@@ -59,7 +59,16 @@ configs:
       }
       ${SITE_DOMAIN} {
         encode zstd gzip
-        reverse_proxy api:4000
+        # Every running API container (two during a deploy, see deploy.sh), looked up each second;
+        # a request that can't connect to one is retried on another for up to 10 seconds.
+        reverse_proxy {
+          dynamic a {
+            name api
+            port 4000
+            refresh 1s
+          }
+          lb_try_duration 10s
+        }
       }
 
 volumes:

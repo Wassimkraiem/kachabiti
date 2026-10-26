@@ -13,12 +13,27 @@ Product photos ──▶ S3 bucket kachabity-products-<id> (public read); docume
 - **Infrastructure** (`infra/terraform/`): the instance and its role (read/write on the three buckets, so
   no S3 keys anywhere), its firewall (80, 443, SSH), the Elastic IP, the buckets, daily disk snapshots and a monthly budget
   alert. You run Terraform yourself; nothing is created without `apply`.
-- **Server files** (`deploy/`): `docker-compose.prod.yml`, `deploy.sh` (backup → migrate → start →
-  health checks → rollback), `backup.sh` (nightly to S3, 30 days kept).
-- **CI/CD** (`.github/workflows/`): `ci.yml` checks every pull request and push (types, lint, API build,
-  all end-to-end suites on an empty database built from `db/baseline.sql`). `deploy.yml` runs on every
-  push to `kachabiti-nest`: CI, then the API image built on GitHub's ARM runners, then `deploy.sh` on
-  the server. Vercel builds the site from the same push.
+- **Server files** (`deploy/`): `docker-compose.prod.yml`, `deploy.sh` (backup → migrate → new API next
+  to the old one → switch once healthy, see below), `backup.sh` (nightly to S3, 30 days kept).
+- **CI/CD** (`.github/workflows/`): `ci.yml` checks pull requests and pushes to `main` (types, lint, API
+  build, all end-to-end suites on an empty database built from `db/baseline.sql`). On `kachabiti-nest`,
+  `deploy.yml` is the one run per push: CI, then, only if the API changed, the API image built on
+  GitHub's ARM runners and `deploy.sh` on the server.
+
+**Separate deploys.** A push deploys only the side it changes:
+- The API deploys when the push changes `api/`, `supabase/migrations/`, `db/baseline.sql`, `deploy/`,
+  the deploy workflow, or a `lib/` file the API imports (`.github/scripts/api-changed.mjs` asks
+  TypeScript which ones, so the list keeps itself up to date).
+- Vercel skips the site build when the push changes only `api/`, `supabase/`, `db/`, `deploy/`, `infra/`,
+  `.github/`, `docs/` or Markdown files (`ignoreCommand` in `vercel.json`, compared with its last deploy).
+- A change to a shared `lib/` file deploys both. A manual "Run workflow" always deploys the API.
+
+**No downtime.** `deploy.sh` starts the new API container next to the running one; Caddy sends requests
+to every running API container and retries on another when one refuses. The old container stops only
+once the new one passes its health check (it finishes its requests in progress first). If the new one
+never gets healthy, it is removed and the old one keeps serving. Migrations run while the old API still
+serves, so write them to work with the previous code too: add a column first, remove the old one in a
+later deploy.
 
 ## What it costs
 
@@ -101,8 +116,9 @@ each deploy):
     and digits only; the S3 and domain lines from `terraform output -raw server_env`; `NEXT_URL` = the
     Vercel site, for the cache refresh).
 - Variable: `API_URL` = `https://<site_domain>` (the deploy checks it answers).
-- Last, Settings → Secrets and variables → Actions → **Variables**: `DEPLOY_ENABLED` = `true`. Until then
-  pushes run CI only, so nothing tries to reach a server that doesn't exist yet.
+- Last, Settings → Secrets and variables → Actions → **Variables** tab → **Repository variables**:
+  `DEPLOY_ENABLED` = `true`. It must be a repository variable, not one of the environment's: GitHub reads
+  it before it loads the environment. Until then pushes run CI only.
 
 ### 6. Vercel
 Import the repo, Production Branch `kachabiti-nest`, and in Settings → Environment Variables (Production):
@@ -124,10 +140,12 @@ name. Redeploy once the API answers, so the pages are built with real data.
 
 ## Everyday
 
-- **Deploy:** merge or push to `kachabiti-nest`. CI must pass; then the API deploys and Vercel builds the site.
+- **Deploy:** merge or push to `kachabiti-nest`. CI must pass; the API deploys if it changed, and Vercel
+  builds the site if it changed (see "Separate deploys").
 - **Roll back the API:** Actions → Deploy → Run workflow on an older commit, or on the server
   `cd /opt/kachabity && ./deploy.sh ghcr.io/<owner>/kachabity-api:<older-sha>`.
-  A failed health check rolls back by itself. Migrations are not undone: restore a backup for that.
+  A new API that isn't healthy is removed and the old one keeps serving. Migrations are not undone:
+  restore a backup for that.
 - **Logs and status:** `ssh deploy@<ip>` then `cd /opt/kachabity && docker compose -f docker-compose.prod.yml ps`
   (or `logs -f api`, `logs -f caddy`).
 - **New migration:** add the file to `supabase/migrations/`; the next deploy applies it after a backup.

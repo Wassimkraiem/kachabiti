@@ -1,7 +1,10 @@
 #!/bin/sh
-# Deploys an API image on the server (run by .github/workflows/deploy.yml over SSH, in /opt/kachabity):
-# back up the database, apply pending migrations, start the new image, and go back to the
-# previous image if it doesn't become healthy. Usage: ./deploy.sh ghcr.io/<owner>/kachabity-api:<sha>
+# Deploys an API image on the server (run by .github/workflows/deploy.yml over SSH, in /opt/kachabity)
+# without downtime: back up the database, apply pending migrations, start the new API next to the
+# running one (Caddy sends requests to both), and stop the old one only once the new one is healthy.
+# If the new one never gets healthy it is removed and the old one keeps serving.
+# Migrations run while the old API still serves: they must keep working with the previous code
+# (add first, remove in a later deploy). Usage: ./deploy.sh ghcr.io/<owner>/kachabity-api:<sha>
 set -eu
 cd "$(dirname "$0")"
 NEW_IMAGE="$1"
@@ -20,8 +23,29 @@ if [ -n "$PREVIOUS_IMAGE" ]; then ./backup.sh; fi
 # Pending migrations (an empty database gets db/baseline.sql first), with the new image's files.
 $COMPOSE run --rm --no-deps api node scripts/migrate.mjs
 
-# Waits up to 3 minutes for the health checks.
-if $COMPOSE up -d --wait --wait-timeout 180 --remove-orphans; then
+# Postgres and Caddy: started, or recreated only when their settings changed.
+$COMPOSE up -d --no-deps --remove-orphans db caddy
+
+# The new API next to the old one (--no-recreate leaves the running container alone).
+OLD="$($COMPOSE ps -q api)"
+$COMPOSE up -d --no-deps --no-recreate --scale api="$(( $(echo "$OLD" | grep -c .) + 1 ))" api
+NEW="$($COMPOSE ps -q api | grep -v -x -F -e "${OLD:-none}")"
+
+# Up to 3 minutes for its health check.
+status=starting
+for _ in $(seq 36); do
+  status="$(docker inspect --format '{{.State.Health.Status}}' "$NEW")"
+  [ "$status" = healthy ] && break
+  [ "$status" = unhealthy ] && break
+  sleep 5
+done
+
+if [ "$status" = healthy ]; then
+  # Caddy re-reads the API's addresses every second: let it see the new one, then stop the old one,
+  # which finishes its requests in progress first (up to 30 seconds).
+  sleep 3
+  echo "$OLD" | xargs -r docker stop -t 30 >/dev/null
+  echo "$OLD" | xargs -r docker rm >/dev/null
   echo "$NEW_IMAGE" > current-image
   docker tag "$NEW_IMAGE" kachabity-api:current
   # Old API images go; the current one and the previous one (for a rollback) stay.
@@ -32,11 +56,10 @@ if $COMPOSE up -d --wait --wait-timeout 180 --remove-orphans; then
   exit 0
 fi
 
-echo "The new API did not become healthy:" >&2
-$COMPOSE logs --tail 80 api >&2 || true
-if [ -n "$PREVIOUS_IMAGE" ]; then
-  echo "Going back to $PREVIOUS_IMAGE (the database keeps the migrations; restore a backup if needed)" >&2
-  API_IMAGE="$PREVIOUS_IMAGE" $COMPOSE up -d api
-  docker tag "$PREVIOUS_IMAGE" kachabity-api:current
+echo "The new API did not become healthy ($status):" >&2
+docker logs --tail 80 "$NEW" >&2 || true
+docker rm -f "$NEW" >/dev/null
+if [ -n "$OLD" ]; then
+  echo "The previous API ($PREVIOUS_IMAGE) keeps serving; the database keeps the migrations (restore a backup if needed)." >&2
 fi
 exit 1

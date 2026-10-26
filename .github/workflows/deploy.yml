@@ -17,6 +17,38 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  # Only pushes that change the API (or the files it's built from) deploy it; site-only changes
+  # deploy on Vercel alone (vercel.json skips the opposite case).
+  changes:
+    name: Did the API change?
+    runs-on: ubuntu-24.04
+    outputs:
+      api: ${{ steps.check.outputs.api }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: api/package-lock.json
+      - name: Install (API, for TypeScript)
+        working-directory: api
+        run: npm ci
+      - id: check
+        env:
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+        run: |
+          # A manual run always deploys.
+          if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then
+            echo "api=true" >> "$GITHUB_OUTPUT"
+          else
+            node .github/scripts/api-changed.mjs "$BEFORE" "$SHA" | tee -a "$GITHUB_OUTPUT"
+          fi
+
+  # Every push is checked (this is the branch's only CI run); only API changes go on to deploy.
   ci:
     uses: ./.github/workflows/ci.yml
     permissions:
@@ -24,9 +56,10 @@ jobs:
 
   build:
     name: Build the API image
-    needs: ci
-    # Off until the server and secrets exist: set the repository variable DEPLOY_ENABLED=true (docs/DEPLOY.md).
-    if: vars.DEPLOY_ENABLED == 'true'
+    needs: [changes, ci]
+    # Off until the server and secrets exist: the REPOSITORY variable DEPLOY_ENABLED=true (docs/DEPLOY.md).
+    # Not an environment variable: this condition is read before the production environment loads.
+    if: needs.changes.outputs.api == 'true' && vars.DEPLOY_ENABLED == 'true'
     # The server is ARM (AWS Graviton): build natively, no emulation.
     runs-on: ubuntu-24.04-arm
     timeout-minutes: 30
