@@ -57,9 +57,7 @@ jobs:
   build:
     name: Build the API image
     needs: [changes, ci]
-    # Off until the server and secrets exist: the REPOSITORY variable DEPLOY_ENABLED=true (docs/DEPLOY.md).
-    # Not an environment variable: this condition is read before the production environment loads.
-    if: needs.changes.outputs.api == 'true' && vars.DEPLOY_ENABLED == 'true'
+    if: needs.changes.outputs.api == 'true'
     # The server is ARM (AWS Graviton): build natively, no emulation.
     runs-on: ubuntu-24.04-arm
     timeout-minutes: 30

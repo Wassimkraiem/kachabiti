@@ -116,9 +116,7 @@ each deploy):
     and digits only; the S3 and domain lines from `terraform output -raw server_env`; `NEXT_URL` = the
     Vercel site, for the cache refresh).
 - Variable: `API_URL` = `https://<site_domain>` (the deploy checks it answers).
-- Last, Settings → Secrets and variables → Actions → **Variables** tab → **Repository variables**:
-  `DEPLOY_ENABLED` = `true`. It must be a repository variable, not one of the environment's: GitHub reads
-  it before it loads the environment. Until then pushes run CI only.
+- Set these before the first push of `kachabiti-nest`: the deploy runs as soon as the API changes.
 
 ### 6. Vercel
 Import the repo, Production Branch `kachabiti-nest`, and in Settings → Environment Variables (Production):
