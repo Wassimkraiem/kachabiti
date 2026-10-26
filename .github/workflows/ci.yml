@@ -73,6 +73,9 @@ jobs:
           DATABASE_URL: postgresql://kachabity:kachabity-local@127.0.0.1:5433/kachabity
         run: node scripts/migrate.mjs
       - name: Build and start the API and the site
+        env:
+          # Newer Compose builds through buildx bake, which refuses the site build's network: host.
+          COMPOSE_BAKE: "false"
         run: |
           docker compose up -d --build
           for _ in $(seq 60); do curl -fs http://localhost:4000/api/health >/dev/null && curl -fs -o /dev/null http://localhost:3000/ar && break; sleep 5; done
