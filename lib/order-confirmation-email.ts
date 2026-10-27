@@ -29,7 +29,9 @@ export async function sendOrderConfirmationEmail(data: EmailData) {
         }
 
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            ...(process.env.SMTP_HOST
+                ? { host: process.env.SMTP_HOST, port: 465, secure: true }
+                : { service: 'gmail' }),
             auth: {
                 user: process.env.GMAIL_USER,
                 pass: process.env.GMAIL_APP_PASSWORD,

@@ -15,6 +15,9 @@ NEXT_URL=http://localhost:3000
 
 # Gmail SMTP Configuration (for sending emails)
 GMAIL_USER=your-email@gmail.com
+# Optional: send through another mailbox's SMTP (port 465, TLS), e.g. smtp.hostinger.com for business@kachabiti.com;
+# GMAIL_USER / GMAIL_APP_PASSWORD are then that mailbox's address and password
+SMTP_HOST=
 GMAIL_APP_PASSWORD=your-16-character-app-password
 
 # Signs the session cookies issued by the NestJS auth API (/api/auth/*). The same value on the

@@ -100,7 +100,7 @@ If any step fails, nothing is written. Bulk deletes send `?ids=a,b` and run one 
   - Subtotal, shipping and tax are recalculated, and item names and images come from the catalog.
   - Mismatches return 409 with `code`: `PRICES_CHANGED`, `TOTALS_CHANGED` or `PRODUCT_UNAVAILABLE`, which the checkout maps to translated messages.
   - If you change how the storefront computes a price, update `priceOrder()` too.
-- `lib/order-confirmation-email.ts`: sent from `POST /api/orders` using the stored order, with customer text HTML-escaped. There is deliberately no public "send email" endpoint. `abandoned-cart-email.ts` is also here. Both send through nodemailer/Gmail SMTP (`GMAIL_USER`, `GMAIL_APP_PASSWORD`).
+- `lib/order-confirmation-email.ts`: sent from `POST /api/orders` using the stored order, with customer text HTML-escaped. There is deliberately no public "send email" endpoint. `abandoned-cart-email.ts` is also here. Both send through nodemailer: Gmail SMTP (`GMAIL_USER`, `GMAIL_APP_PASSWORD`), or another mailbox's SMTP when `SMTP_HOST` is set (port 465, TLS; same two variables as its login).
 - `cart-context.tsx`: the cart is client-side only (localStorage key `shopping_cart`), provided in `app/[locale]/layout.tsx` along with `CartDrawer`. Lines are keyed by product + variant (`cartLineKey`); `removeItem`/`updateQuantity` take that key. Product cards add through `useQuickAdd()` (`lib/quick-add.ts`), which opens the product page when a size/color must be chosen.
 
 ### Stock

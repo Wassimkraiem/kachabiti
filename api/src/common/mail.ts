@@ -2,11 +2,16 @@ import { Logger } from '@nestjs/common';
 import nodemailer from 'nodemailer';
 import { config } from '../config';
 
-/** Gmail SMTP (GMAIL_USER, GMAIL_APP_PASSWORD), or null when e-mail isn't configured. */
+/**
+ * SMTP with the GMAIL_USER / GMAIL_APP_PASSWORD login: Gmail, or SMTP_HOST (port 465, TLS) for
+ * another mailbox such as Hostinger's. Null when e-mail isn't configured.
+ */
 export const gmail = () =>
   config.GMAIL_USER && config.GMAIL_APP_PASSWORD
     ? nodemailer.createTransport({
-        service: 'gmail',
+        ...(config.SMTP_HOST
+          ? { host: config.SMTP_HOST, port: 465, secure: true }
+          : { service: 'gmail' }),
         auth: { user: config.GMAIL_USER, pass: config.GMAIL_APP_PASSWORD },
       })
     : null;

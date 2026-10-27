@@ -8,6 +8,7 @@ const schema = z.object({
   // The storefront's address, for links in e-mails (never taken from the request's Host).
   NEXT_PUBLIC_SITE_URL: z.string().url().default('http://localhost:3000'),
   GMAIL_USER: z.string().optional(),
+  SMTP_HOST: z.string().optional(),
   GMAIL_APP_PASSWORD: z.string().optional(),
   // LISTEN for notifications needs a direct or session-mode connection (not a transaction pooler).
   LISTEN_DATABASE_URL: z.string().url().optional(),
