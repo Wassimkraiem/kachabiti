@@ -27,6 +27,7 @@ import {
 } from "@ant-design/icons";
 import { DATE_LOCALES, useAdminT } from "@/lib/admin-i18n";
 import OrderDeliveryCard from "@/components/admin/delivery/OrderDeliveryCard";
+import { reportParcelCancellation } from "@/components/admin/delivery/delivery-api";
 import OrderPipelineCard, { type PipelineOrder } from "@/components/admin/erp/OrderPipelineCard";
 import OrderPaymentsCard from "@/components/admin/erp/OrderPaymentsCard";
 
@@ -157,6 +158,7 @@ export default function OrderDetailPage() {
 
             if (result.success) {
                 message.success(t("Order updated successfully!"));
+                reportParcelCancellation(result.data?.parcels, message, t);
                 fetchOrder(true);
             } else {
                 message.error(result.error || t("Failed to update order"));

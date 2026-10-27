@@ -14,12 +14,16 @@ import {
   ColissimoError,
   colissimoConfigured,
   createParcel,
+  deleteParcels,
+  editParcel,
+  handOverParcels,
+  requestPriceChange,
   trackParcel,
+  type ParcelChanges,
   type ParcelRequest,
 } from '@shared/colissimo';
 import {
   COLISSIMO_GOVERNORATES,
-  FINAL_STATUSES,
   parcelFromOrder,
 } from '@shared/colissimo-data';
 import { MANUAL_CHANNELS, type Channel } from '@shared/erp/constants';
@@ -34,9 +38,11 @@ import {
   ManualLineError,
   type ManualLineInput,
 } from './commerce';
+import { ColissimoTracking } from './colissimo-tracking';
 
-// Port of app/api/delivery/route.ts: parcels sent to Colissimo (Admin → Delivery, the order page).
-// GET lists them; POST sends, validates, quotes, tracks, imports or refreshes; DELETE removes from the list.
+// Parcels sent to Colissimo (Admin → Delivery, the order page). GET lists them; POST sends,
+// validates, quotes, tracks, imports, refreshes, hands over for pickup, edits or asks a price
+// change; DELETE deletes them at Colissimo (while it allows) and removes them from the list.
 
 const parcelSchema = z.object({
   nom: z.string().trim().min(1).max(100),
@@ -99,6 +105,36 @@ const bodySchema = z.discriminatedUnion('action', [
     action: z.literal('refresh'),
     ids: z.array(z.guid()).max(200).optional(),
   }),
+  // Parcels waiting for pickup → Colissimo's manifest ("A enlever").
+  z.object({
+    action: z.literal('handover'),
+    ids: z.array(z.guid()).min(1).max(200),
+  }),
+  // A parcel waiting for pickup: the fields to change, at Colissimo and on its order.
+  z.object({
+    action: z.literal('edit'),
+    id: z.guid(),
+    parcel: parcelSchema
+      .pick({
+        nom: true,
+        gouvernerat: true,
+        ville: true,
+        adresse: true,
+        tel: true,
+        tel2: true,
+        designation: true,
+        nb_article: true,
+        prix: true,
+      })
+      .partial(),
+  }),
+  // A printed or picked-up parcel's price: a request Colissimo answers later.
+  z.object({
+    action: z.literal('price_change'),
+    id: z.guid(),
+    price: z.number().min(0).max(99999.999),
+    reason: z.string().trim().max(255).optional(),
+  }),
 ]);
 
 const notConfigured = (what: 'add' | 'tracking') =>
@@ -129,7 +165,10 @@ function dbError(error: any): never {
 @Controller('delivery')
 @Public()
 export class DeliveryController {
-  constructor(private readonly db: Database) {}
+  constructor(
+    private readonly db: Database,
+    private readonly tracking: ColissimoTracking,
+  ) {}
 
   private select() {
     return this.db
@@ -157,7 +196,12 @@ export class DeliveryController {
   async list(@Query('order_id') orderId?: string) {
     let query = this.select().orderBy('d.created_at', 'desc').limit(1000);
     if (orderId) query = query.where('d.order_id', '=', orderId);
-    return { rows: await query.execute(), configured: colissimoConfigured() };
+    return {
+      rows: await query.execute(),
+      configured: colissimoConfigured(),
+      // The last automatic check (every 15 minutes), for "checked … ago".
+      tracking: this.tracking.lastRun,
+    };
   }
 
   @Post()
@@ -191,17 +235,28 @@ export class DeliveryController {
           body.order_id ?? null,
           actor,
         );
-      return await this.refresh(body.ids, actor);
+      if (body.action === 'handover')
+        return await this.handOver(body.ids, actor);
+      if (body.action === 'edit')
+        return await this.edit(body.id, body.parcel, actor);
+      if (body.action === 'price_change')
+        return await this.priceChange(body.id, body.price, body.reason, actor);
+      if (!colissimoConfigured().tracking) throw notConfigured('tracking');
+      return await this.tracking.run(actor, body.ids);
     } catch (error) {
       if (error instanceof ManualLineError)
         throw new ApiError(error.message, 422, 'INVALID_ITEMS');
       if (error instanceof ColissimoError)
-        throw new ApiError(error.message, 502, 'COLISSIMO');
+        throw new ApiError(error.message, 502, error.code ?? 'COLISSIMO');
       throw error;
     }
   }
 
-  /** ?ids=a,b — removes parcels from this list only (soft delete); the order can then be sent again. */
+  /**
+   * ?ids=a,b — removes parcels from this list (soft delete), after deleting them at Colissimo when
+   * they're still waiting for pickup. One Colissimo already has (picked up, on its way…) stays, with
+   * the reason in `kept`: removing it here would let the order be sent twice.
+   */
   @Delete()
   async remove(
     @Query() query: { ids?: string },
@@ -209,15 +264,62 @@ export class DeliveryController {
   ) {
     const ids = idsFrom({ ids: query.ids });
     if (ids.length === 0) throw new ApiError('No parcel selected');
-    await this.db.withActor(actor, (trx) =>
-      trx
-        .updateTable('deliveries')
-        .set({ deleted_at: new Date(), updated_at: new Date() })
-        .where('id', 'in', ids)
-        .where('deleted_at', 'is', null)
-        .execute(),
+    const parcels = await this.db
+      .selectFrom('deliveries')
+      .select(['id', 'barcode', 'status'])
+      .where('id', 'in', ids)
+      .where('deleted_at', 'is', null)
+      .execute();
+    // Parcels Colissimo may still hold; the others (never sent, failed, deleted, finished) just go.
+    const live = parcels.filter(
+      (p) => p.barcode && ['En attente', 'A enlever'].includes(p.status),
     );
-    return { deleted: ids.length };
+    const kept: { id: string; barcode: string; reason: string }[] = [];
+    if (live.length) {
+      if (!colissimoConfigured().add) throw notConfigured('add');
+      const results = await deleteParcels(live.map((p) => p.barcode!));
+      for (const parcel of live) {
+        const result = results.get(parcel.barcode!);
+        if (!result?.deleted && !result?.notFound)
+          kept.push({
+            id: parcel.id,
+            barcode: parcel.barcode!,
+            reason: result?.message ?? '',
+          });
+      }
+    }
+    const moving = parcels.filter(
+      (p) =>
+        p.barcode &&
+        !live.includes(p) &&
+        [
+          'Enleve',
+          'Au depot',
+          'Au magasin',
+          'En cours',
+          'Retour Inter Agence',
+        ].includes(p.status),
+    );
+    for (const parcel of moving)
+      kept.push({
+        id: parcel.id,
+        barcode: parcel.barcode!,
+        reason:
+          "Colissimo already has this parcel (picked up, paid or handed over): it can't be deleted",
+      });
+    const removable = parcels
+      .filter((p) => !kept.some((k) => k.id === p.id))
+      .map((p) => p.id);
+    if (removable.length)
+      await this.db.withActor(actor, (trx) =>
+        trx
+          .updateTable('deliveries')
+          .set({ deleted_at: new Date(), updated_at: new Date() })
+          .where('id', 'in', removable)
+          .where('deleted_at', 'is', null)
+          .execute(),
+      );
+    return { deleted: removable.length, kept };
   }
 
   // Reserve the parcel row (for an order: its single live parcel), create the parcel at Colissimo,
@@ -474,7 +576,8 @@ export class DeliveryController {
     return this.sendParcel(orderId, parcel.data, actor);
   }
 
-  // "Check a parcel": Colissimo's status for any barcode, plus our parcel if listed. Read-only.
+  // "Check a parcel": Colissimo's status for any barcode (with the driver's live report), plus our
+  // parcel if listed. Read-only.
   private async lookUp(code: string) {
     if (!colissimoConfigured().tracking) throw notConfigured('tracking');
     const [tracked, listed] = await Promise.all([
@@ -502,6 +605,9 @@ export class DeliveryController {
             status: tracked.status,
             status_reason: tracked.reason || null,
             status_changed_at: new Date(),
+            paid: tracked.paid,
+            driver_status: tracked.driverStatus || null,
+            driver_reason: tracked.driverReason || null,
             created_by: actor.userId,
             created_by_email: actor.email,
           })
@@ -514,52 +620,209 @@ export class DeliveryController {
     };
   }
 
-  // Asks Colissimo for the status of the given parcels (default: every parcel that can still change).
-  private async refresh(ids: string[] | undefined, actor: RequestActor) {
-    if (!colissimoConfigured().tracking) throw notConfigured('tracking');
-    let query = this.db
+  /** One live parcel with its Colissimo barcode, or a clear refusal. */
+  private async parcel(id: string) {
+    const row = await this.db
+      .selectFrom('deliveries')
+      .selectAll()
+      .where('id', '=', id)
+      .where('deleted_at', 'is', null)
+      .executeTakeFirst();
+    if (!row) throw new ApiError('Parcel not found', 404);
+    if (!row.barcode)
+      throw new ApiError(
+        'This parcel has no Colissimo barcode yet',
+        409,
+        'NO_BARCODE',
+      );
+    return row;
+  }
+
+  // "Hand over for pickup": Colissimo makes a manifest of the parcels waiting for pickup, which
+  // then become "A enlever". Each one it refuses comes back with its reason; the rest stand.
+  private async handOver(ids: string[], actor: RequestActor) {
+    if (!colissimoConfigured().add) throw notConfigured('add');
+    const parcels = await this.db
       .selectFrom('deliveries')
       .select(['id', 'barcode', 'status'])
+      .where('id', 'in', ids)
       .where('deleted_at', 'is', null)
-      .where('barcode', 'is not', null);
-    query = ids?.length
-      ? query.where('id', 'in', ids)
-      : query.where('status', 'not in', FINAL_STATUSES);
-    const parcels = await query.limit(200).execute();
+      .execute();
+    const refused: { barcode: string; reason: string }[] = parcels
+      .filter((p) => !p.barcode || p.status !== 'En attente')
+      .map((p) => ({
+        barcode: p.barcode ?? '',
+        reason: p.barcode
+          ? 'Not waiting for pickup'
+          : 'No Colissimo barcode yet',
+      }));
+    const ready = parcels.filter((p) => p.barcode && p.status === 'En attente');
+    if (ready.length === 0) return { manifests: [], accepted: [], refused };
 
-    let changed = 0;
-    const failures: { barcode: string; error: string }[] = [];
-    // A few at a time: Colissimo answers one parcel per request.
-    const queue = [...parcels];
-    await Promise.all(
-      Array.from({ length: Math.min(5, queue.length) }, async () => {
-        for (let parcel = queue.shift(); parcel; parcel = queue.shift()) {
-          try {
-            const tracked = await trackParcel(parcel.barcode!);
-            const updated = await this.db.withActor(actor, (trx) =>
-              this.db.call(
-                'record_delivery_status',
-                {
-                  p_id: parcel.id,
-                  p_status: tracked.status,
-                  p_reason: tracked.reason,
-                  p_actor: actor.userId,
-                  p_actor_email: actor.email,
-                },
-                trx,
-              ),
-            );
-            if (updated) changed += 1;
-          } catch (err) {
-            failures.push({
-              barcode: parcel.barcode!,
-              error: (err as Error).message,
-            });
-          }
+    const result = await handOverParcels(ready.map((p) => p.barcode!));
+    if (result.accepted.length)
+      await this.db.withActor(actor, (trx) =>
+        trx
+          .updateTable('deliveries')
+          .set({
+            status: 'A enlever',
+            status_changed_at: new Date(),
+            manifest_id: result.manifests[0] ?? null,
+            handed_over_at: new Date(),
+            updated_at: new Date(),
+          })
+          .where('barcode', 'in', result.accepted)
+          .where('deleted_at', 'is', null)
+          .execute(),
+      );
+    return {
+      manifests: result.manifests,
+      accepted: result.accepted,
+      refused: [...refused, ...result.refused],
+    };
+  }
+
+  // "Edit parcel": a parcel waiting for pickup changes at Colissimo, then here and on its order
+  // (name, phone, address). Once printed, Colissimo refuses changes; a new price then becomes a
+  // price change request instead, which is what Colissimo offers for printed parcels.
+  private async edit(
+    id: string,
+    changes: Partial<ParcelChanges>,
+    actor: RequestActor,
+  ) {
+    if (!colissimoConfigured().add) throw notConfigured('add');
+    const row = await this.parcel(id);
+    const current: ParcelChanges = {
+      nom: row.recipient_name ?? undefined,
+      tel: row.phone ?? undefined,
+      gouvernerat: row.governorate ?? undefined,
+      ville: row.city ?? undefined,
+      adresse: row.address ?? undefined,
+      designation: row.designation ?? undefined,
+      nb_article: row.items_count ?? undefined,
+      prix: row.cod_amount ?? undefined,
+      tel2: (row.request as { tel2?: string } | null)?.tel2 ?? '',
+    };
+    const diff = Object.fromEntries(
+      Object.entries(changes).filter(
+        ([key, value]) =>
+          value !== undefined && value !== current[key as keyof ParcelChanges],
+      ),
+    ) as ParcelChanges;
+    if (Object.keys(diff).length === 0)
+      return { delivery: row, changed: false, price_change: null };
+
+    try {
+      const result = await editParcel(row.barcode!, diff);
+      const delivery = await this.db.withActor(actor, async (trx) => {
+        const updated = await trx
+          .updateTable('deliveries')
+          .set({
+            recipient_name: diff.nom ?? row.recipient_name,
+            phone: diff.tel ?? row.phone,
+            governorate: diff.gouvernerat ?? row.governorate,
+            city: diff.ville ?? row.city,
+            address: diff.adresse ?? row.address,
+            designation: diff.designation ?? row.designation,
+            items_count: diff.nb_article ?? row.items_count,
+            cod_amount: diff.prix ?? row.cod_amount,
+            request: JSON.stringify({
+              ...((row.request as object) ?? {}),
+              ...diff,
+            }),
+            label_url: result.labelUrl ?? row.label_url,
+            label_zebra_url: result.labelZebraUrl ?? row.label_zebra_url,
+            updated_at: new Date(),
+          })
+          .where('id', '=', id)
+          .returningAll()
+          .executeTakeFirstOrThrow();
+        // The order keeps the corrected delivery details too.
+        if (
+          row.order_id &&
+          (diff.nom ||
+            diff.tel ||
+            diff.adresse ||
+            diff.ville ||
+            diff.gouvernerat)
+        ) {
+          const [first, ...rest] = (diff.nom ?? '').trim().split(/\s+/);
+          await trx
+            .updateTable('orders')
+            .set({
+              ...(diff.nom
+                ? {
+                    customer_first_name: first,
+                    customer_last_name: rest.join(' '),
+                  }
+                : {}),
+              ...(diff.tel ? { customer_phone: diff.tel } : {}),
+              ...(diff.adresse ? { shipping_address: diff.adresse } : {}),
+              ...(diff.ville ? { shipping_city: diff.ville } : {}),
+              ...(diff.gouvernerat ? { shipping_state: diff.gouvernerat } : {}),
+            })
+            .where('id', '=', row.order_id)
+            .where('deleted_at', 'is', null)
+            .execute();
         }
-      }),
+        return updated;
+      });
+      return { delivery, changed: result.changed, price_change: null };
+    } catch (error) {
+      const printed =
+        error instanceof ColissimoError &&
+        (error.code === 'ORDER_ALREADY_PRINTED' ||
+          error.code === 'ORDER_NOT_EDITABLE');
+      const onlyPrice =
+        Object.keys(diff).length === 1 && diff.prix !== undefined;
+      if (printed && onlyPrice) {
+        const request = await this.priceChange(
+          id,
+          diff.prix!,
+          undefined,
+          actor,
+        );
+        return {
+          delivery: request.delivery,
+          changed: false,
+          price_change: request.price_change,
+        };
+      }
+      throw error;
+    }
+  }
+
+  // "Request a price change": Colissimo records the request and answers later; the parcel keeps
+  // its price until then. The request is kept on the parcel to show it's waiting.
+  private async priceChange(
+    id: string,
+    price: number,
+    reason: string | undefined,
+    actor: RequestActor,
+  ) {
+    if (!colissimoConfigured().add) throw notConfigured('add');
+    const row = await this.parcel(id);
+    const request = await requestPriceChange(row.barcode!, price, reason);
+    const priceChange = {
+      request_id: request.requestId,
+      old_price: Number.isFinite(request.oldPrice)
+        ? request.oldPrice
+        : row.cod_amount,
+      new_price: Number.isFinite(request.newPrice) ? request.newPrice : price,
+      reason: reason ?? null,
+      at: new Date().toISOString(),
+    };
+    const delivery = await this.db.withActor(actor, (trx) =>
+      trx
+        .updateTable('deliveries')
+        .set({
+          price_change: JSON.stringify(priceChange),
+          updated_at: new Date(),
+        })
+        .where('id', '=', id)
+        .returningAll()
+        .executeTakeFirstOrThrow(),
     );
-    if (changed > 0) await invalidateCatalog();
-    return { checked: parcels.length, changed, failures };
+    return { delivery, price_change: priceChange };
   }
 }

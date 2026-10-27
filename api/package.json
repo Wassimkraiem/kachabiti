@@ -13,7 +13,7 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/api/src/main",
     "lint": "eslint \"{src,test}/**/*.ts\" --fix",
-    "test:e2e": "node test/e2e/auth.e2e.mjs && node test/e2e/categories.e2e.mjs && node test/e2e/catalog.e2e.mjs && node test/e2e/stock.e2e.mjs && node test/e2e/files.e2e.mjs && node test/e2e/erp.e2e.mjs && node test/e2e/objectives.e2e.mjs",
+    "test:e2e": "node test/e2e/auth.e2e.mjs && node test/e2e/categories.e2e.mjs && node test/e2e/catalog.e2e.mjs && node test/e2e/stock.e2e.mjs && node test/e2e/files.e2e.mjs && node test/e2e/erp.e2e.mjs && node test/e2e/objectives.e2e.mjs && node test/e2e/colissimo.e2e.mjs",
     "db:types": "node scripts/db-types.mjs"
   },
   "dependencies": {

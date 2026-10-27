@@ -315,7 +315,10 @@ export class AuthController {
     return this.startSession(request, response, user);
   }
 
-  /** Without SMTP (local) accounts are confirmed at once; otherwise a link is e-mailed first. */
+  /**
+   * A confirmation link is e-mailed first. Only on a developer machine without SMTP are accounts
+   * confirmed at once; production without SMTP refuses rather than create unverified accounts.
+   */
   @Post('sign-up')
   @HttpCode(200)
   async signUp(
@@ -325,6 +328,12 @@ export class AuthController {
   ) {
     rateLimit(`sign-up:${clientIp(request)}`, 5, 60 * MINUTE);
     const confirm = !!gmail();
+    if (!confirm && config.ENV !== 'local')
+      throw new ApiError(
+        'Sign-up is unavailable right now. Please try again later.',
+        503,
+        'email_unavailable',
+      );
     const passwordHash = await hash(body.password, BCRYPT_COST);
     const user = await this.db
       .withActor(null, (trx) =>

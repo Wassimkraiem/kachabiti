@@ -3,13 +3,22 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { Alert, Button, Card, Descriptions, Input, Popconfirm, Space, Typography } from "antd";
-import { CarOutlined, DeleteOutlined, PrinterOutlined, ReloadOutlined, LinkOutlined } from "@ant-design/icons";
+import { CarOutlined, DeleteOutlined, EditOutlined, PrinterOutlined, ReloadOutlined, LinkOutlined } from "@ant-design/icons";
 import { message } from "@/components/admin/antd-app";
 import { useAdminRole } from "@/lib/admin-role-context";
 import { DATE_LOCALES, useAdminT } from "@/lib/admin-i18n";
-import DeliveryStatusTag from "./DeliveryStatusTag";
+import DeliveryStatusTag, { ParcelBadges } from "./DeliveryStatusTag";
+import EditParcelModal from "./EditParcelModal";
 import SendParcelModal, { type ParcelOrder } from "./SendParcelModal";
-import { deliveryApi, type Delivery, type DeliveryList, type RefreshResult } from "./delivery-api";
+import {
+    canEditParcel,
+    canRequestPriceChange,
+    deliveryApi,
+    type Delivery,
+    type DeliveryList,
+    type RefreshResult,
+    type RemoveResult,
+} from "./delivery-api";
 
 const { Text } = Typography;
 
@@ -33,6 +42,7 @@ export default function OrderDeliveryCard({ order, orderStatus, onOrderChanged, 
     const [linkOpen, setLinkOpen] = useState(false);
     const [barcode, setBarcode] = useState("");
     const [busy, setBusy] = useState<string | null>(null);
+    const [editing, setEditing] = useState(false);
 
     const load = useCallback(async () => {
         try {
@@ -87,8 +97,9 @@ export default function OrderDeliveryCard({ order, orderStatus, onOrderChanged, 
         if (!delivery) return;
         setBusy("remove");
         try {
-            await deliveryApi({ method: "DELETE", query: `ids=${delivery.id}` });
-            message.success(t("Parcel removed from the list"));
+            const result = await deliveryApi<RemoveResult>({ method: "DELETE", query: `ids=${delivery.id}` });
+            if (result.kept.length) message.warning(t(result.kept[0].reason), 8);
+            else message.success(t("Parcel removed"));
             await load();
         } catch (e) {
             message.error((e as Error).message);
@@ -116,10 +127,17 @@ export default function OrderDeliveryCard({ order, orderStatus, onOrderChanged, 
                             <Space size={6} wrap>
                                 <DeliveryStatusTag status={delivery.status} reason={delivery.status_reason} />
                                 {delivery.status_reason && <Text type="secondary">{delivery.status_reason}</Text>}
+                                <ParcelBadges delivery={delivery} />
                             </Space>
                         </Descriptions.Item>
                         <Descriptions.Item label={t("Last status change")}>{formatDate(delivery.status_changed_at)}</Descriptions.Item>
                         <Descriptions.Item label={t("Cash to collect")}>{delivery.cod_amount != null ? `${Number(delivery.cod_amount)} TND` : "—"}</Descriptions.Item>
+                        {delivery.handed_over_at && (
+                            <Descriptions.Item label={t("Handed over for pickup")}>
+                                {formatDate(delivery.handed_over_at)}
+                                {delivery.manifest_id ? ` · ${t("manifest {number}", { number: delivery.manifest_id })}` : ""}
+                            </Descriptions.Item>
+                        )}
                     </Descriptions>
                     <Space wrap>
                         {delivery.label_url && (
@@ -131,11 +149,18 @@ export default function OrderDeliveryCard({ order, orderStatus, onOrderChanged, 
                         {delivery.barcode && (
                             <Button icon={<ReloadOutlined />} loading={busy === "refresh"} onClick={refresh}>{t("Check status")}</Button>
                         )}
+                        {canEditParcel(delivery) && (
+                            <Button icon={<EditOutlined />} onClick={() => setEditing(true)}>{t("Edit parcel")}</Button>
+                        )}
+                        {canRequestPriceChange(delivery) && (
+                            <Button icon={<EditOutlined />} onClick={() => setEditing(true)}>{t("Change price")}</Button>
+                        )}
                         <Link href="/admin/delivery">{t("All parcels")}</Link>
                         {canDelete && (
                             <Popconfirm
-                                title={t("Remove this parcel from the list?")}
-                                description={t("It stays at Colissimo: cancel it on their website if needed. The order can then be sent again.")}
+                                styles={{ root: { maxWidth: 360 } }}
+                                title={t("Remove this parcel?")}
+                                description={t("A parcel waiting for pickup is deleted at Colissimo too. One Colissimo already has can't be removed. The order can then be sent again.")}
                                 okText={t("Remove")}
                                 cancelText={t("Cancel")}
                                 onConfirm={remove}
@@ -172,6 +197,16 @@ export default function OrderDeliveryCard({ order, orderStatus, onOrderChanged, 
                     </Space>
                 )
             )}
+
+            <EditParcelModal
+                delivery={editing ? delivery ?? null : null}
+                onClose={() => setEditing(false)}
+                onSaved={() => {
+                    setEditing(false);
+                    load();
+                    onOrderChanged(); // the order's address or phone may have changed
+                }}
+            />
 
             <SendParcelModal
                 order={order}

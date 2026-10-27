@@ -57,6 +57,7 @@ const content = {
             user_already_exists: "An account with this email already exists. Log in instead.",
             weak_password: "Choose a stronger password.",
             rate_limit: "Too many attempts. Wait a few minutes and try again.",
+            email_unavailable: "Sign-up is unavailable right now. Please try again later.",
             generic: "Something went wrong. Try again.",
         },
     },
@@ -96,6 +97,7 @@ const content = {
             user_already_exists: "Un compte existe déjà avec cet e-mail. Connectez-vous.",
             weak_password: "Choisissez un mot de passe plus solide.",
             rate_limit: "Trop de tentatives. Réessayez dans quelques minutes.",
+            email_unavailable: "La création de compte est momentanément indisponible. Réessayez plus tard.",
             generic: "Une erreur est survenue. Réessayez.",
         },
     },
@@ -135,6 +137,7 @@ const content = {
             user_already_exists: "يوجد حساب بهذا البريد الإلكتروني. سجّل الدخول بدلاً من ذلك.",
             weak_password: "اختر كلمة مرور أقوى.",
             rate_limit: "محاولات كثيرة. انتظر بضع دقائق ثم حاول مجدداً.",
+            email_unavailable: "إنشاء الحسابات غير متاح حالياً. حاول مجدداً لاحقاً.",
             generic: "حدث خطأ. حاول مجدداً.",
         },
     },
@@ -149,6 +152,7 @@ function errorMessage(error: unknown, text: Text) {
     if (code === "email_not_confirmed") return text.errors.email_not_confirmed;
     if (code === "user_already_exists") return text.errors.user_already_exists;
     if (code === "rate_limit") return text.errors.rate_limit;
+    if (code === "email_unavailable") return text.errors.email_unavailable;
     return text.errors.generic;
 }
 

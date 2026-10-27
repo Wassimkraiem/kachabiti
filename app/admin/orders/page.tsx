@@ -39,6 +39,7 @@ import {
 } from "@ant-design/icons";
 import { DATE_LOCALES, useAdminT } from "@/lib/admin-i18n";
 import DeliveryStatusTag from "@/components/admin/delivery/DeliveryStatusTag";
+import { reportParcelCancellation } from "@/components/admin/delivery/delivery-api";
 
 const { Title, Text } = Typography;
 
@@ -228,6 +229,7 @@ export default function AdminOrdersPage() {
             const result = await response.json();
             if (result.success) {
                 message.success(t("Deleted order {order_number}", { order_number: order.order_number }));
+                reportParcelCancellation(result.data?.parcels, message, t);
                 fetchOrders();
             } else {
                 message.error(result.error || t("Unable to delete order"));
@@ -254,6 +256,7 @@ export default function AdminOrdersPage() {
             }
             const successCount = selectedRowKeys.length;
             const failCount = 0;
+            reportParcelCancellation(result.data?.parcels, message, t);
 
             if (successCount > 0) {
                 message.success(t("Successfully deleted {count} order(s)", { count: successCount }));

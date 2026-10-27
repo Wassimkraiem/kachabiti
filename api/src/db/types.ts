@@ -397,13 +397,25 @@ export interface Deliveries {
   created_by_email: string | null;
   deleted_at: Timestamp | null;
   designation: string | null;
+  driver_reason: string | null;
+  /**
+   * What the driver reported on the spot (v2 pre-etat), before Colissimo confirms it.
+   */
+  driver_status: string | null;
   governorate: string | null;
+  handed_over_at: Timestamp | null;
   id: Generated<string>;
   items_count: number | null;
   label_url: string | null;
   label_zebra_url: string | null;
+  manifest_id: number | null;
   order_id: string | null;
+  /**
+   * Colissimo marks the parcel paid (v2 tracking: status "payee").
+   */
+  paid: Generated<boolean>;
   phone: string | null;
+  price_change: Json | null;
   provider: Generated<string>;
   recipient_name: string | null;
   request: Json | null;

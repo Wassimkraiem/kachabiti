@@ -777,14 +777,14 @@ export const openApiSpec = {
             get: {
                 tags: ['Operations'],
                 summary: 'Colissimo parcels (orders permission)',
-                description: 'Live parcels with their order, plus which Colissimo tokens are configured.',
+                description: 'Live parcels with their order (each with `paid`, the driver\'s live report `driver_status` / `driver_reason`, `manifest_id`, `handed_over_at` and a pending `price_change`), which Colissimo tokens are configured, and the last automatic check (`tracking`, every 15 minutes; null until the first one).',
                 parameters: [{ name: 'order_id', in: 'query', schema: { type: 'string', format: 'uuid' } }],
-                responses: { 200: messageResponse('{ rows, configured: { add, tracking } }') },
+                responses: { 200: messageResponse('{ rows, configured: { add, tracking }, tracking: { at, checked, changed, failures } | null }') },
             },
             post: {
                 tags: ['Operations'],
-                summary: 'Send an order to Colissimo, look up or add a parcel by barcode, or refresh statuses',
-                description: '`create` creates the parcel at Colissimo (with `order_id`, for that order, which it marks shipped; without, a parcel entered by hand); `create` with `items` and no `order_id` also creates an order for those products and validates it (they leave the stock); `quote` prices `items` from the catalog without saving; `validate` builds the parcel from the order, sends it and validates the order; `track` returns the Colissimo status of a barcode (etat, motif, previous status) without saving; `import` adds an existing parcel after checking it with the tracking API; `refresh` asks Colissimo for the status of the given parcels (default: all that can still change). Delivered parcels mark their order delivered, "Livre paye" also paid.',
+                summary: 'Send an order to Colissimo, hand parcels over, edit them, look one up or add one by barcode, or refresh statuses',
+                description: '`create` creates the parcel at Colissimo (with `order_id`, for that order, which it marks shipped; without, a parcel entered by hand); `create` with `items` and no `order_id` also creates an order for those products and validates it (they leave the stock); `quote` prices `items` from the catalog without saving; `validate` builds the parcel from the order, sends it and validates the order; `track` returns the Colissimo status of a barcode (status, reason, paid, driverStatus, driverReason) without saving; `import` adds an existing parcel after checking it with the tracking API; `refresh` asks Colissimo for the status of the given parcels (default: all that can still change; also done every 15 minutes). `handover` gives parcels waiting for pickup (`ids`) to Colissimo in a manifest: `{ manifests, accepted, refused: [{ barcode, reason }] }`. `edit` changes a parcel waiting for pickup (`id`, `parcel` with any of nom, tel, tel2, gouvernerat, ville, adresse, designation, nb_article, prix) at Colissimo, here and on its order; once printed, a price alone becomes a price change request. `price_change` asks Colissimo to change a parcel\'s price (`id`, `price`, `reason`); it answers later. Delivered parcels mark their order delivered; delivered and paid ("Livre paye", or "Livrer" with paid) records the cash held by the carrier.',
                 requestBody: {
                     required: true,
                     content: {
@@ -793,11 +793,14 @@ export const openApiSpec = {
                                 type: 'object',
                                 required: ['action'],
                                 properties: {
-                                    action: { type: 'string', enum: ['create', 'validate', 'quote', 'track', 'import', 'refresh'] },
+                                    action: { type: 'string', enum: ['create', 'validate', 'quote', 'track', 'import', 'refresh', 'handover', 'edit', 'price_change'] },
                                     items: { type: 'array', description: 'create (without order_id) and quote: products of a parcel entered by hand', items: { type: 'object', properties: { product_id: { type: 'string', format: 'uuid' }, variant_id: { type: 'string', format: 'uuid', nullable: true }, quantity: { type: 'integer', minimum: 1 } } } },
                                     order_id: { type: 'string', format: 'uuid' },
                                     barcode: { type: 'string' },
                                     ids: { type: 'array', items: { type: 'string', format: 'uuid' } },
+                                    id: { type: 'string', format: 'uuid', description: 'edit and price_change: the parcel' },
+                                    price: { type: 'number', description: 'price_change: the new cash to collect (TND)' },
+                                    reason: { type: 'string', description: 'price_change: why (sent to Colissimo, 255 characters)' },
                                     parcel: {
                                         type: 'object',
                                         description: 'Colissimo fields: nom, gouvernerat, ville, adresse, tel, tel2, designation, nb_article, prix, msg, echange (oui/non), article, nb_echange, ouvrir (0/1), fragile (0/1), type_colis (1-3)',
@@ -810,15 +813,16 @@ export const openApiSpec = {
                 responses: {
                     200: messageResponse('Parcel or refresh summary'),
                     409: errorResponse(409, 'Order already has a parcel, or is cancelled'),
-                    502: errorResponse(502, 'Colissimo refused the request or could not be reached'),
+                    502: errorResponse(502, 'Colissimo refused the request or could not be reached; `code` is Colissimo\'s error_code when it gave one (e.g. ORDER_NOT_FOUND, ORDER_NOT_EDITABLE, ORDER_ALREADY_PRINTED, REQUEST_ALREADY_PENDING)'),
                     503: errorResponse(503, 'Colissimo tokens not configured'),
                 },
             },
             delete: {
                 tags: ['Operations'],
-                summary: 'Remove parcels from the list (soft delete; not cancelled at Colissimo)',
+                summary: 'Remove parcels: deleted at Colissimo while waiting for pickup, then from the list (soft delete)',
+                description: 'Parcels Colissimo already has (handed over, picked up, on the way) are kept, with the reason: removing them here would let the order be sent twice.',
                 parameters: [{ name: 'ids', in: 'query', required: true, schema: { type: 'string' } }],
-                responses: { 200: messageResponse('Removed') },
+                responses: { 200: messageResponse('{ deleted, kept: [{ id, barcode, reason }] }') },
             },
         },
         '/api/stock/costs': {

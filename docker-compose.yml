@@ -28,9 +28,21 @@ services:
     # Same network as web: localhost:3000 (web) and :9000 (files) mean the same here and in the
     # browser, so signed file links work as they are.
     network_mode: service:gateway
-    depends_on: [gateway, db, storage]
+    depends_on: [gateway, db, storage, colissimo]
     environment:
       NEXT_URL: http://localhost:3000
+      # The Colissimo stand-in below, never the real account (its tokens are test values).
+      COLISSIMO_API_URL: http://colissimo:9100/api/v1
+      COLISSIMO_API_V2_URL: http://colissimo:9100/apis-v2
+      COLISSIMO_ADD_TOKEN: local-colissimo-token
+      COLISSIMO_TRACKING_TOKEN: local-colissimo-state-token
+
+  # Stands in for Colissimo's APIs (scripts/docker/colissimo-mock.mjs); tests drive it on :9100.
+  colissimo:
+    image: node:22-alpine
+    command: node /mock.mjs
+    volumes: ["./scripts/docker/colissimo-mock.mjs:/mock.mjs:ro"]
+    ports: ["9100:9100"]
 
   # Plain Postgres 17, as on the server (phase 5). Local-only credentials.
   db:

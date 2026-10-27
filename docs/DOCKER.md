@@ -72,6 +72,8 @@ Suites: `auth`, `categories`, `catalog`, `stock`, `files`, `erp`, `objectives` (
 
 ## Notes
 
+- The API talks to a Colissimo stand-in (`colissimo`, `scripts/docker/colissimo-mock.mjs`, on :9100), never to the
+  real account: parcels live in its memory, and tests change them through `/__mock`.
 - `web` and `api` run inside the small `gateway` container, which forwards its `localhost:9000` to
   the storage. File URLs and signed links therefore work the same in the browser, in the web
   container's image optimizer and in the api.

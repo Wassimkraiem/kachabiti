@@ -4,15 +4,25 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Alert, Breadcrumb, Button, Card, Input, Modal, Popconfirm, Segmented, Space, Table, Typography } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { BarcodeOutlined, DeleteOutlined, PlusOutlined, PrinterOutlined, ReloadOutlined, SearchOutlined } from "@ant-design/icons";
+import { BarcodeOutlined, DeleteOutlined, EditOutlined, PlusOutlined, PrinterOutlined, ReloadOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons";
 import { message } from "@/components/admin/antd-app";
 import { useAdminRole } from "@/lib/admin-role-context";
 import { DATE_LOCALES, useAdminT } from "@/lib/admin-i18n";
 import { statusInfo, type StatusGroup } from "@/lib/colissimo-data";
-import DeliveryStatusTag from "@/components/admin/delivery/DeliveryStatusTag";
+import DeliveryStatusTag, { ParcelBadges } from "@/components/admin/delivery/DeliveryStatusTag";
 import SendParcelModal from "@/components/admin/delivery/SendParcelModal";
 import ParcelLookup from "@/components/admin/delivery/ParcelLookup";
-import { deliveryApi, type Delivery, type DeliveryList, type RefreshResult } from "@/components/admin/delivery/delivery-api";
+import EditParcelModal from "@/components/admin/delivery/EditParcelModal";
+import {
+    canEditParcel,
+    canRequestPriceChange,
+    deliveryApi,
+    type Delivery,
+    type DeliveryList,
+    type HandOverResult,
+    type RefreshResult,
+    type RemoveResult,
+} from "@/components/admin/delivery/delivery-api";
 
 const { Title, Text } = Typography;
 
@@ -20,8 +30,9 @@ type Filter = "all" | StatusGroup;
 
 /**
  * Admin → Delivery: the parcels sent to Colissimo from the orders (or added by barcode), with
- * their live status. Colissimo's API can't list an account's parcels, so parcels created on its
- * website appear here once added by barcode.
+ * their live status (checked automatically every 15 minutes). Parcels waiting for pickup are
+ * handed over in one click (Colissimo's manifest), edited, or deleted at Colissimo. Its API
+ * can't list an account's parcels, so parcels created on its website appear once added by barcode.
  */
 export default function DeliveryPage() {
     const { t, locale } = useAdminT();
@@ -36,6 +47,9 @@ export default function DeliveryPage() {
     const [barcode, setBarcode] = useState("");
     const [importing, setImporting] = useState(false);
     const [newOpen, setNewOpen] = useState(false);
+    const [editing, setEditing] = useState<Delivery | null>(null);
+    const [handingOver, setHandingOver] = useState(false);
+    const [handOverResult, setHandOverResult] = useState<HandOverResult | null>(null);
 
     const load = useCallback(async () => {
         setLoading(true);
@@ -85,12 +99,35 @@ export default function DeliveryPage() {
 
     const remove = async (ids: string[]) => {
         try {
-            await deliveryApi({ method: "DELETE", query: `ids=${ids.join(",")}` });
-            message.success(t("Removed {count} parcel(s) from the list", { count: ids.length }));
+            const result = await deliveryApi<RemoveResult>({ method: "DELETE", query: `ids=${ids.join(",")}` });
+            if (result.deleted) message.success(t("Removed {count} parcel(s)", { count: result.deleted }));
+            if (result.kept.length) {
+                message.warning(t("{count} parcel(s) kept: {reason}", { count: result.kept.length, reason: t(result.kept[0].reason) }), 8);
+            }
             setSelected([]);
             await load();
         } catch (e) {
             message.error((e as Error).message);
+        }
+    };
+
+    // Parcels selected that are waiting for pickup: the ones Colissimo can take in a manifest.
+    const waiting = useMemo(
+        () => (data?.rows ?? []).filter((row) => selected.includes(row.id) && canEditParcel(row)).map((row) => row.id),
+        [data, selected],
+    );
+
+    const handOver = async () => {
+        setHandingOver(true);
+        try {
+            const result = await deliveryApi<HandOverResult>({ method: "POST", body: { action: "handover", ids: waiting } });
+            setHandOverResult(result);
+            setSelected([]);
+            await load();
+        } catch (e) {
+            message.error((e as Error).message);
+        } finally {
+            setHandingOver(false);
         }
     };
 
@@ -157,7 +194,12 @@ export default function DeliveryPage() {
         {
             title: t("Status"),
             key: "status",
-            render: (_, row) => <DeliveryStatusTag status={row.status} reason={row.status_reason} />,
+            render: (_, row) => (
+                <Space orientation="vertical" size={2}>
+                    <DeliveryStatusTag status={row.status} reason={row.status_reason} />
+                    <ParcelBadges delivery={row} />
+                </Space>
+            ),
         },
         {
             title: t("Last change"),
@@ -176,10 +218,17 @@ export default function DeliveryPage() {
                     {row.barcode && (
                         <Button type="link" size="small" icon={<ReloadOutlined />} onClick={() => refreshStatuses([row.id])}>{t("Check")}</Button>
                     )}
+                    {canEditParcel(row) && (
+                        <Button type="link" size="small" icon={<EditOutlined />} onClick={() => setEditing(row)}>{t("Edit")}</Button>
+                    )}
+                    {canRequestPriceChange(row) && (
+                        <Button type="link" size="small" icon={<EditOutlined />} onClick={() => setEditing(row)}>{t("Change price")}</Button>
+                    )}
                     {canDelete && (
                         <Popconfirm
-                            title={t("Remove this parcel from the list?")}
-                            description={t("It stays at Colissimo: cancel it on their website if needed. The order can then be sent again.")}
+                            styles={{ root: { maxWidth: 360 } }}
+                            title={t("Remove this parcel?")}
+                            description={t("A parcel waiting for pickup is deleted at Colissimo too. One Colissimo already has can't be removed. The order can then be sent again.")}
                             okText={t("Remove")}
                             cancelText={t("Cancel")}
                             onConfirm={() => remove([row.id])}
@@ -201,6 +250,15 @@ export default function DeliveryPage() {
                 <div>
                     <Title level={2} style={{ margin: 0, fontWeight: 600 }}>{t("Delivery (Colissimo)")}</Title>
                     <Text type="secondary">{t("Your Colissimo parcels and their status. Create one here, or send an order from its page.")}</Text>
+                    {data?.configured.tracking && (
+                        <div>
+                            <Text type="secondary" style={{ fontSize: 12 }}>
+                                {data.tracking
+                                    ? t("Statuses update automatically every 15 minutes · last check {time}", { time: formatDate(data.tracking.at) })
+                                    : t("Statuses update automatically every 15 minutes")}
+                            </Text>
+                        </div>
+                    )}
                 </div>
                 <Space wrap>
                     <Button
@@ -261,9 +319,25 @@ export default function DeliveryPage() {
                             onChange={(e) => setSearch(e.target.value)}
                             style={{ maxWidth: 360 }}
                         />
+                        {waiting.length > 0 && (
+                            <Popconfirm
+                                styles={{ root: { maxWidth: 360 } }}
+                                title={t("Hand {count} parcel(s) over to Colissimo for pickup?", { count: waiting.length })}
+                                description={t("Colissimo makes a pickup list (manifest) and the driver comes for them. They can no longer be edited, only their price.")}
+                                okText={t("Hand over")}
+                                cancelText={t("Cancel")}
+                                onConfirm={handOver}
+                            >
+                                <Button type="primary" icon={<SendOutlined />} loading={handingOver} disabled={!data?.configured.add}>
+                                    {t("Hand over for pickup ({count})", { count: waiting.length })}
+                                </Button>
+                            </Popconfirm>
+                        )}
                         {canDelete && selected.length > 0 && (
                             <Popconfirm
-                                title={t("Remove {count} parcel(s) from the list?", { count: selected.length })}
+                                styles={{ root: { maxWidth: 360 } }}
+                                title={t("Remove {count} parcel(s)?", { count: selected.length })}
+                                description={t("Parcels waiting for pickup are deleted at Colissimo too. Ones Colissimo already has stay.")}
                                 okText={t("Remove")}
                                 cancelText={t("Cancel")}
                                 onConfirm={() => remove(selected)}
@@ -277,7 +351,7 @@ export default function DeliveryPage() {
                         loading={loading}
                         dataSource={rows}
                         columns={columns}
-                        rowSelection={canDelete ? { selectedRowKeys: selected, onChange: (keys) => setSelected(keys as string[]) } : undefined}
+                        rowSelection={{ selectedRowKeys: selected, onChange: (keys) => setSelected(keys as string[]) }}
                         pagination={{ pageSize: 25, showSizeChanger: false }}
                         scroll={{ x: "max-content" }}
                         locale={{ emptyText: t("No parcels yet. Click “New parcel”, or open an order and click “Send to Colissimo”.") }}
@@ -293,6 +367,49 @@ export default function DeliveryPage() {
                     load();
                 }}
             />
+
+            <EditParcelModal
+                delivery={editing}
+                onClose={() => setEditing(null)}
+                onSaved={() => {
+                    setEditing(null);
+                    load();
+                }}
+            />
+
+            <Modal
+                open={!!handOverResult}
+                title={handOverResult?.accepted.length ? t("Handed over to Colissimo") : t("Nothing was handed over")}
+                footer={<Button type="primary" onClick={() => setHandOverResult(null)}>{t("OK")}</Button>}
+                onCancel={() => setHandOverResult(null)}
+            >
+                {handOverResult && (
+                    <Space orientation="vertical" style={{ width: "100%" }}>
+                        {handOverResult.accepted.length > 0 && (
+                            <Alert
+                                type="success"
+                                showIcon
+                                title={t("{count} parcel(s) handed over for pickup", { count: handOverResult.accepted.length })}
+                                description={handOverResult.manifests.length ? t("Colissimo manifest: {numbers}", { numbers: handOverResult.manifests.join(", ") }) : undefined}
+                            />
+                        )}
+                        {handOverResult.refused.length > 0 && (
+                            <Alert
+                                type="warning"
+                                showIcon
+                                title={t("{count} parcel(s) refused", { count: handOverResult.refused.length })}
+                                description={
+                                    <ul style={{ margin: 0, paddingInlineStart: 18 }}>
+                                        {handOverResult.refused.map((r) => (
+                                            <li key={r.barcode}><Text style={{ fontFamily: "monospace" }}>{r.barcode || "—"}</Text>: {t(r.reason)}</li>
+                                        ))}
+                                    </ul>
+                                }
+                            />
+                        )}
+                    </Space>
+                )}
+            </Modal>
 
             <Modal
                 open={importOpen}

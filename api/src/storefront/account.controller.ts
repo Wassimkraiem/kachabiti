@@ -7,7 +7,9 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { jsonObjectFrom } from 'kysely/helpers/postgres';
 import { z } from 'zod';
+import { customerStage } from '@shared/colissimo-data';
 import { CurrentUserId, Public } from '../auth/decorators';
 import { ApiError, Zod } from '../common/api';
 import { Database } from '../db/database';
@@ -144,19 +146,42 @@ export class AccountController {
     return { favorited: false };
   }
 
-  /** The shopper's orders, newest first, each with its lines. */
+  /**
+   * The shopper's orders, newest first, each with its lines and, once sent, where its parcel
+   * stands (`delivery.stage`, see customerStage) with its barcode; no internal parcel details.
+   */
   @Get('orders')
-  orders(@CurrentUserId() userId: string | null) {
-    return this.db
+  async orders(@CurrentUserId() userId: string | null) {
+    const orders = await this.db
       .selectFrom('orders as o')
       .selectAll('o')
       .select((eb) =>
         many(eb, 'order_items as i', '*', 'i.order_id', 'o.id').as('items'),
       )
+      .select((eb) =>
+        jsonObjectFrom(
+          eb
+            .selectFrom('deliveries as d')
+            .select(['d.barcode', 'd.status', 'd.status_changed_at'])
+            .whereRef('d.order_id', '=', 'o.id')
+            .where('d.deleted_at', 'is', null)
+            .where('d.barcode', 'is not', null),
+        ).as('parcel'),
+      )
       .where('o.user_id', '=', signedIn(userId))
       .where('o.deleted_at', 'is', null)
       .orderBy('o.created_at', 'desc')
       .execute();
+    return orders.map(({ parcel, ...order }) => ({
+      ...order,
+      delivery: parcel
+        ? {
+            stage: customerStage(parcel.status),
+            barcode: parcel.barcode,
+            updated_at: parcel.status_changed_at,
+          }
+        : null,
+    }));
   }
 
   /** A review under the account's own name (as shown in public.users). */

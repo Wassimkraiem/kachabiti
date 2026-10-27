@@ -11,6 +11,7 @@ import { getUserFavorites, removeFromFavorites, FavoriteWithProduct } from "@/li
 import ProductListCard from "@/components/products/ProductListCard";
 import { useQuickAdd } from "@/lib/quick-add";
 import { FormInput } from "@/components/forms";
+import OrderTracking, { type OrderDelivery } from "@/components/ui/OrderTracking";
 import { accountApi, announceAuthChange, authHref, customerName, signOut, useCustomer, type Customer } from "@/lib/customer-auth";
 
 type Locale = "en" | "fr" | "ar";
@@ -27,6 +28,8 @@ type OrderItem = {
 
 type OrderWithItems = OrderType & {
   items: OrderItem[];
+  /** Its Colissimo parcel once sent: where it stands (GET /api/account/orders). */
+  delivery: OrderDelivery | null;
 };
 
 type UserProfile = {
@@ -479,8 +482,10 @@ export default function SettingsPage({ params }: { params: Promise<{ locale: Loc
                           </div>
                         </div>
 
+                        <OrderTracking orderStatus={order.status} delivery={order.delivery} locale={locale} />
+
                         {/* Order Items */}
-                        <div className="space-y-3">
+                        <div className="mt-4 space-y-3">
                           {order.items.map((item) => (
                             <div key={item.id} className="flex items-center gap-4">
                               <div className="relative w-20 h-20 rounded-md overflow-hidden border border-gray-200 shrink-0">

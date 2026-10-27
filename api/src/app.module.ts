@@ -26,6 +26,7 @@ import {
 } from './files/files.controllers';
 import { HealthController } from './health.controller';
 import { NotificationEvents } from './notifications/notification-events';
+import { ColissimoTracking } from './sales/colissimo-tracking';
 import {
   HomeListsController,
   StorefrontController,
@@ -159,6 +160,7 @@ import {
   ],
   providers: [
     NotificationEvents,
+    ColissimoTracking,
     { provide: APP_GUARD, useClass: AuthGuard },
     { provide: APP_INTERCEPTOR, useClass: ApiResponseInterceptor },
     { provide: APP_FILTER, useClass: ApiExceptionFilter },

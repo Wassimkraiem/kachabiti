@@ -20,6 +20,7 @@ import { ApiError, idsFrom } from '../common/api';
 import { invalidateCatalog } from '../catalog/revalidate';
 import { Database } from '../db/database';
 import { priceOrder } from './commerce';
+import { ColissimoTracking } from './colissimo-tracking';
 
 // Port of app/api/orders/route.ts: the public checkout (POST) and the admin order list, status
 // changes and deletes (rules in lib/api-access.ts: `orders`).
@@ -64,7 +65,25 @@ const createOrderSchema = z.object({
 @Controller('orders')
 @Public()
 export class OrdersController {
-  constructor(private readonly db: Database) {}
+  constructor(
+    private readonly db: Database,
+    private readonly tracking: ColissimoTracking,
+  ) {}
+
+  /**
+   * A cancelled or deleted order's parcel is deleted at Colissimo while it's still waiting for
+   * pickup. Never blocks the order change: the result (or Colissimo's refusal) is reported.
+   */
+  private async cancelParcels(orderIds: string[], actor: RequestActor) {
+    try {
+      return await this.tracking.cancelForOrders(orderIds, actor);
+    } catch (error) {
+      Sentry.captureException(error, { tags: { area: 'colissimo-cancel' } });
+      return [
+        { barcode: '', deleted: false, message: (error as Error).message },
+      ];
+    }
+  }
 
   /** Public checkout. Amounts are re-priced on the server; the order is linked to a signed-in shopper. */
   @Post()
@@ -217,6 +236,11 @@ export class OrdersController {
       ),
     );
     if (changes.status) await invalidateCatalog(); // shop availability may have changed
+    if (changes.status === 'cancelled')
+      return {
+        ...(order as object),
+        parcels: await this.cancelParcels([body.id], actor),
+      };
     return order;
   }
 
@@ -236,6 +260,6 @@ export class OrdersController {
       ),
     );
     await invalidateCatalog();
-    return { deleted };
+    return { deleted, parcels: await this.cancelParcels(ids, actor) };
   }
 }

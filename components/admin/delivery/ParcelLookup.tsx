@@ -89,14 +89,15 @@ export default function ParcelLookup({ disabled, onAdded }: { disabled: boolean;
                                 </Space>
                             </Descriptions.Item>
                             <Descriptions.Item label={t("Reason")}>{result.reason || "—"}</Descriptions.Item>
-                            <Descriptions.Item label={t("Previous status")}>
-                                {result.previousStatus ? (
+                            <Descriptions.Item label={t("Driver's report")}>
+                                {result.driverStatus ? (
                                     <Space size={6} wrap>
-                                        <DeliveryStatusTag status={result.previousStatus} />
-                                        {result.previousReason && <Text type="secondary">{result.previousReason}</Text>}
+                                        <DeliveryStatusTag status={result.driverStatus} />
+                                        {result.driverReason && <Text type="secondary">{result.driverReason}</Text>}
                                     </Space>
                                 ) : "—"}
                             </Descriptions.Item>
+                            <Descriptions.Item label={t("Paid by Colissimo")}>{result.paid ? t("Yes") : t("No")}</Descriptions.Item>
                             <Descriptions.Item label={t("In our list")} span={2}>
                                 {result.delivery ? (
                                     result.delivery.order ? (
