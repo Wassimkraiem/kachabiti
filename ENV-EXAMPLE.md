@@ -69,6 +69,10 @@ STOCK_API_KEY=replace-with-a-long-random-key
 # account, Paramètres → APIs. Server-only: keep them secret.
 COLISSIMO_ADD_TOKEN=your-colissimo-add-token
 COLISSIMO_TRACKING_TOKEN=your-colissimo-tracking-token
+# Owner → Colissimo account: your colissimodelivery.tn website login, used read-only to list every parcel
+# of the account and its history (the API can't); optional, the page says when it's missing
+COLISSIMO_PORTAL_USER=
+COLISSIMO_PORTAL_PASSWORD=
 
 NEXT_PUBLIC_PHONE=+216 55 558 648
 NEXT_PUBLIC_ADRESS=Your Address

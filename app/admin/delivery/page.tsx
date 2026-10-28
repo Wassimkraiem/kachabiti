@@ -14,6 +14,7 @@ import DeliveryStatusTag, { ParcelBadges } from "@/components/admin/delivery/Del
 import SendParcelModal from "@/components/admin/delivery/SendParcelModal";
 import ParcelLookup from "@/components/admin/delivery/ParcelLookup";
 import EditParcelModal from "@/components/admin/delivery/EditParcelModal";
+import ParcelHistoryDrawer from "@/components/admin/delivery/ParcelHistoryDrawer";
 import {
     canEditParcel,
     canRemoveParcel,
@@ -53,6 +54,7 @@ export default function DeliveryPage() {
     const [importing, setImporting] = useState(false);
     const [newOpen, setNewOpen] = useState(false);
     const [editing, setEditing] = useState<Delivery | null>(null);
+    const [historyFor, setHistoryFor] = useState<string | null>(null);
     const [handingOver, setHandingOver] = useState(false);
     const [handOverResult, setHandOverResult] = useState<HandOverResult | null>(null);
 
@@ -382,10 +384,20 @@ export default function DeliveryPage() {
                         rowSelection={{ selectedRowKeys: selected, onChange: (keys) => setSelected(keys as string[]), getCheckboxProps: (row) => ({ disabled: !canEditParcel(row) && !canRemoveParcel(row) }) }}
                         pagination={{ pageSize: 25, showSizeChanger: false }}
                         scroll={{ x: "max-content" }}
+                        // A click on the row (not on its links, buttons or checkbox) opens the parcel's history.
+                        onRow={(row) => ({
+                            onClick: (e) => {
+                                if (row.barcode && !(e.target as HTMLElement).closest("a, button, .ant-table-selection-column, .ant-typography-copy"))
+                                    setHistoryFor(row.barcode);
+                            },
+                            style: row.barcode ? { cursor: "pointer" } : undefined,
+                        })}
                         locale={{ emptyText: t("No parcels yet. Click “New parcel”, or open an order and click “Send to Colissimo”.") }}
                     />
                 </Space>
             </Card>
+
+            <ParcelHistoryDrawer barcode={historyFor} onClose={() => setHistoryFor(null)} />
 
             <SendParcelModal
                 open={newOpen}

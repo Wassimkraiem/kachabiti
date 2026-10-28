@@ -75,6 +75,7 @@ import {
   ReceiptsController,
 } from './purchasing/purchasing.controllers';
 import { DeliveryController } from './sales/delivery.controller';
+import { ColissimoPortalController } from './sales/colissimo-portal.controller';
 import { OrdersController } from './sales/orders.controller';
 import {
   PaymentsController,
@@ -122,6 +123,7 @@ import {
     PaymentsController,
     RemittancesController,
     DeliveryController,
+    ColissimoPortalController,
     CustomersController,
     InteractionsController,
     TasksController,

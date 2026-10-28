@@ -166,6 +166,15 @@ export const erpPaths: Record<string, Record<string, Op>> = {
     '/api/owner/overview': {
         get: op('Owner', 'Owner overview: delivered sales, margins, cash, debts, stock, channels, products, agents, campaigns', { parameters: [q('from', 'Start', 'string', 'date-time'), q('to', 'End', 'string', 'date-time'), q('channel', 'Channel'), q('agent', 'Agent id', 'string', 'uuid'), q('product', 'Product id', 'string', 'uuid'), q('campaign', 'Campaign id', 'string', 'uuid')] }),
     },
+    '/api/owner/colissimo': {
+        get: op('Owner', "Every parcel of the Colissimo account added in the period (2 months at most), read live from Colissimo's website, with our order when the barcode is known", { parameters: [q('from', 'Start (YYYY-MM-DD, default 30 days ago)'), q('to', 'End (YYYY-MM-DD, default today)')] }),
+    },
+    '/api/owner/colissimo/sync': {
+        post: op('Owner', 'Add every parcel of the Colissimo account that deliveries does not have yet (never re-adds a removed one): { found, added }'),
+    },
+    '/api/delivery/history': {
+        get: op('Owner', "One parcel's details, changes and status history from Colissimo's website (orders permission)", { parameters: [q('code', 'Barcode')] }),
+    },
     '/api/admin/goals': {
         get: op('Owner', 'Objectives and results of a month (?month=YYYY-MM)'),
         post: op('Owner', "Set an agent's objective and commission (repeat_months to copy it)"),

@@ -8,6 +8,7 @@ const ADMIN_LOGIN_PATH = '/admin/login';
 // Admin pages by path prefix (longest match wins). Pages not listed need any back-office user.
 const PAGE_PERMISSIONS: [string, Requirement][] = [
     ['/admin/overview', { owner: true }],
+    ['/admin/colissimo-account', { owner: true }],
     ['/admin/team', { admin: true }],
     ['/admin/activity', { admin: true }],
     ['/admin/performance', { admin: true }],

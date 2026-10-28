@@ -88,7 +88,10 @@ const menuItems: MenuItem[] = [
         type: "group",
         key: "g-owner",
         label: msg("Owner"),
-        children: [{ key: "/admin/overview", icon: <FundOutlined />, label: msg("Business overview") }],
+        children: [
+            { key: "/admin/overview", icon: <FundOutlined />, label: msg("Business overview") },
+            { key: "/admin/colissimo-account", icon: <CarOutlined />, label: msg("Colissimo account") },
+        ],
     },
     {
         type: "group",
@@ -204,6 +207,7 @@ installAdminFetchCache();
 // a permission, "admin" (owners and admins) or "owner".
 const MENU_PERMISSIONS: Record<string, Permission | "admin" | "owner"> = {
     "/admin/overview": "owner",
+    "/admin/colissimo-account": "owner",
     products: "products",
     categories: "products",
     "/admin/variants": "products",

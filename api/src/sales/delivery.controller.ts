@@ -38,6 +38,7 @@ import {
   ManualLineError,
   type ManualLineInput,
 } from './commerce';
+import { parcelDetail, PortalError } from './colissimo-portal';
 import { ColissimoTracking } from './colissimo-tracking';
 
 // Parcels sent to Colissimo (Admin → Delivery, the order page). GET lists them; POST sends,
@@ -194,7 +195,9 @@ export class DeliveryController {
 
   @Get()
   async list(@Query('order_id') orderId?: string) {
-    let query = this.select().orderBy('d.created_at', 'desc').limit(1000);
+    // shortcut: the whole list goes to the page, which filters it (about 2,500 parcels in 2026);
+    // move search and paging to the server when it nears this limit.
+    let query = this.select().orderBy('d.created_at', 'desc').limit(5000);
     if (orderId) query = query.where('d.order_id', '=', orderId);
     return {
       rows: await query.execute(),
@@ -202,6 +205,21 @@ export class DeliveryController {
       // The last automatic check (every 15 minutes), for "checked … ago".
       tracking: this.tracking.lastRun,
     };
+  }
+
+  /** A parcel's details and full status history, read from Colissimo's website (any barcode). */
+  @Get('history')
+  async history(@Query('code') code = '') {
+    if (!/^\d{6,20}$/.test(code)) throw new ApiError('Enter a valid barcode');
+    try {
+      const detail = await parcelDetail(code);
+      if (!detail)
+        throw new ApiError('Colissimo has no parcel with this barcode', 404);
+      return detail;
+    } catch (error) {
+      if (error instanceof PortalError) throw new ApiError(error.message, 502);
+      throw error;
+    }
   }
 
   @Post()
