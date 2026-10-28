@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Alert, Breadcrumb, Button, Card, Input, Modal, Popconfirm, Segmented, Space, Table, Typography } from "antd";
+import { Alert, Breadcrumb, Button, Card, DatePicker, Input, Modal, Popconfirm, Segmented, Space, Table, Tooltip, Typography } from "antd";
+import type { Dayjs } from "dayjs";
 import type { ColumnsType } from "antd/es/table";
 import { BarcodeOutlined, DeleteOutlined, EditOutlined, PlusOutlined, PrinterOutlined, ReloadOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons";
 import { message } from "@/components/admin/antd-app";
@@ -42,6 +43,7 @@ export default function DeliveryPage() {
     const [refreshing, setRefreshing] = useState(false);
     const [filter, setFilter] = useState<Filter>("all");
     const [search, setSearch] = useState("");
+    const [range, setRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
     const [selected, setSelected] = useState<string[]>([]);
     const [importOpen, setImportOpen] = useState(false);
     const [barcode, setBarcode] = useState("");
@@ -131,44 +133,55 @@ export default function DeliveryPage() {
         }
     };
 
+    // Parcels sent within the chosen dates (by creation); the tabs count these.
+    const inRange = useMemo(() => {
+        const from = range?.[0]?.startOf("day").valueOf() ?? -Infinity;
+        const to = range?.[1]?.endOf("day").valueOf() ?? Infinity;
+        return (data?.rows ?? []).filter((row) => {
+            const sent = new Date(row.created_at).getTime();
+            return sent >= from && sent <= to;
+        });
+    }, [data, range]);
+
     const rows = useMemo(() => {
         const term = search.trim().toLowerCase();
-        return (data?.rows ?? []).filter((row) => {
+        return inRange.filter((row) => {
             if (filter !== "all" && statusInfo(row.status).group !== filter) return false;
             if (!term) return true;
             const customer = row.order ? `${row.order.customer_first_name} ${row.order.customer_last_name}` : "";
             return [row.barcode, row.recipient_name, row.phone, row.governorate, row.city, row.order?.order_number, customer]
                 .some((value) => value?.toLowerCase().includes(term));
         });
-    }, [data, filter, search]);
+    }, [inRange, filter, search]);
 
     const counts = useMemo(() => {
         const result: Record<Filter, number> = { all: 0, pending: 0, moving: 0, delivered: 0, returned: 0, problem: 0 };
-        for (const row of data?.rows ?? []) {
+        for (const row of inRange) {
             result.all += 1;
             result[statusInfo(row.status).group] += 1;
         }
         return result;
-    }, [data]);
+    }, [inRange]);
 
     const formatDate = (date: string | null) => (date ? new Date(date).toLocaleString(DATE_LOCALES[locale], { dateStyle: "short", timeStyle: "short" }) : "—");
 
     const columns: ColumnsType<Delivery> = [
         {
-            title: t("Barcode"),
+            title: t("Barcode / order"),
             dataIndex: "barcode",
             key: "barcode",
-            render: (value: string | null) => (value ? <Text copyable style={{ fontFamily: "monospace" }}>{value}</Text> : "—"),
-        },
-        {
-            title: t("Order"),
-            key: "order",
-            render: (_, row) =>
-                row.order ? (
-                    <Link href={`/admin/orders/${row.order.id}`} style={{ fontFamily: "monospace" }}>{row.order.order_number}</Link>
-                ) : (
-                    <Text type="secondary">{t("Not linked")}</Text>
-                ),
+            render: (value: string | null, row) => (
+                <div>
+                    {value ? <Text copyable style={{ fontFamily: "monospace" }}>{value}</Text> : "—"}
+                    <div style={{ fontSize: 12 }}>
+                        {row.order ? (
+                            <Link href={`/admin/orders/${row.order.id}`} style={{ fontFamily: "monospace" }}>{row.order.order_number}</Link>
+                        ) : (
+                            <Text type="secondary">{t("Not linked")}</Text>
+                        )}
+                    </div>
+                </div>
+            ),
         },
         {
             title: t("Customer"),
@@ -205,24 +218,33 @@ export default function DeliveryPage() {
             title: t("Last change"),
             key: "status_changed_at",
             sorter: (a, b) => new Date(a.status_changed_at ?? a.created_at).getTime() - new Date(b.status_changed_at ?? b.created_at).getTime(),
-            render: (_, row) => formatDate(row.status_changed_at ?? row.created_at),
+            render: (_, row) => (
+                <div>
+                    {formatDate(row.status_changed_at ?? row.created_at)}
+                    <div><Text type="secondary" style={{ fontSize: 12 }}>{t("Sent {date}", { date: formatDate(row.created_at) })}</Text></div>
+                </div>
+            ),
         },
         {
             title: t("Action"),
             key: "action",
+            fixed: "right",
             render: (_, row) => (
-                <Space size={4} wrap>
+                <Space size={0}>
                     {row.label_url && (
-                        <Button type="link" size="small" icon={<PrinterOutlined />} href={row.label_url} target="_blank" rel="noopener noreferrer">{t("Slip")}</Button>
+                        <Tooltip title={t("Slip")}>
+                            <Button type="link" size="small" icon={<PrinterOutlined />} href={row.label_url} target="_blank" rel="noopener noreferrer" aria-label={t("Slip")} />
+                        </Tooltip>
                     )}
                     {row.barcode && (
-                        <Button type="link" size="small" icon={<ReloadOutlined />} onClick={() => refreshStatuses([row.id])}>{t("Check")}</Button>
+                        <Tooltip title={t("Check")}>
+                            <Button type="link" size="small" icon={<ReloadOutlined />} onClick={() => refreshStatuses([row.id])} aria-label={t("Check")} />
+                        </Tooltip>
                     )}
-                    {canEditParcel(row) && (
-                        <Button type="link" size="small" icon={<EditOutlined />} onClick={() => setEditing(row)}>{t("Edit")}</Button>
-                    )}
-                    {canRequestPriceChange(row) && (
-                        <Button type="link" size="small" icon={<EditOutlined />} onClick={() => setEditing(row)}>{t("Change price")}</Button>
+                    {(canEditParcel(row) || canRequestPriceChange(row)) && (
+                        <Tooltip title={t(canEditParcel(row) ? "Edit" : "Change price")}>
+                            <Button type="link" size="small" icon={<EditOutlined />} onClick={() => setEditing(row)} aria-label={t(canEditParcel(row) ? "Edit" : "Change price")} />
+                        </Tooltip>
                     )}
                     {canDelete && (
                         <Popconfirm
@@ -233,7 +255,7 @@ export default function DeliveryPage() {
                             cancelText={t("Cancel")}
                             onConfirm={() => remove([row.id])}
                         >
-                            <Button type="link" size="small" danger icon={<DeleteOutlined />} />
+                            <Button type="link" size="small" danger icon={<DeleteOutlined />} aria-label={t("Remove")} />
                         </Popconfirm>
                     )}
                 </Space>
@@ -319,6 +341,7 @@ export default function DeliveryPage() {
                             onChange={(e) => setSearch(e.target.value)}
                             style={{ maxWidth: 360 }}
                         />
+                        <DatePicker.RangePicker value={range} onChange={setRange} placeholder={[t("Sent from"), t("to")]} allowEmpty={[true, true]} />
                         {waiting.length > 0 && (
                             <Popconfirm
                                 styles={{ root: { maxWidth: 360 } }}

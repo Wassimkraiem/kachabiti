@@ -80,7 +80,7 @@ export class CategoriesController {
         .insertInto('categories')
         .values({
           name: body.name,
-          slug: body.slug || slugify(body.name),
+          slug: slugify(body.slug || body.name),
           sort_order: body.sort_order || 0,
           is_featured: body.is_featured || false,
           image_url: body.image_url || null,

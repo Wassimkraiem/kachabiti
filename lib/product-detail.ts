@@ -19,5 +19,12 @@ export interface ProductDetailData {
 }
 
 export function loadProductDetail(slug: string): Promise<ProductDetailData | null> {
-    return storefront<ProductDetailData | null>(`product?slug=${encodeURIComponent(slug)}`);
+    // The route param of a non-Latin slug (Arabic) arrives still percent-encoded; decode it once.
+    let decoded = slug;
+    try {
+        decoded = decodeURIComponent(slug);
+    } catch {
+        // a stray '%' that isn't an escape: use it as typed
+    }
+    return storefront<ProductDetailData | null>(`product?slug=${encodeURIComponent(decoded)}`);
 }

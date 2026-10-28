@@ -200,7 +200,7 @@ export class ProductsController {
     const name = body.name || body.title || '';
 
     // Unique slug from the name unless one is given.
-    const baseSlug = body.slug || slugify(name || 'product');
+    const baseSlug = slugify(body.slug || name) || 'product';
     let slug = baseSlug;
     for (let n = 1; ; n++) {
       const existing = await this.db
@@ -265,8 +265,10 @@ export class ProductsController {
 
     const changes: Record<string, unknown> = {};
     if (body.name !== undefined) changes.name = body.name;
-    if (body.slug !== undefined) changes.slug = body.slug;
-    else if (body.name !== undefined) changes.slug = slugify(body.name);
+    // A typed slug is cleaned like a generated one: spaces or a trailing space break the link.
+    const slug = slugify(body.slug || body.name || '');
+    if ((body.slug !== undefined || body.name !== undefined) && slug)
+      changes.slug = slug;
     for (const field of [
       'description',
       'name_ar',

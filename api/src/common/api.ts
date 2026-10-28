@@ -140,10 +140,11 @@ export function idsFrom(query: { id?: unknown; ids?: unknown }): string[] {
     .filter(Boolean);
 }
 
+/** URL slug: letters and digits in any script (Arabic names included), everything else one '-'. */
 export const slugify = (name: string) =>
   name
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/[^\p{L}\p{M}\p{N}]+/gu, '-')
     .replace(/(^-|-$)/g, '');
 
 // Shared zod pieces, as in lib/erp/api.ts.
