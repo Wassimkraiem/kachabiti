@@ -12,7 +12,7 @@ import EditParcelModal from "./EditParcelModal";
 import SendParcelModal, { type ParcelOrder } from "./SendParcelModal";
 import {
     canEditParcel,
-    canRequestPriceChange,
+    canRemoveParcel,
     deliveryApi,
     type Delivery,
     type DeliveryList,
@@ -152,11 +152,8 @@ export default function OrderDeliveryCard({ order, orderStatus, onOrderChanged, 
                         {canEditParcel(delivery) && (
                             <Button icon={<EditOutlined />} onClick={() => setEditing(true)}>{t("Edit parcel")}</Button>
                         )}
-                        {canRequestPriceChange(delivery) && (
-                            <Button icon={<EditOutlined />} onClick={() => setEditing(true)}>{t("Change price")}</Button>
-                        )}
                         <Link href="/admin/delivery">{t("All parcels")}</Link>
-                        {canDelete && (
+                        {canDelete && canRemoveParcel(delivery) && (
                             <Popconfirm
                                 styles={{ root: { maxWidth: 360 } }}
                                 title={t("Remove this parcel?")}

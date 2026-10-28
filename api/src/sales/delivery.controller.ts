@@ -270,10 +270,9 @@ export class DeliveryController {
       .where('id', 'in', ids)
       .where('deleted_at', 'is', null)
       .execute();
-    // Parcels Colissimo may still hold; the others (never sent, failed, deleted, finished) just go.
-    const live = parcels.filter(
-      (p) => p.barcode && ['En attente', 'A enlever'].includes(p.status),
-    );
+    // Only a parcel waiting for pickup is deleted (here and at Colissimo); ones that never reached
+    // Colissimo or that it already deleted just go. Validated ones ("A enlever") and later stay.
+    const live = parcels.filter((p) => p.barcode && p.status === 'En attente');
     const kept: { id: string; barcode: string; reason: string }[] = [];
     if (live.length) {
       if (!colissimoConfigured().add) throw notConfigured('add');
@@ -288,24 +287,15 @@ export class DeliveryController {
           });
       }
     }
-    const moving = parcels.filter(
-      (p) =>
-        p.barcode &&
-        !live.includes(p) &&
-        [
-          'Enleve',
-          'Au depot',
-          'Au magasin',
-          'En cours',
-          'Retour Inter Agence',
-        ].includes(p.status),
+    const validated = parcels.filter(
+      (p) => p.barcode && !live.includes(p) && p.status !== 'Supprime',
     );
-    for (const parcel of moving)
+    for (const parcel of validated)
       kept.push({
         id: parcel.id,
         barcode: parcel.barcode!,
         reason:
-          "Colissimo already has this parcel (picked up, paid or handed over): it can't be deleted",
+          'This parcel is already validated at Colissimo: only parcels waiting for pickup can be deleted',
       });
     const removable = parcels
       .filter((p) => !kept.some((k) => k.id === p.id))

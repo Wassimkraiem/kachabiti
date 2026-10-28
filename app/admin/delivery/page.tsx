@@ -16,7 +16,7 @@ import ParcelLookup from "@/components/admin/delivery/ParcelLookup";
 import EditParcelModal from "@/components/admin/delivery/EditParcelModal";
 import {
     canEditParcel,
-    canRequestPriceChange,
+    canRemoveParcel,
     deliveryApi,
     type Delivery,
     type DeliveryList,
@@ -27,7 +27,10 @@ import {
 
 const { Title, Text } = Typography;
 
-type Filter = "all" | StatusGroup;
+// "validate": parcels created but not yet validated (handed over) at Colissimo; "pending" is then
+// only the validated ones waiting for the driver.
+type Filter = "all" | "validate" | StatusGroup;
+const tabOf = (row: Delivery): Filter => (canEditParcel(row) ? "validate" : statusInfo(row.status).group);
 
 /**
  * Admin → Delivery: the parcels sent to Colissimo from the orders (or added by barcode), with
@@ -114,10 +117,6 @@ export default function DeliveryPage() {
     };
 
     // Parcels selected that are waiting for pickup: the ones Colissimo can take in a manifest.
-    const waiting = useMemo(
-        () => (data?.rows ?? []).filter((row) => selected.includes(row.id) && canEditParcel(row)).map((row) => row.id),
-        [data, selected],
-    );
 
     const handOver = async () => {
         setHandingOver(true);
@@ -146,7 +145,7 @@ export default function DeliveryPage() {
     const rows = useMemo(() => {
         const term = search.trim().toLowerCase();
         return inRange.filter((row) => {
-            if (filter !== "all" && statusInfo(row.status).group !== filter) return false;
+            if (filter !== "all" && tabOf(row) !== filter) return false;
             if (!term) return true;
             const customer = row.order ? `${row.order.customer_first_name} ${row.order.customer_last_name}` : "";
             return [row.barcode, row.recipient_name, row.phone, row.governorate, row.city, row.order?.order_number, customer]
@@ -155,13 +154,18 @@ export default function DeliveryPage() {
     }, [inRange, filter, search]);
 
     const counts = useMemo(() => {
-        const result: Record<Filter, number> = { all: 0, pending: 0, moving: 0, delivered: 0, returned: 0, problem: 0 };
+        const result: Record<Filter, number> = { all: 0, validate: 0, pending: 0, moving: 0, delivered: 0, returned: 0, problem: 0 };
         for (const row of inRange) {
             result.all += 1;
-            result[statusInfo(row.status).group] += 1;
+            result[tabOf(row)] += 1;
         }
         return result;
     }, [inRange]);
+
+    const waiting = useMemo(() => {
+        const ticked = rows.filter((row) => selected.includes(row.id) && canEditParcel(row));
+        return (ticked.length ? ticked : rows.filter(canEditParcel)).map((row) => row.id);
+    }, [rows, selected]);
 
     const formatDate = (date: string | null) => (date ? new Date(date).toLocaleString(DATE_LOCALES[locale], { dateStyle: "short", timeStyle: "short" }) : "—");
 
@@ -241,12 +245,12 @@ export default function DeliveryPage() {
                             <Button type="link" size="small" icon={<ReloadOutlined />} onClick={() => refreshStatuses([row.id])} aria-label={t("Check")} />
                         </Tooltip>
                     )}
-                    {(canEditParcel(row) || canRequestPriceChange(row)) && (
-                        <Tooltip title={t(canEditParcel(row) ? "Edit" : "Change price")}>
-                            <Button type="link" size="small" icon={<EditOutlined />} onClick={() => setEditing(row)} aria-label={t(canEditParcel(row) ? "Edit" : "Change price")} />
+                    {canEditParcel(row) && (
+                        <Tooltip title={t("Edit")}>
+                            <Button type="link" size="small" icon={<EditOutlined />} onClick={() => setEditing(row)} aria-label={t("Edit")} />
                         </Tooltip>
                     )}
-                    {canDelete && (
+                    {canDelete && canRemoveParcel(row) && (
                         <Popconfirm
                             styles={{ root: { maxWidth: 360 } }}
                             title={t("Remove this parcel?")}
@@ -324,7 +328,8 @@ export default function DeliveryPage() {
                             onChange={setFilter}
                             options={[
                                 { value: "all", label: filterLabel("All", "all") },
-                                { value: "pending", label: filterLabel("Waiting for pickup", "pending") },
+                                { value: "validate", label: filterLabel("To validate", "validate") },
+                                { value: "pending", label: filterLabel("To be picked up", "pending") },
                                 { value: "moving", label: filterLabel("On the way", "moving") },
                                 { value: "delivered", label: filterLabel("Delivered", "delivered") },
                                 { value: "returned", label: filterLabel("Returns", "returned") },
@@ -345,14 +350,14 @@ export default function DeliveryPage() {
                         {waiting.length > 0 && (
                             <Popconfirm
                                 styles={{ root: { maxWidth: 360 } }}
-                                title={t("Hand {count} parcel(s) over to Colissimo for pickup?", { count: waiting.length })}
+                                title={t("Validate {count} parcel(s) for pickup by Colissimo?", { count: waiting.length })}
                                 description={t("Colissimo makes a pickup list (manifest) and the driver comes for them. They can no longer be edited, only their price.")}
-                                okText={t("Hand over")}
+                                okText={t("Validate")}
                                 cancelText={t("Cancel")}
                                 onConfirm={handOver}
                             >
                                 <Button type="primary" icon={<SendOutlined />} loading={handingOver} disabled={!data?.configured.add}>
-                                    {t("Hand over for pickup ({count})", { count: waiting.length })}
+                                    {t("Validate for pickup ({count})", { count: waiting.length })}
                                 </Button>
                             </Popconfirm>
                         )}
@@ -374,7 +379,7 @@ export default function DeliveryPage() {
                         loading={loading}
                         dataSource={rows}
                         columns={columns}
-                        rowSelection={{ selectedRowKeys: selected, onChange: (keys) => setSelected(keys as string[]) }}
+                        rowSelection={{ selectedRowKeys: selected, onChange: (keys) => setSelected(keys as string[]), getCheckboxProps: (row) => ({ disabled: !canEditParcel(row) && !canRemoveParcel(row) }) }}
                         pagination={{ pageSize: 25, showSizeChanger: false }}
                         scroll={{ x: "max-content" }}
                         locale={{ emptyText: t("No parcels yet. Click “New parcel”, or open an order and click “Send to Colissimo”.") }}

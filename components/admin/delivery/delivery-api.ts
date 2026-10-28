@@ -1,6 +1,5 @@
 "use client";
 
-import { isFinalParcel } from "@/lib/colissimo-data";
 
 /** A parcel as GET /api/delivery returns it. */
 export interface Delivery {
@@ -44,9 +43,11 @@ export interface DeliveryList {
 /** A parcel waiting for pickup can be edited at Colissimo. */
 export const canEditParcel = (d: Delivery) => !!d.barcode && d.status === "En attente";
 
-/** Once handed over or printed, only its price can change, through a request Colissimo answers. */
-export const canRequestPriceChange = (d: Delivery) =>
-    !!d.barcode && !canEditParcel(d) && !["sending", "Supprime"].includes(d.status) && !isFinalParcel(d.status, d.paid);
+/**
+ * Only a parcel waiting for pickup can be removed (it's deleted at Colissimo too), or one that
+ * never reached Colissimo or that it already deleted. Validated ones ("A enlever") and later stay.
+ */
+export const canRemoveParcel = (d: Delivery) => !d.barcode || ["En attente", "Supprime"].includes(d.status);
 
 interface ApiResult<T> {
     success: boolean;
