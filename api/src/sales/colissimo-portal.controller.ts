@@ -6,6 +6,7 @@ import { Database } from '../db/database';
 import {
   allParcels,
   deliveryStatus,
+  payouts,
   PortalError,
   portalConfigured,
   searchParcels,
@@ -84,6 +85,7 @@ export class ColissimoPortalController {
   @HttpCode(200)
   async sync() {
     const parcels = await fromPortal(allParcels);
+    const paid = await fromPortal(payouts);
     const known = new Set(
       (
         await this.db
@@ -129,6 +131,15 @@ export class ColissimoPortalController {
           .onConflict((oc) => oc.doNothing())
           .execute();
     });
-    return { found: parcels.length, added: rows.length };
+    // Then orders for the parcels without one, and Colissimo's payouts as money (one transaction).
+    const history = await this.db.withActor(null, async (trx) =>
+      this.db.call<{
+        orders: number;
+        payments: number;
+        payouts: number;
+        carrier_open: number;
+      }>('import_colissimo_history', { p_payouts: paid }, trx),
+    );
+    return { found: parcels.length, added: rows.length, ...history };
   }
 }

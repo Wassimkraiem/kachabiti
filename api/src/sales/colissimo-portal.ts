@@ -296,3 +296,53 @@ export async function allParcels() {
   }
   return parcels;
 }
+
+export interface PortalPayout {
+  reference: string;
+  date: string;
+  gross: number;
+  fees: number;
+  account: 'cash' | 'bank';
+  parcels: {
+    barcode: string;
+    status: 'delivered' | 'returned';
+    date: string;
+  }[];
+}
+
+/** "Mes paiements": Colissimo's validated payouts, each with its parcels (delivered or returned). */
+export async function payouts(): Promise<PortalPayout[]> {
+  const html = await page('recette.php');
+  const start = html.indexOf('<table');
+  if (start < 0 || !/detail_recette\.php\?id=/.test(html)) return [];
+  const result: PortalPayout[] = [];
+  for (const cells of rowsOf(
+    html.slice(start, html.indexOf('</table>', start)),
+  )) {
+    const id = cells.join(' ').match(/detail_recette\.php\?id=(\d+)/)?.[1];
+    if (!id || cells.length < 7 || text(cells[6]) !== 'Oui') continue;
+    const detail = await page(`detail_recette.php?id=${id}`);
+    const table = [...detail.matchAll(/<table[\s\S]*?<\/table>/g)]
+      .map((m) => m[0])
+      .find((t) => />\s*Etat\s*</.test(t) && />\s*Code\s*</.test(t));
+    if (!table)
+      throw new PortalError(
+        "Colissimo's payout page has changed: its parcels can't be read",
+      );
+    result.push({
+      reference: `colissimo:${id}`,
+      date: text(cells[0]),
+      gross: money(text(cells[1])) ?? 0,
+      fees: money(text(cells[3])) ?? 0,
+      account: /esp[eè]ce/i.test(text(cells[5])) ? 'cash' : 'bank',
+      parcels: rowsOf(table)
+        .filter((row) => row.length >= 8)
+        .map((row) => ({
+          barcode: text(row[0]),
+          status: /^livr/i.test(text(row[4])) ? 'delivered' : 'returned',
+          date: text(row[7]),
+        })),
+    });
+  }
+  return result;
+}

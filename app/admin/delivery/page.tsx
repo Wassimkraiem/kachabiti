@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Alert, Breadcrumb, Button, Card, DatePicker, Input, Modal, Popconfirm, Segmented, Space, Table, Tooltip, Typography } from "antd";
+import { Alert, Breadcrumb, Button, Card, DatePicker, Input, Modal, Popconfirm, Segmented, Select, Space, Table, Tooltip, Typography } from "antd";
 import type { Dayjs } from "dayjs";
 import type { ColumnsType } from "antd/es/table";
 import { BarcodeOutlined, DeleteOutlined, EditOutlined, PlusOutlined, PrinterOutlined, ReloadOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons";
@@ -47,6 +47,8 @@ export default function DeliveryPage() {
     const [refreshing, setRefreshing] = useState(false);
     const [filter, setFilter] = useState<Filter>("all");
     const [search, setSearch] = useState("");
+    // Parcels sent from this system, or imported from Colissimo's website (orders COL-<barcode>).
+    const [source, setSource] = useState<"all" | "system" | "imported">("all");
     const [range, setRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
     const [selected, setSelected] = useState<string[]>([]);
     const [importOpen, setImportOpen] = useState(false);
@@ -140,9 +142,10 @@ export default function DeliveryPage() {
         const to = range?.[1]?.endOf("day").valueOf() ?? Infinity;
         return (data?.rows ?? []).filter((row) => {
             const sent = new Date(row.created_at).getTime();
-            return sent >= from && sent <= to;
+            const imported = !!row.order?.order_number.startsWith("COL-");
+            return sent >= from && sent <= to && (source === "all" || imported === (source === "imported"));
         });
-    }, [data, range]);
+    }, [data, range, source]);
 
     const rows = useMemo(() => {
         const term = search.trim().toLowerCase();
@@ -339,7 +342,7 @@ export default function DeliveryPage() {
                             ]}
                         />
                     </div>
-                    <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
+                    <div className="admin-filters" style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
                         <Input
                             allowClear
                             prefix={<SearchOutlined />}
@@ -349,6 +352,16 @@ export default function DeliveryPage() {
                             style={{ maxWidth: 360 }}
                         />
                         <DatePicker.RangePicker value={range} onChange={setRange} placeholder={[t("Sent from"), t("to")]} allowEmpty={[true, true]} />
+                        <Select
+                            value={source}
+                            onChange={setSource}
+                            style={{ width: 210 }}
+                            options={[
+                                { value: "all", label: t("All parcels") },
+                                { value: "system", label: t("Sent from this system") },
+                                { value: "imported", label: t("Imported from Colissimo") },
+                            ]}
+                        />
                         {waiting.length > 0 && (
                             <Popconfirm
                                 styles={{ root: { maxWidth: 360 } }}

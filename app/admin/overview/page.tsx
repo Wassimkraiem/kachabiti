@@ -89,7 +89,7 @@ export default function OwnerOverviewPage() {
                 />
             )}
 
-            <Card style={{ marginBottom: 16 }} styles={{ body: { display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" } }}>
+            <Card style={{ marginBottom: 16 }} classNames={{ body: "admin-filters" }} styles={{ body: { display: "flex", gap: 8, flexWrap: "wrap", alignItems: "center" } }}>
                 <PeriodFilter value={periodValue} onChange={setPeriod} />
                 <Select
                     value={channel}

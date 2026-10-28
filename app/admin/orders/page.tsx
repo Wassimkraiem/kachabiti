@@ -4,19 +4,20 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
+    Badge,
+    Breadcrumb,
     Button,
     Card,
-    Breadcrumb,
+    DatePicker,
+    Image,
     Input,
     Popconfirm,
     Select,
+    Space,
     Table,
     Tag,
-    Typography,
-    Space,
-    Image,
-    Badge,
     Tooltip,
+    Typography,
 } from "antd";
 import { message } from "@/components/admin/antd-app";
 import { ORDER_ITEM_IMAGE_FALLBACK, ORDER_STATUS_COLORS, ORDER_STATUS_OPTIONS, PAYMENT_STATUS_COLORS, PAYMENT_STATUS_LABELS, errorCode, orderStatusLabel, validateOrder } from "@/components/admin/order-status";
@@ -25,6 +26,7 @@ import { api } from "@/components/admin/erp/erp-client";
 import { CHANNELS, CHANNEL_LABELS, OPEN_ORDER_STATUSES } from "@/lib/erp/constants";
 import { useAdminRole } from "@/lib/admin-role-context";
 import type { ColumnsType } from "antd/es/table";
+import type { Dayjs } from "dayjs";
 import {
     DeleteOutlined,
     EyeOutlined,
@@ -79,6 +81,7 @@ export default function AdminOrdersPage() {
     const [loading, setLoading] = useState(true); // first fetch starts on mount: show the table spinner right away
     const [searchTerm, setSearchTerm] = useState("");
     const [statusFilter, setStatusFilter] = useState<string>("all");
+    const [range, setRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
     const [paymentStatusFilter, setPaymentStatusFilter] = useState<string>("all");
     // Who handles the order: "all", "me", "none" (nobody yet), "website" (customers, no agent) or an
     // agent's user id (?added_by= from Agent performance, ?assigned=none from My day; ?status= too).
@@ -99,6 +102,8 @@ export default function AdminOrdersPage() {
             if (statusFilter !== 'all') {
                 params.append('status', statusFilter);
             }
+            if (range?.[0]) params.append('from', range[0].format('YYYY-MM-DD'));
+            if (range?.[1]) params.append('to', range[1].format('YYYY-MM-DD'));
 
             const response = await fetch(`/api/orders?${params.toString()}`);
 
@@ -121,7 +126,7 @@ export default function AdminOrdersPage() {
         } finally {
             setLoading(false);
         }
-    }, [statusFilter]);
+    }, [statusFilter, range]);
 
     useEffect(() => {
         fetchOrders();
@@ -131,7 +136,7 @@ export default function AdminOrdersPage() {
         const term = searchTerm.toLowerCase();
         return orders.filter((order) => {
             // Email is optional, so it can be null.
-            const matchesSearch = [order.order_number, order.customer_first_name, order.customer_last_name, order.customer_email, order.customer_phone, order.created_by_email]
+            const matchesSearch = [order.order_number, order.customer_first_name, order.customer_last_name, order.customer_email, order.customer_phone, order.created_by_email, order.deliveries?.[0]?.barcode]
                 .some((value) => (value ?? "").toLowerCase().includes(term));
 
             const matchesPaymentStatus =
@@ -318,6 +323,9 @@ export default function AdminOrdersPage() {
             render: (_: any, record: OrderRow) => {
                 const items = record.items ?? [];
                 const shown = items.slice(0, 3);
+                // Orders imported from Colissimo's website: its list doesn't say what was inside.
+                if (items.length === 0)
+                    return <Text type="secondary" style={{ fontSize: 12 }}>{record.order_number.startsWith("COL-") ? t("Imported from Colissimo") : "—"}</Text>;
                 return (
                     <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "nowrap" }}>
                         {shown.map((item) => (
@@ -509,14 +517,7 @@ export default function AdminOrdersPage() {
             </div>
 
             <Card>
-                <div
-                    style={{
-                        display: "flex",
-                        flexWrap: "wrap",
-                        gap: 12,
-                        marginBottom: 16,
-                    }}
-                >
+                <div className="admin-filters" style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 16 }}>
                     <Select
                         value={statusFilter}
                         onChange={(value) => setStatusFilter(value)}
@@ -552,6 +553,13 @@ export default function AdminOrdersPage() {
                             ...agentOptions,
                         ]}
                         style={{ width: 220, maxWidth: "100%" }}
+                    />
+                    <DatePicker.RangePicker
+                        value={range}
+                        onChange={setRange}
+                        allowEmpty={[true, true]}
+                        placeholder={[t("Created from"), t("to")]}
+                        style={{ width: 260, maxWidth: "100%" }}
                     />
                     <Input
                         placeholder={t("Search orders...")}

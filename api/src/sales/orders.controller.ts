@@ -16,7 +16,7 @@ import { generateOrderNumber } from '@shared/order-number';
 import type { Order, OrderItem } from '@shared/order-types';
 import { CurrentActor, CurrentUserId, Public } from '../auth/decorators';
 import type { RequestActor } from '../auth/auth.guard';
-import { ApiError, idsFrom } from '../common/api';
+import { ApiError, idsFrom, zDate } from '../common/api';
 import { invalidateCatalog } from '../catalog/revalidate';
 import { Database } from '../db/database';
 import { priceOrder } from './commerce';
@@ -161,7 +161,12 @@ export class OrdersController {
 
   /** The list (with thumbnails and parcel), or one order with its lines (?id=). */
   @Get()
-  async list(@Query('id') id?: string, @Query('status') status?: string) {
+  async list(
+    @Query('id') id?: string,
+    @Query('status') status?: string,
+    @Query('from') from?: string,
+    @Query('to') to?: string,
+  ) {
     let query = this.db
       .selectFrom('orders as o')
       .selectAll('o')
@@ -183,6 +188,21 @@ export class OrdersController {
     }
     if (status && status !== 'all')
       query = query.where('o.status', '=', status);
+    // Created between these days (YYYY-MM-DD, Tunis time: UTC+1 all year), both included.
+    if (from)
+      query = query.where(
+        'o.created_at',
+        '>=',
+        new Date(`${zDate.parse(from)}T00:00:00+01:00`).toISOString(),
+      );
+    if (to)
+      query = query.where(
+        'o.created_at',
+        '<',
+        new Date(
+          new Date(`${zDate.parse(to)}T00:00:00+01:00`).getTime() + 86_400_000,
+        ).toISOString(),
+      );
     return query
       .select((eb) => [
         jsonArrayFrom(
