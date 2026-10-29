@@ -107,6 +107,25 @@ r = await owner.call('/api/orders', 'PUT', { id: second.id, status: 'cancelled' 
 ok(r.json?.success && r.json.data.parcels?.[0]?.deleted === true, 'cancelling deletes the parcel at Colissimo', r.json);
 ok((await parcelAt(secondParcel.barcode)).etat === 'Supprime' && (await delivery(secondParcel.id)).status === 'Supprime', 'deleted on both sides');
 
+// Colissimo unreachable: cancelling or deleting an order with a waiting parcel changes nothing
+// (the parcel would still be picked up), then works once Colissimo answers again.
+const fourth = await newOrder('21000004');
+r = await owner.call('/api/delivery', 'POST', { action: 'validate', order_id: fourth.id });
+const fourthParcel = r.json?.data?.delivery;
+ok(fourthParcel?.barcode, 'fourth parcel created', r.json);
+await mock('/__mock/down', { down: true });
+r = await owner.call('/api/orders', 'PUT', { id: fourth.id, status: 'cancelled' });
+ok(r.status === 502 && r.json?.code === 'COLISSIMO_UNREACHABLE', 'cancel refused while Colissimo is down', r.json);
+r = await owner.call(`/api/orders?id=${fourth.id}`, 'DELETE');
+ok(r.status === 502, 'delete refused while Colissimo is down', r.json);
+let [fourthRow] = await sql('select status, deleted_at, stock_deducted from orders where id = $1', [fourth.id]);
+ok(fourthRow.status === 'processing' && !fourthRow.deleted_at && fourthRow.stock_deducted, 'the order and its stock are unchanged', fourthRow);
+await mock('/__mock/down', { down: false });
+ok((await parcelAt(fourthParcel.barcode)).etat === 'En attente' && (await delivery(fourthParcel.id)).status === 'En attente', 'the parcel is still waiting on both sides');
+r = await owner.call('/api/orders', 'PUT', { id: fourth.id, status: 'cancelled' });
+[fourthRow] = await sql('select status from orders where id = $1', [fourth.id]);
+ok(r.json?.success && fourthRow.status === 'cancelled' && (await parcelAt(fourthParcel.barcode)).etat === 'Supprime', 'cancelled on both sides once Colissimo is back', r.json);
+
 // Removing a parcel waiting for pickup deletes it at Colissimo, then from the list.
 const third = await newOrder('21000003');
 r = await owner.call('/api/delivery', 'POST', { action: 'validate', order_id: third.id });

@@ -196,18 +196,25 @@ export class DocumentsController {
         size_bytes: file.size,
       };
     }
-    return this.db.withActor(actor, (trx) =>
-      trx
-        .insertInto('documents')
-        .values({
-          ...meta,
-          ...(upload ?? {}),
-          created_by: actor.userId,
-          created_by_email: actor.email,
-        })
-        .returningAll()
-        .executeTakeFirstOrThrow(),
-    );
+    return this.db
+      .withActor(actor, (trx) =>
+        trx
+          .insertInto('documents')
+          .values({
+            ...meta,
+            ...(upload ?? {}),
+            created_by: actor.userId,
+            created_by_email: actor.email,
+          })
+          .returningAll()
+          .executeTakeFirstOrThrow(),
+      )
+      .catch(async (error: unknown) => {
+        // No record, no file: don't leave it in storage.
+        if (upload)
+          await deleteObject('documents', upload.storage_path).catch(() => {});
+        throw error;
+      });
   }
 
   @Put()

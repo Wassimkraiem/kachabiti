@@ -330,8 +330,38 @@ export class DeliveryController {
     return { deleted: removable.length, kept };
   }
 
+  /** A parcel was created at Colissimo but saving it here failed: delete it there again (it's still
+   * waiting for pickup), so nothing exists at Colissimo that this list doesn't know. */
+  private async undoCreatedParcel(barcode: string) {
+    try {
+      const result = (await deleteParcels([barcode])).get(barcode);
+      return !!(result?.deleted || result?.notFound);
+    } catch (error) {
+      Sentry.captureException(error, {
+        tags: { area: 'admin-delivery', action: 'undo-create' },
+      });
+      return false;
+    }
+  }
+
+  private savedFailed(barcode: string, undone: boolean) {
+    return undone
+      ? new ApiError(
+          'Saving the parcel failed, so it was cancelled at Colissimo too. Nothing was sent: try again.',
+          500,
+          'SAVE_FAILED',
+        )
+      : new ApiError(
+          `Colissimo created parcel ${barcode}, but saving it failed. Add it with "Add by barcode".`,
+          500,
+          'SAVE_FAILED',
+          { barcode },
+        );
+  }
+
   // Reserve the parcel row (for an order: its single live parcel), create the parcel at Colissimo,
-  // then record its barcode and validate the order. If Colissimo refuses, the row is released.
+  // then record its barcode and validate the order. If Colissimo refuses, the row is released; if
+  // saving fails after Colissimo created it, the parcel is deleted there again.
   private async sendParcel(
     orderId: string | null,
     parcel: ParcelRequest,
@@ -412,28 +442,23 @@ export class DeliveryController {
         warning: result.warning,
       };
     } catch (error) {
-      // The parcel exists at Colissimo: release the row and give the barcode back for "Add by barcode".
       Sentry.captureException(error, {
         tags: { area: 'admin-delivery', action: 'complete' },
       });
-      await this.db.withActor(actor, (trx) =>
-        this.db.call(
-          'fail_delivery',
-          {
-            p_id: reserved.id,
-            p_error: `Created as ${created.barcode}, not saved: ${(error as Error).message}`,
-          },
-          trx,
-        ),
-      );
-      throw new ApiError(
-        `Colissimo created parcel ${created.barcode}, but saving it failed. Add it with "Add by barcode".`,
-        500,
-        'SAVE_FAILED',
-        {
-          barcode: created.barcode,
-        },
-      );
+      const undone = await this.undoCreatedParcel(created.barcode);
+      await this.db
+        .withActor(actor, (trx) =>
+          this.db.call(
+            'fail_delivery',
+            {
+              p_id: reserved.id,
+              p_error: `${undone ? 'Created and deleted again' : 'Created'} as ${created.barcode}, not saved: ${(error as Error).message}`,
+            },
+            trx,
+          ),
+        )
+        .catch((failError) => Sentry.captureException(failError));
+      throw this.savedFailed(created.barcode, undone);
     }
   }
 
@@ -495,13 +520,9 @@ export class DeliveryController {
       Sentry.captureException(error, {
         tags: { area: 'admin-delivery', action: 'create-order' },
       });
-      throw new ApiError(
-        `Colissimo created parcel ${created.barcode}, but saving the order failed. Add it with "Add by barcode".`,
-        500,
-        'SAVE_FAILED',
-        {
-          barcode: created.barcode,
-        },
+      throw this.savedFailed(
+        created.barcode,
+        await this.undoCreatedParcel(created.barcode),
       );
     }
   }
@@ -722,59 +743,77 @@ export class DeliveryController {
 
     try {
       const result = await editParcel(row.barcode!, diff);
-      const delivery = await this.db.withActor(actor, async (trx) => {
-        const updated = await trx
-          .updateTable('deliveries')
-          .set({
-            recipient_name: diff.nom ?? row.recipient_name,
-            phone: diff.tel ?? row.phone,
-            governorate: diff.gouvernerat ?? row.governorate,
-            city: diff.ville ?? row.city,
-            address: diff.adresse ?? row.address,
-            designation: diff.designation ?? row.designation,
-            items_count: diff.nb_article ?? row.items_count,
-            cod_amount: diff.prix ?? row.cod_amount,
-            request: JSON.stringify({
-              ...((row.request as object) ?? {}),
-              ...diff,
-            }),
-            label_url: result.labelUrl ?? row.label_url,
-            label_zebra_url: result.labelZebraUrl ?? row.label_zebra_url,
-            updated_at: new Date(),
-          })
-          .where('id', '=', id)
-          .returningAll()
-          .executeTakeFirstOrThrow();
-        // The order keeps the corrected delivery details too.
-        if (
-          row.order_id &&
-          (diff.nom ||
-            diff.tel ||
-            diff.adresse ||
-            diff.ville ||
-            diff.gouvernerat)
-        ) {
-          const [first, ...rest] = (diff.nom ?? '').trim().split(/\s+/);
-          await trx
-            .updateTable('orders')
+      const delivery = await this.db
+        .withActor(actor, async (trx) => {
+          const updated = await trx
+            .updateTable('deliveries')
             .set({
-              ...(diff.nom
-                ? {
-                    customer_first_name: first,
-                    customer_last_name: rest.join(' '),
-                  }
-                : {}),
-              ...(diff.tel ? { customer_phone: diff.tel } : {}),
-              ...(diff.adresse ? { shipping_address: diff.adresse } : {}),
-              ...(diff.ville ? { shipping_city: diff.ville } : {}),
-              ...(diff.gouvernerat ? { shipping_state: diff.gouvernerat } : {}),
+              recipient_name: diff.nom ?? row.recipient_name,
+              phone: diff.tel ?? row.phone,
+              governorate: diff.gouvernerat ?? row.governorate,
+              city: diff.ville ?? row.city,
+              address: diff.adresse ?? row.address,
+              designation: diff.designation ?? row.designation,
+              items_count: diff.nb_article ?? row.items_count,
+              cod_amount: diff.prix ?? row.cod_amount,
+              request: JSON.stringify({
+                ...((row.request as object) ?? {}),
+                ...diff,
+              }),
+              label_url: result.labelUrl ?? row.label_url,
+              label_zebra_url: result.labelZebraUrl ?? row.label_zebra_url,
+              updated_at: new Date(),
             })
-            .where('id', '=', row.order_id)
-            .where('deleted_at', 'is', null)
-            .execute();
-        }
-        return updated;
-      });
+            .where('id', '=', id)
+            .returningAll()
+            .executeTakeFirstOrThrow();
+          // The order keeps the corrected delivery details too.
+          if (
+            row.order_id &&
+            (diff.nom ||
+              diff.tel ||
+              diff.adresse ||
+              diff.ville ||
+              diff.gouvernerat)
+          ) {
+            const [first, ...rest] = (diff.nom ?? '').trim().split(/\s+/);
+            await trx
+              .updateTable('orders')
+              .set({
+                ...(diff.nom
+                  ? {
+                      customer_first_name: first,
+                      customer_last_name: rest.join(' '),
+                    }
+                  : {}),
+                ...(diff.tel ? { customer_phone: diff.tel } : {}),
+                ...(diff.adresse ? { shipping_address: diff.adresse } : {}),
+                ...(diff.ville ? { shipping_city: diff.ville } : {}),
+                ...(diff.gouvernerat
+                  ? { shipping_state: diff.gouvernerat }
+                  : {}),
+              })
+              .where('id', '=', row.order_id)
+              .where('deleted_at', 'is', null)
+              .execute();
+          }
+          return updated;
+        })
+        .catch(async (saveError: unknown) => {
+          // Colissimo already has the new details: put the old ones back there so both agree.
+          const previous = Object.fromEntries(
+            Object.keys(diff).map((key) => [
+              key,
+              current[key as keyof ParcelChanges],
+            ]),
+          ) as ParcelChanges;
+          await editParcel(row.barcode!, previous).catch((undoError) =>
+            Sentry.captureException(undoError, {
+              tags: { area: 'admin-delivery', action: 'undo-edit' },
+            }),
+          );
+          throw saveError;
+        });
       return { delivery, changed: result.changed, price_change: null };
     } catch (error) {
       const printed =

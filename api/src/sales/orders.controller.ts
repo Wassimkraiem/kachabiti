@@ -71,17 +71,20 @@ export class OrdersController {
   ) {}
 
   /**
-   * A cancelled or deleted order's parcel is deleted at Colissimo while it's still waiting for
-   * pickup. Never blocks the order change: the result (or Colissimo's refusal) is reported.
+   * A cancelled or deleted order's parcel is deleted at Colissimo first, while it's still waiting
+   * for pickup. Colissimo's refusal (it already has the parcel) is reported and the order change goes
+   * on; when Colissimo can't be reached the order change is refused, or the parcel would still leave.
    */
   private async cancelParcels(orderIds: string[], actor: RequestActor) {
     try {
       return await this.tracking.cancelForOrders(orderIds, actor);
     } catch (error) {
       Sentry.captureException(error, { tags: { area: 'colissimo-cancel' } });
-      return [
-        { barcode: '', deleted: false, message: (error as Error).message },
-      ];
+      throw new ApiError(
+        `The order's parcel couldn't be deleted at Colissimo, so nothing was changed: ${(error as Error).message}. Try again.`,
+        502,
+        'COLISSIMO_UNREACHABLE',
+      );
     }
   }
 
@@ -243,6 +246,10 @@ export class OrdersController {
     for (const field of ['status', 'payment_status', 'order_notes']) {
       if (body[field] !== undefined) changes[field] = body[field];
     }
+    const parcels =
+      changes.status === 'cancelled'
+        ? await this.cancelParcels([body.id], actor)
+        : null;
     const order = await this.db.withActor(actor, (trx) =>
       this.db.call(
         'set_order_status',
@@ -256,12 +263,7 @@ export class OrdersController {
       ),
     );
     if (changes.status) await invalidateCatalog(); // shop availability may have changed
-    if (changes.status === 'cancelled')
-      return {
-        ...(order as object),
-        parcels: await this.cancelParcels([body.id], actor),
-      };
-    return order;
+    return parcels ? { ...(order as object), parcels } : order;
   }
 
   /** ?id= or ?ids=a,b: returns the stock they took, then cancels and deletes them, all or none (delete_orders). */
@@ -272,6 +274,7 @@ export class OrdersController {
   ) {
     const ids = idsFrom(query);
     if (ids.length === 0) throw new ApiError('Order ID is required');
+    const parcels = await this.cancelParcels(ids, actor);
     const deleted = await this.db.withActor(actor, (trx) =>
       this.db.call(
         'delete_orders',
@@ -280,6 +283,6 @@ export class OrdersController {
       ),
     );
     await invalidateCatalog();
-    return { deleted, parcels: await this.cancelParcels(ids, actor) };
+    return { deleted, parcels };
   }
 }

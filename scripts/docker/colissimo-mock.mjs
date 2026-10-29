@@ -2,7 +2,8 @@
 // parcel creation (post.php) and the v2 APIs from "Documentation des API Colissimo" (track,
 // validate, price change, edit, delete), with their rules and error codes. Parcels live in memory.
 // Tests play Colissimo's side through /__mock: POST /__mock/parcel {barcode, etat, paid,
-// printed, pre_etat, …} changes a parcel, GET /__mock/parcel?barcode= reads one, POST /__mock/reset.
+// printed, pre_etat, …} changes a parcel, GET /__mock/parcel?barcode= reads one, POST /__mock/reset,
+// POST /__mock/down {down} makes Colissimo unreachable.
 // Tokens: COLISSIMO_ADD_TOKEN (full) and COLISSIMO_TRACKING_TOKEN (read-only), as the API uses them.
 import { createServer } from 'node:http';
 
@@ -11,7 +12,9 @@ const STATE = process.env.COLISSIMO_TRACKING_TOKEN || 'local-colissimo-state-tok
 const GOVERNORATES = ['Ariana', 'Beja', 'Ben Arous', 'Bizerte', 'Gabes', 'Gafsa', 'Jendouba', 'Kairouan', 'Kasserine', 'Kebili', 'LE Kef', 'Mahdia', 'Mannouba', 'Medenine', 'Monastir', 'Nabeul', 'Sfax', 'Sidi Bouzid', 'Siliana', 'Sousse', 'Tataouine', 'Tozeur', 'Tunis', 'Zaghouan'];
 
 let parcels = new Map();
-let nextBarcode = 400000000001;
+let down = false;
+// Starts from the clock so a restarted stand-in never repeats a barcode the database already has.
+let nextBarcode = 400000000000 + (Math.floor(Date.now() / 1000) % 100000000) * 10;
 let nextManifest = 1;
 let nextRequest = 1;
 
@@ -141,8 +144,15 @@ async function handle(request) {
 
     if (url.pathname === '/__mock/reset' && request.method === 'POST') {
         parcels = new Map();
+        down = false;
         return json({ ok: true });
     }
+    // POST /__mock/down {down: true}: Colissimo answers nothing usable until it's set back.
+    if (url.pathname === '/__mock/down' && request.method === 'POST') {
+        down = !!(await request.json()).down;
+        return json({ down });
+    }
+    if (down && !url.pathname.startsWith('/__mock')) return new Response('Service Unavailable', { status: 503 });
     if (url.pathname === '/__mock/parcel') {
         if (request.method === 'GET') return json(parcels.get(url.searchParams.get('barcode')) ?? null);
         const { barcode, ...changes } = await request.json();
