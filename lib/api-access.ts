@@ -30,7 +30,7 @@ export function apiRequirement(pathname: string, method: string, searchParams: U
     if (under('/api/admin/team') || under('/api/admin/activity') || under('/api/admin/performance')) return { admin: true };
     // Objectives and business settings are managed by owners and admins; anyone signed in reads
     // their own objectives through /api/admin/my-work.
-    if (under('/api/admin/goals') || under('/api/admin/erp-settings')) return { admin: true };
+    if (under('/api/admin/goals') || under('/api/admin/erp-settings') || under('/api/admin/assistant')) return { admin: true };
     // Permanent deletes: `hard_delete` plus the permission of the area the table belongs to.
     if (under('/api/admin/trash')) {
         const table = searchParams.get('table');

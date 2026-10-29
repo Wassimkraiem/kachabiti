@@ -14,6 +14,7 @@ const PAGE_PERMISSIONS: [string, Requirement][] = [
     ['/admin/performance', { admin: true }],
     ['/admin/goals', { admin: true }],
     ['/admin/settings', { admin: true }],
+    ['/admin/assistant', { admin: true }],
     ['/admin/customers', { any: ['customers'] }],
     ['/admin/pos', { any: ['pos'] }],
     ['/admin/purchasing', { any: ['purchasing'] }],

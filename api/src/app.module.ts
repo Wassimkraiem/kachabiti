@@ -1,6 +1,10 @@
 import { Module } from '@nestjs/common';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { TeamController } from './admin/team.controller';
+import { AssistantController } from './assistant/assistant.controller';
+import { AssistantService } from './assistant/assistant.service';
+import { KnowledgeController } from './assistant/knowledge.controller';
+import { KnowledgeService } from './assistant/knowledge';
 import { AuthController } from './auth/auth.controller';
 import { AccountController } from './storefront/account.controller';
 import { AuthGuard } from './auth/auth.guard';
@@ -128,6 +132,8 @@ import {
     InteractionsController,
     TasksController,
     MetaWebhookController,
+    AssistantController,
+    KnowledgeController,
     CampaignsController,
     PosController,
     PurchaseOrdersController,
@@ -163,6 +169,8 @@ import {
   providers: [
     NotificationEvents,
     ColissimoTracking,
+    AssistantService,
+    KnowledgeService,
     { provide: APP_GUARD, useClass: AuthGuard },
     { provide: APP_INTERCEPTOR, useClass: ApiResponseInterceptor },
     { provide: APP_FILTER, useClass: ApiExceptionFilter },

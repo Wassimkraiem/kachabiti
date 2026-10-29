@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { Button, Card, Form, Input, Modal, Select, Space, Table, Tabs, Tag, Typography } from "antd";
-import { PlusOutlined, SearchOutlined, TeamOutlined } from "@ant-design/icons";
+import { PlusOutlined, RobotOutlined, SearchOutlined, TeamOutlined } from "@ant-design/icons";
 import { message } from "@/components/admin/antd-app";
 import { useAdminT } from "@/lib/admin-i18n";
 import { useAdminRole } from "@/lib/admin-role-context";
@@ -27,6 +27,8 @@ interface CustomerRow {
     tags: string[];
     updated_at: string;
     anonymized_at: string | null;
+    bot_status: "bot" | "human" | "off";
+    lead_label: "interested" | "not_interested" | "gibberish" | null;
 }
 
 interface ListResult {
@@ -56,6 +58,7 @@ export default function CustomersPage() {
     const [query, setQuery] = useState("");
     const [channel, setChannel] = useState("");
     const [assigned, setAssigned] = useState("");
+    const [bot, setBot] = useState("");
     const [page, setPage] = useState(1);
     const [creating, setCreating] = useState(false);
     const [showDuplicates, setShowDuplicates] = useState(false);
@@ -67,8 +70,9 @@ export default function CustomersPage() {
         if (query) qs.set("q", query);
         if (channel) qs.set("channel", channel);
         if (assigned) qs.set("assigned", assigned);
+        if (bot) qs.set("bot", bot);
         return `/api/customers?${qs}`;
-    }, [page, stage, query, channel, assigned]);
+    }, [page, stage, query, channel, assigned, bot]);
     const { data, loading, reload } = useApi<ListResult>(url);
     const duplicates = useApi<DuplicatePair[]>(showDuplicates ? "/api/customers?duplicates=1" : null);
 
@@ -133,6 +137,8 @@ export default function CustomersPage() {
                         options={[{ value: "", label: t("All channels") }, ...CHANNELS.map((c) => ({ value: c, label: t(CHANNEL_LABELS[c]) }))]} />
                     <Select value={assigned} onChange={(v) => { setAssigned(v); setPage(1); }} style={{ width: 190 }}
                         options={[{ value: "", label: t("Handled by: anyone") }, { value: "me", label: t("Handled by me") }, { value: "none", label: t("Nobody yet") }]} />
+                    <Select value={bot} onChange={(v) => { setBot(v); setPage(1); }} style={{ width: 210 }}
+                        options={[{ value: "", label: t("Bot: everyone") }, { value: "human", label: t("Waiting for an agent") }, { value: "bot", label: t("The bot answers") }, { value: "off", label: t("Bot off for this customer") }]} />
                 </Space>
                 <Table
                     rowKey="id"
@@ -154,6 +160,18 @@ export default function CustomersPage() {
                         },
                         { title: t("Stage"), dataIndex: "stage", render: (v: CustomerStage) => <Tag color={STAGE_COLORS[v]}>{t(STAGE_LABELS[v])}</Tag> },
                         { title: t("Came from"), dataIndex: "channel", render: (v: string) => <ChannelTag channel={v} /> },
+                        {
+                            title: <RobotOutlined />,
+                            key: "bot",
+                            render: (_, r) => (
+                                <Space size={4} wrap>
+                                    {r.bot_status === "human" && <Tag color="orange">{t("Waiting for an agent")}</Tag>}
+                                    {r.lead_label === "interested" && <Tag color="green">{t("Interested")}</Tag>}
+                                    {r.lead_label === "not_interested" && <Tag>{t("Not interested")}</Tag>}
+                                    {r.lead_label === "gibberish" && <Tag color="red">{t("Gibberish")}</Tag>}
+                                </Space>
+                            ),
+                        },
                         { title: t("City"), key: "city", render: (_, r) => [r.city, r.governorate].filter(Boolean).join(", ") || "—" },
                         { title: t("Handled by"), dataIndex: "assigned_to_email", render: (v: string | null) => v ?? <Text type="secondary">—</Text> },
                         { title: t("Last activity"), dataIndex: "updated_at", render: (v: string) => formatDate(v, locale, true) },

@@ -18,6 +18,7 @@ import {
 import { CurrentActor, Public } from '../auth/decorators';
 import type { RequestActor } from '../auth/auth.guard';
 import { ApiError, isManager, params, Zod, zId } from '../common/api';
+import { signedUrl } from '../common/storage';
 import { Database } from '../db/database';
 import { many, one } from '../db/embed';
 import { memberEmail } from '../sales/commerce';
@@ -40,6 +41,8 @@ const LIST_COLUMNS = [
   'created_at',
   'updated_at',
   'anonymized_at',
+  'bot_status',
+  'lead_label',
 ] as const;
 
 const fields = {
@@ -80,6 +83,12 @@ const actionSchema = z.discriminatedUnion('action', [
     ids: z.array(zId).min(1).max(500),
     user_id: zId.nullable(),
   }),
+  // Who answers this customer's messages: the support bot, an agent, or nobody automatic.
+  z.object({
+    action: z.literal('bot'),
+    id: zId,
+    status: z.enum(['bot', 'human', 'off']),
+  }),
 ]);
 
 @Controller('customers')
@@ -87,7 +96,7 @@ const actionSchema = z.discriminatedUnion('action', [
 export class CustomersController {
   constructor(private readonly db: Database) {}
 
-  /** ?id= (record with orders, conversations, follow-ups) | ?duplicates=1 | list: ?q=&stage=&channel=&assigned=me|none|<id>&page=&size= */
+  /** ?id= (record with orders, conversations, follow-ups) | ?duplicates=1 | list: ?q=&stage=&channel=&bot=&assigned=me|none|<id>&page=&size= */
   @Get()
   async get(
     @Query() query: Record<string, string>,
@@ -148,6 +157,9 @@ export class CustomersController {
       filtered = filtered.where('stage', '=', q.get('stage')!);
     if (q.get('channel'))
       filtered = filtered.where('channel', '=', q.get('channel')!);
+    // ?bot=human: the bot handed them over (or an agent took them) and nobody gave them back.
+    if (q.get('bot'))
+      filtered = filtered.where('bot_status', '=', q.get('bot')!);
     const assigned = q.get('assigned');
     if (assigned === 'me')
       filtered = filtered.where('assigned_to', '=', actor.userId);
@@ -364,6 +376,29 @@ export class CustomersController {
       );
       return { id: body.id };
     }
+    if (body.action === 'bot') {
+      await this.db.withActor(actor, (trx) =>
+        trx
+          .updateTable('customers')
+          .set(
+            body.status === 'human'
+              ? {
+                  bot_status: 'human',
+                  bot_handoff_reason: 'agent_took_over',
+                  bot_handoff_at: new Date(),
+                }
+              : {
+                  bot_status: body.status,
+                  bot_handoff_reason: null,
+                  bot_handoff_at: null,
+                  bot_unclear_count: 0,
+                },
+          )
+          .where('id', '=', body.id)
+          .execute(),
+      );
+      return { id: body.id, bot_status: body.status };
+    }
     const email = body.user_id
       ? await memberEmail(this.db, body.user_id)
       : null;
@@ -551,8 +586,28 @@ export class InteractionsController {
         .set({ updated_at: new Date() })
         .where('id', '=', body.customer_id)
         .execute();
+      // An agent replying on the channel takes the conversation from the bot until they hand it back.
+      if (body.send)
+        await trx
+          .updateTable('customers')
+          .set({
+            bot_status: 'human',
+            bot_handoff_reason: 'agent_replied',
+            bot_handoff_at: new Date(),
+          })
+          .where('id', '=', body.customer_id)
+          .where('bot_status', '=', 'bot')
+          .execute();
       return row;
     });
+  }
+
+  /** ?key= — a 5-minute link to a photo or voice note a customer sent (stored by the support bot). */
+  @Get('file')
+  async file(@Query('key') key: string | undefined) {
+    if (!key || !/^conversations\/[\w-]+\/[\w.-]+$/.test(key))
+      throw new ApiError('Invalid file');
+    return { url: await signedUrl('documents', key, 300) };
   }
 
   /** { customer_id } — marks a customer's messages read. */

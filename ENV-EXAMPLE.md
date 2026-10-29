@@ -106,6 +106,23 @@ NEXT_PUBLIC_SENTRY_DSN_BACKEND_PRODUCTION=https://<backend-key>@<org>.ingest.sen
 SENTRY_AUTH_TOKEN=sntrys_...
 SENTRY_ORG=your-org-slug
 SENTRY_PROJECT=your-project-slug
+
+# Messenger / Instagram / WhatsApp (NestJS only; optional, the CRM works by hand without them)
+META_APP_SECRET=
+META_VERIFY_TOKEN=
+META_PAGE_ACCESS_TOKEN=
+WHATSAPP_TOKEN=
+WHATSAPP_PHONE_NUMBER_ID=
+# Support bot (docs/SUPPORT-BOT.md). META_APP_ID tells our own replies apart from Business Suite's.
+META_APP_ID=
+ANTHROPIC_API_KEY=sk-ant-...
+GROQ_API_KEY=gsk_...
+# Optional: the bot's knowledge base is also searched by meaning (Voyage AI embeddings); without it, by words only
+VOYAGE_API_KEY=pa-...
+# Optional: Langfuse traces of every bot turn (customer details are masked before sending).
+LANGFUSE_PUBLIC_KEY=pk-lf-...
+LANGFUSE_SECRET_KEY=sk-lf-...
+LANGFUSE_BASE_URL=https://cloud.langfuse.com
 ```
 
 ## How to Get Gmail App Password

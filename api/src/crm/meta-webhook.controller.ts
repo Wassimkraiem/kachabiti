@@ -18,17 +18,22 @@ import {
 } from '@shared/erp/meta';
 import { Public } from '../auth/decorators';
 import { ApiError, Raw } from '../common/api';
+import { AssistantService } from '../assistant/assistant.service';
 import { Database } from '../db/database';
 
 /**
  * Port of app/api/webhooks/meta: Messenger, Instagram Direct and WhatsApp messages. Public (Meta
  * calls it); every POST must be signed with META_APP_SECRET. Messages are stored on the customer
- * they come from (by platform id, then phone; a new contact gets a record).
+ * they come from (by platform id, then phone; a new contact gets a record), then handed to the
+ * support bot (docs/SUPPORT-BOT.md), which stores their files and may answer.
  */
 @Controller('webhooks/meta')
 @Public()
 export class MetaWebhookController {
-  constructor(private readonly db: Database) {}
+  constructor(
+    private readonly db: Database,
+    private readonly assistant: AssistantService,
+  ) {}
 
   /** Subscription check from Meta's dashboard. */
   @Get()
@@ -57,32 +62,56 @@ export class MetaWebhookController {
       throw new ApiError('Invalid signature', 401);
     try {
       for (const message of parseWebhook(JSON.parse(raw))) {
-        await this.db.withActor(null, async (trx) => {
+        const stored = await this.db.withActor(null, async (trx) => {
           const customerId = await this.customerFor(
             trx as unknown as Database,
             message,
           );
-          await trx
+          const row = await trx
             .insertInto('customer_interactions')
             .values({
               customer_id: customerId,
               channel: message.channel,
-              direction: 'in',
+              direction: message.fromPage ? 'out' : 'in',
               body: message.text.slice(0, 5000),
               external_id: message.externalId,
-              sender_name: message.senderName,
+              sender_name: message.fromPage
+                ? 'Meta Business Suite'
+                : message.senderName,
+              // Meta's links and media ids until AssistantService copies the files to storage.
+              attachments: JSON.stringify(message.attachments),
+              read_at: message.fromPage ? new Date() : null,
               created_at: message.sentAt,
             })
             .onConflict((oc) =>
               oc.columns(['channel', 'external_id']).doNothing(),
             )
-            .execute();
+            .returning('id')
+            .executeTakeFirst();
           await trx
             .updateTable('customers')
             .set({ updated_at: new Date() })
             .where('id', '=', customerId)
             .execute();
+          // Someone answered from Business Suite: the bot steps back until an agent hands it back.
+          if (row && message.fromPage)
+            await trx
+              .updateTable('customers')
+              .set({
+                bot_status: 'human',
+                bot_handoff_reason: 'agent_replied',
+                bot_handoff_at: new Date(),
+              })
+              .where('id', '=', customerId)
+              .where('bot_status', '=', 'bot')
+              .execute();
+          return row && !message.fromPage
+            ? { interactionId: row.id, customerId }
+            : null;
         });
+        // After the transaction: Meta gets its 200 without waiting for downloads or the AI.
+        if (stored)
+          void this.assistant.received(stored.customerId, stored.interactionId);
       }
     } catch (error) {
       // Answer 200 anyway: Meta retries failed deliveries for hours and then disables the webhook.

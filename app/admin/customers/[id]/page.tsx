@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import dayjs from "dayjs";
 import { Alert, Button, Card, Checkbox, Col, DatePicker, Descriptions, Empty, Form, Input, Modal, Popconfirm, Row, Select, Space, Table, Tag, Timeline, Typography } from "antd";
-import { DeleteOutlined, EditOutlined, PhoneOutlined, PlusOutlined, SendOutlined, WhatsAppOutlined } from "@ant-design/icons";
+import { AudioOutlined, DeleteOutlined, EditOutlined, PaperClipOutlined, PauseCircleOutlined, PhoneOutlined, PictureOutlined, PlusOutlined, RobotOutlined, SendOutlined, WhatsAppOutlined } from "@ant-design/icons";
 import { message } from "@/components/admin/antd-app";
 import { useAdminT } from "@/lib/admin-i18n";
 import { useAdminRole } from "@/lib/admin-role-context";
@@ -35,6 +35,10 @@ interface Customer {
     external_ids: Record<string, string>;
     created_at: string;
     anonymized_at: string | null;
+    bot_status: "bot" | "human" | "off";
+    bot_handoff_reason: string | null;
+    bot_handoff_at: string | null;
+    lead_label: "interested" | "not_interested" | "gibberish" | null;
 }
 
 interface Interaction {
@@ -46,6 +50,8 @@ interface Interaction {
     created_by_email: string | null;
     sender_name: string | null;
     order_id: string | null;
+    by_bot: boolean;
+    attachments: { type: string; key?: string; transcript?: string; error?: string }[];
 }
 
 interface Task {
@@ -66,6 +72,24 @@ interface Detail {
 }
 
 const SENDABLE = ["facebook", "instagram", "whatsapp"];
+
+// Support bot (docs/SUPPORT-BOT.md): why it stepped back, and how it labelled the customer.
+const HANDOFF_REASONS: Record<string, string> = {
+    unknown: "It didn't know the answer",
+    unclear: "It didn't understand the customer",
+    complaint: "Complaint",
+    refund: "Refund or exchange",
+    wholesale: "Wholesale or large order",
+    human_requested: "The customer asked for a person",
+    error: "Bot error",
+    agent_replied: "An agent replied",
+    agent_took_over: "An agent took over",
+};
+const LEAD_LABELS = {
+    interested: { label: "Interested", color: "green" },
+    not_interested: { label: "Not interested", color: "default" },
+    gibberish: { label: "Gibberish", color: "red" },
+} as const;
 
 /**
  * A customer's record: details and pipeline stage, their orders, the conversation (messages
@@ -146,6 +170,25 @@ export default function CustomerPage() {
         reload();
     };
 
+    const setBot = async (status: Customer["bot_status"]) => {
+        try {
+            await api("/api/customers", { method: "PATCH", body: { action: "bot", id, status } });
+            message.success(status === "bot" ? t("The bot answers this customer again") : t("The bot stopped answering this customer"));
+            reload();
+        } catch (e) {
+            message.error(t((e as Error).message));
+        }
+    };
+
+    const openFile = async (key: string) => {
+        try {
+            const { url } = await api<{ url: string }>(`/api/crm/interactions/file?key=${encodeURIComponent(key)}`);
+            window.open(url, "_blank", "noopener");
+        } catch (e) {
+            message.error(t((e as Error).message));
+        }
+    };
+
     const anonymize = async () => {
         try {
             await api("/api/customers", { method: "PATCH", body: { action: "anonymize", id } });
@@ -223,6 +266,26 @@ export default function CustomerPage() {
                         )}
                     </Card>
 
+                    <Card title={<Space><RobotOutlined />{t("Support bot")}</Space>} style={{ marginTop: 16 }}>
+                        <Space wrap style={{ marginBottom: 8 }}>
+                            {c.bot_status === "bot" && <Tag color="blue">{t("The bot answers")}</Tag>}
+                            {c.bot_status === "human" && <Tag color="orange">{t("Waiting for an agent")}</Tag>}
+                            {c.bot_status === "off" && <Tag>{t("Bot off for this customer")}</Tag>}
+                            {c.lead_label && <Tag color={LEAD_LABELS[c.lead_label].color}>{t(LEAD_LABELS[c.lead_label].label)}</Tag>}
+                        </Space>
+                        {c.bot_status === "human" && c.bot_handoff_reason && (
+                            <Paragraph type="secondary" style={{ fontSize: 13 }}>
+                                {t(HANDOFF_REASONS[c.bot_handoff_reason] ?? c.bot_handoff_reason)}
+                                {c.bot_handoff_at ? ` · ${formatDate(c.bot_handoff_at, locale, true)}` : ""}
+                            </Paragraph>
+                        )}
+                        <Space wrap>
+                            {c.bot_status !== "bot" && <Button type="primary" icon={<RobotOutlined />} onClick={() => setBot("bot")}>{t("Give back to the bot")}</Button>}
+                            {c.bot_status === "bot" && <Button icon={<PauseCircleOutlined />} onClick={() => setBot("human")}>{t("I take over")}</Button>}
+                            {c.bot_status !== "off" && <Button type="text" onClick={() => setBot("off")}>{t("Never use the bot")}</Button>}
+                        </Space>
+                    </Card>
+
                     <Card
                         title={t("Follow-ups")}
                         style={{ marginTop: 16 }}
@@ -283,12 +346,22 @@ export default function CustomerPage() {
                                                 <Space size={4} wrap>
                                                     <ChannelTag channel={i.channel === "email" ? "other" : i.channel} />
                                                     <Text type="secondary" style={{ fontSize: 12 }}>
-                                                        {i.direction === "in" ? t("Customer") : i.direction === "out" ? t("We replied") : t("Note")}
+                                                        {i.by_bot && <RobotOutlined style={{ marginInlineEnd: 4 }} />}
+                                                        {i.direction === "in" ? t("Customer") : i.direction === "out" ? (i.by_bot ? t("The bot replied") : t("We replied")) : t("Note")}
                                                         {" · "}{formatDate(i.created_at, locale, true)}
                                                         {i.created_by_email ? ` · ${i.created_by_email}` : i.sender_name ? ` · ${i.sender_name}` : ""}
                                                     </Text>
                                                 </Space>
                                                 <div style={{ whiteSpace: "pre-wrap", marginTop: 4 }}>{i.body}</div>
+                                                {(i.attachments ?? []).length > 0 && (
+                                                    <Space wrap size={4} style={{ marginTop: 4 }}>
+                                                        {i.attachments.map((a, n) => a.key ? (
+                                                            <Button key={n} size="small" icon={a.type === "image" ? <PictureOutlined /> : a.type === "audio" ? <AudioOutlined /> : <PaperClipOutlined />} onClick={() => openFile(a.key!)}>
+                                                                {a.type === "image" ? t("Photo") : a.type === "audio" ? t("Voice note") : t("File")}
+                                                            </Button>
+                                                        ) : a.error ? <Tag key={n} color="red">{t("File not received")}</Tag> : null)}
+                                                    </Space>
+                                                )}
                                             </div>
                                         ),
                                     }))}

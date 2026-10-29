@@ -3,18 +3,14 @@
  * Please do not edit it manually.
  */
 
-import type { ColumnType } from 'kysely';
+import type { ColumnType } from "kysely";
 
-export type Generated<T> =
-  T extends ColumnType<infer S, infer I, infer U>
-    ? ColumnType<S, I | undefined, U>
-    : ColumnType<T, T | undefined, T>;
+export type Generated<T> = T extends ColumnType<infer S, infer I, infer U>
+  ? ColumnType<S, I | undefined, U>
+  : ColumnType<T, T | undefined, T>;
 
 export type Int8 = ColumnType<
-  number,
-  bigint | number | string,
-  bigint | number | string
->;
+  number, bigint | number | string, bigint | number | string>;
 
 export type Json = JsonValue;
 
@@ -30,8 +26,7 @@ export type JsonValue = JsonArray | JsonObject | JsonPrimitive;
 
 export type Numeric = ColumnType<number, number | string, number | string>;
 
-export type StockMovementType =
-  'adjustment' | 'restock' | 'return' | 'sale' | 'transfer';
+export type StockMovementType = "adjustment" | "restock" | "return" | "sale" | "transfer";
 
 export type Timestamp = ColumnType<string, Date | string, Date | string>;
 
@@ -121,6 +116,28 @@ export interface AgentGoals {
   updated_at: Generated<Timestamp>;
   user_email: string | null;
   user_id: string;
+}
+
+export interface AssistantRuns {
+  audio_seconds: Generated<Numeric>;
+  cache_read_tokens: Generated<number>;
+  cache_write_tokens: Generated<number>;
+  channel: string;
+  cost_usd: Generated<Numeric>;
+  created_at: Generated<Timestamp>;
+  customer_id: string | null;
+  error: string | null;
+  handoff_reason: string | null;
+  id: Generated<string>;
+  input_tokens: Generated<number>;
+  latency_ms: Generated<number>;
+  model: string;
+  outcome: string;
+  output_tokens: Generated<number>;
+  prompt_version: string;
+  reply: string | null;
+  tool_calls: Generated<Json>;
+  trace_id: string | null;
 }
 
 export interface AuthTokens {
@@ -338,7 +355,9 @@ export interface CrmTasks {
 }
 
 export interface CustomerInteractions {
+  attachments: Generated<Json>;
   body: string;
+  by_bot: Generated<boolean>;
   channel: Generated<string>;
   created_at: Generated<Timestamp>;
   created_by: string | null;
@@ -359,6 +378,10 @@ export interface Customers {
   anonymized_at: Timestamp | null;
   assigned_to: string | null;
   assigned_to_email: string | null;
+  bot_handoff_at: Timestamp | null;
+  bot_handoff_reason: string | null;
+  bot_status: Generated<string>;
+  bot_unclear_count: Generated<number>;
   channel: Generated<string>;
   city: string | null;
   created_at: Generated<Timestamp>;
@@ -370,6 +393,7 @@ export interface Customers {
   full_name: Generated<string>;
   governorate: string | null;
   id: Generated<string>;
+  lead_label: string | null;
   notes: string | null;
   phone: string | null;
   phone_alt: string | null;
@@ -525,6 +549,30 @@ export interface JournalLines {
   partner_name: string | null;
   partner_type: string | null;
   position: Generated<number>;
+}
+
+export interface KnowledgeChunks {
+  content: string;
+  embedding: number[] | null;
+  embedding_model: string | null;
+  entry_id: string;
+  id: Generated<string>;
+  position: number;
+  search_text: string;
+}
+
+export interface KnowledgeEntries {
+  active: Generated<boolean>;
+  content: string;
+  created_at: Generated<Timestamp>;
+  created_by: string | null;
+  created_by_email: string | null;
+  deleted_at: Timestamp | null;
+  id: Generated<string>;
+  kind: Generated<string>;
+  language: string | null;
+  title: string;
+  updated_at: Generated<Timestamp>;
 }
 
 export interface LandingProducts {
@@ -1097,6 +1145,7 @@ export interface DB {
   ad_campaigns: AdCampaigns;
   ad_spend: AdSpend;
   agent_goals: AgentGoals;
+  assistant_runs: AssistantRuns;
   auth_tokens: AuthTokens;
   back_office_users: BackOfficeUsers;
   bank_statement_lines: BankStatementLines;
@@ -1123,6 +1172,8 @@ export interface DB {
   inventory_levels: InventoryLevels;
   journal_entries: JournalEntries;
   journal_lines: JournalLines;
+  knowledge_chunks: KnowledgeChunks;
+  knowledge_entries: KnowledgeEntries;
   landing_products: LandingProducts;
   locations: Locations;
   material_movements: MaterialMovements;

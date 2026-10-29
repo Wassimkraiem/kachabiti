@@ -42,30 +42,55 @@ export interface IncomingMessage {
     phone: string | null;    // WhatsApp only
     text: string;
     sentAt: Date;
+    attachments: MetaAttachment[];
+    // A reply typed by a person in Meta Business Suite (an echo not sent by our app); senderId is
+    // then the customer it went to.
+    fromPage: boolean;
+}
+
+/** A photo, voice note… on a message: a URL (Messenger, Instagram) or a media id (WhatsApp). */
+export interface MetaAttachment {
+    type: 'image' | 'audio' | 'video' | 'file';
+    url?: string;
+    mediaId?: string;
 }
 
 type Json = Record<string, unknown>;
 const arr = (v: unknown) => (Array.isArray(v) ? (v as Json[]) : []);
 const obj = (v: unknown) => (v && typeof v === 'object' ? (v as Json) : {});
+const ATTACHMENT_TYPES = ['image', 'audio', 'video', 'file'] as const;
+const attachmentType = (type: unknown): MetaAttachment['type'] =>
+    ATTACHMENT_TYPES.find((t) => t === type) ?? (type === 'voice' ? 'audio' : type === 'sticker' ? 'image' : 'file');
 
-/** Text messages in a webhook payload (attachments are noted as such; echoes of our own messages are skipped). */
+/**
+ * Messages in a webhook payload, with their attachments. Echoes of what our app sent are skipped
+ * (they are stored when sent); echoes from another app (Business Suite) are kept as fromPage.
+ * Without META_APP_ID echoes can't be told apart, so all are skipped.
+ */
 export function parseWebhook(payload: Json): IncomingMessage[] {
     const out: IncomingMessage[] = [];
     const object = payload.object;
+    const appId = process.env.META_APP_ID;
     for (const entry of arr(payload.entry)) {
         if (object === 'page' || object === 'instagram') {
             for (const event of arr(entry.messaging)) {
                 const message = obj(event.message);
-                if (!message.mid || message.is_echo) continue;
-                const attachments = arr(message.attachments);
+                if (!message.mid) continue;
+                const fromPage = Boolean(message.is_echo);
+                if (fromPage && (!appId || String(message.app_id ?? '') === appId)) continue;
+                const attachments: MetaAttachment[] = arr(message.attachments)
+                    .map((a) => ({ type: attachmentType(a.type), url: obj(a.payload).url as string | undefined }))
+                    .filter((a) => typeof a.url === 'string');
                 out.push({
                     channel: object === 'page' ? 'facebook' : 'instagram',
                     externalId: String(message.mid),
-                    senderId: String(obj(event.sender).id ?? ''),
+                    senderId: String(obj(fromPage ? event.recipient : event.sender).id ?? ''),
                     senderName: null,
                     phone: null,
                     text: typeof message.text === 'string' && message.text ? message.text : attachments.length ? `[${attachments.map((a) => a.type).join(', ')}]` : '[message]',
                     sentAt: new Date(Number(event.timestamp) || Date.now()),
+                    attachments,
+                    fromPage,
                 });
             }
         } else if (object === 'whatsapp_business_account') {
@@ -74,6 +99,9 @@ export function parseWebhook(payload: Json): IncomingMessage[] {
                 const names = new Map(arr(value.contacts).map((c) => [String(c.wa_id), String(obj(c.profile).name ?? '')]));
                 for (const message of arr(value.messages)) {
                     const from = String(message.from ?? '');
+                    const type = String(message.type ?? 'message');
+                    const media = obj(message[type]);
+                    const caption = typeof media.caption === 'string' ? media.caption : '';
                     const text = obj(message.text).body;
                     out.push({
                         channel: 'whatsapp',
@@ -81,7 +109,9 @@ export function parseWebhook(payload: Json): IncomingMessage[] {
                         senderId: from,
                         senderName: names.get(from) || null,
                         phone: from,
-                        text: typeof text === 'string' ? text : `[${String(message.type ?? 'message')}]`,
+                        text: typeof text === 'string' ? text : caption || `[${type}]`,
+                        attachments: media.id && type !== 'text' ? [{ type: attachmentType(type === 'document' ? 'file' : type), mediaId: String(media.id) }] : [],
+                        fromPage: false,
                         sentAt: new Date((Number(message.timestamp) || Date.now() / 1000) * 1000),
                     });
                 }
@@ -89,6 +119,26 @@ export function parseWebhook(payload: Json): IncomingMessage[] {
         }
     }
     return out.filter((m) => m.senderId);
+}
+
+/** Downloads an attachment (its Messenger URL expires, so this runs as soon as it arrives). */
+export async function downloadMetaMedia(attachment: MetaAttachment): Promise<{ data: Buffer; mime: string }> {
+    let url = attachment.url;
+    let headers: Record<string, string> = {};
+    if (attachment.mediaId) {
+        // WhatsApp: the media id gives a short-lived URL that needs the token too.
+        headers = { Authorization: `Bearer ${process.env.WHATSAPP_TOKEN}` };
+        const info = await fetch(`${GRAPH}/${attachment.mediaId}`, { headers, signal: AbortSignal.timeout(15_000) });
+        if (!info.ok) throw new Error(`WhatsApp media lookup failed (${info.status})`);
+        url = String(((await info.json()) as Json).url ?? '');
+    }
+    if (!url) throw new Error('Attachment without a URL');
+    const response = await fetch(url, { headers, signal: AbortSignal.timeout(30_000) });
+    if (!response.ok) throw new Error(`Attachment download failed (${response.status})`);
+    const data = Buffer.from(await response.arrayBuffer());
+    // shortcut: 25 MB cap (Groq's audio limit), larger files are refused rather than streamed.
+    if (data.length > 25 * 1024 * 1024) throw new Error('Attachment larger than 25 MB');
+    return { data, mime: response.headers.get('content-type')?.split(';')[0] || 'application/octet-stream' };
 }
 
 /** Sends a text reply. Throws with Meta's message when it refuses. */

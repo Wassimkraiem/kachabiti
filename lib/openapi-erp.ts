@@ -62,10 +62,10 @@ export const erpPaths: Record<string, Record<string, Op>> = {
         delete: op('Sales', 'Cancel a payout (its payments are owed again)', { parameters: [q('id', 'Payout id', 'string', 'uuid')] }),
     },
     '/api/customers': {
-        get: op('Customers', 'Customer (?id=), duplicates (?duplicates=1) or list (?q=&stage=&channel=&assigned=me|none|<id>&page=&size=)'),
+        get: op('Customers', 'Customer (?id=), duplicates (?duplicates=1) or list (?q=&stage=&channel=&bot=bot|human|off&assigned=me|none|<id>&page=&size=)'),
         post: op('Customers', 'Create a customer'),
         put: op('Customers', 'Update a customer'),
-        patch: op('Customers', 'merge (keep_id, remove_id) | anonymize (id) | assign (ids, user_id)'),
+        patch: op('Customers', 'merge (keep_id, remove_id) | anonymize (id) | assign (ids, user_id) | bot (id, status: bot|human|off — who answers their messages)'),
         delete: op('Customers', 'Soft-delete a customer record', { parameters: [q('id', 'Customer id', 'string', 'uuid')] }),
     },
     '/api/crm/interactions': {
@@ -80,10 +80,25 @@ export const erpPaths: Record<string, Record<string, Op>> = {
         put: op('Customers', 'Update or tick a follow-up'),
         delete: op('Customers', 'Remove a follow-up', { parameters: [q('id', 'Task id', 'string', 'uuid')] }),
     },
+    '/api/crm/interactions/file': {
+        get: op('Customers', 'A 5-minute link to a photo or voice note a customer sent', { parameters: [q('key', 'Storage key from the message attachments', 'string')] }),
+    },
     '/api/webhooks/meta': {
         get: op('Customers', "Meta webhook subscription check (hub.mode, hub.verify_token, hub.challenge). Public."),
-        post: op('Customers', 'Messenger / Instagram / WhatsApp messages (signed with X-Hub-Signature-256). Public.'),
+        post: op('Customers', 'Messenger / Instagram / WhatsApp messages (signed with X-Hub-Signature-256), with their photos and voice notes; the support bot may answer. Public.'),
     },
+    '/api/admin/assistant': {
+        get: op('Customers', 'Support bot: settings, month spend, last turns (?limit=), customers waiting for an agent; ?customer_id= one customer\'s turns. Owners and admins.'),
+        put: op('Customers', 'Save the support bot settings (enabled, channels, monthly_budget_usd, knowledge, handoff_message, model, escalation_model). Owners and admins.'),
+    },
+    '/api/admin/assistant/knowledge': {
+        get: op('Customers', 'The bot\'s knowledge base: entries (Q&A and documents) with their chunk counts, and whether embeddings are configured. Owners and admins.'),
+        post: op('Customers', 'Save an entry { id?, kind: faq|doc, title, content, language?, active? }: re-chunked and re-embedded. Returns { id, chunks, embedded, warning }.'),
+        delete: op('Customers', 'Remove entries (?ids=a,b; soft delete).'),
+    },
+    '/api/admin/assistant/knowledge/import': { post: op('Customers', 'Save many entries at once: { entries: [...] } (500 at most). Returns { saved, warnings }.') },
+    '/api/admin/assistant/knowledge/embed': { post: op('Customers', 'Embed the chunks that have no embedding yet (needs VOYAGE_API_KEY). Returns { embedded }.') },
+    '/api/admin/assistant/knowledge/search': { get: op('Customers', 'What the bot would get for a message (?q=): the best chunks, by words and by meaning.', { parameters: [q('q', 'A customer message')] }) },
     '/api/pos': {
         get: op('Point of sale', 'Open sessions and shops; ?catalog=1&location_id= products; ?session_id= a session; ?sessions=1 history; ?receipt=<order id>'),
         post: op('Point of sale', 'open (location_id, opening_float) | sale (session_id, items, discount_amount, customer, payments) | cash (session_id, direction, amount, label) | close (session_id, counted_cash)', { requestBody: body({ action: { type: 'string', enum: ['open', 'sale', 'cash', 'close'] } }, ['action']) }),

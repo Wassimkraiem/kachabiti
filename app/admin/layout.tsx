@@ -9,6 +9,7 @@ import { useMobileTableLabels } from "@/components/admin/mobile-table-labels";
 import { installAdminFetchCache } from "@/components/admin/admin-fetch-cache";
 import type { MenuProps } from "antd";
 import {
+    RobotOutlined,
     DashboardOutlined,
     ShoppingOutlined,
     PlusOutlined,
@@ -177,6 +178,8 @@ const menuItems: MenuItem[] = [
             { key: "/admin/goals", icon: <AimOutlined />, label: msg("Objectives & commissions") },
             { key: "/admin/performance", icon: <TrophyOutlined />, label: msg("Agent performance") },
             { key: "/admin/settings", icon: <ControlOutlined />, label: msg("Business settings") },
+            { key: "/admin/assistant", icon: <RobotOutlined />, label: msg("Support bot") },
+            { key: "/admin/assistant/knowledge", icon: <BookOutlined />, label: msg("Bot knowledge") },
             { key: "/admin/notifications", icon: <BellOutlined />, label: msg("Notifications") },
             { key: "/admin/activity", icon: <HistoryOutlined />, label: msg("Activity") },
             { key: "/admin/trash", icon: <DeleteOutlined />, label: msg("Deleted items") },
@@ -238,6 +241,8 @@ const MENU_PERMISSIONS: Record<string, Permission | "admin" | "owner"> = {
     "/admin/team": "admin",
     "/admin/goals": "admin",
     "/admin/settings": "admin",
+    "/admin/assistant": "admin",
+    "/admin/assistant/knowledge": "admin",
     "/admin/activity": "admin",
     "/admin/performance": "admin",
     "/admin/trash": "hard_delete",
