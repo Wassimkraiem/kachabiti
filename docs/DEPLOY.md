@@ -6,15 +6,15 @@ Shoppers / admin ──▶ Vercel (Next.js site + admin, e.g. test.kachabiti.com
                          ▼ https://<site_domain> (e.g. api-test.kachabiti.com; A record → the Elastic IP)
               EC2 t4g.small (ARM, Ubuntu 24.04, 2 GB + 2 GB swap)
                ├─ caddy (ports 80/443, HTTPS from Let's Encrypt) ──▶ api (NestJS, ghcr.io/<owner>/kachabity-api)
-               └─ db (Postgres 17, nightly backups to S3, daily disk snapshots)
+               └─ db (Postgres 17, hourly backups to S3, daily disk snapshots)
 Product photos ──▶ S3 bucket kachabity-products-<id> (public read); documents and backups: private buckets
 ```
 
 - **Infrastructure** (`infra/terraform/`): the instance and its role (read/write on the three buckets, so
-  no S3 keys anywhere), its firewall (80, 443, SSH), the Elastic IP, the buckets, daily disk snapshots and a monthly budget
-  alert. You run Terraform yourself; nothing is created without `apply`.
+  no S3 keys anywhere), its firewall (80, 443, SSH), the Elastic IP, the buckets, daily disk snapshots, a monthly budget
+  alert and e-mail alarms (see Alerts). You run Terraform yourself; nothing is created without `apply`.
 - **Server files** (`deploy/`): `docker-compose.prod.yml`, `deploy.sh` (backup → migrate → new API next
-  to the old one → switch once healthy, see below), `backup.sh` (nightly to S3, 30 days kept).
+  to the old one → switch once healthy, see below), `backup.sh` (hourly to S3, 30 days kept).
 - **CI/CD** (`.github/workflows/`): `ci.yml` checks pull requests and pushes to `main` (types, lint, API
   build, all end-to-end suites on an empty database built from `db/baseline.sql`). On `kachabiti-nest`,
   `deploy.yml` is the one run per push: CI, then, only if the API changed, the API image built on
@@ -98,6 +98,7 @@ Without Terraform installed: `docker run --rm -it -v "$PWD:/tf" -w /tf -e AWS_AC
 
 Afterwards: `terraform output server_public_ip` and `terraform output -raw server_env` (the S3 and domain
 lines of the server `.env`). Wait for the first boot: `ssh ubuntu@<ip> cloud-init status --wait`.
+AWS also e-mails `budget_email` a subscription link for the alarms: click it, or no alarm reaches you.
 
 ### 4. DNS
 At your domain's DNS provider (Hostinger for kachabiti.com: hPanel → Domains → DNS records; not Vercel's
@@ -150,14 +151,20 @@ name. Redeploy once the API answers, so the pages are built with real data.
 - **Costs:** Billing and Cost Management → Cost Explorer; the budget e-mails you at 80% of
   `monthly_budget_usd`.
 - **Stop paying for a test:** `terraform destroy` removes everything except the state bucket (empty the
-  three buckets first; S3 refuses to delete a bucket with files in it).
+  three buckets first; S3 refuses to delete a bucket with files in it). The instance has termination
+  protection: set `disable_api_termination = false` in `aws.tf` and `terraform apply` first.
 
 ## Backups
 
 Two kinds, both automatic:
-- **Database dumps:** nightly at 02:30 (server time, UTC) and before every deploy that has a previous
-  version, `backup.sh` dumps the database into the private bucket `kachabity-backups-<id>` (30 days kept;
-  7 days on the server too). Use them to restore the database alone, on this server or another.
+- **Database dumps:** every hour at :30 (cron in `cloud-init.yaml`) and before every deploy that has a
+  previous version, `backup.sh` dumps the database into the private bucket `kachabity-backups-<id>` (30 days
+  kept; 2 days on the server too), so at most an hour of data is lost. Use them to restore the database
+  alone, on this server or another. A server created before the hourly schedule still has the nightly
+  cron line (cloud-init only runs at first boot); replace it once:
+  ```bash
+  ssh ubuntu@<ip> "echo '30 * * * * deploy flock -n /tmp/kachabity-backup.lock /opt/kachabity/backup.sh >> /var/log/kachabity-backup.log 2>&1' | sudo tee /etc/cron.d/kachabity-backup"
+  ```
 - **Disk snapshots:** every day at 01:00 UTC, AWS snapshots the server's whole disk (Postgres included;
   Data Lifecycle Manager, `aws_dlm_lifecycle_policy.server`), keeping the last `snapshot_days` (7). Use them
   when the server itself is lost or broken: EC2 → Snapshots → the snapshot → Create volume (same
@@ -170,6 +177,20 @@ pg_restore --clean --if-exists --no-owner -d postgresql://… kachabity-<date>.d
 ```
 (create the extensions first on a brand-new database: `pgcrypto`, `pg_trgm`, `unaccent`, `uuid-ossp` in
 schema `extensions`; `api/scripts/migrate.mjs` shows the statements).
+
+## Alerts
+
+E-mails to `budget_email` through the SNS topic `kachabity-alerts` (confirm its subscription e-mail once),
+both when something breaks and when it is OK again:
+- **kachabity-backup-missing:** no backup reached S3 for 2 hours. Each successful `backup.sh` sends the
+  metric `Kachabity/BackupSucceeded`; look at `/var/log/kachabity-backup.log` (a full disk, Docker down, S3
+  refused). Right after the first `apply` it fires until the first hourly backup with the new script runs.
+- **kachabity-server-system-check:** an AWS hardware or network fault; EC2 recovers the instance onto
+  healthy hardware (same disk, IP and data).
+- **kachabity-server-instance-check:** the server stopped answering (out of memory, hung); EC2 reboots it.
+  Postgres recovers from its log as after a power cut.
+
+The instance also has termination protection, so it can't be terminated by mistake (see Stop paying).
 
 ## When kachabiti-nest is merged into main
 
