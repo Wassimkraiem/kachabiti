@@ -33,6 +33,7 @@ import { Database } from '../db/database';
 import {
   buildManualOrderLines,
   calculateShipping,
+  deliveryFee,
   ManualLineError,
   memberEmail,
 } from './commerce';
@@ -106,6 +107,12 @@ async function erpSetting<T>(db: Database, key: string): Promise<T | null> {
 @Public()
 export class SalesOrdersController {
   constructor(private readonly db: Database) {}
+
+  /** The usual delivery fee, filled in on New order and New parcel (agents can change it per order). */
+  @Get('delivery-fee')
+  async fee() {
+    return { fee: await deliveryFee(this.db) };
+  }
 
   /** ?phone=&exclude= — the customer with this phone and their orders still in progress. */
   @Get()

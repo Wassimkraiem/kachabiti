@@ -7,6 +7,7 @@ import { useAdminT } from "@/lib/admin-i18n";
 import { COLISSIMO_GOVERNORATES, parcelFromOrder, type OrderForParcel } from "@/lib/colissimo-data";
 import { deliveryApi, type Delivery } from "./delivery-api";
 import ParcelProducts, { type ProductLine, type QuotedLine } from "./ParcelProducts";
+import { useApi } from "@/components/admin/erp/erp-client";
 
 const { Text } = Typography;
 
@@ -64,6 +65,7 @@ export default function SendParcelModal({ order, open, onClose, onSent }: {
     const [lines, setLines] = useState<ProductLine[]>([]);
     const [quote, setQuote] = useState<QuotedLine[] | null>([]);
     const withProducts = !order && lines.length > 0;
+    const fee = useApi<{ fee: number }>(open && !order ? "/api/sales/orders/delivery-fee" : null).data?.fee ?? 0;
 
     useEffect(() => {
         if (open) {
@@ -75,7 +77,7 @@ export default function SendParcelModal({ order, open, onClose, onSent }: {
         }
     }, [open, order, form]);
 
-    // Contents, item count and cash follow the products (the cash stays editable for a delivery fee).
+    // Contents, item count and cash (products + the usual delivery fee) follow the products; the cash stays editable.
     const onQuote = (quoted: QuotedLine[] | null) => {
         setQuote(quoted);
         if (!quoted || quoted.length === 0) return;
@@ -85,7 +87,7 @@ export default function SendParcelModal({ order, open, onClose, onSent }: {
                 .join(", ")
                 .slice(0, 250),
             nb_article: quoted.reduce((sum, l) => sum + l.quantity, 0),
-            prix: quoted.reduce((sum, l) => sum + l.subtotal, 0),
+            prix: quoted.reduce((sum, l) => sum + l.subtotal, 0) + fee,
         });
     };
 
@@ -214,7 +216,7 @@ export default function SendParcelModal({ order, open, onClose, onSent }: {
                         name="prix"
                         label={t("Cash to collect (TND)")}
                         rules={[{ required: true, message: t("Required") }]}
-                        extra={withProducts ? t("The products' total. Add the delivery fee if the customer pays it.") : undefined}
+                        extra={withProducts ? t("The products' total plus the {fee} TND delivery fee. Change it if needed.", { fee }) : undefined}
                         style={{ flex: "1 1 140px" }}
                     >
                         <InputNumber min={0} max={100000} step={1} style={{ width: "100%" }} />

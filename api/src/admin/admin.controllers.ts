@@ -25,6 +25,7 @@ import { ApiError, params, period, Zod, zId } from '../common/api';
 import { invalidateCatalog } from '../catalog/revalidate';
 import { Database } from '../db/database';
 import { one } from '../db/embed';
+import { deliveryFee, setDeliveryFee } from '../sales/commerce';
 import { NotificationEvents } from '../notifications/notification-events';
 import { clampToStart } from '@shared/erp/objectives';
 import {
@@ -152,6 +153,8 @@ const erpSettingsSchema = z.object({
         .nullable(),
     })
     .optional(),
+  // Stored in shipping_rates (Tunisia), where the checkout reads it.
+  delivery_fee: z.number().min(0).max(1000).optional(),
 });
 
 const SETTING_KEYS = ['sales', 'pos', 'analytics'] as const;
@@ -175,9 +178,12 @@ export class ErpSettingsController {
 
   @Get()
   async get() {
-    return Object.fromEntries(
-      (await this.current()).map((r) => [r.key, r.value]),
-    );
+    return {
+      ...Object.fromEntries(
+        (await this.current()).map((r) => [r.key, r.value]),
+      ),
+      delivery_fee: await deliveryFee(this.db),
+    };
   }
 
   @Put()
@@ -195,9 +201,9 @@ export class ErpSettingsController {
       key,
       value: { ...(byKey[key] ?? {}), ...body[key] },
     }));
-    if (rows.length) {
-      await this.db.withActor(actor, (trx) =>
-        trx
+    await this.db.withActor(actor, async (trx) => {
+      if (rows.length)
+        await trx
           .insertInto('erp_settings')
           .values(
             rows.map((r) => ({ key: r.key, value: JSON.stringify(r.value) })),
@@ -207,10 +213,16 @@ export class ErpSettingsController {
               .column('key')
               .doUpdateSet((eb) => ({ value: eb.ref('excluded.value') })),
           )
-          .execute(),
-      );
-    }
-    return Object.fromEntries(rows.map((r) => [r.key, r.value]));
+          .execute();
+      if (body.delivery_fee !== undefined)
+        await setDeliveryFee(trx, body.delivery_fee);
+    });
+    return {
+      ...Object.fromEntries(rows.map((r) => [r.key, r.value])),
+      ...(body.delivery_fee !== undefined
+        ? { delivery_fee: body.delivery_fee }
+        : {}),
+    };
   }
 }
 

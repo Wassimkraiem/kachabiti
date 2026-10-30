@@ -138,6 +138,27 @@ export async function calculateShipping(
   };
 }
 
+/** The usual delivery fee in Tunisia (before free shipping): the default on agents' orders and parcels. */
+export async function deliveryFee(db: Db) {
+  return (await calculateShipping(db, 'TN', 0)).cost;
+}
+
+/** Sets that fee for the checkout and the agents' forms alike (Tunisia's rate, and the fallback). */
+export async function setDeliveryFee(db: Db, fee: number) {
+  await db
+    .updateTable('shipping_rates')
+    .set({ base_rate: fee })
+    .where('country_code', '=', 'TN')
+    .where('shipping_method', '=', 'standard')
+    .execute();
+  await db
+    .updateTable('site_settings')
+    .set({ setting_value: String(fee) })
+    .where('setting_key', '=', 'default_shipping_cost')
+    .execute();
+  cachedSettings = null;
+}
+
 export async function countryTaxRate(db: Db, code: string): Promise<number> {
   const row = await db
     .selectFrom('country_tax_rates')

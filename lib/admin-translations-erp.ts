@@ -997,4 +997,8 @@ export const erpEntries: [en: string, fr: string, ar: string][] = [
     ["Nothing was handed over", "Rien n'a été remis", "لم يُسلَّم أي طرد"],
     ["Colissimo has no parcel with this barcode", "Colissimo n'a aucun colis avec ce code-barres", "لا يوجد لدى كوليسيمو طرد بهذا الرمز"],
     ["Already paid at Colissimo", "Déjà payé chez Colissimo", "مدفوع مسبقاً لدى كوليسيمو"],
+    ["Usual delivery fee in Tunisia (TND)", "Frais de livraison habituels en Tunisie (TND)", "معلوم التوصيل المعتاد في تونس (د.ت)"],
+    ["Charged at the website checkout and filled in on New order and New parcel, where it can be changed for one order.", "Appliqués au paiement sur le site et pré-remplis dans Nouvelle commande et Nouveau colis, où ils peuvent être modifiés pour une commande.", "يُحتسب عند الدفع في الموقع ويُملأ تلقائياً في طلب جديد وطرد جديد، حيث يمكن تغييره لطلب واحد."],
+    ["The usual fee from Business settings. Change it for this order if needed, or empty it to apply free shipping above the threshold.", "Le tarif habituel des Paramètres. Modifiez-le pour cette commande si besoin, ou videz-le pour appliquer la livraison gratuite au-delà du seuil.", "المعلوم المعتاد من الإعدادات. غيّره لهذا الطلب عند الحاجة، أو أفرغه لتطبيق التوصيل المجاني فوق الحد."],
+    ["The products' total plus the {fee} TND delivery fee. Change it if needed.", "Le total des produits plus {fee} TND de livraison. Modifiez-le si besoin.", "مجموع المنتجات زائد {fee} د.ت للتوصيل. غيّره عند الحاجة."],
 ];

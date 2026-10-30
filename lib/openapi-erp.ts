@@ -183,7 +183,10 @@ export const erpPaths: Record<string, Record<string, Op>> = {
     '/api/admin/my-work': { get: op('Owner', "The signed-in agent's orders to confirm, follow-ups and month") },
     '/api/admin/staff': { get: op('Owner', 'Team members for assignment pickers') },
     '/api/admin/erp-settings': {
-        get: op('Owner', 'Alert, duplicate and discount rules'),
-        put: op('Owner', 'Update those rules'),
+        get: op('Owner', 'Alert, duplicate and discount rules, and the usual delivery fee (delivery_fee)'),
+        put: op('Owner', 'Update those rules; delivery_fee sets the fee charged in Tunisia (checkout and agents\' forms)'),
+    },
+    '/api/sales/orders/delivery-fee': {
+        get: op('Sales', 'The usual delivery fee in Tunisia ({ fee }), the default on New order and New parcel'),
     },
 };
