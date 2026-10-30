@@ -90,6 +90,21 @@ resource "aws_iam_role_policy" "server_buckets" {
   })
 }
 
+# backup.sh reports each finished backup as a metric (alarm backup_missing below), only in its namespace.
+resource "aws_iam_role_policy" "server_metrics" {
+  name = "metrics"
+  role = aws_iam_role.server.id
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [{
+      Effect    = "Allow"
+      Action    = "cloudwatch:PutMetricData"
+      Resource  = "*"
+      Condition = { StringEquals = { "cloudwatch:namespace" = "Kachabity" } }
+    }]
+  })
+}
+
 resource "aws_iam_instance_profile" "server" {
   name = "kachabity-server"
   role = aws_iam_role.server.name
@@ -101,6 +116,8 @@ resource "aws_instance" "server" {
   key_name               = aws_key_pair.admin.key_name
   vpc_security_group_ids = [aws_security_group.server.id]
   iam_instance_profile   = aws_iam_instance_profile.server.name
+  # The database lives on this disk: a console click or terraform destroy can't terminate it (turn off first).
+  disable_api_termination = true
 
   user_data = templatefile("${path.module}/cloud-init.yaml", {
     deploy_ssh_public_key = var.deploy_ssh_public_key
@@ -212,7 +229,7 @@ resource "aws_s3_bucket_policy" "products_public_read" {
   depends_on = [aws_s3_bucket_public_access_block.products]
 }
 
-# Backups are kept 30 days (deploy/backup.sh uploads one a night).
+# Backups are kept 30 days (deploy/backup.sh uploads one an hour).
 resource "aws_s3_bucket_lifecycle_configuration" "backups" {
   bucket = aws_s3_bucket.backups.id
   rule {
@@ -248,4 +265,63 @@ resource "aws_budgets_budget" "monthly" {
     notification_type          = "FORECASTED"
     subscriber_email_addresses = [var.budget_email]
   }
+}
+
+# Alerts by e-mail to budget_email (confirm the subscription e-mail AWS sends after the first apply).
+resource "aws_sns_topic" "alerts" {
+  name = "kachabity-alerts"
+}
+
+resource "aws_sns_topic_subscription" "alerts_email" {
+  topic_arn = aws_sns_topic.alerts.arn
+  protocol  = "email"
+  endpoint  = var.budget_email
+}
+
+# No successful backup for 2 hours (backup.sh runs hourly): the dump, the upload or the server failed.
+resource "aws_cloudwatch_metric_alarm" "backup_missing" {
+  alarm_name          = "kachabity-backup-missing"
+  alarm_description   = "No database backup reached S3 in the last 2 hours (see /var/log/kachabity-backup.log)."
+  namespace           = "Kachabity"
+  metric_name         = "BackupSucceeded"
+  statistic           = "Sum"
+  period              = 3600
+  evaluation_periods  = 2
+  threshold           = 1
+  comparison_operator = "LessThanThreshold"
+  treat_missing_data  = "breaching"
+  alarm_actions       = [aws_sns_topic.alerts.arn]
+  ok_actions          = [aws_sns_topic.alerts.arn]
+}
+
+# AWS hardware or network fault: move the instance to healthy hardware (same disk, IP and data).
+resource "aws_cloudwatch_metric_alarm" "server_system_check" {
+  alarm_name          = "kachabity-server-system-check"
+  alarm_description   = "AWS-side fault on the server; EC2 is recovering it onto other hardware."
+  namespace           = "AWS/EC2"
+  metric_name         = "StatusCheckFailed_System"
+  dimensions          = { InstanceId = aws_instance.server.id }
+  statistic           = "Maximum"
+  period              = 60
+  evaluation_periods  = 2
+  threshold           = 1
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  alarm_actions       = [aws_sns_topic.alerts.arn, "arn:aws:automate:${var.aws_region}:ec2:recover"]
+  ok_actions          = [aws_sns_topic.alerts.arn]
+}
+
+# The server itself stopped answering (out of memory, hung kernel): reboot it. Postgres recovers from its log.
+resource "aws_cloudwatch_metric_alarm" "server_instance_check" {
+  alarm_name          = "kachabity-server-instance-check"
+  alarm_description   = "The server stopped responding; EC2 is rebooting it."
+  namespace           = "AWS/EC2"
+  metric_name         = "StatusCheckFailed_Instance"
+  dimensions          = { InstanceId = aws_instance.server.id }
+  statistic           = "Maximum"
+  period              = 60
+  evaluation_periods  = 3
+  threshold           = 1
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  alarm_actions       = [aws_sns_topic.alerts.arn, "arn:aws:automate:${var.aws_region}:ec2:reboot"]
+  ok_actions          = [aws_sns_topic.alerts.arn]
 }

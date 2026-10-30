@@ -1,6 +1,6 @@
 #cloud-config
 # First boot of the server (infra/terraform/aws.tf): Docker from Ubuntu's packages, automatic
-# security updates, a 'deploy' user for CI (key-only), /opt/kachabity, the nightly backup, and 2 GB
+# security updates, a 'deploy' user for CI (key-only), /opt/kachabity, the hourly backup, and 2 GB
 # of swap (the API and Postgres share 2 GB of memory).
 package_update: true
 package_upgrade: true
@@ -26,11 +26,11 @@ users:
       - ${deploy_ssh_public_key}
 
 write_files:
-  # Nightly database backup to S3 at 02:30 server time (deploy/backup.sh).
+  # Hourly database backup to S3 at :30 (deploy/backup.sh); flock skips a run while one is still going.
   - path: /etc/cron.d/kachabity-backup
     permissions: "0644"
     content: |
-      30 2 * * * deploy /opt/kachabity/backup.sh >> /var/log/kachabity-backup.log 2>&1
+      30 * * * * deploy flock -n /tmp/kachabity-backup.lock /opt/kachabity/backup.sh >> /var/log/kachabity-backup.log 2>&1
 
 runcmd:
   - systemctl enable --now docker

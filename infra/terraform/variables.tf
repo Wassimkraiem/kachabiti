@@ -26,7 +26,7 @@ variable "monthly_budget_usd" {
 }
 variable "budget_email" {
   type        = string
-  description = "Who receives the budget alerts."
+  description = "Who receives the budget alerts and the server/backup alarms."
 }
 
 variable "admin_ssh_public_key" {
