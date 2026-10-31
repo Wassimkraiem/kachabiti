@@ -38,6 +38,7 @@ import {
     CheckOutlined,
     WarningOutlined,
     UserAddOutlined,
+    PrinterOutlined,
 } from "@ant-design/icons";
 import { DATE_LOCALES, useAdminT } from "@/lib/admin-i18n";
 import DeliveryStatusTag from "@/components/admin/delivery/DeliveryStatusTag";
@@ -211,7 +212,8 @@ export default function AdminOrdersPage() {
                 message.success(t("Order {order_number} validated", { order_number: order.order_number }));
             }
             if (result.warning) message.warning(t(result.warning));
-            fetchOrders();
+            if (result.delivery?.label_url) router.push(`/admin/delivery/print?orders=${order.id}`);
+            else fetchOrders();
         } catch (e) {
             if (errorCode(e) === "NEEDS_DETAILS") {
                 // Missing delivery details: finish them in the send form on the order's page.
@@ -223,6 +225,28 @@ export default function AdminOrdersPage() {
         } finally {
             setValidatingId(null);
         }
+    };
+
+    // Validates the selected orders still to validate, one by one, then opens their slips to print.
+    const [bulkValidating, setBulkValidating] = useState(false);
+    const toValidate = orders.filter((o) => selectedRowKeys.includes(o.id) && (o.status === "pending" || o.status === "confirmed"));
+    const handleBulkValidate = async () => {
+        setBulkValidating(true);
+        const validated: string[] = [];
+        for (const order of toValidate) {
+            try {
+                const result = await validateOrder(order.id);
+                if (result.warning) message.warning(t(result.warning));
+                validated.push(order.id);
+            } catch (e) {
+                message.error(`${order.order_number}: ${errorCode(e) === "NEEDS_DETAILS" ? t("Complete the delivery details to validate this order") : t((e as Error).message)}`);
+            }
+        }
+        setBulkValidating(false);
+        if (validated.length > 0) {
+            message.success(t("Validated {count} order(s)", { count: validated.length }));
+            router.push(`/admin/delivery/print?orders=${validated.join(",")}`);
+        } else fetchOrders();
     };
 
     const handleDelete = async (order: OrderRow) => {
@@ -474,6 +498,20 @@ export default function AdminOrdersPage() {
                             <>
                                 <Button icon={<CheckOutlined />} onClick={() => runAction({ action: "confirm", ids: selectedRowKeys }, "Confirmed {count} order(s)")}>
                                     {t("Confirm ({count})", { count: selectedRowKeys.length })}
+                                </Button>
+                                {toValidate.length > 0 && (
+                                    <Popconfirm
+                                        title={t("Validate {count} order(s)?", { count: toValidate.length })}
+                                        description={t("This creates their Colissimo parcels and takes their items out of stock, then opens their slips to print.")}
+                                        okText={t("Validate")}
+                                        cancelText={t("Cancel")}
+                                        onConfirm={handleBulkValidate}
+                                    >
+                                        <Button type="primary" loading={bulkValidating}>{t("Validate ({count})", { count: toValidate.length })}</Button>
+                                    </Popconfirm>
+                                )}
+                                <Button icon={<PrinterOutlined />} onClick={() => router.push(`/admin/delivery/print?orders=${selectedRowKeys.join(",")}`)}>
+                                    {t("Print slips ({count})", { count: selectedRowKeys.length })}
                                 </Button>
                                 {isAdmin ? (
                                     <Space.Compact>

@@ -1001,4 +1001,23 @@ export const erpEntries: [en: string, fr: string, ar: string][] = [
     ["Charged at the website checkout and filled in on New order and New parcel, where it can be changed for one order.", "Appliqués au paiement sur le site et pré-remplis dans Nouvelle commande et Nouveau colis, où ils peuvent être modifiés pour une commande.", "يُحتسب عند الدفع في الموقع ويُملأ تلقائياً في طلب جديد وطرد جديد، حيث يمكن تغييره لطلب واحد."],
     ["The usual fee from Business settings. Change it for this order if needed, or empty it to apply free shipping above the threshold.", "Le tarif habituel des Paramètres. Modifiez-le pour cette commande si besoin, ou videz-le pour appliquer la livraison gratuite au-delà du seuil.", "المعلوم المعتاد من الإعدادات. غيّره لهذا الطلب عند الحاجة، أو أفرغه لتطبيق التوصيل المجاني فوق الحد."],
     ["The products' total plus the {fee} TND delivery fee. Change it if needed.", "Le total des produits plus {fee} TND de livraison. Modifiez-le si besoin.", "مجموع المنتجات زائد {fee} د.ت للتوصيل. غيّره عند الحاجة."],
+    // Bulk validation and slip printing
+    ["Validate ({count})", "Valider ({count})", "تأكيد ({count})"],
+    ["Validate {count} order(s)?", "Valider {count} commande(s) ?", "تأكيد {count} طلب(ات)؟"],
+    ["This creates their Colissimo parcels and takes their items out of stock, then opens their slips to print.", "Cela crée leurs colis Colissimo et sort leurs articles du stock, puis ouvre leurs bons à imprimer.", "ينشئ ذلك طرودها في Colissimo ويُخرج منتجاتها من المخزون، ثم يفتح وصولاتها للطباعة."],
+    ["Validated {count} order(s)", "{count} commande(s) validée(s)", "تم تأكيد {count} طلب(ات)"],
+    ["Print slips ({count})", "Imprimer les bons ({count})", "طباعة الوصولات ({count})"],
+    ["Print {count} slip(s)", "Imprimer {count} bon(s)", "طباعة {count} وصل(ات)"],
+    ["{count} order(s) have no Colissimo slip yet", "{count} commande(s) n'ont pas encore de bon Colissimo", "{count} طلب(ات) بلا وصل Colissimo بعد"],
+    ["No delivery slip to print", "Aucun bon de livraison à imprimer", "لا يوجد وصل تسليم للطباعة"],
+    ["Open slip", "Ouvrir le bon", "فتح الوصل"],
+    // Colissimo account analytics
+    ["Parcels sent", "Colis envoyés", "الطرود المرسلة"],
+    ["Delivered and paid", "Livrés et payés", "مسلّمة ومدفوعة"],
+    ["Colissimo marks the cash as paid to you", "Colissimo indique l'argent comme versé", "Colissimo يؤشر على المبلغ كمدفوع لك"],
+    ["Cash still with Colissimo", "Argent encore chez Colissimo", "أموال ما زالت لدى Colissimo"],
+    ["{count} parcel(s)", "{count} colis", "{count} طرد(ات)"],
+    ["Delivered per day", "Livrés par jour", "المسلّمة حسب اليوم"],
+    ["Parcels of the period delivered each day, with the cash Colissimo collected for them. Delivery rate: {rate}%", "Colis de la période livrés chaque jour, avec l'argent encaissé par Colissimo. Taux de livraison : {rate} %", "طرود الفترة المسلّمة كل يوم، مع المبالغ التي حصّلتها Colissimo. نسبة التسليم: {rate}%"],
+    ["Delivered orders", "Commandes livrées", "الطلبات المسلّمة"],
 ];

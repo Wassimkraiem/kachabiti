@@ -312,7 +312,8 @@ function AdminConfig({ children }: { children: React.ReactNode }) {
                             .admin-root .ant-card-extra { margin-inline-start: 0; }
                             .admin-root h1.ant-typography, .admin-root h2.ant-typography { font-size: 22px; }
                             .admin-root .ant-statistic-content { font-size: 20px; }
-                            .admin-root .ant-picker-dropdown .ant-picker-panels { flex-direction: column; }
+                            /* Pickers open outside .admin-root (in <body>): show a range's two months stacked. */
+                            .ant-picker-dropdown .ant-picker-panels { flex-direction: column; }
                             /* Filter bars (className="admin-filters"): two per row, search and date range on their own. */
                             .admin-root .admin-filters > * { flex: 1 1 140px !important; width: auto !important; min-width: 0 !important; }
                             .admin-root .admin-filters > .ant-input-affix-wrapper, .admin-root .admin-filters > .ant-picker-range, .admin-root .admin-filters > div:not(.ant-select) { flex-basis: 100% !important; }

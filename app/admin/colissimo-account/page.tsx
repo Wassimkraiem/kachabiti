@@ -3,12 +3,13 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import dayjs, { type Dayjs } from "dayjs";
-import { Alert, Button, Card, DatePicker, Input, Popconfirm, Segmented, Space, Table, Tag, Typography } from "antd";
+import { Alert, Button, Card, Col, DatePicker, Input, Popconfirm, Row, Segmented, Space, Table, Tag, Typography } from "antd";
 import type { ColumnsType } from "antd/es/table";
 import { CloudDownloadOutlined, ReloadOutlined, SearchOutlined } from "@ant-design/icons";
 import { useAdminT } from "@/lib/admin-i18n";
-import { PageHeader } from "@/components/admin/erp/ui";
-import { api, useApi } from "@/components/admin/erp/erp-client";
+import { Kpi, PageHeader } from "@/components/admin/erp/ui";
+import { BarChart } from "@/components/admin/erp/charts";
+import { api, formatDate, formatMoney, percent, useApi } from "@/components/admin/erp/erp-client";
 import { message } from "@/components/admin/antd-app";
 import ParcelHistoryDrawer, { portalStatusColor as statusColor } from "@/components/admin/delivery/ParcelHistoryDrawer";
 
@@ -34,13 +35,53 @@ interface PortalList {
     rows: PortalRow[];
 }
 
+type Stage = "delivered" | "returned" | "cancelled" | "in_progress";
+
+/** Colissimo's status wording ("Livré payé", "En cours de livraison", "Rtn définitif"…) → a stage. */
+function stageOf(status: string): Stage {
+    const s = status.toLowerCase();
+    if (s.includes("rtn") || s.includes("retour")) return "returned";
+    if (s.includes("supprim") || s.includes("annul")) return "cancelled";
+    if (s.includes("livr") && !s.includes("cours")) return "delivered";
+    return "in_progress";
+}
+
+const isPaid = (status: string) => /pay/i.test(status);
+
+interface DayRow { day: string; count: number; amount: number }
+
+/** Totals of the parcels in the period, and the delivered ones per delivery day. */
+function analyse(rows: PortalRow[]) {
+    const stages = { delivered: { count: 0, amount: 0 }, returned: { count: 0, amount: 0 }, cancelled: { count: 0, amount: 0 }, in_progress: { count: 0, amount: 0 } };
+    const paid = { count: 0, amount: 0 };
+    const days = new Map<string, DayRow>();
+    let total = 0;
+    for (const row of rows) {
+        const price = row.price ?? 0;
+        const stage = stageOf(row.status);
+        stages[stage].count++;
+        stages[stage].amount += price;
+        if (stage === "cancelled") continue;
+        total += price;
+        if (stage !== "delivered") continue;
+        if (isPaid(row.status)) { paid.count++; paid.amount += price; }
+        const day = (row.delivered_at ?? row.added_at ?? "").slice(0, 10) || "—";
+        const entry = days.get(day) ?? { day, count: 0, amount: 0 };
+        entry.count++;
+        entry.amount += price;
+        days.set(day, entry);
+    }
+    return { stages, paid, total, count: rows.length - stages.cancelled.count, perDay: [...days.values()].sort((a, b) => a.day.localeCompare(b.day)) };
+}
+
 /**
  * Admin → Colissimo account (owners): every parcel of the Colissimo account with its status, read
  * live from the shipper's dashboard on Colissimo's website (its API can't list them), and each
  * parcel's details and full history. Colissimo shows at most 2 months at a time.
  */
 export default function ColissimoAccountPage() {
-    const { t } = useAdminT();
+    const { t, locale } = useAdminT();
+    const money = (n: number) => formatMoney(n, locale);
     const [range, setRange] = useState<[Dayjs, Dayjs]>([dayjs().subtract(30, "day"), dayjs()]);
     const [status, setStatus] = useState("all");
     const [search, setSearch] = useState("");
@@ -68,6 +109,9 @@ export default function ColissimoAccountPage() {
         for (const row of data?.rows ?? []) result.set(row.status, (result.get(row.status) ?? 0) + 1);
         return [...result].sort((a, b) => b[1] - a[1]);
     }, [data]);
+
+    const stats = useMemo(() => analyse(data?.rows ?? []), [data]);
+    const finished = stats.stages.delivered.count + stats.stages.returned.count;
 
     const rows = useMemo(() => {
         const term = search.trim().toLowerCase();
@@ -176,6 +220,56 @@ export default function ColissimoAccountPage() {
                 />
             )}
             {error && <Alert type="error" showIcon style={{ marginBottom: 16 }} title={t(error)} />}
+
+            <Row gutter={[16, 16]} style={{ marginBottom: 16 }}>
+                <Col xs={12} md={8} xl={4}>
+                    <Kpi loading={loading} title={t("Parcels sent")} value={stats.count} sub={money(stats.total)} />
+                </Col>
+                <Col xs={12} md={8} xl={4}>
+                    <Kpi loading={loading} color="#008300" title={t("Delivered")} value={stats.stages.delivered.count} sub={money(stats.stages.delivered.amount)} />
+                </Col>
+                <Col xs={12} md={8} xl={4}>
+                    <Kpi loading={loading} title={t("Delivered and paid")} value={stats.paid.count} sub={money(stats.paid.amount)} hint={t("Colissimo marks the cash as paid to you")} />
+                </Col>
+                <Col xs={12} md={8} xl={4}>
+                    <Kpi loading={loading} title={t("Cash still with Colissimo")} value={money(stats.stages.delivered.amount - stats.paid.amount)} sub={t("{count} parcel(s)", { count: stats.stages.delivered.count - stats.paid.count })} />
+                </Col>
+                <Col xs={12} md={8} xl={4}>
+                    <Kpi loading={loading} color="#d4380d" title={t("Returned")} value={stats.stages.returned.count} sub={`${money(stats.stages.returned.amount)} · ${percent(stats.stages.returned.count, finished) ?? 0}%`} />
+                </Col>
+                <Col xs={12} md={8} xl={4}>
+                    <Kpi loading={loading} title={t("In progress")} value={stats.stages.in_progress.count} sub={money(stats.stages.in_progress.amount)} />
+                </Col>
+            </Row>
+
+            <Card title={t("Delivered per day")} style={{ marginBottom: 16 }}>
+                <Text type="secondary" style={{ display: "block", marginBottom: 12, fontSize: 13 }}>
+                    {t("Parcels of the period delivered each day, with the cash Colissimo collected for them. Delivery rate: {rate}%", { rate: percent(stats.stages.delivered.count, finished) ?? 0 })}
+                </Text>
+                <BarChart
+                    data={stats.perDay.map((d) => ({ label: d.day.slice(5), value: d.amount, tooltip: `${formatDate(d.day, locale)}: ${d.count} · ${money(d.amount)}` }))}
+                    color="#008300"
+                />
+                <Table
+                    rowKey="day"
+                    size="small"
+                    style={{ marginTop: 16 }}
+                    dataSource={[...stats.perDay].reverse()}
+                    pagination={{ pageSize: 10, showSizeChanger: false }}
+                    columns={[
+                        { title: t("Date"), dataIndex: "day", key: "day", render: (value: string) => formatDate(value, locale) },
+                        { title: t("Delivered orders"), dataIndex: "count", key: "count", align: "right" },
+                        { title: t("Amount"), dataIndex: "amount", key: "amount", align: "right", render: (value: number) => money(value) },
+                    ]}
+                    summary={() => (
+                        <Table.Summary.Row>
+                            <Table.Summary.Cell index={0}><Text strong>{t("Total")}</Text></Table.Summary.Cell>
+                            <Table.Summary.Cell index={1} align="right"><Text strong>{stats.stages.delivered.count}</Text></Table.Summary.Cell>
+                            <Table.Summary.Cell index={2} align="right"><Text strong>{money(stats.stages.delivered.amount)}</Text></Table.Summary.Cell>
+                        </Table.Summary.Row>
+                    )}
+                />
+            </Card>
 
             <Card>
                 <Space orientation="vertical" size="middle" style={{ width: "100%" }}>
