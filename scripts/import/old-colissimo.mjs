@@ -73,6 +73,8 @@ const STATUSES = {
 const DELIVERED = new Set(['Livre', 'Livre paye', 'Livrer', 'Echange']);
 const money = (value) => Math.round(Number(String(value ?? '').replace(',', '.')) * 1000) / 1000 || 0;
 const text = (value) => (value ?? '').trim() || null;
+// Colissimo barcodes are digits; anything else is a summary line (the export ends with "TOTAL;;;;…").
+const barcodeOf = (value) => (/^\d{6,20}$/.test((value ?? '').trim()) ? value.trim() : null);
 
 const parcels = new Map(); // barcode → deliveries row
 const payouts = new Map(); // reference → { reference, date, gross, fees, account, parcels }
@@ -87,7 +89,7 @@ const addToPayout = (reference, date, barcode, amount) => {
 
 // 1. Delivered and paid (Colissimo's "Livrés payés" export, ';'-separated), with its payment day.
 for (const r of parseCsv(readFileSync(files[0], 'utf8'), ';')) {
-    const barcode = text(r.Code);
+    const barcode = barcodeOf(r.Code);
     if (!barcode) continue;
     const created = when(r["Date d'ajout"]) ?? new Date();
     const amount = money(r.Prix);
@@ -110,7 +112,7 @@ for (const r of parseCsv(readFileSync(files[0], 'utf8'), ';')) {
 // 2. Every parcel of the older tool (its database export, ','-separated). Its updated_at is that
 // tool's sync time, so the parcel's creation day stands for its other dates.
 for (const r of parseCsv(readFileSync(files[1], 'utf8'), ',')) {
-    const barcode = text(r.code);
+    const barcode = barcodeOf(r.code);
     if (!barcode || r.deleted_at || parcels.has(barcode)) continue;
     let raw = {};
     try { raw = JSON.parse(r.raw_data || '{}'); } catch { /* the columns are enough */ }

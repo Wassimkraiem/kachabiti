@@ -43,6 +43,9 @@ services:
     restart: unless-stopped
     ports: ["80:80", "443:443", "443:443/udp"]
     configs: [{ source: caddyfile, target: /etc/caddy/Caddyfile }]
+    # Compose doesn't recreate a container when an inline config's content changes; a label does,
+    # so a new SITE_DOMAIN restarts Caddy on the next deploy (and it gets that name's certificate).
+    labels: ["kachabity.site-domain=${SITE_DOMAIN}"]
     volumes: [caddy_data:/data, caddy_config:/config]
     depends_on: [api]
 
