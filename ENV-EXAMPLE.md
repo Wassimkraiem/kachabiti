@@ -1,28 +1,54 @@
 # Environment Variables Example
 
-Copy this to `.env.local` for local development or add to Vercel/Netlify for production.
+Copy this to `.env.local` for local development, or set it on the server. The Next.js app (web) and the NestJS API (api) read the same file in Docker; `api/.env.example` lists what the API needs.
 
 ## Required Variables
 
 ```env
-# Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+# Postgres 17, as the role that owns the tables (api only).
+DATABASE_URL=postgresql://kachabity:password@db:5432/kachabity
+# Where the web app reaches the API (server side and the /api rewrite).
+NEST_URL=http://localhost:4000
+# Shared by web and api: the api refreshes the storefront cache (POST /api/internal/revalidate).
+REVALIDATE_SECRET=
+NEXT_URL=http://localhost:3000
 
 # Gmail SMTP Configuration (for sending emails)
 GMAIL_USER=your-email@gmail.com
+# Optional: send through another mailbox's SMTP (port 465, TLS), e.g. smtp.hostinger.com for business@kachabiti.com;
+# GMAIL_USER / GMAIL_APP_PASSWORD are then that mailbox's address and password
+SMTP_HOST=
 GMAIL_APP_PASSWORD=your-16-character-app-password
+
+# Signs the session cookies issued by the NestJS auth API (/api/auth/*). The same value on the
+# Next.js server (middleware reads the sessions) and on NestJS; at least 32 random characters,
+# e.g. node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))".
+# Changing it signs everyone out within 15 minutes (their sessions renew with the new key).
+AUTH_SECRET=
+
+# File storage (NestJS): AWS S3, or any S3-compatible service. Buckets products (public, served at
+# FILES_PUBLIC_URL) and documents (private, signed links); their real names in the two *_BUCKET vars.
+# Without keys, NestJS signs with the EC2 instance role (production). The Next.js build also reads
+# FILES_PUBLIC_URL to allow those images in next/image.
+S3_ENDPOINT=https://s3.<region>.amazonaws.com
+S3_REGION=<region>
+S3_ACCESS_KEY_ID=
+S3_SECRET_ACCESS_KEY=
+S3_PRODUCTS_BUCKET=products
+S3_DOCUMENTS_BUCKET=documents
+FILES_PUBLIC_URL=https://<products bucket>.s3.<region>.amazonaws.com
+
+# Desktop notifications (NestJS sends Web Push): the same values the send-push Edge Function had.
+VAPID_KEYS={"publicKey":{...},"privateKey":{...}}
+VAPID_SUBJECT=mailto:you@yourdomain.com
+# NestJS LISTENs for new notifications; set this only when DATABASE_URL goes through a
+# transaction pooler (PgBouncer), with a direct URL.
+LISTEN_DATABASE_URL=
 ```
 
 ## Optional Variables
 
 ```env
-# Public JWT signing keys, copied from https://<project>.supabase.co/auth/v1/.well-known/jwks.json
-# (one line of JSON). Middleware verifies admin sessions with them instead of downloading them
-# on each new server instance. Update it if you rotate the project's signing keys.
-SUPABASE_JWKS={"keys":[...]}
-
 # Back-office roles that don't depend on the account (comma-separated emails, server only).
 # Owners can do everything, are the only ones who manage other owners, and receive owner
 # alerts (deletes and unusual actions by admins and staff). Admins can do everything else.
@@ -43,6 +69,10 @@ STOCK_API_KEY=replace-with-a-long-random-key
 # account, Paramètres → APIs. Server-only: keep them secret.
 COLISSIMO_ADD_TOKEN=your-colissimo-add-token
 COLISSIMO_TRACKING_TOKEN=your-colissimo-tracking-token
+# Owner → Colissimo account: your colissimodelivery.tn website login, used read-only to list every parcel
+# of the account and its history (the API can't); optional, the page says when it's missing
+COLISSIMO_PORTAL_USER=
+COLISSIMO_PORTAL_PASSWORD=
 
 NEXT_PUBLIC_PHONE=+216 55 558 648
 NEXT_PUBLIC_ADRESS=Your Address

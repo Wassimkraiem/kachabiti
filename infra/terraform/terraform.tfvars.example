@@ -1,0 +1,7 @@
+# Copy to terraform.tfvars (git-ignored) and fill in. See docs/DEPLOY.md for where each value comes from.
+aws_region   = "eu-north-1"
+budget_email = "you@example.com"
+site_domain  = "api-test.kachabiti.com"
+
+admin_ssh_public_key  = "ssh-ed25519 AAAA... you@laptop"
+deploy_ssh_public_key = "ssh-ed25519 AAAA... github-deploy"

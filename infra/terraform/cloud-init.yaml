@@ -1,0 +1,40 @@
+#cloud-config
+# First boot of the server (infra/terraform/aws.tf): Docker from Ubuntu's packages, automatic
+# security updates, a 'deploy' user for CI (key-only), /opt/kachabity, the hourly backup, and 2 GB
+# of swap (the API and Postgres share 2 GB of memory).
+package_update: true
+package_upgrade: true
+packages:
+  - docker.io
+  - docker-compose-v2
+  - unattended-upgrades
+  - fail2ban
+
+ssh_pwauth: false
+
+swap:
+  filename: /swapfile
+  size: 2G
+  maxsize: 2G
+
+users:
+  - default
+  - name: deploy
+    shell: /bin/bash
+    lock_passwd: true
+    ssh_authorized_keys:
+      - ${deploy_ssh_public_key}
+
+write_files:
+  # Hourly database backup to S3 at :30 (deploy/backup.sh); flock skips a run while one is still going.
+  - path: /etc/cron.d/kachabity-backup
+    permissions: "0644"
+    content: |
+      30 * * * * deploy flock -n /tmp/kachabity-backup.lock /opt/kachabity/backup.sh >> /var/log/kachabity-backup.log 2>&1
+
+runcmd:
+  - systemctl enable --now docker
+  - usermod -aG docker deploy
+  - install -d -o deploy -g deploy -m 0750 /opt/kachabity
+  - install -o deploy -g deploy -m 0640 /dev/null /var/log/kachabity-backup.log
+  - systemctl enable --now fail2ban unattended-upgrades

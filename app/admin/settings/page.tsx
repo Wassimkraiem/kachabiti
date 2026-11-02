@@ -15,6 +15,7 @@ interface Settings {
     sales?: { pending_alert_hours?: number; late_delivery_days?: number; duplicate_window_days?: number };
     pos?: { max_discount_percent?: number };
     analytics?: { start_date?: string | null };
+    delivery_fee?: number;
 }
 
 /**
@@ -47,7 +48,7 @@ export default function SettingsPage() {
     const save = async () => {
         const values = await form.validateFields();
         try {
-            await api("/api/admin/erp-settings", { method: "PUT", body: { sales: values.sales, pos: values.pos } });
+            await api("/api/admin/erp-settings", { method: "PUT", body: { sales: values.sales, pos: values.pos, delivery_fee: values.delivery_fee ?? undefined } });
             message.success(t("Saved"));
             reload();
         } catch (e) {
@@ -66,6 +67,10 @@ export default function SettingsPage() {
                             <Form.Item name={["sales", "late_delivery_days"]} label={t("Alert when a parcel is not delivered after (days)")}><InputNumber min={1} max={60} style={{ width: "100%" }} /></Form.Item>
                             <Form.Item name={["sales", "duplicate_window_days"]} label={t("Look for duplicate orders over the last (days)")}><InputNumber min={1} max={365} style={{ width: "100%" }} /></Form.Item>
                             <Text type="secondary">{t("Alerts are checked every morning and also cover low stock, bills due and expiring documents.")}</Text>
+                        </Card>
+                        <Card title={t("Delivery fee")} loading={loading} style={{ marginTop: 16 }}>
+                            <Form.Item name="delivery_fee" label={t("Usual delivery fee in Tunisia (TND)")}><InputNumber min={0} max={1000} precision={3} style={{ width: "100%" }} suffix="TND" /></Form.Item>
+                            <Text type="secondary">{t("Charged at the website checkout and filled in on New order and New parcel, where it can be changed for one order.")}</Text>
                         </Card>
                     </Col>
                     <Col xs={24} md={12}>

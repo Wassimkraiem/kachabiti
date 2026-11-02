@@ -4,10 +4,8 @@ import { Suspense, use, useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import type { AuthChangeEvent, AuthError, Session } from "@supabase/auth-js";
-import supabase from "@/lib/supabaseClient";
 import { isRTL } from "@/lib/language-utils";
-import { safeRedirect, type AuthReason } from "@/lib/customer-auth";
+import { accountApi, announceAuthChange, getCustomer, safeRedirect, type AuthReason, type Customer } from "@/lib/customer-auth";
 import { FormInput } from "@/components/forms";
 import {
     signInSchema,
@@ -59,6 +57,7 @@ const content = {
             user_already_exists: "An account with this email already exists. Log in instead.",
             weak_password: "Choose a stronger password.",
             rate_limit: "Too many attempts. Wait a few minutes and try again.",
+            email_unavailable: "Sign-up is unavailable right now. Please try again later.",
             generic: "Something went wrong. Try again.",
         },
     },
@@ -98,6 +97,7 @@ const content = {
             user_already_exists: "Un compte existe déjà avec cet e-mail. Connectez-vous.",
             weak_password: "Choisissez un mot de passe plus solide.",
             rate_limit: "Trop de tentatives. Réessayez dans quelques minutes.",
+            email_unavailable: "La création de compte est momentanément indisponible. Réessayez plus tard.",
             generic: "Une erreur est survenue. Réessayez.",
         },
     },
@@ -137,6 +137,7 @@ const content = {
             user_already_exists: "يوجد حساب بهذا البريد الإلكتروني. سجّل الدخول بدلاً من ذلك.",
             weak_password: "اختر كلمة مرور أقوى.",
             rate_limit: "محاولات كثيرة. انتظر بضع دقائق ثم حاول مجدداً.",
+            email_unavailable: "إنشاء الحسابات غير متاح حالياً. حاول مجدداً لاحقاً.",
             generic: "حدث خطأ. حاول مجدداً.",
         },
     },
@@ -144,13 +145,14 @@ const content = {
 
 type Text = (typeof content)["en"];
 
-function errorMessage(error: AuthError | Error, text: Text) {
-    const code = "code" in error ? (error as AuthError).code : undefined;
+// Codes sent by the NestJS auth API (api/src/auth/auth.controller.ts).
+function errorMessage(error: unknown, text: Text) {
+    const code = (error as { code?: string }).code;
     if (code === "invalid_credentials") return text.errors.invalid_credentials;
     if (code === "email_not_confirmed") return text.errors.email_not_confirmed;
-    if (code === "user_already_exists" || code === "email_exists") return text.errors.user_already_exists;
-    if (code === "weak_password") return text.errors.weak_password;
-    if (code?.startsWith("over_") || ("status" in error && (error as AuthError).status === 429)) return text.errors.rate_limit;
+    if (code === "user_already_exists") return text.errors.user_already_exists;
+    if (code === "rate_limit") return text.errors.rate_limit;
+    if (code === "email_unavailable") return text.errors.email_unavailable;
     return text.errors.generic;
 }
 
@@ -170,7 +172,9 @@ function AuthForms({ locale }: { locale: string }) {
     const [mode, setMode] = useState<Mode>(initialMode);
     const [error, setError] = useState<string | null>(null);
     const [notice, setNotice] = useState<string | null>(null);
-    const [recoveryReady, setRecoveryReady] = useState(false);
+    // The reset link carries a single-use token; the API says when it has expired.
+    const resetToken = searchParams.get("token");
+    const [recoveryReady, setRecoveryReady] = useState(!!resetToken);
 
     const signInForm = useForm<SignInFormData>({ resolver: zodResolver(signInSchema(locale)) });
     const signUpForm = useForm<SignUpFormData>({ resolver: zodResolver(signUpSchema(locale)) });
@@ -178,21 +182,11 @@ function AuthForms({ locale }: { locale: string }) {
     const resetForm = useForm<NewPasswordFormData>({ resolver: zodResolver(newPasswordSchema(locale)) });
 
     // A signed-in visitor has nothing to do here, except when completing a password reset.
-    // The reset link signs the visitor in and fires PASSWORD_RECOVERY.
     useEffect(() => {
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((event: AuthChangeEvent, session: Session | null) => {
-            if (event === "PASSWORD_RECOVERY") {
-                setMode("reset");
-                setRecoveryReady(true);
-                return;
-            }
-            if (initialMode === "reset") {
-                if (session) setRecoveryReady(true);
-                return;
-            }
-            if (session && event !== "SIGNED_OUT") router.replace(redirectTo);
+        if (initialMode === "reset") return;
+        getCustomer().then((user) => {
+            if (user) router.replace(redirectTo);
         });
-        return () => subscription.unsubscribe();
     }, [initialMode, redirectTo, router]);
 
     const switchMode = (next: Mode) => {
@@ -201,53 +195,55 @@ function AuthForms({ locale }: { locale: string }) {
         setNotice(null);
     };
 
+    const signedIn = (user: Customer, to: string) => {
+        announceAuthChange(user);
+        router.replace(to);
+    };
+
     const onSignIn = async (data: SignInFormData) => {
         setError(null);
-        const { error } = await supabase.auth.signInWithPassword({ email: data.email, password: data.password });
-        if (error) return setError(errorMessage(error, text));
-        router.replace(redirectTo);
+        try {
+            signedIn(await accountApi<Customer>("auth/sign-in", { body: { email: data.email, password: data.password, locale } }), redirectTo);
+        } catch (err) {
+            setError(errorMessage(err, text));
+        }
     };
 
     const onSignUp = async (data: SignUpFormData) => {
         setError(null);
-        const { data: result, error } = await supabase.auth.signUp({
-            email: data.email,
-            password: data.password,
-            options: {
-                data: { full_name: data.fullName },
-                emailRedirectTo: `${window.location.origin}${redirectTo}`,
-            },
-        });
-        if (error) return setError(errorMessage(error, text));
-        if (result.session) {
-            router.replace(redirectTo);
-            return;
+        try {
+            const result = await accountApi<{ user: Customer | null; confirmation_sent: boolean }>("auth/sign-up", {
+                body: { email: data.email, password: data.password, fullName: data.fullName, redirect: redirectTo, locale },
+            });
+            if (result.user) return signedIn(result.user, redirectTo);
+            signUpForm.reset();
+            setNotice(text.checkInbox(data.email));
+            setMode("signin");
+        } catch (err) {
+            setError(errorMessage(err, text));
         }
-        // With email confirmation on, an existing address comes back as a user with no identities.
-        if (result.user && result.user.identities?.length === 0) {
-            setError(text.errors.user_already_exists);
-            return;
-        }
-        signUpForm.reset();
-        setNotice(text.checkInbox(data.email));
-        setMode("signin");
     };
 
     const onForgot = async (data: ForgotPasswordFormData) => {
         setError(null);
-        const { error } = await supabase.auth.resetPasswordForEmail(data.email, {
-            redirectTo: `${window.location.origin}/${locale}/auth?mode=reset`,
-        });
-        if (error) return setError(errorMessage(error, text));
-        setNotice(text.resetSent(data.email));
+        try {
+            await accountApi("auth/forgot", { body: { email: data.email, locale } });
+            setNotice(text.resetSent(data.email));
+        } catch (err) {
+            setError(errorMessage(err, text));
+        }
     };
 
     const onReset = async (data: NewPasswordFormData) => {
         setError(null);
-        const { error } = await supabase.auth.updateUser({ password: data.password });
-        if (error) return setError(errorMessage(error, text));
-        setNotice(text.passwordUpdated);
-        router.replace(`/${locale}/settings`);
+        try {
+            const user = await accountApi<Customer>("auth/reset", { body: { token: resetToken, password: data.password } });
+            setNotice(text.passwordUpdated);
+            signedIn(user, `/${locale}/settings`);
+        } catch (err) {
+            if ((err as { code?: string }).code === "link_expired") return setRecoveryReady(false);
+            setError(errorMessage(err, text));
+        }
     };
 
     const title = {
@@ -360,14 +356,8 @@ function AuthForms({ locale }: { locale: string }) {
     );
 }
 
-// Shown when /auth?mode=reset is opened without a valid recovery session.
+// Shown when /auth?mode=reset has no token or the token has expired.
 function ResetLinkFallback({ text, onRequestNew }: { text: Text; onRequestNew: () => void }) {
-    const [expired, setExpired] = useState(false);
-    useEffect(() => {
-        const timer = setTimeout(() => setExpired(true), 2500);
-        return () => clearTimeout(timer);
-    }, []);
-    if (!expired) return <p className="text-sm text-gray-500">{text.working}</p>;
     return (
         <div className="space-y-4">
             <p className="text-sm text-gray-700">{text.resetLinkInvalid}</p>

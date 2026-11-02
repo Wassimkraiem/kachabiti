@@ -1,5 +1,3 @@
-import supabase from '@/lib/supabaseClient';
-
 export interface CachedCategory {
     id: string;
     name: string;
@@ -23,12 +21,9 @@ let cached: { at: number; promise: Promise<CachedCategory[]> } | null = null;
 export function getCategories(): Promise<CachedCategory[]> {
     if (cached && Date.now() - cached.at < TTL_MS) return cached.promise;
     const promise = (async () => {
-        const { data, error } = await supabase
-            .from('categories')
-            .select('id, name, name_ar, name_fr, slug, image_url, sort_order, is_featured, parent_id')
-            .order('sort_order', { ascending: true });
-        if (error) throw error;
-        return (data ?? []) as CachedCategory[];
+        const body = await (await fetch('/api/categories')).json();
+        if (!body.success) throw new Error(body.error);
+        return body.data as CachedCategory[];
     })();
     cached = { at: Date.now(), promise };
     promise.catch(() => { cached = null; }); // don't cache failures

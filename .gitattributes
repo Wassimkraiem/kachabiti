@@ -1,0 +1,3 @@
+# Scripts and cloud-init run on Linux: keep Unix line endings even in a Windows checkout.
+*.sh text eol=lf
+infra/terraform/cloud-init.yaml text eol=lf

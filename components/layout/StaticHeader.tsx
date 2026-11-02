@@ -10,7 +10,7 @@ import { isRTL } from '@/lib/language-utils';
 import CartButton from '../cart/CartButton';
 import SearchBox from './SearchBox';
 import MobileHeader from './MobileHeader';
-import supabase from '@/lib/supabaseClient';
+import { useCustomer } from '@/lib/customer-auth';
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
 
 const translations = {
@@ -112,7 +112,7 @@ export default function StaticHeader({ locale: propLocale }: StaticHeaderProps =
 
     const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
     const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
-    const [user, setUser] = useState<any>(null);
+    const { user } = useCustomer();
     const [categories, setCategories] = useState<Category[]>([]);
     const [isLoadingCategories, setIsLoadingCategories] = useState(true);
     const [mounted, setMounted] = useState(false);
@@ -124,27 +124,6 @@ export default function StaticHeader({ locale: propLocale }: StaticHeaderProps =
     const locale = propLocale || languageContext?.locale || 'en';
     const t = translations[locale as keyof typeof translations] || translations.en;
     const rtl = isRTL(locale);
-
-    // Auth state removed - authentication disabled
-
-    // Check for user authentication (for mobile header only)
-    useEffect(() => {
-        async function getUser() {
-            try {
-                const { data: { user } } = await supabase.auth.getUser();
-                if (user) {
-                    setUser(user);
-                }
-            } catch (error) {
-                // Silent fail
-            }
-        }
-        getUser();
-        const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: string, session: any) => {
-            setUser(session?.user ?? null);
-        });
-        return () => subscription.unsubscribe();
-    }, []);
 
     // Prevent hydration mismatch
     useEffect(() => {

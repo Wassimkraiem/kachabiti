@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+.env*
+.docker-data
+api
+supabase
+*.md
+!README.md

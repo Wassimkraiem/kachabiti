@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Import the WooCommerce product export (kachabiti-products.csv) into Supabase.
+ * Import the WooCommerce product export (kachabiti-products.csv) into the database.
  *
  *   npm run import:woocommerce -- --dry-run     # report only, no writes
  *   npm run import:woocommerce                  # import (idempotent: re-runs update in place)
@@ -8,15 +8,16 @@
  *
  * Arabic text comes from the export; English/French titles and descriptions come
  * from scripts/import/translations.json and scripts/import/descriptions.json.
- * Images are downloaded, resized to WebP and re-hosted in the `products` bucket.
- * Needs NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY in .env.
+ * Images are downloaded, resized to WebP and re-hosted in the `products` bucket (R2).
+ * Needs DATABASE_URL, S3_ENDPOINT, S3_ACCESS_KEY_ID, S3_SECRET_ACCESS_KEY and FILES_PUBLIC_URL in .env.
  */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'csv-parse/sync';
 import sharp from 'sharp';
-import { createClient } from '@supabase/supabase-js';
+import { AwsClient } from 'aws4fetch';
+import pg from 'pg';
 import dotenv from 'dotenv';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -274,14 +275,22 @@ if (DRY_RUN) {
 }
 
 // ---------------------------------------------------------------------------
-// Write to Supabase
+// Write to the database and the file storage
 // ---------------------------------------------------------------------------
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-if (!supabaseUrl || !serviceKey) throw new Error('NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are required');
-const db = createClient(supabaseUrl, serviceKey, { auth: { persistSession: false, autoRefreshToken: false } });
-const must = async (promise, what) => { const { data, error } = await promise; if (error) throw new Error(`${what}: ${error.message}`); return data; };
+for (const name of ['DATABASE_URL', 'S3_ENDPOINT', 'S3_ACCESS_KEY_ID', 'S3_SECRET_ACCESS_KEY', 'FILES_PUBLIC_URL']) {
+    if (!process.env[name]) throw new Error(`${name} is required`);
+}
+const db = new pg.Client({ connectionString: process.env.DATABASE_URL });
+await db.connect();
+// Like the API's writes without a staff member: the activity log skips them instead of logging
+// hundreds of direct database edits.
+await db.query(`select set_config('request.jwt.claims', '{"role":"service_role"}', false), set_config('request.headers', '{}', false)`);
+const query = async (sql, params, what) => {
+    try { return (await db.query(sql, params)).rows; } catch (error) { throw new Error(`${what}: ${error.message}`); }
+};
+const s3 = new AwsClient({ accessKeyId: process.env.S3_ACCESS_KEY_ID, secretAccessKey: process.env.S3_SECRET_ACCESS_KEY, service: 's3', region: process.env.S3_REGION || 'auto' });
+const objectUrl = (key) => `${process.env.S3_ENDPOINT.replace(/\/$/, '')}/${BUCKET}/${key}`;
 
 // Images: download → WebP (max 1600px) → upload once; re-runs reuse existing files.
 const storagePath = (url) => {
@@ -289,7 +298,6 @@ const storagePath = (url) => {
     const base = (m ? `${m[1]}-${m[2]}-${m[3]}` : url.split('/').pop()).replace(/\.[a-z0-9]+$/i, '');
     return `wp/${slugify(base) || 'image'}.webp`;
 };
-const existing = new Set((await must(db.storage.from(BUCKET).list('wp', { limit: 10000 }), 'list images')).map((f) => `wp/${f.name}`));
 const publicUrl = new Map();
 let uploaded = 0, reused = 0;
 const queue = [...allImageUrls];
@@ -297,15 +305,16 @@ async function worker() {
     while (queue.length) {
         const url = queue.shift();
         const key = storagePath(url);
-        if (!existing.has(key)) {
+        if (!(await s3.fetch(objectUrl(key), { method: 'HEAD' })).ok) {
             const res = await fetch(url);
             if (!res.ok) { warn(`image ${url}: HTTP ${res.status}`); continue; }
             const webp = await sharp(Buffer.from(await res.arrayBuffer())).rotate()
                 .resize(1600, 1600, { fit: 'inside', withoutEnlargement: true }).webp({ quality: 82 }).toBuffer();
-            await must(db.storage.from(BUCKET).upload(key, webp, { contentType: 'image/webp', upsert: true, cacheControl: '31536000' }), `upload ${key}`);
+            const put = await s3.fetch(objectUrl(key), { method: 'PUT', body: webp, headers: { 'Content-Type': 'image/webp', 'Cache-Control': 'public, max-age=31536000, immutable' } });
+            if (!put.ok) throw new Error(`upload ${key}: ${put.status} ${await put.text()}`);
             uploaded++;
         } else reused++;
-        publicUrl.set(url, db.storage.from(BUCKET).getPublicUrl(key).data.publicUrl);
+        publicUrl.set(url, `${process.env.FILES_PUBLIC_URL.replace(/\/$/, '')}/${key}`);
         process.stdout.write(`\rimages: ${uploaded} uploaded, ${reused} reused / ${allImageUrls.length}`);
     }
 }
@@ -314,12 +323,17 @@ console.log();
 
 // Colors and sizes (matched by name).
 async function ensureLookup(table, names, row) {
-    const existingRows = await must(db.from(table).select('id, name').in('name', names), `load ${table}`);
+    const existingRows = await query(`select id, name from ${table} where name = any($1)`, [names], `load ${table}`);
     const ids = new Map(existingRows.map((r) => [r.name, r.id]));
-    const missing = names.filter((n) => !ids.has(n));
-    if (missing.length) {
-        const inserted = await must(db.from(table).insert(missing.map(row)).select('id, name'), `insert ${table}`);
-        for (const r of inserted) ids.set(r.name, r.id);
+    for (const name of names.filter((n) => !ids.has(n))) {
+        const values = row(name);
+        const columns = Object.keys(values);
+        const [inserted] = await query(
+            `insert into ${table} (${columns.join(', ')}) values (${columns.map((_, i) => `$${i + 1}`).join(', ')}) returning id, name`,
+            Object.values(values),
+            `insert ${table}`,
+        );
+        ids.set(inserted.name, inserted.id);
     }
     return ids;
 }
@@ -332,7 +346,14 @@ for (const c of categories) {
     const t = translations.categories[c.arName];
     const row = { slug: t.slug, name: t.en, name_fr: t.fr, name_ar: c.arName, sort_order: t.sort ?? 0,
         is_featured: c.depth === 0, parent_id: c.parentAr ? categoryIds.get(c.parentAr) : null, deleted_at: null };
-    const [saved] = await must(db.from('categories').upsert(row, { onConflict: 'slug' }).select('id'), `category ${t.slug}`);
+    const columns = Object.keys(row);
+    const [saved] = await query(
+        `insert into categories (${columns.join(', ')}) values (${columns.map((_, i) => `$${i + 1}`).join(', ')})
+         on conflict (slug) do update set ${columns.filter((c) => c !== 'slug').map((c) => `${c} = excluded.${c}`).join(', ')}
+         returning id`,
+        Object.values(row),
+        `category ${t.slug}`,
+    );
     categoryIds.set(c.arName, saved.id);
 }
 
@@ -342,9 +363,9 @@ for (const c of categories) {
 // hold stock, movements and order lines); stock itself is managed in the admin and never
 // touched here. Variants missing from the CSV are removed unless they still hold stock.
 for (const p of products) {
-    const existing = await must(db.from('products').select('id').eq('slug', p.slug).maybeSingle(), `find ${p.slug}`);
+    const [existing] = await query('select id from products where slug = $1', [p.slug], `find ${p.slug}`);
     const image = (url) => (url && publicUrl.has(url) ? { url: publicUrl.get(url), alt: p.name_ar } : null);
-    await must(db.rpc('save_product', {
+    const args = {
         p_product_id: existing?.id ?? null,
         p_product: {
             slug: p.slug, name: p.name, name_fr: p.name_fr, name_ar: p.name_ar,
@@ -363,7 +384,14 @@ for (const p of products) {
         p_replace_discount: true,
         p_discount: p.discount ?? null,
         p_keep_stocked_variants: true,
-    }), `product ${p.slug}`);
+    };
+    await query(
+        `select public.save_product(p_product_id => $1::uuid, p_product => $2::jsonb, p_variants => $3::jsonb, p_images => $4::jsonb,
+                                    p_replace_discount => $5, p_discount => $6, p_keep_stocked_variants => $7)`,
+        [args.p_product_id, JSON.stringify(args.p_product), JSON.stringify(args.p_variants), JSON.stringify(args.p_images),
+         args.p_replace_discount, args.p_discount, args.p_keep_stocked_variants],
+        `product ${p.slug}`,
+    );
     process.stdout.write(`\rproducts: ${products.indexOf(p) + 1}/${products.length}`);
 }
 console.log();
@@ -375,8 +403,9 @@ for (const c of categories) {
         return false;
     });
     const cover = own.map((p) => publicUrl.get(p.images[0])).find(Boolean);
-    if (cover) await must(db.from('categories').update({ image_url: cover }).eq('id', categoryIds.get(c.arName)), 'category image');
+    if (cover) await query('update categories set image_url = $1 where id = $2', [cover, categoryIds.get(c.arName)], 'category image');
 }
 
 for (const w of report.warnings) if (w.startsWith('image')) console.log(`  note: ${w}`);
+await db.end();
 console.log('done.');

@@ -93,10 +93,37 @@ export const COLISSIMO_STATUSES: Record<string, { label: string; color: string; 
     'Retour paye': { label: msg('Return paid'), color: 'red', group: 'returned' },
     'Retour recu paye': { label: msg('Return received and paid'), color: 'red', group: 'returned' },
     'Supprime': { label: msg('Deleted at Colissimo'), color: 'default', group: 'problem' },
+    // v2 API names (the ones above are v1's; older parcels keep them).
+    'Au magasin': { label: msg('At the depot'), color: 'blue', group: 'moving' },
+    'Livrer': { label: msg('Delivered'), color: 'green', group: 'delivered' },
+    'Rtn depot': { label: msg('Returned to the depot'), color: 'red', group: 'returned' },
+    'Rtn client/agence': { label: msg('Returned by the customer'), color: 'red', group: 'returned' },
+    'Rtn definitif': { label: msg('Returned'), color: 'red', group: 'returned' },
+    'Retour recu': { label: msg('Return received'), color: 'red', group: 'returned' },
+    // A driver's report (pre-état) only: on the way back.
+    'Retour': { label: msg('Being returned'), color: 'red', group: 'returned' },
 };
 
-/** Statuses after which a parcel no longer changes, so refreshing skips it. */
-export const FINAL_STATUSES = ['Livre paye', 'Retour definitif', 'Retour paye', 'Retour recu paye', 'Supprime'];
+/**
+ * Statuses after which a parcel no longer changes, so tracking skips it. A v2 "Livrer" parcel
+ * is final once Colissimo marks it paid (see isFinalParcel).
+ */
+export const FINAL_STATUSES = ['Livre paye', 'Retour definitif', 'Retour paye', 'Retour recu paye', 'Supprime', 'Rtn definitif', 'Retour recu'];
+
+export const isFinalParcel = (status: string, paid: boolean) => FINAL_STATUSES.includes(status) || (status === 'Livrer' && paid);
+
+/** Where a parcel stands, in a shopper's words (the account page's progress bar). */
+export type CustomerStage = 'preparing' | 'shipped' | 'out_for_delivery' | 'delivered' | 'returned' | 'problem';
+
+export function customerStage(status: string): CustomerStage {
+    if (status === 'sending' || status === 'En attente') return 'preparing';
+    if (status === 'En cours') return 'out_for_delivery';
+    const group = statusInfo(status).group;
+    if (group === 'moving' || status === 'A enlever') return 'shipped';
+    if (group === 'delivered') return 'delivered';
+    if (group === 'returned') return 'returned';
+    return 'problem';
+}
 
 export function statusInfo(status: string) {
     return COLISSIMO_STATUSES[status] ?? { label: status, color: 'default', group: 'problem' as StatusGroup };

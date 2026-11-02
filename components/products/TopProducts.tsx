@@ -2,12 +2,11 @@
 
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import supabase from "@/lib/supabaseClient";
 import { useQuickAdd } from "@/lib/quick-add";
 import ProductListCard, { ProductListItem } from "./ProductListCard";
 import { toggleFavorite, getUserFavorites } from "@/lib/favorites";
-import { goToLogin } from "@/lib/customer-auth";
-import type { ProductImage as SupabaseProductImage } from "@/lib/product-images";
+import { getCustomer, goToLogin } from "@/lib/customer-auth";
+import type { ProductImage as StoredProductImage } from "@/lib/product-images";
 
 const translations = {
     en: {
@@ -34,7 +33,7 @@ interface ProductReview {
     rating?: number | null;
 }
 
-type ProductImage = SupabaseProductImage;
+type ProductImage = StoredProductImage;
 
 interface ProductRow {
     id: string;
@@ -100,12 +99,12 @@ export default function TopProducts({ locale = 'en', initialProducts }: TopProdu
     // Fetch authenticated user and their favorites
     async function fetchUserAndFavorites() {
         try {
-            const { data } = await supabase.auth.getUser();
-            if (data.user) {
-                setUserId(data.user.id);
+            const user = await getCustomer();
+            if (user) {
+                setUserId(user.id);
 
                 // Fetch user's favorites
-                const { favorites: userFavorites } = await getUserFavorites(data.user.id);
+                const { favorites: userFavorites } = await getUserFavorites(user.id);
                 const favoriteIds = new Set(userFavorites.map(fav => fav.product_id));
                 setFavorites(favoriteIds);
             }
@@ -199,7 +198,7 @@ export default function TopProducts({ locale = 'en', initialProducts }: TopProdu
 
         // Persist to database
         try {
-            const { isFavorited, error } = await toggleFavorite(userId, productId);
+            const { isFavorited, error } = await toggleFavorite(userId, productId, favorites.has(productId));
 
             if (error) {
                 console.error("Error toggling favorite:", error);

@@ -4,9 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import type { User } from "@supabase/auth-js";
 import { headerConfig } from "@/lib/config";
-import supabase from "@/lib/supabaseClient";
+import { signOut, type Customer } from "@/lib/customer-auth";
 import SearchBox from "./SearchBox";
 
 const translations = {
@@ -34,7 +33,7 @@ export interface MobileHeaderCategory {
 interface MobileHeaderProps {
     locale: string;
     rtl: boolean;
-    user: User | null;
+    user: Customer | null;
     categories: MobileHeaderCategory[];
     search: string;
     onSearchChange: (value: string) => void;
@@ -283,7 +282,7 @@ export default function MobileHeader({ locale, rtl, user, categories, search, on
                                 <button
                                     type="button"
                                     onClick={async () => {
-                                        await supabase.auth.signOut();
+                                        await signOut();
                                         setMenuOpen(false);
                                         router.push(`/${locale}`);
                                     }}

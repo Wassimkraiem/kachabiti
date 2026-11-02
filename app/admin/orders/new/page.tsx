@@ -12,7 +12,7 @@ import { governorateOptions } from "@/lib/colissimo-data";
 import { CHANNEL_LABELS, MANUAL_CHANNELS, STAGE_COLORS, STAGE_LABELS, type CustomerStage } from "@/lib/erp/constants";
 import ParcelProducts, { type ProductLine, type QuotedLine } from "@/components/admin/delivery/ParcelProducts";
 import { AgentSelect, CampaignSelect, PageHeader } from "@/components/admin/erp/ui";
-import { api, formatDate, formatMoney } from "@/components/admin/erp/erp-client";
+import { api, formatDate, formatMoney, useApi } from "@/components/admin/erp/erp-client";
 import { ORDER_STATUS_COLORS, orderStatusLabel } from "@/components/admin/order-status";
 
 const { Text } = Typography;
@@ -40,6 +40,11 @@ export default function NewOrderPage() {
     const phone: string = Form.useWatch("phone", form) ?? "";
     const discount: number = Form.useWatch("discount_amount", form) ?? 0;
     const shipping: number | null = Form.useWatch("shipping_cost", form) ?? null;
+    // The usual delivery fee (Business settings) starts filled in; the agent can change it.
+    const fee = useApi<{ fee: number }>("/api/sales/orders/delivery-fee").data?.fee;
+    useEffect(() => {
+        if (fee !== undefined && form.getFieldValue("shipping_cost") == null) form.setFieldValue("shipping_cost", fee);
+    }, [fee, form]);
 
     // Look the phone up once it has its 8 digits.
     useEffect(() => {
@@ -195,7 +200,7 @@ export default function NewOrderPage() {
                             </Form.Item>
                             <Row gutter={12}>
                                 <Col span={12}>
-                                    <Form.Item name="shipping_cost" label={t("Delivery fee")} tooltip={t("Leave empty for the usual fee (free above the threshold).")}>
+                                    <Form.Item name="shipping_cost" label={t("Delivery fee")} tooltip={t("The usual fee from Business settings. Change it for this order if needed, or empty it to apply free shipping above the threshold.")}>
                                         <InputNumber min={0} precision={3} style={{ width: "100%" }} suffix="TND" />
                                     </Form.Item>
                                 </Col>

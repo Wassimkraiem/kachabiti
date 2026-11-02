@@ -1,5 +1,4 @@
-import supabase from "./supabaseClient";
-import { getActiveProductDiscounts } from "./product-discounts";
+import { accountApi } from "./customer-auth";
 import { getProductImageUrl } from "./product-images";
 
 const DEFAULT_CURRENCY = process.env.NEXT_PUBLIC_DEFAULT_CURRENCY || "TND";
@@ -36,161 +35,54 @@ export interface FavoriteWithProduct {
     };
 }
 
-/**
- * Add a product to user's favorites
- */
-export async function addToFavorites(userId: string, productId: string): Promise<{ success: boolean; error: Error | null }> {
+// The signed-in customer's favorites, through /api/account/favorites (NestJS). The API takes the
+// user from the session; `userId` stays in the signatures for the existing callers.
+
+export async function addToFavorites(_userId: string, productId: string): Promise<{ success: boolean; error: Error | null }> {
     try {
-        const { error } = await supabase
-            .from("user_favorites")
-            // A removed favorite is kept (deleted_at set); adding it again brings it back.
-            .upsert(
-                { user_id: userId, product_id: productId, deleted_at: null },
-                { onConflict: "user_id,product_id" }
-            );
-
-        if (error) {
-            console.error("Error adding to favorites:", error);
-            return { success: false, error };
-        }
-
+        await accountApi("account/favorites", { body: { product_id: productId } });
         return { success: true, error: null };
     } catch (error) {
-        console.error("Error in addToFavorites:", error);
+        console.error("Error adding to favorites:", error);
         return { success: false, error: error as Error };
     }
 }
 
-/**
- * Remove a product from user's favorites
- */
-export async function removeFromFavorites(userId: string, productId: string): Promise<{ success: boolean; error: Error | null }> {
+export async function removeFromFavorites(_userId: string, productId: string): Promise<{ success: boolean; error: Error | null }> {
     try {
-        const { error } = await supabase
-            .from("user_favorites")
-            .update({ deleted_at: new Date().toISOString() })
-            .eq("user_id", userId)
-            .eq("product_id", productId);
-
-        if (error) {
-            console.error("Error removing from favorites:", error);
-            return { success: false, error };
-        }
-
+        await accountApi(`account/favorites?product_id=${encodeURIComponent(productId)}`, { method: "DELETE" });
         return { success: true, error: null };
     } catch (error) {
-        console.error("Error in removeFromFavorites:", error);
+        console.error("Error removing from favorites:", error);
         return { success: false, error: error as Error };
     }
 }
 
-/**
- * Toggle favorite status (add if not exists, remove if exists)
- */
-export async function toggleFavorite(userId: string, productId: string): Promise<{ isFavorited: boolean; error: Error | null }> {
-    try {
-        // Check if already favorited - use maybeSingle() to avoid PGRST116 error
-        const { data: existing, error: checkError } = await supabase
-            .from("user_favorites")
-            .select("id")
-            .eq("user_id", userId)
-            .eq("product_id", productId)
-            .is("deleted_at", null)
-            .maybeSingle(); // Returns null if not found, no error
-
-        if (checkError) {
-            console.error("Error checking favorite:", checkError);
-            return { isFavorited: false, error: checkError };
-        }
-
-        if (existing) {
-            // Already favorited, remove it
-            const { error } = await removeFromFavorites(userId, productId);
-            return { isFavorited: false, error };
-        } else {
-            // Not favorited, add it
-            const { error } = await addToFavorites(userId, productId);
-            return { isFavorited: true, error };
-        }
-    } catch (error) {
-        console.error("Error in toggleFavorite:", error);
-        return { isFavorited: false, error: error as Error };
-    }
+/** Callers pass the state they show, so no extra request is needed to know which way to go. */
+export async function toggleFavorite(userId: string, productId: string, isFavorited?: boolean): Promise<{ isFavorited: boolean; error: Error | null }> {
+    const favorited = isFavorited ?? (await getUserFavorites(userId)).favorites.some((fav) => fav.product_id === productId);
+    const { error } = favorited ? await removeFromFavorites(userId, productId) : await addToFavorites(userId, productId);
+    return { isFavorited: error ? favorited : !favorited, error };
 }
 
-/**
- * Get all favorites for a user with product details
- */
-export async function getUserFavorites(userId: string): Promise<{ favorites: FavoriteWithProduct[]; error: Error | null }> {
+type FavoriteRow = {
+    id: string;
+    user_id: string;
+    product_id: string;
+    created_at: string;
+    products: any;
+    discount_percent: number | null;
+};
+
+/** Favorites with product details and active discounts, newest first. */
+export async function getUserFavorites(_userId: string): Promise<{ favorites: FavoriteWithProduct[]; error: Error | null }> {
     try {
-        const { data, error } = await supabase
-            .from("user_favorites")
-            .select(`
-                id,
-                user_id,
-                product_id,
-                created_at,
-                products (
-                    id,
-                    name,
-                    slug,
-                    description,
-                    base_price,
-                    category_id,
-                    status,
-                    product_images (
-                        id,
-                        product_id,
-                        image_url,
-                        alt_text,
-                        is_main,
-                        position
-                    ),
-                    reviews:reviews (
-                        rating
-                    )
-                )
-            `)
-            .eq("user_id", userId)
-            .is("deleted_at", null)
-            .order("created_at", { ascending: false });
-
-        if (error) {
-            console.error("Error fetching favorites:", error);
-            return { favorites: [], error };
-        }
-
-        type FavoriteRow = {
-            id: string;
-            user_id: string;
-            product_id: string;
-            created_at: string;
-            products: any;
-        };
-
-        type FavoriteWithMaybeProduct = Omit<FavoriteWithProduct, "product"> & {
-            product: FavoriteWithProduct["product"] | null;
-        };
-
-        // Get product IDs to fetch discounts
-        const productIds = ((data as FavoriteRow[] | null) ?? [])
-            .map((fav) => fav.products?.id)
-            .filter((id): id is string => !!id);
-
-        // Fetch discounts for all products in batch
-        const discountMap = await getActiveProductDiscounts(productIds);
-
-        // Transform the data to match our interface
-        const favorites: FavoriteWithProduct[] = ((data as FavoriteRow[] | null) ?? [])
-            .map<FavoriteWithMaybeProduct>((fav) => ({
-                id: fav.id,
-                user_id: fav.user_id,
-                product_id: fav.product_id,
-                created_at: fav.created_at,
-                product: transformProductForFavorite(fav.products, discountMap.get(fav.products?.id))
-            }))
-            .filter((fav): fav is FavoriteWithProduct => !!fav.product);
-
+        const rows = await accountApi<FavoriteRow[]>("account/favorites");
+        const favorites: FavoriteWithProduct[] = rows.flatMap((fav) => {
+            const product = transformProductForFavorite(fav.products, fav.discount_percent ? { discount_percent: fav.discount_percent } : null);
+            if (!product) return [];
+            return [{ id: fav.id, user_id: fav.user_id, product_id: fav.product_id, created_at: fav.created_at, product }];
+        });
         return { favorites, error: null };
     } catch (error) {
         console.error("Error in getUserFavorites:", error);
@@ -244,52 +136,3 @@ function calculateReviewStats(reviews?: Array<{ rating?: number | null }>) {
         reviewCount: ratedReviews.length,
     };
 }
-
-/**
- * Check if a product is in user's favorites
- */
-export async function isProductFavorited(userId: string, productId: string): Promise<boolean> {
-    try {
-        const { data, error } = await supabase
-            .from("user_favorites")
-            .select("id")
-            .eq("user_id", userId)
-            .eq("product_id", productId)
-            .is("deleted_at", null)
-            .maybeSingle(); // Returns null if not found, no error
-
-        if (error) {
-            console.error("Error checking if favorited:", error);
-            return false;
-        }
-
-        return !!data;
-    } catch (error) {
-        console.error("Error in isProductFavorited:", error);
-        return false;
-    }
-}
-
-/**
- * Get favorite count for a specific product
- */
-export async function getProductFavoriteCount(productId: string): Promise<number> {
-    try {
-        const { count, error } = await supabase
-            .from("user_favorites")
-            .select("*", { count: "exact", head: true })
-            .eq("product_id", productId)
-            .is("deleted_at", null);
-
-        if (error) {
-            console.error("Error getting favorite count:", error);
-            return 0;
-        }
-
-        return count || 0;
-    } catch (error) {
-        console.error("Error in getProductFavoriteCount:", error);
-        return 0;
-    }
-}
-

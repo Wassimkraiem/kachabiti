@@ -1,0 +1,7 @@
+# Copy to backend.hcl (git-ignored), fill in, then: terraform init -backend-config=backend.hcl
+# The state lives in an S3 bucket you create once by hand in your Region (docs/DEPLOY.md).
+bucket       = "kachabity-terraform-state-<something unique>"
+key          = "production/terraform.tfstate"
+region       = "eu-north-1"
+encrypt      = true
+use_lockfile = true

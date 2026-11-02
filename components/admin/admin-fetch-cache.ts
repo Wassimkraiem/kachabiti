@@ -3,7 +3,7 @@
 /**
  * In-memory browser cache for the small lookup lists every admin form loads (categories,
  * colors, sizes, suppliers, collections, locations). Without it each page refetches them,
- * which costs a full round trip to Supabase every time on a slow connection.
+ * which costs a full round trip to the API every time on a slow connection.
  *
  * Installed once by app/admin/layout.tsx as a thin wrapper around window.fetch:
  * - GET to a cached path is answered from memory for up to TTL_MS (in-flight requests are shared).

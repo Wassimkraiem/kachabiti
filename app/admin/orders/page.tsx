@@ -4,19 +4,20 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
+    Badge,
+    Breadcrumb,
     Button,
     Card,
-    Breadcrumb,
+    DatePicker,
+    Image,
     Input,
     Popconfirm,
     Select,
+    Space,
     Table,
     Tag,
-    Typography,
-    Space,
-    Image,
-    Badge,
     Tooltip,
+    Typography,
 } from "antd";
 import { message } from "@/components/admin/antd-app";
 import { ORDER_ITEM_IMAGE_FALLBACK, ORDER_STATUS_COLORS, ORDER_STATUS_OPTIONS, PAYMENT_STATUS_COLORS, PAYMENT_STATUS_LABELS, errorCode, orderStatusLabel, validateOrder } from "@/components/admin/order-status";
@@ -25,6 +26,7 @@ import { api } from "@/components/admin/erp/erp-client";
 import { CHANNELS, CHANNEL_LABELS, OPEN_ORDER_STATUSES } from "@/lib/erp/constants";
 import { useAdminRole } from "@/lib/admin-role-context";
 import type { ColumnsType } from "antd/es/table";
+import type { Dayjs } from "dayjs";
 import {
     DeleteOutlined,
     EyeOutlined,
@@ -36,9 +38,11 @@ import {
     CheckOutlined,
     WarningOutlined,
     UserAddOutlined,
+    PrinterOutlined,
 } from "@ant-design/icons";
 import { DATE_LOCALES, useAdminT } from "@/lib/admin-i18n";
 import DeliveryStatusTag from "@/components/admin/delivery/DeliveryStatusTag";
+import { reportParcelCancellation } from "@/components/admin/delivery/delivery-api";
 
 const { Title, Text } = Typography;
 
@@ -78,6 +82,7 @@ export default function AdminOrdersPage() {
     const [loading, setLoading] = useState(true); // first fetch starts on mount: show the table spinner right away
     const [searchTerm, setSearchTerm] = useState("");
     const [statusFilter, setStatusFilter] = useState<string>("all");
+    const [range, setRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
     const [paymentStatusFilter, setPaymentStatusFilter] = useState<string>("all");
     // Who handles the order: "all", "me", "none" (nobody yet), "website" (customers, no agent) or an
     // agent's user id (?added_by= from Agent performance, ?assigned=none from My day; ?status= too).
@@ -98,6 +103,8 @@ export default function AdminOrdersPage() {
             if (statusFilter !== 'all') {
                 params.append('status', statusFilter);
             }
+            if (range?.[0]) params.append('from', range[0].format('YYYY-MM-DD'));
+            if (range?.[1]) params.append('to', range[1].format('YYYY-MM-DD'));
 
             const response = await fetch(`/api/orders?${params.toString()}`);
 
@@ -120,7 +127,7 @@ export default function AdminOrdersPage() {
         } finally {
             setLoading(false);
         }
-    }, [statusFilter]);
+    }, [statusFilter, range]);
 
     useEffect(() => {
         fetchOrders();
@@ -130,7 +137,7 @@ export default function AdminOrdersPage() {
         const term = searchTerm.toLowerCase();
         return orders.filter((order) => {
             // Email is optional, so it can be null.
-            const matchesSearch = [order.order_number, order.customer_first_name, order.customer_last_name, order.customer_email, order.customer_phone, order.created_by_email]
+            const matchesSearch = [order.order_number, order.customer_first_name, order.customer_last_name, order.customer_email, order.customer_phone, order.created_by_email, order.deliveries?.[0]?.barcode]
                 .some((value) => (value ?? "").toLowerCase().includes(term));
 
             const matchesPaymentStatus =
@@ -205,7 +212,8 @@ export default function AdminOrdersPage() {
                 message.success(t("Order {order_number} validated", { order_number: order.order_number }));
             }
             if (result.warning) message.warning(t(result.warning));
-            fetchOrders();
+            if (result.delivery?.label_url) router.push(`/admin/delivery/print?orders=${order.id}`);
+            else fetchOrders();
         } catch (e) {
             if (errorCode(e) === "NEEDS_DETAILS") {
                 // Missing delivery details: finish them in the send form on the order's page.
@@ -219,6 +227,28 @@ export default function AdminOrdersPage() {
         }
     };
 
+    // Validates the selected orders still to validate, one by one, then opens their slips to print.
+    const [bulkValidating, setBulkValidating] = useState(false);
+    const toValidate = orders.filter((o) => selectedRowKeys.includes(o.id) && (o.status === "pending" || o.status === "confirmed"));
+    const handleBulkValidate = async () => {
+        setBulkValidating(true);
+        const validated: string[] = [];
+        for (const order of toValidate) {
+            try {
+                const result = await validateOrder(order.id);
+                if (result.warning) message.warning(t(result.warning));
+                validated.push(order.id);
+            } catch (e) {
+                message.error(`${order.order_number}: ${errorCode(e) === "NEEDS_DETAILS" ? t("Complete the delivery details to validate this order") : t((e as Error).message)}`);
+            }
+        }
+        setBulkValidating(false);
+        if (validated.length > 0) {
+            message.success(t("Validated {count} order(s)", { count: validated.length }));
+            router.push(`/admin/delivery/print?orders=${validated.join(",")}`);
+        } else fetchOrders();
+    };
+
     const handleDelete = async (order: OrderRow) => {
         try {
             const response = await fetch(`/api/orders?id=${order.id}`, {
@@ -228,6 +258,7 @@ export default function AdminOrdersPage() {
             const result = await response.json();
             if (result.success) {
                 message.success(t("Deleted order {order_number}", { order_number: order.order_number }));
+                reportParcelCancellation(result.data?.parcels, message, t);
                 fetchOrders();
             } else {
                 message.error(result.error || t("Unable to delete order"));
@@ -254,6 +285,7 @@ export default function AdminOrdersPage() {
             }
             const successCount = selectedRowKeys.length;
             const failCount = 0;
+            reportParcelCancellation(result.data?.parcels, message, t);
 
             if (successCount > 0) {
                 message.success(t("Successfully deleted {count} order(s)", { count: successCount }));
@@ -315,6 +347,9 @@ export default function AdminOrdersPage() {
             render: (_: any, record: OrderRow) => {
                 const items = record.items ?? [];
                 const shown = items.slice(0, 3);
+                // Orders imported from Colissimo's website: its list doesn't say what was inside.
+                if (items.length === 0)
+                    return <Text type="secondary" style={{ fontSize: 12 }}>{record.order_number.startsWith("COL-") ? t("Imported from Colissimo") : "—"}</Text>;
                 return (
                     <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "nowrap" }}>
                         {shown.map((item) => (
@@ -464,6 +499,20 @@ export default function AdminOrdersPage() {
                                 <Button icon={<CheckOutlined />} onClick={() => runAction({ action: "confirm", ids: selectedRowKeys }, "Confirmed {count} order(s)")}>
                                     {t("Confirm ({count})", { count: selectedRowKeys.length })}
                                 </Button>
+                                {toValidate.length > 0 && (
+                                    <Popconfirm
+                                        title={t("Validate {count} order(s)?", { count: toValidate.length })}
+                                        description={t("This creates their Colissimo parcels and takes their items out of stock, then opens their slips to print.")}
+                                        okText={t("Validate")}
+                                        cancelText={t("Cancel")}
+                                        onConfirm={handleBulkValidate}
+                                    >
+                                        <Button type="primary" loading={bulkValidating}>{t("Validate ({count})", { count: toValidate.length })}</Button>
+                                    </Popconfirm>
+                                )}
+                                <Button icon={<PrinterOutlined />} onClick={() => router.push(`/admin/delivery/print?orders=${selectedRowKeys.join(",")}`)}>
+                                    {t("Print slips ({count})", { count: selectedRowKeys.length })}
+                                </Button>
                                 {isAdmin ? (
                                     <Space.Compact>
                                         <AgentSelect value={assignTo} onChange={setAssignTo} style={{ minWidth: 180 }} />
@@ -506,14 +555,7 @@ export default function AdminOrdersPage() {
             </div>
 
             <Card>
-                <div
-                    style={{
-                        display: "flex",
-                        flexWrap: "wrap",
-                        gap: 12,
-                        marginBottom: 16,
-                    }}
-                >
+                <div className="admin-filters" style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 16 }}>
                     <Select
                         value={statusFilter}
                         onChange={(value) => setStatusFilter(value)}
@@ -549,6 +591,13 @@ export default function AdminOrdersPage() {
                             ...agentOptions,
                         ]}
                         style={{ width: 220, maxWidth: "100%" }}
+                    />
+                    <DatePicker.RangePicker
+                        value={range}
+                        onChange={setRange}
+                        allowEmpty={[true, true]}
+                        placeholder={[t("Created from"), t("to")]}
+                        style={{ width: 260, maxWidth: "100%" }}
                     />
                     <Input
                         placeholder={t("Search orders...")}

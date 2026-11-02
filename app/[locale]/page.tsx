@@ -1,4 +1,4 @@
-import supabase from "@/lib/supabaseClient";
+import { storefront } from "@/lib/storefront-api";
 import { cachedCatalogQuery } from "@/lib/catalog-cache";
 import HeroSection from "@/components/sections/HeroSection";
 import TopProducts from "@/components/products/TopProducts";
@@ -17,9 +17,8 @@ import ProductShowcase from "@/components/landing/ProductShowcase";
 import NewArrivals from "@/components/landing/NewArrivals";
 import CollectionSpotlight from "@/components/landing/CollectionSpotlight";
 import HowToOrder from "@/components/landing/HowToOrder";
-import { getLandingConfig, getLandingPicks, getNewArrivals, getSpotlightCollection, type LandingProduct, type SpotlightCollection } from "@/lib/landing-products";
+import type { LandingProduct, SpotlightCollection } from "@/lib/landing-products";
 import { DEFAULT_LANDING_CONFIG, type HomeSectionKey, type LandingConfig } from "@/lib/landing-config";
-import { getSiteSettings } from "@/lib/get-site-settings";
 import { getFeaturedCategories, getTopProducts, getPromoProducts, getSaleBanners, getReels, getLatestReviews } from "@/lib/home-data";
 
 // The hero carousel is hidden until it has its own images; the product showcase leads the page meanwhile.
@@ -35,25 +34,8 @@ interface LandingData {
 }
 
 // Section order and visibility, and the products of each list, are set by the admin
-// (Admin → Landing page).
-async function loadLandingData(locale: string): Promise<LandingData> {
-  const config = await getLandingConfig();
-  const [showcase, ringPicks, newArrivals, spotlight, settings] = await Promise.all([
-    getLandingPicks(locale, 'showcase'),
-    getLandingPicks(locale, 'ring', false),
-    getNewArrivals(locale, config.lists.new_arrivals),
-    getSpotlightCollection(locale, config.lists.spotlight, config.spotlightCategoryId),
-    getSiteSettings(),
-  ]);
-  return {
-    showcase,
-    ringPicks,
-    newArrivals,
-    spotlight,
-    freeShippingThreshold: settings.free_shipping_enabled ? settings.global_free_shipping_threshold : null,
-    layout: config.layout,
-  };
-}
+// (Admin → Landing page); NestJS assembles them per locale.
+const loadLandingData = (locale: string) => storefront<LandingData>(`landing?locale=${encodeURIComponent(locale)}`);
 
 // Product-driven landing sections, cached under the catalog tag like the hero rows.
 // Errors are caught outside the cache so a failed load isn't cached.
@@ -86,14 +68,8 @@ function ringProducts(data: LandingData): LandingProduct[] {
   return cards;
 }
 
-// Hero rows change rarely (edited in the Supabase dashboard): serve them from the Next.js data cache.
-const getHeroContent = cachedCatalogQuery("hero-content", async () => {
-  const [heroResult, smallCardsResult] = await Promise.all([
-    supabase.from("hero_sections").select("*").eq("is_active", true).order("sort_order", { ascending: true }),
-    supabase.from("small_cards").select("*").eq("is_active", true).order("sort_order", { ascending: true }),
-  ]);
-  return { heroData: heroResult.data || [], smallCardsData: smallCardsResult.data || [] };
-});
+// Hero rows change rarely: serve them from the Next.js data cache.
+const getHeroContent = cachedCatalogQuery("hero-content", () => storefront<{ heroData: any[]; smallCardsData: any[] }>("hero"));
 
 async function HeroContent({ locale }: { locale: string }) {
   try {

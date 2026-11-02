@@ -6,13 +6,13 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import supabase from "@/lib/supabaseClient";
 import { Order as OrderType } from "@/lib/orders";
 import { getUserFavorites, removeFromFavorites, FavoriteWithProduct } from "@/lib/favorites";
 import ProductListCard from "@/components/products/ProductListCard";
 import { useQuickAdd } from "@/lib/quick-add";
 import { FormInput } from "@/components/forms";
-import { authHref, customerName, useCustomer } from "@/lib/customer-auth";
+import OrderTracking, { type OrderDelivery } from "@/components/ui/OrderTracking";
+import { accountApi, announceAuthChange, authHref, customerName, signOut, useCustomer, type Customer } from "@/lib/customer-auth";
 
 type Locale = "en" | "fr" | "ar";
 
@@ -28,6 +28,8 @@ type OrderItem = {
 
 type OrderWithItems = OrderType & {
   items: OrderItem[];
+  /** Its Colissimo parcel once sent: where it stands (GET /api/account/orders). */
+  delivery: OrderDelivery | null;
 };
 
 type UserProfile = {
@@ -270,46 +272,10 @@ export default function SettingsPage({ params }: { params: Promise<{ locale: Loc
   });
 
   // Fetch user orders
-  const fetchOrders = async (userId: string) => {
+  const fetchOrders = async () => {
     setOrdersLoading(true);
     try {
-      // Fetch orders for the current user
-      const { data: ordersData, error: ordersError } = await supabase
-        .from("orders")
-        .select("*")
-        .eq("user_id", userId)
-        .order("created_at", { ascending: false });
-
-      if (ordersError) {
-        console.error("Error fetching orders:", ordersError);
-        setOrdersLoading(false);
-        return;
-      }
-
-      if (!ordersData || ordersData.length === 0) {
-        setOrders([]);
-        setOrdersLoading(false);
-        return;
-      }
-
-      // Fetch order items for all orders
-      const orderIds = ordersData.map((order: OrderType) => order.id);
-      const { data: itemsData, error: itemsError } = await supabase
-        .from("order_items")
-        .select("*")
-        .in("order_id", orderIds);
-
-      if (itemsError) {
-        console.error("Error fetching order items:", itemsError);
-      }
-
-      // Combine orders with their items
-      const ordersWithItems: OrderWithItems[] = ordersData.map((order: OrderType) => ({
-        ...order,
-        items: itemsData?.filter((item: OrderItem) => item.order_id === order.id) || [],
-      }));
-
-      setOrders(ordersWithItems);
+      setOrders(await accountApi<OrderWithItems[]>("account/orders"));
     } catch (error) {
       console.error("Error in fetchOrders:", error);
     } finally {
@@ -378,7 +344,7 @@ export default function SettingsPage({ params }: { params: Promise<{ locale: Loc
       city: profile.city || "",
       address: profile.address || "",
     });
-    fetchOrders(user.id);
+    fetchOrders();
     fetchFavorites(user.id);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authLoading, user?.id]);
@@ -386,7 +352,7 @@ export default function SettingsPage({ params }: { params: Promise<{ locale: Loc
   const handleTabClick = async (tabId: string) => {
     if (tabId === "logout") {
       loggingOut.current = true;
-      await supabase.auth.signOut();
+      await signOut();
       router.replace(`/${locale}`);
       return;
     }
@@ -399,14 +365,13 @@ export default function SettingsPage({ params }: { params: Promise<{ locale: Loc
     if (data.newPassword.length < 8) return toast.error(text.passwordTooShort);
     if (data.newPassword !== data.confirmPassword) return toast.error(text.passwordMismatch);
 
-    const { error: verifyError } = await supabase.auth.signInWithPassword({
-      email: userProfile.email,
-      password: data.currentPassword,
-    });
-    if (verifyError) return toast.error(text.wrongPassword);
-
-    const { error } = await supabase.auth.updateUser({ password: data.newPassword });
-    if (error) {
+    try {
+      await accountApi("auth/password", {
+        method: "PUT",
+        body: { currentPassword: data.currentPassword, newPassword: data.newPassword },
+      });
+    } catch (error) {
+      if ((error as { code?: string }).code === "invalid_credentials") return toast.error(text.wrongPassword);
       console.error("Error changing password:", error);
       return toast.error(text.somethingWrong);
     }
@@ -414,19 +379,22 @@ export default function SettingsPage({ params }: { params: Promise<{ locale: Loc
     toast.success(text.passwordChanged);
   };
 
-  // Profile details live in the customer's auth metadata; the name is mirrored to
-  // public.users by a database trigger so reviews show it.
+  // Profile details live in the account's user_metadata; the API also stores the name
+  // on the account so reviews show it.
   const handleProfileUpdate = async (data: ProfileFormData) => {
-    const { error } = await supabase.auth.updateUser({
-      data: {
-        full_name: data.full_name.trim(),
-        phone: data.phone.trim(),
-        country: data.country.trim(),
-        city: data.city.trim(),
-        address: data.address.trim(),
-      },
-    });
-    if (error) {
+    try {
+      const updated = await accountApi<Customer>("auth/profile", {
+        method: "PUT",
+        body: {
+          full_name: data.full_name.trim(),
+          phone: data.phone.trim(),
+          country: data.country.trim(),
+          city: data.city.trim(),
+          address: data.address.trim(),
+        },
+      });
+      announceAuthChange(updated);
+    } catch (error) {
       console.error("Error updating profile:", error);
       return toast.error(text.somethingWrong);
     }
@@ -514,8 +482,10 @@ export default function SettingsPage({ params }: { params: Promise<{ locale: Loc
                           </div>
                         </div>
 
+                        <OrderTracking orderStatus={order.status} delivery={order.delivery} locale={locale} />
+
                         {/* Order Items */}
-                        <div className="space-y-3">
+                        <div className="mt-4 space-y-3">
                           {order.items.map((item) => (
                             <div key={item.id} className="flex items-center gap-4">
                               <div className="relative w-20 h-20 rounded-md overflow-hidden border border-gray-200 shrink-0">

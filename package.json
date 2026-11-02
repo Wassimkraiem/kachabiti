@@ -7,18 +7,20 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
-    "test:e2e": "node tests/e2e/categories.e2e.mjs && node tests/e2e/catalog.e2e.mjs && node tests/e2e/stock.e2e.mjs && node tests/e2e/erp.e2e.mjs && node tests/e2e/objectives.e2e.mjs",
-    "import:woocommerce": "node scripts/import-woocommerce.mjs"
+    "import:woocommerce": "node scripts/import-woocommerce.mjs",
+    "docker:env": "node scripts/docker/env.mjs",
+    "docker:import": "node scripts/docker/import-database.mjs",
+    "docker:up": "docker compose up --build -d",
+    "docker:admin": "node scripts/docker/create-admin.mjs"
   },
   "dependencies": {
     "@ant-design/icons": "^6.3.4",
     "@hookform/resolvers": "^5.9.1",
     "@sentry/nextjs": "^11.4.0",
-    "@supabase/ssr": "^0.12.7",
-    "@supabase/supabase-js": "^2.117.2",
     "antd": "^6.6.5",
     "dayjs": "^1.11.23",
     "dotenv": "^17.2.3",
+    "jose": "^6.2.13",
     "next": "^15.5.26",
     "nodemailer": "^10.0.12",
     "react": "^19.3.0",
@@ -37,9 +39,11 @@
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
     "@types/three": "^0.186.0",
+    "aws4fetch": "^1.0.20",
     "csv-parse": "^7.0.3",
     "eslint": "^9",
     "eslint-config-next": "^15.5.26",
+    "pg": "^8.23.1",
     "tailwindcss": "^4.3.3",
     "typescript": "^5"
   }

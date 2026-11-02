@@ -2,6 +2,15 @@ import type { NextConfig } from "next";
 import { withSentryConfig } from "@sentry/nextjs/config";
 
 const nextConfig: NextConfig = {
+  async rewrites() {
+    // The API is the NestJS app in api/ (NEST_URL). afterFiles: app/api/internal/revalidate, the
+    // one route left in Next.js, is matched first.
+    return {
+      beforeFiles: [],
+      afterFiles: [{ source: "/api/:path*", destination: `${process.env.NEST_URL}/api/:path*` }],
+      fallback: [],
+    };
+  },
   // ENV ("local" or "production") as seen by browser, server and edge code; read it via lib/app-env.ts.
   env: {
     NEXT_PUBLIC_APP_ENV: process.env.ENV || "local",
@@ -28,12 +37,15 @@ const nextConfig: NextConfig = {
         port: '',
         pathname: '/**',
       },
-      {
-        protocol: 'https',
-        hostname: 'hwxgibxahqdxkzuvfxvz.supabase.co',
-        port: '',
-        pathname: '/storage/v1/object/**',
-      },
+      // Uploaded files (Cloudflare R2; local storage in Docker): FILES_PUBLIC_URL, read at build.
+      ...(process.env.FILES_PUBLIC_URL
+        ? [(({ protocol, hostname, port, pathname }: URL) => ({
+            protocol: protocol.replace(':', '') as 'http' | 'https',
+            hostname,
+            port,
+            pathname: `${pathname.replace(/\/$/, '')}/**`,
+          }))(new URL(process.env.FILES_PUBLIC_URL))]
+        : []),
       {
         protocol: 'https',
         hostname: 'img.youtube.com',

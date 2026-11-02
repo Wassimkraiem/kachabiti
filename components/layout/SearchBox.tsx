@@ -4,10 +4,9 @@ import { useEffect, useId, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import supabase from "@/lib/supabaseClient";
-import { EMBEDDED_DISCOUNTS, embeddedDiscountPercent, type ProductDiscount } from "@/lib/product-discounts";
 import { getProductName } from "@/lib/utils/product-utils";
-import { MIN_SEARCH_LENGTH, searchProductIds } from "@/lib/product-search";
+import { MIN_SEARCH_LENGTH } from "@/lib/product-search";
+import { storefront } from "@/lib/storefront-api";
 
 const CURRENCY = process.env.NEXT_PUBLIC_DEFAULT_CURRENCY || "TND";
 const SUGGESTIONS = 6;
@@ -36,7 +35,7 @@ interface SuggestionRow {
     name_fr: string | null;
     base_price: number;
     product_images: { image_url: string; is_main: boolean; position: number; variant_id: string | null }[] | null;
-    product_discounts?: ProductDiscount[] | null;
+    discount_percent: number;
 }
 
 function mainImage(images: SuggestionRow["product_images"]): string | null {
@@ -47,19 +46,13 @@ function mainImage(images: SuggestionRow["product_images"]): string | null {
 
 // The best matches, in rank order, with the same price rule as the product pages.
 async function loadSuggestions(query: string, locale: string): Promise<Suggestion[]> {
-    const hits = await searchProductIds(query, SUGGESTIONS);
-    if (hits.length === 0) return [];
-    const ids = hits.map((hit) => hit.id);
-    const { data, error } = await supabase
-        .from("products")
-        .select(`id, slug, name, name_ar, name_fr, base_price, product_images(image_url, is_main, position, variant_id), ${EMBEDDED_DISCOUNTS}`)
-        .in("id", ids);
-    if (error) throw error;
-    return ((data ?? []) as SuggestionRow[])
-        .sort((a, b) => ids.indexOf(a.id) - ids.indexOf(b.id))
+    const q = query.trim();
+    if (q.length < MIN_SEARCH_LENGTH && !/d/.test(q)) return [];
+    const { rows } = await storefront<{ rows: SuggestionRow[] }>(`products?search=${encodeURIComponent(q)}&page_size=${SUGGESTIONS}`);
+    return rows
         .map((row) => {
             const base = Number(row.base_price);
-            const discount = embeddedDiscountPercent(row);
+            const discount = Number(row.discount_percent);
             return {
                 id: row.id,
                 slug: row.slug,

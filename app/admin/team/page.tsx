@@ -221,7 +221,7 @@ export default function TeamPage() {
             <Alert
                 type="info"
                 showIcon
-                title={t("Admins can do everything. Staff only see and change the areas you tick for them, and only admins manage the team. Role and access changes apply when the person's session next refreshes (within an hour) or when they sign in again.")}
+                title={t("Admins can do everything. Staff only see and change the areas you tick for them, and only admins manage the team. Role and access changes sign the person out and apply within 15 minutes.")}
             />
             <Modal
                 open={!!editing}

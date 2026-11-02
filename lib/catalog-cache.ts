@@ -7,7 +7,7 @@ import { loadProductDetail } from '@/lib/product-detail';
  * Every entry is tagged `catalog`, and admin API mutations call invalidateCatalog(), so
  * edits show up immediately while shoppers are served from the cache. The time-based
  * revalidate is only a safety net for writes that bypass the API (e.g. the WooCommerce
- * importer or edits in the Supabase dashboard).
+ * importer or direct database edits).
  */
 export const CATALOG_TAG = 'catalog';
 const REVALIDATE_SECONDS = 300;

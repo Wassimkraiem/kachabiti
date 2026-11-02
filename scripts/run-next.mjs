@@ -3,7 +3,7 @@
  * Launch Next with a longer Happy Eyeballs timeout.
  *
  * Node waits 250 ms by default before trying the next address. On a slow
- * network that times out the connection to Supabase, and middleware then
+ * network that times out the connection to the API, and middleware then
  * treats a signed-in admin as signed out. Setting NODE_OPTIONS here works in
  * Windows cmd and Unix shells, and child processes inherit the flag.
  *

@@ -1,0 +1,147 @@
+# Deploys the API to the AWS server (docs/DEPLOY.md) after CI passes: builds the ARM image, pushes it
+# to GitHub's container registry, then on the server (over SSH) backs up the database, applies the
+# migrations and starts the new image, going back to the previous one if it isn't healthy.
+# The site deploys on Vercel from the same push.
+#
+# Secrets (Settings → Environments → production): DEPLOY_HOST, DEPLOY_SSH_KEY, DEPLOY_KNOWN_HOSTS,
+# PROD_ENV (the server's .env, see deploy/.env.example). Variable: API_URL (https://<api domain>).
+name: Deploy
+
+on:
+  push:
+    branches: [kachabiti-nest]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  # Only pushes that change the API (or the files it's built from) deploy it; site-only changes
+  # deploy on Vercel alone (vercel.json skips the opposite case).
+  changes:
+    name: Did the API change?
+    runs-on: ubuntu-24.04
+    outputs:
+      api: ${{ steps.check.outputs.api }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: api/package-lock.json
+      - name: Install (API, for TypeScript)
+        working-directory: api
+        run: npm ci
+      - id: check
+        env:
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+        run: |
+          # A manual run always deploys.
+          if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then
+            echo "api=true" >> "$GITHUB_OUTPUT"
+          else
+            node .github/scripts/api-changed.mjs "$BEFORE" "$SHA" | tee -a "$GITHUB_OUTPUT"
+          fi
+
+  # Every push is checked (this is the branch's only CI run); only API changes go on to deploy.
+  ci:
+    uses: ./.github/workflows/ci.yml
+    permissions:
+      contents: read
+
+  build:
+    name: Build the API image
+    needs: [changes, ci]
+    if: needs.changes.outputs.api == 'true'
+    # The server is ARM (AWS Graviton): build natively, no emulation.
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 30
+    environment: production
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Image name
+        run: echo "IMAGE=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/kachabity-api" >> "$GITHUB_ENV"
+
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: api/Dockerfile
+          platforms: linux/arm64
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:${{ github.sha }}
+            ${{ env.IMAGE }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    environment: production
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Image name
+        run: echo "IMAGE=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/kachabity-api" >> "$GITHUB_ENV"
+
+      - name: SSH access
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_SSH_KEY" > ~/.ssh/id_ed25519
+          printf '%s\n' "$DEPLOY_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_ed25519 ~/.ssh/known_hosts
+
+      - name: Copy the server files and the .env
+        env:
+          HOST: deploy@${{ secrets.DEPLOY_HOST }}
+          PROD_ENV: ${{ secrets.PROD_ENV }}
+        run: |
+          scp deploy/docker-compose.prod.yml deploy/deploy.sh deploy/backup.sh "$HOST:/opt/kachabity/"
+          printf '%s\n' "$PROD_ENV" | ssh "$HOST" 'umask 077 && cat > /opt/kachabity/.env && chmod +x /opt/kachabity/*.sh'
+
+      - name: Deploy
+        env:
+          HOST: deploy@${{ secrets.DEPLOY_HOST }}
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACTOR: ${{ github.actor }}
+          SHA: ${{ github.sha }}
+        run: |
+          # The registry login lasts only for this deploy (the token expires with the job anyway).
+          # The image name and actor are expanded here, on purpose, before going to the server.
+          # shellcheck disable=SC2029
+          printf '%s' "$GHCR_TOKEN" | ssh "$HOST" "docker login ghcr.io -u '$ACTOR' --password-stdin >/dev/null"
+          # shellcheck disable=SC2029
+          ssh "$HOST" "trap 'docker logout ghcr.io >/dev/null' EXIT; /opt/kachabity/deploy.sh '$IMAGE:$SHA'"
+
+      - name: Health from outside
+        env:
+          API_URL: ${{ vars.API_URL }}
+        if: env.API_URL != ''
+        run: |
+          for _ in $(seq 12); do curl -fs "$API_URL/api/health" && exit 0; sleep 5; done
+          echo "The API does not answer at $API_URL" >&2
+          exit 1

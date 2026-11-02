@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import CountdownTimer from "../timers/CountdownTimer";
-import supabase from '@/lib/supabaseClient';
+import { storefront } from '@/lib/storefront-api';
 import { useParams } from "next/navigation";
 
 const translations = {
@@ -56,16 +56,11 @@ export default function SaleBanner({ initialPromotions }: { initialPromotions?: 
     useEffect(() => {
         if (initialPromotions) return;
         async function fetchPromotion() {
-            const { data, error } = await supabase
-                .from('promotions')
-                .select('*')
-                .eq('active', true)
-                .order('discount_percent', { ascending: false });
-            if (error) {
+            try {
+                setPromotion(pickPromotion(await storefront<any[]>('sale-banners')));
+            } catch (error) {
                 console.error('Error fetching promotion:', error);
-                return;
             }
-            setPromotion(pickPromotion(data || []));
         }
         fetchPromotion();
     }, [initialPromotions]);

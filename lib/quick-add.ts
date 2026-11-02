@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import supabase from "@/lib/supabaseClient";
+import { storefront } from "@/lib/storefront-api";
 import { useCart } from "@/lib/cart-context";
 import { useLanguage } from "@/lib/language-context";
 
@@ -41,20 +41,14 @@ export function useQuickAdd(fallbackImage = "") {
             if (p.slug) router.push(`/${locale}/products/${p.slug}`);
         };
 
-        const [{ data: variants }, { data: product }] = await Promise.all([
-            supabase
-                .from("product_variants")
-                .select("id, price, stock, colors(name, display_name), sizes(name)")
-                .eq("product_id", p.id)
-                .is("deleted_at", null)
-                .neq("is_available", false),
-            supabase.from("products").select("stock_tracked").eq("id", p.id).maybeSingle(),
-        ]);
-        const options = (variants ?? []) as unknown as VariantRow[];
+        const { variants, stock_tracked } = await storefront<{ variants: VariantRow[]; stock_tracked: boolean }>(
+            `quick-add?product_id=${encodeURIComponent(p.id)}`
+        );
+        const options = variants;
         if (options.length > 1) return openProduct();
 
         const variant = options[0];
-        if (variant && product?.stock_tracked && variant.stock <= 0) return openProduct();
+        if (variant && stock_tracked && variant.stock <= 0) return openProduct();
 
         const unitPrice = variant?.price ?? p.base_price;
         const price = p.discount_percent ? unitPrice * (1 - p.discount_percent / 100) : unitPrice;

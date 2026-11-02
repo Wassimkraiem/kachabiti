@@ -1,0 +1,89 @@
+# Checks every pull request and push: type-check and lint of the site and the API, the API build,
+# then the end-to-end suites against the whole stack (docker-compose.yml) on an empty database
+# built from db/baseline.sql. On kachabiti-nest it runs inside deploy.yml instead (one run per push).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  checks:
+    name: Types, lint, build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            api/package-lock.json
+      - name: Install (site)
+        run: npm ci
+      - name: Type-check (site)
+        run: npx tsc --noEmit
+      - name: Lint (site)
+        run: npm run lint
+      - name: Install (API)
+        working-directory: api
+        run: npm ci
+      - name: Lint (API)
+        working-directory: api
+        run: npm run lint && git diff --exit-code -- src test
+      - name: Build (API)
+        working-directory: api
+        run: npm run build
+
+  e2e:
+    name: End-to-end
+    needs: checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: api/package-lock.json
+      - name: Install (API, for the migrations and the test helpers)
+        working-directory: api
+        run: npm ci
+      - name: Local environment (.env.docker)
+        run: node scripts/docker/env.mjs
+      - name: Database and file storage
+        run: |
+          docker compose up -d db storage storage-buckets
+          for _ in $(seq 30); do docker compose exec -T db pg_isready -U kachabity && break; sleep 2; done
+      - name: Schema (baseline + migrations)
+        working-directory: api
+        env:
+          DATABASE_URL: postgresql://kachabity:kachabity-local@127.0.0.1:5433/kachabity
+        run: node scripts/migrate.mjs
+      - name: Build and start the API and the site
+        env:
+          # Newer Compose builds through buildx bake, which refuses the site build's network: host.
+          COMPOSE_BAKE: "false"
+        run: |
+          docker compose up -d --build
+          for _ in $(seq 60); do curl -fs http://localhost:4000/api/health >/dev/null && curl -fs -o /dev/null http://localhost:3000/ar && break; sleep 5; done
+          for _ in $(seq 30); do [ "$(docker inspect -f '{{.State.Status}}' kachabity-storage-buckets-1)" = exited ] && break; sleep 2; done
+          docker compose ps -a
+      - name: End-to-end suites
+        working-directory: api
+        run: npm run test:e2e
+      - name: Logs on failure
+        if: failure()
+        run: docker compose logs --tail 200 api web storage-buckets

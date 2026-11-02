@@ -2,7 +2,7 @@
 
 import { cartLineKey, useCart } from "@/lib/cart-context";
 import { useLanguage } from "@/lib/language-context";
-import { calculateShipping } from "@/lib/shipping";
+import { storefront } from "@/lib/storefront-api";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import CartItem from "@/components/cart/CartItem";
@@ -72,8 +72,8 @@ export default function CartPage() {
         async function fetchShipping() {
 
             try {
-                const { cost } = await calculateShipping('TN', subtotal, 'standard');
-                setShippingCost(cost);
+                const quote = await storefront<{ shipping_cost: number }>(`checkout-quote?country=Tunisia&subtotal=${subtotal}`);
+                setShippingCost(quote.shipping_cost);
                 setIsLoadingShipping(true)
             } catch (error) {
                 console.error('Error calculating shipping:', error);

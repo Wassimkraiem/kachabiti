@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
-import supabase from '@/lib/supabaseClient';
+import { getCategories } from "@/lib/categories-cache";
 import Link from "next/link";
 
 interface Category {
@@ -11,7 +11,7 @@ interface Category {
     name_ar?: string;
     name_fr?: string;
     slug: string;
-    image_url: string;
+    image_url?: string;
     sort_order: number;
     is_featured?: boolean;
 }
@@ -67,29 +67,7 @@ export default function ProductGrid({ locale = 'en', initialCategories }: Produc
     useEffect(() => {
         async function fetchCategories() {
             try {
-                // Try to fetch with translation fields first
-                let { data, error } = await supabase
-                    .from('categories')
-                    .select('id, name, name_ar, name_fr, slug, image_url, sort_order, is_featured')
-                    .eq('is_featured', true)
-                    .order('sort_order', { ascending: true });
-
-                // If error, try without translation fields (fallback for databases without these columns)
-                if (error) {
-                    const fallbackResult = await supabase
-                        .from('categories')
-                        .select('id, name, slug, image_url, sort_order, is_featured')
-                        .eq('is_featured', true)
-                        .order('sort_order', { ascending: true });
-
-                    if (fallbackResult.error) {
-                        throw fallbackResult.error;
-                    }
-                    data = fallbackResult.data;
-                    error = null;
-                }
-
-                if (error) throw error;
+                const data = (await getCategories()).filter((category) => category.is_featured);
 
                 if (data) {
                     setCategories(data);

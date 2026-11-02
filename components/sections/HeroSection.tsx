@@ -64,7 +64,7 @@ function getHeroText(text: string | undefined, textAr: string | undefined, textF
     if (!text) return '';
 
     // PRIORITY 1: Database translation columns (RECOMMENDED APPROACH)
-    // These are managed in Supabase and allow for custom, language-specific content
+    // These are edited in the admin and allow for custom, language-specific content
     if (locale === 'ar' && textAr) return textAr;
     if (locale === 'fr' && textFr) return textFr;
 

@@ -1,0 +1,9 @@
+# The build context is the repository root; send only what the API needs.
+*
+!lib/**
+!api/**
+!supabase/migrations/**
+!db/baseline.sql
+api/node_modules
+api/dist
+api/.env

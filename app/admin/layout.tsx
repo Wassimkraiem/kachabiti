@@ -50,7 +50,6 @@ import {
     ControlOutlined,
 } from "@ant-design/icons";
 import { antdTheme } from "@/lib/antd-config";
-import { createAdminBrowserClient } from "@/lib/supabase-browser";
 import { AdminRoleProvider, useAdminRole } from "@/lib/admin-role-context";
 import type { Permission } from "@/lib/admin-auth";
 import { AdminI18nProvider, msg, useAdminT } from "@/lib/admin-i18n";
@@ -89,7 +88,10 @@ const menuItems: MenuItem[] = [
         type: "group",
         key: "g-owner",
         label: msg("Owner"),
-        children: [{ key: "/admin/overview", icon: <FundOutlined />, label: msg("Business overview") }],
+        children: [
+            { key: "/admin/overview", icon: <FundOutlined />, label: msg("Business overview") },
+            { key: "/admin/colissimo-account", icon: <CarOutlined />, label: msg("Colissimo account") },
+        ],
     },
     {
         type: "group",
@@ -205,6 +207,7 @@ installAdminFetchCache();
 // a permission, "admin" (owners and admins) or "owner".
 const MENU_PERMISSIONS: Record<string, Permission | "admin" | "owner"> = {
     "/admin/overview": "owner",
+    "/admin/colissimo-account": "owner",
     products: "products",
     categories: "products",
     "/admin/variants": "products",
@@ -309,7 +312,11 @@ function AdminConfig({ children }: { children: React.ReactNode }) {
                             .admin-root .ant-card-extra { margin-inline-start: 0; }
                             .admin-root h1.ant-typography, .admin-root h2.ant-typography { font-size: 22px; }
                             .admin-root .ant-statistic-content { font-size: 20px; }
-                            .admin-root .ant-picker-dropdown .ant-picker-panels { flex-direction: column; }
+                            /* Pickers open outside .admin-root (in <body>): show a range's two months stacked. */
+                            .ant-picker-dropdown .ant-picker-panels { flex-direction: column; }
+                            /* Filter bars (className="admin-filters"): two per row, search and date range on their own. */
+                            .admin-root .admin-filters > * { flex: 1 1 140px !important; width: auto !important; min-width: 0 !important; }
+                            .admin-root .admin-filters > .ant-input-affix-wrapper, .admin-root .admin-filters > .ant-picker-range, .admin-root .admin-filters > div:not(.ant-select) { flex-basis: 100% !important; }
                         }
                         /* Phones: table rows become cards, each cell labelled with its column (see mobile-table-labels.ts). */
                         .admin-mobile .ant-table-content, .admin-mobile .ant-table-body { overflow: visible !important; }
@@ -415,7 +422,7 @@ function AdminShell({ children }: { children: React.ReactNode }) {
     };
 
     const handleSignOut = async () => {
-        await createAdminBrowserClient().auth.signOut();
+        await fetch("/api/auth/sign-out", { method: "POST" }).catch(() => undefined);
         router.replace("/admin/login");
         router.refresh();
     };

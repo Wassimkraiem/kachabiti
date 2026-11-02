@@ -1,0 +1,3 @@
+# The NestJS app runs on the AWS server (docs/DEPLOY.md). Vercel would turn every file in a root
+# api/ folder into its own serverless function, past the Hobby plan's limit of 12.
+/api

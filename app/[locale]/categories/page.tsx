@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import supabase from "@/lib/supabaseClient";
+import { getCategories } from "@/lib/categories-cache";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 
 interface Category {
@@ -87,32 +87,10 @@ export default function CategoriesPage() {
                 const from = (currentPage - 1) * ITEMS_PER_PAGE;
                 const to = from + ITEMS_PER_PAGE - 1;
 
-                // Try to fetch with translation fields first
-                let { data, error, count } = await supabase
-                    .from('categories')
-                    .select('id, name, name_ar, name_fr, slug, image_url, sort_order, is_featured', { count: 'exact' })
-                    .is('parent_id', null) // top-level only; sub-categories are shown on their parent's page
-                    .order('sort_order', { ascending: true })
-                    .range(from, to);
-
-                // If error, try without translation fields (fallback for databases without these columns)
-                if (error) {
-                    const fallbackResult = await supabase
-                        .from('categories')
-                        .select('id, name, slug, image_url, sort_order, is_featured', { count: 'exact' })
-                        .is('parent_id', null)
-                        .order('sort_order', { ascending: true })
-                        .range(from, to);
-
-                    if (fallbackResult.error) {
-                        throw fallbackResult.error;
-                    }
-                    data = fallbackResult.data;
-                    count = fallbackResult.count;
-                    error = null;
-                }
-
-                if (error) throw error;
+                // Top-level only; sub-categories are shown on their parent's page.
+                const all = (await getCategories()).filter((category) => !category.parent_id);
+                const data = all.slice(from, to + 1);
+                const count = all.length;
 
                 if (data) {
                     setCategories(data);

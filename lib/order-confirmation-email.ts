@@ -1,12 +1,13 @@
 import nodemailer from 'nodemailer';
-import { Order, OrderItem } from './orders';
+import type { Order, OrderItem } from './order-types';
 import { headerConfig } from './config';
-import { reportError } from './report-error';
 
 interface EmailData {
     order: Order;
     orderItems: OrderItem[];
     customerName: string;
+    /** Reports a failure (Sentry); shared with the NestJS API, so the caller supplies it. */
+    onError?: (error: unknown) => void;
 }
 
 export async function sendOrderConfirmationEmail(data: EmailData) {
@@ -17,7 +18,7 @@ export async function sendOrderConfirmationEmail(data: EmailData) {
         if (!process.env.GMAIL_USER || !process.env.GMAIL_APP_PASSWORD) {
             const errorMsg = 'Gmail credentials are not configured in environment variables';
             console.error(errorMsg);
-            reportError(new Error(errorMsg), 'order-email', { orderNumber: order.order_number });
+            data.onError?.(new Error(errorMsg));
             return {
                 success: false,
                 error: {
@@ -28,7 +29,9 @@ export async function sendOrderConfirmationEmail(data: EmailData) {
         }
 
         const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            ...(process.env.SMTP_HOST
+                ? { host: process.env.SMTP_HOST, port: 465, secure: true }
+                : { service: 'gmail' }),
             auth: {
                 user: process.env.GMAIL_USER,
                 pass: process.env.GMAIL_APP_PASSWORD,
@@ -50,7 +53,7 @@ export async function sendOrderConfirmationEmail(data: EmailData) {
         return { success: true, data: emailResult };
     } catch (error: unknown) {
         console.error('Failed to send order confirmation email:', error);
-        reportError(error, 'order-email', { orderNumber: order.order_number });
+        data.onError?.(error);
         const errorMessage = error instanceof Error ? error.message : 'Unknown error occurred';
         const errorDetails = error instanceof Error ? error.stack : String(error);
         return {

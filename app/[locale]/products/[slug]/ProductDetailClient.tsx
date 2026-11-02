@@ -7,16 +7,17 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
-import supabase from "@/lib/supabaseClient";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import AddToCartButton from "@/components/cart/AddToCartButton";
 import { FormTextarea } from "@/components/forms";
 import ImageLightbox from "@/components/ui/ImageLightbox";
 import { getProductName, getProductDescription } from "@/lib/utils/product-utils";
 import { loadProductDetail, type ProductDetailData } from "@/lib/product-detail";
+import { storefront } from "@/lib/storefront-api";
+import { getCategories } from "@/lib/categories-cache";
 import toast from "react-hot-toast";
 import { headerConfig, SHOW_RATINGS } from "@/lib/config";
-import { authHref, customerName, useCustomer } from "@/lib/customer-auth";
+import { accountApi, authHref, customerName, useCustomer } from "@/lib/customer-auth";
 import { isRTL } from "@/lib/language-utils";
 import { reemKufi } from "@/lib/fonts";
 
@@ -368,17 +369,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                 // Show the product now; reviews fill in below (they change often, so they aren't cached).
                 setLoading(false);
                 if (!SHOW_RATINGS) return;
-                const { data: reviewsData } = await supabase
-                    .from('reviews')
-                    .select(`
-                        *,
-                        users (
-                            name,
-                            avatar_url
-                        )
-                    `)
-                    .eq('product_id', productWithVariants.id)
-                    .order('created_at', { ascending: false });
+                const reviewsData = await storefront<any[]>(`reviews?product_id=${productWithVariants.id}`);
                 if (reviewsData) setReviews(reviewsData);
             } catch (error) {
                 console.error('Error fetching product:', error);
@@ -396,29 +387,8 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
         async function fetchCategoryName() {
             if (categorySlug) {
                 try {
-                    // Try to fetch with translation fields first
-                    let { data, error } = await supabase
-                        .from('categories')
-                        .select('name, name_ar, name_fr')
-                        .eq('slug', categorySlug)
-                        .single();
-
-                    // If error, try without translation fields (fallback)
-                    if (error) {
-                        const fallbackResult = await supabase
-                            .from('categories')
-                            .select('name')
-                            .eq('slug', categorySlug)
-                            .single();
-
-                        if (fallbackResult.error) {
-                            throw fallbackResult.error;
-                        }
-                        data = fallbackResult.data;
-                        error = null;
-                    }
-
-                    if (data && !error) {
+                    const data = (await getCategories()).find((category) => category.slug === categorySlug);
+                    if (data) {
                         setCategoryName(getCategoryName(data, locale));
                     }
                 } catch (error) {
@@ -449,30 +419,11 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
 
         setSubmittingComment(true);
         try {
-            const { error } = await supabase
-                .from('reviews')
-                .insert({
-                    product_id: product.id,
-                    user_id: customer.id,
-                    user_name: customerName(customer),
-                    rating,
-                    comment: (data.comment || '').trim(),
-                });
-
-            if (error) throw error;
+            // Posted under the account's own name (NestJS takes the user from the session).
+            await accountApi('account/reviews', { body: { product_id: product.id, rating, comment: (data.comment || '').trim() } });
 
             // Refresh reviews
-            const { data: reviewsData } = await supabase
-                .from('reviews')
-                .select(`
-                    *,
-                    users (
-                        name,
-                        avatar_url
-                    )
-                `)
-                .eq('product_id', product.id)
-                .order('created_at', { ascending: false });
+            const reviewsData = await storefront<any[]>(`reviews?product_id=${product.id}`);
 
             if (reviewsData) {
                 setReviews(reviewsData);

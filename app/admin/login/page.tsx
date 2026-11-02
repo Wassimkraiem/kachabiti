@@ -1,9 +1,9 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Alert, Button, Card, Form, Input, Typography } from "antd";
-import { createAdminBrowserClient } from "@/lib/supabase-browser";
+import { accountApi, type Customer } from "@/lib/customer-auth";
 import { useAdminT } from "@/lib/admin-i18n";
 import AdminLanguageSwitcher from "@/components/admin/AdminLanguageSwitcher";
 
@@ -11,8 +11,8 @@ const { Title, Text } = Typography;
 
 type LoginValues = { email: string; password: string };
 
-// Role of the signed-in user as middleware sees it, or null. Retried once because a slow
-// connection to Supabase can make a single check fail.
+// Role of the signed-in user as middleware sees it, or null. Retried once in case a
+// single check fails on a slow connection.
 async function fetchBackOfficeRole(): Promise<{ data?: { role?: string } } | null> {
     for (let attempt = 0; attempt < 2; attempt++) {
         const res = await fetch("/api/admin/me").catch(() => null);
@@ -30,20 +30,18 @@ function AdminLoginForm() {
     const { t } = useAdminT();
     const router = useRouter();
     const searchParams = useSearchParams();
-    const supabase = useMemo(() => createAdminBrowserClient(), []);
     const nextPath = safeNextPath(searchParams.get("next"));
 
     const [submitting, setSubmitting] = useState(false);
     const [error, setError] = useState<string | null>(null);
     const [signedInEmail, setSignedInEmail] = useState<string | null>(null);
 
-    // Landing here while signed in usually means middleware couldn't verify the session on
-    // that request (e.g. a slow connection to Supabase). Ask the server before calling the
-    // account "not allowed", and continue if it does have back-office access.
+    // Landing here while signed in means the account has no back-office access (middleware
+    // sends staff on to the dashboard). Ask the server before saying so.
     useEffect(() => {
         let cancelled = false;
-        supabase.auth.getUser().then(async ({ data }: { data: { user: { email?: string } | null } }) => {
-            const email = data.user?.email ?? null;
+        accountApi<Customer | null>("auth/me").catch(() => null).then(async (user) => {
+            const email = user?.email ?? null;
             if (!email || cancelled) return;
             const me = await fetchBackOfficeRole();
             if (cancelled) return;
@@ -57,14 +55,15 @@ function AdminLoginForm() {
         return () => {
             cancelled = true;
         };
-    }, [supabase, router, nextPath]);
+    }, [router, nextPath]);
 
     const handleSubmit = async ({ email, password }: LoginValues) => {
         setSubmitting(true);
         setError(null);
-        const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
-        if (signInError) {
-            setError(signInError.message);
+        try {
+            await accountApi("auth/sign-in", { body: { email, password, locale: "en" } });
+        } catch (signInError) {
+            setError(t((signInError as Error).message));
             setSubmitting(false);
             return;
         }
@@ -80,7 +79,7 @@ function AdminLoginForm() {
     };
 
     const handleSignOut = async () => {
-        await supabase.auth.signOut();
+        await accountApi("auth/sign-out", { body: {} }).catch(() => undefined);
         setSignedInEmail(null);
     };
 

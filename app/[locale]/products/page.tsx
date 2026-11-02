@@ -2,17 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams, useParams, useRouter } from "next/navigation";
-import supabase from "@/lib/supabaseClient";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ProductListCard from "@/components/products/ProductListCard";
-import { EMBEDDED_DISCOUNTS, embeddedDiscountPercent, type ProductDiscount } from "@/lib/product-discounts";
 import { getDescendantCategoryIds } from "@/lib/utils/product-utils";
 import { getCategories } from "@/lib/categories-cache";
 import { useQuickAdd } from "@/lib/quick-add";
 import { toggleFavorite, getUserFavorites } from "@/lib/favorites";
-import { goToLogin } from "@/lib/customer-auth";
+import { getCustomer, goToLogin } from "@/lib/customer-auth";
 import { isRTL } from "@/lib/language-utils";
-import { searchProductIds } from "@/lib/product-search";
+import { storefront } from "@/lib/storefront-api";
 
 interface Product {
     id: string;
@@ -214,12 +212,12 @@ export default function ProductsPage() {
     // Fetch authenticated user and their favorites
     async function fetchUserAndFavorites() {
         try {
-            const { data } = await supabase.auth.getUser();
-            if (data.user) {
-                setUserId(data.user.id);
+            const user = await getCustomer();
+            if (user) {
+                setUserId(user.id);
 
                 // Fetch user's favorites
-                const { favorites } = await getUserFavorites(data.user.id);
+                const { favorites } = await getUserFavorites(user.id);
                 const favoriteIds = new Set(favorites.map(fav => fav.product_id));
                 setWishlist(favoriteIds);
             }
@@ -257,15 +255,8 @@ export default function ProductsPage() {
 
     async function fetchColors() {
         try {
-            const { data, error } = await supabase
-                .from('colors')
-                .select('*')
-                .order('sort_order', { ascending: true });
-
-            if (error) throw error;
-            if (data) {
-                setAvailableColors(data);
-            }
+            const { data } = await (await fetch('/api/colors')).json();
+            setAvailableColors(data ?? []);
         } catch (error) {
             console.error('Error fetching colors:', error);
             // Fallback to empty array if colors table doesn't exist
@@ -275,16 +266,8 @@ export default function ProductsPage() {
 
     async function fetchSizes() {
         try {
-            const { data, error } = await supabase
-                .from('sizes')
-                .select('*')
-                .is('deleted_at', null)
-                .order('sort_order', { ascending: true });
-
-            if (error) throw error;
-            if (data) {
-                setAvailableSizes(data);
-            }
+            const { data } = await (await fetch('/api/sizes')).json();
+            setAvailableSizes(data ?? []);
         } catch (error) {
             console.error('Error fetching sizes:', error);
             // Fallback to empty array if sizes table doesn't exist
@@ -296,197 +279,38 @@ export default function ProductsPage() {
         try {
             setProductsLoading(true);
 
-            // If promo filter is active, get product IDs with active discounts first
-            let promoProductIds: string[] | null = null;
-            if (promoOnly) {
-                const { data: discountsData } = await supabase
-                    .from('product_discounts')
-                    .select('product_id')
-                    .eq('active', true);
-
-                if (discountsData && discountsData.length > 0) {
-                    promoProductIds = discountsData.map((d: { product_id: string }) => d.product_id);
-                } else {
-                    // No active discounts, return empty result
-                    setProducts([]);
-                    setTotalCount(0);
-                    setProductsLoading(false);
-                    setLoading(false);
-                    return;
-                }
-            }
-
-            // Build query with filters applied at database level
-            let query = supabase
-                .from('products')
-                .select(`
-                    *,
-                    product_images (
-                        id,
-                        image_url,
-                        alt_text,
-                        is_main,
-                        position
-                    ),
-                    ${EMBEDDED_DISCOUNTS}
-                `, { count: 'exact' })
-                .is('deleted_at', null)
-                .eq('status', 'active')
-
-
-            // Search: ranked matches from Postgres (names, descriptions, categories in every
-            // language, typo-tolerant); the other filters below narrow them further.
-            let searchRanks: Map<string, number> | null = null;
-            if (search) {
-                const hits = await searchProductIds(search);
-                if (hits.length === 0) {
-                    setProducts([]);
-                    setTotalCount(0);
-                    setProductsLoading(false);
-                    setLoading(false);
-                    return;
-                }
-                searchRanks = new Map(hits.map((hit) => [hit.id, hit.rank]));
-                query = query.in('id', hits.map((hit) => hit.id));
-            }
-
-            // Apply promo filter (products with active discounts)
-            if (promoOnly && promoProductIds) {
-                query = query.in('id', promoProductIds);
-            }
-
-            // Apply price range filter
-            if (priceRange[0] > 0) {
-                query = query.gte('base_price', priceRange[0]);
-            }
-            if (priceRange[1] < 1000) {
-                query = query.lte('base_price', priceRange[1]);
-            }
-
-            // Apply category filter
+            // Filters run in the database (GET /api/storefront/products); a search without a sort
+            // comes back ranked by relevance.
+            const params = new URLSearchParams({ page: String(currentPage), page_size: String(ITEMS_PER_PAGE) });
+            if (search) params.set('search', search);
+            if (promoOnly) params.set('promo', '1');
+            if (priceRange[0] > 0) params.set('price_min', String(priceRange[0]));
+            if (priceRange[1] < 1000) params.set('price_max', String(priceRange[1]));
+            if (sortParam) params.set('sort', sortParam);
             if (selectedCategoryIds.size > 0) {
                 // A selected category also matches products in its sub-categories.
                 const ids = new Set<string>();
                 selectedCategoryIds.forEach((id) => getDescendantCategoryIds(id, categories).forEach((d) => ids.add(d)));
-                query = query.in('category_id', Array.from(ids));
+                params.set('category_ids', Array.from(ids).join(','));
             }
-
-            // Apply size and color filters together
-            // Filter products that have variants matching the selected sizes and/or colors
-            if (selectedSizes.size > 0 || selectedColors.size > 0) {
-                let variantQuery = supabase
-                    .from('product_variants')
-                    .select('product_id')
-                    .is('deleted_at', null);
-
-                // Apply size filter - map size names to size IDs
-                if (selectedSizes.size > 0) {
-                    const selectedSizeNames = Array.from(selectedSizes);
-                    // Map size names (like "S", "M", "L") to size IDs
-                    // Check code first, then name, then display_name
-                    const sizeIds = availableSizes
-                        .filter(size => {
-                            const sizeCode = size.code?.toUpperCase();
-                            const sizeName = size.name?.toUpperCase();
-                            const sizeDisplayName = size.display_name?.toUpperCase();
-                            return selectedSizeNames.some(selectedSize => {
-                                const upperSelected = selectedSize.toUpperCase();
-                                return sizeCode === upperSelected ||
-                                    sizeName === upperSelected ||
-                                    sizeDisplayName === upperSelected;
-                            });
-                        })
-                        .map(size => size.id);
-
-                    if (sizeIds.length > 0) {
-                        variantQuery = variantQuery.in('size_id', sizeIds);
-                    } else {
-                        // If no matching sizes found and sizes table exists, return empty result
-                        // Otherwise, if sizes table doesn't have matching sizes, skip size filtering
-                        if (availableSizes.length > 0) {
-                            // Sizes table exists but no matches, return empty
-                            setProducts([]);
-                            setTotalCount(0);
-                            setProductsLoading(false);
-                            setLoading(false);
-                            return;
-                        }
-                        // If sizes table is empty, continue without size filtering
-                    }
-                }
-
-                // Apply color filter
-                if (selectedColors.size > 0) {
-                    const colorsArray = Array.from(selectedColors);
-                    variantQuery = variantQuery.in('color_id', colorsArray);
-                }
-
-                const { data: matchingVariants, error: variantError } = await variantQuery;
-
-                if (variantError) {
-                    console.error('Error fetching variants:', variantError);
-                    // Don't completely fail - just log and continue without variant filtering
-                    // This allows products without variants to still show
-                    if (variantError.message?.includes('relation') || variantError.message?.includes('column')) {
-                        console.warn('Variant filtering skipped due to schema issue:', variantError.message);
-                    } else {
-                        setProducts([]);
-                        setTotalCount(0);
-                        setProductsLoading(false);
-                        setLoading(false);
-                        return;
-                    }
-                } else if (matchingVariants && matchingVariants.length > 0) {
-                    const productIds = [...new Set(matchingVariants.map((v: { product_id: string }) => v.product_id))];
-                    query = query.in('id', productIds);
-                } else if (selectedSizes.size > 0 || selectedColors.size > 0) {
-                    // No products match the variant filters, return empty result
+            if (selectedSizes.size > 0) {
+                // Size buttons carry names ("S", "M"…): match them to the sizes' code, name or display name.
+                const wanted = Array.from(selectedSizes).map((size) => size.toUpperCase());
+                const sizeIds = availableSizes
+                    .filter((size) => [size.code, size.name, size.display_name].some((v) => v && wanted.includes(v.toUpperCase())))
+                    .map((size) => size.id);
+                if (sizeIds.length === 0 && availableSizes.length > 0) {
                     setProducts([]);
                     setTotalCount(0);
-                    setProductsLoading(false);
-                    setLoading(false);
                     return;
                 }
+                if (sizeIds.length) params.set('size_ids', sizeIds.join(','));
             }
+            if (selectedColors.size > 0) params.set('color_ids', Array.from(selectedColors).join(','));
 
-            // Apply sort options
-            if (sortParam === 'new') {
-                const newArrivalThreshold = new Date();
-                newArrivalThreshold.setDate(newArrivalThreshold.getDate() - 30);
-                query = query.gte('created_at', newArrivalThreshold.toISOString());
-                query = query.order('created_at', { ascending: false });
-            } else if (sortParam === 'popular') {
-                query = query
-                    .order('sold_count', { ascending: false })
-                    .order('created_at', { ascending: false });
-            } else {
-                query = query.order('created_at', { ascending: false });
-            }
-
-            // A search without an explicit sort is shown most relevant first: the matches (at
-            // most a few hundred) are fetched at once, ranked, then paginated here.
-            const from = (currentPage - 1) * ITEMS_PER_PAGE;
-            const to = from + ITEMS_PER_PAGE - 1;
-            const byRelevance = searchRanks !== null && !sortParam;
-            if (!byRelevance) query = query.range(from, to);
-
-            // Execute query
-            const { data, error, count } = await query;
-
-            if (error) throw error;
-            if (data) {
-                let rows = data as unknown as (Product & { product_discounts?: ProductDiscount[] })[];
-                if (byRelevance && searchRanks) {
-                    const ranks = searchRanks;
-                    rows = [...rows].sort((a, b) => (ranks.get(b.id) ?? 0) - (ranks.get(a.id) ?? 0)).slice(from, to + 1);
-                }
-                // Discounts come embedded in the same query (no second round trip).
-                setProducts(rows.map((p) => ({
-                    ...p,
-                    discount_percent: embeddedDiscountPercent(p),
-                })));
-                setTotalCount(count || 0);
-            }
+            const { rows, total } = await storefront<{ rows: Product[]; total: number }>(`products?${params}`);
+            setProducts(rows);
+            setTotalCount(total);
         } catch (error) {
             console.error('Error fetching products:', error);
         } finally {
@@ -529,7 +353,7 @@ export default function ProductsPage() {
 
         // Persist to database
         try {
-            const { isFavorited, error } = await toggleFavorite(userId, productId);
+            const { isFavorited, error } = await toggleFavorite(userId, productId, wishlist.has(productId));
 
             if (error) {
                 console.error("Error toggling favorite:", error);

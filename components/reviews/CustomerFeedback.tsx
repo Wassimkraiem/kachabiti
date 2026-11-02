@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import supabase from '@/lib/supabaseClient';
+import { storefront } from '@/lib/storefront-api';
 import ReviewCard from './ReviewCard';
 import ServiceHighlightCard from '../services/ServiceHighlightCard';
 import SectionHeader from '../ui/SectionHeader';
@@ -66,20 +66,7 @@ export default function CustomerFeedback({ initialReviews }: { initialReviews?: 
     useEffect(() => {
         async function fetchReviews() {
             try {
-                const { data, error } = await supabase
-                    .from('reviews')
-                    .select(`
-                        *,
-                        users:user_id (
-                            id,
-                            name,
-                            avatar_url
-                        )
-                    `)
-                    .order('updated_at', { ascending: false })
-                    .limit(MAX_REVIEWS);
-
-                if (error) throw error;
+                const data = await storefront<any[]>(`latest-reviews?limit=${MAX_REVIEWS}`);
                 if (data) {
                     setReviews(data);
                 }
