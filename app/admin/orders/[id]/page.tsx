@@ -23,6 +23,7 @@ import { ORDER_ITEM_IMAGE_FALLBACK, ORDER_STATUS_OPTIONS, errorCode, validateOrd
 import type { ColumnsType } from "antd/es/table";
 import {
     ArrowLeftOutlined,
+    EditOutlined,
     SaveOutlined,
 } from "@ant-design/icons";
 import { DATE_LOCALES, useAdminT } from "@/lib/admin-i18n";
@@ -30,11 +31,14 @@ import OrderDeliveryCard from "@/components/admin/delivery/OrderDeliveryCard";
 import { reportParcelCancellation } from "@/components/admin/delivery/delivery-api";
 import OrderPipelineCard, { type PipelineOrder } from "@/components/admin/erp/OrderPipelineCard";
 import OrderPaymentsCard from "@/components/admin/erp/OrderPaymentsCard";
+import EditOrderModal from "@/components/admin/erp/EditOrderModal";
 
 const { Title, Text } = Typography;
 
 interface OrderItem {
     id: string;
+    product_id?: string | null;
+    variant_id?: string | null;
     product_name: string;
     variant_label?: string | null;
     quantity: number;
@@ -80,6 +84,7 @@ export default function OrderDetailPage() {
     const [loading, setLoading] = useState(true);
     const [updating, setUpdating] = useState(false);
     const [status, setStatus] = useState<string>("");
+    const [editing, setEditing] = useState(false);
 
     // `quiet` reloads in place (after the delivery card changed the order) without the page spinner.
     const fetchOrder = useCallback(async (quiet = false) => {
@@ -262,13 +267,19 @@ export default function OrderDetailPage() {
                         {t("Placed on {date}", { date: formatDate(order.created_at) })}
                     </Text>
                 </div>
-                <Button
-                    icon={<ArrowLeftOutlined />}
-                    onClick={() => router.push("/admin/orders")}
-                >
-                    {t("Back to Orders")}
-                </Button>
+                <Space wrap>
+                    {(order.status === "pending" || order.status === "confirmed") && (
+                        <Button icon={<EditOutlined />} onClick={() => setEditing(true)}>{t("Edit order")}</Button>
+                    )}
+                    <Button
+                        icon={<ArrowLeftOutlined />}
+                        onClick={() => router.push("/admin/orders")}
+                    >
+                        {t("Back to Orders")}
+                    </Button>
+                </Space>
             </div>
+            <EditOrderModal order={order} open={editing} onClose={() => setEditing(false)} onSaved={() => fetchOrder(true)} />
 
             <Space orientation="vertical" size="large" style={{ width: "100%" }}>
                 {/* Status Update Card */}

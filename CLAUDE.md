@@ -13,6 +13,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - Local copy in Docker (docs/DOCKER.md): `npm run docker:env`, `docker compose up -d db storage`, optionally `npm run docker:import` (copies a database read-only, e.g. the server's), then `npm run docker:up` (web on :3000, NestJS on :4000, Postgres on :5433, files on :9000).
 - `cd api && DATABASE_URL=… node scripts/migrate.mjs [--dry-run]`: apply the migrations in `supabase/migrations` the database doesn't have yet (recorded in `supabase_migrations.schema_migrations`).
 - Production (docs/DEPLOY.md): Terraform in `infra/terraform/` (one AWS EC2 server running the API, Postgres and Caddy; S3 buckets; disk snapshots; a budget alert), server files in `deploy/` (`docker-compose.prod.yml`, `deploy.sh`, `backup.sh`), GitHub Actions in `.github/workflows/` (`ci.yml` on PRs and pushes to `main`; `deploy.yml` on push to `kachabiti-nest`: CI, then the API only when it changed, with no downtime). Vercel skips site builds for backend-only pushes (`vercel.json`). An empty database is built from `db/baseline.sql` by `api/scripts/migrate.mjs`.
+- `DATABASE_URL=… node scripts/import/old-colissimo.mjs <livres_payes.csv> <colis_rows.csv> [--dry-run] [--account=bank|cash]`: import the Colissimo parcels of the tools used before this system (as `COL-` orders, customers and payouts, through `import_colissimo_history`); re-runs skip what is already there.
 - `node scripts/db/move-database.mjs`: copy a whole database to another Postgres (`SOURCE_DATABASE_URL` → `TARGET_DATABASE_URL`) and compare row counts; used for the move off Supabase and for backups/restores.
 - `npx tsc --noEmit`: type-check. **Run this yourself**: `next.config.ts` sets `ignoreBuildErrors` and `ignoreDuringBuilds`, so `npm run build` succeeds even when there are type or lint errors.
 
@@ -71,6 +72,7 @@ NestJS connects to Postgres as the owner of the tables (`api/src/db/database.ts`
 - `record_stock_movements` (all movement types, counts across locations, tracking flag)
 - `save_landing_page` (Admin → Landing page: a section's picks, `landing_config` and featured categories)
 - `delete_variant` (variant + its photos)
+- `edit_order` (an order still to confirm or confirmed: customer, amounts, notes and, optionally, its lines; `PATCH /api/sales/orders` action `edit`, the order page's "Edit order")
 - `purge_deleted` (permanent deletes, see below)
 
 If any step fails, nothing is written. Bulk deletes send `?ids=a,b` and run one statement. When you add a write that touches several rows or tables together, add or extend such a function rather than chaining client calls.

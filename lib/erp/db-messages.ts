@@ -14,6 +14,7 @@ export const DB_MESSAGES: [string, string, number][] = [
     ['session_not_open', 'This till session is closed. Open a new one.', 409],
     ['payment_short', 'The payments do not cover the total.', 409],
     ['order_items_required', 'Add at least one product.', 400],
+    ['order_not_editable', 'Only orders still to confirm or confirmed can be edited. Once validated, edit the parcel from the delivery card.', 409],
     ['purchase_order_not_open', 'Goods can only be received on an ordered purchase order.', 409],
     ['purchase_order_closed', 'This purchase order is received or cancelled; its lines can no longer change.', 409],
     ['purchase_order_not_found', 'This purchase order no longer exists.', 404],

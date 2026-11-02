@@ -1020,4 +1020,11 @@ export const erpEntries: [en: string, fr: string, ar: string][] = [
     ["Delivered per day", "Livrés par jour", "المسلّمة حسب اليوم"],
     ["Parcels of the period delivered each day, with the cash Colissimo collected for them. Delivery rate: {rate}%", "Colis de la période livrés chaque jour, avec l'argent encaissé par Colissimo. Taux de livraison : {rate} %", "طرود الفترة المسلّمة كل يوم، مع المبالغ التي حصّلتها Colissimo. نسبة التسليم: {rate}%"],
     ["Delivered orders", "Commandes livrées", "الطلبات المسلّمة"],
+    // Editing an order, customer filters
+    ["Edit order", "Modifier la commande", "تعديل الطلب"],
+    ["Change the products", "Modifier les produits", "تغيير المنتجات"],
+    ["Products are re-priced from the catalog.", "Les produits sont recalculés au prix du catalogue.", "تُسعَّر المنتجات من جديد حسب الكتالوج."],
+    ["The products keep the price they were ordered at.", "Les produits gardent le prix de la commande.", "تحتفظ المنتجات بسعر الطلب."],
+    ["Only orders still to confirm or confirmed can be edited. Once validated, edit the parcel from the delivery card.", "Seules les commandes à confirmer ou confirmées peuvent être modifiées. Une fois validée, modifiez le colis depuis la carte livraison.", "لا يمكن تعديل إلا الطلبات قيد التأكيد أو المؤكدة. بعد التصديق، عدّل الطرد من بطاقة التوصيل."],
+    ["Customer since", "Client depuis", "عميل منذ"],
 ];

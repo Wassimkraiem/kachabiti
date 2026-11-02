@@ -92,6 +92,16 @@ const patchSchema = z.discriminatedUnion('action', [
     channel: z.enum(CHANNELS),
     campaign_id: zId.nullable(),
   }),
+  // Change an order still to confirm or confirmed: customer, products (omitted: kept), fee, discount, notes.
+  z.object({
+    action: z.literal('edit'),
+    id: zId,
+    customer: createSchema.shape.customer,
+    items: z.array(itemSchema).min(1).max(50).optional(),
+    shipping_cost: zMoney.optional(),
+    discount_amount: zMoney.default(0),
+    notes: z.string().trim().max(2000).optional(),
+  }),
 ]);
 
 async function erpSetting<T>(db: Database, key: string): Promise<T | null> {
@@ -160,35 +170,9 @@ export class SalesOrdersController {
     @Body(new Zod(createSchema)) body: z.infer<typeof createSchema>,
     @CurrentActor() actor: RequestActor,
   ) {
-    let lines;
-    try {
-      lines = await buildManualOrderLines(this.db, body.items);
-    } catch (error) {
-      if (error instanceof ManualLineError)
-        throw new ApiError(error.message, 422, 'INVALID_ITEMS');
-      throw error;
-    }
+    const lines = await this.lines(body.items);
     const subtotal = lines.reduce((sum, line) => sum + line.subtotal, 0);
-    if (body.discount_amount > subtotal)
-      throw new ApiError('The discount is larger than the products total.');
-    if (body.discount_amount > 0 && !isManager(actor)) {
-      const maxPercent = Number(
-        (await erpSetting<{ max_discount_percent?: number }>(this.db, 'pos'))
-          ?.max_discount_percent ?? 10,
-      );
-      if (body.discount_amount > (subtotal * maxPercent) / 100 + 0.0005) {
-        throw new ApiError(
-          `Discounts above ${maxPercent}% need an owner or admin.`,
-          403,
-          'DISCOUNT_LIMIT',
-        );
-      }
-    }
-    const shipping =
-      body.shipping_cost ??
-      (await calculateShipping(this.db, 'TN', subtotal - body.discount_amount))
-        .cost;
-    const total = Math.max(0, subtotal - body.discount_amount) + shipping;
+    const { shipping, total } = await this.amounts(subtotal, body, actor);
 
     const assignee =
       body.assigned_to === undefined ? actor.userId : body.assigned_to;
@@ -253,11 +237,92 @@ export class SalesOrdersController {
     };
   }
 
+  /** Catalog-priced lines for New order and edits. */
+  private async lines(items: z.infer<typeof itemSchema>[]) {
+    try {
+      return await buildManualOrderLines(this.db, items);
+    } catch (error) {
+      if (error instanceof ManualLineError)
+        throw new ApiError(error.message, 422, 'INVALID_ITEMS');
+      throw error;
+    }
+  }
+
+  /** Delivery fee and total; agents may discount up to the till's limit (managers: any). */
+  private async amounts(
+    subtotal: number,
+    body: { discount_amount: number; shipping_cost?: number },
+    actor: RequestActor,
+  ) {
+    if (body.discount_amount > subtotal)
+      throw new ApiError('The discount is larger than the products total.');
+    if (body.discount_amount > 0 && !isManager(actor)) {
+      const maxPercent = Number(
+        (await erpSetting<{ max_discount_percent?: number }>(this.db, 'pos'))
+          ?.max_discount_percent ?? 10,
+      );
+      if (body.discount_amount > (subtotal * maxPercent) / 100 + 0.0005) {
+        throw new ApiError(
+          `Discounts above ${maxPercent}% need an owner or admin.`,
+          403,
+          'DISCOUNT_LIMIT',
+        );
+      }
+    }
+    const shipping =
+      body.shipping_cost ??
+      (await calculateShipping(this.db, 'TN', subtotal - body.discount_amount))
+        .cost;
+    return {
+      shipping,
+      total: Math.max(0, subtotal - body.discount_amount) + shipping,
+    };
+  }
+
   @Patch()
   async patch(
     @Body(new Zod(patchSchema)) body: z.infer<typeof patchSchema>,
     @CurrentActor() actor: RequestActor,
   ) {
+    if (body.action === 'edit') {
+      const lines = body.items ? await this.lines(body.items) : null;
+      const current = await this.db
+        .selectFrom('orders')
+        .select('subtotal')
+        .where('id', '=', body.id)
+        .where('deleted_at', 'is', null)
+        .executeTakeFirst();
+      if (!current) throw new ApiError('Order not found', 404);
+      // Lines kept as they are keep the price they were sold at.
+      const subtotal = lines
+        ? lines.reduce((sum, line) => sum + line.subtotal, 0)
+        : Number(current.subtotal);
+      const { shipping, total } = await this.amounts(subtotal, body, actor);
+      return this.db.withActor(actor, (trx) =>
+        this.db.call(
+          'edit_order',
+          {
+            p_order_id: body.id,
+            p_order: {
+              customer_first_name: body.customer.first_name,
+              customer_last_name: body.customer.last_name,
+              customer_email: body.customer.email ?? '',
+              customer_phone: body.customer.phone,
+              shipping_address: body.customer.address,
+              shipping_city: body.customer.city,
+              shipping_state: body.customer.governorate,
+              order_notes: body.notes ?? '',
+              subtotal,
+              shipping_cost: shipping,
+              discount_amount: body.discount_amount,
+              total,
+            },
+            p_items: lines,
+          },
+          trx,
+        ),
+      );
+    }
     if (body.action === 'assign') {
       // Staff can take unassigned orders for themselves; handing orders to others is for managers.
       if (!isManager(actor) && body.user_id !== actor.userId) {

@@ -17,7 +17,7 @@ import {
 } from '@shared/erp/meta';
 import { CurrentActor, Public } from '../auth/decorators';
 import type { RequestActor } from '../auth/auth.guard';
-import { ApiError, isManager, params, Zod, zId } from '../common/api';
+import { ApiError, isManager, params, Zod, zDate, zId } from '../common/api';
 import { Database } from '../db/database';
 import { many, one } from '../db/embed';
 import { memberEmail } from '../sales/commerce';
@@ -154,6 +154,23 @@ export class CustomersController {
     else if (assigned === 'none')
       filtered = filtered.where('assigned_to', 'is', null);
     else if (assigned) filtered = filtered.where('assigned_to', '=', assigned);
+    // Became a customer between these days (YYYY-MM-DD, Tunis time: UTC+1 all year), both included.
+    const from = q.get('from');
+    const to = q.get('to');
+    if (from)
+      filtered = filtered.where(
+        'created_at',
+        '>=',
+        new Date(`${zDate.parse(from)}T00:00:00+01:00`).toISOString(),
+      );
+    if (to)
+      filtered = filtered.where(
+        'created_at',
+        '<',
+        new Date(
+          new Date(`${zDate.parse(to)}T00:00:00+01:00`).getTime() + 86_400_000,
+        ).toISOString(),
+      );
 
     const [rows, count, stageRows] = await Promise.all([
       filtered

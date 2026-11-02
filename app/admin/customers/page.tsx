@@ -2,14 +2,15 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import { Button, Card, Form, Input, Modal, Select, Space, Table, Tabs, Tag, Typography } from "antd";
+import { Button, Card, DatePicker, Form, Input, Modal, Select, Space, Table, Tabs, Tag, Typography } from "antd";
+import type { Dayjs } from "dayjs";
 import { PlusOutlined, SearchOutlined, TeamOutlined } from "@ant-design/icons";
 import { message } from "@/components/admin/antd-app";
 import { useAdminT } from "@/lib/admin-i18n";
 import { useAdminRole } from "@/lib/admin-role-context";
 import { governorateOptions } from "@/lib/colissimo-data";
 import { CHANNELS, CHANNEL_LABELS, CUSTOMER_STAGES, STAGE_COLORS, STAGE_LABELS, type CustomerStage } from "@/lib/erp/constants";
-import { AgentSelect, ChannelTag, PageHeader } from "@/components/admin/erp/ui";
+import { AgentSelect, ChannelTag, PageHeader, useTeam } from "@/components/admin/erp/ui";
 import { api, formatDate, useApi } from "@/components/admin/erp/erp-client";
 
 const { Text } = Typography;
@@ -56,6 +57,8 @@ export default function CustomersPage() {
     const [query, setQuery] = useState("");
     const [channel, setChannel] = useState("");
     const [assigned, setAssigned] = useState("");
+    const [range, setRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
+    const team = useTeam();
     const [page, setPage] = useState(1);
     const [creating, setCreating] = useState(false);
     const [showDuplicates, setShowDuplicates] = useState(false);
@@ -67,8 +70,10 @@ export default function CustomersPage() {
         if (query) qs.set("q", query);
         if (channel) qs.set("channel", channel);
         if (assigned) qs.set("assigned", assigned);
+        if (range?.[0]) qs.set("from", range[0].format("YYYY-MM-DD"));
+        if (range?.[1]) qs.set("to", range[1].format("YYYY-MM-DD"));
         return `/api/customers?${qs}`;
-    }, [page, stage, query, channel, assigned]);
+    }, [page, stage, query, channel, assigned, range]);
     const { data, loading, reload } = useApi<ListResult>(url);
     const duplicates = useApi<DuplicatePair[]>(showDuplicates ? "/api/customers?duplicates=1" : null);
 
@@ -131,8 +136,14 @@ export default function CustomersPage() {
                     />
                     <Select value={channel} onChange={(v) => { setChannel(v); setPage(1); }} style={{ width: 170 }}
                         options={[{ value: "", label: t("All channels") }, ...CHANNELS.map((c) => ({ value: c, label: t(CHANNEL_LABELS[c]) }))]} />
-                    <Select value={assigned} onChange={(v) => { setAssigned(v); setPage(1); }} style={{ width: 190 }}
-                        options={[{ value: "", label: t("Handled by: anyone") }, { value: "me", label: t("Handled by me") }, { value: "none", label: t("Nobody yet") }]} />
+                    <Select value={assigned} onChange={(v) => { setAssigned(v); setPage(1); }} style={{ width: 220 }} showSearch optionFilterProp="label"
+                        options={[
+                            { value: "", label: t("Handled by: anyone") },
+                            { value: "me", label: t("Handled by me") },
+                            { value: "none", label: t("Nobody yet") },
+                            ...team.map((m) => ({ value: m.user_id, label: m.email ?? m.user_id })),
+                        ]} />
+                    <DatePicker.RangePicker value={range} onChange={(v) => { setRange(v); setPage(1); }} allowEmpty={[true, true]} placeholder={[t("Customer since"), t("to")]} />
                 </Space>
                 <Table
                     rowKey="id"
