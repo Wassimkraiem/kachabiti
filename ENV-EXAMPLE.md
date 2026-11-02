@@ -45,7 +45,7 @@ VAPID_SUBJECT=mailto:you@yourdomain.com
 # transaction pooler (PgBouncer), with a direct URL.
 LISTEN_DATABASE_URL=
 ```
-
+  
 ## Optional Variables
 
 ```env
