@@ -1,12 +1,10 @@
 # Checks every pull request and push: type-check and lint of the site and the API, the API build,
 # then the end-to-end suites against the whole stack (docker-compose.yml) on an empty database
-# built from db/baseline.sql. On kachabiti-nest it runs inside deploy.yml instead (one run per push).
+# built from db/baseline.sql. On main (production) it runs inside deploy.yml instead (one run per push).
 name: CI
 
 on:
   pull_request:
-  push:
-    branches: [main]
   workflow_call:
 
 permissions:

@@ -9,7 +9,7 @@ name: Deploy
 
 on:
   push:
-    branches: [kachabiti-nest]
+    branches: [main]
   workflow_dispatch:
 
 concurrency:

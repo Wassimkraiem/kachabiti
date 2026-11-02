@@ -15,9 +15,9 @@ Product photos ──▶ S3 bucket kachabity-products-<id> (public read); docume
   alert and e-mail alarms (see Alerts). You run Terraform yourself; nothing is created without `apply`.
 - **Server files** (`deploy/`): `docker-compose.prod.yml`, `deploy.sh` (backup → migrate → new API next
   to the old one → switch once healthy, see below), `backup.sh` (hourly to S3, 30 days kept).
-- **CI/CD** (`.github/workflows/`): `ci.yml` checks pull requests and pushes to `main` (types, lint, API
-  build, all end-to-end suites on an empty database built from `db/baseline.sql`). On `kachabiti-nest`,
-  `deploy.yml` is the one run per push: CI, then, only if the API changed, the API image built on
+- **CI/CD** (`.github/workflows/`): `ci.yml` checks pull requests (types, lint, API build, all
+  end-to-end suites on an empty database built from `db/baseline.sql`). On `main`, the production branch
+  of both the site (Vercel) and the API, `deploy.yml` is the one run per push: CI, then, only if the API changed, the API image built on
   GitHub's ARM runners and `deploy.sh` on the server.
 
 **Separate deploys.** A push deploys only the side it changes:
@@ -117,10 +117,10 @@ each deploy):
     and digits only; the S3 and domain lines from `terraform output -raw server_env`; `NEXT_URL` = the
     Vercel site, for the cache refresh).
 - Variable: `API_URL` = `https://<site_domain>` (the deploy checks it answers).
-- Set these before the first push of `kachabiti-nest`: the deploy runs as soon as the API changes.
+- Set these before the first push of `main`: the deploy runs as soon as the API changes.
 
 ### 6. Vercel
-Import the repo, Production Branch `kachabiti-nest`, and in Settings → Environment Variables (Production):
+Import the repo, Production Branch `main`, and in Settings → Environment Variables (Production):
 `NEST_URL=https://<site_domain>`, `FILES_PUBLIC_URL` (from `server_env`), the **same** `AUTH_SECRET` and
 `REVALIDATE_SECRET` as `PROD_ENV`, `ENV=production`, `NEXT_PUBLIC_SITE_URL` (the site's address), and the
 Sentry and other `NEXT_PUBLIC_*` values (see `ENV-EXAMPLE.md`). Then Settings → Domains → add the site's
@@ -139,7 +139,7 @@ name. Redeploy once the API answers, so the pages are built with real data.
 
 ## Everyday
 
-- **Deploy:** merge or push to `kachabiti-nest`. CI must pass; the API deploys if it changed, and Vercel
+- **Deploy:** merge or push to `main`. CI must pass; the API deploys if it changed, and Vercel
   builds the site if it changed (see "Separate deploys").
 - **Roll back the API:** Actions → Deploy → Run workflow on an older commit, or on the server
   `cd /opt/kachabity && ./deploy.sh ghcr.io/<owner>/kachabity-api:<older-sha>`.
@@ -192,6 +192,3 @@ both when something breaks and when it is OK again:
 
 The instance also has termination protection, so it can't be terminated by mistake (see Stop paying).
 
-## When kachabiti-nest is merged into main
-
-Change `branches: [kachabiti-nest]` in `.github/workflows/deploy.yml` to `main`.
