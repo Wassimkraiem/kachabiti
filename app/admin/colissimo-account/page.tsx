@@ -12,6 +12,9 @@ import { BarChart } from "@/components/admin/erp/charts";
 import { api, formatDate, formatMoney, percent, useApi } from "@/components/admin/erp/erp-client";
 import { message } from "@/components/admin/antd-app";
 import ParcelHistoryDrawer, { portalStatusColor as statusColor } from "@/components/admin/delivery/ParcelHistoryDrawer";
+import DeliveryStatusTag from "@/components/admin/delivery/DeliveryStatusTag";
+import type { Delivery, DeliveryList } from "@/components/admin/delivery/delivery-api";
+import { statusInfo } from "@/lib/colissimo-data";
 
 const { Text } = Typography;
 
@@ -37,34 +40,61 @@ interface PortalList {
 
 type Stage = "delivered" | "returned" | "cancelled" | "in_progress";
 
-/** Colissimo's status wording ("Livré payé", "En cours de livraison", "Rtn définitif"…) → a stage. */
+/** A parcel as this page shows it, from Colissimo's website or from our database. */
+interface Row extends PortalRow { stage: Stage; paid: boolean }
+
+/** Colissimo's website wording ("Livré payé", "En cours de livraison", "Rtn définitif"…) → a stage. */
 function stageOf(status: string): Stage {
     const s = status.toLowerCase();
     if (s.includes("rtn") || s.includes("retour")) return "returned";
     if (s.includes("supprim") || s.includes("annul")) return "cancelled";
-    if (s.includes("livr") && !s.includes("cours")) return "delivered";
+    if ((s.includes("livr") && !s.includes("cours")) || s.includes("change")) return "delivered";
     return "in_progress";
 }
 
-const isPaid = (status: string) => /pay/i.test(status);
+const fromPortal = (row: PortalRow): Row => ({ ...row, stage: stageOf(row.status), paid: /pay/i.test(row.status) });
+
+const localTime = (iso: string | null) => (iso ? dayjs(iso).format("YYYY-MM-DD HH:mm") : null);
+
+/** A parcel of our deliveries table, in the same shape (its status spelling: statusInfo()). */
+function fromRecord(d: Delivery): Row {
+    const group = statusInfo(d.status).group;
+    const stage: Stage = d.status === "Supprime" ? "cancelled" : group === "delivered" || group === "returned" ? group : "in_progress";
+    return {
+        barcode: d.barcode ?? "—",
+        client: d.recipient_name || (d.order ? `${d.order.customer_first_name} ${d.order.customer_last_name}`.trim() : ""),
+        phones: d.phone ? d.phone.split(" / ") : [],
+        agency: null,
+        destination_agency: null,
+        driver: d.driver_status,
+        price: d.cod_amount == null ? null : Number(d.cod_amount),
+        status: d.status,
+        added_at: localTime(d.created_at),
+        picked_up_at: localTime(d.handed_over_at),
+        delivered_at: stage === "delivered" ? localTime(d.status_changed_at) : null,
+        order: d.order ? { id: d.order.id, order_number: d.order.order_number } : null,
+        stage,
+        paid: stage === "delivered" && (d.paid || d.status === "Livre paye"),
+    };
+}
 
 interface DayRow { day: string; count: number; amount: number }
 
 /** Totals of the parcels in the period, and the delivered ones per delivery day. */
-function analyse(rows: PortalRow[]) {
+function analyse(rows: Row[]) {
     const stages = { delivered: { count: 0, amount: 0 }, returned: { count: 0, amount: 0 }, cancelled: { count: 0, amount: 0 }, in_progress: { count: 0, amount: 0 } };
     const paid = { count: 0, amount: 0 };
     const days = new Map<string, DayRow>();
     let total = 0;
     for (const row of rows) {
         const price = row.price ?? 0;
-        const stage = stageOf(row.status);
+        const stage = row.stage;
         stages[stage].count++;
         stages[stage].amount += price;
         if (stage === "cancelled") continue;
         total += price;
         if (stage !== "delivered") continue;
-        if (isPaid(row.status)) { paid.count++; paid.amount += price; }
+        if (row.paid) { paid.count++; paid.amount += price; }
         const day = (row.delivered_at ?? row.added_at ?? "").slice(0, 10) || "—";
         const entry = days.get(day) ?? { day, count: 0, amount: 0 };
         entry.count++;
@@ -75,21 +105,37 @@ function analyse(rows: PortalRow[]) {
 }
 
 /**
- * Admin → Colissimo account (owners): every parcel of the Colissimo account with its status, read
- * live from the shipper's dashboard on Colissimo's website (its API can't list them), and each
- * parcel's details and full history. Colissimo shows at most 2 months at a time.
+ * Admin → Colissimo account (owners): every parcel with its status, money and returns, and the
+ * delivered ones per day. By default from our own records (the deliveries table: every parcel
+ * since the start, old imports included, any dates). "Live from Colissimo" reads the shipper's
+ * dashboard on Colissimo's website instead, at most 2 months at a time, to check our records.
+ * Clicking a parcel shows its full history from Colissimo's website.
  */
 export default function ColissimoAccountPage() {
     const { t, locale } = useAdminT();
     const money = (n: number) => formatMoney(n, locale);
-    const [range, setRange] = useState<[Dayjs, Dayjs]>([dayjs().subtract(30, "day"), dayjs()]);
+    const [source, setSource] = useState<"records" | "live">("records");
+    // null: since the start (our records); Colissimo's website needs dates, the last 30 days by default.
+    const [range, setRange] = useState<[Dayjs, Dayjs] | null>(null);
+    const liveRange = range ?? [dayjs().subtract(30, "day"), dayjs()];
     const [status, setStatus] = useState("all");
     const [search, setSearch] = useState("");
     const [open, setOpen] = useState<string | null>(null);
 
-    const { data, loading, error, reload } = useApi<PortalList>(
-        `/api/owner/colissimo?from=${range[0].format("YYYY-MM-DD")}&to=${range[1].format("YYYY-MM-DD")}`,
+    const live = useApi<PortalList>(
+        source === "live" ? `/api/owner/colissimo?from=${liveRange[0].format("YYYY-MM-DD")}&to=${liveRange[1].format("YYYY-MM-DD")}` : null,
     );
+    const records = useApi<DeliveryList>(source === "records" ? "/api/delivery" : null);
+    const { loading, error, reload } = source === "live" ? live : records;
+    const all = useMemo<Row[]>(() => {
+        if (source === "live") return (live.data?.rows ?? []).map(fromPortal);
+        const from = range?.[0].format("YYYY-MM-DD") ?? "";
+        const to = range?.[1].format("YYYY-MM-DD") ?? "9999";
+        return (records.data?.rows ?? []).map(fromRecord).filter((row) => {
+            const day = (row.added_at ?? "").slice(0, 10);
+            return day >= from && day <= to;
+        });
+    }, [source, live.data, records.data, range]);
     const [syncing, setSyncing] = useState(false);
 
     const sync = async () => {
@@ -106,16 +152,29 @@ export default function ColissimoAccountPage() {
 
     const counts = useMemo(() => {
         const result = new Map<string, number>();
-        for (const row of data?.rows ?? []) result.set(row.status, (result.get(row.status) ?? 0) + 1);
+        for (const row of all) result.set(row.status, (result.get(row.status) ?? 0) + 1);
         return [...result].sort((a, b) => b[1] - a[1]);
-    }, [data]);
+    }, [all]);
 
-    const stats = useMemo(() => analyse(data?.rows ?? []), [data]);
+    const stats = useMemo(() => analyse(all), [all]);
     const finished = stats.stages.delivered.count + stats.stages.returned.count;
+    // Over 3 months, one bar per month (the table below stays per day).
+    const chart = useMemo(() => {
+        if (stats.perDay.length <= 92) return stats.perDay.map((d) => ({ label: d.day.slice(5), value: d.amount, tooltip: `${formatDate(d.day, locale)}: ${d.count} · ${money(d.amount)}` }));
+        const months = new Map<string, DayRow>();
+        for (const d of stats.perDay) {
+            const m = months.get(d.day.slice(0, 7)) ?? { day: d.day.slice(0, 7), count: 0, amount: 0 };
+            m.count += d.count;
+            m.amount += d.amount;
+            months.set(m.day, m);
+        }
+        return [...months.values()].map((m) => ({ label: m.day.slice(2), value: m.amount, tooltip: `${m.day}: ${m.count} · ${money(m.amount)}` }));
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- money/locale only change the labels' language
+    }, [stats]);
 
     const rows = useMemo(() => {
         const term = search.trim().toLowerCase();
-        return (data?.rows ?? []).filter(
+        return all.filter(
             (row) =>
                 (status === "all" || row.status === status) &&
                 (!term ||
@@ -123,9 +182,9 @@ export default function ColissimoAccountPage() {
                         v?.toLowerCase().includes(term),
                     )),
         );
-    }, [data, status, search]);
+    }, [all, status, search]);
 
-    const columns: ColumnsType<PortalRow> = [
+    const columns: ColumnsType<Row> = [
         {
             title: t("Barcode / order"),
             key: "barcode",
@@ -167,7 +226,12 @@ export default function ColissimoAccountPage() {
             sorter: (a, b) => (a.price ?? 0) - (b.price ?? 0),
             render: (value: number | null) => (value != null ? `${value} TND` : "—"),
         },
-        { title: t("Status"), dataIndex: "status", key: "status", render: (value: string) => <Tag color={statusColor(value)}>{value}</Tag> },
+        {
+            title: t("Status"),
+            dataIndex: "status",
+            key: "status",
+            render: (value: string) => (source === "records" ? <DeliveryStatusTag status={value} /> : <Tag color={statusColor(value)}>{value}</Tag>),
+        },
         {
             title: t("Added"),
             dataIndex: "added_at",
@@ -184,13 +248,23 @@ export default function ColissimoAccountPage() {
         <div>
             <PageHeader
                 title={t("Colissimo account")}
-                subtitle={t("Every parcel of your Colissimo account, read from Colissimo's website. Click a parcel for its history.")}
+                subtitle={
+                    source === "records"
+                        ? t("Every parcel since the start, from your records. Click a parcel for its history at Colissimo.")
+                        : t("Live from Colissimo's website (2 months at most), to check your records. Click a parcel for its history.")
+                }
                 extra={
                     <>
+                        <Segmented
+                            value={source}
+                            onChange={(value) => { setSource(value as "records" | "live"); setStatus("all"); }}
+                            options={[{ value: "records", label: t("My records") }, { value: "live", label: t("Live from Colissimo") }]}
+                        />
                         <DatePicker.RangePicker
-                            value={range}
-                            allowClear={false}
-                            onChange={(value) => value?.[0] && value[1] && setRange([value[0], value[1]])}
+                            value={source === "live" ? liveRange : range}
+                            allowClear={source === "records"}
+                            placeholder={[t("Since the start"), t("to")]}
+                            onChange={(value) => setRange(value?.[0] && value[1] ? [value[0], value[1]] : null)}
                             disabledDate={(day) => day.isAfter(dayjs(), "day")}
                         />
                         <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}>{t("Refresh")}</Button>
@@ -202,7 +276,7 @@ export default function ColissimoAccountPage() {
                             cancelText={t("Cancel")}
                             onConfirm={sync}
                         >
-                            <Button type="primary" icon={<CloudDownloadOutlined />} loading={syncing} disabled={data ? !data.configured : true}>
+                            <Button type="primary" icon={<CloudDownloadOutlined />} loading={syncing}>
                                 {t("Import all parcels into Delivery")}
                             </Button>
                         </Popconfirm>
@@ -210,7 +284,7 @@ export default function ColissimoAccountPage() {
                 }
             />
 
-            {data && !data.configured && (
+            {live.data && !live.data.configured && (
                 <Alert
                     type="warning"
                     showIcon
@@ -247,7 +321,7 @@ export default function ColissimoAccountPage() {
                     {t("Parcels of the period delivered each day, with the cash Colissimo collected for them. Delivery rate: {rate}%", { rate: percent(stats.stages.delivered.count, finished) ?? 0 })}
                 </Text>
                 <BarChart
-                    data={stats.perDay.map((d) => ({ label: d.day.slice(5), value: d.amount, tooltip: `${formatDate(d.day, locale)}: ${d.count} · ${money(d.amount)}` }))}
+                    data={chart}
                     color="#008300"
                 />
                 <Table
@@ -278,7 +352,7 @@ export default function ColissimoAccountPage() {
                             value={status}
                             onChange={(value) => setStatus(String(value))}
                             options={[
-                                { value: "all", label: `${t("All")} (${data?.rows.length ?? 0})` },
+                                { value: "all", label: `${t("All")} (${all.length})` },
                                 ...counts.map(([name, count]) => ({ value: name, label: `${name} (${count})` })),
                             ]}
                         />

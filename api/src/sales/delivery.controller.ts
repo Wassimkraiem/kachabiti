@@ -195,9 +195,10 @@ export class DeliveryController {
 
   @Get()
   async list(@Query('order_id') orderId?: string) {
-    // shortcut: the whole list goes to the page, which filters it (about 2,500 parcels in 2026);
-    // move search and paging to the server when it nears this limit.
-    let query = this.select().orderBy('d.created_at', 'desc').limit(5000);
+    // shortcut: the whole list goes to the page, which filters it (about 12,000 parcels in Nov 2026,
+    // old imports included; compressed by Caddy); move search and paging to the server when it
+    // nears this limit.
+    let query = this.select().orderBy('d.created_at', 'desc').limit(30000);
     if (orderId) query = query.where('d.order_id', '=', orderId);
     return {
       rows: await query.execute(),

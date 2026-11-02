@@ -1027,4 +1027,9 @@ export const erpEntries: [en: string, fr: string, ar: string][] = [
     ["The products keep the price they were ordered at.", "Les produits gardent le prix de la commande.", "تحتفظ المنتجات بسعر الطلب."],
     ["Only orders still to confirm or confirmed can be edited. Once validated, edit the parcel from the delivery card.", "Seules les commandes à confirmer ou confirmées peuvent être modifiées. Une fois validée, modifiez le colis depuis la carte livraison.", "لا يمكن تعديل إلا الطلبات قيد التأكيد أو المؤكدة. بعد التصديق، عدّل الطرد من بطاقة التوصيل."],
     ["Customer since", "Client depuis", "عميل منذ"],
+    ["My records", "Mes données", "سجلاتي"],
+    ["Live from Colissimo", "En direct de Colissimo", "مباشرة من Colissimo"],
+    ["Since the start", "Depuis le début", "منذ البداية"],
+    ["Every parcel since the start, from your records. Click a parcel for its history at Colissimo.", "Tous les colis depuis le début, depuis vos données. Cliquez sur un colis pour son historique chez Colissimo.", "كل الطرود منذ البداية من سجلاتك. انقر على طرد لرؤية تاريخه لدى Colissimo."],
+    ["Live from Colissimo's website (2 months at most), to check your records. Click a parcel for its history.", "En direct du site de Colissimo (2 mois maximum), pour vérifier vos données. Cliquez sur un colis pour son historique.", "مباشرة من موقع Colissimo (شهران كحد أقصى) للتحقق من سجلاتك. انقر على طرد لرؤية تاريخه."],
 ];
