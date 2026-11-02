@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 `AGENTS.md` holds the repository conventions (naming, commit style, PR expectations) and applies here as well.
 
 ## Commands
-
+  
 - `npm run dev`: Turbopack dev server on http://localhost:3000. It sets `NODE_OPTIONS=--network-family-autoselection-attempt-timeout=2000` because Node's default 250 ms connect attempt times out on slow networks, which made requests fail at random. Use the same flag for `next start` and Node scripts.
 - `npm run lint`: ESLint (flat config in `eslint.config.mjs`)
 - `npm run build`: production build with Turbopack
