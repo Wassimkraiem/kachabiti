@@ -665,7 +665,7 @@ export default function ProductsPage() {
                                     <button
                                         onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                                         disabled={currentPage === 1}
-                                        className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                                        className="px-4 py-2 border border-gray-300 bg-white text-[#2b1a16] rounded-lg hover:bg-gray-50 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed transition"
                                     >
                                         {text.previous}
                                     </button>
@@ -687,7 +687,7 @@ export default function ProductsPage() {
                                                             onClick={() => setCurrentPage(page)}
                                                             className={`w-10 h-10 rounded-lg transition ${currentPage === page
                                                                 ? 'bg-[#842E1B] text-white'
-                                                                : 'border border-gray-300 hover:bg-gray-50'
+                                                                : 'border border-gray-300 bg-white text-[#2b1a16] hover:bg-gray-50'
                                                                 }`}
                                                         >
                                                             {page}
@@ -700,7 +700,7 @@ export default function ProductsPage() {
                                     <button
                                         onClick={() => setCurrentPage(prev => Math.min(Math.ceil(totalCount / ITEMS_PER_PAGE), prev + 1))}
                                         disabled={currentPage >= Math.ceil(totalCount / ITEMS_PER_PAGE)}
-                                        className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition"
+                                        className="px-4 py-2 border border-gray-300 bg-white text-[#2b1a16] rounded-lg hover:bg-gray-50 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed transition"
                                     >
                                         {text.next}
                                     </button>

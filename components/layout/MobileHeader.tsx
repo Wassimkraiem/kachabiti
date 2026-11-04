@@ -157,6 +157,9 @@ export default function MobileHeader({ locale, rtl, user, categories, search, on
                     className={`absolute inset-y-0 start-0 flex w-[86%] max-w-sm flex-col bg-[#faf7f2] shadow-xl transition-transform duration-250 ease-out motion-reduce:transition-none ${
                         menuOpen ? "translate-x-0" : rtl ? "translate-x-full" : "-translate-x-full"
                     }`}
+                    // Any link closes the menu: category links only change the query string (no path
+                    // change), and tapping the current page doesn't navigate at all.
+                    onClick={(e) => (e.target as HTMLElement).closest("a") && setMenuOpen(false)}
                 >
                     <div className="flex h-14 shrink-0 items-center justify-between border-b border-[#ece4da] ps-5 pe-1.5">
                         <Image src="/assets/images/logoKachabity.jpg" alt="Kachabity" width={40} height={40} className="h-9 w-9 rounded-full object-contain" />

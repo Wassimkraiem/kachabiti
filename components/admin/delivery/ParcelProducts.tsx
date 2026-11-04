@@ -67,7 +67,7 @@ export default function ParcelProducts({ lines, onChange, onQuote }: {
     onChange: (lines: ProductLine[]) => void;
     onQuote: (quoted: QuotedLine[] | null) => void;
 }) {
-    const { t } = useAdminT();
+    const { t, locale } = useAdminT();
     const [products, setProducts] = useState<ProductOption[]>([]);
     const [variantsByProduct, setVariantsByProduct] = useState<Record<string, VariantOption[]>>({});
     const [quotedByKey, setQuotedByKey] = useState<Record<number, QuotedLine>>({});
@@ -136,7 +136,7 @@ export default function ParcelProducts({ lines, onChange, onQuote }: {
 
     const productOptions = products.map((p) => ({
         value: p.id,
-        label: p.name,
+        label: (locale === "fr" ? p.name_fr : locale === "ar" ? p.name_ar : null) || p.name,
         searchtext: [p.name, p.name_fr, p.name_ar].filter(Boolean).join(" "),
     }));
 

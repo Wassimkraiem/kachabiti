@@ -4,6 +4,7 @@ import { LanguageProvider } from '@/lib/language-context';
 import { isRTL } from '@/lib/language-utils';
 import { CartProvider } from '@/lib/cart-context';
 import CartDrawer from '@/components/cart/CartDrawer';
+import TrafficSource from '@/components/layout/TrafficSource';
 import StaticHeader from '@/components/layout/StaticHeader';
 import Footer from '@/components/footer/Footer';
 import { Suspense } from 'react';
@@ -109,6 +110,7 @@ export default async function LocaleLayout({
                 </div>
                 <MobileTabBar locale={locale} />
                 <CartDrawer />
+                <TrafficSource />
                 <Script
                     id="json-ld-organization"
                     type="application/ld+json"

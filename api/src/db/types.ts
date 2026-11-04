@@ -664,6 +664,7 @@ export interface Orders {
   stock_deducted: Generated<boolean>;
   subtotal: Numeric;
   total: Numeric;
+  traffic_source: string | null;
   updated_at: Generated<Timestamp>;
   user_id: string | null;
 }

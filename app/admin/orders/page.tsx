@@ -25,6 +25,7 @@ import { AgentSelect, ChannelTag, useTeam } from "@/components/admin/erp/ui";
 import { api } from "@/components/admin/erp/erp-client";
 import { CHANNELS, CHANNEL_LABELS, OPEN_ORDER_STATUSES } from "@/lib/erp/constants";
 import { useAdminRole } from "@/lib/admin-role-context";
+import { TRAFFIC_SOURCE_LABELS } from "@/lib/traffic-source";
 import type { ColumnsType } from "antd/es/table";
 import type { Dayjs } from "dayjs";
 import {
@@ -62,6 +63,7 @@ interface OrderRow {
     created_by?: string | null;
     created_by_email?: string | null;
     channel: string;
+    traffic_source: string | null;
     assigned_to: string | null;
     assigned_to_email: string | null;
     paid_amount: number;
@@ -137,7 +139,7 @@ export default function AdminOrdersPage() {
         const term = searchTerm.toLowerCase();
         return orders.filter((order) => {
             // Email is optional, so it can be null.
-            const matchesSearch = [order.order_number, order.customer_first_name, order.customer_last_name, order.customer_email, order.customer_phone, order.created_by_email, order.deliveries?.[0]?.barcode]
+            const matchesSearch = [order.order_number, order.customer_first_name, order.customer_last_name, order.customer_email, order.customer_phone, order.created_by_email, order.deliveries?.[0]?.barcode, order.traffic_source]
                 .some((value) => (value ?? "").toLowerCase().includes(term));
 
             const matchesPaymentStatus =
@@ -249,6 +251,28 @@ export default function AdminOrdersPage() {
         } else fetchOrders();
     };
 
+    // PUT /api/orders: status with its stock movement; cancelling also deletes the parcel at Colissimo.
+    const [statusSavingId, setStatusSavingId] = useState<string | null>(null);
+    const handleStatusChange = async (order: OrderRow, status: string) => {
+        setStatusSavingId(order.id);
+        try {
+            const response = await fetch("/api/orders", {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ id: order.id, status }),
+            });
+            const result = await response.json().catch(() => null);
+            if (!response.ok || !result?.success) throw new Error(result?.error || t("Failed to update order"));
+            message.success(t("Order {order_number}: {status}", { order_number: order.order_number, status: t(orderStatusLabel(status)) }));
+            reportParcelCancellation(result.data?.parcels, message, t);
+            fetchOrders();
+        } catch (e) {
+            message.error(t((e as Error).message));
+        } finally {
+            setStatusSavingId(null);
+        }
+    };
+
     const handleDelete = async (order: OrderRow) => {
         try {
             const response = await fetch(`/api/orders?id=${order.id}`, {
@@ -325,6 +349,11 @@ export default function AdminOrdersPage() {
                     <div style={{ fontSize: 12, color: "#999" }}>{record.customer_phone}{record.customer_email ? ` · ${record.customer_email}` : ""}</div>
                     <Space size={4} wrap style={{ marginTop: 4 }}>
                         <ChannelTag channel={record.channel} />
+                        {record.traffic_source && (
+                            <Tooltip title={t("Where the shopper came from before ordering")}>
+                                <Tag color="geekblue">{t(TRAFFIC_SOURCE_LABELS[record.traffic_source] ?? record.traffic_source)}</Tag>
+                            </Tooltip>
+                        )}
                         {record.assigned_to_email || record.created_by_email ? (
                             <Tag icon={<UserOutlined />}>{record.assigned_to_email ?? record.created_by_email}</Tag>
                         ) : (OPEN_ORDER_STATUSES as readonly string[]).includes(record.status) && (
@@ -386,7 +415,17 @@ export default function AdminOrdersPage() {
             sorter: (a, b) => a.status.localeCompare(b.status),
             render: (status: string, record: OrderRow) => (
                 <Space orientation="vertical" size={4}>
-                    <Tag color={ORDER_STATUS_COLORS[status] || "default"}>{t(orderStatusLabel(status))}</Tag>
+                    {/* The same manual override as the order page's "Change the status by hand" (no parcel is created). */}
+                    <Select
+                        size="small"
+                        value={status}
+                        loading={statusSavingId === record.id}
+                        disabled={statusSavingId === record.id}
+                        onChange={(value) => handleStatusChange(record, value)}
+                        popupMatchSelectWidth={false}
+                        style={{ minWidth: 130 }}
+                        options={ORDER_STATUS_OPTIONS.map((o) => ({ value: o.value, label: <Tag color={ORDER_STATUS_COLORS[o.value] || "default"} style={{ margin: 0 }}>{t(o.label)}</Tag> }))}
+                    />
                     {record.deliveries?.[0] && (
                         <Space size={4}>
                             <CarOutlined style={{ color: "#8c8c8c" }} />

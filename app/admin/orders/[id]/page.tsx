@@ -32,6 +32,7 @@ import { reportParcelCancellation } from "@/components/admin/delivery/delivery-a
 import OrderPipelineCard, { type PipelineOrder } from "@/components/admin/erp/OrderPipelineCard";
 import OrderPaymentsCard from "@/components/admin/erp/OrderPaymentsCard";
 import EditOrderModal from "@/components/admin/erp/EditOrderModal";
+import { TRAFFIC_SOURCE_LABELS } from "@/lib/traffic-source";
 
 const { Title, Text } = Typography;
 
@@ -69,6 +70,7 @@ interface Order extends PipelineOrder {
     created_at: string;
     created_by?: string | null;
     created_by_email?: string | null;
+    traffic_source?: string | null;
     discount_amount: number;
     paid_amount: number;
     items: OrderItem[];
@@ -348,6 +350,11 @@ export default function OrderDetailPage() {
                         </Descriptions.Item>
                         <Descriptions.Item label={t("Email")}>{order.customer_email}</Descriptions.Item>
                         <Descriptions.Item label={t("Phone")}>{order.customer_phone || "—"}</Descriptions.Item>
+                        {order.traffic_source && (
+                            <Descriptions.Item label={t("Came from")}>
+                                <Tag color="geekblue">{t(TRAFFIC_SOURCE_LABELS[order.traffic_source] ?? order.traffic_source)}</Tag>
+                            </Descriptions.Item>
+                        )}
                         <Descriptions.Item label={t("Added by")}>
                             {order.created_by ? order.created_by_email ?? t("an agent") : order.channel === "website" ? t("Website (customers)") : "—"}
                         </Descriptions.Item>

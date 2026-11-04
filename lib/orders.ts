@@ -1,4 +1,5 @@
 import { CartItem } from "./cart-context";
+import { storedTrafficSource } from "./traffic-source";
 
 export interface OrderData {
     customerEmail?: string; // Optional - only name and phone are required
@@ -32,7 +33,7 @@ export type { Order, OrderItem };
 export async function createOrder(orderData: OrderData): Promise<{ order: Order | null; error: Error | null; code?: string }> {
     try {
         // The server derives the user from the session, never from the payload.
-        const payload = { ...orderData, userId: undefined, cartId: undefined };
+        const payload = { ...orderData, userId: undefined, cartId: undefined, trafficSource: storedTrafficSource() };
 
         const response = await fetch("/api/orders", {
             method: "POST",

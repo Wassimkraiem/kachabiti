@@ -60,6 +60,12 @@ const createOrderSchema = z.object({
   shippingCost: z.number().nonnegative(),
   total: z.number().nonnegative(),
   orderNotes: z.string().max(2000).optional(),
+  // Where the shopper came from (lib/traffic-source.ts); anything else is dropped, not refused.
+  trafficSource: z
+    .string()
+    .regex(/^[a-z0-9._-]{1,40}$/)
+    .optional()
+    .catch(undefined),
 });
 
 @Controller('orders')
@@ -105,9 +111,9 @@ export class OrdersController {
       throw new ApiError('Order prices are out of date', 409, priced.code);
     const { pricing } = priced;
 
-    // The order and its lines in one transaction (create_order).
-    const created = await this.db.withActor(null, (trx) =>
-      this.db.call<{ order: Order; items: OrderItem[] }>(
+    // The order and its lines in one transaction (create_order), with where the shopper came from.
+    const created = await this.db.withActor(null, async (trx) => {
+      const result = await this.db.call<{ order: Order; items: OrderItem[] }>(
         'create_order',
         {
           p_order: {
@@ -145,8 +151,16 @@ export class OrdersController {
           }),
         },
         trx,
-      ),
-    );
+      );
+      if (data.trafficSource) {
+        await trx
+          .updateTable('orders')
+          .set({ traffic_source: data.trafficSource })
+          .where('id', '=', result.order.id)
+          .execute();
+      }
+      return result;
+    });
     const { order, items } = created;
 
     // Sent from stored data only; a failed e-mail never fails the order.
