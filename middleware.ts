@@ -176,12 +176,13 @@ async function handle(request: NextRequest, event: NextFetchEvent) {
     if (pathnameIsMissingLocale) {
         const acceptLanguage = request.headers.get('accept-language');
         const locale = detectLanguageFromHeader(acceptLanguage);
-        return NextResponse.redirect(new URL(`/${locale}${pathname}`, request.url));
+        // Keep the query: shared links carry ?utm_source= and ad click ids (lib/traffic-source.ts).
+        return NextResponse.redirect(new URL(`/${locale}${pathname}${request.nextUrl.search}`, request.url));
     }
 
     const locale = segments[1];
     if (locale && !isValidLocale(locale)) {
-        return NextResponse.redirect(new URL(`/${defaultLanguage}${pathname}`, request.url));
+        return NextResponse.redirect(new URL(`/${defaultLanguage}${pathname}${request.nextUrl.search}`, request.url));
     }
 
     // Lets the root layout set <html lang> for the requested locale.

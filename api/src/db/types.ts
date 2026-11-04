@@ -542,6 +542,8 @@ export interface Locations {
   created_at: Generated<Timestamp>;
   deleted_at: Timestamp | null;
   id: Generated<string>;
+  is_shop: Generated<boolean>;
+  low_stock_limit: number | null;
   name: string;
   sells_online: Generated<boolean>;
   updated_at: Generated<Timestamp>;

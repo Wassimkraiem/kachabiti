@@ -88,6 +88,9 @@ export const erpPaths: Record<string, Record<string, Op>> = {
         get: op('Point of sale', 'Open sessions and shops; ?catalog=1&location_id= products; ?session_id= a session; ?sessions=1 history; ?receipt=<order id>'),
         post: op('Point of sale', 'open (location_id, opening_float) | sale (session_id, items, discount_amount, customer, payments) | cash (session_id, direction, amount, label) | close (session_id, counted_cash)', { requestBody: body({ action: { type: 'string', enum: ['open', 'sale', 'cash', 'close'] } }, ['action']) }),
     },
+    '/api/pos/analytics': {
+        get: op('Point of sale', 'Till sales and stock per shop (analytics or finance permission)', { parameters: [q('from', 'First day (YYYY-MM-DD)', 'string', 'date'), q('to', 'Last day (YYYY-MM-DD)', 'string', 'date'), q('location_id', 'One shop', 'string', 'uuid')] }),
+    },
     '/api/purchasing/orders': {
         get: op('Purchasing', 'Purchase order (?id=) or list (?status=&supplier_id=)'),
         post: op('Purchasing', 'Create or update a purchase order and its lines', { requestBody: body({ id: uuid, supplier_id: uuid, status: { type: 'string', enum: ['draft', 'rfq', 'ordered'] }, order_date: date, expected_date: date, location_id: uuid, lines: { type: 'array', items: { type: 'object', properties: { variant_id: uuid, material_id: uuid, description: { type: 'string' }, quantity: money, unit_cost: money, vat_rate: money } } } }, ['supplier_id', 'lines']) }),

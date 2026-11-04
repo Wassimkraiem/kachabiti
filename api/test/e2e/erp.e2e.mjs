@@ -93,6 +93,13 @@ ok(r.status === 201, 'bank → till transfer', r.json);
 r = await owner.call('/api/finance/treasury');
 ok(r.json?.success, 'treasury loads', r.json?.data?.balances);
 
+// Shops: only they reach the till, and each has its own low-stock limit (3 → 2 alerts below).
+await sql('update locations set is_shop = true, low_stock_limit = 2 where id = $1', [shop.id]);
+await cashier.call('/api/admin/me'); // keeps back_office_users, the alert's recipients, in sync
+r = await cashier.call('/api/pos');
+const tillShops = r.json?.data?.locations?.map((l) => l.id) ?? [];
+ok(tillShops.includes(shop.id) && !tillShops.includes(online.id), 'till lists shops only', r.json?.data?.locations);
+
 // Till: cashier
 r = await cashier.call('/api/pos', 'POST', { action: 'open', location_id: shop.id, opening_float: 50 });
 const sessionId = r.json?.data?.id;
@@ -108,6 +115,21 @@ r = await cashier.call('/api/pos', 'POST', { action: 'cash', session_id: session
 ok(r.status === 201, 'cash out', r.json);
 r = await cashier.call('/api/pos', 'POST', { action: 'close', session_id: sessionId, counted_cash: 158 });
 ok(r.json?.success && Number(r.json.data.expected_cash) === 160 && Number(r.json.data.difference) === -2, 'till closed with -2 difference', r.json);
+
+// Shop stock, alert and analytics
+r = await cashier.call(`/api/pos?catalog=1&location_id=${shop.id}`);
+const shopRow = r.json?.data?.find((v) => v.variant_id === variant.id);
+ok(shopRow?.stock === 2 && shopRow.carried === true && shopRow.low_stock_limit === 2, 'stock tab row: carried, at the shop limit', shopRow);
+const alert = await sql("select url from notifications where recipient_id = $1 and type = 'low_stock' and data->>'variant_id' = $2 and data->>'location_id' = $3", [cashier.id, variant.id, shop.id]);
+ok(alert.length === 1 && alert[0].url === `/admin/pos?tab=stock&location=${shop.id}`, 'cashier told once, with a link to the stock tab', alert);
+const today = new Date().toISOString().slice(0, 10);
+const period = `from=${today}&to=${today}`;
+ok((await cashier.call(`/api/pos/analytics?${period}`)).status === 403, 'cashier cannot see shop analytics');
+ok((await owner.call('/api/pos/analytics?from=nope&to=nope')).status === 400, 'analytics refuses a bad period');
+r = await owner.call(`/api/pos/analytics?${period}&location_id=${shop.id}`);
+const stats = r.json?.data;
+ok(stats?.totals.sales >= 120 && stats.totals.units >= 1 && stats.days.length === 1 && stats.products.length > 0 && stats.methods.some((m) => m.method === 'cash'), 'analytics counts the sale', stats);
+ok(stats?.stock.length === 1 && stats.stock[0].low >= 1 && stats.stock[0].low_stock_limit === 2, 'analytics shows the shop stock', stats?.stock);
 
 // Purchasing: PO → receipt with a rejected unit → stock up at cost
 r = await owner.call('/api/purchasing/materials', 'POST', { name: `E2E Linen ${Date.now()}`, unit: 'm' });

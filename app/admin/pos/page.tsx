@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { Alert, Badge, Button, Card, Col, Empty, Form, Image, Input, InputNumber, Modal, Row, Select, Space, Statistic, Table, Tag, Typography } from "antd";
+import { Alert, Badge, Button, Card, Col, Empty, Form, Image, Input, InputNumber, Modal, Row, Select, Space, Statistic, Table, Tabs, Tag, Typography } from "antd";
 import { DeleteOutlined, LockOutlined, MinusOutlined, PlusOutlined, PrinterOutlined, SearchOutlined, SwapOutlined, UnlockOutlined } from "@ant-design/icons";
 import { message } from "@/components/admin/antd-app";
 import { useAdminT } from "@/lib/admin-i18n";
@@ -11,13 +11,15 @@ import { PAYMENT_METHOD_LABELS, type PaymentMethod } from "@/lib/erp/constants";
 import { PageHeader } from "@/components/admin/erp/ui";
 import { api, formatDate, formatMoney, useApi } from "@/components/admin/erp/erp-client";
 import { ORDER_ITEM_IMAGE_FALLBACK } from "@/components/admin/order-status";
+import { isLowStock, isOutOfStock, PosStockTab, type ShopStockRow } from "@/components/admin/pos/PosStockTab";
+import { PosAnalyticsTab } from "@/components/admin/pos/PosAnalyticsTab";
 
 const { Text, Title } = Typography;
 
 interface Location { id: string; name: string; sells_online: boolean }
 interface Session { id: string; number: string; location_id: string; opened_at: string; opened_by_email: string | null; opening_float: number; location: { id: string; name: string } }
 interface Overview { open_sessions: Session[]; locations: Location[]; settings: { max_discount_percent?: number } }
-interface Sellable { product_id: string; variant_id: string | null; name: string; label: string; sku: string | null; code: string | null; price: number; base_price: number; discount_percent: number; image: string | null; tracked: boolean; stock: number | null }
+interface Sellable extends ShopStockRow { base_price: number; discount_percent: number; image: string | null; tracked: boolean }
 interface CartLine extends Sellable { key: string; quantity: number }
 interface SessionSummary {
     session: Session & { status: string };
@@ -37,11 +39,13 @@ const LOCATION_KEY = "pos_location";
  */
 export default function PosPage() {
     const { t, locale } = useAdminT();
-    const { isAdmin } = useAdminRole();
+    const { isAdmin, can } = useAdminRole();
     const overview = useApi<Overview>("/api/pos");
+    const [tab, setTab] = useState("sell");
     const [locationId, setLocationId] = useState<string | null>(null);
     const session = useMemo(() => overview.data?.open_sessions.find((s) => s.location_id === locationId) ?? null, [overview.data, locationId]);
-    const catalog = useApi<Sellable[]>(session ? `/api/pos?catalog=1&location_id=${session.location_id}` : null);
+    // By shop, not session: the Stock tab works with the till closed.
+    const catalog = useApi<Sellable[]>(locationId ? `/api/pos?catalog=1&location_id=${locationId}` : null);
     const summary = useApi<SessionSummary>(session ? `/api/pos?session_id=${session.id}` : null);
     const [search, setSearch] = useState("");
     const [cart, setCart] = useState<CartLine[]>([]);
@@ -57,12 +61,15 @@ export default function PosPage() {
     const [closing, setClosing] = useState(false);
     const [counted, setCounted] = useState<number | null>(null);
 
-    // Remember the shop this browser sells from.
+    // Remember the shop this browser sells from; a low-stock alert opens ?tab=stock&location=.
+    // shortcut: read once on load, so an alert clicked while already on this page changes nothing; use useSearchParams with a Suspense boundary if that matters.
     useEffect(() => {
         if (!overview.data || locationId) return;
-        let saved: string | null = null;
+        const query = new URLSearchParams(window.location.search);
+        if (query.get("tab") === "stock") setTab("stock");
+        let saved = query.get("location");
         try {
-            saved = localStorage.getItem(LOCATION_KEY);
+            saved ??= localStorage.getItem(LOCATION_KEY);
         } catch {
             // storage unavailable
         }
@@ -175,6 +182,7 @@ export default function PosPage() {
     };
 
     const locations = overview.data?.locations ?? [];
+    const lowCount = (catalog.data ?? []).filter((r) => isLowStock(r) || isOutOfStock(r)).length;
 
     return (
         <div>
@@ -196,7 +204,22 @@ export default function PosPage() {
                 }
             />
 
-            {!session ? (
+            {overview.data && !locations.length && <Alert type="warning" showIcon style={{ marginBottom: 12 }} title={t("No shop yet. Mark a location as a shop in Stock settings to use the caisse.")} />}
+
+            <Tabs
+                activeKey={tab}
+                onChange={setTab}
+                items={[
+                    { key: "sell", label: t("Sell") },
+                    { key: "stock", label: <Badge count={lowCount} offset={[12, 0]} size="small">{t("Stock")}</Badge> },
+                    ...(can("analytics") || can("finance") ? [{ key: "analytics", label: t("Analytics") }] : []),
+                ]}
+            />
+
+            {tab === "stock" && <PosStockTab rows={catalog.data ?? []} loading={catalog.loading} shop={locations.find((l) => l.id === locationId)?.name} onReload={catalog.reload} />}
+            {tab === "analytics" && <PosAnalyticsTab shops={locations} />}
+
+            {tab === "sell" && (!session ? (
                 <Card style={{ maxWidth: 480 }} loading={overview.loading}>
                     <Title level={4} style={{ marginTop: 0 }}><UnlockOutlined /> {t("Open the till")}</Title>
                     {locations.find((l) => l.id === locationId)?.sells_online && (
@@ -238,7 +261,7 @@ export default function PosPage() {
                                             {item.label && <div style={{ fontSize: 12, color: "#8c8c8c" }}>{item.label}</div>}
                                             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 4 }}>
                                                 <span style={{ fontWeight: 600 }}>{formatMoney(item.price, locale, 0)}</span>
-                                                {item.stock !== null && <Tag color={item.stock > 0 ? "green" : "orange"} style={{ marginInlineEnd: 0 }}>{item.stock > 0 ? item.stock : t("Made to order")}</Tag>}
+                                                {item.stock !== null && <Tag color={item.stock > 0 && !isLowStock(item) ? "green" : "orange"} style={{ marginInlineEnd: 0 }}>{item.stock > 0 ? item.stock : t("Made to order")}</Tag>}
                                             </div>
                                         </button>
                                     ))}
@@ -342,7 +365,7 @@ export default function PosPage() {
                         </Card>
                     </Col>
                 </Row>
-            )}
+            ))}
 
             <Modal open={!!done} title={t("Sale {number} done", { number: done?.order_number ?? "" })} onCancel={() => setDone(null)} footer={[
                 <Button key="print" icon={<PrinterOutlined />} onClick={() => window.open(`/admin/pos/receipt/${done?.id}?print=1`, "_blank")}>{t("Print receipt")}</Button>,

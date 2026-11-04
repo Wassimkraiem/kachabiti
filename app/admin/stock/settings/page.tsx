@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import { Card, Table, Typography, Space, Button, Tag, Tabs, Modal, Form, Input, Switch, Popconfirm } from "antd";
+import { Card, Table, Typography, Space, Button, Tag, Tabs, Modal, Form, Input, InputNumber, Switch, Popconfirm } from "antd";
 import { message } from "@/components/admin/antd-app";
 import type { ColumnsType } from "antd/es/table";
 import { PlusOutlined, EditOutlined, DeleteOutlined } from "@ant-design/icons";
@@ -16,7 +16,7 @@ type Row = { id: string; name: string; [key: string]: unknown };
 interface FieldDef {
     name: string;
     label: string;
-    kind?: "text" | "switch" | "textarea";
+    kind?: "text" | "switch" | "textarea" | "number";
     help?: string;
 }
 
@@ -45,10 +45,14 @@ const buildLists = (t: (text: string) => string): ListConfig[] => [
         fields: [
             { name: "name", label: t("Name") },
             { name: "sells_online", label: t("Sells online"), kind: "switch", help: "Only one location can sell online; choosing this one switches the others off." },
+            { name: "is_shop", label: t("Shop with a caisse"), kind: "switch", help: t("Shops appear in Point of sale, each with its own stock and till.") },
+            { name: "low_stock_limit", label: t("Low-stock alert at"), kind: "number", help: t("Alert when a product here reaches this quantity. Empty: use each product's reorder point.") },
         ],
         columns: [
             { title: t("Name"), dataIndex: "name" },
             { title: t("Website"), dataIndex: "sells_online", render: (v) => (v ? <Tag color="green">{t("Sells online")}</Tag> : <Text type="secondary">{t("Not online")}</Text>) },
+            { title: t("Shop"), dataIndex: "is_shop", render: (v) => (v ? <Tag color="blue">{t("Shop")}</Tag> : null) },
+            { title: t("Alert at"), dataIndex: "low_stock_limit", render: (v) => v ?? t("Reorder point") },
         ],
     },
     {
@@ -195,7 +199,7 @@ function ListEditor({ config }: { config: ListConfig }) {
                             valuePropName={field.kind === "switch" ? "checked" : "value"}
                             rules={field.name === "name" ? [{ required: true, whitespace: true, message: t("Enter a name") }] : undefined}
                         >
-                            {field.kind === "switch" ? <Switch /> : field.kind === "textarea" ? <Input.TextArea rows={3} /> : <Input />}
+                            {field.kind === "switch" ? <Switch /> : field.kind === "number" ? <InputNumber min={0} precision={0} style={{ width: "100%" }} /> : field.kind === "textarea" ? <Input.TextArea rows={3} /> : <Input />}
                         </Form.Item>
                     ))}
                 </Form>

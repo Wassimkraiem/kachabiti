@@ -163,7 +163,7 @@ export const CollectionsController = lookupController(
 );
 export const LocationsController = lookupController(
   'locations',
-  ['name', 'sells_online'],
+  ['name', 'sells_online', 'is_shop', 'low_stock_limit'],
   'Location',
   {
     // A deleted location would hide its stock, so only empty, offline locations can be deleted.

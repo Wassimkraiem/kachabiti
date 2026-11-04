@@ -54,6 +54,8 @@ export function apiRequirement(pathname: string, method: string, searchParams: U
     // Order pages look up a customer by phone to warn about duplicates.
     if (under('/api/customers') && method === 'GET') return { any: ['customers', 'orders', 'pos'] };
     if (under('/api/customers') || under('/api/crm')) return withDelete(method, ['customers']);
+    // Shop sales figures are for managers, not every cashier.
+    if (under('/api/pos/analytics')) return { any: ['analytics', 'finance'] };
     if (under('/api/pos')) return withDelete(method, ['pos']);
     if (under('/api/purchasing')) return withDelete(method, ['purchasing']);
     if (under('/api/finance')) return withDelete(method, ['finance']);

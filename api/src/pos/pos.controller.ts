@@ -1,9 +1,18 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { sql } from 'kysely';
 import { z } from 'zod';
 import { generateOrderNumber } from '@shared/order-number';
 import { CurrentActor, Public } from '../auth/decorators';
 import type { RequestActor } from '../auth/auth.guard';
-import { ApiError, isManager, params, Zod, zId, zMoney } from '../common/api';
+import {
+  ApiError,
+  isManager,
+  params,
+  Zod,
+  zDate,
+  zId,
+  zMoney,
+} from '../common/api';
 import { invalidateCatalog } from '../catalog/revalidate';
 import { Database } from '../db/database';
 import { many, one } from '../db/embed';
@@ -84,6 +93,12 @@ const bodySchema = z.discriminatedUnion('action', [
   }),
 ]);
 
+const analyticsQuery = z.object({
+  from: zDate,
+  to: zDate,
+  location_id: zId.optional(),
+});
+
 type Image = {
   image_url: string;
   is_main: boolean;
@@ -133,7 +148,7 @@ export class PosController {
       this.sessions().where('s.status', '=', 'open').execute(),
       this.db
         .selectFrom('locations')
-        .select(['id', 'name', 'sells_online'])
+        .select(['id', 'name', 'sells_online', 'is_shop', 'low_stock_limit'])
         .where('deleted_at', 'is', null)
         .orderBy('name')
         .execute(),
@@ -143,7 +158,91 @@ export class PosController {
         .where('key', '=', 'pos')
         .executeTakeFirst(),
     ]);
-    return { open_sessions: open, locations, settings: settings?.value ?? {} };
+    return {
+      open_sessions: open,
+      // A till left open on a location that stopped being a shop can still be closed.
+      locations: locations.filter(
+        (l) => l.is_shop || open.some((s) => s.location_id === l.id),
+      ),
+      settings: settings?.value ?? {},
+    };
+  }
+
+  /** Admin → Point of sale → Analytics: till sales of a period and the stock of each shop. */
+  @Get('analytics')
+  async analytics(
+    @Query(new Zod(analyticsQuery)) query: z.infer<typeof analyticsQuery>,
+  ) {
+    const { from, to, location_id } = query;
+    const shop = location_id
+      ? sql`and o.location_id = ${location_id}::uuid`
+      : sql``;
+    const sales = sql`o.channel = 'store' and o.status = 'delivered' and o.deleted_at is null
+      and (o.created_at at time zone 'Africa/Tunis')::date between ${from}::date and ${to}::date ${shop}`;
+    const [totals, units, days, shops, methods, products, stock] =
+      await Promise.all([
+        sql<{ sales: number; count: number; discounts: number }>`
+          select coalesce(sum(o.total), 0)::float8 as sales, count(*)::int as count,
+                 coalesce(sum(o.discount_amount), 0)::float8 as discounts
+            from orders o where ${sales}`.execute(this.db),
+        sql<{ units: number }>`
+          select coalesce(sum(i.quantity), 0)::int as units
+            from order_items i join orders o on o.id = i.order_id where ${sales}`.execute(
+          this.db,
+        ),
+        sql<{ day: string; sales: number; count: number }>`
+          select d::date::text as day, coalesce(sum(o.total), 0)::float8 as sales, count(o.id)::int as count
+            from generate_series(${from}::date, ${to}::date, '1 day') d
+            left join orders o on (o.created_at at time zone 'Africa/Tunis')::date = d::date and ${sales}
+           group by d order by d`.execute(this.db),
+        sql<{ id: string; name: string; sales: number; count: number }>`
+          select l.id, l.name, sum(o.total)::float8 as sales, count(*)::int as count
+            from orders o join locations l on l.id = o.location_id
+           where ${sales} group by l.id, l.name order by sales desc`.execute(
+          this.db,
+        ),
+        sql<{ method: string; amount: number }>`
+          select p.method, sum(p.amount)::float8 as amount
+            from order_payments p join orders o on o.id = p.order_id
+           where p.deleted_at is null and ${sales}
+           group by p.method order by amount desc`.execute(this.db),
+        sql<{ name: string; units: number; sales: number }>`
+          select i.product_name as name, sum(i.quantity)::int as units, sum(i.subtotal)::float8 as sales
+            from order_items i join orders o on o.id = i.order_id
+           where ${sales} group by i.product_name order by units desc, sales desc limit 10`.execute(
+          this.db,
+        ),
+        // A shop "carries" what has a level there, so "out" isn't every product it never had.
+        sql<{
+          id: string;
+          name: string;
+          low_stock_limit: number | null;
+          units: number;
+          low: number;
+          out_of_stock: number;
+        }>`
+          select l.id, l.name, l.low_stock_limit, coalesce(sum(il.available), 0)::int as units,
+                 count(*) filter (where il.available > 0 and il.available <= coalesce(l.low_stock_limit, v.reorder_point))::int as low,
+                 count(*) filter (where il.available = 0)::int as out_of_stock
+            from locations l
+            left join inventory_levels il on il.location_id = l.id
+            left join product_variants v on v.id = il.variant_id and v.deleted_at is null
+            left join products p on p.id = v.product_id and p.deleted_at is null and p.stock_tracked
+           where l.is_shop and l.deleted_at is null
+             and (il.variant_id is null or p.id is not null)
+             ${location_id ? sql`and l.id = ${location_id}::uuid` : sql``}
+           group by l.id, l.name, l.low_stock_limit order by l.name`.execute(
+          this.db,
+        ),
+      ]);
+    return {
+      totals: { ...totals.rows[0], units: units.rows[0].units },
+      days: days.rows,
+      shops: shops.rows,
+      methods: methods.rows,
+      products: products.rows,
+      stock: stock.rows,
+    };
   }
 
   @Post()
@@ -458,7 +557,7 @@ export class PosController {
    * discount%)), like the shop) and its stock at one location.
    */
   private async sellable(locationId: string | null) {
-    const [products, variants, levels] = await Promise.all([
+    const [products, variants, levels, location] = await Promise.all([
       this.db
         .selectFrom('products as p')
         .select(['p.id', 'p.name', 'p.code', 'p.base_price', 'p.stock_tracked'])
@@ -477,7 +576,7 @@ export class PosController {
         .execute(),
       this.db
         .selectFrom('product_variants as v')
-        .select(['v.id', 'v.product_id', 'v.sku', 'v.price'])
+        .select(['v.id', 'v.product_id', 'v.sku', 'v.price', 'v.reorder_point'])
         .select((eb) => [
           one(
             eb,
@@ -498,6 +597,13 @@ export class PosController {
             .where('location_id', '=', locationId)
             .execute()
         : Promise.resolve([]),
+      locationId
+        ? this.db
+            .selectFrom('locations')
+            .select('low_stock_limit')
+            .where('id', '=', locationId)
+            .executeTakeFirst()
+        : Promise.resolve(undefined),
     ]);
     const stock = new Map(levels.map((l) => [l.variant_id, l.available]));
     const discounts = await activeDiscounts(
@@ -535,6 +641,8 @@ export class PosController {
           image: firstOf(images.filter((i) => !i.variant_id)),
           tracked: p.stock_tracked,
           stock: null,
+          carried: false,
+          low_stock_limit: null,
         });
         continue;
       }
@@ -562,6 +670,8 @@ export class PosController {
             firstOf(images.filter((i) => !i.variant_id)),
           tracked: p.stock_tracked,
           stock: p.stock_tracked ? (stock.get(v.id) ?? 0) : null,
+          carried: p.stock_tracked && stock.has(v.id),
+          low_stock_limit: location?.low_stock_limit ?? v.reorder_point,
         });
       }
     }
