@@ -60,7 +60,7 @@ scripts/seed-hero-with-products.sql
 ```
 
 This creates:
-- 2 carousel slides (from products)
+- 2 carousel slides (from products) 
 - 1 left sidebar card
 - 2 right promotional cards
 
