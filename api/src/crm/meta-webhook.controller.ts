@@ -3,6 +3,7 @@ import {
   Get,
   Header,
   HttpCode,
+  Logger,
   Post,
   Query,
   Req,
@@ -30,6 +31,10 @@ import { Database } from '../db/database';
 @Controller('webhooks/meta')
 @Public()
 export class MetaWebhookController {
+  // One line per call (what arrived and what was kept; no message text or names), so a missing
+  // message can be traced: Meta not calling, a refused signature, or an event we don't keep.
+  private readonly log = new Logger('MetaWebhook');
+
   constructor(private readonly db: Database) {}
 
   /** Subscription check from Meta's dashboard. */
@@ -55,12 +60,29 @@ export class MetaWebhookController {
         raw,
         (request.headers['x-hub-signature-256'] as string | undefined) ?? null,
       )
-    )
+    ) {
+      this.log.warn(`refused: invalid signature (${raw.length} bytes)`);
       throw new ApiError('Invalid signature', 401);
+    }
     try {
       const payload = JSON.parse(raw);
+      const comments = parseComments(payload);
+      const messages = parseWebhook(payload);
+      const fields = [
+        ...new Set(
+          (Array.isArray(payload.entry) ? payload.entry : []).flatMap(
+            (e: { changes?: { field?: string }[]; messaging?: unknown[] }) => [
+              ...(e.changes ?? []).map((c) => `changes.${c.field}`),
+              ...(e.messaging ? ['messaging'] : []),
+            ],
+          ),
+        ),
+      ];
+      this.log.log(
+        `${payload.object}: ${fields.join(', ') || 'no events'} -> ${comments.length} comment(s), ${messages.length} message(s) kept`,
+      );
       // Public comments: the database finds a phone number in them and tells the team (social_comment_lead).
-      for (const comment of parseComments(payload)) {
+      for (const comment of comments) {
         await this.db.withActor(null, (trx) =>
           trx
             .insertInto('social_comments')
@@ -79,7 +101,7 @@ export class MetaWebhookController {
             .execute(),
         );
       }
-      for (const message of parseWebhook(payload)) {
+      for (const message of messages) {
         await this.db.withActor(null, async (trx) => {
           const customerId = await this.customerFor(
             trx as unknown as Database,
@@ -109,6 +131,7 @@ export class MetaWebhookController {
       }
     } catch (error) {
       // Answer 200 anyway: Meta retries failed deliveries for hours and then disables the webhook.
+      this.log.error(`failed: ${(error as Error).message}`);
       Sentry.captureException(error, { tags: { area: 'meta-webhook' } });
     }
     return new Raw({ received: true });
