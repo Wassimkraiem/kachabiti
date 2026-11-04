@@ -12,6 +12,7 @@ import * as Sentry from '@sentry/nestjs';
 import type { Request } from 'express';
 import { sql } from 'kysely';
 import {
+  parseComments,
   parseWebhook,
   validSignature,
   type IncomingMessage,
@@ -21,7 +22,8 @@ import { ApiError, Raw } from '../common/api';
 import { Database } from '../db/database';
 
 /**
- * Port of app/api/webhooks/meta: Messenger, Instagram Direct and WhatsApp messages. Public (Meta
+ * Port of app/api/webhooks/meta: Messenger, Instagram Direct and WhatsApp messages, and the public
+ * comments on the Page's and Instagram account's posts (social_comments). Public (Meta
  * calls it); every POST must be signed with META_APP_SECRET. Messages are stored on the customer
  * they come from (by platform id, then phone; a new contact gets a record).
  */
@@ -56,7 +58,28 @@ export class MetaWebhookController {
     )
       throw new ApiError('Invalid signature', 401);
     try {
-      for (const message of parseWebhook(JSON.parse(raw))) {
+      const payload = JSON.parse(raw);
+      // Public comments: the database finds a phone number in them and tells the team (social_comment_lead).
+      for (const comment of parseComments(payload)) {
+        await this.db.withActor(null, (trx) =>
+          trx
+            .insertInto('social_comments')
+            .values({
+              platform: comment.platform,
+              external_id: comment.externalId,
+              post_id: comment.postId,
+              author_id: comment.authorId,
+              author_name: comment.authorName,
+              body: comment.text.slice(0, 5000),
+              commented_at: comment.commentedAt,
+            })
+            .onConflict((oc) =>
+              oc.columns(['platform', 'external_id']).doNothing(),
+            )
+            .execute(),
+        );
+      }
+      for (const message of parseWebhook(payload)) {
         await this.db.withActor(null, async (trx) => {
           const customerId = await this.customerFor(
             trx as unknown as Database,

@@ -9,6 +9,7 @@ import { useMobileTableLabels } from "@/components/admin/mobile-table-labels";
 import { installAdminFetchCache } from "@/components/admin/admin-fetch-cache";
 import type { MenuProps } from "antd";
 import {
+    CommentOutlined,
     DashboardOutlined,
     ShoppingOutlined,
     PlusOutlined,
@@ -81,6 +82,7 @@ const menuItems: MenuItem[] = [
             { key: "/admin/delivery", icon: <CarOutlined />, label: msg("Delivery") },
             { key: "/admin/customers", icon: <ContactsOutlined />, label: msg("Customers") },
             { key: "/admin/customers/inbox", icon: <MessageOutlined />, label: msg("Inbox") },
+            { key: "/admin/customers/comments", icon: <CommentOutlined />, label: msg("Comments") },
             { key: "/admin/pos", icon: <ShopOutlined />, label: msg("Point of sale") },
         ],
     },
@@ -216,6 +218,7 @@ const MENU_PERMISSIONS: Record<string, Permission | "admin" | "owner"> = {
     "/admin/delivery": "orders",
     "/admin/customers": "customers",
     "/admin/customers/inbox": "customers",
+    "/admin/customers/comments": "customers",
     "/admin/pos": "pos",
     "/admin/pos/sessions": "pos",
     stock: "stock",

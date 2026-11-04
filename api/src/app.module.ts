@@ -52,6 +52,7 @@ import {
 } from './admin/public.controllers';
 import { CampaignsController } from './crm/campaigns.controller';
 import {
+  CommentsController,
   CustomersController,
   InteractionsController,
   TasksController,
@@ -127,6 +128,7 @@ import {
     CustomersController,
     InteractionsController,
     TasksController,
+    CommentsController,
     MetaWebhookController,
     CampaignsController,
     PosController,

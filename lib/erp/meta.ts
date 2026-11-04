@@ -91,6 +91,54 @@ export function parseWebhook(payload: Json): IncomingMessage[] {
     return out.filter((m) => m.senderId);
 }
 
+export interface IncomingComment {
+    platform: 'facebook' | 'instagram';
+    externalId: string;      // comment id (dedupes Meta's retries)
+    postId: string | null;
+    authorId: string | null;
+    authorName: string | null;
+    text: string;
+    commentedAt: Date;
+}
+
+/**
+ * New public comments in a webhook payload: the Page's `feed` field (item "comment", verb "add")
+ * and the Instagram account's `comments` field. The shop's own replies are skipped.
+ */
+export function parseComments(payload: Json): IncomingComment[] {
+    const out: IncomingComment[] = [];
+    for (const entry of arr(payload.entry)) {
+        const ownId = String(entry.id ?? '');
+        for (const change of arr(entry.changes)) {
+            const value = obj(change.value);
+            const from = obj(value.from);
+            if (String(from.id ?? '') === ownId) continue;
+            if (payload.object === 'page' && change.field === 'feed' && value.item === 'comment' && value.verb === 'add' && value.comment_id) {
+                out.push({
+                    platform: 'facebook',
+                    externalId: String(value.comment_id),
+                    postId: value.post_id ? String(value.post_id) : null,
+                    authorId: from.id ? String(from.id) : null,
+                    authorName: typeof from.name === 'string' ? from.name : null,
+                    text: typeof value.message === 'string' ? value.message : '',
+                    commentedAt: new Date((Number(value.created_time) || Date.now() / 1000) * 1000),
+                });
+            } else if (payload.object === 'instagram' && change.field === 'comments' && value.id) {
+                out.push({
+                    platform: 'instagram',
+                    externalId: String(value.id),
+                    postId: obj(value.media).id ? String(obj(value.media).id) : null,
+                    authorId: from.id ? String(from.id) : null,
+                    authorName: typeof from.username === 'string' ? from.username : null,
+                    text: typeof value.text === 'string' ? value.text : '',
+                    commentedAt: new Date((Number(entry.time) || Date.now() / 1000) * 1000),
+                });
+            }
+        }
+    }
+    return out;
+}
+
 /** Sends a text reply. Throws with Meta's message when it refuses. */
 export async function sendMetaText(channel: MetaChannel, recipientId: string, text: string): Promise<string | null> {
     let url: string;

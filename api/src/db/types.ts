@@ -963,6 +963,27 @@ export interface ShippingRates {
   updated_at: Generated<Timestamp>;
 }
 
+export interface SocialComments {
+  author_id: string | null;
+  author_name: string | null;
+  body: Generated<string>;
+  commented_at: Generated<Timestamp>;
+  created_at: Generated<Timestamp>;
+  customer_id: string | null;
+  deleted_at: Timestamp | null;
+  external_id: string;
+  handled_at: Timestamp | null;
+  handled_by: string | null;
+  handled_by_email: string | null;
+  id: Generated<string>;
+  phone: string | null;
+  platform: string;
+  post_id: string | null;
+  post_url: string | null;
+  task_id: string | null;
+  updated_at: Generated<Timestamp>;
+}
+
 export interface SiteSettings {
   created_at: Generated<Timestamp>;
   description: string | null;
@@ -1154,6 +1175,7 @@ export interface DB {
   sales_invoices: SalesInvoices;
   shipping_rates: ShippingRates;
   site_settings: SiteSettings;
+  social_comments: SocialComments;
   sizes: Sizes;
   small_cards: SmallCards;
   stock_movements: StockMovements;

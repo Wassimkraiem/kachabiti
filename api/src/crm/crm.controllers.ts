@@ -761,3 +761,121 @@ export class TasksController {
     return { id };
   }
 }
+
+// ── Public comments on the shop's posts ──
+
+const commentsPatchSchema = z.object({
+  ids: z.array(zId).min(1).max(500),
+  handled: z.boolean(),
+});
+
+@Controller('crm/comments')
+@Public()
+export class CommentsController {
+  constructor(private readonly db: Database) {}
+
+  /** ?show=all|leads (with a phone)|open (not handled) &platform=&q=&page= — newest first. */
+  @Get()
+  async list(@Query() query: Record<string, string>) {
+    const q = params(query);
+    const page = q.int('page', 1, 10_000);
+    const size = q.int('size', 50, 200);
+    let filtered = this.db
+      .selectFrom('social_comments as sc')
+      .where('sc.deleted_at', 'is', null);
+    if (q.get('show') === 'leads')
+      filtered = filtered.where('sc.phone', 'is not', null);
+    if (q.get('show') === 'open')
+      filtered = filtered.where('sc.handled_at', 'is', null);
+    if (q.get('platform'))
+      filtered = filtered.where('sc.platform', '=', q.get('platform')!);
+    const term = q.get('q');
+    if (term) {
+      const like = `%${term.replace(/[%_]/g, ' ')}%`;
+      filtered = filtered.where((eb) =>
+        eb.or([
+          eb('sc.body', 'ilike', like),
+          eb('sc.author_name', 'ilike', like),
+          eb('sc.phone', 'ilike', like),
+        ]),
+      );
+    }
+    const count = (show: 'leads' | 'open') =>
+      this.db
+        .selectFrom('social_comments')
+        .select((eb) => eb.fn.countAll<number>().as('n'))
+        .where('deleted_at', 'is', null)
+        .where(
+          show === 'leads' ? 'phone' : 'handled_at',
+          show === 'leads' ? 'is not' : 'is',
+          null,
+        )
+        .executeTakeFirstOrThrow();
+    const [rows, total, leads, open] = await Promise.all([
+      filtered
+        .selectAll('sc')
+        .select((eb) => [
+          one(
+            eb,
+            'customers as c',
+            ['c.id', 'c.full_name', 'c.stage', 'c.assigned_to_email'],
+            'c.id',
+            'sc.customer_id',
+            (q) => q.where('c.deleted_at', 'is', null),
+          ).as('customer'),
+          one(
+            eb,
+            'crm_tasks as t',
+            ['t.id', 't.done_at'],
+            't.id',
+            'sc.task_id',
+            (q) => q.where('t.deleted_at', 'is', null),
+          ).as('task'),
+        ])
+        .orderBy('sc.commented_at', 'desc')
+        .limit(size)
+        .offset((page - 1) * size)
+        .execute(),
+      filtered
+        .select((eb) => eb.fn.countAll<number>().as('n'))
+        .executeTakeFirstOrThrow(),
+      count('leads'),
+      count('open'),
+    ]);
+    return {
+      rows,
+      total: total.n,
+      page,
+      size,
+      leads: leads.n,
+      open: open.n,
+      connected: metaConfigured(),
+    };
+  }
+
+  /** { ids, handled } — marks comments handled (or not) by the signed-in agent. */
+  @Patch()
+  async patch(
+    @Body(new Zod(commentsPatchSchema))
+    body: z.infer<typeof commentsPatchSchema>,
+    @CurrentActor() actor: RequestActor,
+  ) {
+    const changed = await this.db.withActor(actor, (trx) =>
+      trx
+        .updateTable('social_comments')
+        .set(
+          body.handled
+            ? {
+                handled_at: new Date(),
+                handled_by: actor.userId,
+                handled_by_email: actor.email,
+              }
+            : { handled_at: null, handled_by: null, handled_by_email: null },
+        )
+        .where('id', 'in', body.ids)
+        .where('deleted_at', 'is', null)
+        .executeTakeFirst(),
+    );
+    return { changed: Number(changed.numUpdatedRows) };
+  }
+}
