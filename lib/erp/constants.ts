@@ -208,3 +208,21 @@ export const DOCUMENT_KIND_LABELS: Record<DocumentKind, string> = {
 
 /** Orders still moving through the pipeline (a second one from the same phone is a possible duplicate). */
 export const OPEN_ORDER_STATUSES = ['pending', 'confirmed', 'processing', 'shipped'] as const;
+
+export const TICKET_STATUSES = ['todo', 'in_progress', 'done'] as const;
+export type TicketStatus = (typeof TICKET_STATUSES)[number];
+
+export const TICKET_STATUS_LABELS: Record<TicketStatus, string> = {
+    todo: msg('To do'),
+    in_progress: msg('In progress'),
+    done: msg('Done'),
+};
+
+export const TICKET_PRIORITIES = ['low', 'normal', 'high'] as const;
+export type TicketPriority = (typeof TICKET_PRIORITIES)[number];
+
+export const TICKET_PRIORITY_LABELS: Record<TicketPriority, string> = {
+    low: msg('Low'),
+    normal: msg('Normal'),
+    high: msg('High'),
+};

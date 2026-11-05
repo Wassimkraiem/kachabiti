@@ -29,14 +29,14 @@ import { Database } from '../db/database';
 // Ports of app/api/upload/image and app/api/finance/documents, on S3-compatible storage (AWS S3).
 // Access rules come from lib/api-access.ts (upload: products or marketing; documents: finance).
 
-type Upload = {
+export type Upload = {
   buffer: Buffer;
   mimetype: string;
   originalname: string;
   size: number;
 };
 
-const IMAGE_TYPES: Record<string, string> = {
+export const IMAGE_TYPES: Record<string, string> = {
   'image/jpeg': 'jpg',
   'image/jpg': 'jpg',
   'image/png': 'png',

@@ -1,5 +1,6 @@
 "use client";
 
+import type { StatusGroup } from "@/lib/colissimo-data";
 
 /** A parcel as GET /api/delivery returns it. */
 export interface Delivery {
@@ -38,6 +39,13 @@ export interface DeliveryList {
     configured: { add: boolean; tracking: boolean };
     /** The last automatic check (every 15 minutes), null until the first one. */
     tracking: (RefreshResult & { at: string }) | null;
+}
+
+/** One page of the list (GET /api/delivery?page=): tab counts, and the parcels shown that Colissimo can still take. */
+export interface DeliveryPageData extends DeliveryList {
+    total: number;
+    counts: Record<"all" | "validate" | StatusGroup, number>;
+    waiting: string[];
 }
 
 /** A parcel waiting for pickup can be edited at Colissimo. */

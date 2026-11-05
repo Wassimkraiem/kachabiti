@@ -729,6 +729,13 @@ export const openApiSpec = {
             },
         },
         '/api/orders': {
+            get: {
+                tags: ['Operations'],
+                summary: 'One page of orders, or one order with its lines (orders permission)',
+                description: '`?id=` returns one order. Otherwise `data` is a page of orders, each with `items`, `deliveries` and `duplicates` (order numbers in progress with the same phone), and `total` beside it. `handled_by` is `website`, `none` or a user id; `q` searches the number, customer, e-mail, phone, agent, parcel barcode and traffic source; `from` and `to` are days in Tunis time, both included; `sort` is created_at, order_number, total, status or payment_status.',
+                parameters: ['id', 'page', 'size', 'status', 'payment_status', 'channel', 'handled_by', 'from', 'to', 'q', 'sort', 'dir'].map((name) => ({ name, in: 'query', schema: { type: 'string' } })),
+                responses: { 200: messageResponse('{ data, total }') },
+            },
             post: {
                 tags: ['Operations'],
                 summary: 'Place an order (checkout)',
@@ -777,9 +784,9 @@ export const openApiSpec = {
             get: {
                 tags: ['Operations'],
                 summary: 'Colissimo parcels (orders permission)',
-                description: 'Live parcels with their order (each with `paid`, the driver\'s live report `driver_status` / `driver_reason`, `manifest_id`, `handed_over_at` and a pending `price_change`), which Colissimo tokens are configured, and the last automatic check (`tracking`, every 15 minutes; null until the first one).',
-                parameters: [{ name: 'order_id', in: 'query', schema: { type: 'string', format: 'uuid' } }],
-                responses: { 200: messageResponse('{ rows, configured: { add, tracking }, tracking: { at, checked, changed, failures } | null }') },
+                description: 'Live parcels with their order (each with `paid`, the driver\'s live report `driver_status` / `driver_reason`, `manifest_id`, `handed_over_at` and a pending `price_change`), which Colissimo tokens are configured, and the last automatic check (`tracking`, every 15 minutes; null until the first one). With `page`, one page instead of the whole list, plus `total`, `counts` per tab (within `from`, `to` and `source`, whatever the search) and `waiting` (ids of the parcels shown that Colissimo can still take, on any page). `tab` is all, validate, pending, moving, delivered, returned or problem; `source` is system or imported; `sort=changed` sorts by last change.',
+                parameters: ['order_id', 'page', 'size', 'tab', 'source', 'from', 'to', 'q', 'sort', 'dir'].map((name) => ({ name, in: 'query', schema: { type: 'string' } })),
+                responses: { 200: messageResponse('{ rows, configured: { add, tracking }, tracking: { at, checked, changed, failures } | null, total?, counts?, waiting? }') },
             },
             post: {
                 tags: ['Operations'],

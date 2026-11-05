@@ -41,7 +41,6 @@ const entries: Entry[] = [
     ["Language", "Langue", "اللغة"],
     ["Admin", "Admin", "مدير"],
     ["Staff", "Personnel", "موظف"],
-    ["Redirecting to admin dashboard...", "Redirection vers le tableau de bord…", "جارٍ التحويل إلى لوحة التحكم…"],
     ["Sign in with your admin or staff account.", "Connectez-vous avec votre compte administrateur ou équipe.", "سجّل الدخول بحساب المدير أو الموظف."],
     ["Invalid email or password.", "E-mail ou mot de passe incorrect.", "البريد الإلكتروني أو كلمة المرور غير صحيحة."],
     ["Confirm your email first.", "Confirmez d'abord votre e-mail.", "أكّد بريدك الإلكتروني أولاً."],

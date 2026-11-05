@@ -34,6 +34,7 @@ import {
     CarOutlined,
     TrophyOutlined,
     CheckSquareOutlined,
+    ProjectOutlined,
     ContactsOutlined,
     MessageOutlined,
     FundOutlined,
@@ -75,6 +76,7 @@ const menuItems: MenuItem[] = [
         key: "g-work",
         label: msg("My work"),
         children: [
+            { key: "/admin/tickets", icon: <ProjectOutlined />, label: msg("Team tasks") },
             { key: "/admin/dashboard", icon: <DashboardOutlined />, label: msg("Dashboard") },
             { key: "/admin/my-work", icon: <CheckSquareOutlined />, label: msg("My day") },
             { key: "/admin/orders", icon: <ShoppingCartOutlined />, label: msg("Orders") },

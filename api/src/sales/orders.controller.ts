@@ -8,15 +8,17 @@ import {
   Query,
 } from '@nestjs/common';
 import * as Sentry from '@sentry/nestjs';
+import { sql } from 'kysely';
 import { jsonArrayFrom } from 'kysely/helpers/postgres';
 import { z } from 'zod';
 import { COLISSIMO_GOVERNORATES } from '@shared/colissimo-data';
+import { OPEN_ORDER_STATUSES } from '@shared/erp/constants';
 import { sendOrderConfirmationEmail } from '@shared/order-confirmation-email';
 import { generateOrderNumber } from '@shared/order-number';
 import type { Order, OrderItem } from '@shared/order-types';
 import { CurrentActor, CurrentUserId, Public } from '../auth/decorators';
 import type { RequestActor } from '../auth/auth.guard';
-import { ApiError, idsFrom, zDate } from '../common/api';
+import { ApiError, Envelope, idsFrom, params, zDate, zId } from '../common/api';
 import { invalidateCatalog } from '../catalog/revalidate';
 import { Database } from '../db/database';
 import { priceOrder } from './commerce';
@@ -24,6 +26,14 @@ import { ColissimoTracking } from './colissimo-tracking';
 
 // Port of app/api/orders/route.ts: the public checkout (POST) and the admin order list, status
 // changes and deletes (rules in lib/api-access.ts: `orders`).
+
+const ORDER_SORTS = [
+  'created_at',
+  'order_number',
+  'total',
+  'status',
+  'payment_status',
+] as const;
 
 const orderItemSchema = z.object({
   id: z.guid(),
@@ -176,21 +186,17 @@ export class OrdersController {
     return order;
   }
 
-  /** The list (with thumbnails and parcel), or one order with its lines (?id=). */
+  /** One page of the list (with thumbnails and parcel), or one order with its lines (?id=). */
   @Get()
-  async list(
-    @Query('id') id?: string,
-    @Query('status') status?: string,
-    @Query('from') from?: string,
-    @Query('to') to?: string,
-  ) {
-    let query = this.db
+  async list(@Query() query: Record<string, string>) {
+    const q = params(query);
+    const id = q.get('id');
+    let filtered = this.db
       .selectFrom('orders as o')
-      .selectAll('o')
-      .where('o.deleted_at', 'is', null)
-      .orderBy('o.created_at', 'desc');
+      .where('o.deleted_at', 'is', null);
     if (id) {
-      const rows = await query
+      const rows = await filtered
+        .selectAll('o')
         .select((eb) =>
           jsonArrayFrom(
             eb
@@ -203,46 +209,112 @@ export class OrdersController {
         .execute();
       return rows[0] ?? [];
     }
+    const status = q.get('status');
     if (status && status !== 'all')
-      query = query.where('o.status', '=', status);
+      filtered = filtered.where('o.status', '=', status);
+    const payment = q.get('payment_status');
+    if (payment) filtered = filtered.where('o.payment_status', '=', payment);
+    const channel = q.get('channel');
+    if (channel) filtered = filtered.where('o.channel', '=', channel);
+    const handler = q.get('handled_by');
+    if (handler === 'website')
+      filtered = filtered.where('o.created_by', 'is', null);
+    else if (handler === 'none')
+      filtered = filtered
+        .where('o.assigned_to', 'is', null)
+        .where('o.created_by', 'is', null);
+    else if (handler)
+      filtered = filtered.where(
+        sql<string>`coalesce(o.assigned_to, o.created_by)`,
+        '=',
+        zId.parse(handler),
+      );
     // Created between these days (YYYY-MM-DD, Tunis time: UTC+1 all year), both included.
+    const from = q.get('from');
+    const to = q.get('to');
     if (from)
-      query = query.where(
+      filtered = filtered.where(
         'o.created_at',
         '>=',
         new Date(`${zDate.parse(from)}T00:00:00+01:00`).toISOString(),
       );
     if (to)
-      query = query.where(
+      filtered = filtered.where(
         'o.created_at',
         '<',
         new Date(
           new Date(`${zDate.parse(to)}T00:00:00+01:00`).getTime() + 86_400_000,
         ).toISOString(),
       );
-    return query
-      .select((eb) => [
-        jsonArrayFrom(
-          eb
-            .selectFrom('order_items as i')
-            .select([
-              'i.id',
-              'i.product_name',
-              'i.product_image',
-              'i.quantity',
-              'i.variant_label',
-            ])
-            .whereRef('i.order_id', '=', 'o.id'),
-        ).as('items'),
-        jsonArrayFrom(
-          eb
-            .selectFrom('deliveries as d')
-            .select(['d.status', 'd.barcode'])
-            .whereRef('d.order_id', '=', 'o.id')
-            .where('d.deleted_at', 'is', null),
-        ).as('deliveries'),
-      ])
-      .execute();
+    const term = q.get('q');
+    if (term) {
+      const like = `%${term.replace(/[%,()]/g, ' ')}%`;
+      filtered = filtered.where((eb) =>
+        eb.or([
+          eb('o.order_number', 'ilike', like),
+          eb('o.customer_first_name', 'ilike', like),
+          eb('o.customer_last_name', 'ilike', like),
+          eb('o.customer_email', 'ilike', like),
+          eb('o.customer_phone', 'ilike', like),
+          eb('o.created_by_email', 'ilike', like),
+          eb('o.traffic_source', 'ilike', like),
+          eb.exists(
+            eb
+              .selectFrom('deliveries as d')
+              .select('d.id')
+              .whereRef('d.order_id', '=', 'o.id')
+              .where('d.deleted_at', 'is', null)
+              .where('d.barcode', 'ilike', like),
+          ),
+        ]),
+      );
+    }
+
+    const page = q.int('page', 1, 10_000);
+    const size = q.int('size', 10, 200);
+    const sort =
+      ORDER_SORTS.find((column) => column === q.get('sort')) ?? 'created_at';
+    const open = [...OPEN_ORDER_STATUSES];
+    const [rows, count] = await Promise.all([
+      filtered
+        .selectAll('o')
+        .select((eb) => [
+          jsonArrayFrom(
+            eb
+              .selectFrom('order_items as i')
+              .select([
+                'i.id',
+                'i.product_name',
+                'i.product_image',
+                'i.quantity',
+                'i.variant_label',
+              ])
+              .whereRef('i.order_id', '=', 'o.id'),
+          ).as('items'),
+          jsonArrayFrom(
+            eb
+              .selectFrom('deliveries as d')
+              .select(['d.status', 'd.barcode'])
+              .whereRef('d.order_id', '=', 'o.id')
+              .where('d.deleted_at', 'is', null),
+          ).as('deliveries'),
+          // Orders in progress sharing this one's phone: possible duplicates.
+          sql<string[]>`case when o.status = any(${open}) then array(
+            select x.order_number from orders x
+             where x.id <> o.id and x.deleted_at is null and x.status = any(${open})
+               and public.normalize_phone(x.customer_phone) = public.normalize_phone(o.customer_phone)
+          ) else '{}' end`.as('duplicates'),
+        ])
+        .orderBy(`o.${sort}`, q.get('dir') === 'asc' ? 'asc' : 'desc')
+        .orderBy('o.id')
+        .limit(size)
+        .offset((page - 1) * size)
+        .execute(),
+      filtered
+        .select((eb) => eb.fn.countAll<number>().as('n'))
+        .executeTakeFirstOrThrow(),
+    ]);
+    return new Envelope(rows, { total: Number(count.n) });
   }
 
   /**

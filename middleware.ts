@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse, type NextFetchEvent } from 'next/server';
 import { supportedLanguages, defaultLanguage, detectLanguageFromHeader, isValidLocale } from './lib/language-utils';
-import { allows, getAdminRole, getPermissions, type Requirement } from './lib/admin-auth';
+import { adminHome, allows, getAdminRole, getPermissions, type Requirement } from './lib/admin-auth';
 import { ACCESS_COOKIE, REFRESH_COOKIE, verifyAccessToken } from './lib/auth-session';
 
 const ADMIN_LOGIN_PATH = '/admin/login';
@@ -10,6 +10,7 @@ const PAGE_PERMISSIONS: [string, Requirement][] = [
     ['/admin/overview', { owner: true }],
     ['/admin/colissimo-account', { owner: true }],
     ['/admin/team', { admin: true }],
+    ['/admin/tickets', { any: [] }],
     ['/admin/activity', { admin: true }],
     ['/admin/performance', { admin: true }],
     ['/admin/goals', { admin: true }],
@@ -123,9 +124,8 @@ async function handle(request: NextRequest, event: NextFetchEvent) {
 
     // Already-signed-in back-office users have no reason to see the login form.
     if (pathname === ADMIN_LOGIN_PATH) {
-        if (getAdminRole(await getRequestUser(request))) {
-            return NextResponse.redirect(new URL('/admin/dashboard', request.url));
-        }
+        const role = getAdminRole(await getRequestUser(request));
+        if (role) return NextResponse.redirect(new URL(adminHome(role), request.url));
         return NextResponse.next();
     }
 
@@ -140,8 +140,9 @@ async function handle(request: NextRequest, event: NextFetchEvent) {
         }
         if (!allows(needed, role, getPermissions(user))) {
             logRefusal(request, event);
-            return NextResponse.redirect(new URL('/admin/dashboard', request.url));
+            return NextResponse.redirect(new URL(adminHome(role), request.url));
         }
+        if (pathname === '/admin') return NextResponse.redirect(new URL(adminHome(role), request.url));
         return NextResponse.next({ request: { headers: request.headers } });
     }
 

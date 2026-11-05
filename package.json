@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^6.3.4",
+    "@hello-pangea/dnd": "^18.0.1",
     "@hookform/resolvers": "^5.9.1",
     "@sentry/nextjs": "^11.4.0",
     "antd": "^6.6.5",

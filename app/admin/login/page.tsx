@@ -23,7 +23,7 @@ async function fetchBackOfficeRole(): Promise<{ data?: { role?: string } } | nul
 
 // Only allow redirects back into the admin area.
 function safeNextPath(next: string | null): string {
-    return next && next.startsWith("/admin/") && !next.startsWith("//") ? next : "/admin/dashboard";
+    return next && next.startsWith("/admin/") && !next.startsWith("//") ? next : "/admin"; // middleware picks the role's home
 }
 
 function AdminLoginForm() {

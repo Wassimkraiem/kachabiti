@@ -8,6 +8,7 @@ import {
   Query,
 } from '@nestjs/common';
 import * as Sentry from '@sentry/nestjs';
+import { sql } from 'kysely';
 import { jsonArrayFrom, jsonObjectFrom } from 'kysely/helpers/postgres';
 import { z } from 'zod';
 import {
@@ -25,12 +26,13 @@ import {
 import {
   COLISSIMO_GOVERNORATES,
   parcelFromOrder,
+  statusInfo,
 } from '@shared/colissimo-data';
 import { MANUAL_CHANNELS, type Channel } from '@shared/erp/constants';
 import { generateOrderNumber } from '@shared/order-number';
 import { CurrentActor, Public } from '../auth/decorators';
 import type { RequestActor } from '../auth/auth.guard';
-import { ApiError, idsFrom } from '../common/api';
+import { ApiError, idsFrom, params, zDate } from '../common/api';
 import { invalidateCatalog } from '../catalog/revalidate';
 import { Database } from '../db/database';
 import {
@@ -171,9 +173,14 @@ export class DeliveryController {
     private readonly tracking: ColissimoTracking,
   ) {}
 
-  private select() {
+  private live() {
     return this.db
       .selectFrom('deliveries as d')
+      .where('d.deleted_at', 'is', null);
+  }
+
+  private select(parcels = this.live()) {
+    return parcels
       .selectAll('d')
       .select((eb) =>
         jsonObjectFrom(
@@ -189,23 +196,136 @@ export class DeliveryController {
             ])
             .whereRef('o.id', '=', 'd.order_id'),
         ).as('order'),
-      )
-      .where('d.deleted_at', 'is', null);
+      );
+  }
+
+  /**
+   * One page of Admin → Delivery. Tabs count the parcels within the dates and source, whatever the
+   * search; `waiting` is what "Validate for pickup" takes when nothing is ticked: every parcel
+   * shown that Colissimo can still take, on any page.
+   */
+  private async page(q: ReturnType<typeof params>) {
+    const page = q.int('page', 1, 10_000);
+    const size = q.int('size', 25, 200);
+    let sent = this.live();
+    // Sent between these days (YYYY-MM-DD, Tunis time: UTC+1 all year), both included.
+    const from = q.get('from');
+    const to = q.get('to');
+    if (from)
+      sent = sent.where(
+        'd.created_at',
+        '>=',
+        new Date(`${zDate.parse(from)}T00:00:00+01:00`).toISOString(),
+      );
+    if (to)
+      sent = sent.where(
+        'd.created_at',
+        '<',
+        new Date(
+          new Date(`${zDate.parse(to)}T00:00:00+01:00`).getTime() + 86_400_000,
+        ).toISOString(),
+      );
+    const source = q.get('source');
+    const imported = sql<boolean>`exists (select 1 from orders o where o.id = d.order_id and o.order_number like 'COL-%')`;
+    if (source === 'imported') sent = sent.where(imported);
+    if (source === 'system') sent = sent.where(sql<boolean>`not ${imported}`);
+
+    const hasBarcode = sql<boolean>`d.barcode is not null`;
+    const groups = await sent
+      .select([
+        'd.status',
+        hasBarcode.as('has_barcode'),
+        (eb) => eb.fn.countAll<number>().as('n'),
+      ])
+      .groupBy(['d.status', hasBarcode])
+      .execute();
+    // The same rule as canEditParcel() on the page; statusInfo() stays the one map of statuses.
+    const tabOf = (g: { status: string; has_barcode: boolean }) =>
+      g.has_barcode && g.status === 'En attente'
+        ? 'validate'
+        : statusInfo(g.status).group;
+    const counts = {
+      all: 0,
+      validate: 0,
+      pending: 0,
+      moving: 0,
+      delivered: 0,
+      returned: 0,
+      problem: 0,
+    };
+    for (const group of groups) {
+      counts.all += Number(group.n);
+      counts[tabOf(group)] += Number(group.n);
+    }
+
+    const canTake = sql<boolean>`d.status = 'En attente' and d.barcode is not null`;
+    let shown = sent;
+    const tab = q.get('tab');
+    if (tab === 'validate') shown = shown.where(canTake);
+    else if (tab && tab !== 'all') {
+      const statuses = groups
+        .filter((g) => tabOf(g) === tab)
+        .map((g) => g.status);
+      shown = shown.where(
+        sql<boolean>`d.status = any(${statuses}) and not (${canTake})`,
+      );
+    }
+    const term = q.get('q');
+    if (term) {
+      const like = `%${term.replace(/[%,()]/g, ' ')}%`;
+      shown = shown.where((eb) =>
+        eb.or([
+          eb('d.barcode', 'ilike', like),
+          eb('d.recipient_name', 'ilike', like),
+          eb('d.phone', 'ilike', like),
+          eb('d.governorate', 'ilike', like),
+          eb('d.city', 'ilike', like),
+          sql<boolean>`exists (select 1 from orders o where o.id = d.order_id and (
+            o.order_number ilike ${like} or o.customer_first_name || ' ' || o.customer_last_name ilike ${like}))`,
+        ]),
+      );
+    }
+
+    const [rows, count, waiting] = await Promise.all([
+      this.select(shown)
+        .orderBy(
+          q.get('sort') === 'changed'
+            ? sql`coalesce(d.status_changed_at, d.created_at)`
+            : sql`d.created_at`,
+          q.get('dir') === 'asc' ? 'asc' : 'desc',
+        )
+        .orderBy('d.id')
+        .limit(size)
+        .offset((page - 1) * size)
+        .execute(),
+      shown
+        .select((eb) => eb.fn.countAll<number>().as('n'))
+        .executeTakeFirstOrThrow(),
+      shown.where(canTake).select('d.id').execute(),
+    ]);
+    return {
+      rows,
+      total: Number(count.n),
+      counts,
+      waiting: waiting.map((row) => row.id),
+    };
   }
 
   @Get()
-  async list(@Query('order_id') orderId?: string) {
-    // shortcut: the whole list goes to the page, which filters it (about 12,000 parcels in Nov 2026,
-    // old imports included; compressed by Caddy); move search and paging to the server when it
-    // nears this limit.
-    let query = this.select().orderBy('d.created_at', 'desc').limit(30000);
-    if (orderId) query = query.where('d.order_id', '=', orderId);
-    return {
-      rows: await query.execute(),
+  async list(@Query() query: Record<string, string>) {
+    const q = params(query);
+    const orderId = q.get('order_id');
+    const status = {
       configured: colissimoConfigured(),
       // The last automatic check (every 15 minutes), for "checked … ago".
       tracking: this.tracking.lastRun,
     };
+    if (q.get('page')) return { ...(await this.page(q)), ...status };
+    // shortcut: without ?page= the whole list is sent, for Admin → Colissimo account's totals
+    // (about 12,000 parcels in Nov 2026); give it totals from the server as it nears this limit.
+    let list = this.select().orderBy('d.created_at', 'desc').limit(30000);
+    if (orderId) list = list.where('d.order_id', '=', orderId);
+    return { rows: await list.execute(), ...status };
   }
 
   /** A parcel's details and full status history, read from Colissimo's website (any barcode). */

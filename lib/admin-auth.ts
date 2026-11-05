@@ -5,6 +5,9 @@ export type AdminRole = 'owner' | 'admin' | 'staff';
 /** Owners and admins have every permission; only owners manage other owners and get owner alerts. */
 export const hasFullAccess = (role: AdminRole | null | undefined): boolean => role === 'owner' || role === 'admin';
 
+/** Where a back-office user starts: staff on the team's tasks, owners and admins on the dashboard. */
+export const adminHome = (role: AdminRole | null | undefined): string => (hasFullAccess(role) ? '/admin/dashboard' : '/admin/tickets');
+
 /**
  * What a staff member can be allowed to do. Admins implicitly have every permission,
  * plus team management, which can't be granted to staff.

@@ -10,7 +10,8 @@ const parcelAt = (barcode) => mock(`/__mock/parcel?barcode=${barcode}`);
 
 await mock('/__mock/reset', {});
 const owner = await user('owner@test.local', { role: 'owner' });
-const shopper = await user(`shopper-${Date.now()}@test.local`);
+const run = Date.now();
+const shopper = await user(`shopper-${run}@test.local`);
 ok(owner.id && shopper.id, 'test users signed in');
 
 let product = (await sql("select * from products where slug = 'e2e-kachabia'"))[0]
@@ -143,5 +144,35 @@ ok(r.status === 502 && (await sql("select 1 from deliveries where barcode = '999
 // The list reports the last automatic check (null until the first one runs, a minute after start).
 r = await owner.call('/api/delivery');
 ok(r.json?.success && 'tracking' in r.json.data, 'the list says when parcels were last checked', Object.keys(r.json?.data ?? {}));
+
+// Paged lists: the server filters, counts and searches what the pages used to work out themselves.
+const fullList = r.json.data.rows;
+const phone = `2${String(run).slice(-7)}`;
+const twinA = await newOrder(phone);
+const twinB = await newOrder(phone);
+r = await owner.call(`/api/orders?q=${twinA.order_number}`);
+ok(r.json?.total === 1 && r.json.data[0].id === twinA.id, 'a search finds the order on any page', r.json?.total);
+ok(r.json?.data?.[0]?.duplicates?.[0] === twinB.order_number, 'a duplicate is flagged even on another page', r.json?.data?.[0]?.duplicates);
+const pageOne = await owner.call('/api/orders?page=1&size=2&sort=total&dir=asc');
+const pageTwo = await owner.call('/api/orders?page=2&size=2&sort=total&dir=asc');
+const ordered = [...pageOne.json.data, ...pageTwo.json.data];
+ok(pageOne.json.data.length === 2 && pageOne.json.total >= 4, 'orders come one page at a time, with the total', pageOne.json.total);
+ok(new Set(ordered.map((o) => o.id)).size === 4 && ordered.every((o, i) => !i || Number(ordered[i - 1].total) <= Number(o.total)), 'pages follow the sort without repeating an order');
+r = await owner.call(`/api/orders?handled_by=${owner.id}&status=pending&size=200`);
+ok(r.json.data.every((o) => (o.assigned_to ?? o.created_by) === owner.id && o.status === 'pending'), 'orders filter by who handles them');
+ok((await owner.call('/api/orders?handled_by=nonsense')).status === 400, 'a bad agent id is refused');
+
+await owner.call('/api/delivery', 'POST', { action: 'validate', order_id: twinA.id });
+r = await owner.call('/api/delivery?page=1&size=1');
+const paged = r.json.data;
+ok(paged.rows.length === 1 && paged.total === fullList.length + 1, 'parcels come one page at a time, with the total', paged.total);
+ok(Object.entries(paged.counts).filter(([tab]) => tab !== 'all').reduce((sum, [, n]) => sum + n, 0) === paged.counts.all, 'each parcel counts in one tab', paged.counts);
+const inValidate = await owner.call('/api/delivery?page=1&tab=validate&size=200');
+ok(inValidate.json.data.total === paged.counts.validate && inValidate.json.data.rows.every((d) => d.status === 'En attente' && d.barcode), 'the tab lists the parcels it counts');
+ok(paged.waiting.length === paged.counts.validate && paged.waiting.length >= 1, '"Validate for pickup" sees waiting parcels on every page', paged.waiting.length);
+r = await owner.call(`/api/delivery?page=1&q=${twinA.order_number}`);
+ok(r.json.data.total === 1 && r.json.data.rows[0].order_id === twinA.id, 'parcels search by order number');
+r = await owner.call(`/api/delivery?page=1&q=${twinA.order_number}&tab=delivered`);
+ok(r.json.data.total === 0 && r.json.data.waiting.length === 0, 'the search stays inside the tab');
 
 done();

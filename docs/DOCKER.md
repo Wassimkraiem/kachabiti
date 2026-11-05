@@ -68,7 +68,7 @@ The end-to-end suites run against this stack and its database (they write data, 
 cd api && node test/e2e/auth.e2e.mjs
 ```
 
-Suites: `auth`, `categories`, `catalog`, `stock`, `files`, `erp`, `objectives` (`npm run test:e2e` in `api/` runs them all, ERP before objectives). The ERP suite checks running totals, so run it on a fresh `npm run docker:import`, before the others that deliver orders (objectives). The sign-up limit (5 per hour per address) is in memory: `docker compose restart api` clears it between repeated runs.
+Suites: `auth`, `categories`, `catalog`, `stock`, `files`, `erp`, `objectives`, `tickets` (`npm run test:e2e` in `api/` runs them all, ERP before objectives). The ERP suite checks running totals, so run it on a fresh `npm run docker:import`, before the others that deliver orders (objectives). The sign-up limit (5 per hour per address) is in memory: `docker compose restart api` clears it between repeated runs.
 
 ## Notes
 

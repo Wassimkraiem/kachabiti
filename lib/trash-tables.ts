@@ -20,6 +20,7 @@ export const TRASH_TABLES = {
     locations: { permission: 'stock', columns: 'id,name,deleted_at' },
     suppliers: { permission: 'stock', columns: 'id,name,deleted_at' },
     collections: { permission: 'stock', columns: 'id,name,deleted_at' },
+    team_tickets: { permission: 'delete', columns: 'id,title,deleted_at' },
 } as const satisfies Record<string, { permission: Permission; columns: string }>;
 
 export type TrashTable = keyof typeof TRASH_TABLES;

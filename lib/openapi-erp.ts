@@ -80,6 +80,17 @@ export const erpPaths: Record<string, Record<string, Op>> = {
         put: op('Customers', 'Update or tick a follow-up'),
         delete: op('Customers', 'Remove a follow-up', { parameters: [q('id', 'Task id', 'string', 'uuid')] }),
     },
+    '/api/admin/tickets': {
+        get: op('Owner', 'Team tasks: open ones, and those finished in the last 30 days'),
+        post: op('Owner', 'Create a task; the assignee is notified', { requestBody: body({ title: { type: 'string' }, description: { type: 'string' }, status: { type: 'string', enum: ['todo', 'in_progress', 'done'] }, priority: { type: 'string', enum: ['low', 'normal', 'high'] }, due_date: date, assigned_to: uuid, position: { type: 'number' } }, ['title']) }),
+        put: op('Owner', 'Edit, move, reorder or reassign a task (id plus the fields to change)'),
+        delete: op('Owner', 'Soft-delete tasks (their author, or the delete permission)', { parameters: [q('id', 'Task id', 'string', 'uuid'), q('ids', 'Task ids, comma-separated')] }),
+    },
+    '/api/admin/tickets/comments': {
+        get: op('Owner', "A task's comments, with image links that last an hour", { parameters: [q('ticket_id', 'Task id', 'string', 'uuid')] }),
+        post: op('Owner', 'Comment on a task (multipart: ticket_id, body and/or an image file up to 5 MB); its assignee and author are notified'),
+        delete: op('Owner', 'Soft-delete a comment (its author, or the delete permission)', { parameters: [q('id', 'Comment id', 'string', 'uuid')] }),
+    },
     '/api/webhooks/meta': {
         get: op('Customers', "Meta webhook subscription check (hub.mode, hub.verify_token, hub.challenge). Public."),
         post: op('Customers', 'Messenger / Instagram / WhatsApp messages (signed with X-Hub-Signature-256). Public.'),
@@ -183,7 +194,7 @@ export const erpPaths: Record<string, Record<string, Op>> = {
         post: op('Owner', "Set an agent's objective and commission (repeat_months to copy it)"),
         delete: op('Owner', 'Remove an objective', { parameters: [q('id', 'Objective id', 'string', 'uuid')] }),
     },
-    '/api/admin/my-work': { get: op('Owner', "The signed-in agent's orders to confirm, follow-ups and month") },
+    '/api/admin/my-work': { get: op('Owner', "The signed-in agent's tasks, orders to confirm, follow-ups and month") },
     '/api/admin/staff': { get: op('Owner', 'Team members for assignment pickers') },
     '/api/admin/erp-settings': {
         get: op('Owner', 'Alert, duplicate and discount rules, and the usual delivery fee (delivery_fee)'),

@@ -1062,6 +1062,37 @@ export interface Suppliers {
   updated_at: Generated<Timestamp>;
 }
 
+export interface TeamTicketComments {
+  author_email: string | null;
+  author_id: string | null;
+  body: Generated<string>;
+  created_at: Generated<Timestamp>;
+  deleted_at: Timestamp | null;
+  id: Generated<string>;
+  image_path: string | null;
+  ticket_id: string;
+  updated_at: Generated<Timestamp>;
+}
+
+export interface TeamTickets {
+  assigned_to: string | null;
+  assigned_to_email: string | null;
+  created_at: Generated<Timestamp>;
+  created_by: string | null;
+  created_by_email: string | null;
+  deleted_at: Timestamp | null;
+  description: string | null;
+  done_at: Timestamp | null;
+  due_date: string | null;
+  id: Generated<string>;
+  position: Generated<number>;
+  priority: Generated<string>;
+  status: Generated<string>;
+  ticket_number: Generated<number>;
+  title: string;
+  updated_at: Generated<Timestamp>;
+}
+
 export interface TreasuryMovements {
   account: string;
   amount: Numeric;
@@ -1180,6 +1211,8 @@ export interface DB {
   small_cards: SmallCards;
   stock_movements: StockMovements;
   suppliers: Suppliers;
+  team_ticket_comments: TeamTicketComments;
+  team_tickets: TeamTickets;
   treasury_movements: TreasuryMovements;
   user_favorites: UserFavorites;
   user_sessions: UserSessions;

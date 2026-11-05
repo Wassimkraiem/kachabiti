@@ -3,10 +3,11 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Alert, Badge, Button, Card, Popconfirm, Select, Table, Typography } from "antd";
 import type { ColumnsType } from "antd/es/table";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, UndoOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import { message } from "@/components/admin/antd-app";
 import { msg, useAdminT } from "@/lib/admin-i18n";
+import { useAdminRole } from "@/lib/admin-role-context";
 import type { TrashTable } from "@/lib/trash-tables";
 
 const { Title, Paragraph } = Typography;
@@ -32,6 +33,7 @@ const TABLE_LABELS: Record<TrashTable, string> = {
     locations: msg("Locations"),
     suppliers: msg("Suppliers"),
     collections: msg("Collections"),
+    team_tickets: msg("Team tasks"),
 };
 
 // What else goes with an erased row, shown before confirming.
@@ -43,6 +45,7 @@ const ERASES_WITH: Partial<Record<TrashTable, string>> = {
 
 export default function TrashPage() {
     const { t } = useAdminT();
+    const { isOwner } = useAdminRole();
     const [counts, setCounts] = useState<Partial<Record<TrashTable, number>>>({});
     const [table, setTable] = useState<TrashTable>();
     const [rows, setRows] = useState<DeletedRow[]>([]);
@@ -112,6 +115,26 @@ export default function TrashPage() {
         }
     };
 
+    const restore = async (ids: string[]) => {
+        if (!table || ids.length === 0) return;
+        setErasing(true);
+        try {
+            const response = await fetch(`/api/admin/trash?table=${table}&ids=${ids.join(",")}`, { method: "PUT" });
+            const result = await response.json();
+            if (!result.success) {
+                message.error(t(result.error || "Failed to restore"));
+                return;
+            }
+            message.success(t("Restored {count} item(s). Products, banners and discounts stay off until you turn them on.", { count: result.data.restored }));
+            await Promise.all([loadRows(), loadCounts()]);
+        } catch (error) {
+            console.error("Error restoring deleted items:", error);
+            message.error(t("Failed to restore"));
+        } finally {
+            setErasing(false);
+        }
+    };
+
     const confirmText = (count: number) => (
         <div style={{ maxWidth: 320 }}>
             {t("Erase {count} item(s) for good? This can't be undone.", { count })}
@@ -130,13 +153,16 @@ export default function TrashPage() {
         {
             title: t("Actions"),
             key: "actions",
-            width: 170,
+            width: 270,
             render: (_, row) => (
-                <Popconfirm title={confirmText(1)} okText={t("Erase")} okButtonProps={{ danger: true }} cancelText={t("Cancel")} onConfirm={() => erase([row.id])}>
-                    <Button danger size="small" icon={<DeleteOutlined />} loading={erasing}>
-                        {t("Erase for good")}
-                    </Button>
-                </Popconfirm>
+                <div style={{ display: "flex", gap: 8 }}>
+                    {isOwner && <Button size="small" icon={<UndoOutlined />} loading={erasing} onClick={() => restore([row.id])}>{t("Restore")}</Button>}
+                    <Popconfirm title={confirmText(1)} okText={t("Erase")} okButtonProps={{ danger: true }} cancelText={t("Cancel")} onConfirm={() => erase([row.id])}>
+                        <Button danger size="small" icon={<DeleteOutlined />} loading={erasing}>
+                            {t("Erase for good")}
+                        </Button>
+                    </Popconfirm>
+                </div>
             ),
         },
     ];
@@ -157,13 +183,20 @@ export default function TrashPage() {
         <div style={{ padding: 24 }}>
             <Title level={2} style={{ marginTop: 0 }}>{t("Deleted items")}</Title>
             <Paragraph type="secondary">
-                {t("Deleting anything in the admin only hides it. Here you can erase deleted items for good. Every erase is recorded in the activity history.")}
+                {t(isOwner
+                    ? "Deleting anything in the admin only hides it. Here you can restore deleted items or erase them for good. Everything is recorded in the activity history."
+                    : "Deleting anything in the admin only hides it. Here you can erase deleted items for good. Every erase is recorded in the activity history.")}
             </Paragraph>
             <Alert type="warning" showIcon style={{ marginBottom: 16 }} message={t("Erased items can't be restored.")} />
 
             <Card>
                 <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginBottom: 16 }}>
                     <Select style={{ minWidth: 260 }} value={table} onChange={setTable} options={tableOptions} />
+                    {isOwner && (
+                        <Button icon={<UndoOutlined />} disabled={selected.length === 0} loading={erasing} onClick={() => restore(selected)}>
+                            {t("Restore selected ({count})", { count: selected.length })}
+                        </Button>
+                    )}
                     <Popconfirm
                         title={confirmText(selected.length)}
                         okText={t("Erase")}

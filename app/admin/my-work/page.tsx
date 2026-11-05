@@ -8,7 +8,7 @@ import { useAdminT } from "@/lib/admin-i18n";
 import { useAdminRole } from "@/lib/admin-role-context";
 import { ChannelTag, Kpi, ListRow, PageHeader } from "@/components/admin/erp/ui";
 import { TargetBar } from "@/components/admin/erp/charts";
-import { api, formatDate, formatMoney, useApi } from "@/components/admin/erp/erp-client";
+import { api, day, formatDate, formatMoney, useApi } from "@/components/admin/erp/erp-client";
 import MonthGoalCard, { type MonthGoal } from "@/components/admin/erp/MonthGoalCard";
 import { ORDER_STATUS_COLORS, orderStatusLabel } from "@/components/admin/order-status";
 
@@ -31,6 +31,7 @@ interface MyWork {
     to_confirm: OrderRow[];
     in_delivery: OrderRow[];
     unassigned_count: number;
+    tickets: { id: string; title: string; priority: string; due_date: string | null }[];
     tasks: { id: string; title: string; notes: string | null; due_at: string; customer: { id: string; full_name: string; phone: string | null } | null; order: { id: string; order_number: string } | null }[];
     unread_customers: number;
     month: {
@@ -73,13 +74,23 @@ export default function MyWorkPage() {
         }
     };
 
+    const ticketDone = async (id: string) => {
+        try {
+            await api("/api/admin/tickets", { method: "PUT", body: { id, status: "done" } });
+            reload();
+        } catch (e) {
+            message.error(t((e as Error).message));
+        }
+    };
+
     const goal = data?.month?.goal;
+    const today = day(new Date());
 
     return (
         <div>
             <PageHeader
                 title={t("My day")}
-                subtitle={t("Your orders, follow-ups and messages, and how your month is going.")}
+                subtitle={t("Your tasks, orders, follow-ups and messages, and how your month is going.")}
                 extra={
                     <>
                         <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}>{t("Refresh")}</Button>
@@ -122,6 +133,34 @@ export default function MyWorkPage() {
             )}
 
             <Row gutter={[16, 16]}>
+                <Col xs={24}>
+                    <Card
+                        title={<span>{t("My tasks")} <Badge count={data?.tickets.length ?? 0} /></span>}
+                        loading={loading}
+                        extra={<Link href="/admin/tickets">{t("Team tasks")}</Link>}
+                    >
+                        {!data?.tickets.length ? <Empty description={t("No tasks for you.")} /> : (
+                            <div>
+                                {data.tickets.map((ticket) => {
+                                    const late = !!ticket.due_date && ticket.due_date < today;
+                                    return (
+                                        <ListRow
+                                            key={ticket.id}
+                                            actions={[<Button key="done" size="small" icon={<CheckOutlined />} onClick={() => ticketDone(ticket.id)}>{t("Done")}</Button>]}
+                                            title={<Link href={`/admin/tickets?id=${ticket.id}`}>{ticket.title}</Link>}
+                                            description={
+                                                <Space size={4} wrap>
+                                                    {ticket.priority === "high" && <Tag color="red">{t("High")}</Tag>}
+                                                    {ticket.due_date && <Text type={late ? "danger" : "secondary"}>{late ? `${t("Overdue")} · ` : ""}{formatDate(ticket.due_date, locale)}</Text>}
+                                                </Space>
+                                            }
+                                        />
+                                    );
+                                })}
+                            </div>
+                        )}
+                    </Card>
+                </Col>
                 {can("orders") && (
                     <Col xs={24} lg={12}>
                         <Card title={<span>{t("To confirm")} <Badge count={data?.to_confirm.length ?? 0} style={{ background: "#fa8c16" }} /></span>} loading={loading}>

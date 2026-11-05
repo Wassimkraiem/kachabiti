@@ -19,7 +19,7 @@ import {
   TRASH_TABLES,
   type TrashTable,
 } from '@shared/trash-tables';
-import { CurrentActor, Public } from '../auth/decorators';
+import { OwnerOnly, CurrentActor, Public } from '../auth/decorators';
 import type { RequestActor } from '../auth/auth.guard';
 import { ApiError, params, period, Zod, zId } from '../common/api';
 import { invalidateCatalog } from '../catalog/revalidate';
@@ -477,91 +477,111 @@ export class MyWorkController {
         ])
         .where('deleted_at', 'is', null);
 
-    const [toConfirm, inDelivery, unassigned, tasks, unread, progress, team] =
-      await Promise.all([
-        can('orders')
-          ? orders()
-              .where('status', 'in', ['pending', 'confirmed'])
-              .where((eb) =>
-                eb.or([
-                  eb('assigned_to', '=', me),
-                  eb.and([
-                    eb('assigned_to', 'is', null),
-                    eb('created_by', '=', me),
-                  ]),
+    const [
+      toConfirm,
+      inDelivery,
+      unassigned,
+      tasks,
+      unread,
+      progress,
+      team,
+      tickets,
+    ] = await Promise.all([
+      can('orders')
+        ? orders()
+            .where('status', 'in', ['pending', 'confirmed'])
+            .where((eb) =>
+              eb.or([
+                eb('assigned_to', '=', me),
+                eb.and([
+                  eb('assigned_to', 'is', null),
+                  eb('created_by', '=', me),
                 ]),
-              )
-              .orderBy('created_at')
-              .limit(100)
-              .execute()
-          : [],
-        can('orders')
-          ? orders()
-              .where('status', 'in', ['processing', 'shipped'])
-              .where('assigned_to', '=', me)
-              .orderBy('created_at')
-              .limit(100)
-              .execute()
-          : [],
-        can('orders')
-          ? this.db
-              .selectFrom('orders')
-              .select((eb) => eb.fn.countAll<number>().as('n'))
-              .where('deleted_at', 'is', null)
-              .where('status', 'in', ['pending', 'confirmed'])
-              .where('assigned_to', 'is', null)
-              .where('created_by', 'is', null)
-              .executeTakeFirstOrThrow()
-              .then((r) => r.n)
-          : 0,
-        can('customers')
-          ? this.db
-              .selectFrom('crm_tasks as t')
-              .selectAll('t')
-              .select((eb) => [
-                one(
-                  eb,
-                  'customers as c',
-                  ['c.id', 'c.full_name', 'c.phone'],
-                  'c.id',
-                  't.customer_id',
-                ).as('customer'),
-                one(
-                  eb,
-                  'orders as o',
-                  ['o.id', 'o.order_number'],
-                  'o.id',
-                  't.order_id',
-                ).as('order'),
-              ])
-              .where('t.assigned_to', '=', me)
-              .where('t.done_at', 'is', null)
-              .where('t.deleted_at', 'is', null)
-              .orderBy('t.due_at')
-              .limit(100)
-              .execute()
-          : [],
-        can('customers')
-          ? this.db
-              .selectFrom('customer_interactions as x')
-              .innerJoin('customers as c', 'c.id', 'x.customer_id')
-              .select('x.customer_id')
-              .where('x.direction', '=', 'in')
-              .where('x.read_at', 'is', null)
-              .where('x.deleted_at', 'is', null)
-              .where('c.assigned_to', '=', me)
-              .limit(500)
-              .execute()
-          : [],
-        monthProgress(this.db, month, me),
-        // The business's goal for the month, so agents see what the team is aiming for.
-        teamProgress(this.db, month),
-      ]);
+              ]),
+            )
+            .orderBy('created_at')
+            .limit(100)
+            .execute()
+        : [],
+      can('orders')
+        ? orders()
+            .where('status', 'in', ['processing', 'shipped'])
+            .where('assigned_to', '=', me)
+            .orderBy('created_at')
+            .limit(100)
+            .execute()
+        : [],
+      can('orders')
+        ? this.db
+            .selectFrom('orders')
+            .select((eb) => eb.fn.countAll<number>().as('n'))
+            .where('deleted_at', 'is', null)
+            .where('status', 'in', ['pending', 'confirmed'])
+            .where('assigned_to', 'is', null)
+            .where('created_by', 'is', null)
+            .executeTakeFirstOrThrow()
+            .then((r) => r.n)
+        : 0,
+      can('customers')
+        ? this.db
+            .selectFrom('crm_tasks as t')
+            .selectAll('t')
+            .select((eb) => [
+              one(
+                eb,
+                'customers as c',
+                ['c.id', 'c.full_name', 'c.phone'],
+                'c.id',
+                't.customer_id',
+              ).as('customer'),
+              one(
+                eb,
+                'orders as o',
+                ['o.id', 'o.order_number'],
+                'o.id',
+                't.order_id',
+              ).as('order'),
+            ])
+            .where('t.assigned_to', '=', me)
+            .where('t.done_at', 'is', null)
+            .where('t.deleted_at', 'is', null)
+            .orderBy('t.due_at')
+            .limit(100)
+            .execute()
+        : [],
+      can('customers')
+        ? this.db
+            .selectFrom('customer_interactions as x')
+            .innerJoin('customers as c', 'c.id', 'x.customer_id')
+            .select('x.customer_id')
+            .where('x.direction', '=', 'in')
+            .where('x.read_at', 'is', null)
+            .where('x.deleted_at', 'is', null)
+            .where('c.assigned_to', '=', me)
+            .limit(500)
+            .execute()
+        : [],
+      monthProgress(this.db, month, me),
+      // The business's goal for the month, so agents see what the team is aiming for.
+      teamProgress(this.db, month),
+      // Nearest due date first; Postgres sorts tickets without one last.
+      this.db
+        .selectFrom('team_tickets')
+        .select(['id', 'title', 'priority', 'due_date'])
+        .where('assigned_to', '=', me)
+        .where('status', '<>', 'done')
+        .where('deleted_at', 'is', null)
+        .orderBy('due_date')
+        .orderBy('created_at')
+        .limit(100)
+        .execute(),
+    ]);
     return {
       to_confirm: toConfirm,
       in_delivery: inDelivery,
       unassigned_count: unassigned,
       tasks,
+      tickets,
       unread_customers: new Set(unread.map((r) => r.customer_id)).size,
       month: progress[0] ?? null,
       team: team.goal
@@ -867,11 +887,7 @@ export class TrashController {
     };
   }
 
-  @Delete()
-  async purge(
-    @Query() query: Record<string, string>,
-    @CurrentActor() actor: RequestActor,
-  ) {
+  private target(query: Record<string, string>) {
     const table = query.table ?? null;
     if (!isTrashTable(table)) throw new ApiError('Unknown table');
     const ids = (query.ids ?? '')
@@ -880,6 +896,30 @@ export class TrashController {
       .filter(Boolean);
     if (ids.length === 0 || !ids.every((id) => UUID.test(id)))
       throw new ApiError('ids must be a comma-separated list of ids');
+    return { table, ids };
+  }
+
+  /** Brings rows back (restore_deleted). What was switched off stays off. */
+  @Put()
+  @OwnerOnly()
+  async restore(
+    @Query() query: Record<string, string>,
+    @CurrentActor() actor: RequestActor,
+  ) {
+    const { table, ids } = this.target(query);
+    const restored = await this.db.withActor(actor, (trx) =>
+      this.db.call('restore_deleted', { p_table: table, p_ids: ids }, trx),
+    );
+    await invalidateCatalog();
+    return { restored: restored ?? 0 };
+  }
+
+  @Delete()
+  async purge(
+    @Query() query: Record<string, string>,
+    @CurrentActor() actor: RequestActor,
+  ) {
+    const { table, ids } = this.target(query);
     try {
       const erased = await this.db.withActor(actor, (trx) =>
         this.db.call('purge_deleted', { p_table: table, p_ids: ids }, trx),

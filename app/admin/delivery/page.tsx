@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Alert, Breadcrumb, Button, Card, DatePicker, Input, Modal, Popconfirm, Segmented, Select, Space, Table, Tooltip, Typography } from "antd";
 import type { Dayjs } from "dayjs";
@@ -9,7 +9,7 @@ import { BarcodeOutlined, DeleteOutlined, EditOutlined, PlusOutlined, PrinterOut
 import { message } from "@/components/admin/antd-app";
 import { useAdminRole } from "@/lib/admin-role-context";
 import { DATE_LOCALES, useAdminT } from "@/lib/admin-i18n";
-import { statusInfo, type StatusGroup } from "@/lib/colissimo-data";
+import type { StatusGroup } from "@/lib/colissimo-data";
 import DeliveryStatusTag, { ParcelBadges } from "@/components/admin/delivery/DeliveryStatusTag";
 import SendParcelModal from "@/components/admin/delivery/SendParcelModal";
 import ParcelLookup from "@/components/admin/delivery/ParcelLookup";
@@ -20,7 +20,7 @@ import {
     canRemoveParcel,
     deliveryApi,
     type Delivery,
-    type DeliveryList,
+    type DeliveryPageData,
     type HandOverResult,
     type RefreshResult,
     type RemoveResult,
@@ -31,7 +31,7 @@ const { Title, Text } = Typography;
 // "validate": parcels created but not yet validated (handed over) at Colissimo; "pending" is then
 // only the validated ones waiting for the driver.
 type Filter = "all" | "validate" | StatusGroup;
-const tabOf = (row: Delivery): Filter => (canEditParcel(row) ? "validate" : statusInfo(row.status).group);
+const PAGE_SIZE = 25;
 
 /**
  * Admin → Delivery: the parcels sent to Colissimo from the orders (or added by barcode), with
@@ -42,15 +42,27 @@ const tabOf = (row: Delivery): Filter => (canEditParcel(row) ? "validate" : stat
 export default function DeliveryPage() {
     const { t, locale } = useAdminT();
     const canDelete = useAdminRole().can("delete");
-    const [data, setData] = useState<DeliveryList | null>(null);
+    const [data, setData] = useState<DeliveryPageData | null>(null);
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
     const [filter, setFilter] = useState<Filter>("all");
+    const [page, setPage] = useState(1);
+    const [lastChange, setLastChange] = useState<"asc" | "desc" | null>(null); // sort of the "Last change" column
     const [search, setSearch] = useState("");
+    const [query, setQuery] = useState(""); // the search sent to the server, a moment after typing stops
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setQuery(search.trim());
+            setPage(1);
+        }, 300);
+        return () => clearTimeout(timer);
+    }, [search]);
     // Parcels sent from this system, or imported from Colissimo's website (orders COL-<barcode>).
     const [source, setSource] = useState<"all" | "system" | "imported">("all");
     const [range, setRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
-    const [selected, setSelected] = useState<string[]>([]);
+    // Kept across pages: antd passes back the rows ticked on other pages too.
+    const [selectedRows, setSelectedRows] = useState<Delivery[]>([]);
+    const selected = selectedRows.map((row) => row.id);
     const [importOpen, setImportOpen] = useState(false);
     const [barcode, setBarcode] = useState("");
     const [importing, setImporting] = useState(false);
@@ -60,16 +72,30 @@ export default function DeliveryPage() {
     const [handingOver, setHandingOver] = useState(false);
     const [handOverResult, setHandOverResult] = useState<HandOverResult | null>(null);
 
+    const latestLoad = useRef(0);
     const load = useCallback(async () => {
+        const loadId = ++latestLoad.current;
         setLoading(true);
+        const params = new URLSearchParams({ page: String(page), size: String(PAGE_SIZE), tab: filter, source });
+        if (query) params.append("q", query);
+        if (range?.[0]) params.append("from", range[0].format("YYYY-MM-DD"));
+        if (range?.[1]) params.append("to", range[1].format("YYYY-MM-DD"));
+        if (lastChange) {
+            params.append("sort", "changed");
+            params.append("dir", lastChange);
+        }
         try {
-            setData(await deliveryApi<DeliveryList>());
+            const result = await deliveryApi<DeliveryPageData>({ query: params.toString() });
+            if (loadId !== latestLoad.current) return; // a newer search or page took over
+            setData(result);
+            // The last page emptied by a removal: go back to the new last one.
+            if (!result.rows.length && result.total > 0 && page > 1) setPage(Math.ceil(result.total / PAGE_SIZE));
         } catch (e) {
             message.error((e as Error).message);
         } finally {
-            setLoading(false);
+            if (loadId === latestLoad.current) setLoading(false);
         }
-    }, []);
+    }, [page, filter, source, query, range, lastChange]);
 
     useEffect(() => {
         load();
@@ -113,21 +139,23 @@ export default function DeliveryPage() {
             if (result.kept.length) {
                 message.warning(t("{count} parcel(s) kept: {reason}", { count: result.kept.length, reason: t(result.kept[0].reason) }), 8);
             }
-            setSelected([]);
+            setSelectedRows([]);
             await load();
         } catch (e) {
             message.error((e as Error).message);
         }
     };
 
-    // Parcels selected that are waiting for pickup: the ones Colissimo can take in a manifest.
+    // The ticked parcels Colissimo can take in a manifest, or with none ticked all those shown, on any page.
+    const ticked = selectedRows.filter(canEditParcel);
+    const waiting = ticked.length ? ticked.map((row) => row.id) : data?.waiting ?? [];
 
     const handOver = async () => {
         setHandingOver(true);
         try {
             const result = await deliveryApi<HandOverResult>({ method: "POST", body: { action: "handover", ids: waiting } });
             setHandOverResult(result);
-            setSelected([]);
+            setSelectedRows([]);
             await load();
         } catch (e) {
             message.error((e as Error).message);
@@ -135,42 +163,6 @@ export default function DeliveryPage() {
             setHandingOver(false);
         }
     };
-
-    // Parcels sent within the chosen dates (by creation); the tabs count these.
-    const inRange = useMemo(() => {
-        const from = range?.[0]?.startOf("day").valueOf() ?? -Infinity;
-        const to = range?.[1]?.endOf("day").valueOf() ?? Infinity;
-        return (data?.rows ?? []).filter((row) => {
-            const sent = new Date(row.created_at).getTime();
-            const imported = !!row.order?.order_number.startsWith("COL-");
-            return sent >= from && sent <= to && (source === "all" || imported === (source === "imported"));
-        });
-    }, [data, range, source]);
-
-    const rows = useMemo(() => {
-        const term = search.trim().toLowerCase();
-        return inRange.filter((row) => {
-            if (filter !== "all" && tabOf(row) !== filter) return false;
-            if (!term) return true;
-            const customer = row.order ? `${row.order.customer_first_name} ${row.order.customer_last_name}` : "";
-            return [row.barcode, row.recipient_name, row.phone, row.governorate, row.city, row.order?.order_number, customer]
-                .some((value) => value?.toLowerCase().includes(term));
-        });
-    }, [inRange, filter, search]);
-
-    const counts = useMemo(() => {
-        const result: Record<Filter, number> = { all: 0, validate: 0, pending: 0, moving: 0, delivered: 0, returned: 0, problem: 0 };
-        for (const row of inRange) {
-            result.all += 1;
-            result[tabOf(row)] += 1;
-        }
-        return result;
-    }, [inRange]);
-
-    const waiting = useMemo(() => {
-        const ticked = rows.filter((row) => selected.includes(row.id) && canEditParcel(row));
-        return (ticked.length ? ticked : rows.filter(canEditParcel)).map((row) => row.id);
-    }, [rows, selected]);
 
     const formatDate = (date: string | null) => (date ? new Date(date).toLocaleString(DATE_LOCALES[locale], { dateStyle: "short", timeStyle: "short" }) : "—");
 
@@ -226,7 +218,7 @@ export default function DeliveryPage() {
         {
             title: t("Last change"),
             key: "status_changed_at",
-            sorter: (a, b) => new Date(a.status_changed_at ?? a.created_at).getTime() - new Date(b.status_changed_at ?? b.created_at).getTime(),
+            sorter: true,
             render: (_, row) => (
                 <div>
                     {formatDate(row.status_changed_at ?? row.created_at)}
@@ -272,7 +264,7 @@ export default function DeliveryPage() {
         },
     ];
 
-    const filterLabel = (label: string, key: Filter) => `${t(label)} (${counts[key]})`;
+    const filterLabel = (label: string, key: Filter) => `${t(label)} (${data?.counts[key] ?? 0})`;
 
     return (
         <div>
@@ -330,7 +322,7 @@ export default function DeliveryPage() {
                     <div style={{ overflowX: "auto" }}>
                         <Segmented<Filter>
                             value={filter}
-                            onChange={setFilter}
+                            onChange={(value) => { setFilter(value); setPage(1); }}
                             options={[
                                 { value: "all", label: filterLabel("All", "all") },
                                 { value: "validate", label: filterLabel("To validate", "validate") },
@@ -351,10 +343,10 @@ export default function DeliveryPage() {
                             onChange={(e) => setSearch(e.target.value)}
                             style={{ maxWidth: 360 }}
                         />
-                        <DatePicker.RangePicker value={range} onChange={setRange} placeholder={[t("Sent from"), t("to")]} allowEmpty={[true, true]} />
+                        <DatePicker.RangePicker value={range} onChange={(value) => { setRange(value); setPage(1); }} placeholder={[t("Sent from"), t("to")]} allowEmpty={[true, true]} />
                         <Select
                             value={source}
-                            onChange={setSource}
+                            onChange={(value) => { setSource(value); setPage(1); }}
                             style={{ width: 210 }}
                             options={[
                                 { value: "all", label: t("All parcels") },
@@ -392,10 +384,15 @@ export default function DeliveryPage() {
                     <Table
                         rowKey="id"
                         loading={loading}
-                        dataSource={rows}
+                        dataSource={data?.rows}
                         columns={columns}
-                        rowSelection={{ selectedRowKeys: selected, onChange: (keys) => setSelected(keys as string[]), getCheckboxProps: (row) => ({ disabled: !canEditParcel(row) && !canRemoveParcel(row) }) }}
-                        pagination={{ pageSize: 25, showSizeChanger: false }}
+                        rowSelection={{ selectedRowKeys: selected, preserveSelectedRowKeys: true, onChange: (_keys, rows) => setSelectedRows(rows), getCheckboxProps: (row) => ({ disabled: !canEditParcel(row) && !canRemoveParcel(row) }) }}
+                        pagination={{ current: page, pageSize: PAGE_SIZE, total: data?.total ?? 0, showSizeChanger: false }}
+                        onChange={(pagination, _filters, sorter) => {
+                            setPage(pagination.current ?? 1);
+                            const by = Array.isArray(sorter) ? sorter[0] : sorter;
+                            setLastChange(by?.order ? (by.order === "ascend" ? "asc" : "desc") : null);
+                        }}
                         scroll={{ x: "max-content" }}
                         // A click on the row (not on its links, buttons or checkbox) opens the parcel's history.
                         onRow={(row) => ({

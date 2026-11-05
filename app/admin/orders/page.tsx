@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
@@ -60,6 +60,8 @@ interface OrderRow {
     created_at: string;
     items?: { id: string; product_name: string; product_image: string | null; quantity: number; variant_label: string | null }[];
     deliveries?: { status: string; barcode: string | null }[];
+    /** Order numbers in progress with the same phone. */
+    duplicates?: string[];
     created_by?: string | null;
     created_by_email?: string | null;
     channel: string;
@@ -68,9 +70,6 @@ interface OrderRow {
     assigned_to_email: string | null;
     paid_amount: number;
 }
-
-/** Last 8 digits of a phone, to spot the same customer ordering twice. */
-const phoneKey = (phone: string | null | undefined) => (phone ?? "").replace(/\D/g, "").slice(-8);
 
 export default function AdminOrdersPage() {
     const { t, locale } = useAdminT();
@@ -82,7 +81,19 @@ export default function AdminOrdersPage() {
     const router = useRouter();
     const [orders, setOrders] = useState<OrderRow[]>([]);
     const [loading, setLoading] = useState(true); // first fetch starts on mount: show the table spinner right away
+    const [total, setTotal] = useState(0);
+    const [page, setPage] = useState(1);
+    const [pageSize, setPageSize] = useState(10);
+    const [sort, setSort] = useState<{ sort: string; dir: string } | null>(null);
     const [searchTerm, setSearchTerm] = useState("");
+    const [query, setQuery] = useState(""); // the search sent to the server, a moment after typing stops
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setQuery(searchTerm.trim());
+            setPage(1);
+        }, 300);
+        return () => clearTimeout(timer);
+    }, [searchTerm]);
     const [statusFilter, setStatusFilter] = useState<string>("all");
     const [range, setRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
     const [paymentStatusFilter, setPaymentStatusFilter] = useState<string>("all");
@@ -95,20 +106,34 @@ export default function AdminOrdersPage() {
         if (handledBy) setAddedByFilter(handledBy);
         if (params.get("status")) setStatusFilter(params.get("status")!);
     }, []);
-    const [selectedRowKeys, setSelectedRowKeys] = useState<string[]>([]);
+    // Kept across pages: antd passes back the rows ticked on other pages too.
+    const [selectedRows, setSelectedRows] = useState<OrderRow[]>([]);
+    const selectedRowKeys = selectedRows.map((order) => order.id);
     const [bulkDeleting, setBulkDeleting] = useState(false);
 
+    const latestFetch = useRef(0);
     const fetchOrders = useCallback(async () => {
+        const fetchId = ++latestFetch.current;
         setLoading(true);
         try {
-            const params = new URLSearchParams();
+            const params = new URLSearchParams({ page: String(page), size: String(pageSize) });
             if (statusFilter !== 'all') {
                 params.append('status', statusFilter);
             }
+            if (paymentStatusFilter !== 'all') params.append('payment_status', paymentStatusFilter);
+            if (channelFilter !== 'all') params.append('channel', channelFilter);
+            const handledBy = addedByFilter === 'me' ? myId : addedByFilter;
+            if (handledBy && handledBy !== 'all') params.append('handled_by', handledBy);
             if (range?.[0]) params.append('from', range[0].format('YYYY-MM-DD'));
             if (range?.[1]) params.append('to', range[1].format('YYYY-MM-DD'));
+            if (query) params.append('q', query);
+            if (sort) {
+                params.append('sort', sort.sort);
+                params.append('dir', sort.dir);
+            }
 
             const response = await fetch(`/api/orders?${params.toString()}`);
+            if (fetchId !== latestFetch.current) return; // a newer search or page took over
 
             if (!response.ok) {
                 const text = await response.text();
@@ -120,6 +145,9 @@ export default function AdminOrdersPage() {
             const result = await response.json();
             if (result.success) {
                 setOrders(result.data || []);
+                setTotal(result.total ?? 0);
+                // The last page emptied by a delete or a status change: go back to the new last one.
+                if (!result.data?.length && result.total > 0 && page > 1) setPage(Math.ceil(result.total / pageSize));
             } else {
                 message.error(result.error || t("Unable to load orders"));
             }
@@ -127,37 +155,13 @@ export default function AdminOrdersPage() {
             console.error("Fetch error:", error);
             message.error(t("Failed to fetch orders: {error}", { error: error.message || t("Unknown error") }));
         } finally {
-            setLoading(false);
+            if (fetchId === latestFetch.current) setLoading(false);
         }
-    }, [statusFilter, range]);
+    }, [statusFilter, range, page, pageSize, sort, query, paymentStatusFilter, channelFilter, addedByFilter, myId]);
 
     useEffect(() => {
         fetchOrders();
     }, [fetchOrders]);
-
-    const filteredOrders = useMemo(() => {
-        const term = searchTerm.toLowerCase();
-        return orders.filter((order) => {
-            // Email is optional, so it can be null.
-            const matchesSearch = [order.order_number, order.customer_first_name, order.customer_last_name, order.customer_email, order.customer_phone, order.created_by_email, order.deliveries?.[0]?.barcode, order.traffic_source]
-                .some((value) => (value ?? "").toLowerCase().includes(term));
-
-            const matchesPaymentStatus =
-                paymentStatusFilter === "all" ? true : order.payment_status === paymentStatusFilter;
-
-            const handler = order.assigned_to ?? order.created_by ?? null;
-            const matchesAddedBy =
-                addedByFilter === "all" ? true
-                    : addedByFilter === "website" ? !order.created_by
-                        : addedByFilter === "none" ? !handler
-                            : addedByFilter === "me" ? handler === myId
-                                : handler === addedByFilter;
-
-            const matchesChannel = channelFilter === "all" || order.channel === channelFilter;
-
-            return matchesSearch && matchesPaymentStatus && matchesAddedBy && matchesChannel;
-        });
-    }, [orders, searchTerm, paymentStatusFilter, addedByFilter, channelFilter, myId]);
 
     // Team members for the "Handled by" filter (plus an agent from the URL who left the team).
     const agentOptions = useMemo(() => {
@@ -166,23 +170,11 @@ export default function AdminOrdersPage() {
         return [...agents].map(([value, label]) => ({ value, label }));
     }, [team, addedByFilter, t]);
 
-    // Orders in progress that share a phone with another order in progress: possible duplicates.
-    const duplicates = useMemo(() => {
-        const byPhone = new Map<string, OrderRow[]>();
-        for (const order of orders) {
-            const key = phoneKey(order.customer_phone);
-            if (key.length < 8 || !(OPEN_ORDER_STATUSES as readonly string[]).includes(order.status)) continue;
-            byPhone.set(key, [...(byPhone.get(key) ?? []), order]);
-        }
-        return byPhone;
-    }, [orders]);
-    const duplicatesOf = (order: OrderRow) => (duplicates.get(phoneKey(order.customer_phone)) ?? []).filter((o) => o.id !== order.id);
-
     const runAction = async (body: Record<string, unknown>, done: string) => {
         try {
             const result = await api<{ changed?: number; confirmed?: number }>("/api/sales/orders", { method: "PATCH", body });
             message.success(t(done, { count: result.changed ?? result.confirmed ?? 0 }));
-            setSelectedRowKeys([]);
+            setSelectedRows([]);
             fetchOrders();
         } catch (e) {
             message.error(t((e as Error).message));
@@ -231,7 +223,7 @@ export default function AdminOrdersPage() {
 
     // Validates the selected orders still to validate, one by one, then opens their slips to print.
     const [bulkValidating, setBulkValidating] = useState(false);
-    const toValidate = orders.filter((o) => selectedRowKeys.includes(o.id) && (o.status === "pending" || o.status === "confirmed"));
+    const toValidate = selectedRows.filter((o) => o.status === "pending" || o.status === "confirmed");
     const handleBulkValidate = async () => {
         setBulkValidating(true);
         const validated: string[] = [];
@@ -318,7 +310,7 @@ export default function AdminOrdersPage() {
                 message.error(t("Failed to delete {count} order(s)", { count: failCount }));
             }
 
-            setSelectedRowKeys([]);
+            setSelectedRows([]);
             fetchOrders();
         } catch (error: any) {
             console.error("Bulk delete error:", error);
@@ -333,7 +325,7 @@ export default function AdminOrdersPage() {
             title: t("Order #"),
             dataIndex: "order_number",
             key: "order_number",
-            sorter: (a, b) => a.order_number.localeCompare(b.order_number),
+            sorter: true,
             render: (orderNumber: string) => (
                 <span style={{ fontFamily: 'monospace', fontWeight: 500 }}>{orderNumber}</span>
             ),
@@ -361,8 +353,8 @@ export default function AdminOrdersPage() {
                                 {t("Take it")}
                             </Button>
                         )}
-                        {duplicatesOf(record).length > 0 && (
-                            <Tooltip title={t("Same phone as {orders}", { orders: duplicatesOf(record).map((o) => o.order_number).join(", ") })}>
+                        {!!record.duplicates?.length && (
+                            <Tooltip title={t("Same phone as {orders}", { orders: record.duplicates.join(", ") })}>
                                 <Tag color="red" icon={<WarningOutlined />}>{t("Possible duplicate")}</Tag>
                             </Tooltip>
                         )}
@@ -405,14 +397,14 @@ export default function AdminOrdersPage() {
             title: t("Total"),
             dataIndex: "total",
             key: "total",
-            sorter: (a, b) => a.total - b.total,
+            sorter: true,
             render: (total: number) => formatPrice(total),
         },
         {
             title: t("Status"),
             dataIndex: "status",
             key: "status",
-            sorter: (a, b) => a.status.localeCompare(b.status),
+            sorter: true,
             render: (status: string, record: OrderRow) => (
                 <Space orientation="vertical" size={4}>
                     {/* The same manual override as the order page's "Change the status by hand" (no parcel is created). */}
@@ -439,7 +431,7 @@ export default function AdminOrdersPage() {
             title: t("Payment"),
             dataIndex: "payment_status",
             key: "payment_status",
-            sorter: (a, b) => a.payment_status.localeCompare(b.payment_status),
+            sorter: true,
             render: (paymentStatus: string, record: OrderRow) => (
                 <Tooltip title={t("Received {paid} of {total}", { paid: formatPrice(Number(record.paid_amount ?? 0)), total: formatPrice(Number(record.total)) })}>
                     <Tag color={PAYMENT_STATUS_COLORS[paymentStatus] || "default"}>{t(PAYMENT_STATUS_LABELS[paymentStatus] ?? paymentStatus)}</Tag>
@@ -450,7 +442,7 @@ export default function AdminOrdersPage() {
             title: t("Date"),
             dataIndex: "created_at",
             key: "created_at",
-            sorter: (a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
+            sorter: true,
             render: (date: string) => formatDate(date),
         },
         {
@@ -597,7 +589,7 @@ export default function AdminOrdersPage() {
                 <div className="admin-filters" style={{ display: "flex", flexWrap: "wrap", gap: 12, marginBottom: 16 }}>
                     <Select
                         value={statusFilter}
-                        onChange={(value) => setStatusFilter(value)}
+                        onChange={(value) => { setStatusFilter(value); setPage(1); }}
                         options={[
                             { value: "all", label: t("All statuses") },
                             ...ORDER_STATUS_OPTIONS.map((o) => ({ ...o, label: t(o.label) })),
@@ -606,7 +598,7 @@ export default function AdminOrdersPage() {
                     />
                     <Select
                         value={paymentStatusFilter}
-                        onChange={(value) => setPaymentStatusFilter(value)}
+                        onChange={(value) => { setPaymentStatusFilter(value); setPage(1); }}
                         options={[
                             { value: "all", label: t("All payments") },
                             ...Object.entries(PAYMENT_STATUS_LABELS).map(([value, label]) => ({ value, label: t(label) })),
@@ -615,13 +607,13 @@ export default function AdminOrdersPage() {
                     />
                     <Select
                         value={channelFilter}
-                        onChange={setChannelFilter}
+                        onChange={(value) => { setChannelFilter(value); setPage(1); }}
                         options={[{ value: "all", label: t("All channels") }, ...CHANNELS.map((c) => ({ value: c, label: t(CHANNEL_LABELS[c]) }))]}
                         style={{ width: 160 }}
                     />
                     <Select
                         value={addedByFilter}
-                        onChange={(value) => setAddedByFilter(value)}
+                        onChange={(value) => { setAddedByFilter(value); setPage(1); }}
                         options={[
                             { value: "all", label: t("Handled by: anyone") },
                             { value: "me", label: t("Handled by me") },
@@ -633,7 +625,7 @@ export default function AdminOrdersPage() {
                     />
                     <DatePicker.RangePicker
                         value={range}
-                        onChange={setRange}
+                        onChange={(value) => { setRange(value); setPage(1); }}
                         allowEmpty={[true, true]}
                         placeholder={[t("Created from"), t("to")]}
                         style={{ width: 260, maxWidth: "100%" }}
@@ -650,11 +642,18 @@ export default function AdminOrdersPage() {
                 <Table
                     rowKey="id"
                     loading={loading}
-                    dataSource={filteredOrders}
+                    dataSource={orders}
                     columns={columns}
+                    onChange={(pagination, _filters, sorter) => {
+                        setPage(pagination.current ?? 1);
+                        setPageSize(pagination.pageSize ?? 10);
+                        const by = Array.isArray(sorter) ? sorter[0] : sorter;
+                        setSort(by?.order ? { sort: String(by.field), dir: by.order === "ascend" ? "asc" : "desc" } : null);
+                    }}
                     rowSelection={{
                         selectedRowKeys,
-                        onChange: (selectedKeys) => setSelectedRowKeys(selectedKeys as string[]),
+                        preserveSelectedRowKeys: true,
+                        onChange: (_keys, rows) => setSelectedRows(rows),
                         selections: [
                             Table.SELECTION_ALL,
                             Table.SELECTION_INVERT,
@@ -662,9 +661,11 @@ export default function AdminOrdersPage() {
                         ],
                     }}
                     pagination={{
-                        pageSize: 10,
+                        current: page,
+                        pageSize,
+                        total,
                         showSizeChanger: true,
-                        showTotal: (total) => t("{count} orders", { count: total }),
+                        showTotal: (count) => t("{count} orders", { count }),
                     }}
                     locale={{
                         emptyText: (
