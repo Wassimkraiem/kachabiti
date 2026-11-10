@@ -27,7 +27,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://kachabiti.tn"),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://www.kachabiti.com"),
   title: "Kachabiti - Handcrafted Traditional Products | Premium Quality",
   description: "Discover authentic handcrafted traditional products at Kachabiti. Premium quality HBarnous ROSSINI, Serviette de table, and unique handmade items. 100% authentic craftsmanship.",
   keywords: "handcrafted, traditional products, HBarnous ROSSINI, Serviette de table, artisan, handmade, premium quality, Tunisia, traditional wear, home accessories",
@@ -53,7 +53,6 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://kachabiti.tn",
     siteName: "Kachabiti",
     title: "Kachabiti - Handcrafted Traditional Products",
     description: "Discover authentic handcrafted traditional products at Kachabiti. Premium quality HBarnous ROSSINI, Serviette de table, and unique handmade items.",
@@ -71,12 +70,6 @@ export const metadata: Metadata = {
     title: "Kachabiti - Handcrafted Traditional Products",
     description: "Discover authentic handcrafted traditional products at Kachabiti. Premium quality HBarnous ROSSINI, Serviette de table, and unique handmade items.",
     images: ["/assets/images/logoKachabity.jpg"],
-  },
-  alternates: {
-    canonical: "https://artisan-kraiem.com",
-  },
-  verification: {
-    google: "your-google-verification-code",
   },
 };
 
@@ -97,8 +90,8 @@ export default async function RootLayout({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Kachabiti",
-              url: "https://kachabiti.tn",
-              logo: "https://kachabiti.tn/assets/images/logo.svg",
+              url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.kachabiti.com",
+              logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.kachabiti.com"}/assets/images/logoKachabity.jpg`,
               description: "Premium handcrafted traditional products and authentic artisan goods",
               contactPoint: {
                 "@type": "ContactPoint",

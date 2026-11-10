@@ -30,6 +30,12 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
+    // Vercel's free plan counts every image optimization. Uploaded photos get a new file name, so
+    // an optimized copy can be kept a month (the default, 60 s for files without Cache-Control,
+    // re-optimized the same photos all day), and 7 widths instead of 16 cover phones to desktops.
+    minimumCacheTTL: 31 * 24 * 3600,
+    deviceSizes: [640, 828, 1080, 1920],
+    imageSizes: [96, 256, 384],
     remotePatterns: [
       {
         protocol: 'https',

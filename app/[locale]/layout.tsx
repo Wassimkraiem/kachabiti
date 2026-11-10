@@ -9,6 +9,9 @@ import StaticHeader from '@/components/layout/StaticHeader';
 import Footer from '@/components/footer/Footer';
 import { Suspense } from 'react';
 import Script from "next/script";
+import { headers } from "next/headers";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.kachabiti.com";
 
 // Language-specific metadata
 const metadataByLocale: Record<string, Metadata> = {
@@ -32,10 +35,11 @@ const metadataByLocale: Record<string, Metadata> = {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
     const { locale } = await params;
     const baseMetadata = metadataByLocale[locale] || metadataByLocale.en;
+    const path = (await headers()).get("x-pathname") || `/${locale}`;
 
     return {
         ...baseMetadata,
-        metadataBase: new URL("https://your-ecommerce-site.com"),
+        metadataBase: new URL(SITE_URL),
         authors: [{ name: "Kachabity" }],
         creator: "Kachabity",
         publisher: "Kachabity",
@@ -53,11 +57,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         openGraph: {
             title: baseMetadata.title || "Kachabiti",
             description: baseMetadata.description || "Handcrafted Traditional Products",
-            url: "https://your-ecommerce-site.com",
+            url: path,
             siteName: "Kachabiti",
             images: [
                 {
-                    url: "https://your-ecommerce-site.com/og-image.jpg",
+                    url: "/assets/images/logoKachabity.jpg",
                     width: 1200,
                     height: 630,
                     alt: "Kachabiti - Handcrafted Traditional Products",
@@ -70,18 +74,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
             card: "summary_large_image",
             title: baseMetadata.title || "Kachabiti",
             description: baseMetadata.description || "Handcrafted Traditional Products",
-            images: ["https://your-ecommerce-site.com/twitter-image.jpg"],
+            images: ["/assets/images/logoKachabity.jpg"],
         },
+        // Each page's own address (the path without query), and the same page in the other languages.
         alternates: {
-            canonical: "https://your-ecommerce-site.com",
-            languages: {
-                'en': 'https://your-ecommerce-site.com/en',
-                'fr': 'https://your-ecommerce-site.com/fr',
-                'ar': 'https://your-ecommerce-site.com/ar',
-            },
-        },
-        verification: {
-            google: "your-google-verification-code",
+            canonical: path,
+            languages: Object.fromEntries(["en", "fr", "ar"].map((l) => [l, path.replace(/^\/(en|fr|ar)(?=\/|$)/, `/${l}`)])),
         },
     };
 }
@@ -119,8 +117,8 @@ export default async function LocaleLayout({
                             "@context": "https://schema.org",
                             "@type": "Organization",
                             "name": "Kachabiti",
-                            "url": "https://your-ecommerce-site.com",
-                            "logo": "https://your-ecommerce-site.com/logo.png",
+                            "url": SITE_URL,
+                            "logo": `${SITE_URL}/assets/images/logoKachabity.jpg`,
                             "contactPoint": {
                                 "@type": "ContactPoint",
                                 "telephone": "+216-55-558-648",

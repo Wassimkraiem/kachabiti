@@ -75,10 +75,16 @@ export default function NotificationBell() {
         }
     }, []);
 
+    // Safety net: reload every minute while the live stream is down, every 5 minutes while it's up
+    // (each reload is a request on Vercel's free plan, per open admin tab).
+    const live = useRef(false);
     useEffect(() => {
         load();
-        // Safety net if the live connection drops.
-        const timer = setInterval(load, 60_000);
+        let ticks = 0;
+        const timer = setInterval(() => {
+            ticks += 1;
+            if (!live.current || ticks % 5 === 0) load();
+        }, 60_000);
         return () => clearInterval(timer);
     }, [load]);
 
@@ -88,6 +94,8 @@ export default function NotificationBell() {
     useEffect(() => {
         if (!userId) return;
         const stream = new EventSource("/api/admin/notifications/stream");
+        stream.onopen = () => { live.current = true; };
+        stream.onerror = () => { live.current = false; };
         stream.onmessage = (event) => {
             const { op, row } = JSON.parse(event.data) as { op: "insert" | "update"; row: AdminNotification };
             if (op === "update") {

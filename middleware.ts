@@ -189,10 +189,14 @@ async function handle(request: NextRequest, event: NextFetchEvent) {
     // Lets the root layout set <html lang> for the requested locale.
     const requestHeaders = new Headers(request.headers);
     requestHeaders.set('x-locale', locale);
+    // The page's own path, for its canonical address (app/[locale]/layout.tsx).
+    requestHeaders.set('x-pathname', pathname);
     return NextResponse.next({ request: { headers: requestHeaders } });
 }
 
 export const config = {
     // /monitoring is the Sentry tunnel (next.config.ts): no locale prefix, no admin gate.
-    matcher: ['/((?!_next|favicon.ico|monitoring).*)'],
+    // Not for files (anything with an extension: images, admin-sw.js, robots.txt…) or /assets:
+    // each middleware run counts on Vercel, and files need no locale or session.
+    matcher: ['/((?!_next|favicon.ico|monitoring|assets/|.*\\.[a-zA-Z0-9]+$).*)'],
 };
