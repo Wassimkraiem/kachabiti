@@ -13,6 +13,14 @@
   --color-foreground: var(--foreground);
   --color-primary: var(--primary);
   --color-primary-hover: var(--primary-hover);
+  --color-surface: var(--surface);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-mute: var(--mute);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-line: var(--line);
+  --font-display: var(--font-kufi);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-hando: var(--font-hando);
@@ -29,11 +37,156 @@
   --font-size-custom12: 12px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Theme tokens. Outside the storefront (admin) they keep the old light values. */
+:root {
+  --surface: #ffffff;
+  --card: #ffffff;
+  --ink: #171717;
+  --mute: #6b7280;
+  --accent: #7a3b2e;
+  --accent-hover: #6b2516;
+  --on-accent: #ffffff;
+  --line: #e5e7eb;
+}
+
+/* Storefront: dark for browsing… */
+.storefront,
+.theme-dark {
+  --surface: #0a0705;
+  --card: #17110b;
+  --ink: #f4e6cf;
+  --mute: #a8987f;
+  --accent: #d9a548;
+  --accent-hover: #e9b860;
+  --on-accent: #16100a;
+  --line: rgba(244, 230, 207, 0.22);
+  --primary: var(--accent);
+  --primary-hover: var(--accent-hover);
+}
+
+/* …cream for buying (cart, checkout, account, text pages). */
+.theme-cream {
+  --surface: #ede2d0;
+  --card: #f7f0e6;
+  --ink: #16100a;
+  --mute: #5d5245;
+  --accent: #b5651d;
+  --accent-hover: #9a5416;
+  --on-accent: #f7f0e6;
+  --line: rgba(22, 16, 10, 0.2);
+}
+
+@layer base {
+  .storefront,
+  .theme-dark,
+  .theme-cream {
+    background: var(--surface);
+    color: var(--ink);
   }
+}
+
+/* Page background behind the storefront (overscroll, short pages) */
+body:has(.storefront) {
+  background: #0a0705;
+}
+
+/* Unlayered, so it wins over text-white left on old buttons: text on a filled
+   button always contrasts with the fill, in both themes. */
+.storefront :is(.bg-accent, .bg-primary, .hover\:bg-accent:hover) {
+  color: var(--on-accent);
+}
+.storefront .bg-ink {
+  color: var(--surface);
+}
+
+/* Arched photo frame from the brand landing page */
+.arch {
+  border-radius: 999px 999px 10px 10px;
+  overflow: hidden;
+}
+
+/* Pill button: lifts 2px on hover */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 9px 22px;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  font-weight: 600;
+  transition: transform 0.25s, border-color 0.25s, background-color 0.25s;
+}
+.pill:hover,
+.pill:focus-visible {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+.pill-solid {
+  background: var(--ink);
+  color: var(--surface);
+  border-color: var(--ink);
+}
+
+/* Reveal on scroll (components/ui/Reveal.tsx adds .is-in) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease-out, transform 0.7s cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* Product card on a pinned scroll track: as tall as the pinned screen allows */
+.track-card {
+  flex: none;
+  width: min(66vw, clamp(170px, calc((100svh - 400px) * 0.75), 300px));
+}
+
+/* Children of .stagger appear one after another once their Reveal is on screen */
+.reveal .stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease-out, transform 0.6s cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+.reveal.is-in .stagger > * {
+  opacity: 1;
+  transform: none;
+}
+.reveal.is-in .stagger > :nth-child(2) { transition-delay: 0.15s; }
+.reveal.is-in .stagger > :nth-child(3) { transition-delay: 0.3s; }
+.reveal.is-in .stagger > :nth-child(4) { transition-delay: 0.45s; }
+
+/* Card photo: slow zoom on hover */
+.zoom-img {
+  transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+.group:hover .zoom-img {
+  transform: scale(1.05);
+}
+
+@keyframes hero-float {
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.hero-float {
+  animation: hero-float 7s ease-in-out infinite;
+}
+
+/* Two-line moving text band */
+@keyframes band-slide {
+  to {
+    transform: translateX(var(--band-shift, -50%));
+  }
+}
+.band-line {
+  display: flex;
+  width: max-content;
+  animation: band-slide 40s linear infinite;
 }
 
 body {
@@ -104,7 +257,19 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
   .landing-reveal,
-  .landing-fade {
+  .landing-fade,
+  .hero-float,
+  .band-line {
     animation: none;
+  }
+  .reveal,
+  .reveal .stagger > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .pill,
+  .zoom-img {
+    transition: none;
   }
 }

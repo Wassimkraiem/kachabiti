@@ -1,0 +1,337 @@
+{
+ "projectRoot": "C:/Users/Wassi/kachabity",
+ "batchFiles": [
+  {
+   "path": "api/src/finance/finance.controllers.ts",
+   "language": "typescript",
+   "sizeLines": 1743,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/health.controller.ts",
+   "language": "typescript",
+   "sizeLines": 16,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/instrument.ts",
+   "language": "typescript",
+   "sizeLines": 11,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/main.ts",
+   "language": "typescript",
+   "sizeLines": 14,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/notifications/notification-events.ts",
+   "language": "typescript",
+   "sizeLines": 240,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/pos/pos.controller.ts",
+   "language": "typescript",
+   "sizeLines": 684,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/purchasing/purchasing.controllers.ts",
+   "language": "typescript",
+   "sizeLines": 781,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/sales/colissimo-portal.controller.ts",
+   "language": "typescript",
+   "sizeLines": 145,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/sales/colissimo-portal.ts",
+   "language": "typescript",
+   "sizeLines": 348,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/sales/colissimo-tracking.ts",
+   "language": "typescript",
+   "sizeLines": 180,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/sales/commerce.ts",
+   "language": "typescript",
+   "sizeLines": 504,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/sales/delivery.controller.ts",
+   "language": "typescript",
+   "sizeLines": 996,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/sales/orders.controller.ts",
+   "language": "typescript",
+   "sizeLines": 374,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/sales/sales.controllers.ts",
+   "language": "typescript",
+   "sizeLines": 688,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/stock/stock.controllers.ts",
+   "language": "typescript",
+   "sizeLines": 686,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/storefront/account.controller.ts",
+   "language": "typescript",
+   "sizeLines": 223,
+   "fileCategory": "code"
+  },
+  {
+   "path": "api/src/storefront/storefront.controller.ts",
+   "language": "typescript",
+   "sizeLines": 991,
+   "fileCategory": "code"
+  },
+  {
+   "path": "lib/abandoned-cart-email.ts",
+   "language": "typescript",
+   "sizeLines": 26,
+   "fileCategory": "code"
+  },
+  {
+   "path": "lib/admin-auth.ts",
+   "language": "typescript",
+   "sizeLines": 113,
+   "fileCategory": "code"
+  },
+  {
+   "path": "lib/api-access.ts",
+   "language": "typescript",
+   "sizeLines": 79,
+   "fileCategory": "code"
+  },
+  {
+   "path": "lib/auth-session.ts",
+   "language": "typescript",
+   "sizeLines": 53,
+   "fileCategory": "code"
+  },
+  {
+   "path": "lib/colissimo.ts",
+   "language": "typescript",
+   "sizeLines": 310,
+   "fileCategory": "code"
+  },
+  {
+   "path": "lib/erp/meta.ts",
+   "language": "typescript",
+   "sizeLines": 166,
+   "fileCategory": "code"
+  },
+  {
+   "path": "lib/erp/objectives.ts",
+   "language": "typescript",
+   "sizeLines": 61,
+   "fileCategory": "code"
+  },
+  {
+   "path": "lib/landing-config.ts",
+   "language": "typescript",
+   "sizeLines": 95,
+   "fileCategory": "code"
+  },
+  {
+   "path": "lib/openapi-erp.ts",
+   "language": "typescript",
+   "sizeLines": 206,
+   "fileCategory": "code"
+  },
+  {
+   "path": "lib/openapi.ts",
+   "language": "typescript",
+   "sizeLines": 1123,
+   "fileCategory": "code"
+  },
+  {
+   "path": "lib/order-number.ts",
+   "language": "typescript",
+   "sizeLines": 8,
+   "fileCategory": "code"
+  },
+  {
+   "path": "lib/trash-tables.ts",
+   "language": "typescript",
+   "sizeLines": 29,
+   "fileCategory": "code"
+  },
+  {
+   "path": "middleware.ts",
+   "language": "typescript",
+   "sizeLines": 198,
+   "fileCategory": "code"
+  }
+ ],
+ "batchImportData": {
+  "api/src/finance/finance.controllers.ts": [
+   "api/src/auth/auth.guard.ts",
+   "api/src/auth/decorators.ts",
+   "api/src/common/api.ts",
+   "api/src/db/database.ts",
+   "api/src/db/embed.ts",
+   "lib/erp/constants.ts"
+  ],
+  "api/src/health.controller.ts": [
+   "api/src/auth/decorators.ts",
+   "api/src/db/database.ts"
+  ],
+  "api/src/instrument.ts": [
+   "api/src/config.ts"
+  ],
+  "api/src/main.ts": [
+   "api/src/app.module.ts",
+   "api/src/config.ts",
+   "api/src/instrument.ts"
+  ],
+  "api/src/notifications/notification-events.ts": [
+   "api/src/config.ts",
+   "api/src/db/database.ts"
+  ],
+  "api/src/pos/pos.controller.ts": [
+   "api/src/auth/auth.guard.ts",
+   "api/src/auth/decorators.ts",
+   "api/src/catalog/revalidate.ts",
+   "api/src/common/api.ts",
+   "api/src/db/database.ts",
+   "api/src/db/embed.ts",
+   "api/src/sales/commerce.ts",
+   "lib/order-number.ts"
+  ],
+  "api/src/purchasing/purchasing.controllers.ts": [
+   "api/src/auth/auth.guard.ts",
+   "api/src/auth/decorators.ts",
+   "api/src/catalog/revalidate.ts",
+   "api/src/common/api.ts",
+   "api/src/db/database.ts",
+   "api/src/db/embed.ts",
+   "lib/erp/constants.ts"
+  ],
+  "api/src/sales/colissimo-portal.controller.ts": [
+   "api/src/auth/decorators.ts",
+   "api/src/common/api.ts",
+   "api/src/db/database.ts",
+   "api/src/sales/colissimo-portal.ts"
+  ],
+  "api/src/sales/colissimo-portal.ts": [],
+  "api/src/sales/colissimo-tracking.ts": [
+   "api/src/catalog/revalidate.ts",
+   "api/src/db/database.ts",
+   "lib/colissimo-data.ts",
+   "lib/colissimo.ts"
+  ],
+  "api/src/sales/commerce.ts": [
+   "api/src/db/types.ts"
+  ],
+  "api/src/sales/delivery.controller.ts": [
+   "api/src/auth/auth.guard.ts",
+   "api/src/auth/decorators.ts",
+   "api/src/catalog/revalidate.ts",
+   "api/src/common/api.ts",
+   "api/src/db/database.ts",
+   "api/src/sales/colissimo-portal.ts",
+   "api/src/sales/colissimo-tracking.ts",
+   "api/src/sales/commerce.ts",
+   "lib/colissimo-data.ts",
+   "lib/colissimo.ts",
+   "lib/erp/constants.ts",
+   "lib/order-number.ts"
+  ],
+  "api/src/sales/orders.controller.ts": [
+   "api/src/auth/auth.guard.ts",
+   "api/src/auth/decorators.ts",
+   "api/src/catalog/revalidate.ts",
+   "api/src/common/api.ts",
+   "api/src/db/database.ts",
+   "api/src/sales/colissimo-tracking.ts",
+   "api/src/sales/commerce.ts",
+   "lib/colissimo-data.ts",
+   "lib/erp/constants.ts",
+   "lib/order-confirmation-email.ts",
+   "lib/order-number.ts",
+   "lib/order-types.ts"
+  ],
+  "api/src/sales/sales.controllers.ts": [
+   "api/src/auth/auth.guard.ts",
+   "api/src/auth/decorators.ts",
+   "api/src/catalog/revalidate.ts",
+   "api/src/common/api.ts",
+   "api/src/db/database.ts",
+   "api/src/sales/commerce.ts",
+   "lib/colissimo-data.ts",
+   "lib/erp/constants.ts",
+   "lib/order-number.ts"
+  ],
+  "api/src/stock/stock.controllers.ts": [
+   "api/src/auth/auth.guard.ts",
+   "api/src/auth/decorators.ts",
+   "api/src/catalog/revalidate.ts",
+   "api/src/common/api.ts",
+   "api/src/db/database.ts",
+   "lib/stock.ts"
+  ],
+  "api/src/storefront/account.controller.ts": [
+   "api/src/auth/decorators.ts",
+   "api/src/common/api.ts",
+   "api/src/db/database.ts",
+   "api/src/db/embed.ts",
+   "api/src/sales/commerce.ts",
+   "lib/colissimo-data.ts"
+  ],
+  "api/src/storefront/storefront.controller.ts": [
+   "api/src/auth/decorators.ts",
+   "api/src/common/api.ts",
+   "api/src/db/database.ts",
+   "api/src/db/embed.ts",
+   "api/src/sales/commerce.ts",
+   "lib/landing-config.ts",
+   "lib/utils/product-utils.ts"
+  ],
+  "lib/abandoned-cart-email.ts": [],
+  "lib/admin-auth.ts": [],
+  "lib/api-access.ts": [
+   "lib/admin-auth.ts",
+   "lib/trash-tables.ts"
+  ],
+  "lib/auth-session.ts": [],
+  "lib/colissimo.ts": [
+   "lib/colissimo-data.ts"
+  ],
+  "lib/erp/meta.ts": [],
+  "lib/erp/objectives.ts": [],
+  "lib/landing-config.ts": [],
+  "lib/openapi-erp.ts": [],
+  "lib/openapi.ts": [
+   "lib/admin-auth.ts",
+   "lib/openapi-erp.ts"
+  ],
+  "lib/order-number.ts": [],
+  "lib/trash-tables.ts": [
+   "lib/admin-auth.ts"
+  ],
+  "middleware.ts": [
+   "lib/admin-auth.ts",
+   "lib/auth-session.ts",
+   "lib/language-utils.ts"
+  ]
+ }
+}

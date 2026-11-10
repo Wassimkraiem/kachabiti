@@ -1,0 +1,118 @@
+{
+ "nodes": [
+  {
+   "id": "pipeline:.github/workflows/ci.yml",
+   "type": "pipeline",
+   "name": "ci.yml",
+   "filePath": ".github/workflows/ci.yml",
+   "summary": "CI workflow on PRs (also reusable): type-check and lint the site, lint and build the API, then run the end-to-end suites against the Docker stack with migrations applied.",
+   "tags": [
+    "ci-cd",
+    "testing",
+    "github-actions",
+    "quality"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "pipeline:.github/workflows/deploy.yml",
+   "type": "pipeline",
+   "name": "deploy.yml",
+   "filePath": ".github/workflows/deploy.yml",
+   "summary": "Deploy workflow on push to main: runs CI, detects API changes, builds and pushes the API image to GHCR, then deploys over SSH with no downtime and checks health.",
+   "tags": [
+    "ci-cd",
+    "deployment",
+    "github-actions",
+    "docker"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "pipeline:.github/workflows/deploy.yml",
+   "target": "pipeline:.github/workflows/ci.yml",
+   "type": "triggers",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "pipeline:.github/workflows/deploy.yml",
+   "target": "service:api/Dockerfile",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "pipeline:.github/workflows/ci.yml",
+   "target": "service:docker-compose.yml",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "pipeline:.github/workflows/ci.yml",
+   "target": "file:api/test/e2e/auth.e2e.mjs",
+   "type": "triggers",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "pipeline:.github/workflows/ci.yml",
+   "target": "file:api/test/e2e/catalog.e2e.mjs",
+   "type": "triggers",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "pipeline:.github/workflows/ci.yml",
+   "target": "file:api/test/e2e/categories.e2e.mjs",
+   "type": "triggers",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "pipeline:.github/workflows/ci.yml",
+   "target": "file:api/test/e2e/colissimo.e2e.mjs",
+   "type": "triggers",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "pipeline:.github/workflows/ci.yml",
+   "target": "file:api/test/e2e/erp.e2e.mjs",
+   "type": "triggers",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "pipeline:.github/workflows/ci.yml",
+   "target": "file:api/test/e2e/files.e2e.mjs",
+   "type": "triggers",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "pipeline:.github/workflows/ci.yml",
+   "target": "file:api/test/e2e/objectives.e2e.mjs",
+   "type": "triggers",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "pipeline:.github/workflows/ci.yml",
+   "target": "file:api/test/e2e/stock.e2e.mjs",
+   "type": "triggers",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "pipeline:.github/workflows/ci.yml",
+   "target": "file:api/test/e2e/tickets.e2e.mjs",
+   "type": "triggers",
+   "direction": "forward",
+   "weight": 0.6
+  }
+ ]
+}

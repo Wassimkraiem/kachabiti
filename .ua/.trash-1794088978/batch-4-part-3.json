@@ -1,0 +1,1064 @@
+{
+ "nodes": [
+  {
+   "id": "file:api/src/catalog/revalidate.ts",
+   "type": "file",
+   "name": "revalidate.ts",
+   "filePath": "api/src/catalog/revalidate.ts",
+   "summary": "Calls the Next.js internal revalidate endpoint to invalidate the cached storefront catalog after writes.",
+   "tags": [
+    "utility",
+    "cache",
+    "catalog"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/catalog/revalidate.ts:invalidateCatalog",
+   "type": "function",
+   "name": "invalidateCatalog",
+   "filePath": "api/src/catalog/revalidate.ts",
+   "lineRange": [
+    11,
+    26
+   ],
+   "summary": "Triggers storefront catalog cache revalidation.",
+   "tags": [
+    "function",
+    "utility",
+    "catalog"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/catalog/variants.controller.ts",
+   "type": "file",
+   "name": "variants.controller.ts",
+   "filePath": "api/src/catalog/variants.controller.ts",
+   "summary": "Product variants API for listing, creating, updating and deleting variants (delete_variant), invalidating the catalog cache.",
+   "tags": [
+    "api-handler",
+    "catalog",
+    "variants",
+    "nestjs"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/catalog/variants.controller.ts:VariantsController",
+   "type": "class",
+   "name": "VariantsController",
+   "filePath": "api/src/catalog/variants.controller.ts",
+   "lineRange": [
+    27,
+    116
+   ],
+   "summary": "Variant CRUD endpoints.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/src/common/api.ts",
+   "type": "file",
+   "name": "api.ts",
+   "filePath": "api/src/common/api.ts",
+   "summary": "Shared API plumbing: response envelope interceptor, ApiError and an exception filter mapping zod and database errors, a Zod validation pipe, and helpers for ids, slugs, periods and Tunis dates.",
+   "tags": [
+    "utility",
+    "validation",
+    "error-handling",
+    "nestjs",
+    "serialization"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/common/api.ts:Envelope",
+   "type": "class",
+   "name": "Envelope",
+   "filePath": "api/src/common/api.ts",
+   "lineRange": [
+    25,
+    30
+   ],
+   "summary": "Response envelope wrapper.",
+   "tags": [
+    "class",
+    "nestjs",
+    "service"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:api/src/common/api.ts:Raw",
+   "type": "class",
+   "name": "Raw",
+   "filePath": "api/src/common/api.ts",
+   "lineRange": [
+    33,
+    35
+   ],
+   "summary": "Marker for raw, unwrapped responses.",
+   "tags": [
+    "class",
+    "nestjs",
+    "service"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:api/src/common/api.ts:ApiResponseInterceptor",
+   "type": "class",
+   "name": "ApiResponseInterceptor",
+   "filePath": "api/src/common/api.ts",
+   "lineRange": [
+    38,
+    52
+   ],
+   "summary": "Wraps handler results in the API envelope.",
+   "tags": [
+    "class",
+    "nestjs",
+    "service"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:api/src/common/api.ts:ApiError",
+   "type": "class",
+   "name": "ApiError",
+   "filePath": "api/src/common/api.ts",
+   "lineRange": [
+    55,
+    64
+   ],
+   "summary": "HTTP error with status and code.",
+   "tags": [
+    "class",
+    "nestjs",
+    "service"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:api/src/common/api.ts:ApiExceptionFilter",
+   "type": "class",
+   "name": "ApiExceptionFilter",
+   "filePath": "api/src/common/api.ts",
+   "lineRange": [
+    67,
+    114
+   ],
+   "summary": "Turns zod, database and API errors into JSON error responses.",
+   "tags": [
+    "class",
+    "nestjs",
+    "service"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/common/api.ts:Zod",
+   "type": "class",
+   "name": "Zod",
+   "filePath": "api/src/common/api.ts",
+   "lineRange": [
+    117,
+    127
+   ],
+   "summary": "Validation pipe parsing input with a zod schema.",
+   "tags": [
+    "class",
+    "nestjs",
+    "service"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/api.ts:idsFrom",
+   "type": "function",
+   "name": "idsFrom",
+   "filePath": "api/src/common/api.ts",
+   "lineRange": [
+    130,
+    141
+   ],
+   "summary": "Parses comma-separated id lists.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/api.ts:slugify",
+   "type": "function",
+   "name": "slugify",
+   "filePath": "api/src/common/api.ts",
+   "lineRange": [
+    144,
+    148
+   ],
+   "summary": "Builds URL slugs.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/api.ts:zText",
+   "type": "function",
+   "name": "zText",
+   "filePath": "api/src/common/api.ts",
+   "lineRange": [
+    154,
+    154
+   ],
+   "summary": "Zod trimmed text schema.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/api.ts:isManager",
+   "type": "function",
+   "name": "isManager",
+   "filePath": "api/src/common/api.ts",
+   "lineRange": [
+    157,
+    158
+   ],
+   "summary": "Tells whether an actor is an owner or admin.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/api.ts:params",
+   "type": "function",
+   "name": "params",
+   "filePath": "api/src/common/api.ts",
+   "lineRange": [
+    161,
+    179
+   ],
+   "summary": "Parses pagination and filter query params.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/api.ts:period",
+   "type": "function",
+   "name": "period",
+   "filePath": "api/src/common/api.ts",
+   "lineRange": [
+    182,
+    191
+   ],
+   "summary": "Parses a from/to period.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/api.ts:tunisDay",
+   "type": "function",
+   "name": "tunisDay",
+   "filePath": "api/src/common/api.ts",
+   "lineRange": [
+    194,
+    200
+   ],
+   "summary": "Returns the current date in Tunis time.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/common/mail.ts",
+   "type": "file",
+   "name": "mail.ts",
+   "filePath": "api/src/common/mail.ts",
+   "summary": "Nodemailer transport (Gmail or custom SMTP) and a helper to send account e-mails.",
+   "tags": [
+    "utility",
+    "email",
+    "service"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/mail.ts:gmail",
+   "type": "function",
+   "name": "gmail",
+   "filePath": "api/src/common/mail.ts",
+   "lineRange": [
+    9,
+    17
+   ],
+   "summary": "Creates the SMTP transport.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/mail.ts:sendAccountMail",
+   "type": "function",
+   "name": "sendAccountMail",
+   "filePath": "api/src/common/mail.ts",
+   "lineRange": [
+    24,
+    40
+   ],
+   "summary": "Sends an account e-mail.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/common/rate-limit.ts",
+   "type": "file",
+   "name": "rate-limit.ts",
+   "filePath": "api/src/common/rate-limit.ts",
+   "summary": "In-memory rate limiter keyed per address or IP, plus client IP extraction, for auth endpoints.",
+   "tags": [
+    "utility",
+    "security",
+    "rate-limiting"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/rate-limit.ts:rateLimit",
+   "type": "function",
+   "name": "rateLimit",
+   "filePath": "api/src/common/rate-limit.ts",
+   "lineRange": [
+    9,
+    21
+   ],
+   "summary": "Throws when a key exceeds its request budget.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/rate-limit.ts:clientIp",
+   "type": "function",
+   "name": "clientIp",
+   "filePath": "api/src/common/rate-limit.ts",
+   "lineRange": [
+    24,
+    27
+   ],
+   "summary": "Extracts the client IP from headers.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/common/storage.ts",
+   "type": "file",
+   "name": "storage.ts",
+   "filePath": "api/src/common/storage.ts",
+   "summary": "S3-compatible storage client signing with env or EC2 instance role keys, offering put/delete, signed and public URLs for the products and documents buckets.",
+   "tags": [
+    "service",
+    "storage",
+    "s3",
+    "utility"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/common/storage.ts:storage",
+   "type": "function",
+   "name": "storage",
+   "filePath": "api/src/common/storage.ts",
+   "lineRange": [
+    19,
+    42
+   ],
+   "summary": "Lazily creates the S3 client.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/storage.ts:instanceRoleKeys",
+   "type": "function",
+   "name": "instanceRoleKeys",
+   "filePath": "api/src/common/storage.ts",
+   "lineRange": [
+    47,
+    70
+   ],
+   "summary": "Fetches EC2 instance role credentials.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/storage.ts:putObject",
+   "type": "function",
+   "name": "putObject",
+   "filePath": "api/src/common/storage.ts",
+   "lineRange": [
+    89,
+    105
+   ],
+   "summary": "Uploads an object.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/storage.ts:deleteObject",
+   "type": "function",
+   "name": "deleteObject",
+   "filePath": "api/src/common/storage.ts",
+   "lineRange": [
+    107,
+    108
+   ],
+   "summary": "Deletes an object.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/storage.ts:signedUrl",
+   "type": "function",
+   "name": "signedUrl",
+   "filePath": "api/src/common/storage.ts",
+   "lineRange": [
+    111,
+    130
+   ],
+   "summary": "Creates a presigned GET URL.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/common/storage.ts:publicUrl",
+   "type": "function",
+   "name": "publicUrl",
+   "filePath": "api/src/common/storage.ts",
+   "lineRange": [
+    133,
+    137
+   ],
+   "summary": "Builds the public URL of a products-bucket object.",
+   "tags": [
+    "function",
+    "utility",
+    "common"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/config.ts",
+   "type": "file",
+   "name": "config.ts",
+   "filePath": "api/src/config.ts",
+   "summary": "Loads and exports the NestJS API configuration from environment variables.",
+   "tags": [
+    "config",
+    "environment",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/config.ts:loadConfig",
+   "type": "function",
+   "name": "loadConfig",
+   "filePath": "api/src/config.ts",
+   "lineRange": [
+    41,
+    51
+   ],
+   "summary": "Reads environment variables into the config object.",
+   "tags": [
+    "function",
+    "utility",
+    "config"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/crm/campaigns.controller.ts",
+   "type": "file",
+   "name": "campaigns.controller.ts",
+   "filePath": "api/src/crm/campaigns.controller.ts",
+   "summary": "Marketing campaigns API (CRUD and stats) used to attribute orders and ad spend.",
+   "tags": [
+    "api-handler",
+    "crm",
+    "marketing",
+    "nestjs"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/crm/campaigns.controller.ts:CampaignsController",
+   "type": "class",
+   "name": "CampaignsController",
+   "filePath": "api/src/crm/campaigns.controller.ts",
+   "lineRange": [
+    50,
+    199
+   ],
+   "summary": "Campaign CRUD and stats.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:api/src/catalog/revalidate.ts",
+   "target": "file:api/src/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/revalidate.ts",
+   "target": "function:api/src/catalog/revalidate.ts:invalidateCatalog",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/revalidate.ts",
+   "target": "function:api/src/catalog/revalidate.ts:invalidateCatalog",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/catalog/variants.controller.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/variants.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/variants.controller.ts",
+   "target": "file:api/src/catalog/queries.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/variants.controller.ts",
+   "target": "file:api/src/catalog/revalidate.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/variants.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/variants.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/variants.controller.ts",
+   "target": "class:api/src/catalog/variants.controller.ts:VariantsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/variants.controller.ts",
+   "target": "class:api/src/catalog/variants.controller.ts:VariantsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "file:lib/erp/db-messages.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "class:api/src/common/api.ts:Envelope",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "class:api/src/common/api.ts:Envelope",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "class:api/src/common/api.ts:Raw",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "class:api/src/common/api.ts:Raw",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "class:api/src/common/api.ts:ApiResponseInterceptor",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "class:api/src/common/api.ts:ApiResponseInterceptor",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "class:api/src/common/api.ts:ApiError",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "class:api/src/common/api.ts:ApiError",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "class:api/src/common/api.ts:ApiExceptionFilter",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "class:api/src/common/api.ts:ApiExceptionFilter",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "class:api/src/common/api.ts:Zod",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "class:api/src/common/api.ts:Zod",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "function:api/src/common/api.ts:idsFrom",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "function:api/src/common/api.ts:idsFrom",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "function:api/src/common/api.ts:slugify",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "function:api/src/common/api.ts:slugify",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "function:api/src/common/api.ts:zText",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "function:api/src/common/api.ts:zText",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "function:api/src/common/api.ts:isManager",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "function:api/src/common/api.ts:isManager",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "function:api/src/common/api.ts:params",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "function:api/src/common/api.ts:params",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "function:api/src/common/api.ts:period",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "function:api/src/common/api.ts:period",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "function:api/src/common/api.ts:tunisDay",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/api.ts",
+   "target": "function:api/src/common/api.ts:tunisDay",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/mail.ts",
+   "target": "file:api/src/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/common/mail.ts",
+   "target": "function:api/src/common/mail.ts:gmail",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/mail.ts",
+   "target": "function:api/src/common/mail.ts:gmail",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/mail.ts",
+   "target": "function:api/src/common/mail.ts:sendAccountMail",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/mail.ts",
+   "target": "function:api/src/common/mail.ts:sendAccountMail",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/rate-limit.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/common/rate-limit.ts",
+   "target": "function:api/src/common/rate-limit.ts:rateLimit",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/rate-limit.ts",
+   "target": "function:api/src/common/rate-limit.ts:rateLimit",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/rate-limit.ts",
+   "target": "function:api/src/common/rate-limit.ts:clientIp",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/rate-limit.ts",
+   "target": "function:api/src/common/rate-limit.ts:clientIp",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/storage.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/common/storage.ts",
+   "target": "file:api/src/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/common/storage.ts",
+   "target": "function:api/src/common/storage.ts:storage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/storage.ts",
+   "target": "function:api/src/common/storage.ts:instanceRoleKeys",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/storage.ts",
+   "target": "function:api/src/common/storage.ts:putObject",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/storage.ts",
+   "target": "function:api/src/common/storage.ts:putObject",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/storage.ts",
+   "target": "function:api/src/common/storage.ts:deleteObject",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/storage.ts",
+   "target": "function:api/src/common/storage.ts:deleteObject",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/storage.ts",
+   "target": "function:api/src/common/storage.ts:signedUrl",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/storage.ts",
+   "target": "function:api/src/common/storage.ts:signedUrl",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/common/storage.ts",
+   "target": "function:api/src/common/storage.ts:publicUrl",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/common/storage.ts",
+   "target": "function:api/src/common/storage.ts:publicUrl",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/config.ts",
+   "target": "function:api/src/config.ts:loadConfig",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/config.ts",
+   "target": "function:api/src/config.ts:loadConfig",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/crm/campaigns.controller.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/campaigns.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/campaigns.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/campaigns.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/campaigns.controller.ts",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/campaigns.controller.ts",
+   "target": "class:api/src/crm/campaigns.controller.ts:CampaignsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/crm/campaigns.controller.ts",
+   "target": "class:api/src/crm/campaigns.controller.ts:CampaignsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/catalog/variants.controller.ts:VariantsController",
+   "target": "function:api/src/catalog/queries.ts:variantsWithOptions",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

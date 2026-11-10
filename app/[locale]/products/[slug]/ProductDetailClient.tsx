@@ -455,7 +455,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
         return (
             <>
                 <div className="min-h-screen flex items-center justify-center">
-                    <p className="text-xl text-gray-600">Product not found</p>
+                    <p className="text-xl text-mute">Product not found</p>
                 </div>
             </>
         );
@@ -578,7 +578,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
     const productUrl = `/${locale}/products/${slug}`;
 
     const Stars = ({ value, size = 'h-4 w-4' }: { value: number; size?: string }) => (
-        <span className="flex gap-0.5 text-[var(--wool-camel)]" aria-hidden="true">
+        <span className="flex gap-0.5 text-accent" aria-hidden="true">
             {[1, 2, 3, 4, 5].map((i) => (
                 <svg key={i} className={`${size} ${i <= Math.round(value) ? 'fill-current' : 'fill-[#e6ddd2]'}`} viewBox="0 0 20 20">
                     <path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9L10 1.5z" />
@@ -588,21 +588,21 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
     );
 
     return (
-        <div dir={rtl ? 'rtl' : 'ltr'} className={`${reemKufi.variable} bg-white text-[var(--wool-ink)]`}>
+        <div dir={rtl ? 'rtl' : 'ltr'} className={`${reemKufi.variable} bg-card text-ink`}>
             {/* Purchase: gallery and buy panel */}
             <div className="mx-auto max-w-7xl px-4 pt-6 pb-12 lg:pt-8 lg:pb-16">
-                <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-[#8a7a70]">
-                    <Link href={`/${locale}`} className="hover:text-[var(--wool-maroon)]">{text.home}</Link>
+                <nav aria-label="Breadcrumb" className="mb-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-mute">
+                    <Link href={`/${locale}`} className="hover:text-accent">{text.home}</Link>
                     <span aria-hidden="true">/</span>
-                    <Link href={`/${locale}/products`} className="hover:text-[var(--wool-maroon)]">{text.products}</Link>
+                    <Link href={`/${locale}/products`} className="hover:text-accent">{text.products}</Link>
                     {categorySlug && categoryName && (
                         <>
                             <span aria-hidden="true">/</span>
-                            <Link href={`/${locale}/products?category=${categorySlug}`} className="hover:text-[var(--wool-maroon)]">{categoryName}</Link>
+                            <Link href={`/${locale}/products?category=${categorySlug}`} className="hover:text-accent">{categoryName}</Link>
                         </>
                     )}
                     <span aria-hidden="true">/</span>
-                    <span className="max-w-[40ch] truncate text-[var(--wool-ink)]" aria-current="page">{productName}</span>
+                    <span className="max-w-[40ch] truncate text-ink" aria-current="page">{productName}</span>
                 </nav>
 
                 <div className="grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-14">
@@ -628,7 +628,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                         <ImageLightbox
                             images={galleryImages.map((img) => ({ src: img.url, alt: img.alt || productName }))}
                             index={selectedImage}
-                            className="rounded-[14px]! bg-[#f3efe9] shadow-none! hover:shadow-none!"
+                            className="rounded-[14px]! bg-surface shadow-none! hover:shadow-none!"
                         />
                         {galleryImages.length > 1 && (
                             <div className="mt-3 flex gap-3 overflow-x-auto pb-1 scrollbar-hide">
@@ -639,7 +639,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                                         onClick={() => setSelectedImage(index)}
                                         aria-label={`${productName} ${index + 1}`}
                                         aria-pressed={selectedImage === index}
-                                        className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-[10px] bg-[#f3efe9] outline-none transition focus-visible:ring-2 focus-visible:ring-[var(--wool-maroon)] ${selectedImage === index ? 'ring-2 ring-[var(--wool-maroon)] ring-offset-2' : 'opacity-75 hover:opacity-100'}`}
+                                        className={`relative h-20 w-20 shrink-0 overflow-hidden rounded-[10px] bg-surface outline-none transition focus-visible:ring-2 focus-visible:ring-accent ${selectedImage === index ? 'ring-2 ring-accent ring-offset-2' : 'opacity-75 hover:opacity-100'}`}
                                     >
                                         <Image src={img.url} alt="" fill sizes="80px" className="object-cover object-top" />
                                     </button>
@@ -651,7 +651,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                     {/* Buy panel */}
                     <div className="lg:sticky lg:top-6 lg:self-start">
                         {categorySlug && categoryName && (
-                            <Link href={`/${locale}/products?category=${categorySlug}`} className="text-sm font-medium text-[var(--wool-camel)] hover:underline underline-offset-4">
+                            <Link href={`/${locale}/products?category=${categorySlug}`} className="text-sm font-medium text-accent hover:underline underline-offset-4">
                                 {categoryName}
                             </Link>
                         )}
@@ -661,7 +661,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
 
                         <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
                             {SHOW_RATINGS && (
-                            <a href="#reviews" className="flex items-center gap-2 text-[#5b4a42] hover:text-[var(--wool-maroon)]">
+                            <a href="#reviews" className="flex items-center gap-2 text-ink hover:text-accent">
                                 <Stars value={averageRating} />
                                 <span>{reviewCount > 0 ? `${averageRating.toFixed(1)} (${reviewCount} ${text.reviews})` : text.noRatingYet}</span>
                             </a>
@@ -671,30 +671,30 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                                 {inStock ? text.inStock : text.onOrder}
                             </span>
                         </div>
-                        {!inStock && <p className="mt-2 text-sm text-[#6f5f57]">{text.onOrderNote}</p>}
+                        {!inStock && <p className="mt-2 text-sm text-mute">{text.onOrderNote}</p>}
 
                         {/* Price */}
                         <div className="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1" dir="ltr">
-                            <span className="text-3xl font-semibold text-[var(--wool-maroon)]">
+                            <span className="text-3xl font-semibold text-accent">
                                 {Math.round(discountedPrice)} {currency}
                             </span>
                             {hasDiscount && (
                                 <>
-                                    <span className="text-lg text-[#a3958c] line-through">{Math.round(basePrice)} {currency}</span>
-                                    <span className="rounded-full bg-[var(--wool-maroon)]/10 px-2.5 py-0.5 text-sm font-medium text-[var(--wool-maroon)]">
+                                    <span className="text-lg text-mute line-through">{Math.round(basePrice)} {currency}</span>
+                                    <span className="rounded-full bg-accent/10 px-2.5 py-0.5 text-sm font-medium text-accent">
                                         −{Math.round(product.discount_percent!)}% {text.off}
                                     </span>
                                 </>
                             )}
                         </div>
 
-                        <div className="my-6 h-px bg-[#ece4da]" />
+                        <div className="my-6 h-px bg-line" />
 
                         {/* Color */}
                         {availableColors.length > 0 && (
                             <fieldset className="mb-6">
-                                <legend className="mb-3 text-sm text-[#5b4a42]">
-                                    {text.color}{selectedColorObj && <>{text.colon}<span className="font-medium text-[var(--wool-ink)]">{selectedColorObj.display_name || selectedColorObj.name}</span></>}
+                                <legend className="mb-3 text-sm text-ink">
+                                    {text.color}{selectedColorObj && <>{text.colon}<span className="font-medium text-ink">{selectedColorObj.display_name || selectedColorObj.name}</span></>}
                                 </legend>
                                 <div className="flex flex-wrap gap-3">
                                     {availableColors.map((color) => {
@@ -708,7 +708,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                                                 aria-label={colorName}
                                                 aria-pressed={selected}
                                                 title={colorName}
-                                                className={`relative h-10 w-10 rounded-full border border-black/10 outline-none transition focus-visible:ring-2 focus-visible:ring-[var(--wool-maroon)] focus-visible:ring-offset-2 ${selected ? 'ring-2 ring-[var(--wool-maroon)] ring-offset-2' : 'hover:scale-105'}`}
+                                                className={`relative h-10 w-10 rounded-full border border-black/10 outline-none transition focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${selected ? 'ring-2 ring-accent ring-offset-2' : 'hover:scale-105'}`}
                                                 style={{ backgroundColor: color.hex_code || '#cccccc' }}
                                             >
                                             </button>
@@ -721,8 +721,8 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                         {/* Size */}
                         {availableSizes.length > 0 && (
                             <fieldset className="mb-6">
-                                <legend className="mb-3 text-sm text-[#5b4a42]">
-                                    {text.size}{selectedSizeObj && <>{text.colon}<span className="font-medium text-[var(--wool-ink)]">{selectedSizeObj.display_name || selectedSizeObj.name}</span></>}
+                                <legend className="mb-3 text-sm text-ink">
+                                    {text.size}{selectedSizeObj && <>{text.colon}<span className="font-medium text-ink">{selectedSizeObj.display_name || selectedSizeObj.name}</span></>}
                                 </legend>
                                 <div className="flex flex-wrap gap-2">
                                     {availableSizes.map((size) => {
@@ -735,11 +735,11 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                                                 onClick={() => handleSizeSelect(size.id)}
                                                 disabled={!isAvailable}
                                                 aria-pressed={selected}
-                                                className={`h-11 min-w-12 rounded-full border px-4 text-sm font-medium outline-none transition focus-visible:ring-2 focus-visible:ring-[var(--wool-maroon)] focus-visible:ring-offset-2 ${selected
-                                                    ? 'border-[var(--wool-ink)] bg-[var(--wool-ink)] text-white'
+                                                className={`h-11 min-w-12 rounded-full border px-4 text-sm font-medium outline-none transition focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 ${selected
+                                                    ? 'border-ink bg-ink text-white'
                                                     : isAvailable
-                                                        ? 'border-[#d9cfc3] hover:border-[var(--wool-ink)]'
-                                                        : 'cursor-not-allowed border-[#ece4da] text-[#c2b6aa] line-through'}`}
+                                                        ? 'border-line hover:border-ink'
+                                                        : 'cursor-not-allowed border-line text-mute line-through'}`}
                                             >
                                                 {size.code || size.name}
                                             </button>
@@ -751,11 +751,11 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
 
                         {/* Quantity and add to cart */}
                         <div ref={setBuyRowEl} className="flex gap-3">
-                            <div className="inline-flex h-12 shrink-0 items-center rounded-full border border-[#d9cfc3]" role="group" aria-label={text.quantity}>
+                            <div className="inline-flex h-12 shrink-0 items-center rounded-full border border-line" role="group" aria-label={text.quantity}>
                                 <button
                                     type="button"
                                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                                    className="h-12 w-11 rounded-s-full text-lg outline-none hover:bg-[#f3efe9] focus-visible:ring-2 focus-visible:ring-[var(--wool-maroon)]"
+                                    className="h-12 w-11 rounded-s-full text-lg outline-none hover:bg-surface focus-visible:ring-2 focus-visible:ring-accent"
                                     aria-label="−"
                                 >
                                     −
@@ -764,7 +764,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                                 <button
                                     type="button"
                                     onClick={() => setQuantity(quantity + 1)}
-                                    className="h-12 w-11 rounded-e-full text-lg outline-none hover:bg-[#f3efe9] focus-visible:ring-2 focus-visible:ring-[var(--wool-maroon)]"
+                                    className="h-12 w-11 rounded-e-full text-lg outline-none hover:bg-surface focus-visible:ring-2 focus-visible:ring-accent"
                                     aria-label="+"
                                 >
                                     +
@@ -784,14 +784,14 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                                     reviewCount: reviewCount
                                 }}
                                 quantity={quantity}
-                                className="h-12 flex-1 justify-center rounded-full! bg-[var(--wool-maroon)]! text-base hover:bg-[#6b2516]!"
+                                className="h-12 flex-1 justify-center rounded-full! bg-accent! text-base hover:bg-accent-hover!"
                             />
                         </div>
 
                         {/* Phones: sticky buy bar while the row above is out of view */}
                         <div className="h-24 sm:hidden" aria-hidden="true" />
                         <div
-                            className={`fixed inset-x-0 bottom-0 z-40 border-t border-[#ece4da] bg-white/95 px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur transition-transform duration-200 motion-reduce:transition-none sm:hidden ${
+                            className={`fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 px-4 pb-[calc(0.75rem+env(safe-area-inset-bottom))] pt-3 backdrop-blur transition-transform duration-200 motion-reduce:transition-none sm:hidden ${
                                 buyRowVisible ? "translate-y-full" : "translate-y-0"
                             }`}
                             aria-hidden={buyRowVisible}
@@ -799,10 +799,10 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                             <div className="flex items-center gap-3">
                                 <div className="min-w-0 flex-1">
                                     <div className="flex items-baseline gap-2" dir="ltr">
-                                        <span className="text-lg font-semibold text-[var(--wool-maroon)]">{Math.round(discountedPrice)} {currency}</span>
-                                        {hasDiscount && <span className="text-sm text-[#a3958c] line-through">{Math.round(basePrice)} {currency}</span>}
+                                        <span className="text-lg font-semibold text-accent">{Math.round(discountedPrice)} {currency}</span>
+                                        {hasDiscount && <span className="text-sm text-mute line-through">{Math.round(basePrice)} {currency}</span>}
                                     </div>
-                                    {variantLabel && <p className="truncate text-xs text-[#6f5f57]">{variantLabel}</p>}
+                                    {variantLabel && <p className="truncate text-xs text-mute">{variantLabel}</p>}
                                 </div>
                                 <AddToCartButton
                                     product={{
@@ -818,22 +818,22 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                                         reviewCount: reviewCount
                                     }}
                                     quantity={quantity}
-                                    className="h-12 w-auto! shrink-0 justify-center rounded-full! bg-[var(--wool-maroon)]! px-6! text-base hover:bg-[#6b2516]!"
+                                    className="h-12 w-auto! shrink-0 justify-center rounded-full! bg-accent! px-6! text-base hover:bg-accent-hover!"
                                 />
                             </div>
                         </div>
 
                         {/* Ordering terms */}
-                        <ul className="mt-6 space-y-3 rounded-[14px] bg-[#f7f3ee] p-4 text-sm text-[#5b4a42]">
+                        <ul className="mt-6 space-y-3 rounded-[14px] bg-surface p-4 text-sm text-ink">
                             <li className="flex items-start gap-3">
-                                <svg className="mt-0.5 h-4 w-4 shrink-0 text-[var(--wool-camel)]" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <svg className="mt-0.5 h-4 w-4 shrink-0 text-accent" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                                     <rect x="2" y="5" width="16" height="10" rx="2" stroke="currentColor" strokeWidth="1.6" />
                                     <circle cx="10" cy="10" r="2.2" stroke="currentColor" strokeWidth="1.6" />
                                 </svg>
                                 {text.cashOnDelivery}
                             </li>
                             <li className="flex items-start gap-3">
-                                <svg className="mt-0.5 h-4 w-4 shrink-0 text-[var(--wool-camel)]" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <svg className="mt-0.5 h-4 w-4 shrink-0 text-accent" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                                     <path d="M2 5h10v8H2zM12 8h3.5L18 10.5V13h-6" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
                                     <circle cx="5.5" cy="14.5" r="1.5" fill="currentColor" />
                                     <circle cx="14.5" cy="14.5" r="1.5" fill="currentColor" />
@@ -845,7 +845,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                                 </span>
                             </li>
                             <li className="flex items-start gap-3">
-                                <svg className="mt-0.5 h-4 w-4 shrink-0 text-[var(--wool-camel)]" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                                <svg className="mt-0.5 h-4 w-4 shrink-0 text-accent" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                                     <circle cx="10" cy="10" r="7.5" stroke="currentColor" strokeWidth="1.6" />
                                     <path d="M10 6v4l2.5 2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
                                 </svg>
@@ -863,14 +863,14 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                 <div>
                     <h2 className="font-[family-name:var(--font-kufi)] text-2xl font-bold">{text.aboutPiece}</h2>
                     {description && (
-                        <div className="mt-5 max-w-[68ch] whitespace-pre-line text-[15px] leading-7 text-[#5b4a42]">{description}</div>
+                        <div className="mt-5 max-w-[68ch] whitespace-pre-line text-[15px] leading-7 text-ink">{description}</div>
                     )}
                 </div>
-                <aside className="space-y-8 lg:border-s lg:border-[#ece4da] lg:ps-10">
+                <aside className="space-y-8 lg:border-s lg:border-line lg:ps-10">
                     {product.product_details && product.product_details.length > 0 && (
                         <div>
                             <h3 className="font-semibold">{text.productDetails}</h3>
-                            <ul className="mt-3 list-disc space-y-1.5 ps-5 text-sm text-[#5b4a42] marker:text-[var(--wool-camel)]">
+                            <ul className="mt-3 list-disc space-y-1.5 ps-5 text-sm text-ink marker:text-accent">
                                 {product.product_details.map((detail, i) => <li key={i}>{detail}</li>)}
                                 {product.weight && <li>{product.weight} g</li>}
                             </ul>
@@ -878,11 +878,11 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                     )}
                     <div>
                         <h3 className="font-semibold">{text.shippingDetails}</h3>
-                        <dl className="mt-3 space-y-2 text-sm text-[#5b4a42]">
+                        <dl className="mt-3 space-y-2 text-sm text-ink">
                             {shippingCost && (
                                 <div className="flex justify-between gap-4">
                                     <dt>{text.homeDelivery}</dt>
-                                    <dd className="font-medium text-[var(--wool-ink)]" dir="ltr">{shippingCost} TND</dd>
+                                    <dd className="font-medium text-ink" dir="ltr">{shippingCost} TND</dd>
                                 </div>
                             )}
                             {freeShippingThreshold && <p>{text.freeFrom.replace('{amount}', String(freeShippingThreshold))}</p>}
@@ -895,7 +895,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                             <Image src="/assets/images/logoKachabity.jpg" alt="" width={44} height={44} className="rounded-full" />
                             <div className="text-sm">
                                 <p className="font-medium">Kachabity</p>
-                                <a href={`tel:${headerConfig.contact.phone.replace(/\s+/g, '')}`} className="text-[var(--wool-maroon)] hover:underline underline-offset-4" dir="ltr">
+                                <a href={`tel:${headerConfig.contact.phone.replace(/\s+/g, '')}`} className="text-accent hover:underline underline-offset-4" dir="ltr">
                                     {text.callUs}: {headerConfig.contact.phone}
                                 </a>
                             </div>
@@ -907,7 +907,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
             {SHOW_RATINGS && (
             <>
             {/* Reviews */}
-            <section id="reviews" className="scroll-mt-6 bg-[#f7f3ee]">
+            <section id="reviews" className="scroll-mt-6 bg-surface">
                 <div className="mx-auto grid max-w-7xl gap-10 px-4 py-12 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-14 lg:py-16">
                     <div>
                         <h2 className="font-[family-name:var(--font-kufi)] text-2xl font-bold">{text.reviewsTitle}</h2>
@@ -915,37 +915,37 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                             {reviewCount > 0 && <span className="text-4xl font-semibold" dir="ltr">{averageRating.toFixed(1)}</span>}
                             <div>
                                 <Stars value={averageRating} size="h-5 w-5" />
-                                <p className="mt-1 text-sm text-[#5b4a42]">{reviewCount > 0 ? text.basedOn.replace('{count}', String(reviewCount)) : text.noRatingYet}</p>
+                                <p className="mt-1 text-sm text-ink">{reviewCount > 0 ? text.basedOn.replace('{count}', String(reviewCount)) : text.noRatingYet}</p>
                             </div>
                         </div>
 
                         {!customer ? (
                             <div className="mt-6">
-                                <p className="text-sm text-[#5b4a42]">{text.reviewLoginPrompt}</p>
+                                <p className="text-sm text-ink">{text.reviewLoginPrompt}</p>
                                 <div className="mt-3 flex flex-wrap gap-2">
-                                    <Link href={authHref(locale, { redirect: productUrl, reason: "review" })} className="rounded-full bg-[var(--wool-maroon)] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#6b2516]">
+                                    <Link href={authHref(locale, { redirect: productUrl, reason: "review" })} className="rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-white hover:bg-accent-hover">
                                         {text.logIn}
                                     </Link>
-                                    <Link href={authHref(locale, { redirect: productUrl, reason: "review", mode: "signup" })} className="rounded-full border border-[var(--wool-ink)]/25 px-5 py-2.5 text-sm font-medium hover:border-[var(--wool-ink)]">
+                                    <Link href={authHref(locale, { redirect: productUrl, reason: "review", mode: "signup" })} className="rounded-full border border-ink/25 px-5 py-2.5 text-sm font-medium hover:border-ink">
                                         {text.createAccount}
                                     </Link>
                                 </div>
                             </div>
                         ) : !reviewFormOpen ? (
-                            <button type="button" onClick={() => setReviewFormOpen(true)} className="mt-6 rounded-full border border-[var(--wool-ink)]/25 px-5 py-2.5 text-sm font-medium hover:border-[var(--wool-ink)]">
+                            <button type="button" onClick={() => setReviewFormOpen(true)} className="mt-6 rounded-full border border-ink/25 px-5 py-2.5 text-sm font-medium hover:border-ink">
                                 {text.writeReview}
                             </button>
                         ) : (
-                            <form onSubmit={handleSubmit(onSubmitComment)} className="mt-6 rounded-[14px] bg-white p-5">
-                                <p className="text-sm text-[#5b4a42]">
-                                    {text.postingAs} <span className="font-medium text-[var(--wool-ink)]">{customerName(customer)}</span>
+                            <form onSubmit={handleSubmit(onSubmitComment)} className="mt-6 rounded-[14px] bg-card p-5">
+                                <p className="text-sm text-ink">
+                                    {text.postingAs} <span className="font-medium text-ink">{customerName(customer)}</span>
                                 </p>
                                 <fieldset className="mt-4">
                                     <legend className="mb-2 text-sm font-medium">{text.yourRating}</legend>
                                     <div className="flex gap-1" dir="ltr">
                                         {[1, 2, 3, 4, 5].map((star) => (
-                                            <button key={star} type="button" onClick={() => setSelectedRating(star)} aria-label={`${star}/5`} aria-pressed={star === selectedRating} className="rounded outline-none focus-visible:ring-2 focus-visible:ring-[var(--wool-maroon)]">
-                                                <svg className={`h-7 w-7 ${star <= selectedRating ? 'fill-[var(--wool-camel)]' : 'fill-[#e6ddd2]'}`} viewBox="0 0 20 20">
+                                            <button key={star} type="button" onClick={() => setSelectedRating(star)} aria-label={`${star}/5`} aria-pressed={star === selectedRating} className="rounded outline-none focus-visible:ring-2 focus-visible:ring-accent">
+                                                <svg className={`h-7 w-7 ${star <= selectedRating ? 'fill-accent' : 'fill-[#e6ddd2]'}`} viewBox="0 0 20 20">
                                                     <path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9L10 1.5z" />
                                                 </svg>
                                             </button>
@@ -956,10 +956,10 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                                     <FormTextarea label={text.comments} name="comment" placeholder={text.commentPlaceholder} register={register} error={errors.comment} required rows={4} />
                                 </div>
                                 <div className="mt-4 flex gap-2">
-                                    <button type="submit" disabled={submittingComment} className="rounded-full bg-[var(--wool-maroon)] px-6 py-2.5 text-sm font-medium text-white hover:bg-[#6b2516] disabled:cursor-not-allowed disabled:opacity-50">
+                                    <button type="submit" disabled={submittingComment} className="rounded-full bg-accent px-6 py-2.5 text-sm font-medium text-white hover:bg-accent-hover disabled:cursor-not-allowed disabled:opacity-50">
                                         {submittingComment ? text.submittingComment : text.send}
                                     </button>
-                                    <button type="button" onClick={() => setReviewFormOpen(false)} className="rounded-full px-5 py-2.5 text-sm font-medium text-[#5b4a42] hover:text-[var(--wool-ink)]">
+                                    <button type="button" onClick={() => setReviewFormOpen(false)} className="rounded-full px-5 py-2.5 text-sm font-medium text-ink hover:text-ink">
                                         {text.cancel}
                                     </button>
                                 </div>
@@ -969,7 +969,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
 
                     <div>
                         {reviews.length === 0 ? (
-                            <p className="rounded-[14px] bg-white p-6 text-[#5b4a42]">{text.noReviews}</p>
+                            <p className="rounded-[14px] bg-card p-6 text-ink">{text.noReviews}</p>
                         ) : (
                             <ul className="space-y-4">
                                 {reviews.slice(0, visibleComments).map((review) => {
@@ -977,27 +977,27 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                                     const initials = displayName.split(' ').map((n) => n[0]).join('').toUpperCase().slice(0, 2);
                                     const reviewDate = new Date(review.created_at).toLocaleDateString(locale, { year: 'numeric', month: 'short', day: 'numeric' });
                                     return (
-                                        <li key={review.id} className="rounded-[14px] bg-white p-5">
+                                        <li key={review.id} className="rounded-[14px] bg-card p-5">
                                             <div className="flex items-center gap-3">
                                                 {review.users?.avatar_url ? (
                                                     <Image src={review.users.avatar_url} alt="" width={40} height={40} className="h-10 w-10 rounded-full object-cover" />
                                                 ) : (
-                                                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[var(--wool-undyed)] text-sm font-semibold text-[var(--wool-brown)]">{initials}</span>
+                                                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-ink text-sm font-semibold text-surface">{initials}</span>
                                                 )}
                                                 <div className="min-w-0 flex-1">
                                                     <p className="truncate font-medium">{displayName}</p>
-                                                    <p className="text-xs text-[#8a7a70]">{reviewDate}</p>
+                                                    <p className="text-xs text-mute">{reviewDate}</p>
                                                 </div>
                                                 <Stars value={review.rating} />
                                             </div>
-                                            <p className="mt-3 whitespace-pre-line text-sm leading-6 text-[#5b4a42]">{review.comment}</p>
+                                            <p className="mt-3 whitespace-pre-line text-sm leading-6 text-ink">{review.comment}</p>
                                         </li>
                                     );
                                 })}
                             </ul>
                         )}
                         {reviews.length > visibleComments && (
-                            <button type="button" onClick={() => setVisibleComments((prev) => prev + 5)} className="mt-4 rounded-full border border-[var(--wool-ink)]/25 px-5 py-2.5 text-sm font-medium hover:border-[var(--wool-ink)]">
+                            <button type="button" onClick={() => setVisibleComments((prev) => prev + 5)} className="mt-4 rounded-full border border-ink/25 px-5 py-2.5 text-sm font-medium hover:border-ink">
                                 {text.seeMoreReviews}
                             </button>
                         )}
@@ -1020,13 +1020,13 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                                     return (
                                         <li key={item.id}>
                                             <Link href={`/${locale}/products/${item.slug}`} className="group block outline-none">
-                                                <div className="relative aspect-[3/4] overflow-hidden rounded-[14px] bg-[#f3efe9] group-focus-visible:ring-2 group-focus-visible:ring-[var(--wool-maroon)] group-focus-visible:ring-offset-2">
+                                                <div className="relative aspect-[3/4] overflow-hidden rounded-[14px] bg-surface group-focus-visible:ring-2 group-focus-visible:ring-accent group-focus-visible:ring-offset-2">
                                                     <Image src={item.image_url || '/assets/images/logo.svg'} alt={itemName} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover object-top object-top" />
                                                 </div>
                                                 <p className="mt-3 line-clamp-2 text-sm font-medium group-hover:underline underline-offset-4">{itemName}</p>
                                                 <p className="mt-1 text-sm" dir="ltr">
-                                                    <span className="font-semibold text-[var(--wool-maroon)]">{Math.round(itemPrice)} {item.currency || 'TND'}</span>
-                                                    {item.discount_percent ? <span className="ms-2 text-[#a3958c] line-through">{Math.round(item.base_price)}</span> : null}
+                                                    <span className="font-semibold text-accent">{Math.round(itemPrice)} {item.currency || 'TND'}</span>
+                                                    {item.discount_percent ? <span className="ms-2 text-mute line-through">{Math.round(item.base_price)}</span> : null}
                                                 </p>
                                             </Link>
                                         </li>
@@ -1040,7 +1040,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                             <h3 className="font-semibold">{text.relatedCategories}</h3>
                             <div className="mt-3 flex flex-wrap gap-2">
                                 {relatedCategories.map((cat) => (
-                                    <Link key={cat.id} href={`/${locale}/products?category=${cat.slug}`} className="rounded-full border border-[#d9cfc3] px-4 py-2 text-sm hover:border-[var(--wool-maroon)] hover:text-[var(--wool-maroon)]">
+                                    <Link key={cat.id} href={`/${locale}/products?category=${cat.slug}`} className="rounded-full border border-line px-4 py-2 text-sm hover:border-accent hover:text-accent">
                                         {getCategoryName(cat, locale)}
                                     </Link>
                                 ))}

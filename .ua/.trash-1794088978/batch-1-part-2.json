@@ -1,0 +1,1065 @@
+{
+ "nodes": [
+  {
+   "id": "file:app/[locale]/settings/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/[locale]/settings/page.tsx",
+   "summary": "Customer account settings page for profile editing, password change, favorites and order history with Colissimo parcel tracking.",
+   "tags": [
+    "page",
+    "account",
+    "orders",
+    "storefront"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/[locale]/settings/page.tsx:SettingsPage",
+   "type": "function",
+   "name": "SettingsPage",
+   "filePath": "app/[locale]/settings/page.tsx",
+   "lineRange": [
+    236,
+    727
+   ],
+   "summary": "Account settings with profile, password, favorites and order tracking tabs.",
+   "tags": [
+    "component",
+    "react",
+    "storefront"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/[locale]/shipping/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/[locale]/shipping/page.tsx",
+   "summary": "Shipping policy page with per-locale delivery content rendered through TermsSection blocks.",
+   "tags": [
+    "page",
+    "legal",
+    "shipping",
+    "content"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/[locale]/shipping/page.tsx:getContent",
+   "type": "function",
+   "name": "getContent",
+   "filePath": "app/[locale]/shipping/page.tsx",
+   "lineRange": [
+    20,
+    210
+   ],
+   "summary": "Returns the per-locale legal content sections.",
+   "tags": [
+    "utility",
+    "helper",
+    "server"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/[locale]/shipping/page.tsx:ShippingPolicyPage",
+   "type": "function",
+   "name": "ShippingPolicyPage",
+   "filePath": "app/[locale]/shipping/page.tsx",
+   "lineRange": [
+    212,
+    254
+   ],
+   "summary": "Renders the shipping policy sections.",
+   "tags": [
+    "component",
+    "react",
+    "storefront"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/[locale]/terms-and-conditions/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/[locale]/terms-and-conditions/page.tsx",
+   "summary": "Terms and conditions page with per-locale legal content rendered through TermsSection blocks.",
+   "tags": [
+    "page",
+    "legal",
+    "i18n",
+    "content"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/[locale]/terms-and-conditions/page.tsx:getContent",
+   "type": "function",
+   "name": "getContent",
+   "filePath": "app/[locale]/terms-and-conditions/page.tsx",
+   "lineRange": [
+    21,
+    253
+   ],
+   "summary": "Returns the per-locale legal content sections.",
+   "tags": [
+    "utility",
+    "helper",
+    "server"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/[locale]/terms-and-conditions/page.tsx:TermsAndConditions",
+   "type": "function",
+   "name": "TermsAndConditions",
+   "filePath": "app/[locale]/terms-and-conditions/page.tsx",
+   "lineRange": [
+    255,
+    319
+   ],
+   "summary": "Renders the terms and conditions sections.",
+   "tags": [
+    "component",
+    "react",
+    "storefront"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/api/internal/revalidate/route.ts",
+   "type": "file",
+   "name": "route.ts",
+   "filePath": "app/api/internal/revalidate/route.ts",
+   "summary": "The only remaining Next.js API route: lets the NestJS API invalidate the catalog data cache, guarded by a timing-safe REVALIDATE_SECRET check.",
+   "tags": [
+    "api-handler",
+    "caching",
+    "security",
+    "internal"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/api/internal/revalidate/route.ts:POST",
+   "type": "function",
+   "name": "POST",
+   "filePath": "app/api/internal/revalidate/route.ts",
+   "lineRange": [
+    7,
+    15
+   ],
+   "summary": "Verifies the revalidate secret with timingSafeEqual and invalidates the catalog cache.",
+   "tags": [
+    "utility",
+    "helper",
+    "server"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/not-found.tsx",
+   "type": "file",
+   "name": "not-found.tsx",
+   "filePath": "app/not-found.tsx",
+   "summary": "Root-level 404 page rendered outside locale routes, with header and footer and a language detected from the request.",
+   "tags": [
+    "page",
+    "error-page",
+    "i18n"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/not-found.tsx:RootNotFound",
+   "type": "function",
+   "name": "RootNotFound",
+   "filePath": "app/not-found.tsx",
+   "lineRange": [
+    11,
+    86
+   ],
+   "summary": "Root 404 view with header, footer and detected language.",
+   "tags": [
+    "component",
+    "react",
+    "storefront"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/page.tsx",
+   "summary": "Root page that redirects to the default locale.",
+   "tags": [
+    "entry-point",
+    "redirect",
+    "routing"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/page.tsx:RootPage",
+   "type": "function",
+   "name": "RootPage",
+   "filePath": "app/page.tsx",
+   "lineRange": [
+    4,
+    7
+   ],
+   "summary": "Redirects to the default language route.",
+   "tags": [
+    "component",
+    "react",
+    "storefront"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/carousel/CarouselIndicators.tsx",
+   "type": "file",
+   "name": "CarouselIndicators.tsx",
+   "filePath": "components/carousel/CarouselIndicators.tsx",
+   "summary": "Dot indicators for a carousel showing and selecting the active slide.",
+   "tags": [
+    "component",
+    "carousel",
+    "ui"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/carousel/CarouselIndicators.tsx:CarouselIndicators",
+   "type": "function",
+   "name": "CarouselIndicators",
+   "filePath": "components/carousel/CarouselIndicators.tsx",
+   "lineRange": [
+    10,
+    33
+   ],
+   "summary": "Renders clickable slide indicator dots.",
+   "tags": [
+    "component",
+    "react",
+    "storefront"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/carousel/CarouselNavigation.tsx",
+   "type": "file",
+   "name": "CarouselNavigation.tsx",
+   "filePath": "components/carousel/CarouselNavigation.tsx",
+   "summary": "Previous/next arrow buttons for a carousel.",
+   "tags": [
+    "component",
+    "carousel",
+    "ui"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/carousel/CarouselNavigation.tsx:CarouselNavigation",
+   "type": "function",
+   "name": "CarouselNavigation",
+   "filePath": "components/carousel/CarouselNavigation.tsx",
+   "lineRange": [
+    7,
+    36
+   ],
+   "summary": "Renders previous and next carousel buttons.",
+   "tags": [
+    "component",
+    "react",
+    "storefront"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/cart/AddToCartButton.tsx",
+   "type": "file",
+   "name": "AddToCartButton.tsx",
+   "filePath": "components/cart/AddToCartButton.tsx",
+   "summary": "Localized add-to-cart button that adds a product or variant line to the cart with feedback state.",
+   "tags": [
+    "component",
+    "cart",
+    "storefront"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/cart/AddToCartButton.tsx:AddToCartButton",
+   "type": "function",
+   "name": "AddToCartButton",
+   "filePath": "components/cart/AddToCartButton.tsx",
+   "lineRange": [
+    47,
+    142
+   ],
+   "summary": "Adds the selected product or variant to the cart and shows added state.",
+   "tags": [
+    "component",
+    "react",
+    "storefront"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/cart/CartButton.tsx",
+   "type": "file",
+   "name": "CartButton.tsx",
+   "filePath": "components/cart/CartButton.tsx",
+   "summary": "Header cart icon button showing the item count and opening the cart drawer.",
+   "tags": [
+    "component",
+    "cart",
+    "ui"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/cart/CartButton.tsx:CartButton",
+   "type": "function",
+   "name": "CartButton",
+   "filePath": "components/cart/CartButton.tsx",
+   "lineRange": [
+    26,
+    67
+   ],
+   "summary": "Shows the cart count badge and opens the cart.",
+   "tags": [
+    "component",
+    "react",
+    "storefront"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/cart/CartDrawer.tsx",
+   "type": "file",
+   "name": "CartDrawer.tsx",
+   "filePath": "components/cart/CartDrawer.tsx",
+   "summary": "Slide-out cart drawer listing cart lines with subtotal and links to cart and checkout, RTL-aware.",
+   "tags": [
+    "component",
+    "cart",
+    "storefront",
+    "i18n"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/cart/CartDrawer.tsx:CartDrawer",
+   "type": "function",
+   "name": "CartDrawer",
+   "filePath": "components/cart/CartDrawer.tsx",
+   "lineRange": [
+    40,
+    159
+   ],
+   "summary": "Slide-out drawer listing cart items and subtotal.",
+   "tags": [
+    "component",
+    "react",
+    "storefront"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/cart/CartItem.tsx",
+   "type": "file",
+   "name": "CartItem.tsx",
+   "filePath": "components/cart/CartItem.tsx",
+   "summary": "Cart line component showing product image, variant label, price and quantity controls keyed by cart line key.",
+   "tags": [
+    "component",
+    "cart",
+    "storefront"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:components/cart/CartItem.tsx:CartItem",
+   "type": "function",
+   "name": "CartItem",
+   "filePath": "components/cart/CartItem.tsx",
+   "lineRange": [
+    36,
+    326
+   ],
+   "summary": "Renders one cart line with quantity update and removal.",
+   "tags": [
+    "component",
+    "react",
+    "storefront"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/footer/Footer.tsx",
+   "type": "file",
+   "name": "Footer.tsx",
+   "filePath": "components/footer/Footer.tsx",
+   "summary": "Site footer resolving configured links per locale and rendering footer sections, newsletter form and social links.",
+   "tags": [
+    "component",
+    "layout",
+    "navigation",
+    "i18n"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:components/footer/Footer.tsx:resolveHref",
+   "type": "function",
+   "name": "resolveHref",
+   "filePath": "components/footer/Footer.tsx",
+   "lineRange": [
+    77,
+    113
+   ],
+   "summary": "Resolves a footer link config into a locale-aware href.",
+   "tags": [
+    "utility",
+    "helper",
+    "server"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/footer/Footer.tsx:Footer",
+   "type": "function",
+   "name": "Footer",
+   "filePath": "components/footer/Footer.tsx",
+   "lineRange": [
+    124,
+    242
+   ],
+   "summary": "Renders the localized site footer.",
+   "tags": [
+    "component",
+    "react",
+    "storefront"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/footer/FooterSection.tsx",
+   "type": "file",
+   "name": "FooterSection.tsx",
+   "filePath": "components/footer/FooterSection.tsx",
+   "summary": "One titled column of footer links.",
+   "tags": [
+    "component",
+    "layout",
+    "navigation"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/footer/FooterSection.tsx:FooterSection",
+   "type": "function",
+   "name": "FooterSection",
+   "filePath": "components/footer/FooterSection.tsx",
+   "lineRange": [
+    10,
+    30
+   ],
+   "summary": "Renders a titled list of footer links.",
+   "tags": [
+    "component",
+    "react",
+    "storefront"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/forms/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "components/forms/index.ts",
+   "summary": "Barrel re-exporting the FormInput, FormSelect and FormTextarea form components.",
+   "tags": [
+    "barrel",
+    "forms",
+    "entry-point"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/landing/CollectionSpotlight.tsx",
+   "type": "file",
+   "name": "CollectionSpotlight.tsx",
+   "filePath": "components/landing/CollectionSpotlight.tsx",
+   "summary": "Home page section spotlighting the largest collection with a few landing product cards and a link to the full category.",
+   "tags": [
+    "component",
+    "landing",
+    "storefront"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/landing/CollectionSpotlight.tsx:CollectionSpotlight",
+   "type": "function",
+   "name": "CollectionSpotlight",
+   "filePath": "components/landing/CollectionSpotlight.tsx",
+   "lineRange": [
+    27,
+    88
+   ],
+   "summary": "Renders the spotlight collection when it has at least three products.",
+   "tags": [
+    "component",
+    "react",
+    "storefront"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:app/[locale]/settings/page.tsx",
+   "target": "function:app/[locale]/settings/page.tsx:SettingsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/[locale]/settings/page.tsx",
+   "target": "function:app/[locale]/settings/page.tsx:SettingsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/[locale]/settings/page.tsx",
+   "target": "file:components/forms/index.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/[locale]/settings/page.tsx",
+   "target": "file:components/products/ProductListCard.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/[locale]/settings/page.tsx",
+   "target": "file:components/ui/OrderTracking.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/[locale]/settings/page.tsx",
+   "target": "file:lib/customer-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/[locale]/settings/page.tsx",
+   "target": "file:lib/favorites.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/[locale]/settings/page.tsx",
+   "target": "file:lib/orders.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/[locale]/settings/page.tsx",
+   "target": "file:lib/quick-add.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/[locale]/shipping/page.tsx",
+   "target": "function:app/[locale]/shipping/page.tsx:getContent",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/[locale]/shipping/page.tsx",
+   "target": "function:app/[locale]/shipping/page.tsx:ShippingPolicyPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/[locale]/shipping/page.tsx",
+   "target": "function:app/[locale]/shipping/page.tsx:ShippingPolicyPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/[locale]/shipping/page.tsx",
+   "target": "file:components/sections/TermsSection.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/[locale]/shipping/page.tsx",
+   "target": "file:lib/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/[locale]/terms-and-conditions/page.tsx",
+   "target": "function:app/[locale]/terms-and-conditions/page.tsx:getContent",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/[locale]/terms-and-conditions/page.tsx",
+   "target": "function:app/[locale]/terms-and-conditions/page.tsx:TermsAndConditions",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/[locale]/terms-and-conditions/page.tsx",
+   "target": "function:app/[locale]/terms-and-conditions/page.tsx:TermsAndConditions",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/[locale]/terms-and-conditions/page.tsx",
+   "target": "file:components/sections/TermsSection.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/[locale]/terms-and-conditions/page.tsx",
+   "target": "file:lib/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/api/internal/revalidate/route.ts",
+   "target": "function:app/api/internal/revalidate/route.ts:POST",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/api/internal/revalidate/route.ts",
+   "target": "function:app/api/internal/revalidate/route.ts:POST",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/api/internal/revalidate/route.ts",
+   "target": "file:lib/catalog-cache.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/not-found.tsx",
+   "target": "function:app/not-found.tsx:RootNotFound",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/not-found.tsx",
+   "target": "function:app/not-found.tsx:RootNotFound",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/not-found.tsx",
+   "target": "file:components/footer/Footer.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/not-found.tsx",
+   "target": "file:components/layout/StaticHeader.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/not-found.tsx",
+   "target": "file:lib/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/not-found.tsx",
+   "target": "file:lib/language-utils.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/page.tsx",
+   "target": "function:app/page.tsx:RootPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/page.tsx",
+   "target": "function:app/page.tsx:RootPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/page.tsx",
+   "target": "file:lib/language-utils.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/carousel/CarouselIndicators.tsx",
+   "target": "function:components/carousel/CarouselIndicators.tsx:CarouselIndicators",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/carousel/CarouselIndicators.tsx",
+   "target": "function:components/carousel/CarouselIndicators.tsx:CarouselIndicators",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/carousel/CarouselNavigation.tsx",
+   "target": "function:components/carousel/CarouselNavigation.tsx:CarouselNavigation",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/carousel/CarouselNavigation.tsx",
+   "target": "function:components/carousel/CarouselNavigation.tsx:CarouselNavigation",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/cart/AddToCartButton.tsx",
+   "target": "function:components/cart/AddToCartButton.tsx:AddToCartButton",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/cart/AddToCartButton.tsx",
+   "target": "function:components/cart/AddToCartButton.tsx:AddToCartButton",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/cart/AddToCartButton.tsx",
+   "target": "file:lib/cart-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/cart/AddToCartButton.tsx",
+   "target": "file:lib/language-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/cart/CartButton.tsx",
+   "target": "function:components/cart/CartButton.tsx:CartButton",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/cart/CartButton.tsx",
+   "target": "function:components/cart/CartButton.tsx:CartButton",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/cart/CartButton.tsx",
+   "target": "file:lib/cart-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/cart/CartDrawer.tsx",
+   "target": "function:components/cart/CartDrawer.tsx:CartDrawer",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/cart/CartDrawer.tsx",
+   "target": "function:components/cart/CartDrawer.tsx:CartDrawer",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/cart/CartDrawer.tsx",
+   "target": "file:components/cart/CartItem.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/cart/CartDrawer.tsx",
+   "target": "file:lib/cart-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/cart/CartDrawer.tsx",
+   "target": "file:lib/language-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/cart/CartDrawer.tsx",
+   "target": "file:lib/language-utils.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/cart/CartItem.tsx",
+   "target": "function:components/cart/CartItem.tsx:CartItem",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/cart/CartItem.tsx",
+   "target": "function:components/cart/CartItem.tsx:CartItem",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/cart/CartItem.tsx",
+   "target": "file:lib/cart-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/cart/CartItem.tsx",
+   "target": "file:lib/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/cart/CartItem.tsx",
+   "target": "file:lib/language-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/footer/Footer.tsx",
+   "target": "function:components/footer/Footer.tsx:resolveHref",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/footer/Footer.tsx",
+   "target": "function:components/footer/Footer.tsx:Footer",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/footer/Footer.tsx",
+   "target": "function:components/footer/Footer.tsx:Footer",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/footer/Footer.tsx",
+   "target": "file:components/footer/FooterSection.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/footer/Footer.tsx",
+   "target": "file:components/sections/NewsletterForm.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/footer/Footer.tsx",
+   "target": "file:components/sections/SocialLinks.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/footer/Footer.tsx",
+   "target": "file:lib/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/footer/Footer.tsx",
+   "target": "file:lib/footer-config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/footer/Footer.tsx",
+   "target": "file:lib/language-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/footer/FooterSection.tsx",
+   "target": "function:components/footer/FooterSection.tsx:FooterSection",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/footer/FooterSection.tsx",
+   "target": "function:components/footer/FooterSection.tsx:FooterSection",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/footer/FooterSection.tsx",
+   "target": "file:lib/footer-config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/landing/CollectionSpotlight.tsx",
+   "target": "function:components/landing/CollectionSpotlight.tsx:CollectionSpotlight",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/landing/CollectionSpotlight.tsx",
+   "target": "function:components/landing/CollectionSpotlight.tsx:CollectionSpotlight",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/landing/CollectionSpotlight.tsx",
+   "target": "file:components/landing/LandingProductCard.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/landing/CollectionSpotlight.tsx",
+   "target": "file:lib/fonts.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/landing/CollectionSpotlight.tsx",
+   "target": "file:lib/landing-products.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/landing/CollectionSpotlight.tsx",
+   "target": "file:lib/language-utils.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:app/api/internal/revalidate/route.ts:POST",
+   "target": "function:lib/catalog-cache.ts:invalidateCatalog",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/cart/CartDrawer.tsx:CartDrawer",
+   "target": "function:components/cart/CartItem.tsx:CartItem",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/footer/Footer.tsx:Footer",
+   "target": "function:components/footer/FooterSection.tsx:FooterSection",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/cart/AddToCartButton.tsx:AddToCartButton",
+   "target": "function:lib/cart-context.tsx:useCart",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/cart/CartButton.tsx:CartButton",
+   "target": "function:lib/cart-context.tsx:useCart",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:app/[locale]/settings/page.tsx:SettingsPage",
+   "target": "function:lib/customer-auth.ts:useCustomer",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

@@ -1,0 +1,1369 @@
+{
+ "nodes": [
+  {
+   "id": "file:components/admin/antd-app.tsx",
+   "type": "file",
+   "name": "antd-app.tsx",
+   "filePath": "components/admin/antd-app.tsx",
+   "summary": "Bridges antd's App context so admin code can call a themed message API outside React components; exports AntdAppBridge and the message proxy used instead of antd's static API.",
+   "tags": [
+    "utility",
+    "component",
+    "admin",
+    "antd",
+    "singleton"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/antd-app.tsx:AntdAppBridge",
+   "type": "function",
+   "name": "AntdAppBridge",
+   "filePath": "components/admin/antd-app.tsx",
+   "lineRange": [
+    24,
+    34
+   ],
+   "summary": "Captures antd App context's message instance so the module-level message proxy is themed.",
+   "tags": [
+    "component",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/admin/delivery/DeliveryStatusTag.tsx",
+   "type": "file",
+   "name": "DeliveryStatusTag.tsx",
+   "filePath": "components/admin/delivery/DeliveryStatusTag.tsx",
+   "summary": "Renders Colissimo parcel status tags and badges (paid, price change, etc.) for delivery rows in the admin.",
+   "tags": [
+    "component",
+    "delivery",
+    "colissimo",
+    "admin",
+    "ui"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/delivery/DeliveryStatusTag.tsx:ParcelBadges",
+   "type": "function",
+   "name": "ParcelBadges",
+   "filePath": "components/admin/delivery/DeliveryStatusTag.tsx",
+   "lineRange": [
+    12,
+    33
+   ],
+   "summary": "Shows extra parcel badges such as paid or pending price change.",
+   "tags": [
+    "component",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/delivery/DeliveryStatusTag.tsx:DeliveryStatusTag",
+   "type": "function",
+   "name": "DeliveryStatusTag",
+   "filePath": "components/admin/delivery/DeliveryStatusTag.tsx",
+   "lineRange": [
+    36,
+    45
+   ],
+   "summary": "Colored tag for a parcel's Colissimo status label.",
+   "tags": [
+    "component",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/admin/delivery/EditParcelModal.tsx",
+   "type": "file",
+   "name": "EditParcelModal.tsx",
+   "filePath": "components/admin/delivery/EditParcelModal.tsx",
+   "summary": "Modal form for editing a Colissimo parcel's recipient, governorate, address and price through the delivery API, handling price-change requests for printed parcels.",
+   "tags": [
+    "component",
+    "delivery",
+    "form",
+    "modal",
+    "colissimo"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/delivery/EditParcelModal.tsx:EditParcelModal",
+   "type": "function",
+   "name": "EditParcelModal",
+   "filePath": "components/admin/delivery/EditParcelModal.tsx",
+   "lineRange": [
+    30,
+    167
+   ],
+   "summary": "Edit form modal for a parcel, submitting edits or price-change requests.",
+   "tags": [
+    "component",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/admin/delivery/OrderDeliveryCard.tsx",
+   "type": "file",
+   "name": "OrderDeliveryCard.tsx",
+   "filePath": "components/admin/delivery/OrderDeliveryCard.tsx",
+   "summary": "Order-page card showing the order's Colissimo parcel, its status, and actions to send, edit, refresh or remove the parcel.",
+   "tags": [
+    "component",
+    "delivery",
+    "order",
+    "admin",
+    "colissimo"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:components/admin/delivery/OrderDeliveryCard.tsx:OrderDeliveryCard",
+   "type": "function",
+   "name": "OrderDeliveryCard",
+   "filePath": "components/admin/delivery/OrderDeliveryCard.tsx",
+   "lineRange": [
+    29,
+    221
+   ],
+   "summary": "Delivery card on the order page with send, edit, refresh and remove parcel actions.",
+   "tags": [
+    "component",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/admin/delivery/ParcelHistoryDrawer.tsx",
+   "type": "file",
+   "name": "ParcelHistoryDrawer.tsx",
+   "filePath": "components/admin/delivery/ParcelHistoryDrawer.tsx",
+   "summary": "Drawer that loads and shows a parcel's tracking history from GET /api/delivery/history, with color mapping for portal statuses.",
+   "tags": [
+    "component",
+    "delivery",
+    "tracking",
+    "drawer",
+    "colissimo"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/delivery/ParcelHistoryDrawer.tsx:portalStatusColor",
+   "type": "function",
+   "name": "portalStatusColor",
+   "filePath": "components/admin/delivery/ParcelHistoryDrawer.tsx",
+   "lineRange": [
+    17,
+    25
+   ],
+   "summary": "Maps Colissimo portal status text to a tag color.",
+   "tags": [
+    "utility",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/delivery/ParcelHistoryDrawer.tsx:ParcelHistoryDrawer",
+   "type": "function",
+   "name": "ParcelHistoryDrawer",
+   "filePath": "components/admin/delivery/ParcelHistoryDrawer.tsx",
+   "lineRange": [
+    28,
+    82
+   ],
+   "summary": "Drawer fetching and listing a parcel's tracking events.",
+   "tags": [
+    "component",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/admin/delivery/ParcelLookup.tsx",
+   "type": "file",
+   "name": "ParcelLookup.tsx",
+   "filePath": "components/admin/delivery/ParcelLookup.tsx",
+   "summary": "Check-a-parcel tool that looks up any Colissimo barcode without saving and can add a parcel created on Colissimo's site to the deliveries list.",
+   "tags": [
+    "component",
+    "delivery",
+    "lookup",
+    "colissimo",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/delivery/ParcelLookup.tsx:ParcelLookup",
+   "type": "function",
+   "name": "ParcelLookup",
+   "filePath": "components/admin/delivery/ParcelLookup.tsx",
+   "lineRange": [
+    18,
+    126
+   ],
+   "summary": "Barcode lookup UI that tracks a parcel and can add it to deliveries.",
+   "tags": [
+    "component",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/admin/delivery/ParcelProducts.tsx",
+   "type": "file",
+   "name": "ParcelProducts.tsx",
+   "filePath": "components/admin/delivery/ParcelProducts.tsx",
+   "summary": "Editable product-line picker (product, variant, quantity, price) used by the New parcel and Edit order forms, with server quote previews.",
+   "tags": [
+    "component",
+    "form",
+    "order-lines",
+    "delivery",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/delivery/ParcelProducts.tsx:lineIsComplete",
+   "type": "function",
+   "name": "lineIsComplete",
+   "filePath": "components/admin/delivery/ParcelProducts.tsx",
+   "lineRange": [
+    53,
+    58
+   ],
+   "summary": "Checks whether a product line has the product, variant and quantity it needs.",
+   "tags": [
+    "utility",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/delivery/ParcelProducts.tsx:ParcelProducts",
+   "type": "function",
+   "name": "ParcelProducts",
+   "filePath": "components/admin/delivery/ParcelProducts.tsx",
+   "lineRange": [
+    65,
+    204
+   ],
+   "summary": "Editable list of product lines with variant selection and quote preview.",
+   "tags": [
+    "component",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/admin/delivery/SendParcelModal.tsx",
+   "type": "file",
+   "name": "SendParcelModal.tsx",
+   "filePath": "components/admin/delivery/SendParcelModal.tsx",
+   "summary": "Modal for creating or sending a Colissimo parcel, prefilling fields from the order and optionally listing products priced by a server quote.",
+   "tags": [
+    "component",
+    "delivery",
+    "modal",
+    "form",
+    "colissimo"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:components/admin/delivery/SendParcelModal.tsx:initialValues",
+   "type": "function",
+   "name": "initialValues",
+   "filePath": "components/admin/delivery/SendParcelModal.tsx",
+   "lineRange": [
+    38,
+    47
+   ],
+   "summary": "Builds the send-parcel form's initial values from the order's parcel fields.",
+   "tags": [
+    "utility",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/delivery/SendParcelModal.tsx:SendParcelModal",
+   "type": "function",
+   "name": "SendParcelModal",
+   "filePath": "components/admin/delivery/SendParcelModal.tsx",
+   "lineRange": [
+    53,
+    262
+   ],
+   "summary": "Modal to send an order's parcel or create a manual parcel with products.",
+   "tags": [
+    "component",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/admin/delivery/delivery-api.ts",
+   "type": "file",
+   "name": "delivery-api.ts",
+   "filePath": "components/admin/delivery/delivery-api.ts",
+   "summary": "Typed client and shared types for the /api/delivery endpoints, plus rules for when a parcel can be edited or removed and a helper reporting Colissimo cancellation failures.",
+   "tags": [
+    "service",
+    "api-client",
+    "delivery",
+    "type-definition",
+    "colissimo"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/delivery/delivery-api.ts:canEditParcel",
+   "type": "function",
+   "name": "canEditParcel",
+   "filePath": "components/admin/delivery/delivery-api.ts",
+   "lineRange": [
+    52,
+    52
+   ],
+   "summary": "Whether a parcel's status still allows editing at Colissimo.",
+   "tags": [
+    "utility",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/delivery/delivery-api.ts:canRemoveParcel",
+   "type": "function",
+   "name": "canRemoveParcel",
+   "filePath": "components/admin/delivery/delivery-api.ts",
+   "lineRange": [
+    58,
+    58
+   ],
+   "summary": "Whether a parcel can still be removed.",
+   "tags": [
+    "utility",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/delivery/delivery-api.ts:deliveryApi",
+   "type": "function",
+   "name": "deliveryApi",
+   "filePath": "components/admin/delivery/delivery-api.ts",
+   "lineRange": [
+    69,
+    83
+   ],
+   "summary": "Calls /api/delivery with a given action and payload, throwing on errors.",
+   "tags": [
+    "utility",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/delivery/delivery-api.ts:reportParcelCancellation",
+   "type": "function",
+   "name": "reportParcelCancellation",
+   "filePath": "components/admin/delivery/delivery-api.ts",
+   "lineRange": [
+    117,
+    126
+   ],
+   "summary": "Warns when Colissimo refused to delete a cancelled order's parcel.",
+   "tags": [
+    "utility",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/admin/desktop-push.ts",
+   "type": "file",
+   "name": "desktop-push.ts",
+   "filePath": "components/admin/desktop-push.ts",
+   "summary": "Browser-side Web Push helpers that register the admin service worker, subscribe with the VAPID public key, and save or remove push subscriptions.",
+   "tags": [
+    "utility",
+    "push-notifications",
+    "service-worker",
+    "admin",
+    "browser"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/desktop-push.ts:desktopSupported",
+   "type": "function",
+   "name": "desktopSupported",
+   "filePath": "components/admin/desktop-push.ts",
+   "lineRange": [
+    15,
+    17
+   ],
+   "summary": "Detects Push API and service worker support.",
+   "tags": [
+    "utility",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/desktop-push.ts:getDesktopState",
+   "type": "function",
+   "name": "getDesktopState",
+   "filePath": "components/admin/desktop-push.ts",
+   "lineRange": [
+    24,
+    30
+   ],
+   "summary": "Returns whether desktop push is unsupported, denied, enabled or off.",
+   "tags": [
+    "utility",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/desktop-push.ts:enableDesktop",
+   "type": "function",
+   "name": "enableDesktop",
+   "filePath": "components/admin/desktop-push.ts",
+   "lineRange": [
+    51,
+    67
+   ],
+   "summary": "Requests permission, subscribes with the VAPID key and saves the subscription.",
+   "tags": [
+    "utility",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/desktop-push.ts:disableDesktop",
+   "type": "function",
+   "name": "disableDesktop",
+   "filePath": "components/admin/desktop-push.ts",
+   "lineRange": [
+    69,
+    81
+   ],
+   "summary": "Unsubscribes and removes the saved push subscription.",
+   "tags": [
+    "utility",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/desktop-push.ts:refreshDesktop",
+   "type": "function",
+   "name": "refreshDesktop",
+   "filePath": "components/admin/desktop-push.ts",
+   "lineRange": [
+    84,
+    89
+   ],
+   "summary": "Re-saves an existing subscription so the server keeps it current.",
+   "tags": [
+    "utility",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/admin/erp/EditOrderModal.tsx",
+   "type": "file",
+   "name": "EditOrderModal.tsx",
+   "filePath": "components/admin/erp/EditOrderModal.tsx",
+   "summary": "Modal to edit an order still to confirm or confirmed (customer, amounts, notes and optionally its lines) via PATCH /api/sales/orders action edit.",
+   "tags": [
+    "component",
+    "modal",
+    "order",
+    "form",
+    "erp"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/erp/EditOrderModal.tsx:EditOrderModal",
+   "type": "function",
+   "name": "EditOrderModal",
+   "filePath": "components/admin/erp/EditOrderModal.tsx",
+   "lineRange": [
+    32,
+    139
+   ],
+   "summary": "Modal form editing an order's customer, amounts, notes and lines.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/admin/erp/MonthGoalCard.tsx",
+   "type": "file",
+   "name": "MonthGoalCard.tsx",
+   "filePath": "components/admin/erp/MonthGoalCard.tsx",
+   "summary": "Card showing the business's monthly goal progress and pace with target bars, used on My day and the Business overview.",
+   "tags": [
+    "component",
+    "erp",
+    "objectives",
+    "dashboard",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/erp/MonthGoalCard.tsx:MonthGoalCard",
+   "type": "function",
+   "name": "MonthGoalCard",
+   "filePath": "components/admin/erp/MonthGoalCard.tsx",
+   "lineRange": [
+    35,
+    74
+   ],
+   "summary": "Monthly business goal progress card with pace.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/admin/erp/OrderPaymentsCard.tsx",
+   "type": "file",
+   "name": "OrderPaymentsCard.tsx",
+   "filePath": "components/admin/erp/OrderPaymentsCard.tsx",
+   "summary": "Order-page card listing order payments and refunds by account (cash, bank, carrier) and recording new ones.",
+   "tags": [
+    "component",
+    "erp",
+    "payments",
+    "order",
+    "finance"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/erp/OrderPaymentsCard.tsx:OrderPaymentsCard",
+   "type": "function",
+   "name": "OrderPaymentsCard",
+   "filePath": "components/admin/erp/OrderPaymentsCard.tsx",
+   "lineRange": [
+    39,
+    180
+   ],
+   "summary": "Lists and records order payments and refunds.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/admin/erp/OrderPipelineCard.tsx",
+   "type": "file",
+   "name": "OrderPipelineCard.tsx",
+   "filePath": "components/admin/erp/OrderPipelineCard.tsx",
+   "summary": "Order-page card for the sales pipeline: channel, assigned agent, campaign and confirmation actions.",
+   "tags": [
+    "component",
+    "erp",
+    "order",
+    "pipeline",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/erp/OrderPipelineCard.tsx:OrderPipelineCard",
+   "type": "function",
+   "name": "OrderPipelineCard",
+   "filePath": "components/admin/erp/OrderPipelineCard.tsx",
+   "lineRange": [
+    39,
+    122
+   ],
+   "summary": "Edits an order's channel, agent and campaign and confirms it.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:components/admin/antd-app.tsx",
+   "target": "function:components/admin/antd-app.tsx:AntdAppBridge",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/antd-app.tsx",
+   "target": "function:components/admin/antd-app.tsx:AntdAppBridge",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/delivery/DeliveryStatusTag.tsx",
+   "target": "function:components/admin/delivery/DeliveryStatusTag.tsx:ParcelBadges",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/delivery/DeliveryStatusTag.tsx",
+   "target": "function:components/admin/delivery/DeliveryStatusTag.tsx:ParcelBadges",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/delivery/DeliveryStatusTag.tsx",
+   "target": "function:components/admin/delivery/DeliveryStatusTag.tsx:DeliveryStatusTag",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/delivery/DeliveryStatusTag.tsx",
+   "target": "function:components/admin/delivery/DeliveryStatusTag.tsx:DeliveryStatusTag",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/delivery/DeliveryStatusTag.tsx",
+   "target": "file:components/admin/delivery/delivery-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/DeliveryStatusTag.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/DeliveryStatusTag.tsx",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/EditParcelModal.tsx",
+   "target": "function:components/admin/delivery/EditParcelModal.tsx:EditParcelModal",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/delivery/EditParcelModal.tsx",
+   "target": "function:components/admin/delivery/EditParcelModal.tsx:EditParcelModal",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/delivery/EditParcelModal.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/EditParcelModal.tsx",
+   "target": "file:components/admin/delivery/delivery-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/EditParcelModal.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/EditParcelModal.tsx",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/OrderDeliveryCard.tsx",
+   "target": "function:components/admin/delivery/OrderDeliveryCard.tsx:OrderDeliveryCard",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/delivery/OrderDeliveryCard.tsx",
+   "target": "function:components/admin/delivery/OrderDeliveryCard.tsx:OrderDeliveryCard",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/delivery/OrderDeliveryCard.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/OrderDeliveryCard.tsx",
+   "target": "file:components/admin/delivery/DeliveryStatusTag.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/OrderDeliveryCard.tsx",
+   "target": "file:components/admin/delivery/EditParcelModal.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/OrderDeliveryCard.tsx",
+   "target": "file:components/admin/delivery/SendParcelModal.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/OrderDeliveryCard.tsx",
+   "target": "file:components/admin/delivery/delivery-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/OrderDeliveryCard.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/OrderDeliveryCard.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelHistoryDrawer.tsx",
+   "target": "function:components/admin/delivery/ParcelHistoryDrawer.tsx:portalStatusColor",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelHistoryDrawer.tsx",
+   "target": "function:components/admin/delivery/ParcelHistoryDrawer.tsx:portalStatusColor",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelHistoryDrawer.tsx",
+   "target": "function:components/admin/delivery/ParcelHistoryDrawer.tsx:ParcelHistoryDrawer",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelHistoryDrawer.tsx",
+   "target": "function:components/admin/delivery/ParcelHistoryDrawer.tsx:ParcelHistoryDrawer",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelHistoryDrawer.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelHistoryDrawer.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelLookup.tsx",
+   "target": "function:components/admin/delivery/ParcelLookup.tsx:ParcelLookup",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelLookup.tsx",
+   "target": "function:components/admin/delivery/ParcelLookup.tsx:ParcelLookup",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelLookup.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelLookup.tsx",
+   "target": "file:components/admin/delivery/DeliveryStatusTag.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelLookup.tsx",
+   "target": "file:components/admin/delivery/delivery-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelLookup.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelProducts.tsx",
+   "target": "function:components/admin/delivery/ParcelProducts.tsx:lineIsComplete",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelProducts.tsx",
+   "target": "function:components/admin/delivery/ParcelProducts.tsx:lineIsComplete",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelProducts.tsx",
+   "target": "function:components/admin/delivery/ParcelProducts.tsx:ParcelProducts",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelProducts.tsx",
+   "target": "function:components/admin/delivery/ParcelProducts.tsx:ParcelProducts",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelProducts.tsx",
+   "target": "file:components/admin/delivery/delivery-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelProducts.tsx",
+   "target": "file:components/admin/select-search.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/ParcelProducts.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/SendParcelModal.tsx",
+   "target": "function:components/admin/delivery/SendParcelModal.tsx:initialValues",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/delivery/SendParcelModal.tsx",
+   "target": "function:components/admin/delivery/SendParcelModal.tsx:SendParcelModal",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/delivery/SendParcelModal.tsx",
+   "target": "function:components/admin/delivery/SendParcelModal.tsx:SendParcelModal",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/delivery/SendParcelModal.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/SendParcelModal.tsx",
+   "target": "file:components/admin/delivery/ParcelProducts.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/SendParcelModal.tsx",
+   "target": "file:components/admin/delivery/delivery-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/SendParcelModal.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/SendParcelModal.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/SendParcelModal.tsx",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/delivery/delivery-api.ts",
+   "target": "function:components/admin/delivery/delivery-api.ts:canEditParcel",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/delivery/delivery-api.ts",
+   "target": "function:components/admin/delivery/delivery-api.ts:canEditParcel",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/delivery/delivery-api.ts",
+   "target": "function:components/admin/delivery/delivery-api.ts:canRemoveParcel",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/delivery/delivery-api.ts",
+   "target": "function:components/admin/delivery/delivery-api.ts:canRemoveParcel",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/delivery/delivery-api.ts",
+   "target": "function:components/admin/delivery/delivery-api.ts:deliveryApi",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/delivery/delivery-api.ts",
+   "target": "function:components/admin/delivery/delivery-api.ts:deliveryApi",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/delivery/delivery-api.ts",
+   "target": "function:components/admin/delivery/delivery-api.ts:reportParcelCancellation",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/delivery/delivery-api.ts",
+   "target": "function:components/admin/delivery/delivery-api.ts:reportParcelCancellation",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/delivery/delivery-api.ts",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/desktop-push.ts",
+   "target": "function:components/admin/desktop-push.ts:desktopSupported",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/desktop-push.ts",
+   "target": "function:components/admin/desktop-push.ts:desktopSupported",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/desktop-push.ts",
+   "target": "function:components/admin/desktop-push.ts:getDesktopState",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/desktop-push.ts",
+   "target": "function:components/admin/desktop-push.ts:getDesktopState",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/desktop-push.ts",
+   "target": "function:components/admin/desktop-push.ts:enableDesktop",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/desktop-push.ts",
+   "target": "function:components/admin/desktop-push.ts:enableDesktop",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/desktop-push.ts",
+   "target": "function:components/admin/desktop-push.ts:disableDesktop",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/desktop-push.ts",
+   "target": "function:components/admin/desktop-push.ts:disableDesktop",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/desktop-push.ts",
+   "target": "function:components/admin/desktop-push.ts:refreshDesktop",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/desktop-push.ts",
+   "target": "function:components/admin/desktop-push.ts:refreshDesktop",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/EditOrderModal.tsx",
+   "target": "function:components/admin/erp/EditOrderModal.tsx:EditOrderModal",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/EditOrderModal.tsx",
+   "target": "function:components/admin/erp/EditOrderModal.tsx:EditOrderModal",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/EditOrderModal.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/EditOrderModal.tsx",
+   "target": "file:components/admin/delivery/ParcelProducts.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/EditOrderModal.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/EditOrderModal.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/EditOrderModal.tsx",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/MonthGoalCard.tsx",
+   "target": "function:components/admin/erp/MonthGoalCard.tsx:MonthGoalCard",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/MonthGoalCard.tsx",
+   "target": "function:components/admin/erp/MonthGoalCard.tsx:MonthGoalCard",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/MonthGoalCard.tsx",
+   "target": "file:components/admin/erp/charts.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/MonthGoalCard.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/MonthGoalCard.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/OrderPaymentsCard.tsx",
+   "target": "function:components/admin/erp/OrderPaymentsCard.tsx:OrderPaymentsCard",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/OrderPaymentsCard.tsx",
+   "target": "function:components/admin/erp/OrderPaymentsCard.tsx:OrderPaymentsCard",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/OrderPaymentsCard.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/OrderPaymentsCard.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/OrderPaymentsCard.tsx",
+   "target": "file:components/admin/order-status.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/OrderPaymentsCard.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/OrderPaymentsCard.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/OrderPaymentsCard.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/OrderPipelineCard.tsx",
+   "target": "function:components/admin/erp/OrderPipelineCard.tsx:OrderPipelineCard",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/OrderPipelineCard.tsx",
+   "target": "function:components/admin/erp/OrderPipelineCard.tsx:OrderPipelineCard",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/OrderPipelineCard.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/OrderPipelineCard.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/OrderPipelineCard.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/OrderPipelineCard.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/OrderPipelineCard.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/OrderPipelineCard.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/admin/delivery/SendParcelModal.tsx:SendParcelModal",
+   "target": "function:components/admin/delivery/ParcelProducts.tsx:ParcelProducts",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/admin/erp/EditOrderModal.tsx:EditOrderModal",
+   "target": "function:components/admin/delivery/ParcelProducts.tsx:ParcelProducts",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/admin/delivery/OrderDeliveryCard.tsx:OrderDeliveryCard",
+   "target": "function:components/admin/delivery/SendParcelModal.tsx:SendParcelModal",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/admin/delivery/OrderDeliveryCard.tsx:OrderDeliveryCard",
+   "target": "function:components/admin/delivery/EditParcelModal.tsx:EditParcelModal",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/admin/erp/MonthGoalCard.tsx:MonthGoalCard",
+   "target": "function:components/admin/erp/charts.tsx:TargetBar",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

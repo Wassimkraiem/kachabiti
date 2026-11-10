@@ -1,0 +1,420 @@
+{
+ "nodes": [
+  {
+   "id": "file:api/test/e2e/auth.e2e.mjs",
+   "type": "file",
+   "name": "auth.e2e.mjs",
+   "filePath": "api/test/e2e/auth.e2e.mjs",
+   "summary": "End-to-end suite for /api/auth: sign-up, confirmation, sign-in cookies, refresh, password change/reset and session revocation against the local Docker stack.",
+   "tags": [
+    "test",
+    "e2e",
+    "auth",
+    "sessions"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/test/e2e/catalog.e2e.mjs",
+   "type": "file",
+   "name": "catalog.e2e.mjs",
+   "filePath": "api/test/e2e/catalog.e2e.mjs",
+   "summary": "End-to-end suite exercising catalog product creation, update, storefront reads and soft deletion through the API.",
+   "tags": [
+    "test",
+    "e2e",
+    "catalog",
+    "products"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/test/e2e/categories.e2e.mjs",
+   "type": "file",
+   "name": "categories.e2e.mjs",
+   "filePath": "api/test/e2e/categories.e2e.mjs",
+   "summary": "End-to-end suite checking category CRUD and that anonymous users are denied write access.",
+   "tags": [
+    "test",
+    "e2e",
+    "categories",
+    "access-control"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/test/e2e/colissimo.e2e.mjs",
+   "type": "file",
+   "name": "colissimo.e2e.mjs",
+   "filePath": "api/test/e2e/colissimo.e2e.mjs",
+   "summary": "End-to-end suite for Colissimo delivery: validating orders into parcels, tracking status changes and returns against the Colissimo mock service.",
+   "tags": [
+    "test",
+    "e2e",
+    "delivery",
+    "colissimo"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/test/e2e/erp.e2e.mjs",
+   "type": "file",
+   "name": "erp.e2e.mjs",
+   "filePath": "api/test/e2e/erp.e2e.mjs",
+   "summary": "End-to-end suite covering ERP flows: manual orders, order pipeline statuses, payments, customers, till sessions, purchasing and accounting.",
+   "tags": [
+    "test",
+    "e2e",
+    "erp",
+    "orders"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:api/test/e2e/files.e2e.mjs",
+   "type": "file",
+   "name": "files.e2e.mjs",
+   "filePath": "api/test/e2e/files.e2e.mjs",
+   "summary": "End-to-end suite for image upload and private document storage through the S3-compatible file store.",
+   "tags": [
+    "test",
+    "e2e",
+    "files",
+    "storage"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/test/e2e/helpers.mjs",
+   "type": "file",
+   "name": "helpers.mjs",
+   "filePath": "api/test/e2e/helpers.mjs",
+   "summary": "Shared e2e test helpers: API base URL, direct SQL access to the local database, assertion and summary helpers, and creation of signed-in test users with roles.",
+   "tags": [
+    "test",
+    "e2e",
+    "utility",
+    "fixtures"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/test/e2e/objectives.e2e.mjs",
+   "type": "file",
+   "name": "objectives.e2e.mjs",
+   "filePath": "api/test/e2e/objectives.e2e.mjs",
+   "summary": "End-to-end suite verifying monthly business and agent goals, progress measurement and commission tiers in Tunis time.",
+   "tags": [
+    "test",
+    "e2e",
+    "objectives",
+    "commissions"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/test/e2e/stock.e2e.mjs",
+   "type": "file",
+   "name": "stock.e2e.mjs",
+   "filePath": "api/test/e2e/stock.e2e.mjs",
+   "summary": "End-to-end suite for stock movements: restocks, sales, transfers and the negative stock guard.",
+   "tags": [
+    "test",
+    "e2e",
+    "stock",
+    "inventory"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/test/e2e/tickets.e2e.mjs",
+   "type": "file",
+   "name": "tickets.e2e.mjs",
+   "filePath": "api/test/e2e/tickets.e2e.mjs",
+   "summary": "End-to-end suite for the team tickets board: creation, assignment, moves, comments with images, notifications and My day listing.",
+   "tags": [
+    "test",
+    "e2e",
+    "tickets",
+    "team"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/test/e2e/auth.e2e.mjs:call",
+   "type": "function",
+   "name": "call",
+   "filePath": "api/test/e2e/auth.e2e.mjs",
+   "lineRange": [
+    8,
+    19
+   ],
+   "summary": "Performs an API request with a cookie jar, capturing Set-Cookie headers for session tests.",
+   "tags": [
+    "test",
+    "http",
+    "helper"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/test/e2e/helpers.mjs:user",
+   "type": "function",
+   "name": "user",
+   "filePath": "api/test/e2e/helpers.mjs",
+   "lineRange": [
+    30,
+    49
+   ],
+   "summary": "Creates a test user with a role and permissions and signs it in, returning its session cookie.",
+   "tags": [
+    "test",
+    "fixtures",
+    "auth"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/test/e2e/helpers.mjs:sql",
+   "type": "function",
+   "name": "sql",
+   "filePath": "api/test/e2e/helpers.mjs",
+   "lineRange": [
+    14,
+    14
+   ],
+   "summary": "Runs a SQL statement against the local test database.",
+   "tags": [
+    "test",
+    "database",
+    "helper"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/test/e2e/helpers.mjs:ok",
+   "type": "function",
+   "name": "ok",
+   "filePath": "api/test/e2e/helpers.mjs",
+   "lineRange": [
+    17,
+    20
+   ],
+   "summary": "Records and prints a passing or failing assertion.",
+   "tags": [
+    "test",
+    "assertion",
+    "helper"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/test/e2e/helpers.mjs:done",
+   "type": "function",
+   "name": "done",
+   "filePath": "api/test/e2e/helpers.mjs",
+   "lineRange": [
+    21,
+    24
+   ],
+   "summary": "Prints the suite summary and exits with a failure code if any check failed.",
+   "tags": [
+    "test",
+    "reporting",
+    "helper"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:api/test/e2e/auth.e2e.mjs",
+   "target": "file:api/test/e2e/helpers.mjs",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/test/e2e/catalog.e2e.mjs",
+   "target": "file:api/test/e2e/helpers.mjs",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/test/e2e/categories.e2e.mjs",
+   "target": "file:api/test/e2e/helpers.mjs",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/test/e2e/colissimo.e2e.mjs",
+   "target": "file:api/test/e2e/helpers.mjs",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/test/e2e/erp.e2e.mjs",
+   "target": "file:api/test/e2e/helpers.mjs",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/test/e2e/files.e2e.mjs",
+   "target": "file:api/test/e2e/helpers.mjs",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/test/e2e/objectives.e2e.mjs",
+   "target": "file:api/test/e2e/helpers.mjs",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/test/e2e/stock.e2e.mjs",
+   "target": "file:api/test/e2e/helpers.mjs",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/test/e2e/tickets.e2e.mjs",
+   "target": "file:api/test/e2e/helpers.mjs",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/test/e2e/auth.e2e.mjs",
+   "target": "function:api/test/e2e/auth.e2e.mjs:call",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/test/e2e/helpers.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:user",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/test/e2e/helpers.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:user",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/test/e2e/helpers.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:sql",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/test/e2e/helpers.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:sql",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/test/e2e/helpers.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:ok",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/test/e2e/helpers.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:ok",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/test/e2e/helpers.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:done",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/test/e2e/helpers.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:done",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/test/e2e/auth.e2e.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:ok",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/test/e2e/catalog.e2e.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:ok",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/test/e2e/categories.e2e.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:ok",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/test/e2e/colissimo.e2e.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:ok",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/test/e2e/erp.e2e.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:ok",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/test/e2e/files.e2e.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:ok",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/test/e2e/objectives.e2e.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:ok",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/test/e2e/stock.e2e.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:ok",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/test/e2e/tickets.e2e.mjs",
+   "target": "function:api/test/e2e/helpers.mjs:ok",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

@@ -125,21 +125,21 @@ export default function Reels({ initialReels }: { initialReels?: Reel[] }) {
 
     return (
         <>
-            <section className="w-full py-16 px-0 bg-gradient-to-b from-white via-[#faf8f5] to-white overflow-hidden">
+            <section className="w-full py-16 px-0 bg-gradient-to-b from-card via-card to-card overflow-hidden">
                 <div className="max-w-[1600px] mx-auto">
                     {/* Section Title with Decorative Elements */}
                     <div className="text-center mb-12 px-4">
                         <div className="inline-flex items-center gap-3 mb-3">
                             <div className="w-12 h-[2px] bg-gradient-to-r from-transparent to-[#d4a574]"></div>
-                            <svg className="w-6 h-6 text-[#7a3b2e]" fill="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-6 h-6 text-accent" fill="currentColor" viewBox="0 0 24 24">
                                 <path d="M8 5v14l11-7z" />
                             </svg>
                             <div className="w-12 h-[2px] bg-gradient-to-l from-transparent to-[#d4a574]"></div>
                         </div>
-                        <h2 className="text-3xl md:text-4xl font-bold text-[#2b1a16] mb-2">
+                        <h2 className="text-3xl md:text-4xl font-bold text-ink mb-2">
                             {t.title}
                         </h2>
-                        <p className="text-[#7a3b2e]/70 text-sm md:text-base">
+                        <p className="text-accent/70 text-sm md:text-base">
                             Discover our latest stories and products
                         </p>
                     </div>
@@ -150,10 +150,10 @@ export default function Reels({ initialReels }: { initialReels?: Reel[] }) {
                         {reels.length > 1 && (
                             <button
                                 onClick={scrollLeft}
-                                className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white hover:bg-[#faf8f5] rounded-full shadow-xl hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 border-2 border-[#d4a574]/30 hover:border-[#7a3b2e]/50 backdrop-blur-sm"
+                                className="absolute left-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-card hover:bg-surface rounded-full shadow-xl hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 border-2 border-[#d4a574]/30 hover:border-accent/50 backdrop-blur-sm"
                                 aria-label="Previous"
                             >
-                                <svg className="w-5 h-5 text-[#7a3b2e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
                                 </svg>
                             </button>
@@ -215,12 +215,12 @@ export default function Reels({ initialReels }: { initialReels?: Reel[] }) {
                                                             <div className="absolute w-20 h-20 rounded-full bg-white/20 animate-ping opacity-75"></div>
 
                                                             {/* Play Button */}
-                                                            <div className="relative w-16 h-16 bg-gradient-to-br from-white via-[#faf8f5] to-white rounded-full flex items-center justify-center shadow-2xl transform group-hover:scale-125 transition-all duration-500 ring-4 ring-white/40 group-hover:ring-8 group-hover:ring-white/60">
+                                                            <div className="relative w-16 h-16 bg-gradient-to-br from-card via-card to-card rounded-full flex items-center justify-center shadow-2xl transform group-hover:scale-125 transition-all duration-500 ring-4 ring-white/40 group-hover:ring-8 group-hover:ring-white/60">
                                                                 {/* Inner Glow */}
                                                                 <div className="absolute inset-1 rounded-full bg-gradient-to-br from-[#d4a574]/20 to-transparent"></div>
 
                                                                 {/* Play Icon */}
-                                                                <svg className="relative w-7 h-7 text-[#7a3b2e] ml-1 drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
+                                                                <svg className="relative w-7 h-7 text-accent ml-1 drop-shadow-lg" fill="currentColor" viewBox="0 0 24 24">
                                                                     <path d="M8 5v14l11-7z" />
                                                                 </svg>
                                                             </div>
@@ -244,7 +244,7 @@ export default function Reels({ initialReels }: { initialReels?: Reel[] }) {
                                                                     <div className="absolute inset-0 rounded-full bg-gradient-to-br from-[#d4a574] to-[#7a3b2e] blur-md opacity-75"></div>
 
                                                                     {/* Kachabiti Logo Avatar */}
-                                                                    <div className="relative w-10 h-10 rounded-full bg-white flex items-center justify-center ring-2 ring-white/60 shadow-xl overflow-hidden">
+                                                                    <div className="relative w-10 h-10 rounded-full bg-card flex items-center justify-center ring-2 ring-white/60 shadow-xl overflow-hidden">
                                                                         <Image
                                                                             src="/assets/images/logoKachabitybg.png"
                                                                             alt="Kachabiti"
@@ -284,10 +284,10 @@ export default function Reels({ initialReels }: { initialReels?: Reel[] }) {
                         {reels.length > 1 && (
                             <button
                                 onClick={scrollRight}
-                                className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-white hover:bg-[#faf8f5] rounded-full shadow-xl hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 border-2 border-[#d4a574]/30 hover:border-[#7a3b2e]/50 backdrop-blur-sm"
+                                className="absolute right-2 top-1/2 -translate-y-1/2 z-20 w-12 h-12 bg-card hover:bg-surface rounded-full shadow-xl hover:shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 border-2 border-[#d4a574]/30 hover:border-accent/50 backdrop-blur-sm"
                                 aria-label="Next"
                             >
-                                <svg className="w-5 h-5 text-[#7a3b2e]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                                 </svg>
                             </button>
@@ -311,7 +311,7 @@ export default function Reels({ initialReels }: { initialReels?: Reel[] }) {
                     <div className="relative w-full  max-w-md aspect-[9/16]">
                         <button
                             onClick={() => setSelectedVideo(null)}
-                            className="absolute -top-12 right-0 text-white hover:text-gray-300 transition-colors"
+                            className="absolute -top-12 right-0 text-white hover:text-mute transition-colors"
                             aria-label="Close"
                         >
                             <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">

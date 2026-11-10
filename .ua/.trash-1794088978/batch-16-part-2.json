@@ -1,0 +1,1147 @@
+{
+ "nodes": [
+  {
+   "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "type": "table",
+   "name": "20261016120000_erp_sales_crm.sql",
+   "filePath": "supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "summary": "ERP part 1: sales pipeline statuses and channels, CRM customers with interactions and tasks, campaigns and ad spend, order payments, carrier remittances, treasury movements, goals and stock costing.",
+   "tags": [
+    "database",
+    "migration",
+    "erp",
+    "crm",
+    "payments"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:erp_settings",
+   "type": "table",
+   "name": "erp_settings",
+   "filePath": "supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "summary": "Admin-only business rule settings.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:ad_campaigns",
+   "type": "table",
+   "name": "ad_campaigns",
+   "filePath": "supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "summary": "Marketing campaigns orders can be attributed to.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:ad_spend",
+   "type": "table",
+   "name": "ad_spend",
+   "filePath": "supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "summary": "Daily advertising spend per campaign.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:customers",
+   "type": "table",
+   "name": "customers",
+   "filePath": "supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "summary": "CRM customers, one live row per normalized phone.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:customer_interactions",
+   "type": "table",
+   "name": "customer_interactions",
+   "filePath": "supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "summary": "Customer conversations and notes.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:crm_tasks",
+   "type": "table",
+   "name": "crm_tasks",
+   "filePath": "supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "summary": "Customer follow-up tasks.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:cod_remittances",
+   "type": "table",
+   "name": "cod_remittances",
+   "filePath": "supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "summary": "Carrier cash-on-delivery payouts with fees.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:order_payments",
+   "type": "table",
+   "name": "order_payments",
+   "filePath": "supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "summary": "Payments and refunds received per order and account.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:treasury_movements",
+   "type": "table",
+   "name": "treasury_movements",
+   "filePath": "supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "summary": "Other cash and bank movements.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:agent_goals",
+   "type": "table",
+   "name": "agent_goals",
+   "filePath": "supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "summary": "Monthly targets and commissions per agent.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:business_goals",
+   "type": "table",
+   "name": "business_goals",
+   "filePath": "supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "summary": "Monthly goals for the whole business.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "type": "table",
+   "name": "20261016121000_erp_purchasing_pos.sql",
+   "filePath": "supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "summary": "ERP part 2: raw materials and bills of materials, production, purchase orders and receipts with quality check, and point-of-sale till sessions and sales.",
+   "tags": [
+    "database",
+    "migration",
+    "erp",
+    "purchasing",
+    "point-of-sale"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:raw_materials",
+   "type": "table",
+   "name": "raw_materials",
+   "filePath": "supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "summary": "Raw materials used in production.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:material_movements",
+   "type": "table",
+   "name": "material_movements",
+   "filePath": "supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "summary": "Append-only raw material stock movements.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:product_bom",
+   "type": "table",
+   "name": "product_bom",
+   "filePath": "supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "summary": "Bill of materials per product.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:product_costing",
+   "type": "table",
+   "name": "product_costing",
+   "filePath": "supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "summary": "Labor and overhead costs per product.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_orders",
+   "type": "table",
+   "name": "purchase_orders",
+   "filePath": "supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "summary": "Purchase orders and price requests to suppliers.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_order_lines",
+   "type": "table",
+   "name": "purchase_order_lines",
+   "filePath": "supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "summary": "Lines of purchase orders.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_receipts",
+   "type": "table",
+   "name": "purchase_receipts",
+   "filePath": "supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "summary": "Goods receipts against purchase orders.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_receipt_lines",
+   "type": "table",
+   "name": "purchase_receipt_lines",
+   "filePath": "supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "summary": "Accepted and rejected quantities per receipt line.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:pos_sessions",
+   "type": "table",
+   "name": "pos_sessions",
+   "filePath": "supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "summary": "Till sessions per shop location.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016122000_erp_accounting.sql",
+   "type": "table",
+   "name": "20261016122000_erp_accounting.sql",
+   "filePath": "supabase/migrations/20261016122000_erp_accounting.sql",
+   "summary": "ERP part 3: Tunisian SCE chart of accounts, journals booked automatically by triggers, bills, sales invoices, bank reconciliation, documents and owner overview reports.",
+   "tags": [
+    "database",
+    "migration",
+    "erp",
+    "accounting",
+    "reporting"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:accounts",
+   "type": "table",
+   "name": "accounts",
+   "filePath": "supabase/migrations/20261016122000_erp_accounting.sql",
+   "summary": "Chart of accounts (Tunisian SCE).",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:document_counters",
+   "type": "table",
+   "name": "document_counters",
+   "filePath": "supabase/migrations/20261016122000_erp_accounting.sql",
+   "summary": "Gap-free numbering counters per journal and year.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:journal_entries",
+   "type": "table",
+   "name": "journal_entries",
+   "filePath": "supabase/migrations/20261016122000_erp_accounting.sql",
+   "summary": "Accounting journal entries (draft or posted).",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:journal_lines",
+   "type": "table",
+   "name": "journal_lines",
+   "filePath": "supabase/migrations/20261016122000_erp_accounting.sql",
+   "summary": "Debit/credit lines of journal entries.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:bills",
+   "type": "table",
+   "name": "bills",
+   "filePath": "supabase/migrations/20261016122000_erp_accounting.sql",
+   "summary": "Supplier invoices and expenses.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:bill_payments",
+   "type": "table",
+   "name": "bill_payments",
+   "filePath": "supabase/migrations/20261016122000_erp_accounting.sql",
+   "summary": "Payments of bills.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:sales_invoices",
+   "type": "table",
+   "name": "sales_invoices",
+   "filePath": "supabase/migrations/20261016122000_erp_accounting.sql",
+   "summary": "Issued sales invoices and credit notes.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:bank_statement_lines",
+   "type": "table",
+   "name": "bank_statement_lines",
+   "filePath": "supabase/migrations/20261016122000_erp_accounting.sql",
+   "summary": "Imported bank statement lines for reconciliation.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:documents",
+   "type": "table",
+   "name": "documents",
+   "filePath": "supabase/migrations/20261016122000_erp_accounting.sql",
+   "summary": "Business documents stored in the private bucket.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261023204053_own_auth_accounts.sql",
+   "type": "table",
+   "name": "20261023204053_own_auth_accounts.sql",
+   "filePath": "supabase/migrations/20261023204053_own_auth_accounts.sql",
+   "summary": "NestJS migration phase 3: public.users becomes the account table and NestJS-owned user_sessions and auth_tokens replace Supabase Auth.",
+   "tags": [
+    "database",
+    "migration",
+    "authentication",
+    "sessions",
+    "nestjs-migration"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "table:supabase/migrations/20261023204053_own_auth_accounts.sql:user_sessions",
+   "type": "table",
+   "name": "user_sessions",
+   "filePath": "supabase/migrations/20261023204053_own_auth_accounts.sql",
+   "summary": "Refresh-token sessions of signed-in users.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261023204053_own_auth_accounts.sql:auth_tokens",
+   "type": "table",
+   "name": "auth_tokens",
+   "filePath": "supabase/migrations/20261023204053_own_auth_accounts.sql",
+   "summary": "Single-use confirmation and password reset tokens.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261023214627_notifications_from_nestjs.sql",
+   "type": "table",
+   "name": "20261023214627_notifications_from_nestjs.sql",
+   "filePath": "supabase/migrations/20261023214627_notifications_from_nestjs.sql",
+   "summary": "NestJS migration phase 4: announces each new or changed notification on the Postgres notifications channel for NestJS to stream and push.",
+   "tags": [
+    "database",
+    "migration",
+    "notifications",
+    "listen-notify",
+    "nestjs-migration"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261024134433_plain_postgres_ready.sql",
+   "type": "table",
+   "name": "20261024134433_plain_postgres_ready.sql",
+   "filePath": "supabase/migrations/20261024134433_plain_postgres_ready.sql",
+   "summary": "NestJS migration phase 5: removes Supabase-only dependencies so the schema can be dumped and restored on plain Postgres.",
+   "tags": [
+    "database",
+    "migration",
+    "nestjs-migration",
+    "portability"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261024160000_objective_prize_tiers.sql",
+   "type": "table",
+   "name": "20261024160000_objective_prize_tiers.sql",
+   "filePath": "supabase/migrations/20261024160000_objective_prize_tiers.sql",
+   "summary": "Adds prize-tier commissions to agent_goals and an analytics start date, updating set_agent_goal.",
+   "tags": [
+    "database",
+    "migration",
+    "objectives",
+    "commissions"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261026150000_colissimo_v2.sql",
+   "type": "table",
+   "name": "20261026150000_colissimo_v2.sql",
+   "filePath": "supabase/migrations/20261026150000_colissimo_v2.sql",
+   "summary": "Colissimo v2 support: delivery payment and driver status fields, handover manifests, price-change requests and v2 status names in record_delivery_status.",
+   "tags": [
+    "database",
+    "migration",
+    "delivery",
+    "colissimo"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "table:supabase/migrations/20261028120000_colissimo_history_import.sql",
+   "type": "table",
+   "name": "20261028120000_colissimo_history_import.sql",
+   "filePath": "supabase/migrations/20261028120000_colissimo_history_import.sql",
+   "summary": "Adds import_colissimo_history to turn past Colissimo parcels and payouts into COL- orders, customers and payments, silencing new-order notifications for imports.",
+   "tags": [
+    "database",
+    "migration",
+    "data-import",
+    "colissimo"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "table:supabase/migrations/20261102120000_edit_order.sql",
+   "type": "table",
+   "name": "20261102120000_edit_order.sql",
+   "filePath": "supabase/migrations/20261102120000_edit_order.sql",
+   "summary": "Adds edit_order for changing customer, lines, fees and notes of an order still to confirm or confirmed, relinking its customer.",
+   "tags": [
+    "database",
+    "migration",
+    "orders",
+    "stored-procedures"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "table:supabase/migrations/20261104120000_order_traffic_source.sql",
+   "type": "table",
+   "name": "20261104120000_order_traffic_source.sql",
+   "filePath": "supabase/migrations/20261104120000_order_traffic_source.sql",
+   "summary": "Adds the website traffic source column to orders, sent by the storefront at checkout.",
+   "tags": [
+    "database",
+    "migration",
+    "orders",
+    "analytics"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261104130000_shop_stock.sql",
+   "type": "table",
+   "name": "20261104130000_shop_stock.sql",
+   "filePath": "supabase/migrations/20261104130000_shop_stock.sql",
+   "summary": "Shop locations with their own low-stock limit, a pos notification audience, and notify_low_stock alerts for cashiers.",
+   "tags": [
+    "database",
+    "migration",
+    "point-of-sale",
+    "inventory",
+    "notifications"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "table:supabase/migrations/20261104150000_social_comments.sql",
+   "type": "table",
+   "name": "20261104150000_social_comments.sql",
+   "filePath": "supabase/migrations/20261104150000_social_comments.sql",
+   "summary": "social_comments table for Facebook/Instagram post comments with a trigger that detects Tunisian phone numbers and turns them into CRM leads.",
+   "tags": [
+    "database",
+    "migration",
+    "crm",
+    "social-media",
+    "trigger"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "table:supabase/migrations/20261104150000_social_comments.sql:social_comments",
+   "type": "table",
+   "name": "social_comments",
+   "filePath": "supabase/migrations/20261104150000_social_comments.sql",
+   "summary": "Public social media post comments.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261105120000_team_tickets.sql",
+   "type": "table",
+   "name": "20261105120000_team_tickets.sql",
+   "filePath": "supabase/migrations/20261105120000_team_tickets.sql",
+   "summary": "Team tasks board: team_tickets table, assignee notification trigger, and overdue tickets in the daily alerts.",
+   "tags": [
+    "database",
+    "migration",
+    "team-tasks",
+    "notifications"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "table:supabase/migrations/20261105120000_team_tickets.sql:team_tickets",
+   "type": "table",
+   "name": "team_tickets",
+   "filePath": "supabase/migrations/20261105120000_team_tickets.sql",
+   "summary": "Back-office team task tickets.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261105130000_faster_owner_overview.sql",
+   "type": "table",
+   "name": "20261105130000_faster_owner_overview.sql",
+   "filePath": "supabase/migrations/20261105130000_faster_owner_overview.sql",
+   "summary": "Redefines owner_overview with JIT disabled and a leaner query, cutting it from about 10 seconds to well under one.",
+   "tags": [
+    "database",
+    "migration",
+    "performance",
+    "reporting"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "table:supabase/migrations/20261105131000_orders_open_indexes.sql",
+   "type": "table",
+   "name": "20261105131000_orders_open_indexes.sql",
+   "filePath": "supabase/migrations/20261105131000_orders_open_indexes.sql",
+   "summary": "Adds partial indexes for orders still to confirm and for confirmed dates, removing full scans on My day and Objectives.",
+   "tags": [
+    "database",
+    "migration",
+    "performance",
+    "indexes"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261105140000_ticket_comments_and_restore.sql",
+   "type": "table",
+   "name": "20261105140000_ticket_comments_and_restore.sql",
+   "filePath": "supabase/migrations/20261105140000_ticket_comments_and_restore.sql",
+   "summary": "team_ticket_comments with image support and notifications, plus restore_deleted for owners and team tasks in purge_deleted.",
+   "tags": [
+    "database",
+    "migration",
+    "team-tasks",
+    "soft-delete"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "table:supabase/migrations/20261105140000_ticket_comments_and_restore.sql:team_ticket_comments",
+   "type": "table",
+   "name": "team_ticket_comments",
+   "filePath": "supabase/migrations/20261105140000_ticket_comments_and_restore.sql",
+   "summary": "Comments and images on team tickets.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261105160000_team_ticket_board.sql",
+   "type": "table",
+   "name": "20261105160000_team_ticket_board.sql",
+   "filePath": "supabase/migrations/20261105160000_team_ticket_board.sql",
+   "summary": "Adds ticket numbers (T-12) and column positions to team_tickets for the drag-and-drop board.",
+   "tags": [
+    "database",
+    "migration",
+    "team-tasks"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:erp_settings",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:ad_campaigns",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:ad_spend",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:customers",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:customer_interactions",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:crm_tasks",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:cod_remittances",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:order_payments",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:treasury_movements",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:agent_goals",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:business_goals",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "target": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:raw_materials",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "target": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:material_movements",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "target": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:product_bom",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "target": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:product_costing",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "target": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_orders",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "target": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_order_lines",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "target": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_receipts",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "target": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_receipt_lines",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "target": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:pos_sessions",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016122000_erp_accounting.sql",
+   "target": "table:supabase/migrations/20261016122000_erp_accounting.sql:accounts",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016122000_erp_accounting.sql",
+   "target": "table:supabase/migrations/20261016122000_erp_accounting.sql:document_counters",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016122000_erp_accounting.sql",
+   "target": "table:supabase/migrations/20261016122000_erp_accounting.sql:journal_entries",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016122000_erp_accounting.sql",
+   "target": "table:supabase/migrations/20261016122000_erp_accounting.sql:journal_lines",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016122000_erp_accounting.sql",
+   "target": "table:supabase/migrations/20261016122000_erp_accounting.sql:bills",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016122000_erp_accounting.sql",
+   "target": "table:supabase/migrations/20261016122000_erp_accounting.sql:bill_payments",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016122000_erp_accounting.sql",
+   "target": "table:supabase/migrations/20261016122000_erp_accounting.sql:sales_invoices",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016122000_erp_accounting.sql",
+   "target": "table:supabase/migrations/20261016122000_erp_accounting.sql:bank_statement_lines",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016122000_erp_accounting.sql",
+   "target": "table:supabase/migrations/20261016122000_erp_accounting.sql:documents",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261023204053_own_auth_accounts.sql",
+   "target": "table:supabase/migrations/20261023204053_own_auth_accounts.sql:user_sessions",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261023204053_own_auth_accounts.sql",
+   "target": "table:supabase/migrations/20261023204053_own_auth_accounts.sql:auth_tokens",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261104150000_social_comments.sql",
+   "target": "table:supabase/migrations/20261104150000_social_comments.sql:social_comments",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261105120000_team_tickets.sql",
+   "target": "table:supabase/migrations/20261105120000_team_tickets.sql:team_tickets",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261105140000_ticket_comments_and_restore.sql",
+   "target": "table:supabase/migrations/20261105140000_ticket_comments_and_restore.sql:team_ticket_comments",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:orders",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_variants",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "table:supabase/migrations/20261001112501_stock_management.sql:stock_movements",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:order_items",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "target": "table:supabase/migrations/20261001112501_stock_management.sql:suppliers",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:orders",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "target": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:order_payments",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "target": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:treasury_movements",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261023204053_own_auth_accounts.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:users",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261023204053_own_auth_accounts.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:carts",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261023204053_own_auth_accounts.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:user_favorites",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261023204053_own_auth_accounts.sql",
+   "target": "table:supabase/migrations/20261001112501_stock_management.sql:stock_movements",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261023204053_own_auth_accounts.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:orders",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261023204053_own_auth_accounts.sql",
+   "target": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql:landing_products",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261023204053_own_auth_accounts.sql",
+   "target": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:customers",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261024160000_objective_prize_tiers.sql",
+   "target": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:agent_goals",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261026150000_colissimo_v2.sql",
+   "target": "table:supabase/migrations/20261006142809_colissimo_deliveries.sql:deliveries",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261104120000_order_traffic_source.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:orders",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261104130000_shop_stock.sql",
+   "target": "table:supabase/migrations/20261001112501_stock_management.sql:locations",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261105160000_team_ticket_board.sql",
+   "target": "table:supabase/migrations/20261105120000_team_tickets.sql:team_tickets",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261105140000_ticket_comments_and_restore.sql",
+   "target": "file:lib/trash-tables.ts",
+   "type": "defines_schema",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "table:supabase/migrations/20261023214627_notifications_from_nestjs.sql",
+   "target": "file:api/src/notifications/notification-events.ts",
+   "type": "defines_schema",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "table:supabase/migrations/20261026150000_colissimo_v2.sql",
+   "target": "file:api/src/sales/colissimo-tracking.ts",
+   "type": "defines_schema",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "table:supabase/migrations/20261023204053_own_auth_accounts.sql",
+   "target": "file:api/src/auth/auth.controller.ts",
+   "type": "defines_schema",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "table:supabase/migrations/20261105120000_team_tickets.sql",
+   "target": "file:api/src/admin/tickets.controller.ts",
+   "type": "defines_schema",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "table:supabase/migrations/20261024160000_objective_prize_tiers.sql",
+   "target": "file:api/src/admin/goals.ts",
+   "type": "defines_schema",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "file:api/src/sales/commerce.ts",
+   "type": "defines_schema",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "target": "file:lib/erp/db-messages.ts",
+   "type": "defines_schema",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "table:supabase/migrations/20261024134433_plain_postgres_ready.sql",
+   "target": "file:scripts/db/move-database.mjs",
+   "type": "defines_schema",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

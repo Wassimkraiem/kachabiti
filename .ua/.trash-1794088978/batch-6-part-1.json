@@ -1,0 +1,1281 @@
+{
+ "nodes": [
+  {
+   "id": "file:app/admin/activity/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/activity/page.tsx",
+   "summary": "Admin Activity page that browses the append-only activity log (/api/admin/activity) with filters by staff member, entity and action, showing before/after column changes.",
+   "tags": [
+    "component",
+    "admin-page",
+    "audit-log",
+    "activity"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/activity/page.tsx:ActivityPage",
+   "type": "function",
+   "name": "ActivityPage",
+   "filePath": "app/admin/activity/page.tsx",
+   "lineRange": [
+    86,
+    277
+   ],
+   "summary": "Default-exported client component for this route. Admin Activity page that browses the append-only activity log (/api/admin/activity) with filters by staff member, entity and action, showing before/after column changes.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/cart-analytics/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/cart-analytics/page.tsx",
+   "summary": "Admin cart analytics page showing cart/checkout conversion statistics and the list of abandoned carts from /api/cart/analytics over a selectable day range.",
+   "tags": [
+    "component",
+    "admin-page",
+    "analytics",
+    "abandoned-cart"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/cart-analytics/page.tsx:CartAnalyticsPage",
+   "type": "function",
+   "name": "CartAnalyticsPage",
+   "filePath": "app/admin/cart-analytics/page.tsx",
+   "lineRange": [
+    51,
+    326
+   ],
+   "summary": "Default-exported client component for this route. Admin cart analytics page showing cart/checkout conversion statistics and the list of abandoned carts from /api/cart/analytics over a selectable day range.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/categories/[id]/edit/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/categories/[id]/edit/page.tsx",
+   "summary": "Admin form for editing an existing category (localized names, parent, image and extra fields) and saving it through the categories API.",
+   "tags": [
+    "component",
+    "admin-page",
+    "form",
+    "catalog",
+    "category"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/categories/[id]/edit/page.tsx:EditCategoryPage",
+   "type": "function",
+   "name": "EditCategoryPage",
+   "filePath": "app/admin/categories/[id]/edit/page.tsx",
+   "lineRange": [
+    33,
+    288
+   ],
+   "summary": "Default-exported client component for this route. Admin form for editing an existing category (localized names, parent, image and extra fields) and saving it through the categories API.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/categories/new/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/categories/new/page.tsx",
+   "summary": "Admin form for creating a new nested product category with localized names, parent selection and extra fields.",
+   "tags": [
+    "component",
+    "admin-page",
+    "form",
+    "catalog",
+    "category"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/categories/new/page.tsx:CreateCategoryPage",
+   "type": "function",
+   "name": "CreateCategoryPage",
+   "filePath": "app/admin/categories/new/page.tsx",
+   "lineRange": [
+    32,
+    222
+   ],
+   "summary": "Default-exported client component for this route. Admin form for creating a new nested product category with localized names, parent selection and extra fields.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/categories/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/categories/page.tsx",
+   "summary": "Admin categories list with hierarchy display, search, bulk delete and permission-gated actions based on the admin role context.",
+   "tags": [
+    "component",
+    "admin-page",
+    "catalog",
+    "category",
+    "list"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/categories/page.tsx:AdminCategoriesPage",
+   "type": "function",
+   "name": "AdminCategoriesPage",
+   "filePath": "app/admin/categories/page.tsx",
+   "lineRange": [
+    43,
+    368
+   ],
+   "summary": "Default-exported client component for this route. Admin categories list with hierarchy display, search, bulk delete and permission-gated actions based on the admin role context.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/colissimo-account/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/colissimo-account/page.tsx",
+   "summary": "Owner-only Colissimo account page that loads the whole carrier account from /api/owner/colissimo two months at a time, analyses parcel stages with KPIs and charts, and syncs missing parcels into deliveries.",
+   "tags": [
+    "component",
+    "admin-page",
+    "delivery",
+    "colissimo",
+    "owner"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/colissimo-account/page.tsx:fromRecord",
+   "type": "function",
+   "name": "fromRecord",
+   "filePath": "app/admin/colissimo-account/page.tsx",
+   "lineRange": [
+    60,
+    79
+   ],
+   "summary": "Normalizes a stored delivery record into the portal parcel row shape used by the page.",
+   "tags": [
+    "helper",
+    "component",
+    "internal"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/admin/colissimo-account/page.tsx:analyse",
+   "type": "function",
+   "name": "analyse",
+   "filePath": "app/admin/colissimo-account/page.tsx",
+   "lineRange": [
+    84,
+    105
+   ],
+   "summary": "Aggregates parcel rows into stage counts, rates and per-period figures for KPIs and charts.",
+   "tags": [
+    "helper",
+    "component",
+    "internal"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/admin/colissimo-account/page.tsx:ColissimoAccountPage",
+   "type": "function",
+   "name": "ColissimoAccountPage",
+   "filePath": "app/admin/colissimo-account/page.tsx",
+   "lineRange": [
+    114,
+    384
+   ],
+   "summary": "Default-exported client component for this route. Owner-only Colissimo account page that loads the whole carrier account from /api/owner/colissimo two months at a time, analyses parcel stages with KPIs and charts, and syncs missing parcels into deliveries.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/customers/[id]/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/customers/[id]/page.tsx",
+   "summary": "CRM customer detail page showing a customer profile, stage, orders, conversations and follow-up tasks, with actions to log interactions and edit the customer.",
+   "tags": [
+    "component",
+    "admin-page",
+    "crm",
+    "customer-detail"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/customers/[id]/page.tsx:CustomerPage",
+   "type": "function",
+   "name": "CustomerPage",
+   "filePath": "app/admin/customers/[id]/page.tsx",
+   "lineRange": [
+    74,
+    350
+   ],
+   "summary": "Default-exported client component for this route. CRM customer detail page showing a customer profile, stage, orders, conversations and follow-up tasks, with actions to log interactions and edit the customer.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/customers/comments/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/customers/comments/page.tsx",
+   "summary": "CRM page listing public social-media post comments captured by the Meta webhook (/api/crm/comments), with lead/phone detection and handling actions.",
+   "tags": [
+    "component",
+    "admin-page",
+    "crm",
+    "social-comments"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/customers/comments/page.tsx:CommentsPage",
+   "type": "function",
+   "name": "CommentsPage",
+   "filePath": "app/admin/customers/comments/page.tsx",
+   "lineRange": [
+    40,
+    166
+   ],
+   "summary": "Default-exported client component for this route. CRM page listing public social-media post comments captured by the Meta webhook (/api/crm/comments), with lead/phone detection and handling actions.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/customers/inbox/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/customers/inbox/page.tsx",
+   "summary": "CRM inbox page listing incoming customer messages (Messenger/Instagram/WhatsApp interactions) from /api/crm/interactions?inbox=1.",
+   "tags": [
+    "component",
+    "admin-page",
+    "crm",
+    "inbox"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/customers/inbox/page.tsx:InboxPage",
+   "type": "function",
+   "name": "InboxPage",
+   "filePath": "app/admin/customers/inbox/page.tsx",
+   "lineRange": [
+    30,
+    89
+   ],
+   "summary": "Default-exported client component for this route. CRM inbox page listing incoming customer messages (Messenger/Instagram/WhatsApp interactions) from /api/crm/interactions?inbox=1.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/customers/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/customers/page.tsx",
+   "summary": "CRM customers list with search, stage and channel filters, duplicate detection and links to customer detail pages.",
+   "tags": [
+    "component",
+    "admin-page",
+    "crm",
+    "list"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/customers/page.tsx:CustomersPage",
+   "type": "function",
+   "name": "CustomersPage",
+   "filePath": "app/admin/customers/page.tsx",
+   "lineRange": [
+    52,
+    214
+   ],
+   "summary": "Default-exported client component for this route. CRM customers list with search, stage and channel filters, duplicate detection and links to customer detail pages.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/dashboard/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/dashboard/page.tsx",
+   "summary": "Admin dashboard home combining cart analytics KPIs, abandoned carts, quick links and a stock overview widget for owners and admins.",
+   "tags": [
+    "component",
+    "admin-page",
+    "dashboard",
+    "analytics",
+    "entry-point"
+   ],
+   "complexity": "complex",
+   "languageNotes": "The default export is still named CartAnalyticsPage, apparently copied from the cart analytics page."
+  },
+  {
+   "id": "function:app/admin/dashboard/page.tsx:CartAnalyticsPage",
+   "type": "function",
+   "name": "CartAnalyticsPage",
+   "filePath": "app/admin/dashboard/page.tsx",
+   "lineRange": [
+    54,
+    368
+   ],
+   "summary": "Default-exported client component for this route. Admin dashboard home combining cart analytics KPIs, abandoned carts, quick links and a stock overview widget for owners and admins.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/delivery/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/delivery/page.tsx",
+   "summary": "Admin Delivery page listing Colissimo parcels with server-side paging and filters, plus sending, editing, tracking refresh, manifest hand-over, lookup and parcel history actions.",
+   "tags": [
+    "component",
+    "admin-page",
+    "delivery",
+    "colissimo",
+    "logistics"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/delivery/page.tsx:DeliveryPage",
+   "type": "function",
+   "name": "DeliveryPage",
+   "filePath": "app/admin/delivery/page.tsx",
+   "lineRange": [
+    42,
+    481
+   ],
+   "summary": "Default-exported client component for this route. Admin Delivery page listing Colissimo parcels with server-side paging and filters, plus sending, editing, tracking refresh, manifest hand-over, lookup and parcel history actions.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/delivery/print/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/delivery/print/page.tsx",
+   "summary": "Printable page that renders shipping slips for selected Colissimo parcels via the delivery API.",
+   "tags": [
+    "component",
+    "admin-page",
+    "delivery",
+    "print"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/delivery/print/page.tsx:PrintSlipsPage",
+   "type": "function",
+   "name": "PrintSlipsPage",
+   "filePath": "app/admin/delivery/print/page.tsx",
+   "lineRange": [
+    16,
+    71
+   ],
+   "summary": "Default-exported client component for this route. Printable page that renders shipping slips for selected Colissimo parcels via the delivery API.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/finance/accounting/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/finance/accounting/page.tsx",
+   "summary": "Accounting workspace (Tunisian SCE) with tabs for the journal and entry editor, financial reports and export, chart of accounts, and accounting settings.",
+   "tags": [
+    "component",
+    "admin-page",
+    "accounting",
+    "finance",
+    "reports"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/finance/accounting/page.tsx:AccountingPage",
+   "type": "function",
+   "name": "AccountingPage",
+   "filePath": "app/admin/finance/accounting/page.tsx",
+   "lineRange": [
+    35,
+    48
+   ],
+   "summary": "Default-exported client component for this route. Accounting workspace (Tunisian SCE) with tabs for the journal and entry editor, financial reports and export, chart of accounts, and accounting settings.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/admin/finance/accounting/page.tsx:JournalTab",
+   "type": "function",
+   "name": "JournalTab",
+   "filePath": "app/admin/finance/accounting/page.tsx",
+   "lineRange": [
+    54,
+    176
+   ],
+   "summary": "Journal tab listing journal entries with filters, posting drafts and opening the entry editor.",
+   "tags": [
+    "helper",
+    "component",
+    "internal"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/finance/accounting/page.tsx:EntryEditor",
+   "type": "function",
+   "name": "EntryEditor",
+   "filePath": "app/admin/finance/accounting/page.tsx",
+   "lineRange": [
+    178,
+    240
+   ],
+   "summary": "Modal editor for creating balanced manual journal entries line by line.",
+   "tags": [
+    "helper",
+    "component",
+    "internal"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/finance/accounting/page.tsx:ReportsTab",
+   "type": "function",
+   "name": "ReportsTab",
+   "filePath": "app/admin/finance/accounting/page.tsx",
+   "lineRange": [
+    242,
+    357
+   ],
+   "summary": "Reports tab rendering trial balance, ledger, income statement, balance sheet and VAT summaries, with CSV export.",
+   "tags": [
+    "helper",
+    "component",
+    "internal"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/finance/accounting/page.tsx:AccountsTab",
+   "type": "function",
+   "name": "AccountsTab",
+   "filePath": "app/admin/finance/accounting/page.tsx",
+   "lineRange": [
+    368,
+    422
+   ],
+   "summary": "Chart-of-accounts tab for listing and adding accounts.",
+   "tags": [
+    "helper",
+    "component",
+    "internal"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/finance/accounting/page.tsx:SettingsTab",
+   "type": "function",
+   "name": "SettingsTab",
+   "filePath": "app/admin/finance/accounting/page.tsx",
+   "lineRange": [
+    432,
+    491
+   ],
+   "summary": "Accounting settings tab (start date, VAT rate, system account mapping).",
+   "tags": [
+    "helper",
+    "component",
+    "internal"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:app/admin/activity/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/activity/page.tsx",
+   "target": "file:components/admin/select-search.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/activity/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/activity/page.tsx",
+   "target": "function:app/admin/activity/page.tsx:ActivityPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/activity/page.tsx",
+   "target": "function:app/admin/activity/page.tsx:ActivityPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/cart-analytics/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/cart-analytics/page.tsx",
+   "target": "function:app/admin/cart-analytics/page.tsx:CartAnalyticsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/cart-analytics/page.tsx",
+   "target": "function:app/admin/cart-analytics/page.tsx:CartAnalyticsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/categories/[id]/edit/page.tsx",
+   "target": "file:components/admin/CategoryExtraFields.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/categories/[id]/edit/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/categories/[id]/edit/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/categories/[id]/edit/page.tsx",
+   "target": "function:app/admin/categories/[id]/edit/page.tsx:EditCategoryPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/categories/[id]/edit/page.tsx",
+   "target": "function:app/admin/categories/[id]/edit/page.tsx:EditCategoryPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/categories/new/page.tsx",
+   "target": "file:components/admin/CategoryExtraFields.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/categories/new/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/categories/new/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/categories/new/page.tsx",
+   "target": "function:app/admin/categories/new/page.tsx:CreateCategoryPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/categories/new/page.tsx",
+   "target": "function:app/admin/categories/new/page.tsx:CreateCategoryPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/categories/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/categories/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/categories/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/categories/page.tsx",
+   "target": "function:app/admin/categories/page.tsx:AdminCategoriesPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/categories/page.tsx",
+   "target": "function:app/admin/categories/page.tsx:AdminCategoriesPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/colissimo-account/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/colissimo-account/page.tsx",
+   "target": "file:components/admin/delivery/DeliveryStatusTag.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/colissimo-account/page.tsx",
+   "target": "file:components/admin/delivery/ParcelHistoryDrawer.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/colissimo-account/page.tsx",
+   "target": "file:components/admin/delivery/delivery-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/colissimo-account/page.tsx",
+   "target": "file:components/admin/erp/charts.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/colissimo-account/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/colissimo-account/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/colissimo-account/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/colissimo-account/page.tsx",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/colissimo-account/page.tsx",
+   "target": "function:app/admin/colissimo-account/page.tsx:fromRecord",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/colissimo-account/page.tsx",
+   "target": "function:app/admin/colissimo-account/page.tsx:analyse",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/colissimo-account/page.tsx",
+   "target": "function:app/admin/colissimo-account/page.tsx:ColissimoAccountPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/colissimo-account/page.tsx",
+   "target": "function:app/admin/colissimo-account/page.tsx:ColissimoAccountPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/customers/[id]/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/[id]/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/[id]/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/[id]/page.tsx",
+   "target": "file:components/admin/order-status.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/[id]/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/[id]/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/[id]/page.tsx",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/[id]/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/[id]/page.tsx",
+   "target": "function:app/admin/customers/[id]/page.tsx:CustomerPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/customers/[id]/page.tsx",
+   "target": "function:app/admin/customers/[id]/page.tsx:CustomerPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/customers/comments/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/comments/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/comments/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/comments/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/comments/page.tsx",
+   "target": "function:app/admin/customers/comments/page.tsx:CommentsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/customers/comments/page.tsx",
+   "target": "function:app/admin/customers/comments/page.tsx:CommentsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/customers/inbox/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/inbox/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/inbox/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/inbox/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/inbox/page.tsx",
+   "target": "function:app/admin/customers/inbox/page.tsx:InboxPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/customers/inbox/page.tsx",
+   "target": "function:app/admin/customers/inbox/page.tsx:InboxPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/customers/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/page.tsx",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/customers/page.tsx",
+   "target": "function:app/admin/customers/page.tsx:CustomersPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/customers/page.tsx",
+   "target": "function:app/admin/customers/page.tsx:CustomersPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/dashboard/page.tsx",
+   "target": "file:components/admin/erp/QuickLinks.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/dashboard/page.tsx",
+   "target": "file:components/admin/stock/StockOverview.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/dashboard/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/dashboard/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/dashboard/page.tsx",
+   "target": "function:app/admin/dashboard/page.tsx:CartAnalyticsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/dashboard/page.tsx",
+   "target": "function:app/admin/dashboard/page.tsx:CartAnalyticsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/delivery/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/delivery/page.tsx",
+   "target": "file:components/admin/delivery/DeliveryStatusTag.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/delivery/page.tsx",
+   "target": "file:components/admin/delivery/EditParcelModal.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/delivery/page.tsx",
+   "target": "file:components/admin/delivery/ParcelHistoryDrawer.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/delivery/page.tsx",
+   "target": "file:components/admin/delivery/ParcelLookup.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/delivery/page.tsx",
+   "target": "file:components/admin/delivery/SendParcelModal.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/delivery/page.tsx",
+   "target": "file:components/admin/delivery/delivery-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/delivery/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/delivery/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/delivery/page.tsx",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/delivery/page.tsx",
+   "target": "function:app/admin/delivery/page.tsx:DeliveryPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/delivery/page.tsx",
+   "target": "function:app/admin/delivery/page.tsx:DeliveryPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/delivery/print/page.tsx",
+   "target": "file:components/admin/delivery/delivery-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/delivery/print/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/delivery/print/page.tsx",
+   "target": "function:app/admin/delivery/print/page.tsx:PrintSlipsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/delivery/print/page.tsx",
+   "target": "function:app/admin/delivery/print/page.tsx:PrintSlipsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/finance/accounting/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/accounting/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/accounting/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/accounting/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/accounting/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/accounting/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/accounting/page.tsx",
+   "target": "function:app/admin/finance/accounting/page.tsx:AccountingPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/finance/accounting/page.tsx",
+   "target": "function:app/admin/finance/accounting/page.tsx:AccountingPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/finance/accounting/page.tsx",
+   "target": "function:app/admin/finance/accounting/page.tsx:JournalTab",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/finance/accounting/page.tsx",
+   "target": "function:app/admin/finance/accounting/page.tsx:EntryEditor",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/finance/accounting/page.tsx",
+   "target": "function:app/admin/finance/accounting/page.tsx:ReportsTab",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/finance/accounting/page.tsx",
+   "target": "function:app/admin/finance/accounting/page.tsx:AccountsTab",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/finance/accounting/page.tsx",
+   "target": "function:app/admin/finance/accounting/page.tsx:SettingsTab",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  }
+ ]
+}

@@ -1,0 +1,3702 @@
+{
+ "scriptCompleted": true,
+ "entryPointCandidates": [
+  {
+   "id": "document:README.md",
+   "score": 5,
+   "name": "README.md",
+   "summary": "Stock create-next-app README describing how to run the dev server and linking to Next.js and Vercel docs; not project-specific."
+  },
+  {
+   "id": "file:components/carousel/index.ts",
+   "score": 4,
+   "name": "index.ts",
+   "summary": "Barrel re-exporting the CarouselIndicators and CarouselNavigation components."
+  },
+  {
+   "id": "file:components/cart/index.ts",
+   "score": 4,
+   "name": "index.ts",
+   "summary": "Barrel re-exporting the cart UI components: AddToCartButton, CartButton, CartDrawer and CartItem."
+  },
+  {
+   "id": "file:components/footer/index.ts",
+   "score": 4,
+   "name": "index.ts",
+   "summary": "Barrel re-exporting the Footer and FooterSection components."
+  },
+  {
+   "id": "file:components/layout/index.ts",
+   "score": 4,
+   "name": "index.ts",
+   "summary": "Barrel re-exporting the StaticHeader layout component."
+  }
+ ],
+ "fanInRanking": [
+  {
+   "id": "file:lib/admin-i18n.tsx",
+   "fanIn": 82,
+   "name": "admin-i18n.tsx"
+  },
+  {
+   "id": "file:components/admin/antd-app.tsx",
+   "fanIn": 56,
+   "name": "antd-app.tsx"
+  },
+  {
+   "id": "file:components/admin/erp/erp-client.ts",
+   "fanIn": 37,
+   "name": "erp-client.ts"
+  },
+  {
+   "id": "file:lib/admin-role-context.tsx",
+   "fanIn": 33,
+   "name": "admin-role-context.tsx"
+  },
+  {
+   "id": "file:lib/erp/constants.ts",
+   "fanIn": 33,
+   "name": "constants.ts"
+  },
+  {
+   "id": "file:api/src/db/database.ts",
+   "fanIn": 32,
+   "name": "database.ts"
+  },
+  {
+   "id": "file:api/src/common/api.ts",
+   "fanIn": 29,
+   "name": "api.ts"
+  },
+  {
+   "id": "file:components/admin/erp/ui.tsx",
+   "fanIn": 29,
+   "name": "ui.tsx"
+  },
+  {
+   "id": "file:api/src/auth/decorators.ts",
+   "fanIn": 28,
+   "name": "decorators.ts"
+  },
+  {
+   "id": "file:api/src/auth/auth.guard.ts",
+   "fanIn": 22,
+   "name": "auth.guard.ts"
+  },
+  {
+   "id": "file:lib/config.ts",
+   "fanIn": 19,
+   "name": "config.ts"
+  },
+  {
+   "id": "file:lib/colissimo-data.ts",
+   "fanIn": 19,
+   "name": "colissimo-data.ts"
+  },
+  {
+   "id": "file:lib/language-utils.ts",
+   "fanIn": 17,
+   "name": "language-utils.ts"
+  },
+  {
+   "id": "file:api/src/catalog/revalidate.ts",
+   "fanIn": 15,
+   "name": "revalidate.ts"
+  },
+  {
+   "id": "file:lib/storefront-api.ts",
+   "fanIn": 13,
+   "name": "storefront-api.ts"
+  },
+  {
+   "id": "file:lib/customer-auth.ts",
+   "fanIn": 12,
+   "name": "customer-auth.ts"
+  },
+  {
+   "id": "file:components/admin/delivery/delivery-api.ts",
+   "fanIn": 12,
+   "name": "delivery-api.ts"
+  },
+  {
+   "id": "file:lib/admin-auth.ts",
+   "fanIn": 11,
+   "name": "admin-auth.ts"
+  },
+  {
+   "id": "file:lib/stock.ts",
+   "fanIn": 11,
+   "name": "stock.ts"
+  },
+  {
+   "id": "file:lib/cart-context.tsx",
+   "fanIn": 10,
+   "name": "cart-context.tsx"
+  }
+ ],
+ "fanOutRanking": [
+  {
+   "id": "file:api/src/app.module.ts",
+   "fanOut": 32,
+   "name": "app.module.ts"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "fanOut": 22,
+   "name": "20260928135357_rebuild_storefront_schema.sql"
+  },
+  {
+   "id": "file:app/[locale]/page.tsx",
+   "fanOut": 21,
+   "name": "page.tsx"
+  },
+  {
+   "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+   "fanOut": 17,
+   "name": "20261016120000_erp_sales_crm.sql"
+  },
+  {
+   "id": "file:api/src/admin/admin.controllers.ts",
+   "fanOut": 13,
+   "name": "admin.controllers.ts"
+  },
+  {
+   "id": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "fanOut": 13,
+   "name": "20261002082656_soft_deletes_and_landing_products.sql"
+  },
+  {
+   "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+   "fanOut": 13,
+   "name": "20261016121000_erp_purchasing_pos.sql"
+  },
+  {
+   "id": "resource:infra/terraform/aws.tf",
+   "fanOut": 13,
+   "name": "aws.tf"
+  },
+  {
+   "id": "file:app/[locale]/products/[slug]/ProductDetailClient.tsx",
+   "fanOut": 12,
+   "name": "ProductDetailClient.tsx"
+  },
+  {
+   "id": "file:api/src/sales/delivery.controller.ts",
+   "fanOut": 12,
+   "name": "delivery.controller.ts"
+  },
+  {
+   "id": "file:api/src/sales/orders.controller.ts",
+   "fanOut": 12,
+   "name": "orders.controller.ts"
+  },
+  {
+   "id": "table:supabase/migrations/20261001112501_stock_management.sql",
+   "fanOut": 11,
+   "name": "20261001112501_stock_management.sql"
+  },
+  {
+   "id": "file:app/[locale]/checkout/page.tsx",
+   "fanOut": 10,
+   "name": "page.tsx"
+  },
+  {
+   "id": "file:app/admin/delivery/page.tsx",
+   "fanOut": 10,
+   "name": "page.tsx"
+  },
+  {
+   "id": "file:app/admin/orders/page.tsx",
+   "fanOut": 10,
+   "name": "page.tsx"
+  },
+  {
+   "id": "pipeline:.github/workflows/ci.yml",
+   "fanOut": 10,
+   "name": "ci.yml"
+  },
+  {
+   "id": "table:supabase/migrations/20261023204053_own_auth_accounts.sql",
+   "fanOut": 10,
+   "name": "20261023204053_own_auth_accounts.sql"
+  },
+  {
+   "id": "file:app/[locale]/products/page.tsx",
+   "fanOut": 9,
+   "name": "page.tsx"
+  },
+  {
+   "id": "file:api/src/sales/sales.controllers.ts",
+   "fanOut": 9,
+   "name": "sales.controllers.ts"
+  },
+  {
+   "id": "file:app/admin/colissimo-account/page.tsx",
+   "fanOut": 9,
+   "name": "page.tsx"
+  }
+ ],
+ "bfsTraversal": {
+  "startNode": "file:components/carousel/index.ts",
+  "order": [
+   "file:components/carousel/index.ts",
+   "file:components/carousel/CarouselIndicators.tsx",
+   "file:components/carousel/CarouselNavigation.tsx"
+  ],
+  "depthMap": {
+   "file:components/carousel/index.ts": 0,
+   "file:components/carousel/CarouselIndicators.tsx": 1,
+   "file:components/carousel/CarouselNavigation.tsx": 1
+  },
+  "byDepth": {
+   "0": [
+    "file:components/carousel/index.ts"
+   ],
+   "1": [
+    "file:components/carousel/CarouselIndicators.tsx",
+    "file:components/carousel/CarouselNavigation.tsx"
+   ]
+  }
+ },
+ "nonCodeFiles": {
+  "documentation": [
+   {
+    "id": "document:CLAUDE.md",
+    "name": "CLAUDE.md",
+    "type": "document",
+    "summary": "Primary engineering guide for AI assistants and developers: commands, architecture (middleware gate, sessions, i18n, Postgres access rules, stock, ERP, caching) and conventions for the Next.js storefront and NestJS API."
+   },
+   {
+    "id": "document:README.md",
+    "name": "README.md",
+    "type": "document",
+    "summary": "Stock create-next-app README describing how to run the dev server and linking to Next.js and Vercel docs; not project-specific."
+   },
+   {
+    "id": "document:api/README.md",
+    "name": "README.md",
+    "type": "document",
+    "summary": "Guide to the NestJS API: how to run it, how it fits behind the Next.js /api rewrite, the end-to-end test suites and the Docker image."
+   },
+   {
+    "id": "document:docs/DEPLOY.md",
+    "name": "DEPLOY.md",
+    "type": "document",
+    "summary": "Production runbook: site on Vercel and API on one AWS server, costs, one-time setup (AWS, SSH, Terraform, DNS, GitHub, Vercel), everyday deploys, backups and alerts."
+   },
+   {
+    "id": "document:docs/DOCKER.md",
+    "name": "DOCKER.md",
+    "type": "document",
+    "summary": "Guide to running the whole stack locally in Docker: creating .env.docker, starting Postgres and file storage, copying a database, building the app and running the tests."
+   },
+   {
+    "id": "document:docs/META.md",
+    "name": "META.md",
+    "type": "document",
+    "summary": "Setup guide for connecting Facebook, Instagram and WhatsApp through a Meta app: permanent tokens, server env vars, webhook subscription, going live, Meta rules and TikTok notes."
+   },
+   {
+    "id": "document:docs/MIGRATION-NESTJS-TASKS.md",
+    "name": "MIGRATION-NESTJS-TASKS.md",
+    "type": "document",
+    "summary": "Task-by-task plan for phase 0 of the NestJS migration (app setup, DB module, withActor, auth guard, errors, routing, CI) and the categories pilot module."
+   },
+   {
+    "id": "document:docs/MIGRATION-NESTJS.md",
+    "name": "MIGRATION-NESTJS.md",
+    "type": "document",
+    "summary": "Migration plan from Next.js API routes on Supabase to NestJS on plain Postgres: target architecture, Supabase feature replacements, phases, hosting cost, risks and decisions."
+   },
+   {
+    "id": "document:app/[locale]/settings/README.md",
+    "name": "README.md",
+    "type": "document",
+    "summary": "Historical implementation notes for the customer settings page describing its tabs (orders, account info, security, saved items, logout), auth protection and profile editing."
+   },
+   {
+    "id": "document:components/forms/README.md",
+    "name": "README.md",
+    "type": "document",
+    "summary": "Usage guide for the reusable form components (FormInput, FormSelect, FormTextarea) with React Hook Form + Zod examples and prop lists."
+   }
+  ],
+  "infrastructure": [
+   {
+    "id": "service:Dockerfile",
+    "name": "Dockerfile",
+    "type": "service",
+    "summary": "Single-stage Node 22 image that installs dependencies, builds the Next.js site with env passed as a build secret, and runs next start on port 3000 as a non-root user."
+   },
+   {
+    "id": "service:docker-compose.yml",
+    "name": "docker-compose.yml",
+    "type": "service",
+    "summary": "Local stack: web site, NestJS API, Postgres 17, SeaweedFS S3 storage with bucket bootstrap, a socat gateway and the Colissimo mock service."
+   },
+   {
+    "id": "service:api/Dockerfile",
+    "name": "Dockerfile",
+    "type": "service",
+    "summary": "Multi-stage Alpine build of the NestJS API: compiles with the shared lib files, then a production image with runtime deps, migration scripts, migrations and the baseline schema, serving on port 4000."
+   },
+   {
+    "id": "pipeline:.github/workflows/ci.yml",
+    "name": "ci.yml",
+    "type": "pipeline",
+    "summary": "CI workflow on PRs (also reusable): type-check and lint the site, lint and build the API, then run the end-to-end suites against the Docker stack with migrations applied."
+   },
+   {
+    "id": "pipeline:.github/workflows/deploy.yml",
+    "name": "deploy.yml",
+    "type": "pipeline",
+    "summary": "Deploy workflow on push to main: runs CI, detects API changes, builds and pushes the API image to GHCR, then deploys over SSH with no downtime and checks health."
+   },
+   {
+    "id": "service:api/Dockerfile.dockerignore",
+    "name": "Dockerfile.dockerignore",
+    "type": "service",
+    "summary": "Dockerfile-specific ignore list that restricts the repo-root build context to lib, api, migrations and the baseline SQL, excluding node_modules, dist and .env."
+   },
+   {
+    "id": "service:deploy/docker-compose.prod.yml",
+    "name": "docker-compose.prod.yml",
+    "type": "service",
+    "summary": "Production compose stack on the EC2 server: Postgres 17 (loopback-only), the NestJS API image with a health check, and Caddy as HTTPS reverse proxy load-balancing across API containers."
+   },
+   {
+    "id": "resource:infra/terraform/aws.tf",
+    "name": "aws.tf",
+    "type": "resource",
+    "summary": "Main Terraform for production AWS: security group, IAM instance role, the ARM EC2 server with Elastic IP and daily snapshots, S3 buckets for products/documents/backups, a monthly budget, and CloudWatch alarms via SNS email."
+   },
+   {
+    "id": "resource:infra/terraform/aws.tf:aws_instance.server",
+    "name": "aws_instance.server",
+    "type": "resource",
+    "summary": "EC2 instance running Postgres, the NestJS API and Caddy, bootstrapped by cloud-init."
+   },
+   {
+    "id": "resource:infra/terraform/aws.tf:aws_security_group.server",
+    "name": "aws_security_group.server",
+    "type": "resource",
+    "summary": "Security group allowing HTTP/HTTPS publicly and SSH only from the allowed CIDR."
+   },
+   {
+    "id": "resource:infra/terraform/aws.tf:aws_iam_role.server",
+    "name": "aws_iam_role.server",
+    "type": "resource",
+    "summary": "Instance role the server uses to sign S3 and CloudWatch calls without static keys."
+   },
+   {
+    "id": "resource:infra/terraform/aws.tf:aws_eip.server",
+    "name": "aws_eip.server",
+    "type": "resource",
+    "summary": "Elastic IP giving the API server a stable public address."
+   },
+   {
+    "id": "resource:infra/terraform/aws.tf:aws_dlm_lifecycle_policy.server",
+    "name": "aws_dlm_lifecycle_policy.server",
+    "type": "resource",
+    "summary": "Data Lifecycle Manager policy taking daily disk snapshots of the server."
+   },
+   {
+    "id": "resource:infra/terraform/aws.tf:aws_s3_bucket.products",
+    "name": "aws_s3_bucket.products",
+    "type": "resource",
+    "summary": "Public-read S3 bucket holding product images."
+   },
+   {
+    "id": "resource:infra/terraform/aws.tf:aws_s3_bucket.documents",
+    "name": "aws_s3_bucket.documents",
+    "type": "resource",
+    "summary": "Private S3 bucket for accounting documents and ticket attachments."
+   },
+   {
+    "id": "resource:infra/terraform/aws.tf:aws_s3_bucket.backups",
+    "name": "aws_s3_bucket.backups",
+    "type": "resource",
+    "summary": "S3 bucket receiving hourly database dumps, expired by a 30-day lifecycle rule."
+   },
+   {
+    "id": "resource:infra/terraform/aws.tf:aws_budgets_budget.monthly",
+    "name": "aws_budgets_budget.monthly",
+    "type": "resource",
+    "summary": "Monthly AWS cost budget that emails alerts as spend approaches the limit."
+   },
+   {
+    "id": "resource:infra/terraform/aws.tf:aws_cloudwatch_metric_alarm.backup_missing",
+    "name": "aws_cloudwatch_metric_alarm.backup_missing",
+    "type": "resource",
+    "summary": "Alarm that fires when the BackupSucceeded metric stops arriving from backup.sh."
+   },
+   {
+    "id": "resource:infra/terraform/aws.tf:aws_sns_topic.alerts",
+    "name": "aws_sns_topic.alerts",
+    "type": "resource",
+    "summary": "SNS topic delivering CloudWatch alarm emails."
+   },
+   {
+    "id": "resource:infra/terraform/outputs.tf",
+    "name": "outputs.tf",
+    "type": "resource",
+    "summary": "Terraform outputs exposing the server public IP, the API URL and the env values (buckets, region, file URL) to paste into the server .env."
+   },
+   {
+    "id": "resource:infra/terraform/variables.tf",
+    "name": "variables.tf",
+    "type": "resource",
+    "summary": "Terraform input variables: region, instance type, disk size, snapshot retention, budget amount and email, SSH keys and CIDR, and the site domain."
+   },
+   {
+    "id": "resource:infra/terraform/versions.tf",
+    "name": "versions.tf",
+    "type": "resource",
+    "summary": "Terraform version and provider pins (aws ~> 6, random ~> 3.6), the S3 state backend and the AWS provider with default project tags."
+   }
+  ],
+  "data": [
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+    "name": "20260928135357_rebuild_storefront_schema.sql",
+    "type": "table",
+    "summary": "Baseline storefront schema: catalog (categories, products, variants, images, discounts), content (promotions, reels, hero sections), users, reviews, favorites, orders, carts and shipping/tax settings, with indexes, views and an updated_at trigger."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:categories",
+    "name": "categories",
+    "type": "table",
+    "summary": "Product categories with localized names, nesting and featured position."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:products",
+    "name": "products",
+    "type": "table",
+    "summary": "Catalog products with localized texts, pricing, status and search fields."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:colors",
+    "name": "colors",
+    "type": "table",
+    "summary": "Color lookup for product variants."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:sizes",
+    "name": "sizes",
+    "type": "table",
+    "summary": "Size lookup for product variants."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_variants",
+    "name": "product_variants",
+    "type": "table",
+    "summary": "Color and size variants of a product with price and mirrored stock."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_images",
+    "name": "product_images",
+    "type": "table",
+    "summary": "Product and variant photos with ordering."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_discounts",
+    "name": "product_discounts",
+    "type": "table",
+    "summary": "Time-bound percentage discounts per product."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:promotions",
+    "name": "promotions",
+    "type": "table",
+    "summary": "Promotional banners shown on the storefront."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:reels",
+    "name": "reels",
+    "type": "table",
+    "summary": "Short video reels shown on the home page."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:hero_sections",
+    "name": "hero_sections",
+    "type": "table",
+    "summary": "Hero cards and carousel slides ordered by sort_order."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:small_cards",
+    "name": "small_cards",
+    "type": "table",
+    "summary": "Small promotional cards on the home page."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:users",
+    "name": "users",
+    "type": "table",
+    "summary": "User profiles, later the account table with credentials and metadata."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:reviews",
+    "name": "reviews",
+    "type": "table",
+    "summary": "Customer product reviews with ratings."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:user_favorites",
+    "name": "user_favorites",
+    "type": "table",
+    "summary": "Products favorited by shoppers."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:orders",
+    "name": "orders",
+    "type": "table",
+    "summary": "Customer orders with status, totals and shipping details."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:order_items",
+    "name": "order_items",
+    "type": "table",
+    "summary": "Order lines with variant, quantity and price."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:newsletter_subscribers",
+    "name": "newsletter_subscribers",
+    "type": "table",
+    "summary": "Newsletter email subscriptions."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:carts",
+    "name": "carts",
+    "type": "table",
+    "summary": "Server-side carts used for abandoned-cart analytics."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:cart_items",
+    "name": "cart_items",
+    "type": "table",
+    "summary": "Lines of tracked carts."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:site_settings",
+    "name": "site_settings",
+    "type": "table",
+    "summary": "Key/value settings read by the storefront."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:shipping_rates",
+    "name": "shipping_rates",
+    "type": "table",
+    "summary": "Shipping cost per country."
+   },
+   {
+    "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:country_tax_rates",
+    "name": "country_tax_rates",
+    "type": "table",
+    "summary": "Tax rate per country."
+   },
+   {
+    "id": "table:supabase/migrations/20260928141343_seed_tunisia_shipping_rate.sql",
+    "name": "20260928141343_seed_tunisia_shipping_rate.sql",
+    "type": "table",
+    "summary": "Seeds the standard Tunisia shipping rate row (8 TND, free above the global threshold) so calculateShipping stops falling back on every checkout."
+   },
+   {
+    "id": "table:supabase/migrations/20260928164330_category_hierarchy.sql",
+    "name": "20260928164330_category_hierarchy.sql",
+    "type": "table",
+    "summary": "Adds categories.parent_id with an index so categories can be nested and category pages include descendant products."
+   },
+   {
+    "id": "table:supabase/migrations/20260928183053_customer_accounts.sql",
+    "name": "20260928183053_customer_accounts.sql",
+    "type": "table",
+    "summary": "Customer accounts: keeps a public.users profile row (name and avatar only) in sync with auth users through a trigger."
+   },
+   {
+    "id": "table:supabase/migrations/20261001112501_stock_management.sql",
+    "name": "20261001112501_stock_management.sql",
+    "type": "table",
+    "summary": "Stock management merged from the separate stock app: locations, suppliers, collections, product costs, per-location inventory levels and the append-only stock_movements ledger, with triggers that apply movements, mirror online stock, and generate product codes and SKUs."
+   },
+   {
+    "id": "table:supabase/migrations/20261001112501_stock_management.sql:locations",
+    "name": "locations",
+    "type": "table",
+    "summary": "Stock locations (warehouse, online, shops)."
+   },
+   {
+    "id": "table:supabase/migrations/20261001112501_stock_management.sql:suppliers",
+    "name": "suppliers",
+    "type": "table",
+    "summary": "Suppliers of goods and materials."
+   },
+   {
+    "id": "table:supabase/migrations/20261001112501_stock_management.sql:collections",
+    "name": "collections",
+    "type": "table",
+    "summary": "Product collections."
+   },
+   {
+    "id": "table:supabase/migrations/20261001112501_stock_management.sql:product_costs",
+    "name": "product_costs",
+    "type": "table",
+    "summary": "Purchase cost per product."
+   },
+   {
+    "id": "table:supabase/migrations/20261001112501_stock_management.sql:inventory_levels",
+    "name": "inventory_levels",
+    "type": "table",
+    "summary": "Stock quantity per variant and location, maintained by trigger."
+   },
+   {
+    "id": "table:supabase/migrations/20261001112501_stock_management.sql:stock_movements",
+    "name": "stock_movements",
+    "type": "table",
+    "summary": "Append-only ledger of stock changes."
+   },
+   {
+    "id": "table:supabase/migrations/20261001130516_stock_trigger_privileges.sql",
+    "name": "20261001130516_stock_trigger_privileges.sql",
+    "type": "table",
+    "summary": "Makes the stock trigger functions SECURITY DEFINER so callers without usage on the private schema can still fire them."
+   },
+   {
+    "id": "table:supabase/migrations/20261001170000_transactional_writes.sql",
+    "name": "20261001170000_transactional_writes.sql",
+    "type": "table",
+    "summary": "Wraps multi-step writes (create_order, set_order_status, delete_orders, save_product, record_stock_movements) in Postgres functions so each runs in one transaction."
+   },
+   {
+    "id": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+    "name": "20261002082656_soft_deletes_and_landing_products.sql",
+    "type": "table",
+    "summary": "Introduces soft deletes (deleted_at columns plus a prevent_hard_delete trigger on business tables) and the landing_products table for home page picks."
+   },
+   {
+    "id": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql:landing_products",
+    "name": "landing_products",
+    "type": "table",
+    "summary": "Pinned product picks per home page section."
+   },
+   {
+    "id": "table:supabase/migrations/20261002084321_landing_config_and_activity_log.sql",
+    "name": "20261002084321_landing_config_and_activity_log.sql",
+    "type": "table",
+    "summary": "Makes every home section configurable (landing products, featured categories, landing_config) and adds the append-only activity_log filled by the log_activity trigger."
+   },
+   {
+    "id": "table:supabase/migrations/20261002084321_landing_config_and_activity_log.sql:activity_log",
+    "name": "activity_log",
+    "type": "table",
+    "summary": "Append-only audit log of staff changes."
+   },
+   {
+    "id": "table:supabase/migrations/20261002090113_permanent_deletes.sql",
+    "name": "20261002090113_permanent_deletes.sql",
+    "type": "table",
+    "summary": "Adds purge_deleted for permanently erasing already soft-deleted rows, trusted actor headers for the activity log, save_landing_page and delete_variant."
+   },
+   {
+    "id": "table:supabase/migrations/20261004085227_product_search.sql",
+    "name": "20261004085227_product_search.sql",
+    "type": "table",
+    "summary": "Product search: normalized search_name/search_text columns maintained by triggers, a trigram index, and the ranked search_products function with fuzzy fallback."
+   },
+   {
+    "id": "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql",
+    "name": "20261004092308_notifications_and_owner_alerts.sql",
+    "type": "table",
+    "summary": "Back-office notifications: back_office_users, per-recipient trilingual notifications, push subscriptions, a new-order trigger and owner_alerts rules on activity_log."
+   },
+   {
+    "id": "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql:back_office_users",
+    "name": "back_office_users",
+    "type": "table",
+    "summary": "Back-office recipients and roles for notifications."
+   },
+   {
+    "id": "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql:notifications",
+    "name": "notifications",
+    "type": "table",
+    "summary": "Per-recipient trilingual back-office notifications."
+   },
+   {
+    "id": "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql:push_subscriptions",
+    "name": "push_subscriptions",
+    "type": "table",
+    "summary": "Web Push subscriptions of back-office browsers."
+   },
+   {
+    "id": "table:supabase/migrations/20261004120000_update_delivery_fee_to_8.sql",
+    "name": "20261004120000_update_delivery_fee_to_8.sql",
+    "type": "table",
+    "summary": "Data migration that updates the live Tunisia delivery fee to 8 TND on existing installations."
+   },
+   {
+    "id": "table:supabase/migrations/20261005145858_made_to_order_stock.sql",
+    "name": "20261005145858_made_to_order_stock.sql",
+    "type": "table",
+    "summary": "Redefines apply_order_stock so validating an order deducts only the units the online location holds; the rest is made to order."
+   },
+   {
+    "id": "table:supabase/migrations/20261006142809_colissimo_deliveries.sql",
+    "name": "20261006142809_colissimo_deliveries.sql",
+    "type": "table",
+    "summary": "Colissimo parcels: the deliveries table (one live parcel per order) and begin/complete/fail_delivery and record_delivery_status functions."
+   },
+   {
+    "id": "table:supabase/migrations/20261006142809_colissimo_deliveries.sql:deliveries",
+    "name": "deliveries",
+    "type": "table",
+    "summary": "Colissimo parcels, one live parcel per order."
+   },
+   {
+    "id": "table:supabase/migrations/20261007104019_delivery_on_validation.sql",
+    "name": "20261007104019_delivery_on_validation.sql",
+    "type": "table",
+    "summary": "Changes complete_delivery and record_delivery_status so creating a parcel validates the order and carrier pickup marks it shipped."
+   },
+   {
+    "id": "table:supabase/migrations/20261014081317_manual_order_parcel.sql",
+    "name": "20261014081317_manual_order_parcel.sql",
+    "type": "table",
+    "summary": "Adds create_order_with_delivery, saving an order, its lines and Colissimo parcel and validating it in one transaction."
+   },
+   {
+    "id": "table:supabase/migrations/20261014090736_agent_orders_performance.sql",
+    "name": "20261014090736_agent_orders_performance.sql",
+    "type": "table",
+    "summary": "Records which agent created each order (orders.created_by) and adds agent_performance() for comparing agents."
+   },
+   {
+    "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql",
+    "name": "20261016120000_erp_sales_crm.sql",
+    "type": "table",
+    "summary": "ERP part 1: sales pipeline statuses and channels, CRM customers with interactions and tasks, campaigns and ad spend, order payments, carrier remittances, treasury movements, goals and stock costing."
+   },
+   {
+    "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:erp_settings",
+    "name": "erp_settings",
+    "type": "table",
+    "summary": "Admin-only business rule settings."
+   },
+   {
+    "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:ad_campaigns",
+    "name": "ad_campaigns",
+    "type": "table",
+    "summary": "Marketing campaigns orders can be attributed to."
+   },
+   {
+    "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:ad_spend",
+    "name": "ad_spend",
+    "type": "table",
+    "summary": "Daily advertising spend per campaign."
+   },
+   {
+    "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:customers",
+    "name": "customers",
+    "type": "table",
+    "summary": "CRM customers, one live row per normalized phone."
+   },
+   {
+    "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:customer_interactions",
+    "name": "customer_interactions",
+    "type": "table",
+    "summary": "Customer conversations and notes."
+   },
+   {
+    "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:crm_tasks",
+    "name": "crm_tasks",
+    "type": "table",
+    "summary": "Customer follow-up tasks."
+   },
+   {
+    "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:cod_remittances",
+    "name": "cod_remittances",
+    "type": "table",
+    "summary": "Carrier cash-on-delivery payouts with fees."
+   },
+   {
+    "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:order_payments",
+    "name": "order_payments",
+    "type": "table",
+    "summary": "Payments and refunds received per order and account."
+   },
+   {
+    "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:treasury_movements",
+    "name": "treasury_movements",
+    "type": "table",
+    "summary": "Other cash and bank movements."
+   },
+   {
+    "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:agent_goals",
+    "name": "agent_goals",
+    "type": "table",
+    "summary": "Monthly targets and commissions per agent."
+   },
+   {
+    "id": "table:supabase/migrations/20261016120000_erp_sales_crm.sql:business_goals",
+    "name": "business_goals",
+    "type": "table",
+    "summary": "Monthly goals for the whole business."
+   },
+   {
+    "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+    "name": "20261016121000_erp_purchasing_pos.sql",
+    "type": "table",
+    "summary": "ERP part 2: raw materials and bills of materials, production, purchase orders and receipts with quality check, and point-of-sale till sessions and sales."
+   },
+   {
+    "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:raw_materials",
+    "name": "raw_materials",
+    "type": "table",
+    "summary": "Raw materials used in production."
+   },
+   {
+    "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:material_movements",
+    "name": "material_movements",
+    "type": "table",
+    "summary": "Append-only raw material stock movements."
+   },
+   {
+    "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:product_bom",
+    "name": "product_bom",
+    "type": "table",
+    "summary": "Bill of materials per product."
+   },
+   {
+    "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:product_costing",
+    "name": "product_costing",
+    "type": "table",
+    "summary": "Labor and overhead costs per product."
+   },
+   {
+    "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_orders",
+    "name": "purchase_orders",
+    "type": "table",
+    "summary": "Purchase orders and price requests to suppliers."
+   },
+   {
+    "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_order_lines",
+    "name": "purchase_order_lines",
+    "type": "table",
+    "summary": "Lines of purchase orders."
+   },
+   {
+    "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_receipts",
+    "name": "purchase_receipts",
+    "type": "table",
+    "summary": "Goods receipts against purchase orders."
+   },
+   {
+    "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_receipt_lines",
+    "name": "purchase_receipt_lines",
+    "type": "table",
+    "summary": "Accepted and rejected quantities per receipt line."
+   },
+   {
+    "id": "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:pos_sessions",
+    "name": "pos_sessions",
+    "type": "table",
+    "summary": "Till sessions per shop location."
+   },
+   {
+    "id": "table:supabase/migrations/20261016122000_erp_accounting.sql",
+    "name": "20261016122000_erp_accounting.sql",
+    "type": "table",
+    "summary": "ERP part 3: Tunisian SCE chart of accounts, journals booked automatically by triggers, bills, sales invoices, bank reconciliation, documents and owner overview reports."
+   },
+   {
+    "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:accounts",
+    "name": "accounts",
+    "type": "table",
+    "summary": "Chart of accounts (Tunisian SCE)."
+   },
+   {
+    "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:document_counters",
+    "name": "document_counters",
+    "type": "table",
+    "summary": "Gap-free numbering counters per journal and year."
+   },
+   {
+    "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:journal_entries",
+    "name": "journal_entries",
+    "type": "table",
+    "summary": "Accounting journal entries (draft or posted)."
+   },
+   {
+    "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:journal_lines",
+    "name": "journal_lines",
+    "type": "table",
+    "summary": "Debit/credit lines of journal entries."
+   },
+   {
+    "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:bills",
+    "name": "bills",
+    "type": "table",
+    "summary": "Supplier invoices and expenses."
+   },
+   {
+    "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:bill_payments",
+    "name": "bill_payments",
+    "type": "table",
+    "summary": "Payments of bills."
+   },
+   {
+    "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:sales_invoices",
+    "name": "sales_invoices",
+    "type": "table",
+    "summary": "Issued sales invoices and credit notes."
+   },
+   {
+    "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:bank_statement_lines",
+    "name": "bank_statement_lines",
+    "type": "table",
+    "summary": "Imported bank statement lines for reconciliation."
+   },
+   {
+    "id": "table:supabase/migrations/20261016122000_erp_accounting.sql:documents",
+    "name": "documents",
+    "type": "table",
+    "summary": "Business documents stored in the private bucket."
+   },
+   {
+    "id": "table:supabase/migrations/20261023204053_own_auth_accounts.sql",
+    "name": "20261023204053_own_auth_accounts.sql",
+    "type": "table",
+    "summary": "NestJS migration phase 3: public.users becomes the account table and NestJS-owned user_sessions and auth_tokens replace Supabase Auth."
+   },
+   {
+    "id": "table:supabase/migrations/20261023204053_own_auth_accounts.sql:user_sessions",
+    "name": "user_sessions",
+    "type": "table",
+    "summary": "Refresh-token sessions of signed-in users."
+   },
+   {
+    "id": "table:supabase/migrations/20261023204053_own_auth_accounts.sql:auth_tokens",
+    "name": "auth_tokens",
+    "type": "table",
+    "summary": "Single-use confirmation and password reset tokens."
+   },
+   {
+    "id": "table:supabase/migrations/20261023214627_notifications_from_nestjs.sql",
+    "name": "20261023214627_notifications_from_nestjs.sql",
+    "type": "table",
+    "summary": "NestJS migration phase 4: announces each new or changed notification on the Postgres notifications channel for NestJS to stream and push."
+   },
+   {
+    "id": "table:supabase/migrations/20261024134433_plain_postgres_ready.sql",
+    "name": "20261024134433_plain_postgres_ready.sql",
+    "type": "table",
+    "summary": "NestJS migration phase 5: removes Supabase-only dependencies so the schema can be dumped and restored on plain Postgres."
+   },
+   {
+    "id": "table:supabase/migrations/20261024160000_objective_prize_tiers.sql",
+    "name": "20261024160000_objective_prize_tiers.sql",
+    "type": "table",
+    "summary": "Adds prize-tier commissions to agent_goals and an analytics start date, updating set_agent_goal."
+   },
+   {
+    "id": "table:supabase/migrations/20261026150000_colissimo_v2.sql",
+    "name": "20261026150000_colissimo_v2.sql",
+    "type": "table",
+    "summary": "Colissimo v2 support: delivery payment and driver status fields, handover manifests, price-change requests and v2 status names in record_delivery_status."
+   },
+   {
+    "id": "table:supabase/migrations/20261028120000_colissimo_history_import.sql",
+    "name": "20261028120000_colissimo_history_import.sql",
+    "type": "table",
+    "summary": "Adds import_colissimo_history to turn past Colissimo parcels and payouts into COL- orders, customers and payments, silencing new-order notifications for imports."
+   },
+   {
+    "id": "table:supabase/migrations/20261102120000_edit_order.sql",
+    "name": "20261102120000_edit_order.sql",
+    "type": "table",
+    "summary": "Adds edit_order for changing customer, lines, fees and notes of an order still to confirm or confirmed, relinking its customer."
+   },
+   {
+    "id": "table:supabase/migrations/20261104120000_order_traffic_source.sql",
+    "name": "20261104120000_order_traffic_source.sql",
+    "type": "table",
+    "summary": "Adds the website traffic source column to orders, sent by the storefront at checkout."
+   },
+   {
+    "id": "table:supabase/migrations/20261104130000_shop_stock.sql",
+    "name": "20261104130000_shop_stock.sql",
+    "type": "table",
+    "summary": "Shop locations with their own low-stock limit, a pos notification audience, and notify_low_stock alerts for cashiers."
+   },
+   {
+    "id": "table:supabase/migrations/20261104150000_social_comments.sql",
+    "name": "20261104150000_social_comments.sql",
+    "type": "table",
+    "summary": "social_comments table for Facebook/Instagram post comments with a trigger that detects Tunisian phone numbers and turns them into CRM leads."
+   },
+   {
+    "id": "table:supabase/migrations/20261104150000_social_comments.sql:social_comments",
+    "name": "social_comments",
+    "type": "table",
+    "summary": "Public social media post comments."
+   },
+   {
+    "id": "table:supabase/migrations/20261105120000_team_tickets.sql",
+    "name": "20261105120000_team_tickets.sql",
+    "type": "table",
+    "summary": "Team tasks board: team_tickets table, assignee notification trigger, and overdue tickets in the daily alerts."
+   },
+   {
+    "id": "table:supabase/migrations/20261105120000_team_tickets.sql:team_tickets",
+    "name": "team_tickets",
+    "type": "table",
+    "summary": "Back-office team task tickets."
+   },
+   {
+    "id": "table:supabase/migrations/20261105130000_faster_owner_overview.sql",
+    "name": "20261105130000_faster_owner_overview.sql",
+    "type": "table",
+    "summary": "Redefines owner_overview with JIT disabled and a leaner query, cutting it from about 10 seconds to well under one."
+   },
+   {
+    "id": "table:supabase/migrations/20261105131000_orders_open_indexes.sql",
+    "name": "20261105131000_orders_open_indexes.sql",
+    "type": "table",
+    "summary": "Adds partial indexes for orders still to confirm and for confirmed dates, removing full scans on My day and Objectives."
+   },
+   {
+    "id": "table:supabase/migrations/20261105140000_ticket_comments_and_restore.sql",
+    "name": "20261105140000_ticket_comments_and_restore.sql",
+    "type": "table",
+    "summary": "team_ticket_comments with image support and notifications, plus restore_deleted for owners and team tasks in purge_deleted."
+   },
+   {
+    "id": "table:supabase/migrations/20261105140000_ticket_comments_and_restore.sql:team_ticket_comments",
+    "name": "team_ticket_comments",
+    "type": "table",
+    "summary": "Comments and images on team tickets."
+   },
+   {
+    "id": "table:supabase/migrations/20261105160000_team_ticket_board.sql",
+    "name": "20261105160000_team_ticket_board.sql",
+    "type": "table",
+    "summary": "Adds ticket numbers (T-12) and column positions to team_tickets for the drag-and-drop board."
+   }
+  ],
+  "config": [
+   {
+    "id": "config:.dockerignore",
+    "name": ".dockerignore",
+    "type": "config",
+    "summary": "Excludes node_modules, build output, git data, env files, the API and migrations from the web image build context."
+   },
+   {
+    "id": "config:netlify.toml",
+    "name": "netlify.toml",
+    "type": "config",
+    "summary": "Legacy Netlify build configuration running the Next.js build with the Netlify Next.js plugin on Node 20 and catch-all redirects to the server function."
+   },
+   {
+    "id": "config:package.json",
+    "name": "package.json",
+    "type": "config",
+    "summary": "Root npm manifest for the Next.js 15 storefront and admin: dev/build/lint scripts, the WooCommerce import and Docker helper scripts, and React 19, antd 6, Sentry, zod and Tailwind v4 dependencies."
+   },
+   {
+    "id": "config:skills-lock.json",
+    "name": "skills-lock.json",
+    "type": "config",
+    "summary": "Lock file pinning two Supabase agent skills (supabase and postgres best practices) from GitHub by content hash."
+   },
+   {
+    "id": "config:tsconfig.json",
+    "name": "tsconfig.json",
+    "type": "config",
+    "summary": "TypeScript compiler configuration for the Next.js app with strict mode, bundler module resolution and the @/* path alias."
+   },
+   {
+    "id": "config:vercel.json",
+    "name": "vercel.json",
+    "type": "config",
+    "summary": "Vercel configuration whose ignoreCommand skips site builds when a push only touches backend folders (api, supabase, db, deploy, infra)."
+   },
+   {
+    "id": "config:api/.env.example",
+    "name": ".env.example",
+    "type": "config",
+    "summary": "Example environment for running the NestJS API locally: database and LISTEN URLs, AUTH_SECRET, SMTP, S3 storage, VAPID push keys, owner/admin emails, revalidation secret, Sentry, ENV and PORT."
+   },
+   {
+    "id": "config:api/nest-cli.json",
+    "name": "nest-cli.json",
+    "type": "config",
+    "summary": "Nest CLI configuration setting the source root, clean output builds and the api/src/main entry file."
+   },
+   {
+    "id": "config:api/package.json",
+    "name": "package.json",
+    "type": "config",
+    "summary": "npm manifest for the NestJS 11 API: build/start scripts, the chained e2e test suites, DB type generation, and dependencies such as Kysely, pg and web-push."
+   },
+   {
+    "id": "config:api/tsconfig.build.json",
+    "name": "tsconfig.build.json",
+    "type": "config",
+    "summary": "Build-only TypeScript config extending the API tsconfig and excluding tests and output folders."
+   },
+   {
+    "id": "config:api/tsconfig.json",
+    "name": "tsconfig.json",
+    "type": "config",
+    "summary": "TypeScript configuration for the NestJS API with decorator metadata and the @shared/* alias to root lib files."
+   },
+   {
+    "id": "config:deploy/.env.example",
+    "name": ".env.example",
+    "type": "config",
+    "summary": "Template for the production server .env: Postgres credentials, auth and revalidation secrets, site domain, S3 buckets, SMTP, VAPID, Colissimo, Meta/WhatsApp tokens and Sentry."
+   },
+   {
+    "id": "config:infra/terraform/cloud-init.yaml",
+    "name": "cloud-init.yaml",
+    "type": "config",
+    "summary": "Cloud-init first-boot config for the server: installs Docker, fail2ban and unattended upgrades, creates a key-only deploy user and /opt/kachabity, adds swap and the hourly backup cron."
+   },
+   {
+    "id": "config:scripts/import/colors.json",
+    "name": "colors.json",
+    "type": "config",
+    "summary": "Lookup table mapping WooCommerce color names to hex codes used when importing product variants."
+   },
+   {
+    "id": "config:scripts/import/descriptions.json",
+    "name": "descriptions.json",
+    "type": "config",
+    "summary": "English and French product descriptions keyed by WooCommerce product id, applied by the WooCommerce importer."
+   },
+   {
+    "id": "config:scripts/import/translations.json",
+    "name": "translations.json",
+    "type": "config",
+    "summary": "Arabic-to-English/French translation tables for categories (with slugs and sort order) and product names used by the WooCommerce importer."
+   },
+   {
+    "id": "config:.ua/config.json",
+    "name": "config.json",
+    "type": "config",
+    "summary": "Understand-Anything tool configuration setting the knowledge-graph output language to English."
+   },
+   {
+    "id": "config:messages/en/Settings.json",
+    "name": "Settings.json",
+    "type": "config",
+    "summary": "Placeholder next-intl English message file for a Settings namespace with a title and lorem-ipsum description; next-intl is largely unused."
+   },
+   {
+    "id": "config:supabase/.temp/linked-project.json",
+    "name": "linked-project.json",
+    "type": "config",
+    "summary": "Supabase CLI cache recording the linked hosted project ref, name and organization (legacy, from before the move off Supabase)."
+   }
+  ]
+ },
+ "clusters": [
+  {
+   "nodes": [
+    "file:api/src/auth/auth.guard.ts",
+    "file:api/src/auth/decorators.ts",
+    "file:api/src/admin/admin.controllers.ts",
+    "file:api/src/admin/team.controller.ts",
+    "file:api/src/admin/tickets.controller.ts"
+   ],
+   "edgeCount": 8
+  }
+ ],
+ "layers": {
+  "count": 10,
+  "list": [
+   {
+    "id": "layer:storefront-ui",
+    "name": "Storefront UI",
+    "description": "Localized (en/fr/ar, RTL) Next.js App Router pages under app/[locale], the root app shell files, and the public storefront components (landing sections, layout, product UI) built with Tailwind."
+   },
+   {
+    "id": "layer:admin-ui",
+    "name": "Admin Back Office UI",
+    "description": "Client-rendered Ant Design back office under app/admin and components/admin covering catalog, orders, stock, CRM, POS, purchasing, accounting and team screens."
+   },
+   {
+    "id": "layer:shared-lib",
+    "name": "Shared Logic & Middleware",
+    "description": "Root lib/ helpers shared by the site and the NestJS API (as @shared/*), such as auth roles, API access rules, i18n, cart, catalog cache and ERP constants, plus the locale/auth middleware, Sentry instrumentation and the revalidate route."
+   },
+   {
+    "id": "layer:backend-api",
+    "name": "NestJS API",
+    "description": "NestJS 11 app in api/src serving every /api request, organized by domain (auth, catalog, sales, stock, crm, finance, pos, purchasing, notifications) over Kysely/Postgres and S3 storage."
+   },
+   {
+    "id": "layer:database",
+    "name": "Database Schema",
+    "description": "Postgres schema source of truth: supabase/migrations SQL defining tables, transactional functions and triggers for stock, activity log and accounting, plus the database baseline."
+   },
+   {
+    "id": "layer:test",
+    "name": "API E2E Tests",
+    "description": "End-to-end suites in api/test that run against the local Docker stack and its database."
+   },
+   {
+    "id": "layer:scripts",
+    "name": "Scripts & Tooling",
+    "description": "Operational Node scripts for WooCommerce and Colissimo imports, database moves, migrations, storage copy, and the local Docker and Colissimo stand-ins."
+   },
+   {
+    "id": "layer:infrastructure",
+    "name": "Infrastructure & Deployment",
+    "description": "Dockerfiles and compose stacks, Terraform for the AWS EC2/S3 setup, server deploy and backup files, GitHub Actions CI/deploy workflows, and Vercel/Netlify hosting settings."
+   },
+   {
+    "id": "layer:config",
+    "name": "Project Configuration",
+    "description": "Package manifests and TypeScript, ESLint, Next.js, PostCSS and NestJS CLI configuration for the site and the API."
+   },
+   {
+    "id": "layer:documentation",
+    "name": "Documentation",
+    "description": "README files, the CLAUDE.md agent guide, and docs/ guides for Docker, deployment, Meta setup and the NestJS migration."
+   }
+  ]
+ },
+ "nodeSummaryIndex": {
+  "file:app/[locale]/about/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Localized About page telling the Kachabity brand story with highlighted keywords, rendered in en/fr/ar with RTL support."
+  },
+  "file:app/[locale]/auth/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Customer sign-in, sign-up, forgot-password and password-reset page using zod-validated forms and the session-cookie account API."
+  },
+  "file:app/[locale]/cart/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Shopping cart page listing client-side cart lines with totals and shipping settings fetched from the storefront API."
+  },
+  "file:app/[locale]/categories/[slug]/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Category detail page listing products of a category and its descendants, with sorting, favorites and quick-add."
+  },
+  "file:app/[locale]/categories/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Categories index page showing the cached category tree with localized names and images."
+  },
+  "file:app/[locale]/checkout/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Checkout page collecting customer, Colissimo governorate and address details, validating with the checkout schema and submitting the order for server-side repricing."
+  },
+  "file:app/[locale]/contact/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Localized contact page with store contact details and a contact form built from shared form inputs."
+  },
+  "file:app/[locale]/layout.tsx": {
+   "name": "layout.tsx",
+   "type": "file",
+   "summary": "Locale layout that renders the header, footer, mobile tab bar, cart drawer and traffic tracking once, wraps pages in language and cart providers, and builds localized metadata."
+  },
+  "file:app/[locale]/not-found.tsx": {
+   "name": "not-found.tsx",
+   "type": "file",
+   "summary": "Localized 404 page for storefront routes with links back to the shop."
+  },
+  "file:app/[locale]/order-confirmation/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Order confirmation page shown after checkout, reading the order number from the query string inside a Suspense boundary."
+  },
+  "file:app/[locale]/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Server-rendered home page that loads cached landing configuration and home data and renders the configured sections in order (hero, spotlight, new arrivals, top and promo products, reels, FAQ)."
+  },
+  "file:app/[locale]/privacy/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Privacy policy page with per-locale legal content rendered through TermsSection blocks."
+  },
+  "file:app/[locale]/products/[slug]/ProductDetailClient.tsx": {
+   "name": "ProductDetailClient.tsx",
+   "type": "file",
+   "summary": "Client product detail view handling variant (color/size) selection, image gallery and lightbox, discounted pricing, made-to-order stock state, add to cart, related products and reviews."
+  },
+  "file:app/[locale]/products/[slug]/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Server product page that loads the cached product detail and site settings, builds SEO metadata and passes data to ProductDetailClient."
+  },
+  "file:app/[locale]/products/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Products listing page with search, category filter, price range, sorting and pagination against the storefront products API."
+  },
+  "file:app/[locale]/settings/layout.tsx": {
+   "name": "layout.tsx",
+   "type": "file",
+   "summary": "Minimal wrapper layout for the customer settings section."
+  },
+  "file:app/[locale]/settings/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Customer account settings page for profile editing, password change, favorites and order history with Colissimo parcel tracking."
+  },
+  "file:app/[locale]/shipping/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Shipping policy page with per-locale delivery content rendered through TermsSection blocks."
+  },
+  "file:app/[locale]/terms-and-conditions/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Terms and conditions page with per-locale legal content rendered through TermsSection blocks."
+  },
+  "file:app/api/internal/revalidate/route.ts": {
+   "name": "route.ts",
+   "type": "file",
+   "summary": "The only remaining Next.js API route: lets the NestJS API invalidate the catalog data cache, guarded by a timing-safe REVALIDATE_SECRET check."
+  },
+  "file:app/not-found.tsx": {
+   "name": "not-found.tsx",
+   "type": "file",
+   "summary": "Root-level 404 page rendered outside locale routes, with header and footer and a language detected from the request."
+  },
+  "file:app/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Root page that redirects to the default locale."
+  },
+  "file:components/carousel/CarouselIndicators.tsx": {
+   "name": "CarouselIndicators.tsx",
+   "type": "file",
+   "summary": "Dot indicators for a carousel showing and selecting the active slide."
+  },
+  "file:components/carousel/CarouselNavigation.tsx": {
+   "name": "CarouselNavigation.tsx",
+   "type": "file",
+   "summary": "Previous/next arrow buttons for a carousel."
+  },
+  "file:components/cart/AddToCartButton.tsx": {
+   "name": "AddToCartButton.tsx",
+   "type": "file",
+   "summary": "Localized add-to-cart button that adds a product or variant line to the cart with feedback state."
+  },
+  "file:components/cart/CartButton.tsx": {
+   "name": "CartButton.tsx",
+   "type": "file",
+   "summary": "Header cart icon button showing the item count and opening the cart drawer."
+  },
+  "file:components/cart/CartDrawer.tsx": {
+   "name": "CartDrawer.tsx",
+   "type": "file",
+   "summary": "Slide-out cart drawer listing cart lines with subtotal and links to cart and checkout, RTL-aware."
+  },
+  "file:components/cart/CartItem.tsx": {
+   "name": "CartItem.tsx",
+   "type": "file",
+   "summary": "Cart line component showing product image, variant label, price and quantity controls keyed by cart line key."
+  },
+  "file:components/footer/Footer.tsx": {
+   "name": "Footer.tsx",
+   "type": "file",
+   "summary": "Site footer resolving configured links per locale and rendering footer sections, newsletter form and social links."
+  },
+  "file:components/footer/FooterSection.tsx": {
+   "name": "FooterSection.tsx",
+   "type": "file",
+   "summary": "One titled column of footer links."
+  },
+  "file:components/forms/index.ts": {
+   "name": "index.ts",
+   "type": "file",
+   "summary": "Barrel re-exporting the FormInput, FormSelect and FormTextarea form components."
+  },
+  "file:components/landing/CollectionSpotlight.tsx": {
+   "name": "CollectionSpotlight.tsx",
+   "type": "file",
+   "summary": "Home page section spotlighting the largest collection with a few landing product cards and a link to the full category."
+  },
+  "file:components/landing/HowToOrder.tsx": {
+   "name": "HowToOrder.tsx",
+   "type": "file",
+   "summary": "Landing-page section explaining the ordering steps in en/fr/ar, with RTL layout and a contact call-to-action from the header config."
+  },
+  "file:components/landing/LandingProductCard.tsx": {
+   "name": "LandingProductCard.tsx",
+   "type": "file",
+   "summary": "Image-led product card for landing sections showing a portrait photo, name, category and price."
+  },
+  "file:components/landing/NewArrivals.tsx": {
+   "name": "NewArrivals.tsx",
+   "type": "file",
+   "summary": "Home-page \"New arrivals\" section that renders landing product picks as LandingProductCard tiles with a localized heading."
+  },
+  "file:components/landing/ProductRing3D.tsx": {
+   "name": "ProductRing3D.tsx",
+   "type": "file",
+   "summary": "Client wrapper that lazy-loads the three.js ring scene behind a WebGL/reduced-motion capability check, showing static photos until it is ready."
+  },
+  "file:components/landing/ProductShowcase.tsx": {
+   "name": "ProductShowcase.tsx",
+   "type": "file",
+   "summary": "Full-width landing header whose background is the 3D product ring (or a static photo backdrop), with localized heading, text and buttons on top."
+  },
+  "file:components/landing/ring-scene.ts": {
+   "name": "ring-scene.ts",
+   "type": "file",
+   "summary": "three.js scene for the landing header: product photos on a slowly turning, draggable curved ring with a woven kachabia-stripe ribbon; loaded on demand so three.js stays out of the first page load."
+  },
+  "file:components/layout/MobileHeader.tsx": {
+   "name": "MobileHeader.tsx",
+   "type": "file",
+   "summary": "Phone header: compact bar with menu drawer, logo and search panel, language switch, contact links and sign-out; cart and account live in the bottom tab bar."
+  },
+  "file:components/layout/MobileTabBar.tsx": {
+   "name": "MobileTabBar.tsx",
+   "type": "file",
+   "summary": "Bottom tab bar on phones with cart count and account links, hidden on product and checkout pages, rendering a spacer to avoid covering content."
+  },
+  "file:components/layout/SearchBox.tsx": {
+   "name": "SearchBox.tsx",
+   "type": "file",
+   "summary": "Product search field with ranked suggestions from the storefront API, keyboard navigation and a see-all link, in light (desktop) or dark (mobile menu) style."
+  },
+  "file:components/layout/StaticHeader.tsx": {
+   "name": "StaticHeader.tsx",
+   "type": "file",
+   "summary": "Main storefront header: logo, navigation, featured category menu with sub-categories, search, language switcher, account and cart button, delegating to MobileHeader on phones."
+  },
+  "file:components/layout/TrafficSource.tsx": {
+   "name": "TrafficSource.tsx",
+   "type": "file",
+   "summary": "Renderless client component that records the visit traffic source (Google, Facebook...) once on the landing page."
+  },
+  "file:components/products/ProductGrid.tsx": {
+   "name": "ProductGrid.tsx",
+   "type": "file",
+   "summary": "Horizontally scrollable strip of featured categories with scroll buttons, using server-loaded categories or the shared categories cache."
+  },
+  "file:components/products/ProductListCard.tsx": {
+   "name": "ProductListCard.tsx",
+   "type": "file",
+   "summary": "Product card used in listings and carousels with localized name, sorted main image, price, discount and optional ratings, plus favorite and quick-add actions."
+  },
+  "file:components/products/PromoProductCard.tsx": {
+   "name": "PromoProductCard.tsx",
+   "type": "file",
+   "summary": "Promotional product card with discounted price, countdown timer, stock progress and add-to-cart via quick add."
+  },
+  "file:components/products/PromoProducts.tsx": {
+   "name": "PromoProducts.tsx",
+   "type": "file",
+   "summary": "Home-page promotions section listing discounted products as PromoProductCards, from server-loaded data or /api/products/promo."
+  },
+  "file:components/products/TopProducts.tsx": {
+   "name": "TopProducts.tsx",
+   "type": "file",
+   "summary": "Home-page top-products carousel with review stats, favorites toggling for signed-in customers and quick add, from server-loaded data or /api/products/top."
+  },
+  "file:components/reviews/CustomerFeedback.tsx": {
+   "name": "CustomerFeedback.tsx",
+   "type": "file",
+   "summary": "Customer reviews carousel fetched from the storefront API, combined with service highlight cards, carousel navigation and indicators."
+  },
+  "file:components/reviews/ReviewCard.tsx": {
+   "name": "ReviewCard.tsx",
+   "type": "file",
+   "summary": "Presentational card showing a customer review with star rating, author and date."
+  },
+  "file:components/sections/FAQ.tsx": {
+   "name": "FAQ.tsx",
+   "type": "file",
+   "summary": "Localized FAQ accordion section that scrolls into view when the URL hash is #faqs."
+  },
+  "file:components/sections/HeroSection.tsx": {
+   "name": "HeroSection.tsx",
+   "type": "file",
+   "summary": "Home hero with side cards and a carousel driven by hero_sections sort order, picking per-locale text from database columns with a fallback translation map."
+  },
+  "file:components/sections/NewsletterForm.tsx": {
+   "name": "NewsletterForm.tsx",
+   "type": "file",
+   "summary": "Newsletter sign-up form with email validation and localized status messages, posting to /api/newsletter/subscribe."
+  },
+  "file:components/sections/Reels.tsx": {
+   "name": "Reels.tsx",
+   "type": "file",
+   "summary": "Video reels section loading /api/reels and embedding YouTube, TikTok or Facebook videos in a player, falling back to opening a new tab."
+  },
+  "file:components/sections/SaleBanner.tsx": {
+   "name": "SaleBanner.tsx",
+   "type": "file",
+   "summary": "Sale banner showing the currently running promotion (timed ones first) with a countdown, from server data or the storefront API."
+  },
+  "file:components/sections/SocialLinks.tsx": {
+   "name": "SocialLinks.tsx",
+   "type": "file",
+   "summary": "Row of social media links built from the header configuration."
+  },
+  "file:components/sections/TermsSection.tsx": {
+   "name": "TermsSection.tsx",
+   "type": "file",
+   "summary": "Simple titled section of paragraphs used on the terms page."
+  },
+  "file:components/services/ServiceHighlightCard.tsx": {
+   "name": "ServiceHighlightCard.tsx",
+   "type": "file",
+   "summary": "Small card showing one service highlight (icon, title, description)."
+  },
+  "file:components/services/ServiceHighlights.tsx": {
+   "name": "ServiceHighlights.tsx",
+   "type": "file",
+   "summary": "Service highlights section shown as a grid on desktop and an auto-advancing carousel on mobile."
+  },
+  "file:components/timers/CountdownTimer.tsx": {
+   "name": "CountdownTimer.tsx",
+   "type": "file",
+   "summary": "Countdown timer to an end date with days/hours/minutes/seconds display, used by the sale banner."
+  },
+  "file:components/timers/PromoCountdownTimer.tsx": {
+   "name": "PromoCountdownTimer.tsx",
+   "type": "file",
+   "summary": "Compact countdown timer variant for promotional product cards."
+  },
+  "file:components/ui/ErrorBoundary.tsx": {
+   "name": "ErrorBoundary.tsx",
+   "type": "file",
+   "summary": "React class error boundary that catches render errors and shows a fallback UI."
+  },
+  "file:components/ui/ImageLightbox.tsx": {
+   "name": "ImageLightbox.tsx",
+   "type": "file",
+   "summary": "Product photo that opens a portalled full-screen, keyboard- and swipe-navigable image gallery."
+  },
+  "file:components/ui/LoadingSpinner.tsx": {
+   "name": "LoadingSpinner.tsx",
+   "type": "file",
+   "summary": "Centered loading spinner for page-level loading states."
+  },
+  "file:components/ui/OrderTracking.tsx": {
+   "name": "OrderTracking.tsx",
+   "type": "file",
+   "summary": "Client component showing a shopper's order progress as a four-step Colissimo tracker (placed, shipped, out for delivery, delivered) with localized status messages, tracking number and RTL support."
+  },
+  "file:components/ui/SectionHeader.tsx": {
+   "name": "SectionHeader.tsx",
+   "type": "file",
+   "summary": "Small presentational component rendering a centered section title with an optional subtitle."
+  },
+  "file:components/ui/StockProgress.tsx": {
+   "name": "StockProgress.tsx",
+   "type": "file",
+   "summary": "Client component drawing a sold-versus-in-stock progress bar used on promo product cards."
+  },
+  "file:hooks/useCarousel.ts": {
+   "name": "useCarousel.ts",
+   "type": "file",
+   "summary": "React hook providing slide index state and navigation helpers for simple paginated carousels."
+  },
+  "file:lib/cart-context.tsx": {
+   "name": "cart-context.tsx",
+   "type": "file",
+   "summary": "Client-side shopping cart React context persisted in localStorage (key shopping_cart), with lines keyed by product and variant."
+  },
+  "file:lib/catalog-cache.ts": {
+   "name": "catalog-cache.ts",
+   "type": "file",
+   "summary": "Server-side Next.js data cache for public catalog reads, tagging entries 'catalog' with a 5-minute safety revalidate and exposing invalidation for admin writes."
+  },
+  "file:lib/categories-cache.ts": {
+   "name": "categories-cache.ts",
+   "type": "file",
+   "summary": "Browser-side in-memory cache of the category list (5-minute TTL) shared by the header, listing, category and product pages."
+  },
+  "file:lib/config.ts": {
+   "name": "config.ts",
+   "type": "file",
+   "summary": "Storefront configuration constants: ratings toggle, contact details, social links with SVG icons, navigation, languages and invoice/shipping defaults from NEXT_PUBLIC env vars."
+  },
+  "file:lib/customer-auth.ts": {
+   "name": "customer-auth.ts",
+   "type": "file",
+   "summary": "Browser helpers for customer sessions: the NestJS account API client, the cached signed-in customer, auth change events, sign-out, login redirects and the useCustomer hook."
+  },
+  "file:lib/favorites.ts": {
+   "name": "favorites.ts",
+   "type": "file",
+   "summary": "Customer favorites client over /api/account/favorites: add, remove, toggle and list favorites, mapping product rows into display-ready favorite cards."
+  },
+  "file:lib/fonts.ts": {
+   "name": "fonts.ts",
+   "type": "file",
+   "summary": "Self-hosted Reem Kufi variable font (Arabic and Latin) loaded with next/font/local for landing page headings."
+  },
+  "file:lib/footer-config.ts": {
+   "name": "footer-config.ts",
+   "type": "file",
+   "summary": "Static footer configuration: brand, link sections, newsletter copy and copyright, plus FooterLink/FooterSection types."
+  },
+  "file:lib/get-site-settings.ts": {
+   "name": "get-site-settings.ts",
+   "type": "file",
+   "summary": "Type definition of the shop-wide shipping and tax settings returned by GET /api/storefront/settings."
+  },
+  "file:lib/home-data.ts": {
+   "name": "home-data.ts",
+   "type": "file",
+   "summary": "Server-side home page loaders (top and promo products, featured categories, sale banners, reels, latest reviews) fetched from the NestJS storefront API and cached under the catalog tag."
+  },
+  "file:lib/landing-products.ts": {
+   "name": "landing-products.ts",
+   "type": "file",
+   "summary": "Type definitions for the product-led landing sections (LandingProduct, SpotlightCollection) served by GET /api/storefront/landing."
+  },
+  "file:lib/language-context.tsx": {
+   "name": "language-context.tsx",
+   "type": "file",
+   "summary": "React context exposing the current route locale to client components and keeping <html lang> in sync."
+  },
+  "file:lib/language-utils.ts": {
+   "name": "language-utils.ts",
+   "type": "file",
+   "summary": "Locale definitions and helpers: supported en/fr/ar languages with Arabic default, names, flags, RTL detection, Accept-Language parsing and locale validation."
+  },
+  "file:lib/order-confirmation-email.ts": {
+   "name": "order-confirmation-email.ts",
+   "type": "file",
+   "summary": "Sends the order confirmation e-mail through nodemailer (Gmail or custom SMTP) with an HTML template built from the stored order and HTML-escaped customer text."
+  },
+  "file:lib/order-types.ts": {
+   "name": "order-types.ts",
+   "type": "file",
+   "summary": "Import-free Order and OrderItem row types shared between the storefront and the NestJS API."
+  },
+  "file:lib/orders.ts": {
+   "name": "orders.ts",
+   "type": "file",
+   "summary": "Client checkout helper that posts orders to /api/orders with the stored traffic source and re-exports the shared Order types."
+  },
+  "file:lib/product-detail.ts": {
+   "name": "product-detail.ts",
+   "type": "file",
+   "summary": "Loader for everything the product page needs (product, variants, images, similar products, related categories) from the NestJS storefront API."
+  },
+  "file:lib/product-images.ts": {
+   "name": "product-images.ts",
+   "type": "file",
+   "summary": "ProductImage type and a helper choosing a product's main image URL with legacy fallbacks."
+  },
+  "file:lib/product-search.ts": {
+   "name": "product-search.ts",
+   "type": "file",
+   "summary": "Shared product search constant (minimum query length) documenting that matching and ranking run in Postgres search_products."
+  },
+  "file:lib/quick-add.ts": {
+   "name": "quick-add.ts",
+   "type": "file",
+   "summary": "Client hook for adding products to the cart from product cards, opening the product page when a size/color must be chosen or stock is out."
+  },
+  "file:lib/schemas/auth-schema.ts": {
+   "name": "auth-schema.ts",
+   "type": "file",
+   "summary": "Localized zod schemas (en/fr/ar messages) for sign-in, sign-up, forgot-password and new-password forms."
+  },
+  "file:lib/schemas/checkout-schema.ts": {
+   "name": "checkout-schema.ts",
+   "type": "file",
+   "summary": "Zod checkout form schema requiring name, Tunisian phone, Colissimo governorate, city and address, with optional email and postal fields."
+  },
+  "file:lib/service-highlights.ts": {
+   "name": "service-highlights.ts",
+   "type": "file",
+   "summary": "Static service highlight cards (free shipping threshold, cash back, support) built from the header config."
+  },
+  "file:lib/storefront-api.ts": {
+   "name": "storefront-api.ts",
+   "type": "file",
+   "summary": "Fetch helper for public NestJS storefront reads, calling NEST_URL on the server and the Next.js rewrite in the browser."
+  },
+  "file:lib/traffic-source.ts": {
+   "name": "traffic-source.ts",
+   "type": "file",
+   "summary": "Detects and remembers where a shopper came from (utm_source, referrer, ad click ids) for 30 days in the browser, and labels sources for the admin."
+  },
+  "file:lib/utils/product-utils.ts": {
+   "name": "product-utils.ts",
+   "type": "file",
+   "summary": "Product helpers shared by storefront and API: localized names/descriptions/category names, descendant category ids, images, discounted price, stock status and product URLs."
+  },
+  "file:types/product.ts": {
+   "name": "product.ts",
+   "type": "file",
+   "summary": "Shared TypeScript types for products, variants, colors, sizes and promo products."
+  },
+  "file:api/src/admin/admin.controllers.ts": {
+   "name": "admin.controllers.ts",
+   "type": "file",
+   "summary": "NestJS back-office controllers for the owner overview, activity log, ERP settings, objectives and commissions, current-user info, access-denied logging, My day, agent performance, notifications (including the SSE stream and push subscriptions) and the deleted-items trash."
+  },
+  "file:api/src/admin/goals.ts": {
+   "name": "goals.ts",
+   "type": "file",
+   "summary": "Computes monthly team and per-agent goal progress, delivered orders per day and commission figures from owner_overview and order data, honoring the analytics start date."
+  },
+  "file:api/src/admin/public.controllers.ts": {
+   "name": "public.controllers.ts",
+   "type": "file",
+   "summary": "Public NestJS endpoints for abandoned-cart tracking, the contact form, newsletter subscription and campaigns, and serving the OpenAPI spec."
+  },
+  "file:api/src/admin/team.controller.ts": {
+   "name": "team.controller.ts",
+   "type": "file",
+   "summary": "Admin-only Team API that lists, invites, updates roles and permissions of, removes access for and soft-deletes back-office members, revoking their sessions and logging team changes."
+  },
+  "file:api/src/admin/tickets.controller.ts": {
+   "name": "tickets.controller.ts",
+   "type": "file",
+   "summary": "Team tasks board API: CRUD, drag ordering, assignment and status of team_tickets plus comments with images stored in the private documents bucket."
+  },
+  "file:api/src/app.module.ts": {
+   "name": "app.module.ts",
+   "type": "file",
+   "summary": "Root NestJS module wiring every controller, the database module, the global auth guard, response interceptor, exception filter and background services."
+  },
+  "file:api/src/auth/auth.controller.ts": {
+   "name": "auth.controller.ts",
+   "type": "file",
+   "summary": "Accounts and sessions API: sign-in, sign-up, refresh, sign-out, e-mail confirmation, password forgot/reset/change and profile, using bcrypt, JWT access cookies, hashed refresh tokens and rate limiting."
+  },
+  "file:api/src/auth/auth.guard.ts": {
+   "name": "auth.guard.ts",
+   "type": "file",
+   "summary": "Global NestJS guard that verifies the kb_access session or a stock API key, resolves role and permissions, and enforces route decorators and apiRequirement rules, logging refusals."
+  },
+  "file:api/src/auth/decorators.ts": {
+   "name": "decorators.ts",
+   "type": "file",
+   "summary": "Route access decorators (Public, Requires, RequiresAll, AdminOnly, OwnerOnly) and the CurrentActor/CurrentUserId parameter decorators read by the auth guard."
+  },
+  "file:api/src/catalog/categories.controller.ts": {
+   "name": "categories.controller.ts",
+   "type": "file",
+   "summary": "CRUD API for nested product categories with slug handling, soft delete and catalog cache invalidation."
+  },
+  "file:api/src/catalog/content.controllers.ts": {
+   "name": "content.controllers.ts",
+   "type": "file",
+   "summary": "Controllers for product discounts, sale banners and reels, sharing generic row pick/update helpers and invalidating the catalog cache on writes."
+  },
+  "file:api/src/catalog/landing.controller.ts": {
+   "name": "landing.controller.ts",
+   "type": "file",
+   "summary": "Landing page configuration API reading and saving section picks, landing_config and featured categories through save_landing_page."
+  },
+  "file:api/src/catalog/options.controller.ts": {
+   "name": "options.controller.ts",
+   "type": "file",
+   "summary": "Factory that builds identical CRUD controllers for product colors and sizes."
+  },
+  "file:api/src/catalog/product-images.controller.ts": {
+   "name": "product-images.controller.ts",
+   "type": "file",
+   "summary": "API to list, add, reorder and soft-delete product images, invalidating the catalog cache."
+  },
+  "file:api/src/catalog/products.controller.ts": {
+   "name": "products.controller.ts",
+   "type": "file",
+   "summary": "Products API for admin and storefront listings, single-product reads and transactional create/update/delete via save_product, with SKU checks and stock-aware error mapping."
+  },
+  "file:api/src/catalog/queries.ts": {
+   "name": "queries.ts",
+   "type": "file",
+   "summary": "Shared Kysely query returning product variants joined with their color and size options."
+  },
+  "file:api/src/catalog/revalidate.ts": {
+   "name": "revalidate.ts",
+   "type": "file",
+   "summary": "Calls the Next.js internal revalidate endpoint to invalidate the cached storefront catalog after writes."
+  },
+  "file:api/src/catalog/variants.controller.ts": {
+   "name": "variants.controller.ts",
+   "type": "file",
+   "summary": "Product variants API for listing, creating, updating and deleting variants (delete_variant), invalidating the catalog cache."
+  },
+  "file:api/src/common/api.ts": {
+   "name": "api.ts",
+   "type": "file",
+   "summary": "Shared API plumbing: response envelope interceptor, ApiError and an exception filter mapping zod and database errors, a Zod validation pipe, and helpers for ids, slugs, periods and Tunis dates."
+  },
+  "file:api/src/common/mail.ts": {
+   "name": "mail.ts",
+   "type": "file",
+   "summary": "Nodemailer transport (Gmail or custom SMTP) and a helper to send account e-mails."
+  },
+  "file:api/src/common/rate-limit.ts": {
+   "name": "rate-limit.ts",
+   "type": "file",
+   "summary": "In-memory rate limiter keyed per address or IP, plus client IP extraction, for auth endpoints."
+  },
+  "file:api/src/common/storage.ts": {
+   "name": "storage.ts",
+   "type": "file",
+   "summary": "S3-compatible storage client signing with env or EC2 instance role keys, offering put/delete, signed and public URLs for the products and documents buckets."
+  },
+  "file:api/src/config.ts": {
+   "name": "config.ts",
+   "type": "file",
+   "summary": "Loads and exports the NestJS API configuration from environment variables."
+  },
+  "file:api/src/crm/campaigns.controller.ts": {
+   "name": "campaigns.controller.ts",
+   "type": "file",
+   "summary": "Marketing campaigns API (CRUD and stats) used to attribute orders and ad spend."
+  },
+  "file:api/src/crm/crm.controllers.ts": {
+   "name": "crm.controllers.ts",
+   "type": "file",
+   "summary": "CRM API: customers (list, detail, merge, duplicates, anonymize), interactions with Meta replies, follow-up tasks and social post comments."
+  },
+  "file:api/src/crm/meta-webhook.controller.ts": {
+   "name": "meta-webhook.controller.ts",
+   "type": "file",
+   "summary": "Public signature-checked Meta webhook receiving Messenger, Instagram and WhatsApp messages and post comments into the CRM."
+  },
+  "file:api/src/db/database.ts": {
+   "name": "database.ts",
+   "type": "file",
+   "summary": "Kysely/pg Database service with withActor transactions that set activity-log settings, typed db.call for Postgres functions, LISTEN support, and the global DatabaseModule."
+  },
+  "file:api/src/db/embed.ts": {
+   "name": "embed.ts",
+   "type": "file",
+   "summary": "Helpers building JSON one/many embeds that filter out soft-deleted rows."
+  },
+  "file:api/src/db/types.ts": {
+   "name": "types.ts",
+   "type": "file",
+   "summary": "Generated Kysely database type definitions for every Postgres table."
+  },
+  "file:api/src/files/files.controllers.ts": {
+   "name": "files.controllers.ts",
+   "type": "file",
+   "summary": "Image upload API to the public products bucket and a documents API for private files with signed links."
+  },
+  "file:api/src/finance/finance.controllers.ts": {
+   "name": "finance.controllers.ts",
+   "type": "file",
+   "summary": "NestJS controllers for the Tunisian SCE accounting module: journal entries, chart of accounts, bank reconciliation, supplier bills, sales invoices, financial reports with CSV export, and treasury movements."
+  },
+  "file:api/src/health.controller.ts": {
+   "name": "health.controller.ts",
+   "type": "file",
+   "summary": "Public NestJS health-check endpoint that verifies the API and its Postgres connection are up."
+  },
+  "file:api/src/instrument.ts": {
+   "name": "instrument.ts",
+   "type": "file",
+   "summary": "Initializes Sentry error monitoring for the NestJS API before the application loads, using the API config."
+  },
+  "file:api/src/main.ts": {
+   "name": "main.ts",
+   "type": "file",
+   "summary": "NestJS API entry point that loads Sentry instrumentation, creates the AppModule application and starts listening on the configured port."
+  },
+  "file:api/src/notifications/notification-events.ts": {
+   "name": "notification-events.ts",
+   "type": "file",
+   "summary": "NestJS service that LISTENs on the Postgres notifications channel, streams notification rows to open admin tabs over SSE, sends Web Push, and schedules the daily alerts job."
+  },
+  "file:api/src/pos/pos.controller.ts": {
+   "name": "pos.controller.ts",
+   "type": "file",
+   "summary": "NestJS point-of-sale controller: opening and closing till sessions, recording store sales, session summaries, receipts, shop stock catalog, and POS analytics."
+  },
+  "file:api/src/purchasing/purchasing.controllers.ts": {
+   "name": "purchasing.controllers.ts",
+   "type": "file",
+   "summary": "NestJS purchasing controllers for purchase orders, goods receipts, raw materials and their movements, product costing/production, and supplier price comparison."
+  },
+  "file:api/src/sales/colissimo-portal.controller.ts": {
+   "name": "colissimo-portal.controller.ts",
+   "type": "file",
+   "summary": "Owner-only NestJS controller that lists the whole Colissimo account by scraping the carrier portal and syncs missing parcels into the deliveries table."
+  },
+  "file:api/src/sales/colissimo-portal.ts": {
+   "name": "colissimo-portal.ts",
+   "type": "file",
+   "summary": "Read-only client for the Colissimo website: signs in with portal credentials, keeps the session in memory, and parses HTML pages into parcel lists, parcel details and payouts."
+  },
+  "file:api/src/sales/colissimo-tracking.ts": {
+   "name": "colissimo-tracking.ts",
+   "type": "file",
+   "summary": "Scheduled NestJS service that polls Colissimo every 15 minutes for parcels that can still change, records status changes, and cancels parcels for cancelled orders."
+  },
+  "file:api/src/sales/commerce.ts": {
+   "name": "commerce.ts",
+   "type": "file",
+   "summary": "Core commerce rules for the API: active discounts, site settings, shipping and tax calculation, server-side checkout re-pricing (priceOrder), and manual order line building."
+  },
+  "file:api/src/sales/delivery.controller.ts": {
+   "name": "delivery.controller.ts",
+   "type": "file",
+   "summary": "NestJS controller for Colissimo deliveries: listing parcels, sending orders as parcels, validating orders, importing and tracking barcodes, hand-over manifests, edits and price changes."
+  },
+  "file:api/src/sales/orders.controller.ts": {
+   "name": "orders.controller.ts",
+   "type": "file",
+   "summary": "NestJS orders controller handling checkout order creation with server re-pricing and confirmation email, admin order listing and filtering, status updates with stock, and soft deletes."
+  },
+  "file:api/src/sales/sales.controllers.ts": {
+   "name": "sales.controllers.ts",
+   "type": "file",
+   "summary": "NestJS ERP sales controllers: agent-created orders and pipeline actions, order payments by account, and carrier COD remittances."
+  },
+  "file:api/src/stock/stock.controllers.ts": {
+   "name": "stock.controllers.ts",
+   "type": "file",
+   "summary": "NestJS stock controllers: generic lookup controllers (suppliers, collections, locations), stock tracking, product costs, stock movements and inventory reports."
+  },
+  "file:api/src/storefront/account.controller.ts": {
+   "name": "account.controller.ts",
+   "type": "file",
+   "summary": "NestJS controller for the signed-in shopper's own data: favorites, order history with delivery stage, and posting reviews."
+  },
+  "file:api/src/storefront/storefront.controller.ts": {
+   "name": "storefront.controller.ts",
+   "type": "file",
+   "summary": "Public NestJS storefront read API: product listings and detail, categories, landing page sections, hero, banners, reels, reviews, settings and checkout quotes."
+  },
+  "file:lib/abandoned-cart-email.ts": {
+   "name": "abandoned-cart-email.ts",
+   "type": "file",
+   "summary": "Helper that triggers the abandoned-cart email campaign through the API."
+  },
+  "file:lib/admin-auth.ts": {
+   "name": "admin-auth.ts",
+   "type": "file",
+   "summary": "Defines the back-office role and permission model: owner/admin/staff resolution from app_metadata and env email lists, permission lists, presets, and access checks."
+  },
+  "file:lib/api-access.ts": {
+   "name": "api-access.ts",
+   "type": "file",
+   "summary": "Maps API paths and methods to access requirements (permissions, admin or owner) used by the NestJS auth guard."
+  },
+  "file:lib/auth-session.ts": {
+   "name": "auth-session.ts",
+   "type": "file",
+   "summary": "Session token helpers: cookie names and lifetimes, HS256 access JWT signing and verification, and cookie parsing."
+  },
+  "file:lib/colissimo.ts": {
+   "name": "colissimo.ts",
+   "type": "file",
+   "summary": "Colissimo carrier API client covering v1 parcel creation and v2 tracking, hand-over, editing, price change requests and deletion, with retry on transient errors."
+  },
+  "file:lib/erp/meta.ts": {
+   "name": "meta.ts",
+   "type": "file",
+   "summary": "Meta (Messenger, Instagram, WhatsApp) integration: webhook signature check, parsing incoming messages and comments, and sending text replies."
+  },
+  "file:lib/erp/objectives.ts": {
+   "name": "objectives.ts",
+   "type": "file",
+   "summary": "Agent objective helpers: normalizing prize tiers, computing commissions, and clamping periods to the analytics start date."
+  },
+  "file:lib/landing-config.ts": {
+   "name": "landing-config.ts",
+   "type": "file",
+   "summary": "Home page landing configuration: section keys, defaults, and normalization and parsing of the stored landing_config JSON."
+  },
+  "file:lib/openapi-erp.ts": {
+   "name": "openapi-erp.ts",
+   "type": "file",
+   "summary": "Hand-written OpenAPI path and tag definitions for the ERP routes, merged into the main spec."
+  },
+  "file:lib/openapi.ts": {
+   "name": "openapi.ts",
+   "type": "file",
+   "summary": "Builds the hand-written OpenAPI specification served at /api/docs, covering storefront, admin and ERP routes."
+  },
+  "file:lib/order-number.ts": {
+   "name": "order-number.ts",
+   "type": "file",
+   "summary": "Generates human-readable order numbers."
+  },
+  "file:lib/trash-tables.ts": {
+   "name": "trash-tables.ts",
+   "type": "file",
+   "summary": "Lists the soft-deletable tables shown in Admin Deleted items with their area permissions, plus a type guard."
+  },
+  "file:middleware.ts": {
+   "name": "middleware.ts",
+   "type": "file",
+   "summary": "Next.js middleware that gates admin pages by role and permission, refreshes expired sessions, refuses cross-origin writes, and redirects storefront paths to a locale."
+  },
+  "file:app/admin/activity/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin Activity page that browses the append-only activity log (/api/admin/activity) with filters by staff member, entity and action, showing before/after column changes."
+  },
+  "file:app/admin/cart-analytics/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin cart analytics page showing cart/checkout conversion statistics and the list of abandoned carts from /api/cart/analytics over a selectable day range."
+  },
+  "file:app/admin/categories/[id]/edit/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin form for editing an existing category (localized names, parent, image and extra fields) and saving it through the categories API."
+  },
+  "file:app/admin/categories/new/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin form for creating a new nested product category with localized names, parent selection and extra fields."
+  },
+  "file:app/admin/categories/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin categories list with hierarchy display, search, bulk delete and permission-gated actions based on the admin role context."
+  },
+  "file:app/admin/colissimo-account/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Owner-only Colissimo account page that loads the whole carrier account from /api/owner/colissimo two months at a time, analyses parcel stages with KPIs and charts, and syncs missing parcels into deliveries."
+  },
+  "file:app/admin/customers/[id]/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "CRM customer detail page showing a customer profile, stage, orders, conversations and follow-up tasks, with actions to log interactions and edit the customer."
+  },
+  "file:app/admin/customers/comments/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "CRM page listing public social-media post comments captured by the Meta webhook (/api/crm/comments), with lead/phone detection and handling actions."
+  },
+  "file:app/admin/customers/inbox/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "CRM inbox page listing incoming customer messages (Messenger/Instagram/WhatsApp interactions) from /api/crm/interactions?inbox=1."
+  },
+  "file:app/admin/customers/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "CRM customers list with search, stage and channel filters, duplicate detection and links to customer detail pages."
+  },
+  "file:app/admin/dashboard/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin dashboard home combining cart analytics KPIs, abandoned carts, quick links and a stock overview widget for owners and admins."
+  },
+  "file:app/admin/delivery/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin Delivery page listing Colissimo parcels with server-side paging and filters, plus sending, editing, tracking refresh, manifest hand-over, lookup and parcel history actions."
+  },
+  "file:app/admin/delivery/print/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Printable page that renders shipping slips for selected Colissimo parcels via the delivery API."
+  },
+  "file:app/admin/finance/accounting/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Accounting workspace (Tunisian SCE) with tabs for the journal and entry editor, financial reports and export, chart of accounts, and accounting settings."
+  },
+  "file:app/admin/finance/bills/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Finance page for supplier bills and expenses: list, create, categorize and record bill payments."
+  },
+  "file:app/admin/finance/documents/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Finance page for uploading and listing business documents stored in the private documents bucket, with kinds and expiry dates."
+  },
+  "file:app/admin/finance/invoices/[id]/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Printable sales invoice / credit note detail page that loads an issued invoice and renders it with formatted amounts."
+  },
+  "file:app/admin/finance/invoices/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Finance list of issued sales invoices and credit notes from /api/finance/invoices."
+  },
+  "file:app/admin/finance/payments/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Finance page listing order payments by account (cash, bank, carrier) and recording carrier remittances."
+  },
+  "file:app/admin/finance/treasury/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Treasury page showing cash/bank balances and movements, recording transfers, and importing bank statement CSVs for reconciliation."
+  },
+  "file:app/admin/goals/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Objectives and commissions page where admins set monthly business goals and per-agent targets, commissions and prize tiers, and view team progress charts."
+  },
+  "file:app/admin/landing/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin landing-page editor configuring home section order, visibility, list sizes, autofill, pinned products and featured categories, saved through /api/landing."
+  },
+  "file:app/admin/marketing/campaigns/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Marketing campaigns page for creating and listing ad campaigns with channels and performance figures."
+  },
+  "file:app/admin/my-work/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "My day page for agents showing their monthly goal progress, assigned orders, CRM follow-up tasks and open team tickets."
+  },
+  "file:app/admin/notifications/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin notifications center listing the signed-in staff member notifications with mark-as-read actions."
+  },
+  "file:app/admin/orders/[id]/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin order detail page showing lines, customer, status, pipeline, payments, delivery card and traffic source, with edit and validate actions."
+  },
+  "file:app/admin/orders/new/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Agent order-entry form that creates manual orders via /api/sales/orders with product lines, channel, governorate and duplicate-phone warnings."
+  },
+  "file:app/admin/orders/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin orders list with server-side paging, filtering by status/agent/channel, search, bulk status changes and deletes, delivery tags and traffic sources."
+  },
+  "file:app/admin/overview/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Owner-only Business overview dashboard showing delivered sales, gross and estimated net margin, cash/bank/carrier balances, receivables, stock value and breakdowns from /api/owner/overview, filtered by period, channel, agent and campaign."
+  },
+  "file:app/admin/performance/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin Agent performance page comparing back-office agents over a date range (orders taken, confirmed, delivered, returns) using GET /api/admin/performance."
+  },
+  "file:app/admin/pos/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Point-of-sale till screen: opens and closes cash sessions per shop, builds in-store sales with discounts and payments, and hosts the shop Stock and Analytics tabs."
+  },
+  "file:app/admin/pos/receipt/[id]/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Printable till receipt for a point-of-sale order, showing lines, totals and payments."
+  },
+  "file:app/admin/pos/sessions/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Lists point-of-sale till sessions with opening/closing times, expected versus counted cash and differences."
+  },
+  "file:app/admin/products/[id]/edit/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin product edit form covering translations, pricing, category, images, variants with per-variant photos, stock fields and purchase cost, saved through PUT /api/products."
+  },
+  "file:app/admin/products/new/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin create-product form with translations, pricing, category, images, variants, opening stock and purchase cost, posting to /api/products."
+  },
+  "file:app/admin/products/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin products list with search, category and status filters, status toggles, single and bulk soft deletes, using the summary product API."
+  },
+  "file:app/admin/promotions/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin promotions page for managing product discounts (percentage, validity window, active flag) stored in product_discounts."
+  },
+  "file:app/admin/purchasing/[id]/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Purchase order detail and editor: lines for variants, raw materials or free text, status workflow, goods receipts and receipt validation into stock."
+  },
+  "file:app/admin/purchasing/materials/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Raw materials page managing material stock and movements, plus a costing drawer for each product bill of materials, labor and overhead."
+  },
+  "file:app/admin/purchasing/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Purchase orders list showing supplier, status and totals, linking to each order."
+  },
+  "file:app/admin/purchasing/prices/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Supplier price comparison page listing purchase prices per item across suppliers."
+  },
+  "file:app/admin/purchasing/suppliers/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Supplier directory page with create, edit and delete of supplier records."
+  },
+  "file:app/admin/reels/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin page managing storefront video reels: upload media, link products, order and activate them."
+  },
+  "file:app/admin/sale-banners/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin page managing promotional sale banners with localized texts, images, links, dates and activation."
+  },
+  "file:app/admin/settings/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Business settings page editing erp_settings (sales, POS discount limits, delivery fee) and the analytics start date."
+  },
+  "file:app/admin/stock/settings/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Stock settings page with generic list editors for locations (shops, online seller, low-stock limit) and other stock lookup lists."
+  },
+  "file:app/admin/team/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Team management page (admin-only) to invite members, change roles and per-member permissions, and remove access via /api/admin/team."
+  },
+  "file:app/admin/tickets/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Team tasks Kanban board with drag-and-drop columns, quick create, in-place ticket view, assignees, priorities, due dates and comments with images."
+  },
+  "file:app/admin/trash/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Deleted items page listing soft-deleted rows per table, with permanent purge and owner-only restore through /api/admin/trash."
+  },
+  "file:app/admin/variants/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin page managing the color and size lookup lists used by product variants, with single and bulk deletes."
+  },
+  "file:components/admin/CategoryExtraFields.tsx": {
+   "name": "CategoryExtraFields.tsx",
+   "type": "file",
+   "summary": "Shared form fields for category pages: parent-category select and extra category options."
+  },
+  "file:components/admin/ImageUpload.tsx": {
+   "name": "ImageUpload.tsx",
+   "type": "file",
+   "summary": "Single image upload control for admin forms that posts files to /api/upload/image and shows a preview."
+  },
+  "file:components/admin/MultiImageUpload.tsx": {
+   "name": "MultiImageUpload.tsx",
+   "type": "file",
+   "summary": "Multi-image upload control for admin forms, uploading each file to /api/upload/image and managing an ordered list of URLs."
+  },
+  "file:components/admin/NotificationBell.tsx": {
+   "name": "NotificationBell.tsx",
+   "type": "file",
+   "summary": "Admin header notification bell: loads notifications, listens to the SSE stream with pop-ups and a chime, polls every 60 s, marks read and toggles desktop push."
+  },
+  "file:components/admin/ProductStockFields.tsx": {
+   "name": "ProductStockFields.tsx",
+   "type": "file",
+   "summary": "Stock-related product form fields (code, supplier, collection, tracking, purchase cost) plus helpers to load and save the product cost via /api/stock/costs."
+  },
+  "file:components/admin/ProductTranslationFields.tsx": {
+   "name": "ProductTranslationFields.tsx",
+   "type": "file",
+   "summary": "Form fields for a product French and Arabic name and description translations."
+  },
+  "file:components/admin/antd-app.tsx": {
+   "name": "antd-app.tsx",
+   "type": "file",
+   "summary": "Bridges antd's App context so admin code can call a themed message API outside React components; exports AntdAppBridge and the message proxy used instead of antd's static API."
+  },
+  "file:components/admin/delivery/DeliveryStatusTag.tsx": {
+   "name": "DeliveryStatusTag.tsx",
+   "type": "file",
+   "summary": "Renders Colissimo parcel status tags and badges (paid, price change, etc.) for delivery rows in the admin."
+  },
+  "file:components/admin/delivery/EditParcelModal.tsx": {
+   "name": "EditParcelModal.tsx",
+   "type": "file",
+   "summary": "Modal form for editing a Colissimo parcel's recipient, governorate, address and price through the delivery API, handling price-change requests for printed parcels."
+  },
+  "file:components/admin/delivery/OrderDeliveryCard.tsx": {
+   "name": "OrderDeliveryCard.tsx",
+   "type": "file",
+   "summary": "Order-page card showing the order's Colissimo parcel, its status, and actions to send, edit, refresh or remove the parcel."
+  },
+  "file:components/admin/delivery/ParcelHistoryDrawer.tsx": {
+   "name": "ParcelHistoryDrawer.tsx",
+   "type": "file",
+   "summary": "Drawer that loads and shows a parcel's tracking history from GET /api/delivery/history, with color mapping for portal statuses."
+  },
+  "file:components/admin/delivery/ParcelLookup.tsx": {
+   "name": "ParcelLookup.tsx",
+   "type": "file",
+   "summary": "Check-a-parcel tool that looks up any Colissimo barcode without saving and can add a parcel created on Colissimo's site to the deliveries list."
+  },
+  "file:components/admin/delivery/ParcelProducts.tsx": {
+   "name": "ParcelProducts.tsx",
+   "type": "file",
+   "summary": "Editable product-line picker (product, variant, quantity, price) used by the New parcel and Edit order forms, with server quote previews."
+  },
+  "file:components/admin/delivery/SendParcelModal.tsx": {
+   "name": "SendParcelModal.tsx",
+   "type": "file",
+   "summary": "Modal for creating or sending a Colissimo parcel, prefilling fields from the order and optionally listing products priced by a server quote."
+  },
+  "file:components/admin/delivery/delivery-api.ts": {
+   "name": "delivery-api.ts",
+   "type": "file",
+   "summary": "Typed client and shared types for the /api/delivery endpoints, plus rules for when a parcel can be edited or removed and a helper reporting Colissimo cancellation failures."
+  },
+  "file:components/admin/desktop-push.ts": {
+   "name": "desktop-push.ts",
+   "type": "file",
+   "summary": "Browser-side Web Push helpers that register the admin service worker, subscribe with the VAPID public key, and save or remove push subscriptions."
+  },
+  "file:components/admin/erp/EditOrderModal.tsx": {
+   "name": "EditOrderModal.tsx",
+   "type": "file",
+   "summary": "Modal to edit an order still to confirm or confirmed (customer, amounts, notes and optionally its lines) via PATCH /api/sales/orders action edit."
+  },
+  "file:components/admin/erp/MonthGoalCard.tsx": {
+   "name": "MonthGoalCard.tsx",
+   "type": "file",
+   "summary": "Card showing the business's monthly goal progress and pace with target bars, used on My day and the Business overview."
+  },
+  "file:components/admin/erp/OrderPaymentsCard.tsx": {
+   "name": "OrderPaymentsCard.tsx",
+   "type": "file",
+   "summary": "Order-page card listing order payments and refunds by account (cash, bank, carrier) and recording new ones."
+  },
+  "file:components/admin/erp/OrderPipelineCard.tsx": {
+   "name": "OrderPipelineCard.tsx",
+   "type": "file",
+   "summary": "Order-page card for the sales pipeline: channel, assigned agent, campaign and confirmation actions."
+  },
+  "file:components/admin/erp/QuickLinks.tsx": {
+   "name": "QuickLinks.tsx",
+   "type": "file",
+   "summary": "Permission-aware grid of quick links to admin areas shown on the dashboard."
+  },
+  "file:components/admin/erp/charts.tsx": {
+   "name": "charts.tsx",
+   "type": "file",
+   "summary": "Dependency-free SVG chart components (BarChart, BarList, TargetBar) for ERP admin screens."
+  },
+  "file:components/admin/erp/erp-client.ts": {
+   "name": "erp-client.ts",
+   "type": "file",
+   "summary": "Shared ERP admin client: fetch wrapper with ApiError, a useApi data hook, and money/number/date/period formatting and download helpers."
+  },
+  "file:components/admin/erp/purchase-items.ts": {
+   "name": "purchase-items.ts",
+   "type": "file",
+   "summary": "React hook loading the purchasable items (variants and raw materials) used by purchase order lines."
+  },
+  "file:components/admin/erp/ui.tsx": {
+   "name": "ui.tsx",
+   "type": "file",
+   "summary": "Shared ERP admin UI kit: PageHeader, Kpi, ChannelTag, PeriodFilter, AgentSelect, CampaignSelect, ListRow, Help and the usePeriod/useTeam hooks."
+  },
+  "file:components/admin/notification-item.tsx": {
+   "name": "notification-item.tsx",
+   "type": "file",
+   "summary": "Renders one back-office notification with localized title/body and an icon by type, used by the bell and notifications page."
+  },
+  "file:components/admin/order-status.ts": {
+   "name": "order-status.ts",
+   "type": "file",
+   "summary": "Order and payment status labels, colors and options for the admin, plus validateOrder which creates the Colissimo parcel and moves the order to processing."
+  },
+  "file:components/admin/pos/PosAnalyticsTab.tsx": {
+   "name": "PosAnalyticsTab.tsx",
+   "type": "file",
+   "summary": "Point of sale Analytics tab showing shop sales KPIs and charts from GET /api/pos/analytics."
+  },
+  "file:components/admin/pos/PosStockTab.tsx": {
+   "name": "PosStockTab.tsx",
+   "type": "file",
+   "summary": "Point of sale Stock tab listing a shop's carried variants with low and out-of-stock flags based on the location's limit."
+  },
+  "file:components/admin/select-search.ts": {
+   "name": "select-search.ts",
+   "type": "file",
+   "summary": "Tiny antd Select filterOption helper matching options by their searchtext attribute."
+  },
+  "file:lib/admin-i18n.tsx": {
+   "name": "admin-i18n.tsx",
+   "type": "file",
+   "summary": "Admin EN/FR/AR translation context: AdminI18nProvider, useAdminT with placeholder interpolation, msg marker, and locale/date-locale constants."
+  },
+  "file:lib/admin-role-context.tsx": {
+   "name": "admin-role-context.tsx",
+   "type": "file",
+   "summary": "React context providing the signed-in back-office user's role and permissions from GET /api/admin/me, with a can(permission) helper."
+  },
+  "file:lib/colissimo-data.ts": {
+   "name": "colissimo-data.ts",
+   "type": "file",
+   "summary": "Shared Colissimo data: Tunisian governorates and matching, parcel status catalog and final statuses, customer-facing stage mapping, and parcelFromOrder to build parcel fields from an order."
+  },
+  "file:lib/erp/constants.ts": {
+   "name": "constants.ts",
+   "type": "file",
+   "summary": "Shared ERP constants and translatable labels/colors: channels, customer stages, payment methods, money accounts, bill and treasury categories, PO statuses, journals, account types, documents and ticket statuses."
+  },
+  "file:app/admin/stock/movements/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin stock movements page listing the append-only stock movement history with filters by type, location and date, plus CSV export."
+  },
+  "file:app/admin/stock/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin inventory page showing per-variant stock levels across locations with status filters, product variant drill-down and a movement modal for restocks, adjustments and transfers."
+  },
+  "file:app/admin/stock/restock/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Admin restock page listing low-stock variants with a suggested reorder quantity and launching the movement modal to record restocks."
+  },
+  "file:components/admin/stock/MovementChart.tsx": {
+   "name": "MovementChart.tsx",
+   "type": "file",
+   "summary": "Dependency-free SVG chart component plotting stock movement quantities over time by movement type for the admin stock screens."
+  },
+  "file:components/admin/stock/MovementModal.tsx": {
+   "name": "MovementModal.tsx",
+   "type": "file",
+   "summary": "Ant Design modal form for recording stock movements (restock, adjustment, transfer, count) for a variant and location through POST /api/stock/movements."
+  },
+  "file:components/admin/stock/ProductVariantsPanel.tsx": {
+   "name": "ProductVariantsPanel.tsx",
+   "type": "file",
+   "summary": "Panel showing the variants of a product with their per-location stock levels and tracking state in the admin inventory view."
+  },
+  "file:components/admin/stock/StockOverview.tsx": {
+   "name": "StockOverview.tsx",
+   "type": "file",
+   "summary": "Summary component showing stock KPIs and a movement chart for the admin dashboard and stock screens."
+  },
+  "file:components/admin/stock/VariantThumb.tsx": {
+   "name": "VariantThumb.tsx",
+   "type": "file",
+   "summary": "Tiny component rendering a variant thumbnail image or placeholder."
+  },
+  "file:components/admin/stock/stock-client.ts": {
+   "name": "stock-client.ts",
+   "type": "file",
+   "summary": "Client-side helpers for admin stock screens: status and movement color maps, variant label formatting, a JSON fetch wrapper with readable errors, and CSV download."
+  },
+  "file:lib/erp/db-messages.ts": {
+   "name": "db-messages.ts",
+   "type": "file",
+   "summary": "Maps known Postgres exceptions raised by ERP database functions to user-facing messages and HTTP statuses, shared with the NestJS API error handling."
+  },
+  "file:lib/stock.ts": {
+   "name": "stock.ts",
+   "type": "file",
+   "summary": "Shared stock domain constants and helpers: movement types and labels, stock status computation, and translation of insufficient_stock database errors into readable messages."
+  },
+  "file:api/test/e2e/auth.e2e.mjs": {
+   "name": "auth.e2e.mjs",
+   "type": "file",
+   "summary": "End-to-end suite for /api/auth: sign-up, confirmation, sign-in cookies, refresh, password change/reset and session revocation against the local Docker stack."
+  },
+  "file:api/test/e2e/catalog.e2e.mjs": {
+   "name": "catalog.e2e.mjs",
+   "type": "file",
+   "summary": "End-to-end suite exercising catalog product creation, update, storefront reads and soft deletion through the API."
+  },
+  "file:api/test/e2e/categories.e2e.mjs": {
+   "name": "categories.e2e.mjs",
+   "type": "file",
+   "summary": "End-to-end suite checking category CRUD and that anonymous users are denied write access."
+  },
+  "file:api/test/e2e/colissimo.e2e.mjs": {
+   "name": "colissimo.e2e.mjs",
+   "type": "file",
+   "summary": "End-to-end suite for Colissimo delivery: validating orders into parcels, tracking status changes and returns against the Colissimo mock service."
+  },
+  "file:api/test/e2e/erp.e2e.mjs": {
+   "name": "erp.e2e.mjs",
+   "type": "file",
+   "summary": "End-to-end suite covering ERP flows: manual orders, order pipeline statuses, payments, customers, till sessions, purchasing and accounting."
+  },
+  "file:api/test/e2e/files.e2e.mjs": {
+   "name": "files.e2e.mjs",
+   "type": "file",
+   "summary": "End-to-end suite for image upload and private document storage through the S3-compatible file store."
+  },
+  "file:api/test/e2e/helpers.mjs": {
+   "name": "helpers.mjs",
+   "type": "file",
+   "summary": "Shared e2e test helpers: API base URL, direct SQL access to the local database, assertion and summary helpers, and creation of signed-in test users with roles."
+  },
+  "file:api/test/e2e/objectives.e2e.mjs": {
+   "name": "objectives.e2e.mjs",
+   "type": "file",
+   "summary": "End-to-end suite verifying monthly business and agent goals, progress measurement and commission tiers in Tunis time."
+  },
+  "file:api/test/e2e/stock.e2e.mjs": {
+   "name": "stock.e2e.mjs",
+   "type": "file",
+   "summary": "End-to-end suite for stock movements: restocks, sales, transfers and the negative stock guard."
+  },
+  "file:api/test/e2e/tickets.e2e.mjs": {
+   "name": "tickets.e2e.mjs",
+   "type": "file",
+   "summary": "End-to-end suite for the team tickets board: creation, assignment, moves, comments with images, notifications and My day listing."
+  },
+  "file:app/admin/layout.tsx": {
+   "name": "layout.tsx",
+   "type": "file",
+   "summary": "Client-rendered admin shell: grouped, permission-filtered sidebar menu, header with notification bell and language switch, Ant Design theme/locale/RTL configuration, role context and fetch cache installation."
+  },
+  "file:app/admin/login/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Back-office sign-in page that authenticates through the customer auth API, checks the back-office role and redirects to a safe next path."
+  },
+  "file:components/admin/AdminLanguageSwitcher.tsx": {
+   "name": "AdminLanguageSwitcher.tsx",
+   "type": "file",
+   "summary": "Selector that switches the admin UI language between English, French and Arabic."
+  },
+  "file:components/admin/admin-fetch-cache.ts": {
+   "name": "admin-fetch-cache.ts",
+   "type": "file",
+   "summary": "Patches window.fetch in the admin to cache small lookup lists (categories, colors, sizes, suppliers, locations) for 5 minutes and clear entries on writes."
+  },
+  "file:components/admin/mobile-table-labels.ts": {
+   "name": "mobile-table-labels.ts",
+   "type": "file",
+   "summary": "Hook that labels Ant Design table cells with their column titles so tables render as cards on mobile."
+  },
+  "file:lib/antd-config.ts": {
+   "name": "antd-config.ts",
+   "type": "file",
+   "summary": "Ant Design theme token configuration for the admin dashboard."
+  },
+  "file:instrumentation-client.ts": {
+   "name": "instrumentation-client.ts",
+   "type": "file",
+   "summary": "Browser Sentry initialization using shared options, exporting the router transition hook for navigation tracing."
+  },
+  "file:lib/app-env.ts": {
+   "name": "app-env.ts",
+   "type": "file",
+   "summary": "Exposes the deployment environment (APP_ENV, isProduction, isLocal) from NEXT_PUBLIC_APP_ENV instead of NODE_ENV."
+  },
+  "file:lib/sentry-options.ts": {
+   "name": "sentry-options.ts",
+   "type": "file",
+   "summary": "Shared Sentry options for browser, server and edge: environment tag, sample rates and a PII scrubber that strips customer data from events."
+  },
+  "file:sentry.edge.config.ts": {
+   "name": "sentry.edge.config.ts",
+   "type": "file",
+   "summary": "Sentry initialization for edge runtime code such as middleware."
+  },
+  "file:sentry.server.config.ts": {
+   "name": "sentry.server.config.ts",
+   "type": "file",
+   "summary": "Sentry initialization for the Node.js server runtime using the backend options."
+  },
+  "config:.dockerignore": {
+   "name": ".dockerignore",
+   "type": "config",
+   "summary": "Excludes node_modules, build output, git data, env files, the API and migrations from the web image build context."
+  },
+  "service:Dockerfile": {
+   "name": "Dockerfile",
+   "type": "service",
+   "summary": "Single-stage Node 22 image that installs dependencies, builds the Next.js site with env passed as a build secret, and runs next start on port 3000 as a non-root user."
+  },
+  "service:docker-compose.yml": {
+   "name": "docker-compose.yml",
+   "type": "service",
+   "summary": "Local stack: web site, NestJS API, Postgres 17, SeaweedFS S3 storage with bucket bootstrap, a socat gateway and the Colissimo mock service."
+  },
+  "service:api/Dockerfile": {
+   "name": "Dockerfile",
+   "type": "service",
+   "summary": "Multi-stage Alpine build of the NestJS API: compiles with the shared lib files, then a production image with runtime deps, migration scripts, migrations and the baseline schema, serving on port 4000."
+  },
+  "pipeline:.github/workflows/ci.yml": {
+   "name": "ci.yml",
+   "type": "pipeline",
+   "summary": "CI workflow on PRs (also reusable): type-check and lint the site, lint and build the API, then run the end-to-end suites against the Docker stack with migrations applied."
+  },
+  "pipeline:.github/workflows/deploy.yml": {
+   "name": "deploy.yml",
+   "type": "pipeline",
+   "summary": "Deploy workflow on push to main: runs CI, detects API changes, builds and pushes the API image to GHCR, then deploys over SSH with no downtime and checks health."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql": {
+   "name": "20260928135357_rebuild_storefront_schema.sql",
+   "type": "table",
+   "summary": "Baseline storefront schema: catalog (categories, products, variants, images, discounts), content (promotions, reels, hero sections), users, reviews, favorites, orders, carts and shipping/tax settings, with indexes, views and an updated_at trigger."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:categories": {
+   "name": "categories",
+   "type": "table",
+   "summary": "Product categories with localized names, nesting and featured position."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:products": {
+   "name": "products",
+   "type": "table",
+   "summary": "Catalog products with localized texts, pricing, status and search fields."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:colors": {
+   "name": "colors",
+   "type": "table",
+   "summary": "Color lookup for product variants."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:sizes": {
+   "name": "sizes",
+   "type": "table",
+   "summary": "Size lookup for product variants."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_variants": {
+   "name": "product_variants",
+   "type": "table",
+   "summary": "Color and size variants of a product with price and mirrored stock."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_images": {
+   "name": "product_images",
+   "type": "table",
+   "summary": "Product and variant photos with ordering."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_discounts": {
+   "name": "product_discounts",
+   "type": "table",
+   "summary": "Time-bound percentage discounts per product."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:promotions": {
+   "name": "promotions",
+   "type": "table",
+   "summary": "Promotional banners shown on the storefront."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:reels": {
+   "name": "reels",
+   "type": "table",
+   "summary": "Short video reels shown on the home page."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:hero_sections": {
+   "name": "hero_sections",
+   "type": "table",
+   "summary": "Hero cards and carousel slides ordered by sort_order."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:small_cards": {
+   "name": "small_cards",
+   "type": "table",
+   "summary": "Small promotional cards on the home page."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:users": {
+   "name": "users",
+   "type": "table",
+   "summary": "User profiles, later the account table with credentials and metadata."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:reviews": {
+   "name": "reviews",
+   "type": "table",
+   "summary": "Customer product reviews with ratings."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:user_favorites": {
+   "name": "user_favorites",
+   "type": "table",
+   "summary": "Products favorited by shoppers."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:orders": {
+   "name": "orders",
+   "type": "table",
+   "summary": "Customer orders with status, totals and shipping details."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:order_items": {
+   "name": "order_items",
+   "type": "table",
+   "summary": "Order lines with variant, quantity and price."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:newsletter_subscribers": {
+   "name": "newsletter_subscribers",
+   "type": "table",
+   "summary": "Newsletter email subscriptions."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:carts": {
+   "name": "carts",
+   "type": "table",
+   "summary": "Server-side carts used for abandoned-cart analytics."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:cart_items": {
+   "name": "cart_items",
+   "type": "table",
+   "summary": "Lines of tracked carts."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:site_settings": {
+   "name": "site_settings",
+   "type": "table",
+   "summary": "Key/value settings read by the storefront."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:shipping_rates": {
+   "name": "shipping_rates",
+   "type": "table",
+   "summary": "Shipping cost per country."
+  },
+  "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:country_tax_rates": {
+   "name": "country_tax_rates",
+   "type": "table",
+   "summary": "Tax rate per country."
+  },
+  "table:supabase/migrations/20260928141343_seed_tunisia_shipping_rate.sql": {
+   "name": "20260928141343_seed_tunisia_shipping_rate.sql",
+   "type": "table",
+   "summary": "Seeds the standard Tunisia shipping rate row (8 TND, free above the global threshold) so calculateShipping stops falling back on every checkout."
+  },
+  "table:supabase/migrations/20260928164330_category_hierarchy.sql": {
+   "name": "20260928164330_category_hierarchy.sql",
+   "type": "table",
+   "summary": "Adds categories.parent_id with an index so categories can be nested and category pages include descendant products."
+  },
+  "table:supabase/migrations/20260928183053_customer_accounts.sql": {
+   "name": "20260928183053_customer_accounts.sql",
+   "type": "table",
+   "summary": "Customer accounts: keeps a public.users profile row (name and avatar only) in sync with auth users through a trigger."
+  },
+  "table:supabase/migrations/20261001112501_stock_management.sql": {
+   "name": "20261001112501_stock_management.sql",
+   "type": "table",
+   "summary": "Stock management merged from the separate stock app: locations, suppliers, collections, product costs, per-location inventory levels and the append-only stock_movements ledger, with triggers that apply movements, mirror online stock, and generate product codes and SKUs."
+  },
+  "table:supabase/migrations/20261001112501_stock_management.sql:locations": {
+   "name": "locations",
+   "type": "table",
+   "summary": "Stock locations (warehouse, online, shops)."
+  },
+  "table:supabase/migrations/20261001112501_stock_management.sql:suppliers": {
+   "name": "suppliers",
+   "type": "table",
+   "summary": "Suppliers of goods and materials."
+  },
+  "table:supabase/migrations/20261001112501_stock_management.sql:collections": {
+   "name": "collections",
+   "type": "table",
+   "summary": "Product collections."
+  },
+  "table:supabase/migrations/20261001112501_stock_management.sql:product_costs": {
+   "name": "product_costs",
+   "type": "table",
+   "summary": "Purchase cost per product."
+  },
+  "table:supabase/migrations/20261001112501_stock_management.sql:inventory_levels": {
+   "name": "inventory_levels",
+   "type": "table",
+   "summary": "Stock quantity per variant and location, maintained by trigger."
+  },
+  "table:supabase/migrations/20261001112501_stock_management.sql:stock_movements": {
+   "name": "stock_movements",
+   "type": "table",
+   "summary": "Append-only ledger of stock changes."
+  },
+  "table:supabase/migrations/20261001130516_stock_trigger_privileges.sql": {
+   "name": "20261001130516_stock_trigger_privileges.sql",
+   "type": "table",
+   "summary": "Makes the stock trigger functions SECURITY DEFINER so callers without usage on the private schema can still fire them."
+  },
+  "table:supabase/migrations/20261001170000_transactional_writes.sql": {
+   "name": "20261001170000_transactional_writes.sql",
+   "type": "table",
+   "summary": "Wraps multi-step writes (create_order, set_order_status, delete_orders, save_product, record_stock_movements) in Postgres functions so each runs in one transaction."
+  },
+  "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql": {
+   "name": "20261002082656_soft_deletes_and_landing_products.sql",
+   "type": "table",
+   "summary": "Introduces soft deletes (deleted_at columns plus a prevent_hard_delete trigger on business tables) and the landing_products table for home page picks."
+  },
+  "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql:landing_products": {
+   "name": "landing_products",
+   "type": "table",
+   "summary": "Pinned product picks per home page section."
+  },
+  "table:supabase/migrations/20261002084321_landing_config_and_activity_log.sql": {
+   "name": "20261002084321_landing_config_and_activity_log.sql",
+   "type": "table",
+   "summary": "Makes every home section configurable (landing products, featured categories, landing_config) and adds the append-only activity_log filled by the log_activity trigger."
+  },
+  "table:supabase/migrations/20261002084321_landing_config_and_activity_log.sql:activity_log": {
+   "name": "activity_log",
+   "type": "table",
+   "summary": "Append-only audit log of staff changes."
+  },
+  "table:supabase/migrations/20261002090113_permanent_deletes.sql": {
+   "name": "20261002090113_permanent_deletes.sql",
+   "type": "table",
+   "summary": "Adds purge_deleted for permanently erasing already soft-deleted rows, trusted actor headers for the activity log, save_landing_page and delete_variant."
+  },
+  "table:supabase/migrations/20261004085227_product_search.sql": {
+   "name": "20261004085227_product_search.sql",
+   "type": "table",
+   "summary": "Product search: normalized search_name/search_text columns maintained by triggers, a trigram index, and the ranked search_products function with fuzzy fallback."
+  },
+  "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql": {
+   "name": "20261004092308_notifications_and_owner_alerts.sql",
+   "type": "table",
+   "summary": "Back-office notifications: back_office_users, per-recipient trilingual notifications, push subscriptions, a new-order trigger and owner_alerts rules on activity_log."
+  },
+  "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql:back_office_users": {
+   "name": "back_office_users",
+   "type": "table",
+   "summary": "Back-office recipients and roles for notifications."
+  },
+  "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql:notifications": {
+   "name": "notifications",
+   "type": "table",
+   "summary": "Per-recipient trilingual back-office notifications."
+  },
+  "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql:push_subscriptions": {
+   "name": "push_subscriptions",
+   "type": "table",
+   "summary": "Web Push subscriptions of back-office browsers."
+  },
+  "table:supabase/migrations/20261004120000_update_delivery_fee_to_8.sql": {
+   "name": "20261004120000_update_delivery_fee_to_8.sql",
+   "type": "table",
+   "summary": "Data migration that updates the live Tunisia delivery fee to 8 TND on existing installations."
+  },
+  "table:supabase/migrations/20261005145858_made_to_order_stock.sql": {
+   "name": "20261005145858_made_to_order_stock.sql",
+   "type": "table",
+   "summary": "Redefines apply_order_stock so validating an order deducts only the units the online location holds; the rest is made to order."
+  },
+  "table:supabase/migrations/20261006142809_colissimo_deliveries.sql": {
+   "name": "20261006142809_colissimo_deliveries.sql",
+   "type": "table",
+   "summary": "Colissimo parcels: the deliveries table (one live parcel per order) and begin/complete/fail_delivery and record_delivery_status functions."
+  },
+  "table:supabase/migrations/20261006142809_colissimo_deliveries.sql:deliveries": {
+   "name": "deliveries",
+   "type": "table",
+   "summary": "Colissimo parcels, one live parcel per order."
+  },
+  "table:supabase/migrations/20261007104019_delivery_on_validation.sql": {
+   "name": "20261007104019_delivery_on_validation.sql",
+   "type": "table",
+   "summary": "Changes complete_delivery and record_delivery_status so creating a parcel validates the order and carrier pickup marks it shipped."
+  },
+  "table:supabase/migrations/20261014081317_manual_order_parcel.sql": {
+   "name": "20261014081317_manual_order_parcel.sql",
+   "type": "table",
+   "summary": "Adds create_order_with_delivery, saving an order, its lines and Colissimo parcel and validating it in one transaction."
+  },
+  "table:supabase/migrations/20261014090736_agent_orders_performance.sql": {
+   "name": "20261014090736_agent_orders_performance.sql",
+   "type": "table",
+   "summary": "Records which agent created each order (orders.created_by) and adds agent_performance() for comparing agents."
+  },
+  "table:supabase/migrations/20261016120000_erp_sales_crm.sql": {
+   "name": "20261016120000_erp_sales_crm.sql",
+   "type": "table",
+   "summary": "ERP part 1: sales pipeline statuses and channels, CRM customers with interactions and tasks, campaigns and ad spend, order payments, carrier remittances, treasury movements, goals and stock costing."
+  },
+  "table:supabase/migrations/20261016120000_erp_sales_crm.sql:erp_settings": {
+   "name": "erp_settings",
+   "type": "table",
+   "summary": "Admin-only business rule settings."
+  },
+  "table:supabase/migrations/20261016120000_erp_sales_crm.sql:ad_campaigns": {
+   "name": "ad_campaigns",
+   "type": "table",
+   "summary": "Marketing campaigns orders can be attributed to."
+  },
+  "table:supabase/migrations/20261016120000_erp_sales_crm.sql:ad_spend": {
+   "name": "ad_spend",
+   "type": "table",
+   "summary": "Daily advertising spend per campaign."
+  },
+  "table:supabase/migrations/20261016120000_erp_sales_crm.sql:customers": {
+   "name": "customers",
+   "type": "table",
+   "summary": "CRM customers, one live row per normalized phone."
+  },
+  "table:supabase/migrations/20261016120000_erp_sales_crm.sql:customer_interactions": {
+   "name": "customer_interactions",
+   "type": "table",
+   "summary": "Customer conversations and notes."
+  },
+  "table:supabase/migrations/20261016120000_erp_sales_crm.sql:crm_tasks": {
+   "name": "crm_tasks",
+   "type": "table",
+   "summary": "Customer follow-up tasks."
+  },
+  "table:supabase/migrations/20261016120000_erp_sales_crm.sql:cod_remittances": {
+   "name": "cod_remittances",
+   "type": "table",
+   "summary": "Carrier cash-on-delivery payouts with fees."
+  },
+  "table:supabase/migrations/20261016120000_erp_sales_crm.sql:order_payments": {
+   "name": "order_payments",
+   "type": "table",
+   "summary": "Payments and refunds received per order and account."
+  },
+  "table:supabase/migrations/20261016120000_erp_sales_crm.sql:treasury_movements": {
+   "name": "treasury_movements",
+   "type": "table",
+   "summary": "Other cash and bank movements."
+  },
+  "table:supabase/migrations/20261016120000_erp_sales_crm.sql:agent_goals": {
+   "name": "agent_goals",
+   "type": "table",
+   "summary": "Monthly targets and commissions per agent."
+  },
+  "table:supabase/migrations/20261016120000_erp_sales_crm.sql:business_goals": {
+   "name": "business_goals",
+   "type": "table",
+   "summary": "Monthly goals for the whole business."
+  },
+  "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql": {
+   "name": "20261016121000_erp_purchasing_pos.sql",
+   "type": "table",
+   "summary": "ERP part 2: raw materials and bills of materials, production, purchase orders and receipts with quality check, and point-of-sale till sessions and sales."
+  },
+  "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:raw_materials": {
+   "name": "raw_materials",
+   "type": "table",
+   "summary": "Raw materials used in production."
+  },
+  "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:material_movements": {
+   "name": "material_movements",
+   "type": "table",
+   "summary": "Append-only raw material stock movements."
+  },
+  "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:product_bom": {
+   "name": "product_bom",
+   "type": "table",
+   "summary": "Bill of materials per product."
+  },
+  "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:product_costing": {
+   "name": "product_costing",
+   "type": "table",
+   "summary": "Labor and overhead costs per product."
+  },
+  "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_orders": {
+   "name": "purchase_orders",
+   "type": "table",
+   "summary": "Purchase orders and price requests to suppliers."
+  },
+  "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_order_lines": {
+   "name": "purchase_order_lines",
+   "type": "table",
+   "summary": "Lines of purchase orders."
+  },
+  "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_receipts": {
+   "name": "purchase_receipts",
+   "type": "table",
+   "summary": "Goods receipts against purchase orders."
+  },
+  "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:purchase_receipt_lines": {
+   "name": "purchase_receipt_lines",
+   "type": "table",
+   "summary": "Accepted and rejected quantities per receipt line."
+  },
+  "table:supabase/migrations/20261016121000_erp_purchasing_pos.sql:pos_sessions": {
+   "name": "pos_sessions",
+   "type": "table",
+   "summary": "Till sessions per shop location."
+  },
+  "table:supabase/migrations/20261016122000_erp_accounting.sql": {
+   "name": "20261016122000_erp_accounting.sql",
+   "type": "table",
+   "summary": "ERP part 3: Tunisian SCE chart of accounts, journals booked automatically by triggers, bills, sales invoices, bank reconciliation, documents and owner overview reports."
+  },
+  "table:supabase/migrations/20261016122000_erp_accounting.sql:accounts": {
+   "name": "accounts",
+   "type": "table",
+   "summary": "Chart of accounts (Tunisian SCE)."
+  },
+  "table:supabase/migrations/20261016122000_erp_accounting.sql:document_counters": {
+   "name": "document_counters",
+   "type": "table",
+   "summary": "Gap-free numbering counters per journal and year."
+  },
+  "table:supabase/migrations/20261016122000_erp_accounting.sql:journal_entries": {
+   "name": "journal_entries",
+   "type": "table",
+   "summary": "Accounting journal entries (draft or posted)."
+  },
+  "table:supabase/migrations/20261016122000_erp_accounting.sql:journal_lines": {
+   "name": "journal_lines",
+   "type": "table",
+   "summary": "Debit/credit lines of journal entries."
+  },
+  "table:supabase/migrations/20261016122000_erp_accounting.sql:bills": {
+   "name": "bills",
+   "type": "table",
+   "summary": "Supplier invoices and expenses."
+  },
+  "table:supabase/migrations/20261016122000_erp_accounting.sql:bill_payments": {
+   "name": "bill_payments",
+   "type": "table",
+   "summary": "Payments of bills."
+  },
+  "table:supabase/migrations/20261016122000_erp_accounting.sql:sales_invoices": {
+   "name": "sales_invoices",
+   "type": "table",
+   "summary": "Issued sales invoices and credit notes."
+  },
+  "table:supabase/migrations/20261016122000_erp_accounting.sql:bank_statement_lines": {
+   "name": "bank_statement_lines",
+   "type": "table",
+   "summary": "Imported bank statement lines for reconciliation."
+  },
+  "table:supabase/migrations/20261016122000_erp_accounting.sql:documents": {
+   "name": "documents",
+   "type": "table",
+   "summary": "Business documents stored in the private bucket."
+  },
+  "table:supabase/migrations/20261023204053_own_auth_accounts.sql": {
+   "name": "20261023204053_own_auth_accounts.sql",
+   "type": "table",
+   "summary": "NestJS migration phase 3: public.users becomes the account table and NestJS-owned user_sessions and auth_tokens replace Supabase Auth."
+  },
+  "table:supabase/migrations/20261023204053_own_auth_accounts.sql:user_sessions": {
+   "name": "user_sessions",
+   "type": "table",
+   "summary": "Refresh-token sessions of signed-in users."
+  },
+  "table:supabase/migrations/20261023204053_own_auth_accounts.sql:auth_tokens": {
+   "name": "auth_tokens",
+   "type": "table",
+   "summary": "Single-use confirmation and password reset tokens."
+  },
+  "table:supabase/migrations/20261023214627_notifications_from_nestjs.sql": {
+   "name": "20261023214627_notifications_from_nestjs.sql",
+   "type": "table",
+   "summary": "NestJS migration phase 4: announces each new or changed notification on the Postgres notifications channel for NestJS to stream and push."
+  },
+  "table:supabase/migrations/20261024134433_plain_postgres_ready.sql": {
+   "name": "20261024134433_plain_postgres_ready.sql",
+   "type": "table",
+   "summary": "NestJS migration phase 5: removes Supabase-only dependencies so the schema can be dumped and restored on plain Postgres."
+  },
+  "table:supabase/migrations/20261024160000_objective_prize_tiers.sql": {
+   "name": "20261024160000_objective_prize_tiers.sql",
+   "type": "table",
+   "summary": "Adds prize-tier commissions to agent_goals and an analytics start date, updating set_agent_goal."
+  },
+  "table:supabase/migrations/20261026150000_colissimo_v2.sql": {
+   "name": "20261026150000_colissimo_v2.sql",
+   "type": "table",
+   "summary": "Colissimo v2 support: delivery payment and driver status fields, handover manifests, price-change requests and v2 status names in record_delivery_status."
+  },
+  "table:supabase/migrations/20261028120000_colissimo_history_import.sql": {
+   "name": "20261028120000_colissimo_history_import.sql",
+   "type": "table",
+   "summary": "Adds import_colissimo_history to turn past Colissimo parcels and payouts into COL- orders, customers and payments, silencing new-order notifications for imports."
+  },
+  "table:supabase/migrations/20261102120000_edit_order.sql": {
+   "name": "20261102120000_edit_order.sql",
+   "type": "table",
+   "summary": "Adds edit_order for changing customer, lines, fees and notes of an order still to confirm or confirmed, relinking its customer."
+  },
+  "table:supabase/migrations/20261104120000_order_traffic_source.sql": {
+   "name": "20261104120000_order_traffic_source.sql",
+   "type": "table",
+   "summary": "Adds the website traffic source column to orders, sent by the storefront at checkout."
+  },
+  "table:supabase/migrations/20261104130000_shop_stock.sql": {
+   "name": "20261104130000_shop_stock.sql",
+   "type": "table",
+   "summary": "Shop locations with their own low-stock limit, a pos notification audience, and notify_low_stock alerts for cashiers."
+  },
+  "table:supabase/migrations/20261104150000_social_comments.sql": {
+   "name": "20261104150000_social_comments.sql",
+   "type": "table",
+   "summary": "social_comments table for Facebook/Instagram post comments with a trigger that detects Tunisian phone numbers and turns them into CRM leads."
+  },
+  "table:supabase/migrations/20261104150000_social_comments.sql:social_comments": {
+   "name": "social_comments",
+   "type": "table",
+   "summary": "Public social media post comments."
+  },
+  "table:supabase/migrations/20261105120000_team_tickets.sql": {
+   "name": "20261105120000_team_tickets.sql",
+   "type": "table",
+   "summary": "Team tasks board: team_tickets table, assignee notification trigger, and overdue tickets in the daily alerts."
+  },
+  "table:supabase/migrations/20261105120000_team_tickets.sql:team_tickets": {
+   "name": "team_tickets",
+   "type": "table",
+   "summary": "Back-office team task tickets."
+  },
+  "table:supabase/migrations/20261105130000_faster_owner_overview.sql": {
+   "name": "20261105130000_faster_owner_overview.sql",
+   "type": "table",
+   "summary": "Redefines owner_overview with JIT disabled and a leaner query, cutting it from about 10 seconds to well under one."
+  },
+  "table:supabase/migrations/20261105131000_orders_open_indexes.sql": {
+   "name": "20261105131000_orders_open_indexes.sql",
+   "type": "table",
+   "summary": "Adds partial indexes for orders still to confirm and for confirmed dates, removing full scans on My day and Objectives."
+  },
+  "table:supabase/migrations/20261105140000_ticket_comments_and_restore.sql": {
+   "name": "20261105140000_ticket_comments_and_restore.sql",
+   "type": "table",
+   "summary": "team_ticket_comments with image support and notifications, plus restore_deleted for owners and team tasks in purge_deleted."
+  },
+  "table:supabase/migrations/20261105140000_ticket_comments_and_restore.sql:team_ticket_comments": {
+   "name": "team_ticket_comments",
+   "type": "table",
+   "summary": "Comments and images on team tickets."
+  },
+  "table:supabase/migrations/20261105160000_team_ticket_board.sql": {
+   "name": "20261105160000_team_ticket_board.sql",
+   "type": "table",
+   "summary": "Adds ticket numbers (T-12) and column positions to team_tickets for the drag-and-drop board."
+  },
+  "file:.git-ssh-setup.sh": {
+   "name": ".git-ssh-setup.sh",
+   "type": "file",
+   "summary": "One-off helper script that switches the git origin remote from HTTPS to SSH and prints the steps to create and register an SSH key on GitHub."
+  },
+  "document:CLAUDE.md": {
+   "name": "CLAUDE.md",
+   "type": "document",
+   "summary": "Primary engineering guide for AI assistants and developers: commands, architecture (middleware gate, sessions, i18n, Postgres access rules, stock, ERP, caching) and conventions for the Next.js storefront and NestJS API."
+  },
+  "document:README.md": {
+   "name": "README.md",
+   "type": "document",
+   "summary": "Stock create-next-app README describing how to run the dev server and linking to Next.js and Vercel docs; not project-specific."
+  },
+  "config:netlify.toml": {
+   "name": "netlify.toml",
+   "type": "config",
+   "summary": "Legacy Netlify build configuration running the Next.js build with the Netlify Next.js plugin on Node 20 and catch-all redirects to the server function."
+  },
+  "config:package.json": {
+   "name": "package.json",
+   "type": "config",
+   "summary": "Root npm manifest for the Next.js 15 storefront and admin: dev/build/lint scripts, the WooCommerce import and Docker helper scripts, and React 19, antd 6, Sentry, zod and Tailwind v4 dependencies."
+  },
+  "config:skills-lock.json": {
+   "name": "skills-lock.json",
+   "type": "config",
+   "summary": "Lock file pinning two Supabase agent skills (supabase and postgres best practices) from GitHub by content hash."
+  },
+  "config:tsconfig.json": {
+   "name": "tsconfig.json",
+   "type": "config",
+   "summary": "TypeScript compiler configuration for the Next.js app with strict mode, bundler module resolution and the @/* path alias."
+  },
+  "config:vercel.json": {
+   "name": "vercel.json",
+   "type": "config",
+   "summary": "Vercel configuration whose ignoreCommand skips site builds when a push only touches backend folders (api, supabase, db, deploy, infra)."
+  },
+  "config:api/.env.example": {
+   "name": ".env.example",
+   "type": "config",
+   "summary": "Example environment for running the NestJS API locally: database and LISTEN URLs, AUTH_SECRET, SMTP, S3 storage, VAPID push keys, owner/admin emails, revalidation secret, Sentry, ENV and PORT."
+  },
+  "service:api/Dockerfile.dockerignore": {
+   "name": "Dockerfile.dockerignore",
+   "type": "service",
+   "summary": "Dockerfile-specific ignore list that restricts the repo-root build context to lib, api, migrations and the baseline SQL, excluding node_modules, dist and .env."
+  },
+  "document:api/README.md": {
+   "name": "README.md",
+   "type": "document",
+   "summary": "Guide to the NestJS API: how to run it, how it fits behind the Next.js /api rewrite, the end-to-end test suites and the Docker image."
+  },
+  "config:api/nest-cli.json": {
+   "name": "nest-cli.json",
+   "type": "config",
+   "summary": "Nest CLI configuration setting the source root, clean output builds and the api/src/main entry file."
+  },
+  "config:api/package.json": {
+   "name": "package.json",
+   "type": "config",
+   "summary": "npm manifest for the NestJS 11 API: build/start scripts, the chained e2e test suites, DB type generation, and dependencies such as Kysely, pg and web-push."
+  },
+  "config:api/tsconfig.build.json": {
+   "name": "tsconfig.build.json",
+   "type": "config",
+   "summary": "Build-only TypeScript config extending the API tsconfig and excluding tests and output folders."
+  },
+  "config:api/tsconfig.json": {
+   "name": "tsconfig.json",
+   "type": "config",
+   "summary": "TypeScript configuration for the NestJS API with decorator metadata and the @shared/* alias to root lib files."
+  },
+  "config:deploy/.env.example": {
+   "name": ".env.example",
+   "type": "config",
+   "summary": "Template for the production server .env: Postgres credentials, auth and revalidation secrets, site domain, S3 buckets, SMTP, VAPID, Colissimo, Meta/WhatsApp tokens and Sentry."
+  },
+  "file:deploy/backup.sh": {
+   "name": "backup.sh",
+   "type": "file",
+   "summary": "Hourly backup script that pg_dumps the production database, uploads it to the S3 backup bucket via rclone, prunes local dumps and reports a CloudWatch metric for the missing-backup alarm."
+  },
+  "file:deploy/deploy.sh": {
+   "name": "deploy.sh",
+   "type": "file",
+   "summary": "Zero-downtime API deploy script: backs up, runs pending migrations, starts the new API container beside the old one, waits for health, then retires the old container or rolls back."
+  },
+  "service:deploy/docker-compose.prod.yml": {
+   "name": "docker-compose.prod.yml",
+   "type": "service",
+   "summary": "Production compose stack on the EC2 server: Postgres 17 (loopback-only), the NestJS API image with a health check, and Caddy as HTTPS reverse proxy load-balancing across API containers."
+  },
+  "document:docs/DEPLOY.md": {
+   "name": "DEPLOY.md",
+   "type": "document",
+   "summary": "Production runbook: site on Vercel and API on one AWS server, costs, one-time setup (AWS, SSH, Terraform, DNS, GitHub, Vercel), everyday deploys, backups and alerts."
+  },
+  "document:docs/DOCKER.md": {
+   "name": "DOCKER.md",
+   "type": "document",
+   "summary": "Guide to running the whole stack locally in Docker: creating .env.docker, starting Postgres and file storage, copying a database, building the app and running the tests."
+  },
+  "document:docs/META.md": {
+   "name": "META.md",
+   "type": "document",
+   "summary": "Setup guide for connecting Facebook, Instagram and WhatsApp through a Meta app: permanent tokens, server env vars, webhook subscription, going live, Meta rules and TikTok notes."
+  },
+  "document:docs/MIGRATION-NESTJS-TASKS.md": {
+   "name": "MIGRATION-NESTJS-TASKS.md",
+   "type": "document",
+   "summary": "Task-by-task plan for phase 0 of the NestJS migration (app setup, DB module, withActor, auth guard, errors, routing, CI) and the categories pilot module."
+  },
+  "document:docs/MIGRATION-NESTJS.md": {
+   "name": "MIGRATION-NESTJS.md",
+   "type": "document",
+   "summary": "Migration plan from Next.js API routes on Supabase to NestJS on plain Postgres: target architecture, Supabase feature replacements, phases, hosting cost, risks and decisions."
+  },
+  "resource:infra/terraform/aws.tf": {
+   "name": "aws.tf",
+   "type": "resource",
+   "summary": "Main Terraform for production AWS: security group, IAM instance role, the ARM EC2 server with Elastic IP and daily snapshots, S3 buckets for products/documents/backups, a monthly budget, and CloudWatch alarms via SNS email."
+  },
+  "resource:infra/terraform/aws.tf:aws_instance.server": {
+   "name": "aws_instance.server",
+   "type": "resource",
+   "summary": "EC2 instance running Postgres, the NestJS API and Caddy, bootstrapped by cloud-init."
+  },
+  "resource:infra/terraform/aws.tf:aws_security_group.server": {
+   "name": "aws_security_group.server",
+   "type": "resource",
+   "summary": "Security group allowing HTTP/HTTPS publicly and SSH only from the allowed CIDR."
+  },
+  "resource:infra/terraform/aws.tf:aws_iam_role.server": {
+   "name": "aws_iam_role.server",
+   "type": "resource",
+   "summary": "Instance role the server uses to sign S3 and CloudWatch calls without static keys."
+  },
+  "resource:infra/terraform/aws.tf:aws_eip.server": {
+   "name": "aws_eip.server",
+   "type": "resource",
+   "summary": "Elastic IP giving the API server a stable public address."
+  },
+  "resource:infra/terraform/aws.tf:aws_dlm_lifecycle_policy.server": {
+   "name": "aws_dlm_lifecycle_policy.server",
+   "type": "resource",
+   "summary": "Data Lifecycle Manager policy taking daily disk snapshots of the server."
+  },
+  "resource:infra/terraform/aws.tf:aws_s3_bucket.products": {
+   "name": "aws_s3_bucket.products",
+   "type": "resource",
+   "summary": "Public-read S3 bucket holding product images."
+  },
+  "resource:infra/terraform/aws.tf:aws_s3_bucket.documents": {
+   "name": "aws_s3_bucket.documents",
+   "type": "resource",
+   "summary": "Private S3 bucket for accounting documents and ticket attachments."
+  },
+  "resource:infra/terraform/aws.tf:aws_s3_bucket.backups": {
+   "name": "aws_s3_bucket.backups",
+   "type": "resource",
+   "summary": "S3 bucket receiving hourly database dumps, expired by a 30-day lifecycle rule."
+  },
+  "resource:infra/terraform/aws.tf:aws_budgets_budget.monthly": {
+   "name": "aws_budgets_budget.monthly",
+   "type": "resource",
+   "summary": "Monthly AWS cost budget that emails alerts as spend approaches the limit."
+  },
+  "resource:infra/terraform/aws.tf:aws_cloudwatch_metric_alarm.backup_missing": {
+   "name": "aws_cloudwatch_metric_alarm.backup_missing",
+   "type": "resource",
+   "summary": "Alarm that fires when the BackupSucceeded metric stops arriving from backup.sh."
+  },
+  "resource:infra/terraform/aws.tf:aws_sns_topic.alerts": {
+   "name": "aws_sns_topic.alerts",
+   "type": "resource",
+   "summary": "SNS topic delivering CloudWatch alarm emails."
+  },
+  "config:infra/terraform/cloud-init.yaml": {
+   "name": "cloud-init.yaml",
+   "type": "config",
+   "summary": "Cloud-init first-boot config for the server: installs Docker, fail2ban and unattended upgrades, creates a key-only deploy user and /opt/kachabity, adds swap and the hourly backup cron."
+  },
+  "resource:infra/terraform/outputs.tf": {
+   "name": "outputs.tf",
+   "type": "resource",
+   "summary": "Terraform outputs exposing the server public IP, the API URL and the env values (buckets, region, file URL) to paste into the server .env."
+  },
+  "resource:infra/terraform/variables.tf": {
+   "name": "variables.tf",
+   "type": "resource",
+   "summary": "Terraform input variables: region, instance type, disk size, snapshot retention, budget amount and email, SSH keys and CIDR, and the site domain."
+  },
+  "resource:infra/terraform/versions.tf": {
+   "name": "versions.tf",
+   "type": "resource",
+   "summary": "Terraform version and provider pins (aws ~> 6, random ~> 3.6), the S3 state backend and the AWS provider with default project tags."
+  },
+  "config:scripts/import/colors.json": {
+   "name": "colors.json",
+   "type": "config",
+   "summary": "Lookup table mapping WooCommerce color names to hex codes used when importing product variants."
+  },
+  "config:scripts/import/descriptions.json": {
+   "name": "descriptions.json",
+   "type": "config",
+   "summary": "English and French product descriptions keyed by WooCommerce product id, applied by the WooCommerce importer."
+  },
+  "config:scripts/import/translations.json": {
+   "name": "translations.json",
+   "type": "config",
+   "summary": "Arabic-to-English/French translation tables for categories (with slugs and sort order) and product names used by the WooCommerce importer."
+  },
+  "file:.gitattributes": {
+   "name": ".gitattributes",
+   "type": "file",
+   "summary": "Git attributes forcing LF line endings for shell scripts and the Terraform cloud-init file so they run on Linux even from a Windows checkout."
+  },
+  "file:.github/scripts/api-changed.mjs": {
+   "name": "api-changed.mjs",
+   "type": "file",
+   "summary": "CI helper that diffs two commits and prints api=true when the API, migrations, baseline, deploy files, or any lib/ file the API compiles against changed; drives whether deploy.yml redeploys the NestJS server."
+  },
+  "config:.ua/config.json": {
+   "name": "config.json",
+   "type": "config",
+   "summary": "Understand-Anything tool configuration setting the knowledge-graph output language to English."
+  },
+  "file:.vercelignore": {
+   "name": ".vercelignore",
+   "type": "file",
+   "summary": "Vercel ignore file excluding the root api/ NestJS folder so Vercel does not turn it into serverless functions."
+  },
+  "file:api/eslint.config.mjs": {
+   "name": "eslint.config.mjs",
+   "type": "file",
+   "summary": "ESLint flat config for the NestJS API combining recommended JS and type-checked typescript-eslint rules with Prettier, Node/Jest globals and relaxed any/floating-promise rules."
+  },
+  "file:api/scripts/copy-storage.mjs": {
+   "name": "copy-storage.mjs",
+   "type": "file",
+   "summary": "One-off migration script that copies the Supabase Storage buckets (products, documents) to S3-compatible storage via aws4fetch and, with --rewrite, rewrites stored product-image URLs in Postgres to the new public file host."
+  },
+  "file:api/scripts/db-types.mjs": {
+   "name": "db-types.mjs",
+   "type": "file",
+   "summary": "Regenerates the Kysely database types (src/db/types.ts) with kysely-codegen and patches Int8 and Timestamp types to match the API value parsers."
+  },
+  "file:api/scripts/migrate.mjs": {
+   "name": "migrate.mjs",
+   "type": "file",
+   "summary": "Migration runner for plain Postgres: loads db/baseline.sql into an empty database, then applies each pending supabase/migrations file in its own transaction and records it in schema_migrations, with a --dry-run mode."
+  },
+  "document:app/[locale]/settings/README.md": {
+   "name": "README.md",
+   "type": "document",
+   "summary": "Historical implementation notes for the customer settings page describing its tabs (orders, account info, security, saved items, logout), auth protection and profile editing."
+  },
+  "file:app/admin/loading.tsx": {
+   "name": "loading.tsx",
+   "type": "file",
+   "summary": "Next.js loading boundary for the admin area showing a centered Ant Design spinner while the next admin page loads."
+  },
+  "file:app/api-docs/page.tsx": {
+   "name": "page.tsx",
+   "type": "file",
+   "summary": "Client page that loads swagger-ui from a CDN and renders the OpenAPI spec served at /api/docs."
+  },
+  "file:app/global-error.tsx": {
+   "name": "global-error.tsx",
+   "type": "file",
+   "summary": "Root-level Next.js error boundary that reports the crash to Sentry and renders a trilingual (ar/fr/en) fallback page with a retry button."
+  },
+  "file:app/globals.css": {
+   "name": "globals.css",
+   "type": "file",
+   "summary": "Global Tailwind v4 stylesheet defining brand color tokens, theme font variables, custom font sizes and base styles."
+  },
+  "file:app/layout.tsx": {
+   "name": "layout.tsx",
+   "type": "file",
+   "summary": "Root Next.js layout: self-hosted fonts, viewport and SEO metadata, Organization JSON-LD, html lang from the x-locale header, and the react-hot-toast Toaster."
+  },
+  "file:app/manifest.ts": {
+   "name": "manifest.ts",
+   "type": "file",
+   "summary": "Next.js web app manifest route describing the Kachabity PWA name, colors, start URL and icon."
+  },
+  "file:app/robots.ts": {
+   "name": "robots.ts",
+   "type": "file",
+   "summary": "Next.js robots route allowing all crawlers except /private/ and pointing to the sitemap."
+  },
+  "file:app/sitemap.ts": {
+   "name": "sitemap.ts",
+   "type": "file",
+   "summary": "Next.js sitemap route listing the main static storefront pages with change frequency and priority."
+  },
+  "file:components/carousel/index.ts": {
+   "name": "index.ts",
+   "type": "file",
+   "summary": "Barrel re-exporting the CarouselIndicators and CarouselNavigation components."
+  },
+  "file:components/cart/index.ts": {
+   "name": "index.ts",
+   "type": "file",
+   "summary": "Barrel re-exporting the cart UI components: AddToCartButton, CartButton, CartDrawer and CartItem."
+  },
+  "file:components/footer/index.ts": {
+   "name": "index.ts",
+   "type": "file",
+   "summary": "Barrel re-exporting the Footer and FooterSection components."
+  },
+  "file:components/forms/FormInput.tsx": {
+   "name": "FormInput.tsx",
+   "type": "file",
+   "summary": "Reusable labelled text input wired to react-hook-form register with required marker and validation error display."
+  },
+  "file:components/forms/FormSelect.tsx": {
+   "name": "FormSelect.tsx",
+   "type": "file",
+   "summary": "Reusable labelled select bound to react-hook-form that renders options and shows validation errors."
+  },
+  "file:components/forms/FormTextarea.tsx": {
+   "name": "FormTextarea.tsx",
+   "type": "file",
+   "summary": "Reusable labelled textarea bound to react-hook-form with validation error display."
+  },
+  "document:components/forms/README.md": {
+   "name": "README.md",
+   "type": "document",
+   "summary": "Usage guide for the reusable form components (FormInput, FormSelect, FormTextarea) with React Hook Form + Zod examples and prop lists."
+  },
+  "file:components/layout/index.ts": {
+   "name": "index.ts",
+   "type": "file",
+   "summary": "Barrel re-exporting the StaticHeader layout component."
+  },
+  "file:components/products/index.ts": {
+   "name": "index.ts",
+   "type": "file",
+   "summary": "Barrel re-exporting the storefront product components: ProductGrid, PromoProductCard, PromoProducts and TopProducts."
+  },
+  "file:components/reviews/index.ts": {
+   "name": "index.ts",
+   "type": "file",
+   "summary": "Barrel re-exporting the review components CustomerFeedback and ReviewCard."
+  },
+  "file:components/sections/index.ts": {
+   "name": "index.ts",
+   "type": "file",
+   "summary": "Barrel re-exporting home page section components: HeroSection, NewsletterForm, SaleBanner, SocialLinks and TermsSection."
+  },
+  "file:components/services/index.ts": {
+   "name": "index.ts",
+   "type": "file",
+   "summary": "Barrel re-exporting ServiceHighlightCard and ServiceHighlights for the storefront service highlights strip."
+  },
+  "file:components/timers/index.ts": {
+   "name": "index.ts",
+   "type": "file",
+   "summary": "Barrel re-exporting the CountdownTimer and PromoCountdownTimer promotion timer components."
+  },
+  "file:components/ui/index.ts": {
+   "name": "index.ts",
+   "type": "file",
+   "summary": "Barrel re-exporting shared UI primitives: ErrorBoundary, LoadingSpinner, SectionHeader and StockProgress."
+  },
+  "file:eslint.config.mjs": {
+   "name": "eslint.config.mjs",
+   "type": "file",
+   "summary": "ESLint flat config extending next/core-web-vitals and next/typescript via FlatCompat, ignoring the NestJS api/ folder and build output, and disabling no-explicit-any for legacy code."
+  },
+  "file:infra/terraform/.terraform.lock.hcl": {
+   "name": ".terraform.lock.hcl",
+   "type": "file",
+   "summary": "Terraform dependency lock file pinning the hashicorp/aws and hashicorp/random provider versions and checksums for the production infrastructure."
+  },
+  "file:infra/terraform/backend.hcl.example": {
+   "name": "backend.hcl.example",
+   "type": "file",
+   "summary": "Example Terraform S3 backend config (state bucket, key, eu-north-1 region, encryption, lockfile) to copy into a git-ignored backend.hcl before terraform init."
+  },
+  "file:infra/terraform/terraform.tfvars.example": {
+   "name": "terraform.tfvars.example",
+   "type": "file",
+   "summary": "Example Terraform variables for production: AWS region, budget alert email, API site domain and admin/deploy SSH public keys."
+  },
+  "file:instrumentation.ts": {
+   "name": "instrumentation.ts",
+   "type": "file",
+   "summary": "Next.js instrumentation hook that loads the Sentry server or edge config depending on runtime and reports request errors via Sentry.captureRequestError."
+  },
+  "file:lib/admin-translations-erp.ts": {
+   "name": "admin-translations-erp.ts",
+   "type": "file",
+   "summary": "Large table of [English, French, Arabic] translation rows for the ERP admin screens (orders pipeline, CRM, till, purchasing, finance, accounting, owner overview), merged into the main admin translations."
+  },
+  "file:lib/admin-translations.ts": {
+   "name": "admin-translations.ts",
+   "type": "file",
+   "summary": "Builds the French and Arabic admin dictionaries keyed by English UI text, combining the core admin entries with the ERP entries (core rows win on duplicates)."
+  },
+  "file:lib/report-error.ts": {
+   "name": "report-error.ts",
+   "type": "file",
+   "summary": "Helper that sends caught, handled errors to Sentry tagged with the app area, for code paths that turn errors into responses or fallbacks."
+  },
+  "config:messages/en/Settings.json": {
+   "name": "Settings.json",
+   "type": "config",
+   "summary": "Placeholder next-intl English message file for a Settings namespace with a title and lorem-ipsum description; next-intl is largely unused."
+  },
+  "file:next.config.ts": {
+   "name": "next.config.ts",
+   "type": "file",
+   "summary": "Next.js configuration: rewrites /api/* to the NestJS API (NEST_URL), exposes ENV as NEXT_PUBLIC_APP_ENV, sets client router staleTimes, ignores build-time type/lint errors, whitelists remote image hosts including FILES_PUBLIC_URL, and wraps the config with Sentry."
+  },
+  "file:postcss.config.mjs": {
+   "name": "postcss.config.mjs",
+   "type": "file",
+   "summary": "PostCSS config enabling the Tailwind CSS v4 plugin (@tailwindcss/postcss)."
+  },
+  "file:public/admin-sw.js": {
+   "name": "admin-sw.js",
+   "type": "file",
+   "summary": "Back-office service worker that shows Web Push notifications (RTL for Arabic, sticky for alerts and orders) and opens or focuses the related admin page when clicked."
+  },
+  "file:scripts/db/move-database.mjs": {
+   "name": "move-database.mjs",
+   "type": "file",
+   "summary": "Copies the public, private and migration-history schemas from a source Postgres to a target Postgres 17 via a dockerized pg_dump/psql, then compares row counts per table; used for the Supabase move and backups/restores."
+  },
+  "file:scripts/docker/colissimo-mock.mjs": {
+   "name": "colissimo-mock.mjs",
+   "type": "file",
+   "summary": "In-memory HTTP stand-in for the Colissimo carrier APIs (v1 parcel creation and v2 track/validate/price change/edit/delete) with their rules and error codes, plus /__mock control endpoints for tests in local Docker and CI."
+  },
+  "file:scripts/docker/create-admin.mjs": {
+   "name": "create-admin.mjs",
+   "type": "file",
+   "summary": "Creates or resets the local owner account admin@kachabity.local in the Docker Postgres with a bcrypt hash of LOCAL_PASSWORD from .env.docker."
+  },
+  "file:scripts/docker/env.mjs": {
+   "name": "env.mjs",
+   "type": "file",
+   "summary": "Generates .env.docker for the local Docker stack with random AUTH_SECRET and REVALIDATE_SECRET plus local database, API and S3 storage settings, keeping an existing file."
+  },
+  "file:scripts/docker/import-database.mjs": {
+   "name": "import-database.mjs",
+   "type": "file",
+   "summary": "Imports a read-only copy of a source database into the local Docker db via move-database.mjs, applies newer migrations, neutralizes passwords, sessions and e-mailed links, then recreates the local owner."
+  },
+  "file:scripts/docker/meta-webhook-test.mjs": {
+   "name": "meta-webhook-test.mjs",
+   "type": "file",
+   "summary": "Sends HMAC-signed Meta-style webhook events (verification challenge, Facebook/Instagram comments, Messenger message) to the local API to exercise the CRM comment and inbox flow."
+  },
+  "file:scripts/find-unused-code.sh": {
+   "name": "find-unused-code.sh",
+   "type": "file",
+   "summary": "Legacy shell report that lists potentially unused exports (ts-prune), unused packages (depcheck), large files, duplicated locale patterns, console statements and commented JSX."
+  },
+  "file:scripts/import-woocommerce.mjs": {
+   "name": "import-woocommerce.mjs",
+   "type": "file",
+   "summary": "Idempotent CLI importer that reads the WooCommerce product CSV export, merges English/French translations and color data, re-hosts product images as WebP in S3 storage, and upserts products and variants into Postgres (supports --dry-run)."
+  },
+  "file:scripts/import/old-colissimo.mjs": {
+   "name": "old-colissimo.mjs",
+   "type": "file",
+   "summary": "One-off, re-runnable importer that loads Colissimo parcels and payouts from the legacy tools' CSV exports into deliveries, then calls import_colissimo_history to create COL- orders, customers and payout records."
+  },
+  "file:scripts/run-next.mjs": {
+   "name": "run-next.mjs",
+   "type": "file",
+   "summary": "Launcher that sets NODE_OPTIONS with a longer network-family autoselection timeout and spawns the Next.js CLI, forwarding arguments and exit codes."
+  },
+  "file:types/shims-supabase.d.ts": {
+   "name": "shims-supabase.d.ts",
+   "type": "file",
+   "summary": "Ambient module declaration that types @supabase/supabase-js as any, a leftover shim from the Supabase era."
+  },
+  "config:supabase/.temp/linked-project.json": {
+   "name": "linked-project.json",
+   "type": "config",
+   "summary": "Supabase CLI cache recording the linked hosted project ref, name and organization (legacy, from before the move off Supabase)."
+  },
+  "file:supabase/.temp/gotrue-version": {
+   "name": "gotrue-version",
+   "type": "file",
+   "summary": "Supabase CLI cache file holding the linked project's GoTrue (Supabase Auth) version; generated metadata, not used by the app."
+  },
+  "file:supabase/.temp/pooler-url": {
+   "name": "pooler-url",
+   "type": "file",
+   "summary": "Supabase CLI cache file holding the linked project's connection pooler URL; generated metadata, not used by the app."
+  },
+  "file:supabase/.temp/postgres-version": {
+   "name": "postgres-version",
+   "type": "file",
+   "summary": "Supabase CLI cache file holding the linked project's Postgres version; generated metadata, not used by the app."
+  },
+  "file:supabase/.temp/project-ref": {
+   "name": "project-ref",
+   "type": "file",
+   "summary": "Supabase CLI cache file holding the linked project's linked project reference; generated metadata, not used by the app."
+  },
+  "file:supabase/.temp/rest-version": {
+   "name": "rest-version",
+   "type": "file",
+   "summary": "Supabase CLI cache file holding the linked project's PostgREST version; generated metadata, not used by the app."
+  },
+  "file:supabase/.temp/storage-migration": {
+   "name": "storage-migration",
+   "type": "file",
+   "summary": "Supabase CLI cache file holding the linked project's Storage migration marker; generated metadata, not used by the app."
+  },
+  "file:supabase/.temp/storage-version": {
+   "name": "storage-version",
+   "type": "file",
+   "summary": "Supabase CLI cache file holding the linked project's Storage API version; generated metadata, not used by the app."
+  }
+ },
+ "totalNodes": 486,
+ "totalEdges": 1110
+}

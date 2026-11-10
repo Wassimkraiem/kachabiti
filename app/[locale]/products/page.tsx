@@ -427,8 +427,8 @@ export default function ProductsPage() {
             {/* Price Range */}
             <div className="mb-8">
                 <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm font-medium text-gray-900">{text.price}</span>
-                    <button className="text-gray-400 hover:text-gray-600">
+                    <span className="text-sm font-medium text-ink">{text.price}</span>
+                    <button className="text-mute hover:text-mute">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>
@@ -440,9 +440,9 @@ export default function ProductsPage() {
                     max="1000"
                     value={priceRange[1]}
                     onChange={(e) => setPriceRange([0, parseInt(e.target.value)])}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#842E1B]"
+                    className="w-full h-2 bg-line rounded-lg appearance-none cursor-pointer accent-[#842E1B]"
                 />
-                <div className="flex items-center justify-between mt-2 text-sm text-gray-600">
+                <div className="flex items-center justify-between mt-2 text-sm text-mute">
                     <span>{priceRange[0]}</span>
                     <span>{priceRange[1]}</span>
                 </div>
@@ -451,8 +451,8 @@ export default function ProductsPage() {
             {/* Size Filter */}
             <div className="mb-8">
                 <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm font-medium text-gray-900">{text.size}</span>
-                    <button className="text-gray-400 hover:text-gray-600">
+                    <span className="text-sm font-medium text-ink">{text.size}</span>
+                    <button className="text-mute hover:text-mute">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>
@@ -464,8 +464,8 @@ export default function ProductsPage() {
                             key={size}
                             onClick={() => toggleSize(size)}
                             className={`px-3 py-2 text-sm font-medium border rounded-lg transition ${selectedSizes.has(size)
-                                ? 'bg-[#842E1B] text-white border-[#842E1B]'
-                                : 'bg-white text-gray-700 border-gray-300 hover:border-gray-400'
+                                ? 'bg-accent text-white border-accent'
+                                : 'bg-card text-ink border-line hover:border-line'
                                 }`}
                         >
                             {size}
@@ -478,14 +478,14 @@ export default function ProductsPage() {
             {availableColors.length > 0 && (
                 <div className="mb-8">
                     <div className="flex items-center justify-between mb-3">
-                        <span className="text-sm font-medium text-gray-900">{text.color}</span>
+                        <span className="text-sm font-medium text-ink">{text.color}</span>
                         <button
-                            className="text-gray-400 hover:text-gray-600"
+                            className="text-mute hover:text-mute"
                             onClick={() => setSelectedColors(new Set())}
                             disabled={selectedColors.size === 0}
                         >
                             {selectedColors.size > 0 && (
-                                <span className="text-xs text-[#842E1B]">Clear</span>
+                                <span className="text-xs text-accent">Clear</span>
                             )}
                         </button>
                     </div>
@@ -495,8 +495,8 @@ export default function ProductsPage() {
                                 key={color.id}
                                 onClick={() => toggleColor(color.id)}
                                 className={`relative w-10 h-10 rounded-full border-2 transition-all hover:scale-105 ${selectedColors.has(color.id)
-                                    ? 'border-[#842E1B] scale-110 ring-2 ring-[#842E1B] ring-offset-2'
-                                    : 'border-gray-300 hover:border-gray-400'
+                                    ? 'border-accent scale-110 ring-2 ring-accent ring-offset-2'
+                                    : 'border-line hover:border-line'
                                     }`}
                                 style={{ backgroundColor: color.hex_code || '#CCCCCC' }}
                                 title={color.display_name || color.name}
@@ -521,7 +521,7 @@ export default function ProductsPage() {
                         ))}
                     </div>
                     {selectedColors.size > 0 && (
-                        <div className="mt-2 text-xs text-gray-600">
+                        <div className="mt-2 text-xs text-mute">
                             {selectedColors.size} color{selectedColors.size > 1 ? 's' : ''} selected
                         </div>
                     )}
@@ -531,8 +531,8 @@ export default function ProductsPage() {
             {/* Category Filter */}
             <div className="mb-8">
                 <div className="flex items-center justify-between mb-3">
-                    <span className="text-sm font-medium text-gray-900">{text.category}</span>
-                    <button className="text-gray-400 hover:text-gray-600">
+                    <span className="text-sm font-medium text-ink">{text.category}</span>
+                    <button className="text-mute hover:text-mute">
                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                         </svg>
@@ -545,9 +545,9 @@ export default function ProductsPage() {
                                 type="checkbox"
                                 checked={selectedCategoryIds.has(category.id)}
                                 onChange={() => toggleCategory(category.id)}
-                                className="w-4 h-4 text-[#842E1B] border-gray-300 rounded focus:ring-[#842E1B]"
+                                className="w-4 h-4 text-accent border-line rounded focus:ring-accent"
                             />
-                            <span className="text-sm text-gray-700">{getCategoryName(category, locale)}</span>
+                            <span className="text-sm text-ink">{getCategoryName(category, locale)}</span>
                         </label>
                     ))}
                 </div>
@@ -559,7 +559,7 @@ export default function ProductsPage() {
                     // Filters are applied automatically via state
                     setIsFilterDrawerOpen(false); // Close drawer on mobile
                 }}
-                className="w-full py-3 bg-[#842E1B] text-white rounded-lg hover:bg-[#6b2516] transition font-medium"
+                className="w-full py-3 bg-accent text-white rounded-lg hover:bg-accent-hover transition font-medium"
             >
                 {text.applyFilters}
             </button>
@@ -568,16 +568,16 @@ export default function ProductsPage() {
 
     return (
         <>
-            <div className="min-h-screen bg-white py-8">
+            <div className="min-h-screen bg-card py-8">
                 <div className="max-w-7xl mx-auto px-4">
                     {/* Mobile Filter Button */}
                     <div className="lg:hidden mb-4 flex items-center justify-between">
-                        <p className="text-sm text-gray-600">
+                        <p className="text-sm text-mute">
                             {!productsLoading && text.showingResults.replace('{count}', products.length.toString())}
                         </p>
                         <button
                             onClick={() => setIsFilterDrawerOpen(true)}
-                            className="flex h-11 items-center gap-2 rounded-full border border-[#d9cfc3] bg-white px-4 text-sm font-medium text-[#2b1a16] transition hover:border-[#2b1a16]"
+                            className="flex h-11 items-center gap-2 rounded-full border border-line bg-card px-4 text-sm font-medium text-ink transition hover:border-ink"
                         >
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
@@ -589,8 +589,8 @@ export default function ProductsPage() {
                     <div className="grid lg:grid-cols-4 gap-8">
                         {/* Left Sidebar - Filters (Desktop only) */}
                         <div className="hidden lg:block lg:col-span-1">
-                            <div className="bg-white rounded-lg p-6 border border-gray-200 sticky top-4">
-                                <h2 className="text-xl font-bold text-gray-900 mb-6">{text.filter}</h2>
+                            <div className="bg-card rounded-lg p-6 border border-line sticky top-4">
+                                <h2 className="text-xl font-bold text-ink mb-6">{text.filter}</h2>
                                 <FilterContent />
                             </div>
                         </div>
@@ -600,13 +600,13 @@ export default function ProductsPage() {
                             {/* Search heading */}
                             {search && (
                                 <div className="mb-4 flex flex-wrap items-center gap-3">
-                                    <h1 className="text-xl font-semibold text-gray-900">
+                                    <h1 className="text-xl font-semibold text-ink">
                                         {text.resultsFor.replace('{query}', search)}
                                     </h1>
                                     <button
                                         type="button"
                                         onClick={clearSearch}
-                                        className="text-sm font-medium text-[#842E1B] underline underline-offset-4 hover:text-[#6b2516]"
+                                        className="text-sm font-medium text-accent underline underline-offset-4 hover:text-accent"
                                     >
                                         {text.clearSearch}
                                     </button>
@@ -616,7 +616,7 @@ export default function ProductsPage() {
                             {/* Results Count - Desktop only */}
                             {!productsLoading && (
                                 <div className="mb-6 hidden lg:block">
-                                    <p className="text-sm text-gray-600">
+                                    <p className="text-sm text-mute">
                                         {text.showingResults.replace('{count}', products.length.toString())}
                                     </p>
                                 </div>
@@ -627,22 +627,22 @@ export default function ProductsPage() {
                                 <div className="grid grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-3">
                                     {Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
                                         <div key={index} className="animate-pulse">
-                                            <div className="aspect-[4/5] w-full rounded-2xl bg-gray-200" />
+                                            <div className="aspect-[4/5] w-full rounded-2xl bg-line" />
                                             <div className="space-y-2 pt-3">
-                                                <div className="h-4 w-3/4 rounded bg-gray-200" />
-                                                <div className="h-3 w-1/2 rounded bg-gray-200" />
-                                                <div className="h-3 w-1/3 rounded bg-gray-200" />
+                                                <div className="h-4 w-3/4 rounded bg-line" />
+                                                <div className="h-3 w-1/2 rounded bg-line" />
+                                                <div className="h-3 w-1/3 rounded bg-line" />
                                             </div>
                                         </div>
                                     ))}
                                 </div>
                             ) : products.length === 0 ? (
                                 <div className="text-center py-16">
-                                    <svg className="w-24 h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="w-24 h-24 mx-auto text-mute mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                                     </svg>
-                                    <h3 className="text-xl font-semibold text-gray-900 mb-2">{text.noProducts}</h3>
-                                    <p className="text-gray-600">{search ? text.trySearch : text.tryAdjustingFilters}</p>
+                                    <h3 className="text-xl font-semibold text-ink mb-2">{text.noProducts}</h3>
+                                    <p className="text-mute">{search ? text.trySearch : text.tryAdjustingFilters}</p>
                                 </div>
                             ) : (
                                 <div className="grid grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-3 pb-4">
@@ -665,7 +665,7 @@ export default function ProductsPage() {
                                     <button
                                         onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                                         disabled={currentPage === 1}
-                                        className="px-4 py-2 border border-gray-300 bg-white text-[#2b1a16] rounded-lg hover:bg-gray-50 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed transition"
+                                        className="px-4 py-2 border border-line bg-card text-ink rounded-lg hover:bg-surface disabled:bg-surface disabled:text-mute disabled:cursor-not-allowed transition"
                                     >
                                         {text.previous}
                                     </button>
@@ -686,8 +686,8 @@ export default function ProductsPage() {
                                                         <button
                                                             onClick={() => setCurrentPage(page)}
                                                             className={`w-10 h-10 rounded-lg transition ${currentPage === page
-                                                                ? 'bg-[#842E1B] text-white'
-                                                                : 'border border-gray-300 bg-white text-[#2b1a16] hover:bg-gray-50'
+                                                                ? 'bg-accent text-white'
+                                                                : 'border border-line bg-card text-ink hover:bg-surface'
                                                                 }`}
                                                         >
                                                             {page}
@@ -700,7 +700,7 @@ export default function ProductsPage() {
                                     <button
                                         onClick={() => setCurrentPage(prev => Math.min(Math.ceil(totalCount / ITEMS_PER_PAGE), prev + 1))}
                                         disabled={currentPage >= Math.ceil(totalCount / ITEMS_PER_PAGE)}
-                                        className="px-4 py-2 border border-gray-300 bg-white text-[#2b1a16] rounded-lg hover:bg-gray-50 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed transition"
+                                        className="px-4 py-2 border border-line bg-card text-ink rounded-lg hover:bg-surface disabled:bg-surface disabled:text-mute disabled:cursor-not-allowed transition"
                                     >
                                         {text.next}
                                     </button>
@@ -721,15 +721,15 @@ export default function ProductsPage() {
                     />
                     {/* Drawer */}
                     <div
-                        className={`fixed inset-y-0 z-50 w-full max-w-sm bg-white shadow-xl transform transition-transform duration-300 ease-in-out lg:hidden overflow-y-auto ${isFilterDrawerOpen ? 'translate-x-0' : (rtl ? 'translate-x-full' : '-translate-x-full')}`}
+                        className={`fixed inset-y-0 z-50 w-full max-w-sm bg-card shadow-xl transform transition-transform duration-300 ease-in-out lg:hidden overflow-y-auto ${isFilterDrawerOpen ? 'translate-x-0' : (rtl ? 'translate-x-full' : '-translate-x-full')}`}
                         style={{ [rtl ? 'right' : 'left']: 0 }}
                         dir={rtl ? 'rtl' : 'ltr'}
                     >
-                        <div className={`sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between z-10 `}>
-                            <h2 className="text-xl font-bold text-gray-900">{text.filter}</h2>
+                        <div className={`sticky top-0 bg-card border-b border-line px-6 py-4 flex items-center justify-between z-10 `}>
+                            <h2 className="text-xl font-bold text-ink">{text.filter}</h2>
                             <button
                                 onClick={() => setIsFilterDrawerOpen(false)}
-                                className="text-gray-400 hover:text-gray-600 transition p-2"
+                                className="text-mute hover:text-mute transition p-2"
                                 aria-label="Close filter"
                             >
                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

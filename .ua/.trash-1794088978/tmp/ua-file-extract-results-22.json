@@ -1,0 +1,532 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 3,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 3,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 3
+    }
+  },
+  "results": [
+    {
+      "path": "scripts/import/colors.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 35,
+      "nonEmptyLines": 35,
+      "sections": [
+        {
+          "heading": "Black",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "noir",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "White",
+          "level": 1,
+          "line": 4
+        },
+        {
+          "heading": "Grey",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "Eagle",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "Mamba",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "Seal Brown",
+          "level": 1,
+          "line": 8
+        },
+        {
+          "heading": "Regal Blue",
+          "level": 1,
+          "line": 9
+        },
+        {
+          "heading": "Potters Clay",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "Blue Bayoux",
+          "level": 1,
+          "line": 11
+        },
+        {
+          "heading": "Catalina Blue",
+          "level": 1,
+          "line": 12
+        },
+        {
+          "heading": "Del Rio",
+          "level": 1,
+          "line": 13
+        },
+        {
+          "heading": "Jordy Blue",
+          "level": 1,
+          "line": 14
+        },
+        {
+          "heading": "Pearl Bush",
+          "level": 1,
+          "line": 15
+        },
+        {
+          "heading": "vert 1",
+          "level": 1,
+          "line": 16
+        },
+        {
+          "heading": "vert",
+          "level": 1,
+          "line": 17
+        },
+        {
+          "heading": "vert d'eau",
+          "level": 1,
+          "line": 18
+        },
+        {
+          "heading": "Rouge",
+          "level": 1,
+          "line": 19
+        },
+        {
+          "heading": "rouge 1",
+          "level": 1,
+          "line": 20
+        },
+        {
+          "heading": "#7F1734",
+          "level": 1,
+          "line": 21
+        },
+        {
+          "heading": "Feldspar",
+          "level": 1,
+          "line": 22
+        },
+        {
+          "heading": "maron",
+          "level": 1,
+          "line": 23
+        },
+        {
+          "heading": "Marron Chocolat",
+          "level": 1,
+          "line": 24
+        },
+        {
+          "heading": "yellow",
+          "level": 1,
+          "line": 25
+        },
+        {
+          "heading": "rose",
+          "level": 1,
+          "line": 26
+        },
+        {
+          "heading": "violet",
+          "level": 1,
+          "line": 27
+        },
+        {
+          "heading": "Bleu Clair",
+          "level": 1,
+          "line": 28
+        },
+        {
+          "heading": "Bleu Indigo",
+          "level": 1,
+          "line": 29
+        },
+        {
+          "heading": "Bleu Jean",
+          "level": 1,
+          "line": 30
+        },
+        {
+          "heading": "Grège",
+          "level": 1,
+          "line": 31
+        },
+        {
+          "heading": "Gris Charbon",
+          "level": 1,
+          "line": 32
+        },
+        {
+          "heading": "Gris Sablé",
+          "level": 1,
+          "line": 33
+        },
+        {
+          "heading": "beige claire",
+          "level": 1,
+          "line": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 33
+      }
+    },
+    {
+      "path": "scripts/import/descriptions.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 234,
+      "nonEmptyLines": 234,
+      "sections": [
+        {
+          "heading": "224",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "232",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "240",
+          "level": 1,
+          "line": 10
+        },
+        {
+          "heading": "241",
+          "level": 1,
+          "line": 14
+        },
+        {
+          "heading": "243",
+          "level": 1,
+          "line": 18
+        },
+        {
+          "heading": "688",
+          "level": 1,
+          "line": 58
+        },
+        {
+          "heading": "690",
+          "level": 1,
+          "line": 62
+        },
+        {
+          "heading": "698",
+          "level": 1,
+          "line": 66
+        },
+        {
+          "heading": "1634",
+          "level": 1,
+          "line": 70
+        },
+        {
+          "heading": "1801",
+          "level": 1,
+          "line": 74
+        },
+        {
+          "heading": "1853",
+          "level": 1,
+          "line": 78
+        },
+        {
+          "heading": "2213",
+          "level": 1,
+          "line": 82
+        },
+        {
+          "heading": "2329",
+          "level": 1,
+          "line": 86
+        },
+        {
+          "heading": "2638",
+          "level": 1,
+          "line": 90
+        },
+        {
+          "heading": "2717",
+          "level": 1,
+          "line": 94
+        },
+        {
+          "heading": "3089",
+          "level": 1,
+          "line": 98
+        },
+        {
+          "heading": "3171",
+          "level": 1,
+          "line": 102
+        },
+        {
+          "heading": "3226",
+          "level": 1,
+          "line": 110
+        },
+        {
+          "heading": "3272",
+          "level": 1,
+          "line": 114
+        },
+        {
+          "heading": "3441",
+          "level": 1,
+          "line": 118
+        },
+        {
+          "heading": "3534",
+          "level": 1,
+          "line": 122
+        },
+        {
+          "heading": "3553",
+          "level": 1,
+          "line": 126
+        },
+        {
+          "heading": "3582",
+          "level": 1,
+          "line": 138
+        },
+        {
+          "heading": "3742",
+          "level": 1,
+          "line": 142
+        },
+        {
+          "heading": "3831",
+          "level": 1,
+          "line": 146
+        },
+        {
+          "heading": "3999",
+          "level": 1,
+          "line": 154
+        },
+        {
+          "heading": "4443",
+          "level": 1,
+          "line": 158
+        },
+        {
+          "heading": "4496",
+          "level": 1,
+          "line": 162
+        },
+        {
+          "heading": "4563",
+          "level": 1,
+          "line": 170
+        },
+        {
+          "heading": "4595",
+          "level": 1,
+          "line": 178
+        },
+        {
+          "heading": "4661",
+          "level": 1,
+          "line": 182
+        },
+        {
+          "heading": "4672",
+          "level": 1,
+          "line": 186
+        },
+        {
+          "heading": "4681",
+          "level": 1,
+          "line": 190
+        },
+        {
+          "heading": "4705",
+          "level": 1,
+          "line": 194
+        },
+        {
+          "heading": "4755",
+          "level": 1,
+          "line": 198
+        },
+        {
+          "heading": "4952",
+          "level": 1,
+          "line": 202
+        },
+        {
+          "heading": "4975",
+          "level": 1,
+          "line": 206
+        },
+        {
+          "heading": "5419",
+          "level": 1,
+          "line": 210
+        },
+        {
+          "heading": "5849",
+          "level": 1,
+          "line": 22
+        },
+        {
+          "heading": "5858",
+          "level": 1,
+          "line": 26
+        },
+        {
+          "heading": "5860",
+          "level": 1,
+          "line": 30
+        },
+        {
+          "heading": "5898",
+          "level": 1,
+          "line": 34
+        },
+        {
+          "heading": "5942",
+          "level": 1,
+          "line": 214
+        },
+        {
+          "heading": "6089",
+          "level": 1,
+          "line": 166
+        },
+        {
+          "heading": "6099",
+          "level": 1,
+          "line": 218
+        },
+        {
+          "heading": "6113",
+          "level": 1,
+          "line": 222
+        },
+        {
+          "heading": "6301",
+          "level": 1,
+          "line": 38
+        },
+        {
+          "heading": "6307",
+          "level": 1,
+          "line": 150
+        },
+        {
+          "heading": "6350",
+          "level": 1,
+          "line": 42
+        },
+        {
+          "heading": "6398",
+          "level": 1,
+          "line": 46
+        },
+        {
+          "heading": "6400",
+          "level": 1,
+          "line": 50
+        },
+        {
+          "heading": "6415",
+          "level": 1,
+          "line": 54
+        },
+        {
+          "heading": "6433",
+          "level": 1,
+          "line": 226
+        },
+        {
+          "heading": "6583",
+          "level": 1,
+          "line": 230
+        },
+        {
+          "heading": "6795",
+          "level": 1,
+          "line": 130
+        },
+        {
+          "heading": "6812",
+          "level": 1,
+          "line": 174
+        },
+        {
+          "heading": "7018",
+          "level": 1,
+          "line": 106
+        },
+        {
+          "heading": "7066",
+          "level": 1,
+          "line": 134
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 58
+      }
+    },
+    {
+      "path": "scripts/import/translations.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 410,
+      "nonEmptyLines": 410,
+      "sections": [
+        {
+          "heading": "categories",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "products",
+          "level": 1,
+          "line": 118
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    }
+  ]
+}

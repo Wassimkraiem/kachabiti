@@ -123,14 +123,14 @@ export default function CategoriesPage() {
 
     return (
         <>
-            <div className="min-h-screen bg-white py-12">
+            <div className="min-h-screen bg-card py-12">
                 <div className="max-w-7xl mx-auto px-4">
                     {/* Header */}
                     <div className="text-center mb-12">
-                        <h1 className="text-4xl font-bold text-[#2b1a16] mb-4">
+                        <h1 className="text-4xl font-bold text-ink mb-4">
                             {text.title}
                         </h1>
-                        <p className="text-gray-500 text-sm">
+                        <p className="text-mute text-sm">
                             {text.subtitle}
                         </p>
                     </div>
@@ -138,7 +138,7 @@ export default function CategoriesPage() {
                     {/* Results Count */}
                     {!loading && categories.length > 0 && (
                         <div className="mb-6">
-                            <p className="text-sm text-gray-600">
+                            <p className="text-sm text-mute">
                                 {text.showingResults.replace('{count}', totalCount.toString())}
                             </p>
                         </div>
@@ -149,17 +149,17 @@ export default function CategoriesPage() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                             {Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
                                 <div key={index} className="w-full flex flex-col items-center">
-                                    <div className="relative w-full aspect-square rounded-2xl bg-gray-200 animate-pulse mb-3" />
-                                    <div className="w-24 h-4 bg-gray-200 animate-pulse rounded" />
+                                    <div className="relative w-full aspect-square rounded-2xl bg-line animate-pulse mb-3" />
+                                    <div className="w-24 h-4 bg-line animate-pulse rounded" />
                                 </div>
                             ))}
                         </div>
                     ) : categories.length === 0 ? (
                         <div className="text-center py-16">
-                            <svg className="w-24 h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-24 h-24 mx-auto text-mute mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                             </svg>
-                            <h3 className="text-xl font-semibold text-gray-900 mb-2">{text.noCategories}</h3>
+                            <h3 className="text-xl font-semibold text-ink mb-2">{text.noCategories}</h3>
                         </div>
                     ) : (
                         <>
@@ -179,7 +179,7 @@ export default function CategoriesPage() {
                                                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                                                 />
                                             </div>
-                                            <h3 className="text-center font-medium text-[#2b1a16] text-sm group-hover:text-[#7a3b2e] transition">
+                                            <h3 className="text-center font-medium text-ink text-sm group-hover:text-accent transition">
                                                 {getCategoryName(category, locale)}
                                             </h3>
                                         </div>
@@ -193,7 +193,7 @@ export default function CategoriesPage() {
                                     <button
                                         onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                                         disabled={currentPage === 1}
-                                        className="px-4 py-2 border border-gray-300 bg-white text-[#2b1a16] rounded-lg hover:bg-gray-50 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed transition"
+                                        className="px-4 py-2 border border-line bg-card text-ink rounded-lg hover:bg-surface disabled:bg-surface disabled:text-mute disabled:cursor-not-allowed transition"
                                     >
                                         {text.previous}
                                     </button>
@@ -214,8 +214,8 @@ export default function CategoriesPage() {
                                                         <button
                                                             onClick={() => setCurrentPage(page)}
                                                             className={`w-10 h-10 rounded-lg transition ${currentPage === page
-                                                                ? 'bg-[#842E1B] text-white'
-                                                                : 'border border-gray-300 bg-white text-[#2b1a16] hover:bg-gray-50'
+                                                                ? 'bg-accent text-white'
+                                                                : 'border border-line bg-card text-ink hover:bg-surface'
                                                                 }`}
                                                         >
                                                             {page}
@@ -228,7 +228,7 @@ export default function CategoriesPage() {
                                     <button
                                         onClick={() => setCurrentPage(prev => Math.min(Math.ceil(totalCount / ITEMS_PER_PAGE), prev + 1))}
                                         disabled={currentPage >= Math.ceil(totalCount / ITEMS_PER_PAGE)}
-                                        className="px-4 py-2 border border-gray-300 bg-white text-[#2b1a16] rounded-lg hover:bg-gray-50 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed transition"
+                                        className="px-4 py-2 border border-line bg-card text-ink rounded-lg hover:bg-surface disabled:bg-surface disabled:text-mute disabled:cursor-not-allowed transition"
                                     >
                                         {text.next}
                                     </button>

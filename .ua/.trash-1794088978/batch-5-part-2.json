@@ -1,0 +1,1585 @@
+{
+ "nodes": [
+  {
+   "id": "file:api/src/sales/commerce.ts",
+   "type": "file",
+   "name": "commerce.ts",
+   "filePath": "api/src/sales/commerce.ts",
+   "summary": "Core commerce rules for the API: active discounts, site settings, shipping and tax calculation, server-side checkout re-pricing (priceOrder), and manual order line building.",
+   "tags": [
+    "service",
+    "pricing",
+    "checkout",
+    "business-logic",
+    "utility"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:api/src/sales/delivery.controller.ts",
+   "type": "file",
+   "name": "delivery.controller.ts",
+   "filePath": "api/src/sales/delivery.controller.ts",
+   "summary": "NestJS controller for Colissimo deliveries: listing parcels, sending orders as parcels, validating orders, importing and tracking barcodes, hand-over manifests, edits and price changes.",
+   "tags": [
+    "api-handler",
+    "delivery",
+    "colissimo",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:api/src/sales/orders.controller.ts",
+   "type": "file",
+   "name": "orders.controller.ts",
+   "filePath": "api/src/sales/orders.controller.ts",
+   "summary": "NestJS orders controller handling checkout order creation with server re-pricing and confirmation email, admin order listing and filtering, status updates with stock, and soft deletes.",
+   "tags": [
+    "api-handler",
+    "orders",
+    "checkout",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:api/src/sales/sales.controllers.ts",
+   "type": "file",
+   "name": "sales.controllers.ts",
+   "filePath": "api/src/sales/sales.controllers.ts",
+   "summary": "NestJS ERP sales controllers: agent-created orders and pipeline actions, order payments by account, and carrier COD remittances.",
+   "tags": [
+    "api-handler",
+    "sales",
+    "payments",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:api/src/stock/stock.controllers.ts",
+   "type": "file",
+   "name": "stock.controllers.ts",
+   "filePath": "api/src/stock/stock.controllers.ts",
+   "summary": "NestJS stock controllers: generic lookup controllers (suppliers, collections, locations), stock tracking, product costs, stock movements and inventory reports.",
+   "tags": [
+    "api-handler",
+    "stock",
+    "inventory",
+    "nestjs",
+    "factory"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:api/src/storefront/account.controller.ts",
+   "type": "file",
+   "name": "account.controller.ts",
+   "filePath": "api/src/storefront/account.controller.ts",
+   "summary": "NestJS controller for the signed-in shopper's own data: favorites, order history with delivery stage, and posting reviews.",
+   "tags": [
+    "api-handler",
+    "account",
+    "storefront",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/src/storefront/storefront.controller.ts",
+   "type": "file",
+   "name": "storefront.controller.ts",
+   "filePath": "api/src/storefront/storefront.controller.ts",
+   "summary": "Public NestJS storefront read API: product listings and detail, categories, landing page sections, hero, banners, reels, reviews, settings and checkout quotes.",
+   "tags": [
+    "api-handler",
+    "storefront",
+    "catalog",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:lib/abandoned-cart-email.ts",
+   "type": "file",
+   "name": "abandoned-cart-email.ts",
+   "filePath": "lib/abandoned-cart-email.ts",
+   "summary": "Helper that triggers the abandoned-cart email campaign through the API.",
+   "tags": [
+    "utility",
+    "email",
+    "marketing"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/admin-auth.ts",
+   "type": "file",
+   "name": "admin-auth.ts",
+   "filePath": "lib/admin-auth.ts",
+   "summary": "Defines the back-office role and permission model: owner/admin/staff resolution from app_metadata and env email lists, permission lists, presets, and access checks.",
+   "tags": [
+    "security",
+    "authorization",
+    "roles",
+    "shared"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:lib/api-access.ts",
+   "type": "file",
+   "name": "api-access.ts",
+   "filePath": "lib/api-access.ts",
+   "summary": "Maps API paths and methods to access requirements (permissions, admin or owner) used by the NestJS auth guard.",
+   "tags": [
+    "security",
+    "authorization",
+    "api-rules",
+    "shared"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/sales/commerce.ts:activeDiscounts",
+   "type": "function",
+   "name": "activeDiscounts",
+   "filePath": "api/src/sales/commerce.ts",
+   "lineRange": [
+    32,
+    57
+   ],
+   "summary": "Attaches currently valid product discounts to listings.",
+   "tags": [
+    "pricing",
+    "discounts",
+    "business-logic"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/sales/commerce.ts:siteSettings",
+   "type": "function",
+   "name": "siteSettings",
+   "filePath": "api/src/sales/commerce.ts",
+   "lineRange": [
+    79,
+    100
+   ],
+   "summary": "Loads storefront site settings with fallbacks.",
+   "tags": [
+    "settings",
+    "config",
+    "business-logic"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/sales/commerce.ts:calculateShipping",
+   "type": "function",
+   "name": "calculateShipping",
+   "filePath": "api/src/sales/commerce.ts",
+   "lineRange": [
+    115,
+    139
+   ],
+   "summary": "Computes shipping cost from rates and the free-shipping threshold.",
+   "tags": [
+    "shipping",
+    "pricing",
+    "business-logic"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/sales/commerce.ts:countryTaxRate",
+   "type": "function",
+   "name": "countryTaxRate",
+   "filePath": "api/src/sales/commerce.ts",
+   "lineRange": [
+    162,
+    170
+   ],
+   "summary": "Returns the tax rate for a country.",
+   "tags": [
+    "tax",
+    "pricing",
+    "business-logic"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/sales/commerce.ts:priceOrder",
+   "type": "function",
+   "name": "priceOrder",
+   "filePath": "api/src/sales/commerce.ts",
+   "lineRange": [
+    214,
+    372
+   ],
+   "summary": "Re-prices a checkout order on the server and rejects price or total mismatches with 409 codes.",
+   "tags": [
+    "checkout",
+    "pricing",
+    "validation"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:api/src/sales/commerce.ts:buildManualOrderLines",
+   "type": "function",
+   "name": "buildManualOrderLines",
+   "filePath": "api/src/sales/commerce.ts",
+   "lineRange": [
+    389,
+    490
+   ],
+   "summary": "Prices agent-entered order lines from the catalog.",
+   "tags": [
+    "orders",
+    "pricing",
+    "validation"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:api/src/sales/commerce.ts:setDeliveryFee",
+   "type": "function",
+   "name": "setDeliveryFee",
+   "filePath": "api/src/sales/commerce.ts",
+   "lineRange": [
+    147,
+    160
+   ],
+   "summary": "Updates the delivery fee setting.",
+   "tags": [
+    "settings",
+    "shipping",
+    "business-logic"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/sales/commerce.ts:memberEmail",
+   "type": "function",
+   "name": "memberEmail",
+   "filePath": "api/src/sales/commerce.ts",
+   "lineRange": [
+    493,
+    504
+   ],
+   "summary": "Looks up a team member email address.",
+   "tags": [
+    "utility",
+    "team",
+    "lookup"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:api/src/sales/delivery.controller.ts:DeliveryController",
+   "type": "class",
+   "name": "DeliveryController",
+   "filePath": "api/src/sales/delivery.controller.ts",
+   "lineRange": [
+    170,
+    996
+   ],
+   "summary": "Colissimo delivery endpoints: send, validate, track, import, hand over, edit and delete parcels.",
+   "tags": [
+    "controller",
+    "delivery",
+    "colissimo"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:api/src/sales/delivery.controller.ts:dbError",
+   "type": "function",
+   "name": "dbError",
+   "filePath": "api/src/sales/delivery.controller.ts",
+   "lineRange": [
+    152,
+    166
+   ],
+   "summary": "Maps database delivery errors to API errors.",
+   "tags": [
+    "error-handling",
+    "delivery",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:api/src/sales/orders.controller.ts:OrdersController",
+   "type": "class",
+   "name": "OrdersController",
+   "filePath": "api/src/sales/orders.controller.ts",
+   "lineRange": [
+    83,
+    374
+   ],
+   "summary": "Order creation, listing, status updates and deletion.",
+   "tags": [
+    "controller",
+    "orders",
+    "api-handler"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/sales/sales.controllers.ts:SalesOrdersController",
+   "type": "class",
+   "name": "SalesOrdersController",
+   "filePath": "api/src/sales/sales.controllers.ts",
+   "lineRange": [
+    118,
+    400
+   ],
+   "summary": "Agent order creation, duplicates check and pipeline actions.",
+   "tags": [
+    "controller",
+    "sales",
+    "api-handler"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/sales/sales.controllers.ts:PaymentsController",
+   "type": "class",
+   "name": "PaymentsController",
+   "filePath": "api/src/sales/sales.controllers.ts",
+   "lineRange": [
+    425,
+    554
+   ],
+   "summary": "Order payment listing, recording and removal.",
+   "tags": [
+    "controller",
+    "payments",
+    "api-handler"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/sales/sales.controllers.ts:RemittancesController",
+   "type": "class",
+   "name": "RemittancesController",
+   "filePath": "api/src/sales/sales.controllers.ts",
+   "lineRange": [
+    572,
+    688
+   ],
+   "summary": "Carrier COD remittance endpoints.",
+   "tags": [
+    "controller",
+    "payments",
+    "api-handler"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:api/src/stock/stock.controllers.ts:lookupController",
+   "type": "function",
+   "name": "lookupController",
+   "filePath": "api/src/stock/stock.controllers.ts",
+   "lineRange": [
+    43,
+    141
+   ],
+   "summary": "Factory producing CRUD controllers for simple lookup tables (suppliers, collections, locations).",
+   "tags": [
+    "factory",
+    "controller",
+    "stock"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/stock/stock.controllers.ts:StockTrackingController",
+   "type": "class",
+   "name": "StockTrackingController",
+   "filePath": "api/src/stock/stock.controllers.ts",
+   "lineRange": [
+    207,
+    230
+   ],
+   "summary": "Toggles stock tracking for products.",
+   "tags": [
+    "controller",
+    "stock",
+    "api-handler"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:api/src/stock/stock.controllers.ts:StockCostsController",
+   "type": "class",
+   "name": "StockCostsController",
+   "filePath": "api/src/stock/stock.controllers.ts",
+   "lineRange": [
+    234,
+    277
+   ],
+   "summary": "Lists and sets product purchase costs.",
+   "tags": [
+    "controller",
+    "costs",
+    "api-handler"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/stock/stock.controllers.ts:StockMovementsController",
+   "type": "class",
+   "name": "StockMovementsController",
+   "filePath": "api/src/stock/stock.controllers.ts",
+   "lineRange": [
+    310,
+    430
+   ],
+   "summary": "Lists and records stock movements, transfers and counts.",
+   "tags": [
+    "controller",
+    "stock",
+    "api-handler"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/stock/stock.controllers.ts:StockReportsController",
+   "type": "class",
+   "name": "StockReportsController",
+   "filePath": "api/src/stock/stock.controllers.ts",
+   "lineRange": [
+    440,
+    686
+   ],
+   "summary": "Inventory and stock overview reports.",
+   "tags": [
+    "controller",
+    "reports",
+    "api-handler"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/storefront/account.controller.ts:AccountController",
+   "type": "class",
+   "name": "AccountController",
+   "filePath": "api/src/storefront/account.controller.ts",
+   "lineRange": [
+    36,
+    223
+   ],
+   "summary": "Shopper favorites, orders and reviews endpoints.",
+   "tags": [
+    "controller",
+    "account",
+    "api-handler"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/storefront/storefront.controller.ts:StorefrontController",
+   "type": "class",
+   "name": "StorefrontController",
+   "filePath": "api/src/storefront/storefront.controller.ts",
+   "lineRange": [
+    69,
+    970
+   ],
+   "summary": "Public catalog and landing page read endpoints.",
+   "tags": [
+    "controller",
+    "storefront",
+    "api-handler"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/storefront/storefront.controller.ts:HomeListsController",
+   "type": "class",
+   "name": "HomeListsController",
+   "filePath": "api/src/storefront/storefront.controller.ts",
+   "lineRange": [
+    975,
+    991
+   ],
+   "summary": "Legacy top and promo product list endpoints.",
+   "tags": [
+    "controller",
+    "storefront",
+    "api-handler"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/storefront/storefront.controller.ts:ratingOf",
+   "type": "function",
+   "name": "ratingOf",
+   "filePath": "api/src/storefront/storefront.controller.ts",
+   "lineRange": [
+    42,
+    54
+   ],
+   "summary": "Computes a product average rating.",
+   "tags": [
+    "utility",
+    "reviews",
+    "storefront"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/abandoned-cart-email.ts:triggerAbandonedCartCampaign",
+   "type": "function",
+   "name": "triggerAbandonedCartCampaign",
+   "filePath": "lib/abandoned-cart-email.ts",
+   "lineRange": [
+    15,
+    25
+   ],
+   "summary": "Calls the API to send abandoned-cart emails.",
+   "tags": [
+    "email",
+    "marketing",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/admin-auth.ts:getAdminRole",
+   "type": "function",
+   "name": "getAdminRole",
+   "filePath": "lib/admin-auth.ts",
+   "lineRange": [
+    61,
+    70
+   ],
+   "summary": "Resolves a user back-office role from app_metadata and env email lists.",
+   "tags": [
+    "authorization",
+    "roles",
+    "security"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/admin-auth.ts:getPermissions",
+   "type": "function",
+   "name": "getPermissions",
+   "filePath": "lib/admin-auth.ts",
+   "lineRange": [
+    79,
+    85
+   ],
+   "summary": "Returns the permissions a user holds.",
+   "tags": [
+    "authorization",
+    "permissions",
+    "security"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/admin-auth.ts:allows",
+   "type": "function",
+   "name": "allows",
+   "filePath": "lib/admin-auth.ts",
+   "lineRange": [
+    107,
+    113
+   ],
+   "summary": "Checks whether a user satisfies an access requirement.",
+   "tags": [
+    "authorization",
+    "permissions",
+    "security"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/admin-auth.ts:hasFullAccess",
+   "type": "function",
+   "name": "hasFullAccess",
+   "filePath": "lib/admin-auth.ts",
+   "lineRange": [
+    6,
+    6
+   ],
+   "summary": "True for owners and admins.",
+   "tags": [
+    "authorization",
+    "roles",
+    "security"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/admin-auth.ts:adminHome",
+   "type": "function",
+   "name": "adminHome",
+   "filePath": "lib/admin-auth.ts",
+   "lineRange": [
+    9,
+    9
+   ],
+   "summary": "Returns the landing admin page for a role.",
+   "tags": [
+    "routing",
+    "roles",
+    "admin"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/admin-auth.ts:isAdminUser",
+   "type": "function",
+   "name": "isAdminUser",
+   "filePath": "lib/admin-auth.ts",
+   "lineRange": [
+    88,
+    90
+   ],
+   "summary": "True when the user has any back-office role.",
+   "tags": [
+    "authorization",
+    "roles",
+    "security"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/admin-auth.ts:isRoleFromSettings",
+   "type": "function",
+   "name": "isRoleFromSettings",
+   "filePath": "lib/admin-auth.ts",
+   "lineRange": [
+    73,
+    76
+   ],
+   "summary": "True when a role comes from app_metadata rather than env email lists.",
+   "tags": [
+    "authorization",
+    "roles",
+    "security"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/api-access.ts:apiRequirement",
+   "type": "function",
+   "name": "apiRequirement",
+   "filePath": "lib/api-access.ts",
+   "lineRange": [
+    25,
+    79
+   ],
+   "summary": "Returns the access requirement for an API path and method.",
+   "tags": [
+    "authorization",
+    "api-rules",
+    "security"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "file:api/src/db/types.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/delivery.controller.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/delivery.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/delivery.controller.ts",
+   "target": "file:api/src/catalog/revalidate.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/delivery.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/delivery.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/delivery.controller.ts",
+   "target": "file:api/src/sales/colissimo-portal.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/delivery.controller.ts",
+   "target": "file:api/src/sales/colissimo-tracking.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/delivery.controller.ts",
+   "target": "file:api/src/sales/commerce.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/delivery.controller.ts",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/delivery.controller.ts",
+   "target": "file:lib/colissimo.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/delivery.controller.ts",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/delivery.controller.ts",
+   "target": "file:lib/order-number.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/orders.controller.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/orders.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/orders.controller.ts",
+   "target": "file:api/src/catalog/revalidate.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/orders.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/orders.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/orders.controller.ts",
+   "target": "file:api/src/sales/colissimo-tracking.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/orders.controller.ts",
+   "target": "file:api/src/sales/commerce.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/orders.controller.ts",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/orders.controller.ts",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/orders.controller.ts",
+   "target": "file:lib/order-confirmation-email.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/orders.controller.ts",
+   "target": "file:lib/order-number.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/orders.controller.ts",
+   "target": "file:lib/order-types.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/sales.controllers.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/sales.controllers.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/sales.controllers.ts",
+   "target": "file:api/src/catalog/revalidate.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/sales.controllers.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/sales.controllers.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/sales.controllers.ts",
+   "target": "file:api/src/sales/commerce.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/sales.controllers.ts",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/sales.controllers.ts",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/sales.controllers.ts",
+   "target": "file:lib/order-number.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/stock/stock.controllers.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/stock/stock.controllers.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/stock/stock.controllers.ts",
+   "target": "file:api/src/catalog/revalidate.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/stock/stock.controllers.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/stock/stock.controllers.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/stock/stock.controllers.ts",
+   "target": "file:lib/stock.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/storefront/account.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/storefront/account.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/storefront/account.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/storefront/account.controller.ts",
+   "target": "file:api/src/db/embed.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/storefront/account.controller.ts",
+   "target": "file:api/src/sales/commerce.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/storefront/account.controller.ts",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/storefront/storefront.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/storefront/storefront.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/storefront/storefront.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/storefront/storefront.controller.ts",
+   "target": "file:api/src/db/embed.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/storefront/storefront.controller.ts",
+   "target": "file:api/src/sales/commerce.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/storefront/storefront.controller.ts",
+   "target": "file:lib/landing-config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/storefront/storefront.controller.ts",
+   "target": "file:lib/utils/product-utils.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/api-access.ts",
+   "target": "file:lib/admin-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/api-access.ts",
+   "target": "file:lib/trash-tables.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:activeDiscounts",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:activeDiscounts",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:siteSettings",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:siteSettings",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:calculateShipping",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:calculateShipping",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:countryTaxRate",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:countryTaxRate",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:priceOrder",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:priceOrder",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:buildManualOrderLines",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:buildManualOrderLines",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:setDeliveryFee",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:setDeliveryFee",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:memberEmail",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/commerce.ts",
+   "target": "function:api/src/sales/commerce.ts:memberEmail",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/delivery.controller.ts",
+   "target": "class:api/src/sales/delivery.controller.ts:DeliveryController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/delivery.controller.ts",
+   "target": "class:api/src/sales/delivery.controller.ts:DeliveryController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/delivery.controller.ts",
+   "target": "function:api/src/sales/delivery.controller.ts:dbError",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/orders.controller.ts",
+   "target": "class:api/src/sales/orders.controller.ts:OrdersController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/orders.controller.ts",
+   "target": "class:api/src/sales/orders.controller.ts:OrdersController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/sales.controllers.ts",
+   "target": "class:api/src/sales/sales.controllers.ts:SalesOrdersController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/sales.controllers.ts",
+   "target": "class:api/src/sales/sales.controllers.ts:SalesOrdersController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/sales.controllers.ts",
+   "target": "class:api/src/sales/sales.controllers.ts:PaymentsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/sales.controllers.ts",
+   "target": "class:api/src/sales/sales.controllers.ts:PaymentsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/sales.controllers.ts",
+   "target": "class:api/src/sales/sales.controllers.ts:RemittancesController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/sales.controllers.ts",
+   "target": "class:api/src/sales/sales.controllers.ts:RemittancesController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/stock/stock.controllers.ts",
+   "target": "function:api/src/stock/stock.controllers.ts:lookupController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/stock/stock.controllers.ts",
+   "target": "class:api/src/stock/stock.controllers.ts:StockTrackingController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/stock/stock.controllers.ts",
+   "target": "class:api/src/stock/stock.controllers.ts:StockTrackingController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/stock/stock.controllers.ts",
+   "target": "class:api/src/stock/stock.controllers.ts:StockCostsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/stock/stock.controllers.ts",
+   "target": "class:api/src/stock/stock.controllers.ts:StockCostsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/stock/stock.controllers.ts",
+   "target": "class:api/src/stock/stock.controllers.ts:StockMovementsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/stock/stock.controllers.ts",
+   "target": "class:api/src/stock/stock.controllers.ts:StockMovementsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/stock/stock.controllers.ts",
+   "target": "class:api/src/stock/stock.controllers.ts:StockReportsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/stock/stock.controllers.ts",
+   "target": "class:api/src/stock/stock.controllers.ts:StockReportsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/storefront/account.controller.ts",
+   "target": "class:api/src/storefront/account.controller.ts:AccountController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/storefront/account.controller.ts",
+   "target": "class:api/src/storefront/account.controller.ts:AccountController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/storefront/storefront.controller.ts",
+   "target": "class:api/src/storefront/storefront.controller.ts:StorefrontController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/storefront/storefront.controller.ts",
+   "target": "class:api/src/storefront/storefront.controller.ts:StorefrontController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/storefront/storefront.controller.ts",
+   "target": "class:api/src/storefront/storefront.controller.ts:HomeListsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/storefront/storefront.controller.ts",
+   "target": "class:api/src/storefront/storefront.controller.ts:HomeListsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/storefront/storefront.controller.ts",
+   "target": "function:api/src/storefront/storefront.controller.ts:ratingOf",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/abandoned-cart-email.ts",
+   "target": "function:lib/abandoned-cart-email.ts:triggerAbandonedCartCampaign",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/abandoned-cart-email.ts",
+   "target": "function:lib/abandoned-cart-email.ts:triggerAbandonedCartCampaign",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/admin-auth.ts",
+   "target": "function:lib/admin-auth.ts:getAdminRole",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/admin-auth.ts",
+   "target": "function:lib/admin-auth.ts:getAdminRole",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/admin-auth.ts",
+   "target": "function:lib/admin-auth.ts:getPermissions",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/admin-auth.ts",
+   "target": "function:lib/admin-auth.ts:getPermissions",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/admin-auth.ts",
+   "target": "function:lib/admin-auth.ts:allows",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/admin-auth.ts",
+   "target": "function:lib/admin-auth.ts:allows",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/admin-auth.ts",
+   "target": "function:lib/admin-auth.ts:hasFullAccess",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/admin-auth.ts",
+   "target": "function:lib/admin-auth.ts:hasFullAccess",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/admin-auth.ts",
+   "target": "function:lib/admin-auth.ts:adminHome",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/admin-auth.ts",
+   "target": "function:lib/admin-auth.ts:adminHome",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/admin-auth.ts",
+   "target": "function:lib/admin-auth.ts:isAdminUser",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/admin-auth.ts",
+   "target": "function:lib/admin-auth.ts:isAdminUser",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/admin-auth.ts",
+   "target": "function:lib/admin-auth.ts:isRoleFromSettings",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/admin-auth.ts",
+   "target": "function:lib/admin-auth.ts:isRoleFromSettings",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/api-access.ts",
+   "target": "function:lib/api-access.ts:apiRequirement",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/api-access.ts",
+   "target": "function:lib/api-access.ts:apiRequirement",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/sales/delivery.controller.ts:DeliveryController",
+   "target": "function:lib/colissimo.ts:createParcel",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/sales/delivery.controller.ts:DeliveryController",
+   "target": "function:lib/colissimo.ts:handOverParcels",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/sales/delivery.controller.ts:DeliveryController",
+   "target": "function:lib/colissimo.ts:editParcel",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/sales/delivery.controller.ts:DeliveryController",
+   "target": "function:lib/colissimo.ts:requestPriceChange",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/sales/delivery.controller.ts:DeliveryController",
+   "target": "function:api/src/sales/commerce.ts:buildManualOrderLines",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/sales/delivery.controller.ts:DeliveryController",
+   "target": "function:api/src/sales/colissimo-portal.ts:parcelDetail",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/sales/orders.controller.ts:OrdersController",
+   "target": "function:api/src/sales/commerce.ts:priceOrder",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/sales/orders.controller.ts:OrdersController",
+   "target": "function:lib/order-number.ts:generateOrderNumber",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/sales/sales.controllers.ts:SalesOrdersController",
+   "target": "function:api/src/sales/commerce.ts:buildManualOrderLines",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/storefront/storefront.controller.ts:StorefrontController",
+   "target": "function:api/src/sales/commerce.ts:activeDiscounts",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/storefront/storefront.controller.ts:StorefrontController",
+   "target": "function:lib/landing-config.ts:parseLandingConfig",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

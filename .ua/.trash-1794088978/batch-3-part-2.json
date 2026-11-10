@@ -1,0 +1,1166 @@
+{
+ "nodes": [
+  {
+   "id": "file:lib/language-utils.ts",
+   "type": "file",
+   "name": "language-utils.ts",
+   "filePath": "lib/language-utils.ts",
+   "summary": "Locale definitions and helpers: supported en/fr/ar languages with Arabic default, names, flags, RTL detection, Accept-Language parsing and locale validation.",
+   "tags": [
+    "i18n",
+    "utility",
+    "rtl",
+    "constants"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/language-utils.ts:isRTL",
+   "type": "function",
+   "name": "isRTL",
+   "filePath": "lib/language-utils.ts",
+   "lineRange": [
+    25,
+    27
+   ],
+   "summary": "Returns whether a locale is right-to-left.",
+   "tags": [
+    "i18n",
+    "rtl",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/language-utils.ts:detectLanguageFromHeader",
+   "type": "function",
+   "name": "detectLanguageFromHeader",
+   "filePath": "lib/language-utils.ts",
+   "lineRange": [
+    30,
+    46
+   ],
+   "summary": "Picks the best supported locale from an Accept-Language header, defaulting to Arabic.",
+   "tags": [
+    "i18n",
+    "utility",
+    "middleware"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/language-utils.ts:isValidLocale",
+   "type": "function",
+   "name": "isValidLocale",
+   "filePath": "lib/language-utils.ts",
+   "lineRange": [
+    49,
+    51
+   ],
+   "summary": "Type guard checking a string is a supported locale.",
+   "tags": [
+    "i18n",
+    "validation"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/order-confirmation-email.ts",
+   "type": "file",
+   "name": "order-confirmation-email.ts",
+   "filePath": "lib/order-confirmation-email.ts",
+   "summary": "Sends the order confirmation e-mail through nodemailer (Gmail or custom SMTP) with an HTML template built from the stored order and HTML-escaped customer text.",
+   "tags": [
+    "email",
+    "notification",
+    "server",
+    "template"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:lib/order-confirmation-email.ts:sendOrderConfirmationEmail",
+   "type": "function",
+   "name": "sendOrderConfirmationEmail",
+   "filePath": "lib/order-confirmation-email.ts",
+   "lineRange": [
+    13,
+    67
+   ],
+   "summary": "Configures the SMTP transport and sends the confirmation e-mail for an order and its lines.",
+   "tags": [
+    "email",
+    "notification",
+    "service"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/order-confirmation-email.ts:generateOrderConfirmationHTML",
+   "type": "function",
+   "name": "generateOrderConfirmationHTML",
+   "filePath": "lib/order-confirmation-email.ts",
+   "lineRange": [
+    79,
+    250
+   ],
+   "summary": "Builds the HTML body of the confirmation e-mail with order lines, totals and shipping details.",
+   "tags": [
+    "email",
+    "template",
+    "serialization"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:lib/order-types.ts",
+   "type": "file",
+   "name": "order-types.ts",
+   "filePath": "lib/order-types.ts",
+   "summary": "Import-free Order and OrderItem row types shared between the storefront and the NestJS API.",
+   "tags": [
+    "type-definition",
+    "orders",
+    "shared"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/orders.ts",
+   "type": "file",
+   "name": "orders.ts",
+   "filePath": "lib/orders.ts",
+   "summary": "Client checkout helper that posts orders to /api/orders with the stored traffic source and re-exports the shared Order types.",
+   "tags": [
+    "api-client",
+    "checkout",
+    "orders"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/orders.ts:createOrder",
+   "type": "function",
+   "name": "createOrder",
+   "filePath": "lib/orders.ts",
+   "lineRange": [
+    33,
+    55
+   ],
+   "summary": "Posts the order payload (stripped of user ids) to /api/orders and returns the order or an error with the API code.",
+   "tags": [
+    "api-client",
+    "checkout",
+    "orders"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/product-detail.ts",
+   "type": "file",
+   "name": "product-detail.ts",
+   "filePath": "lib/product-detail.ts",
+   "summary": "Loader for everything the product page needs (product, variants, images, similar products, related categories) from the NestJS storefront API.",
+   "tags": [
+    "data-fetching",
+    "product",
+    "storefront"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/product-detail.ts:loadProductDetail",
+   "type": "function",
+   "name": "loadProductDetail",
+   "filePath": "lib/product-detail.ts",
+   "lineRange": [
+    21,
+    30
+   ],
+   "summary": "Decodes the slug once and fetches the product detail payload from the storefront API.",
+   "tags": [
+    "data-fetching",
+    "product"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/product-images.ts",
+   "type": "file",
+   "name": "product-images.ts",
+   "filePath": "lib/product-images.ts",
+   "summary": "ProductImage type and a helper choosing a product's main image URL with legacy fallbacks.",
+   "tags": [
+    "utility",
+    "images",
+    "product",
+    "type-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/product-images.ts:getProductImageUrl",
+   "type": "function",
+   "name": "getProductImageUrl",
+   "filePath": "lib/product-images.ts",
+   "lineRange": [
+    21,
+    44
+   ],
+   "summary": "Returns the main image URL from product_images, images or the legacy image_url field.",
+   "tags": [
+    "utility",
+    "images"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/product-search.ts",
+   "type": "file",
+   "name": "product-search.ts",
+   "filePath": "lib/product-search.ts",
+   "summary": "Shared product search constant (minimum query length) documenting that matching and ranking run in Postgres search_products.",
+   "tags": [
+    "search",
+    "constants",
+    "product"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/quick-add.ts",
+   "type": "file",
+   "name": "quick-add.ts",
+   "filePath": "lib/quick-add.ts",
+   "summary": "Client hook for adding products to the cart from product cards, opening the product page when a size/color must be chosen or stock is out.",
+   "tags": [
+    "hook",
+    "cart",
+    "storefront",
+    "product"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/quick-add.ts:useQuickAdd",
+   "type": "function",
+   "name": "useQuickAdd",
+   "filePath": "lib/quick-add.ts",
+   "lineRange": [
+    34,
+    75
+   ],
+   "summary": "Returns an async handler that checks variants via the storefront API and either adds the line to the cart or navigates to the product page.",
+   "tags": [
+    "hook",
+    "cart",
+    "event-handler"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:lib/schemas/auth-schema.ts",
+   "type": "file",
+   "name": "auth-schema.ts",
+   "filePath": "lib/schemas/auth-schema.ts",
+   "summary": "Localized zod schemas (en/fr/ar messages) for sign-in, sign-up, forgot-password and new-password forms.",
+   "tags": [
+    "validation",
+    "schema",
+    "authentication",
+    "i18n"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/schemas/auth-schema.ts:signInSchema",
+   "type": "function",
+   "name": "signInSchema",
+   "filePath": "lib/schemas/auth-schema.ts",
+   "lineRange": [
+    34,
+    40
+   ],
+   "summary": "Builds the localized sign-in schema (email and password).",
+   "tags": [
+    "validation",
+    "authentication"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/schemas/auth-schema.ts:signUpSchema",
+   "type": "function",
+   "name": "signUpSchema",
+   "filePath": "lib/schemas/auth-schema.ts",
+   "lineRange": [
+    42,
+    52
+   ],
+   "summary": "Builds the localized sign-up schema with name, email, password and matching confirmation.",
+   "tags": [
+    "validation",
+    "authentication"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/schemas/auth-schema.ts:forgotPasswordSchema",
+   "type": "function",
+   "name": "forgotPasswordSchema",
+   "filePath": "lib/schemas/auth-schema.ts",
+   "lineRange": [
+    54,
+    56
+   ],
+   "summary": "Builds the localized forgot-password schema (email).",
+   "tags": [
+    "validation",
+    "authentication"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/schemas/auth-schema.ts:newPasswordSchema",
+   "type": "function",
+   "name": "newPasswordSchema",
+   "filePath": "lib/schemas/auth-schema.ts",
+   "lineRange": [
+    58,
+    66
+   ],
+   "summary": "Builds the localized new-password schema with confirmation matching.",
+   "tags": [
+    "validation",
+    "authentication"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/schemas/checkout-schema.ts",
+   "type": "file",
+   "name": "checkout-schema.ts",
+   "filePath": "lib/schemas/checkout-schema.ts",
+   "summary": "Zod checkout form schema requiring name, Tunisian phone, Colissimo governorate, city and address, with optional email and postal fields.",
+   "tags": [
+    "validation",
+    "schema",
+    "checkout"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/service-highlights.ts",
+   "type": "file",
+   "name": "service-highlights.ts",
+   "filePath": "lib/service-highlights.ts",
+   "summary": "Static service highlight cards (free shipping threshold, cash back, support) built from the header config.",
+   "tags": [
+    "config",
+    "constants",
+    "marketing"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/service-highlights.ts:getServiceHighlights",
+   "type": "function",
+   "name": "getServiceHighlights",
+   "filePath": "lib/service-highlights.ts",
+   "lineRange": [
+    9,
+    34
+   ],
+   "summary": "Returns the service highlight cards, including the configured free-shipping threshold and currency.",
+   "tags": [
+    "config",
+    "marketing"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:lib/storefront-api.ts",
+   "type": "file",
+   "name": "storefront-api.ts",
+   "filePath": "lib/storefront-api.ts",
+   "summary": "Fetch helper for public NestJS storefront reads, calling NEST_URL on the server and the Next.js rewrite in the browser.",
+   "tags": [
+    "api-client",
+    "utility",
+    "storefront"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/storefront-api.ts:storefront",
+   "type": "function",
+   "name": "storefront",
+   "filePath": "lib/storefront-api.ts",
+   "lineRange": [
+    3,
+    9
+   ],
+   "summary": "Fetches /api/storefront/<path> without caching and returns its data or throws on failure.",
+   "tags": [
+    "api-client",
+    "data-fetching"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/traffic-source.ts",
+   "type": "file",
+   "name": "traffic-source.ts",
+   "filePath": "lib/traffic-source.ts",
+   "summary": "Detects and remembers where a shopper came from (utm_source, referrer, ad click ids) for 30 days in the browser, and labels sources for the admin.",
+   "tags": [
+    "analytics",
+    "utility",
+    "marketing",
+    "persistence"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/traffic-source.ts:detectTrafficSource",
+   "type": "function",
+   "name": "detectTrafficSource",
+   "filePath": "lib/traffic-source.ts",
+   "lineRange": [
+    41,
+    56
+   ],
+   "summary": "Classifies a visit's source from utm_source, the referring host or ad click ids, else direct.",
+   "tags": [
+    "analytics",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/traffic-source.ts:rememberTrafficSource",
+   "type": "function",
+   "name": "rememberTrafficSource",
+   "filePath": "lib/traffic-source.ts",
+   "lineRange": [
+    59,
+    68
+   ],
+   "summary": "Stores the latest non-direct traffic source in localStorage with a timestamp.",
+   "tags": [
+    "analytics",
+    "persistence"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/traffic-source.ts:storedTrafficSource",
+   "type": "function",
+   "name": "storedTrafficSource",
+   "filePath": "lib/traffic-source.ts",
+   "lineRange": [
+    70,
+    77
+   ],
+   "summary": "Reads the remembered traffic source if it is still within 30 days.",
+   "tags": [
+    "analytics",
+    "persistence"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/utils/product-utils.ts",
+   "type": "file",
+   "name": "product-utils.ts",
+   "filePath": "lib/utils/product-utils.ts",
+   "summary": "Product helpers shared by storefront and API: localized names/descriptions/category names, descendant category ids, images, discounted price, stock status and product URLs.",
+   "tags": [
+    "utility",
+    "product",
+    "i18n",
+    "shared"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/utils/product-utils.ts:getProductName",
+   "type": "function",
+   "name": "getProductName",
+   "filePath": "lib/utils/product-utils.ts",
+   "lineRange": [
+    7,
+    15
+   ],
+   "summary": "Returns the product name in the locale, falling back to the base column.",
+   "tags": [
+    "utility",
+    "i18n"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/utils/product-utils.ts:getProductDescription",
+   "type": "function",
+   "name": "getProductDescription",
+   "filePath": "lib/utils/product-utils.ts",
+   "lineRange": [
+    20,
+    28
+   ],
+   "summary": "Returns the localized product description with fallback.",
+   "tags": [
+    "utility",
+    "i18n"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/utils/product-utils.ts:getCategoryName",
+   "type": "function",
+   "name": "getCategoryName",
+   "filePath": "lib/utils/product-utils.ts",
+   "lineRange": [
+    33,
+    41
+   ],
+   "summary": "Returns the localized category name with fallback.",
+   "tags": [
+    "utility",
+    "i18n"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/utils/product-utils.ts:getDescendantCategoryIds",
+   "type": "function",
+   "name": "getDescendantCategoryIds",
+   "filePath": "lib/utils/product-utils.ts",
+   "lineRange": [
+    47,
+    58
+   ],
+   "summary": "Collects a category id and all nested descendant ids for category filtering.",
+   "tags": [
+    "utility",
+    "categories"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/utils/product-utils.ts:getProductImageUrl",
+   "type": "function",
+   "name": "getProductImageUrl",
+   "filePath": "lib/utils/product-utils.ts",
+   "lineRange": [
+    63,
+    82
+   ],
+   "summary": "Picks a product's main image URL with fallbacks.",
+   "tags": [
+    "utility",
+    "images"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/utils/product-utils.ts:calculateDiscountedPrice",
+   "type": "function",
+   "name": "calculateDiscountedPrice",
+   "filePath": "lib/utils/product-utils.ts",
+   "lineRange": [
+    87,
+    112
+   ],
+   "summary": "Computes the discounted price and savings from a base price and discount.",
+   "tags": [
+    "utility",
+    "pricing"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/utils/product-utils.ts:isProductInStock",
+   "type": "function",
+   "name": "isProductInStock",
+   "filePath": "lib/utils/product-utils.ts",
+   "lineRange": [
+    117,
+    119
+   ],
+   "summary": "Returns whether a product has stock.",
+   "tags": [
+    "utility",
+    "stock"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/utils/product-utils.ts:getStockStatus",
+   "type": "function",
+   "name": "getStockStatus",
+   "filePath": "lib/utils/product-utils.ts",
+   "lineRange": [
+    124,
+    135
+   ],
+   "summary": "Maps a stock quantity to a status label and color.",
+   "tags": [
+    "utility",
+    "stock"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/utils/product-utils.ts:getProductUrl",
+   "type": "function",
+   "name": "getProductUrl",
+   "filePath": "lib/utils/product-utils.ts",
+   "lineRange": [
+    140,
+    144
+   ],
+   "summary": "Builds the localized product page URL.",
+   "tags": [
+    "utility",
+    "routing"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/utils/product-utils.ts:getSortedProductImages",
+   "type": "function",
+   "name": "getSortedProductImages",
+   "filePath": "lib/utils/product-utils.ts",
+   "lineRange": [
+    149,
+    165
+   ],
+   "summary": "Returns product images sorted with the main image first, then by position.",
+   "tags": [
+    "utility",
+    "images"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:types/product.ts",
+   "type": "file",
+   "name": "product.ts",
+   "filePath": "types/product.ts",
+   "summary": "Shared TypeScript types for products, variants, colors, sizes and promo products.",
+   "tags": [
+    "type-definition",
+    "data-model",
+    "product"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:lib/language-utils.ts",
+   "target": "function:lib/language-utils.ts:isRTL",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/language-utils.ts",
+   "target": "function:lib/language-utils.ts:isRTL",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/language-utils.ts",
+   "target": "function:lib/language-utils.ts:detectLanguageFromHeader",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/language-utils.ts",
+   "target": "function:lib/language-utils.ts:detectLanguageFromHeader",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/language-utils.ts",
+   "target": "function:lib/language-utils.ts:isValidLocale",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/language-utils.ts",
+   "target": "function:lib/language-utils.ts:isValidLocale",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/order-confirmation-email.ts",
+   "target": "function:lib/order-confirmation-email.ts:sendOrderConfirmationEmail",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/order-confirmation-email.ts",
+   "target": "function:lib/order-confirmation-email.ts:sendOrderConfirmationEmail",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/order-confirmation-email.ts",
+   "target": "function:lib/order-confirmation-email.ts:generateOrderConfirmationHTML",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/order-confirmation-email.ts",
+   "target": "file:lib/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/order-confirmation-email.ts",
+   "target": "file:lib/order-types.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/orders.ts",
+   "target": "function:lib/orders.ts:createOrder",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/orders.ts",
+   "target": "function:lib/orders.ts:createOrder",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/orders.ts",
+   "target": "file:lib/cart-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/orders.ts",
+   "target": "file:lib/order-types.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/orders.ts",
+   "target": "file:lib/traffic-source.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/product-detail.ts",
+   "target": "function:lib/product-detail.ts:loadProductDetail",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/product-detail.ts",
+   "target": "function:lib/product-detail.ts:loadProductDetail",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/product-detail.ts",
+   "target": "file:lib/storefront-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/product-images.ts",
+   "target": "function:lib/product-images.ts:getProductImageUrl",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/product-images.ts",
+   "target": "function:lib/product-images.ts:getProductImageUrl",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/quick-add.ts",
+   "target": "function:lib/quick-add.ts:useQuickAdd",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/quick-add.ts",
+   "target": "function:lib/quick-add.ts:useQuickAdd",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/quick-add.ts",
+   "target": "file:lib/cart-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/quick-add.ts",
+   "target": "file:lib/language-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/quick-add.ts",
+   "target": "file:lib/storefront-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/schemas/auth-schema.ts",
+   "target": "function:lib/schemas/auth-schema.ts:signInSchema",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/schemas/auth-schema.ts",
+   "target": "function:lib/schemas/auth-schema.ts:signInSchema",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/schemas/auth-schema.ts",
+   "target": "function:lib/schemas/auth-schema.ts:signUpSchema",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/schemas/auth-schema.ts",
+   "target": "function:lib/schemas/auth-schema.ts:signUpSchema",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/schemas/auth-schema.ts",
+   "target": "function:lib/schemas/auth-schema.ts:forgotPasswordSchema",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/schemas/auth-schema.ts",
+   "target": "function:lib/schemas/auth-schema.ts:forgotPasswordSchema",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/schemas/auth-schema.ts",
+   "target": "function:lib/schemas/auth-schema.ts:newPasswordSchema",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/schemas/auth-schema.ts",
+   "target": "function:lib/schemas/auth-schema.ts:newPasswordSchema",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/schemas/checkout-schema.ts",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/service-highlights.ts",
+   "target": "function:lib/service-highlights.ts:getServiceHighlights",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/service-highlights.ts",
+   "target": "function:lib/service-highlights.ts:getServiceHighlights",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/service-highlights.ts",
+   "target": "file:lib/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/storefront-api.ts",
+   "target": "function:lib/storefront-api.ts:storefront",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/storefront-api.ts",
+   "target": "function:lib/storefront-api.ts:storefront",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/traffic-source.ts",
+   "target": "function:lib/traffic-source.ts:detectTrafficSource",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/traffic-source.ts",
+   "target": "function:lib/traffic-source.ts:detectTrafficSource",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/traffic-source.ts",
+   "target": "function:lib/traffic-source.ts:rememberTrafficSource",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/traffic-source.ts",
+   "target": "function:lib/traffic-source.ts:rememberTrafficSource",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/traffic-source.ts",
+   "target": "function:lib/traffic-source.ts:storedTrafficSource",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/traffic-source.ts",
+   "target": "function:lib/traffic-source.ts:storedTrafficSource",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getProductName",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getProductName",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getProductDescription",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getProductDescription",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getCategoryName",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getCategoryName",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getDescendantCategoryIds",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getDescendantCategoryIds",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getProductImageUrl",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getProductImageUrl",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:calculateDiscountedPrice",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:calculateDiscountedPrice",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:isProductInStock",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:isProductInStock",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getStockStatus",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getStockStatus",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getProductUrl",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getProductUrl",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getSortedProductImages",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/utils/product-utils.ts",
+   "target": "function:lib/utils/product-utils.ts:getSortedProductImages",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/order-confirmation-email.ts:sendOrderConfirmationEmail",
+   "target": "function:lib/order-confirmation-email.ts:generateOrderConfirmationHTML",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/orders.ts:createOrder",
+   "target": "function:lib/traffic-source.ts:storedTrafficSource",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/product-detail.ts:loadProductDetail",
+   "target": "function:lib/storefront-api.ts:storefront",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/quick-add.ts:useQuickAdd",
+   "target": "function:lib/storefront-api.ts:storefront",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/quick-add.ts:useQuickAdd",
+   "target": "function:lib/cart-context.tsx:useCart",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/quick-add.ts:useQuickAdd",
+   "target": "function:lib/language-context.tsx:useLanguage",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

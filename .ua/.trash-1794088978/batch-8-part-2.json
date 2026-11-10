@@ -1,0 +1,1813 @@
+{
+ "nodes": [
+  {
+   "id": "file:components/admin/erp/QuickLinks.tsx",
+   "type": "file",
+   "name": "QuickLinks.tsx",
+   "filePath": "components/admin/erp/QuickLinks.tsx",
+   "summary": "Permission-aware grid of quick links to admin areas shown on the dashboard.",
+   "tags": [
+    "component",
+    "navigation",
+    "dashboard",
+    "admin",
+    "permissions"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/QuickLinks.tsx:QuickLinks",
+   "type": "function",
+   "name": "QuickLinks",
+   "filePath": "components/admin/erp/QuickLinks.tsx",
+   "lineRange": [
+    11,
+    41
+   ],
+   "summary": "Renders quick links filtered by the user's permissions.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/admin/erp/charts.tsx",
+   "type": "file",
+   "name": "charts.tsx",
+   "filePath": "components/admin/erp/charts.tsx",
+   "summary": "Dependency-free SVG chart components (BarChart, BarList, TargetBar) for ERP admin screens.",
+   "tags": [
+    "component",
+    "charts",
+    "svg",
+    "erp",
+    "data-visualization"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/erp/charts.tsx:BarChart",
+   "type": "function",
+   "name": "BarChart",
+   "filePath": "components/admin/erp/charts.tsx",
+   "lineRange": [
+    35,
+    107
+   ],
+   "summary": "SVG vertical bar chart with a rounded axis maximum.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/erp/charts.tsx:BarList",
+   "type": "function",
+   "name": "BarList",
+   "filePath": "components/admin/erp/charts.tsx",
+   "lineRange": [
+    110,
+    134
+   ],
+   "summary": "Horizontal bar list ranking labeled values.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/charts.tsx:TargetBar",
+   "type": "function",
+   "name": "TargetBar",
+   "filePath": "components/admin/erp/charts.tsx",
+   "lineRange": [
+    137,
+    152
+   ],
+   "summary": "Progress bar against a target value.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/admin/erp/erp-client.ts",
+   "type": "file",
+   "name": "erp-client.ts",
+   "filePath": "components/admin/erp/erp-client.ts",
+   "summary": "Shared ERP admin client: fetch wrapper with ApiError, a useApi data hook, and money/number/date/period formatting and download helpers.",
+   "tags": [
+    "utility",
+    "api-client",
+    "hook",
+    "formatting",
+    "erp"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/erp/erp-client.ts:api",
+   "type": "function",
+   "name": "api",
+   "filePath": "components/admin/erp/erp-client.ts",
+   "lineRange": [
+    14,
+    27
+   ],
+   "summary": "JSON fetch wrapper for /api that throws ApiError on failure.",
+   "tags": [
+    "utility",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/erp-client.ts:useApi",
+   "type": "function",
+   "name": "useApi",
+   "filePath": "components/admin/erp/erp-client.ts",
+   "lineRange": [
+    30,
+    50
+   ],
+   "summary": "Data-loading hook with loading, error and reload state.",
+   "tags": [
+    "hook",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/erp-client.ts:formatMoney",
+   "type": "function",
+   "name": "formatMoney",
+   "filePath": "components/admin/erp/erp-client.ts",
+   "lineRange": [
+    55,
+    59
+   ],
+   "summary": "Formats amounts with 3 decimals.",
+   "tags": [
+    "utility",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/erp-client.ts:formatNumber",
+   "type": "function",
+   "name": "formatNumber",
+   "filePath": "components/admin/erp/erp-client.ts",
+   "lineRange": [
+    61,
+    62
+   ],
+   "summary": "Locale number formatting.",
+   "tags": [
+    "utility",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/erp-client.ts:formatDate",
+   "type": "function",
+   "name": "formatDate",
+   "filePath": "components/admin/erp/erp-client.ts",
+   "lineRange": [
+    64,
+    65
+   ],
+   "summary": "Formats a date for display.",
+   "tags": [
+    "utility",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/erp-client.ts:percent",
+   "type": "function",
+   "name": "percent",
+   "filePath": "components/admin/erp/erp-client.ts",
+   "lineRange": [
+    67,
+    67
+   ],
+   "summary": "Formats a ratio as a percentage.",
+   "tags": [
+    "utility",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/erp-client.ts:periodRange",
+   "type": "function",
+   "name": "periodRange",
+   "filePath": "components/admin/erp/erp-client.ts",
+   "lineRange": [
+    72,
+    84
+   ],
+   "summary": "Computes from/to dates for a named period.",
+   "tags": [
+    "utility",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/erp-client.ts:day",
+   "type": "function",
+   "name": "day",
+   "filePath": "components/admin/erp/erp-client.ts",
+   "lineRange": [
+    87,
+    87
+   ],
+   "summary": "Returns a YYYY-MM-DD day string.",
+   "tags": [
+    "utility",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/erp-client.ts:download",
+   "type": "function",
+   "name": "download",
+   "filePath": "components/admin/erp/erp-client.ts",
+   "lineRange": [
+    90,
+    97
+   ],
+   "summary": "Downloads an API response as a file.",
+   "tags": [
+    "utility",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:components/admin/erp/erp-client.ts:ApiError",
+   "type": "class",
+   "name": "ApiError",
+   "filePath": "components/admin/erp/erp-client.ts",
+   "lineRange": [
+    7,
+    11
+   ],
+   "summary": "Error carrying the HTTP status and API error code.",
+   "tags": [
+    "error-handling",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/admin/erp/purchase-items.ts",
+   "type": "file",
+   "name": "purchase-items.ts",
+   "filePath": "components/admin/erp/purchase-items.ts",
+   "summary": "React hook loading the purchasable items (variants and raw materials) used by purchase order lines.",
+   "tags": [
+    "hook",
+    "purchasing",
+    "erp",
+    "data-loading",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/erp/purchase-items.ts:usePurchaseItems",
+   "type": "function",
+   "name": "usePurchaseItems",
+   "filePath": "components/admin/erp/purchase-items.ts",
+   "lineRange": [
+    32,
+    61
+   ],
+   "summary": "Loads variants and raw materials as purchase line options.",
+   "tags": [
+    "hook",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/admin/erp/ui.tsx",
+   "type": "file",
+   "name": "ui.tsx",
+   "filePath": "components/admin/erp/ui.tsx",
+   "summary": "Shared ERP admin UI kit: PageHeader, Kpi, ChannelTag, PeriodFilter, AgentSelect, CampaignSelect, ListRow, Help and the usePeriod/useTeam hooks.",
+   "tags": [
+    "component",
+    "ui-kit",
+    "hook",
+    "erp",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/erp/ui.tsx:PageHeader",
+   "type": "function",
+   "name": "PageHeader",
+   "filePath": "components/admin/erp/ui.tsx",
+   "lineRange": [
+    15,
+    31
+   ],
+   "summary": "Page title header with actions.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/ui.tsx:Kpi",
+   "type": "function",
+   "name": "Kpi",
+   "filePath": "components/admin/erp/ui.tsx",
+   "lineRange": [
+    34,
+    56
+   ],
+   "summary": "KPI stat tile.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/ui.tsx:ChannelTag",
+   "type": "function",
+   "name": "ChannelTag",
+   "filePath": "components/admin/erp/ui.tsx",
+   "lineRange": [
+    58,
+    63
+   ],
+   "summary": "Colored tag for a sales channel.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/ui.tsx:PeriodFilter",
+   "type": "function",
+   "name": "PeriodFilter",
+   "filePath": "components/admin/erp/ui.tsx",
+   "lineRange": [
+    66,
+    94
+   ],
+   "summary": "Period selector with custom date range.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/ui.tsx:usePeriod",
+   "type": "function",
+   "name": "usePeriod",
+   "filePath": "components/admin/erp/ui.tsx",
+   "lineRange": [
+    96,
+    100
+   ],
+   "summary": "State hook for a selected period range.",
+   "tags": [
+    "hook",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/ui.tsx:useTeam",
+   "type": "function",
+   "name": "useTeam",
+   "filePath": "components/admin/erp/ui.tsx",
+   "lineRange": [
+    112,
+    126
+   ],
+   "summary": "Loads the back-office team for agent pickers.",
+   "tags": [
+    "hook",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/ui.tsx:AgentSelect",
+   "type": "function",
+   "name": "AgentSelect",
+   "filePath": "components/admin/erp/ui.tsx",
+   "lineRange": [
+    129,
+    153
+   ],
+   "summary": "Select of team agents.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/ui.tsx:CampaignSelect",
+   "type": "function",
+   "name": "CampaignSelect",
+   "filePath": "components/admin/erp/ui.tsx",
+   "lineRange": [
+    162,
+    178
+   ],
+   "summary": "Select of marketing campaigns.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/ui.tsx:ListRow",
+   "type": "function",
+   "name": "ListRow",
+   "filePath": "components/admin/erp/ui.tsx",
+   "lineRange": [
+    184,
+    208
+   ],
+   "summary": "Labeled value row for detail lists.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/erp/ui.tsx:Help",
+   "type": "function",
+   "name": "Help",
+   "filePath": "components/admin/erp/ui.tsx",
+   "lineRange": [
+    211,
+    213
+   ],
+   "summary": "Inline help tooltip icon.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/admin/notification-item.tsx",
+   "type": "file",
+   "name": "notification-item.tsx",
+   "filePath": "components/admin/notification-item.tsx",
+   "summary": "Renders one back-office notification with localized title/body and an icon by type, used by the bell and notifications page.",
+   "tags": [
+    "component",
+    "notifications",
+    "i18n",
+    "admin",
+    "ui"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/notification-item.tsx:notificationText",
+   "type": "function",
+   "name": "notificationText",
+   "filePath": "components/admin/notification-item.tsx",
+   "lineRange": [
+    29,
+    34
+   ],
+   "summary": "Picks a notification's title/body in the admin language.",
+   "tags": [
+    "utility",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/notification-item.tsx:NotificationItem",
+   "type": "function",
+   "name": "NotificationItem",
+   "filePath": "components/admin/notification-item.tsx",
+   "lineRange": [
+    45,
+    74
+   ],
+   "summary": "Renders a notification row with icon, text and time.",
+   "tags": [
+    "component",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/admin/order-status.ts",
+   "type": "file",
+   "name": "order-status.ts",
+   "filePath": "components/admin/order-status.ts",
+   "summary": "Order and payment status labels, colors and options for the admin, plus validateOrder which creates the Colissimo parcel and moves the order to processing.",
+   "tags": [
+    "utility",
+    "order",
+    "status",
+    "constants",
+    "delivery"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/order-status.ts:orderStatusLabel",
+   "type": "function",
+   "name": "orderStatusLabel",
+   "filePath": "components/admin/order-status.ts",
+   "lineRange": [
+    50,
+    50
+   ],
+   "summary": "Returns the display label for an order status.",
+   "tags": [
+    "utility",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/order-status.ts:validateOrder",
+   "type": "function",
+   "name": "validateOrder",
+   "filePath": "components/admin/order-status.ts",
+   "lineRange": [
+    63,
+    65
+   ],
+   "summary": "Posts the validate action to /api/delivery for an order.",
+   "tags": [
+    "utility",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/order-status.ts:errorCode",
+   "type": "function",
+   "name": "errorCode",
+   "filePath": "components/admin/order-status.ts",
+   "lineRange": [
+    67,
+    67
+   ],
+   "summary": "Extracts an API error code from an error.",
+   "tags": [
+    "utility",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/admin/pos/PosAnalyticsTab.tsx",
+   "type": "file",
+   "name": "PosAnalyticsTab.tsx",
+   "filePath": "components/admin/pos/PosAnalyticsTab.tsx",
+   "summary": "Point of sale Analytics tab showing shop sales KPIs and charts from GET /api/pos/analytics.",
+   "tags": [
+    "component",
+    "pos",
+    "analytics",
+    "erp",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/pos/PosAnalyticsTab.tsx:PosAnalyticsTab",
+   "type": "function",
+   "name": "PosAnalyticsTab",
+   "filePath": "components/admin/pos/PosAnalyticsTab.tsx",
+   "lineRange": [
+    21,
+    83
+   ],
+   "summary": "POS analytics tab with KPIs and charts.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/admin/pos/PosStockTab.tsx",
+   "type": "file",
+   "name": "PosStockTab.tsx",
+   "filePath": "components/admin/pos/PosStockTab.tsx",
+   "summary": "Point of sale Stock tab listing a shop's carried variants with low and out-of-stock flags based on the location's limit.",
+   "tags": [
+    "component",
+    "pos",
+    "stock",
+    "inventory",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/pos/PosStockTab.tsx:isLowStock",
+   "type": "function",
+   "name": "isLowStock",
+   "filePath": "components/admin/pos/PosStockTab.tsx",
+   "lineRange": [
+    27,
+    27
+   ],
+   "summary": "Whether a level is at or below the low-stock limit.",
+   "tags": [
+    "utility",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/pos/PosStockTab.tsx:isOutOfStock",
+   "type": "function",
+   "name": "isOutOfStock",
+   "filePath": "components/admin/pos/PosStockTab.tsx",
+   "lineRange": [
+    28,
+    28
+   ],
+   "summary": "Whether a level is zero or less.",
+   "tags": [
+    "utility",
+    "admin",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/pos/PosStockTab.tsx:PosStockTab",
+   "type": "function",
+   "name": "PosStockTab",
+   "filePath": "components/admin/pos/PosStockTab.tsx",
+   "lineRange": [
+    31,
+    98
+   ],
+   "summary": "POS shop stock list with filters.",
+   "tags": [
+    "component",
+    "admin",
+    "erp"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/admin/select-search.ts",
+   "type": "file",
+   "name": "select-search.ts",
+   "filePath": "components/admin/select-search.ts",
+   "summary": "Tiny antd Select filterOption helper matching options by their searchtext attribute.",
+   "tags": [
+    "utility",
+    "antd",
+    "search",
+    "admin",
+    "select"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/select-search.ts:searchByText",
+   "type": "function",
+   "name": "searchByText",
+   "filePath": "components/admin/select-search.ts",
+   "lineRange": [
+    5,
+    7
+   ],
+   "summary": "antd filterOption matching an option's searchtext.",
+   "tags": [
+    "utility",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/admin-i18n.tsx",
+   "type": "file",
+   "name": "admin-i18n.tsx",
+   "filePath": "lib/admin-i18n.tsx",
+   "summary": "Admin EN/FR/AR translation context: AdminI18nProvider, useAdminT with placeholder interpolation, msg marker, and locale/date-locale constants.",
+   "tags": [
+    "i18n",
+    "context-provider",
+    "hook",
+    "admin",
+    "rtl"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/admin-i18n.tsx:msg",
+   "type": "function",
+   "name": "msg",
+   "filePath": "lib/admin-i18n.tsx",
+   "lineRange": [
+    28,
+    28
+   ],
+   "summary": "Marks a string for translation where it is displayed.",
+   "tags": [
+    "utility",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/admin-i18n.tsx:AdminI18nProvider",
+   "type": "function",
+   "name": "AdminI18nProvider",
+   "filePath": "lib/admin-i18n.tsx",
+   "lineRange": [
+    50,
+    88
+   ],
+   "summary": "Provides the admin language, remembered per browser, and the translation function.",
+   "tags": [
+    "component",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/admin-i18n.tsx:useAdminT",
+   "type": "function",
+   "name": "useAdminT",
+   "filePath": "lib/admin-i18n.tsx",
+   "lineRange": [
+    90,
+    92
+   ],
+   "summary": "Hook returning the admin translator and language.",
+   "tags": [
+    "hook",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/admin-role-context.tsx",
+   "type": "file",
+   "name": "admin-role-context.tsx",
+   "filePath": "lib/admin-role-context.tsx",
+   "summary": "React context providing the signed-in back-office user's role and permissions from GET /api/admin/me, with a can(permission) helper.",
+   "tags": [
+    "context-provider",
+    "hook",
+    "permissions",
+    "auth",
+    "admin"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/admin-role-context.tsx:AdminRoleProvider",
+   "type": "function",
+   "name": "AdminRoleProvider",
+   "filePath": "lib/admin-role-context.tsx",
+   "lineRange": [
+    21,
+    40
+   ],
+   "summary": "Loads /api/admin/me and provides role and permissions.",
+   "tags": [
+    "component",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/admin-role-context.tsx:useAdminRole",
+   "type": "function",
+   "name": "useAdminRole",
+   "filePath": "lib/admin-role-context.tsx",
+   "lineRange": [
+    42,
+    51
+   ],
+   "summary": "Hook returning role, permissions and can().",
+   "tags": [
+    "hook",
+    "admin",
+    "frontend"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/colissimo-data.ts",
+   "type": "file",
+   "name": "colissimo-data.ts",
+   "filePath": "lib/colissimo-data.ts",
+   "summary": "Shared Colissimo data: Tunisian governorates and matching, parcel status catalog and final statuses, customer-facing stage mapping, and parcelFromOrder to build parcel fields from an order.",
+   "tags": [
+    "data-model",
+    "delivery",
+    "colissimo",
+    "constants",
+    "shared"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/colissimo-data.ts:governorateOptions",
+   "type": "function",
+   "name": "governorateOptions",
+   "filePath": "lib/colissimo-data.ts",
+   "lineRange": [
+    41,
+    43
+   ],
+   "summary": "Select options for Tunisian governorates in Colissimo spelling.",
+   "tags": [
+    "utility",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/colissimo-data.ts:governorateLabel",
+   "type": "function",
+   "name": "governorateLabel",
+   "filePath": "lib/colissimo-data.ts",
+   "lineRange": [
+    46,
+    49
+   ],
+   "summary": "Localized label for a governorate.",
+   "tags": [
+    "utility",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/colissimo-data.ts:matchGovernorate",
+   "type": "function",
+   "name": "matchGovernorate",
+   "filePath": "lib/colissimo-data.ts",
+   "lineRange": [
+    60,
+    71
+   ],
+   "summary": "Matches free-text input to a Colissimo governorate name.",
+   "tags": [
+    "utility",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/colissimo-data.ts:isFinalParcel",
+   "type": "function",
+   "name": "isFinalParcel",
+   "filePath": "lib/colissimo-data.ts",
+   "lineRange": [
+    113,
+    113
+   ],
+   "summary": "Whether a parcel status is final.",
+   "tags": [
+    "utility",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/colissimo-data.ts:customerStage",
+   "type": "function",
+   "name": "customerStage",
+   "filePath": "lib/colissimo-data.ts",
+   "lineRange": [
+    118,
+    126
+   ],
+   "summary": "Maps a parcel status to the shopper-facing stage.",
+   "tags": [
+    "utility",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/colissimo-data.ts:statusInfo",
+   "type": "function",
+   "name": "statusInfo",
+   "filePath": "lib/colissimo-data.ts",
+   "lineRange": [
+    128,
+    130
+   ],
+   "summary": "Looks up a Colissimo status's label and color.",
+   "tags": [
+    "utility",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/colissimo-data.ts:parcelFromOrder",
+   "type": "function",
+   "name": "parcelFromOrder",
+   "filePath": "lib/colissimo-data.ts",
+   "lineRange": [
+    151,
+    172
+   ],
+   "summary": "Builds Colissimo parcel fields from an order, flagging missing details.",
+   "tags": [
+    "utility",
+    "admin",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/erp/constants.ts",
+   "type": "file",
+   "name": "constants.ts",
+   "filePath": "lib/erp/constants.ts",
+   "summary": "Shared ERP constants and translatable labels/colors: channels, customer stages, payment methods, money accounts, bill and treasury categories, PO statuses, journals, account types, documents and ticket statuses.",
+   "tags": [
+    "constants",
+    "erp",
+    "type-definition",
+    "shared",
+    "i18n"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:components/admin/erp/QuickLinks.tsx",
+   "target": "function:components/admin/erp/QuickLinks.tsx:QuickLinks",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/QuickLinks.tsx",
+   "target": "function:components/admin/erp/QuickLinks.tsx:QuickLinks",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/QuickLinks.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/QuickLinks.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/charts.tsx",
+   "target": "function:components/admin/erp/charts.tsx:BarChart",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/charts.tsx",
+   "target": "function:components/admin/erp/charts.tsx:BarChart",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/charts.tsx",
+   "target": "function:components/admin/erp/charts.tsx:BarList",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/charts.tsx",
+   "target": "function:components/admin/erp/charts.tsx:BarList",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/charts.tsx",
+   "target": "function:components/admin/erp/charts.tsx:TargetBar",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/charts.tsx",
+   "target": "function:components/admin/erp/charts.tsx:TargetBar",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:api",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:api",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:useApi",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:useApi",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:formatMoney",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:formatMoney",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:formatNumber",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:formatNumber",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:formatDate",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:formatDate",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:percent",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:percent",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:periodRange",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:periodRange",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:day",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:day",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:download",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "function:components/admin/erp/erp-client.ts:download",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "class:components/admin/erp/erp-client.ts:ApiError",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/erp-client.ts",
+   "target": "class:components/admin/erp/erp-client.ts:ApiError",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/purchase-items.ts",
+   "target": "function:components/admin/erp/purchase-items.ts:usePurchaseItems",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/purchase-items.ts",
+   "target": "function:components/admin/erp/purchase-items.ts:usePurchaseItems",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/purchase-items.ts",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:PageHeader",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:PageHeader",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:Kpi",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:Kpi",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:ChannelTag",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:ChannelTag",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:PeriodFilter",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:PeriodFilter",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:usePeriod",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:usePeriod",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:useTeam",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:useTeam",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:AgentSelect",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:AgentSelect",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:CampaignSelect",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:CampaignSelect",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:ListRow",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:ListRow",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:Help",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "function:components/admin/erp/ui.tsx:Help",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/erp/ui.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/notification-item.tsx",
+   "target": "function:components/admin/notification-item.tsx:notificationText",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/notification-item.tsx",
+   "target": "function:components/admin/notification-item.tsx:notificationText",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/notification-item.tsx",
+   "target": "function:components/admin/notification-item.tsx:NotificationItem",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/notification-item.tsx",
+   "target": "function:components/admin/notification-item.tsx:NotificationItem",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/notification-item.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/order-status.ts",
+   "target": "function:components/admin/order-status.ts:orderStatusLabel",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/order-status.ts",
+   "target": "function:components/admin/order-status.ts:orderStatusLabel",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/order-status.ts",
+   "target": "function:components/admin/order-status.ts:validateOrder",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/order-status.ts",
+   "target": "function:components/admin/order-status.ts:validateOrder",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/order-status.ts",
+   "target": "function:components/admin/order-status.ts:errorCode",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/order-status.ts",
+   "target": "function:components/admin/order-status.ts:errorCode",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/order-status.ts",
+   "target": "file:components/admin/delivery/delivery-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/pos/PosAnalyticsTab.tsx",
+   "target": "function:components/admin/pos/PosAnalyticsTab.tsx:PosAnalyticsTab",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/pos/PosAnalyticsTab.tsx",
+   "target": "function:components/admin/pos/PosAnalyticsTab.tsx:PosAnalyticsTab",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/pos/PosAnalyticsTab.tsx",
+   "target": "file:components/admin/erp/charts.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/pos/PosAnalyticsTab.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/pos/PosAnalyticsTab.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/pos/PosAnalyticsTab.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/pos/PosAnalyticsTab.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/pos/PosStockTab.tsx",
+   "target": "function:components/admin/pos/PosStockTab.tsx:isLowStock",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/pos/PosStockTab.tsx",
+   "target": "function:components/admin/pos/PosStockTab.tsx:isLowStock",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/pos/PosStockTab.tsx",
+   "target": "function:components/admin/pos/PosStockTab.tsx:isOutOfStock",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/pos/PosStockTab.tsx",
+   "target": "function:components/admin/pos/PosStockTab.tsx:isOutOfStock",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/pos/PosStockTab.tsx",
+   "target": "function:components/admin/pos/PosStockTab.tsx:PosStockTab",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/pos/PosStockTab.tsx",
+   "target": "function:components/admin/pos/PosStockTab.tsx:PosStockTab",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/pos/PosStockTab.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/pos/PosStockTab.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/pos/PosStockTab.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/pos/PosStockTab.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/select-search.ts",
+   "target": "function:components/admin/select-search.ts:searchByText",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/select-search.ts",
+   "target": "function:components/admin/select-search.ts:searchByText",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/admin-i18n.tsx",
+   "target": "function:lib/admin-i18n.tsx:msg",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/admin-i18n.tsx",
+   "target": "function:lib/admin-i18n.tsx:msg",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/admin-i18n.tsx",
+   "target": "function:lib/admin-i18n.tsx:AdminI18nProvider",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/admin-i18n.tsx",
+   "target": "function:lib/admin-i18n.tsx:AdminI18nProvider",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/admin-i18n.tsx",
+   "target": "function:lib/admin-i18n.tsx:useAdminT",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/admin-i18n.tsx",
+   "target": "function:lib/admin-i18n.tsx:useAdminT",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/admin-i18n.tsx",
+   "target": "file:lib/admin-translations.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/admin-role-context.tsx",
+   "target": "function:lib/admin-role-context.tsx:AdminRoleProvider",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/admin-role-context.tsx",
+   "target": "function:lib/admin-role-context.tsx:AdminRoleProvider",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/admin-role-context.tsx",
+   "target": "function:lib/admin-role-context.tsx:useAdminRole",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/admin-role-context.tsx",
+   "target": "function:lib/admin-role-context.tsx:useAdminRole",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/admin-role-context.tsx",
+   "target": "file:lib/admin-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/colissimo-data.ts",
+   "target": "function:lib/colissimo-data.ts:governorateOptions",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo-data.ts",
+   "target": "function:lib/colissimo-data.ts:governorateOptions",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/colissimo-data.ts",
+   "target": "function:lib/colissimo-data.ts:governorateLabel",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo-data.ts",
+   "target": "function:lib/colissimo-data.ts:governorateLabel",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/colissimo-data.ts",
+   "target": "function:lib/colissimo-data.ts:matchGovernorate",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo-data.ts",
+   "target": "function:lib/colissimo-data.ts:matchGovernorate",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/colissimo-data.ts",
+   "target": "function:lib/colissimo-data.ts:isFinalParcel",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo-data.ts",
+   "target": "function:lib/colissimo-data.ts:isFinalParcel",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/colissimo-data.ts",
+   "target": "function:lib/colissimo-data.ts:customerStage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo-data.ts",
+   "target": "function:lib/colissimo-data.ts:customerStage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/colissimo-data.ts",
+   "target": "function:lib/colissimo-data.ts:statusInfo",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo-data.ts",
+   "target": "function:lib/colissimo-data.ts:statusInfo",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/colissimo-data.ts",
+   "target": "function:lib/colissimo-data.ts:parcelFromOrder",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo-data.ts",
+   "target": "function:lib/colissimo-data.ts:parcelFromOrder",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/admin/order-status.ts:validateOrder",
+   "target": "function:components/admin/delivery/delivery-api.ts:deliveryApi",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

@@ -53,7 +53,7 @@ export default function CartItem({
     if (variant === "compact") {
         return (
             <div className="flex gap-4 sm:gap-6">
-                <div className="relative h-24 w-20 shrink-0 overflow-hidden rounded-lg bg-gray-100 sm:h-30 sm:w-30">
+                <div className="relative h-24 w-20 shrink-0 overflow-hidden rounded-lg bg-surface sm:h-30 sm:w-30">
                     <Image
                         src={imageUrl}
                         alt={itemName || "Product"}
@@ -66,14 +66,14 @@ export default function CartItem({
                 <div className="flex-1 flex flex-col justify-between">
                     <div>
                         <div className="flex justify-between items-start mb-1">
-                            <h3 className="text-[13px] font-normal text-[#50555C] pr-8">
+                            <h3 className="text-[13px] font-normal text-mute pr-8">
                                 {itemName}
-                                {item.variantLabel && <span className="block text-[12px] text-gray-400 mt-0.5">{item.variantLabel}</span>}
+                                {item.variantLabel && <span className="block text-[12px] text-mute mt-0.5">{item.variantLabel}</span>}
                             </h3>
                             {onRemove && (
                                 <button
                                     onClick={() => onRemove(cartLineKey(item))}
-                                    className="text-gray-400 hover:text-red-500 transition shrink-0"
+                                    className="text-mute hover:text-red-500 transition shrink-0"
                                 >
                                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M18.5625 4.8125H3.4375" stroke="#777A7E" strokeLinecap="round" strokeLinejoin="round" />
@@ -93,7 +93,7 @@ export default function CartItem({
                                     {[...Array(5)].map((_, i) => (
                                         <svg
                                             key={i}
-                                            className={`w-4 h-4 ${i < Math.floor(item.rating!) ? 'text-[#842E1B] fill-[#842E1B]' : 'text-gray-300 fill-gray-300'}`}
+                                            className={`w-4 h-4 ${i < Math.floor(item.rating!) ? 'text-accent fill-accent' : 'text-mute fill-gray-300'}`}
                                             width="18"
                                             height="18"
                                             viewBox="0 0 18 18"
@@ -104,7 +104,7 @@ export default function CartItem({
                                         </svg>
                                     ))}
                                 </div>
-                                <span className="text-[10px] text-[#777A7E]">
+                                <span className="text-[10px] text-mute">
                                     {item.reviewCount ? `${(item.reviewCount / 1000).toFixed(1)} K ${reviewsText}` : ''}
                                 </span>
                             </div>
@@ -112,7 +112,7 @@ export default function CartItem({
                     </div>
 
                     <div>
-                        <p className="mb-4 text-[17px] font-semibold text-[#2b1a16]" dir="ltr">
+                        <p className="mb-4 text-[17px] font-semibold text-ink" dir="ltr">
                             {item.price} TND
                         </p>
 
@@ -120,16 +120,16 @@ export default function CartItem({
                             <div className="flex items-center">
                                 <button
                                     onClick={() => onUpdateQuantity(cartLineKey(item), item.quantity - 1)}
-                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d9cfc3] text-xl text-[#2b1a16] transition hover:bg-gray-50" aria-label="−"
+                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-xl text-ink transition hover:bg-surface" aria-label="−"
                                 >
                                     −
                                 </button>
-                                <span className="text-[#4F4F4F] text-[15px] font-medium min-w-12 text-center">
+                                <span className="text-ink text-[15px] font-medium min-w-12 text-center">
                                     {item.quantity}
                                 </span>
                                 <button
                                     onClick={() => onUpdateQuantity(cartLineKey(item), item.quantity + 1)}
-                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d9cfc3] text-xl text-[#2b1a16] transition hover:bg-gray-50" aria-label="+"
+                                    className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-xl text-ink transition hover:bg-surface" aria-label="+"
                                 >
                                     +
                                 </button>
@@ -146,7 +146,7 @@ export default function CartItem({
         return (
             <div className="border rounded-xl p-6">
                 <div className="flex gap-6">
-                    <div className="relative w-32 h-32 shrink-0 bg-gray-100 rounded-lg overflow-hidden">
+                    <div className="relative w-32 h-32 shrink-0 bg-surface rounded-lg overflow-hidden">
                         <Image
                             src={imageUrl}
                             alt={itemName || "Product"}
@@ -159,14 +159,14 @@ export default function CartItem({
                     <div className="flex-1 flex flex-col justify-between">
                         <div>
                             <div className="flex justify-between items-start mb-1">
-                                <h3 className="text-[13px] font-normal text-[#50555C] pr-8">
+                                <h3 className="text-[13px] font-normal text-mute pr-8">
                                     {itemName}
-                                    {item.variantLabel && <span className="block text-[12px] text-gray-400 mt-0.5">{item.variantLabel}</span>}
+                                    {item.variantLabel && <span className="block text-[12px] text-mute mt-0.5">{item.variantLabel}</span>}
                                 </h3>
                                 {onRemove && (
                                     <button
                                         onClick={() => onRemove(cartLineKey(item))}
-                                        className="text-gray-400 hover:text-red-500 transition shrink-0"
+                                        className="text-mute hover:text-red-500 transition shrink-0"
                                     >
                                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M18.5625 4.8125H3.4375" stroke="#777A7E" strokeLinecap="round" strokeLinejoin="round" />
@@ -185,7 +185,7 @@ export default function CartItem({
                                         {[...Array(5)].map((_, i) => (
                                             <svg
                                                 key={i}
-                                                className={`w-4 h-4 ${i < Math.floor(item.rating!) ? 'text-[#842E1B] fill-[#842E1B]' : 'text-gray-300 fill-gray-300'}`}
+                                                className={`w-4 h-4 ${i < Math.floor(item.rating!) ? 'text-accent fill-accent' : 'text-mute fill-gray-300'}`}
                                                 width="18"
                                                 height="18"
                                                 viewBox="0 0 18 18"
@@ -196,7 +196,7 @@ export default function CartItem({
                                             </svg>
                                         ))}
                                     </div>
-                                    <span className="text-[10px] text-[#777A7E]">
+                                    <span className="text-[10px] text-mute">
                                         {item.reviewCount ? `${(item.reviewCount / 1000).toFixed(1)} K ${reviewsText}` : ''}
                                     </span>
                                 </div>
@@ -204,7 +204,7 @@ export default function CartItem({
                         </div>
 
                         <div>
-                            <p className="mb-4 text-[17px] font-semibold text-[#2b1a16]" dir="ltr">
+                            <p className="mb-4 text-[17px] font-semibold text-ink" dir="ltr">
                                 {item.price} TND
                             </p>
 
@@ -212,16 +212,16 @@ export default function CartItem({
                                 <div className="flex items-center">
                                     <button
                                         onClick={() => onUpdateQuantity(cartLineKey(item), item.quantity - 1)}
-                                        className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d9cfc3] text-xl text-[#2b1a16] transition hover:bg-gray-50" aria-label="−"
+                                        className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-xl text-ink transition hover:bg-surface" aria-label="−"
                                     >
                                         −
                                     </button>
-                                    <span className="text-[#4F4F4F] text-[15px] font-medium min-w-12 text-center">
+                                    <span className="text-ink text-[15px] font-medium min-w-12 text-center">
                                         {item.quantity}
                                     </span>
                                     <button
                                         onClick={() => onUpdateQuantity(cartLineKey(item), item.quantity + 1)}
-                                        className="flex h-10 w-10 items-center justify-center rounded-full border border-[#d9cfc3] text-xl text-[#2b1a16] transition hover:bg-gray-50" aria-label="+"
+                                        className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-xl text-ink transition hover:bg-surface" aria-label="+"
                                     >
                                         +
                                     </button>
@@ -239,7 +239,7 @@ export default function CartItem({
         <div className="flex flex-col md:grid md:grid-cols-5 gap-4 items-center border-b pb-6">
             {/* Product Image and Name */}
             <div className="flex items-center gap-4 col-span-2 w-full md:w-auto">
-                <div className="relative w-24 h-24 shrink-0 bg-gray-100 rounded-lg overflow-hidden">
+                <div className="relative w-24 h-24 shrink-0 bg-surface rounded-lg overflow-hidden">
                     <Image
                         src={imageUrl}
                         alt={itemName || "Product"}
@@ -249,17 +249,17 @@ export default function CartItem({
                     />
                 </div>
                 <div className="flex-1">
-                    <h3 className="text-lg font-medium text-gray-900">
+                    <h3 className="text-lg font-medium text-ink">
                         {itemName}
                     </h3>
-                    {item.variantLabel && <p className="text-sm text-gray-500 mt-0.5">{item.variantLabel}</p>}
+                    {item.variantLabel && <p className="text-sm text-mute mt-0.5">{item.variantLabel}</p>}
                     {SHOW_RATINGS && !!item.rating && (
-                        <div className="flex items-center gap-1 text-sm text-gray-600 mt-1">
+                        <div className="flex items-center gap-1 text-sm text-mute mt-1">
                             <div className="flex">
                                 {[...Array(5)].map((_, i) => (
                                     <svg
                                         key={i}
-                                        className={`w-4 h-4 ${i < Math.floor(item.rating!) ? 'text-[#7a3b2e]' : 'text-gray-300'}`}
+                                        className={`w-4 h-4 ${i < Math.floor(item.rating!) ? 'text-accent' : 'text-mute'}`}
                                         fill="currentColor"
                                         viewBox="0 0 20 20"
                                     >
@@ -274,7 +274,7 @@ export default function CartItem({
             </div>
 
             {/* Price */}
-            <span className="text-lg font-medium text-gray-900 mt-4 md:mt-0">
+            <span className="text-lg font-medium text-ink mt-4 md:mt-0">
                 {item.price} TND
             </span>
 
@@ -283,7 +283,7 @@ export default function CartItem({
                 <div className="flex items-center gap-2 mt-4 md:mt-0">
                     <button
                         onClick={() => onUpdateQuantity(cartLineKey(item), item.quantity - 1)}
-                        className="w-8 h-8 border border-gray-300 rounded-md flex items-center justify-center hover:bg-gray-50 transition text-lg font-bold"
+                        className="w-8 h-8 border border-line rounded-md flex items-center justify-center hover:bg-surface transition text-lg font-bold"
                     >
                         −
                     </button>
@@ -292,13 +292,13 @@ export default function CartItem({
                     </span>
                     <button
                         onClick={() => onUpdateQuantity(cartLineKey(item), item.quantity + 1)}
-                        className="w-8 h-8 border border-gray-300 rounded-md flex items-center justify-center hover:bg-gray-50 transition text-lg font-bold"
+                        className="w-8 h-8 border border-line rounded-md flex items-center justify-center hover:bg-surface transition text-lg font-bold"
                     >
                         +
                     </button>
                 </div>
             ) : (
-                <span className="text-lg font-medium text-gray-900 mt-4 md:mt-0">
+                <span className="text-lg font-medium text-ink mt-4 md:mt-0">
                     Qty: {item.quantity}
                 </span>
             )}
@@ -314,7 +314,7 @@ export default function CartItem({
             {onRemove && (
                 <button
                     onClick={() => onRemove(cartLineKey(item))}
-                    className="text-gray-400 hover:text-red-500 transition mt-4 md:mt-0"
+                    className="text-mute hover:text-red-500 transition mt-4 md:mt-0"
                 >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />

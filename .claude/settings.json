@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc --noEmit)",
+      "Bash(npx tsc --noEmit *)",
+      "Bash(ffprobe *)",
+      "Bash(npm run lint)",
+      "Bash(docker compose logs *)",
+      "Bash(docker compose ps *)",
+      "Bash(nslookup *)",
+      "Bash(git check-ignore *)",
+      "Bash(git ls-tree *)",
+      "mcp__Claude_Browser__find",
+      "mcp__Claude_Browser__get_page_text",
+      "mcp__Claude_Browser__read_page",
+      "mcp__Claude_Browser__read_console_messages",
+      "mcp__Claude_Browser__read_network_requests",
+      "mcp__Claude_Browser__tabs_context"
+    ]
+  }
+}

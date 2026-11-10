@@ -1,0 +1,494 @@
+{
+ "nodes": [
+  {
+   "id": "file:app/admin/layout.tsx",
+   "type": "file",
+   "name": "layout.tsx",
+   "filePath": "app/admin/layout.tsx",
+   "summary": "Client-rendered admin shell: grouped, permission-filtered sidebar menu, header with notification bell and language switch, Ant Design theme/locale/RTL configuration, role context and fetch cache installation.",
+   "tags": [
+    "component",
+    "layout",
+    "admin",
+    "navigation",
+    "access-control"
+   ],
+   "complexity": "complex",
+   "languageNotes": "Ant Design ConfigProvider switches locale and direction per admin language, with dayjs following along."
+  },
+  {
+   "id": "file:app/admin/login/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/login/page.tsx",
+   "summary": "Back-office sign-in page that authenticates through the customer auth API, checks the back-office role and redirects to a safe next path.",
+   "tags": [
+    "component",
+    "auth",
+    "admin-page",
+    "login"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/admin/AdminLanguageSwitcher.tsx",
+   "type": "file",
+   "name": "AdminLanguageSwitcher.tsx",
+   "filePath": "components/admin/AdminLanguageSwitcher.tsx",
+   "summary": "Selector that switches the admin UI language between English, French and Arabic.",
+   "tags": [
+    "component",
+    "i18n",
+    "admin"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/admin/admin-fetch-cache.ts",
+   "type": "file",
+   "name": "admin-fetch-cache.ts",
+   "filePath": "components/admin/admin-fetch-cache.ts",
+   "summary": "Patches window.fetch in the admin to cache small lookup lists (categories, colors, sizes, suppliers, locations) for 5 minutes and clear entries on writes.",
+   "tags": [
+    "utility",
+    "cache",
+    "performance",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/admin/mobile-table-labels.ts",
+   "type": "file",
+   "name": "mobile-table-labels.ts",
+   "filePath": "components/admin/mobile-table-labels.ts",
+   "summary": "Hook that labels Ant Design table cells with their column titles so tables render as cards on mobile.",
+   "tags": [
+    "hook",
+    "responsive",
+    "admin",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/antd-config.ts",
+   "type": "file",
+   "name": "antd-config.ts",
+   "filePath": "lib/antd-config.ts",
+   "summary": "Ant Design theme token configuration for the admin dashboard.",
+   "tags": [
+    "config",
+    "theme",
+    "admin"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/admin/layout.tsx:AdminLayout",
+   "type": "function",
+   "name": "AdminLayout",
+   "filePath": "app/admin/layout.tsx",
+   "lineRange": [
+    284,
+    299
+   ],
+   "summary": "Root admin layout component that wraps pages with language and configuration providers.",
+   "tags": [
+    "component",
+    "layout",
+    "admin"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/admin/layout.tsx:AdminConfig",
+   "type": "function",
+   "name": "AdminConfig",
+   "filePath": "app/admin/layout.tsx",
+   "lineRange": [
+    302,
+    374
+   ],
+   "summary": "Configures Ant Design locale, direction and theme for the current admin language.",
+   "tags": [
+    "component",
+    "config",
+    "i18n"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/layout.tsx:AdminShell",
+   "type": "function",
+   "name": "AdminShell",
+   "filePath": "app/admin/layout.tsx",
+   "lineRange": [
+    376,
+    619
+   ],
+   "summary": "Renders the sidebar, header and content area, loading the role and filtering menu entries.",
+   "tags": [
+    "component",
+    "layout",
+    "navigation"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/layout.tsx:menuFor",
+   "type": "function",
+   "name": "menuFor",
+   "filePath": "app/admin/layout.tsx",
+   "lineRange": [
+    261,
+    280
+   ],
+   "summary": "Filters the grouped menu by role and permissions and drops empty groups.",
+   "tags": [
+    "access-control",
+    "navigation",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/admin/layout.tsx:withLinks",
+   "type": "function",
+   "name": "withLinks",
+   "filePath": "app/admin/layout.tsx",
+   "lineRange": [
+    193,
+    205
+   ],
+   "summary": "Wraps menu item labels in Next.js links recursively.",
+   "tags": [
+    "navigation",
+    "utility",
+    "menu"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/admin/login/page.tsx:AdminLoginForm",
+   "type": "function",
+   "name": "AdminLoginForm",
+   "filePath": "app/admin/login/page.tsx",
+   "lineRange": [
+    29,
+    120
+   ],
+   "summary": "Sign-in form that submits credentials, checks the back-office role and redirects.",
+   "tags": [
+    "component",
+    "form",
+    "auth"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/login/page.tsx:AdminLoginPage",
+   "type": "function",
+   "name": "AdminLoginPage",
+   "filePath": "app/admin/login/page.tsx",
+   "lineRange": [
+    122,
+    128
+   ],
+   "summary": "Login page wrapper rendering the form inside Suspense.",
+   "tags": [
+    "component",
+    "auth",
+    "page"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/AdminLanguageSwitcher.tsx:AdminLanguageSwitcher",
+   "type": "function",
+   "name": "AdminLanguageSwitcher",
+   "filePath": "components/admin/AdminLanguageSwitcher.tsx",
+   "lineRange": [
+    7,
+    18
+   ],
+   "summary": "Renders the admin language selector.",
+   "tags": [
+    "component",
+    "i18n",
+    "ui"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/admin-fetch-cache.ts:installAdminFetchCache",
+   "type": "function",
+   "name": "installAdminFetchCache",
+   "filePath": "components/admin/admin-fetch-cache.ts",
+   "lineRange": [
+    31,
+    65
+   ],
+   "summary": "Installs the caching fetch wrapper for admin lookup endpoints.",
+   "tags": [
+    "cache",
+    "utility",
+    "fetch"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/mobile-table-labels.ts:labelTables",
+   "type": "function",
+   "name": "labelTables",
+   "filePath": "components/admin/mobile-table-labels.ts",
+   "lineRange": [
+    11,
+    32
+   ],
+   "summary": "Sets data-label attributes on table cells from header titles.",
+   "tags": [
+    "utility",
+    "responsive",
+    "dom"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/mobile-table-labels.ts:useMobileTableLabels",
+   "type": "function",
+   "name": "useMobileTableLabels",
+   "filePath": "components/admin/mobile-table-labels.ts",
+   "lineRange": [
+    34,
+    50
+   ],
+   "summary": "Hook that observes DOM changes and keeps table cell labels current.",
+   "tags": [
+    "hook",
+    "responsive",
+    "dom"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:app/admin/layout.tsx",
+   "target": "file:components/admin/AdminLanguageSwitcher.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/layout.tsx",
+   "target": "file:components/admin/NotificationBell.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/layout.tsx",
+   "target": "file:components/admin/admin-fetch-cache.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/layout.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/layout.tsx",
+   "target": "file:components/admin/mobile-table-labels.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/layout.tsx",
+   "target": "file:lib/admin-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/layout.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/layout.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/layout.tsx",
+   "target": "file:lib/antd-config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/login/page.tsx",
+   "target": "file:components/admin/AdminLanguageSwitcher.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/login/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/login/page.tsx",
+   "target": "file:lib/customer-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/AdminLanguageSwitcher.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/layout.tsx",
+   "target": "function:app/admin/layout.tsx:AdminLayout",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/layout.tsx",
+   "target": "function:app/admin/layout.tsx:AdminLayout",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/layout.tsx",
+   "target": "function:app/admin/layout.tsx:AdminConfig",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/layout.tsx",
+   "target": "function:app/admin/layout.tsx:AdminShell",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/layout.tsx",
+   "target": "function:app/admin/layout.tsx:menuFor",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/layout.tsx",
+   "target": "function:app/admin/layout.tsx:withLinks",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/login/page.tsx",
+   "target": "function:app/admin/login/page.tsx:AdminLoginForm",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/login/page.tsx",
+   "target": "function:app/admin/login/page.tsx:AdminLoginPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/login/page.tsx",
+   "target": "function:app/admin/login/page.tsx:AdminLoginPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/AdminLanguageSwitcher.tsx",
+   "target": "function:components/admin/AdminLanguageSwitcher.tsx:AdminLanguageSwitcher",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/AdminLanguageSwitcher.tsx",
+   "target": "function:components/admin/AdminLanguageSwitcher.tsx:AdminLanguageSwitcher",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/admin-fetch-cache.ts",
+   "target": "function:components/admin/admin-fetch-cache.ts:installAdminFetchCache",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/admin-fetch-cache.ts",
+   "target": "function:components/admin/admin-fetch-cache.ts:installAdminFetchCache",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/mobile-table-labels.ts",
+   "target": "function:components/admin/mobile-table-labels.ts:labelTables",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/mobile-table-labels.ts",
+   "target": "function:components/admin/mobile-table-labels.ts:useMobileTableLabels",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/mobile-table-labels.ts",
+   "target": "function:components/admin/mobile-table-labels.ts:useMobileTableLabels",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:app/admin/layout.tsx:AdminShell",
+   "target": "function:app/admin/layout.tsx:menuFor",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/admin/mobile-table-labels.ts:useMobileTableLabels",
+   "target": "function:components/admin/mobile-table-labels.ts:labelTables",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

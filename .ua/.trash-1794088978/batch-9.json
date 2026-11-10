@@ -1,0 +1,873 @@
+{
+ "nodes": [
+  {
+   "id": "file:app/admin/stock/movements/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/stock/movements/page.tsx",
+   "summary": "Admin stock movements page listing the append-only stock movement history with filters by type, location and date, plus CSV export.",
+   "tags": [
+    "component",
+    "admin-page",
+    "stock",
+    "reporting"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/stock/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/stock/page.tsx",
+   "summary": "Admin inventory page showing per-variant stock levels across locations with status filters, product variant drill-down and a movement modal for restocks, adjustments and transfers.",
+   "tags": [
+    "component",
+    "admin-page",
+    "stock",
+    "inventory"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/stock/restock/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/stock/restock/page.tsx",
+   "summary": "Admin restock page listing low-stock variants with a suggested reorder quantity and launching the movement modal to record restocks.",
+   "tags": [
+    "component",
+    "admin-page",
+    "stock",
+    "restock"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/admin/stock/MovementChart.tsx",
+   "type": "file",
+   "name": "MovementChart.tsx",
+   "filePath": "components/admin/stock/MovementChart.tsx",
+   "summary": "Dependency-free SVG chart component plotting stock movement quantities over time by movement type for the admin stock screens.",
+   "tags": [
+    "component",
+    "chart",
+    "stock",
+    "visualization"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/admin/stock/MovementModal.tsx",
+   "type": "file",
+   "name": "MovementModal.tsx",
+   "filePath": "components/admin/stock/MovementModal.tsx",
+   "summary": "Ant Design modal form for recording stock movements (restock, adjustment, transfer, count) for a variant and location through POST /api/stock/movements.",
+   "tags": [
+    "component",
+    "form",
+    "stock",
+    "modal"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/admin/stock/ProductVariantsPanel.tsx",
+   "type": "file",
+   "name": "ProductVariantsPanel.tsx",
+   "filePath": "components/admin/stock/ProductVariantsPanel.tsx",
+   "summary": "Panel showing the variants of a product with their per-location stock levels and tracking state in the admin inventory view.",
+   "tags": [
+    "component",
+    "stock",
+    "inventory",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/admin/stock/StockOverview.tsx",
+   "type": "file",
+   "name": "StockOverview.tsx",
+   "filePath": "components/admin/stock/StockOverview.tsx",
+   "summary": "Summary component showing stock KPIs and a movement chart for the admin dashboard and stock screens.",
+   "tags": [
+    "component",
+    "dashboard",
+    "stock",
+    "kpi"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/admin/stock/VariantThumb.tsx",
+   "type": "file",
+   "name": "VariantThumb.tsx",
+   "filePath": "components/admin/stock/VariantThumb.tsx",
+   "summary": "Tiny component rendering a variant thumbnail image or placeholder.",
+   "tags": [
+    "component",
+    "ui",
+    "stock"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/admin/stock/stock-client.ts",
+   "type": "file",
+   "name": "stock-client.ts",
+   "filePath": "components/admin/stock/stock-client.ts",
+   "summary": "Client-side helpers for admin stock screens: status and movement color maps, variant label formatting, a JSON fetch wrapper with readable errors, and CSV download.",
+   "tags": [
+    "utility",
+    "stock",
+    "api-client",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:lib/erp/db-messages.ts",
+   "type": "file",
+   "name": "db-messages.ts",
+   "filePath": "lib/erp/db-messages.ts",
+   "summary": "Maps known Postgres exceptions raised by ERP database functions to user-facing messages and HTTP statuses, shared with the NestJS API error handling.",
+   "tags": [
+    "utility",
+    "error-handling",
+    "erp",
+    "shared"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:lib/stock.ts",
+   "type": "file",
+   "name": "stock.ts",
+   "filePath": "lib/stock.ts",
+   "summary": "Shared stock domain constants and helpers: movement types and labels, stock status computation, and translation of insufficient_stock database errors into readable messages.",
+   "tags": [
+    "utility",
+    "stock",
+    "shared",
+    "validation"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/admin/stock/movements/page.tsx:MovementsPage",
+   "type": "function",
+   "name": "MovementsPage",
+   "filePath": "app/admin/stock/movements/page.tsx",
+   "lineRange": [
+    36,
+    181
+   ],
+   "summary": "Client page component that loads, filters and exports the stock movement history.",
+   "tags": [
+    "component",
+    "admin-page",
+    "stock"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/stock/page.tsx:InventoryPage",
+   "type": "function",
+   "name": "InventoryPage",
+   "filePath": "app/admin/stock/page.tsx",
+   "lineRange": [
+    38,
+    273
+   ],
+   "summary": "Main inventory page component handling level loading, filtering, permissions and movement modal state.",
+   "tags": [
+    "component",
+    "admin-page",
+    "inventory"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/stock/restock/page.tsx:RestockPage",
+   "type": "function",
+   "name": "RestockPage",
+   "filePath": "app/admin/stock/restock/page.tsx",
+   "lineRange": [
+    18,
+    127
+   ],
+   "summary": "Restock page component listing variants below their reorder point with suggested quantities.",
+   "tags": [
+    "component",
+    "admin-page",
+    "restock"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/stock/MovementChart.tsx:MovementChart",
+   "type": "function",
+   "name": "MovementChart",
+   "filePath": "components/admin/stock/MovementChart.tsx",
+   "lineRange": [
+    27,
+    180
+   ],
+   "summary": "Renders an SVG chart of movement quantities grouped by period and type.",
+   "tags": [
+    "component",
+    "chart",
+    "visualization"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/stock/MovementModal.tsx:MovementModal",
+   "type": "function",
+   "name": "MovementModal",
+   "filePath": "components/admin/stock/MovementModal.tsx",
+   "lineRange": [
+    48,
+    228
+   ],
+   "summary": "Modal form that validates and submits a stock movement, including transfers and counts.",
+   "tags": [
+    "component",
+    "form",
+    "modal"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:components/admin/stock/ProductVariantsPanel.tsx:ProductVariantsPanel",
+   "type": "function",
+   "name": "ProductVariantsPanel",
+   "filePath": "components/admin/stock/ProductVariantsPanel.tsx",
+   "lineRange": [
+    24,
+    156
+   ],
+   "summary": "Displays the variants of a product with stock per location, loading levels from the API.",
+   "tags": [
+    "component",
+    "stock",
+    "inventory"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/stock/StockOverview.tsx:StockOverview",
+   "type": "function",
+   "name": "StockOverview",
+   "filePath": "components/admin/stock/StockOverview.tsx",
+   "lineRange": [
+    25,
+    90
+   ],
+   "summary": "Shows stock KPI tiles and the recent movement chart.",
+   "tags": [
+    "component",
+    "dashboard",
+    "kpi"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/stock/VariantThumb.tsx:VariantThumb",
+   "type": "function",
+   "name": "VariantThumb",
+   "filePath": "components/admin/stock/VariantThumb.tsx",
+   "lineRange": [
+    6,
+    13
+   ],
+   "summary": "Renders a small variant image thumbnail.",
+   "tags": [
+    "component",
+    "ui",
+    "image"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/stock/stock-client.ts:variantLabel",
+   "type": "function",
+   "name": "variantLabel",
+   "filePath": "components/admin/stock/stock-client.ts",
+   "lineRange": [
+    63,
+    65
+   ],
+   "summary": "Formats a variant into a readable color/size label.",
+   "tags": [
+    "utility",
+    "formatting",
+    "stock"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/stock/stock-client.ts:apiJson",
+   "type": "function",
+   "name": "apiJson",
+   "filePath": "components/admin/stock/stock-client.ts",
+   "lineRange": [
+    68,
+    78
+   ],
+   "summary": "Fetches an API endpoint and returns parsed JSON, throwing a readable error on failure.",
+   "tags": [
+    "utility",
+    "api-client",
+    "fetch"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/stock/stock-client.ts:downloadCsv",
+   "type": "function",
+   "name": "downloadCsv",
+   "filePath": "components/admin/stock/stock-client.ts",
+   "lineRange": [
+    81,
+    93
+   ],
+   "summary": "Builds a CSV from rows and triggers a browser download.",
+   "tags": [
+    "utility",
+    "export",
+    "csv"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/erp/db-messages.ts:knownDbError",
+   "type": "function",
+   "name": "knownDbError",
+   "filePath": "lib/erp/db-messages.ts",
+   "lineRange": [
+    52,
+    68
+   ],
+   "summary": "Converts a known database exception into a message, HTTP status and code, or returns null if unknown.",
+   "tags": [
+    "error-handling",
+    "utility",
+    "erp"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/stock.ts:stockStatus",
+   "type": "function",
+   "name": "stockStatus",
+   "filePath": "lib/stock.ts",
+   "lineRange": [
+    29,
+    34
+   ],
+   "summary": "Computes in-stock, low-stock or out-of-stock status from quantity and reorder point.",
+   "tags": [
+    "utility",
+    "stock",
+    "status"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/stock.ts:stockErrorMessage",
+   "type": "function",
+   "name": "stockErrorMessage",
+   "filePath": "lib/stock.ts",
+   "lineRange": [
+    37,
+    51
+   ],
+   "summary": "Turns insufficient_stock and related database errors into readable stock messages.",
+   "tags": [
+    "error-handling",
+    "stock",
+    "formatting"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:app/admin/stock/movements/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/movements/page.tsx",
+   "target": "file:components/admin/stock/stock-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/movements/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/movements/page.tsx",
+   "target": "file:lib/stock.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/page.tsx",
+   "target": "file:components/admin/stock/MovementModal.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/page.tsx",
+   "target": "file:components/admin/stock/ProductVariantsPanel.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/page.tsx",
+   "target": "file:components/admin/stock/VariantThumb.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/page.tsx",
+   "target": "file:components/admin/stock/stock-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/page.tsx",
+   "target": "file:lib/stock.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/restock/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/restock/page.tsx",
+   "target": "file:components/admin/stock/MovementModal.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/restock/page.tsx",
+   "target": "file:components/admin/stock/stock-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/restock/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/restock/page.tsx",
+   "target": "file:lib/stock.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/MovementChart.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/MovementModal.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/MovementModal.tsx",
+   "target": "file:components/admin/select-search.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/MovementModal.tsx",
+   "target": "file:components/admin/stock/VariantThumb.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/MovementModal.tsx",
+   "target": "file:components/admin/stock/stock-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/MovementModal.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/MovementModal.tsx",
+   "target": "file:lib/stock.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/ProductVariantsPanel.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/ProductVariantsPanel.tsx",
+   "target": "file:components/admin/stock/VariantThumb.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/ProductVariantsPanel.tsx",
+   "target": "file:components/admin/stock/stock-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/ProductVariantsPanel.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/ProductVariantsPanel.tsx",
+   "target": "file:lib/stock.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/StockOverview.tsx",
+   "target": "file:components/admin/stock/MovementChart.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/StockOverview.tsx",
+   "target": "file:components/admin/stock/stock-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/StockOverview.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/StockOverview.tsx",
+   "target": "file:lib/stock.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/stock/stock-client.ts",
+   "target": "file:lib/stock.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/erp/db-messages.ts",
+   "target": "file:lib/stock.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/movements/page.tsx",
+   "target": "function:app/admin/stock/movements/page.tsx:MovementsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/stock/movements/page.tsx",
+   "target": "function:app/admin/stock/movements/page.tsx:MovementsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/stock/page.tsx",
+   "target": "function:app/admin/stock/page.tsx:InventoryPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/stock/page.tsx",
+   "target": "function:app/admin/stock/page.tsx:InventoryPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/stock/restock/page.tsx",
+   "target": "function:app/admin/stock/restock/page.tsx:RestockPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/stock/restock/page.tsx",
+   "target": "function:app/admin/stock/restock/page.tsx:RestockPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/stock/MovementChart.tsx",
+   "target": "function:components/admin/stock/MovementChart.tsx:MovementChart",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/stock/MovementChart.tsx",
+   "target": "function:components/admin/stock/MovementChart.tsx:MovementChart",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/stock/MovementModal.tsx",
+   "target": "function:components/admin/stock/MovementModal.tsx:MovementModal",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/stock/MovementModal.tsx",
+   "target": "function:components/admin/stock/MovementModal.tsx:MovementModal",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/stock/ProductVariantsPanel.tsx",
+   "target": "function:components/admin/stock/ProductVariantsPanel.tsx:ProductVariantsPanel",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/stock/ProductVariantsPanel.tsx",
+   "target": "function:components/admin/stock/ProductVariantsPanel.tsx:ProductVariantsPanel",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/stock/StockOverview.tsx",
+   "target": "function:components/admin/stock/StockOverview.tsx:StockOverview",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/stock/StockOverview.tsx",
+   "target": "function:components/admin/stock/StockOverview.tsx:StockOverview",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/stock/VariantThumb.tsx",
+   "target": "function:components/admin/stock/VariantThumb.tsx:VariantThumb",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/stock/VariantThumb.tsx",
+   "target": "function:components/admin/stock/VariantThumb.tsx:VariantThumb",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/stock/stock-client.ts",
+   "target": "function:components/admin/stock/stock-client.ts:variantLabel",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/stock/stock-client.ts",
+   "target": "function:components/admin/stock/stock-client.ts:variantLabel",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/stock/stock-client.ts",
+   "target": "function:components/admin/stock/stock-client.ts:apiJson",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/stock/stock-client.ts",
+   "target": "function:components/admin/stock/stock-client.ts:apiJson",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/stock/stock-client.ts",
+   "target": "function:components/admin/stock/stock-client.ts:downloadCsv",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/stock/stock-client.ts",
+   "target": "function:components/admin/stock/stock-client.ts:downloadCsv",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/erp/db-messages.ts",
+   "target": "function:lib/erp/db-messages.ts:knownDbError",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/erp/db-messages.ts",
+   "target": "function:lib/erp/db-messages.ts:knownDbError",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/stock.ts",
+   "target": "function:lib/stock.ts:stockStatus",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/stock.ts",
+   "target": "function:lib/stock.ts:stockStatus",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/stock.ts",
+   "target": "function:lib/stock.ts:stockErrorMessage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/stock.ts",
+   "target": "function:lib/stock.ts:stockErrorMessage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/erp/db-messages.ts:knownDbError",
+   "target": "function:lib/stock.ts:stockErrorMessage",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:app/admin/stock/movements/page.tsx:MovementsPage",
+   "target": "function:components/admin/stock/stock-client.ts:downloadCsv",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:app/admin/stock/page.tsx:InventoryPage",
+   "target": "function:components/admin/stock/stock-client.ts:downloadCsv",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:app/admin/stock/restock/page.tsx:RestockPage",
+   "target": "function:components/admin/stock/stock-client.ts:downloadCsv",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/admin/stock/ProductVariantsPanel.tsx:ProductVariantsPanel",
+   "target": "function:components/admin/stock/stock-client.ts:apiJson",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

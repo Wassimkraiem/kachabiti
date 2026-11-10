@@ -19,8 +19,8 @@ export default function PromoCountdownTimer({ targetDate }: PromoCountdownTimerP
                 {[...Array(4)].map((_, i) => (
                     <div key={i} className="flex items-center gap-1.5">
                         <div className="flex flex-col items-center gap-1">
-                            <div className="bg-gray-200 rounded-md px-2.5 py-2 min-w-[45px] h-[40px] animate-pulse" />
-                            <div className="w-6 h-3 bg-gray-200 rounded animate-pulse" />
+                            <div className="bg-line rounded-md px-2.5 py-2 min-w-[45px] h-[40px] animate-pulse" />
+                            <div className="w-6 h-3 bg-line rounded animate-pulse" />
                         </div>
                     </div>
                 ))}
@@ -56,17 +56,17 @@ function CountdownDisplay({ deadline }: { deadline: number }) {
             {timeUnits.map((unit, index) => (
                 <div key={index} className="flex items-center gap-1.5">
                     <div className="flex flex-col items-center gap-1">
-                        <div className="bg-[#F5F5F5] rounded-md px-2.5 py-2 min-w-[45px] flex items-center justify-center">
-                            <span className="text-[16px] font-semibold text-[#2b1a16]">
+                        <div className="bg-surface rounded-md px-2.5 py-2 min-w-[45px] flex items-center justify-center">
+                            <span className="text-[16px] font-semibold text-ink">
                                 {String(unit.value).padStart(2, '0')}
                             </span>
                         </div>
-                        <span className="text-[10px] text-gray-500 font-medium">
+                        <span className="text-[10px] text-mute font-medium">
                             {unit.label}
                         </span>
                     </div>
                     {index < timeUnits.length - 1 && (
-                        <span className="text-[16px] font-semibold text-[#2b1a16] -mt-5">:</span>
+                        <span className="text-[16px] font-semibold text-ink -mt-5">:</span>
                     )}
                 </div>
             ))}

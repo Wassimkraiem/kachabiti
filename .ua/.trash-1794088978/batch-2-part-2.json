@@ -1,0 +1,1084 @@
+{
+ "nodes": [
+  {
+   "id": "file:components/reviews/CustomerFeedback.tsx",
+   "type": "file",
+   "name": "CustomerFeedback.tsx",
+   "filePath": "components/reviews/CustomerFeedback.tsx",
+   "summary": "Customer reviews carousel fetched from the storefront API, combined with service highlight cards, carousel navigation and indicators.",
+   "tags": [
+    "component",
+    "reviews",
+    "carousel",
+    "home-section"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/reviews/CustomerFeedback.tsx:CustomerFeedback",
+   "type": "function",
+   "name": "CustomerFeedback",
+   "filePath": "components/reviews/CustomerFeedback.tsx",
+   "lineRange": [
+    48,
+    129
+   ],
+   "summary": "CustomerFeedback component. Customer reviews carousel fetched from the storefront API, combined with service highlight cards, carousel navigation and indicators.",
+   "tags": [
+    "component",
+    "reviews",
+    "carousel",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/reviews/ReviewCard.tsx",
+   "type": "file",
+   "name": "ReviewCard.tsx",
+   "filePath": "components/reviews/ReviewCard.tsx",
+   "summary": "Presentational card showing a customer review with star rating, author and date.",
+   "tags": [
+    "component",
+    "reviews",
+    "presentational",
+    "rating"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/reviews/ReviewCard.tsx:ReviewCard",
+   "type": "function",
+   "name": "ReviewCard",
+   "filePath": "components/reviews/ReviewCard.tsx",
+   "lineRange": [
+    25,
+    97
+   ],
+   "summary": "ReviewCard component. Presentational card showing a customer review with star rating, author and date.",
+   "tags": [
+    "component",
+    "reviews",
+    "presentational",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/sections/FAQ.tsx",
+   "type": "file",
+   "name": "FAQ.tsx",
+   "filePath": "components/sections/FAQ.tsx",
+   "summary": "Localized FAQ accordion section that scrolls into view when the URL hash is #faqs.",
+   "tags": [
+    "component",
+    "faq",
+    "i18n",
+    "accordion"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/sections/FAQ.tsx:FAQItem",
+   "type": "function",
+   "name": "FAQItem",
+   "filePath": "components/sections/FAQ.tsx",
+   "lineRange": [
+    106,
+    142
+   ],
+   "summary": "Single collapsible FAQ question/answer row.",
+   "tags": [
+    "helper",
+    "component",
+    "faq"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/sections/FAQ.tsx:FAQ",
+   "type": "function",
+   "name": "FAQ",
+   "filePath": "components/sections/FAQ.tsx",
+   "lineRange": [
+    144,
+    194
+   ],
+   "summary": "FAQ component. Localized FAQ accordion section that scrolls into view when the URL hash is #faqs.",
+   "tags": [
+    "component",
+    "faq",
+    "i18n",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/sections/HeroSection.tsx",
+   "type": "file",
+   "name": "HeroSection.tsx",
+   "filePath": "components/sections/HeroSection.tsx",
+   "summary": "Home hero with side cards and a carousel driven by hero_sections sort order, picking per-locale text from database columns with a fallback translation map.",
+   "tags": [
+    "component",
+    "hero",
+    "carousel",
+    "i18n"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:components/sections/HeroSection.tsx:getHeroText",
+   "type": "function",
+   "name": "getHeroText",
+   "filePath": "components/sections/HeroSection.tsx",
+   "lineRange": [
+    63,
+    81
+   ],
+   "summary": "Picks the hero title/subtitle for the locale from database columns, falling back to a translation map.",
+   "tags": [
+    "helper",
+    "component",
+    "hero"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/sections/HeroSection.tsx:HeroSection",
+   "type": "function",
+   "name": "HeroSection",
+   "filePath": "components/sections/HeroSection.tsx",
+   "lineRange": [
+    130,
+    481
+   ],
+   "summary": "HeroSection component. Home hero with side cards and a carousel driven by hero_sections sort order, picking per-locale text from database columns with a fallback translation map.",
+   "tags": [
+    "component",
+    "hero",
+    "carousel",
+    "exported"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/sections/NewsletterForm.tsx",
+   "type": "file",
+   "name": "NewsletterForm.tsx",
+   "filePath": "components/sections/NewsletterForm.tsx",
+   "summary": "Newsletter sign-up form with email validation and localized status messages, posting to /api/newsletter/subscribe.",
+   "tags": [
+    "component",
+    "form",
+    "newsletter",
+    "validation"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/sections/NewsletterForm.tsx:NewsletterForm",
+   "type": "function",
+   "name": "NewsletterForm",
+   "filePath": "components/sections/NewsletterForm.tsx",
+   "lineRange": [
+    42,
+    136
+   ],
+   "summary": "NewsletterForm component. Newsletter sign-up form with email validation and localized status messages, posting to /api/newsletter/subscribe.",
+   "tags": [
+    "component",
+    "form",
+    "newsletter",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/sections/Reels.tsx",
+   "type": "file",
+   "name": "Reels.tsx",
+   "filePath": "components/sections/Reels.tsx",
+   "summary": "Video reels section loading /api/reels and embedding YouTube, TikTok or Facebook videos in a player, falling back to opening a new tab.",
+   "tags": [
+    "component",
+    "video",
+    "embed",
+    "home-section"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:components/sections/Reels.tsx:detectVideoPlatform",
+   "type": "function",
+   "name": "detectVideoPlatform",
+   "filePath": "components/sections/Reels.tsx",
+   "lineRange": [
+    54,
+    73
+   ],
+   "summary": "Detects the video platform (YouTube, TikTok, Facebook) from a URL.",
+   "tags": [
+    "helper",
+    "component",
+    "video"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/sections/Reels.tsx:Reels",
+   "type": "function",
+   "name": "Reels",
+   "filePath": "components/sections/Reels.tsx",
+   "lineRange": [
+    75,
+    334
+   ],
+   "summary": "Reels component. Video reels section loading /api/reels and embedding YouTube, TikTok or Facebook videos in a player, falling back to opening a new tab.",
+   "tags": [
+    "component",
+    "video",
+    "embed",
+    "exported"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/sections/SaleBanner.tsx",
+   "type": "file",
+   "name": "SaleBanner.tsx",
+   "filePath": "components/sections/SaleBanner.tsx",
+   "summary": "Sale banner showing the currently running promotion (timed ones first) with a countdown, from server data or the storefront API.",
+   "tags": [
+    "component",
+    "promotion",
+    "banner",
+    "countdown"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/sections/SaleBanner.tsx:SaleBanner",
+   "type": "function",
+   "name": "SaleBanner",
+   "filePath": "components/sections/SaleBanner.tsx",
+   "lineRange": [
+    45,
+    122
+   ],
+   "summary": "SaleBanner component. Sale banner showing the currently running promotion (timed ones first) with a countdown, from server data or the storefront API.",
+   "tags": [
+    "component",
+    "promotion",
+    "banner",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/sections/SocialLinks.tsx",
+   "type": "file",
+   "name": "SocialLinks.tsx",
+   "filePath": "components/sections/SocialLinks.tsx",
+   "summary": "Row of social media links built from the header configuration.",
+   "tags": [
+    "component",
+    "social",
+    "presentational",
+    "config-driven"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/sections/SocialLinks.tsx:SocialLinks",
+   "type": "function",
+   "name": "SocialLinks",
+   "filePath": "components/sections/SocialLinks.tsx",
+   "lineRange": [
+    10,
+    53
+   ],
+   "summary": "SocialLinks component. Row of social media links built from the header configuration.",
+   "tags": [
+    "component",
+    "social",
+    "presentational",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/sections/TermsSection.tsx",
+   "type": "file",
+   "name": "TermsSection.tsx",
+   "filePath": "components/sections/TermsSection.tsx",
+   "summary": "Simple titled section of paragraphs used on the terms page.",
+   "tags": [
+    "component",
+    "presentational",
+    "legal",
+    "content"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/sections/TermsSection.tsx:TermsSection",
+   "type": "function",
+   "name": "TermsSection",
+   "filePath": "components/sections/TermsSection.tsx",
+   "lineRange": [
+    7,
+    20
+   ],
+   "summary": "TermsSection component. Simple titled section of paragraphs used on the terms page.",
+   "tags": [
+    "component",
+    "presentational",
+    "legal",
+    "exported"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/services/ServiceHighlightCard.tsx",
+   "type": "file",
+   "name": "ServiceHighlightCard.tsx",
+   "filePath": "components/services/ServiceHighlightCard.tsx",
+   "summary": "Small card showing one service highlight (icon, title, description).",
+   "tags": [
+    "component",
+    "presentational",
+    "services",
+    "card"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/services/ServiceHighlightCard.tsx:ServiceHighlightCard",
+   "type": "function",
+   "name": "ServiceHighlightCard",
+   "filePath": "components/services/ServiceHighlightCard.tsx",
+   "lineRange": [
+    10,
+    32
+   ],
+   "summary": "ServiceHighlightCard component. Small card showing one service highlight (icon, title, description).",
+   "tags": [
+    "component",
+    "presentational",
+    "services",
+    "exported"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/services/ServiceHighlights.tsx",
+   "type": "file",
+   "name": "ServiceHighlights.tsx",
+   "filePath": "components/services/ServiceHighlights.tsx",
+   "summary": "Service highlights section shown as a grid on desktop and an auto-advancing carousel on mobile.",
+   "tags": [
+    "component",
+    "services",
+    "carousel",
+    "home-section"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:components/services/ServiceHighlights.tsx:ServiceHighlights",
+   "type": "function",
+   "name": "ServiceHighlights",
+   "filePath": "components/services/ServiceHighlights.tsx",
+   "lineRange": [
+    78,
+    216
+   ],
+   "summary": "ServiceHighlights component. Service highlights section shown as a grid on desktop and an auto-advancing carousel on mobile.",
+   "tags": [
+    "component",
+    "services",
+    "carousel",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/timers/CountdownTimer.tsx",
+   "type": "file",
+   "name": "CountdownTimer.tsx",
+   "filePath": "components/timers/CountdownTimer.tsx",
+   "summary": "Countdown timer to an end date with days/hours/minutes/seconds display, used by the sale banner.",
+   "tags": [
+    "component",
+    "timer",
+    "countdown",
+    "utility"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/timers/CountdownTimer.tsx:CountdownTimer",
+   "type": "function",
+   "name": "CountdownTimer",
+   "filePath": "components/timers/CountdownTimer.tsx",
+   "lineRange": [
+    9,
+    36
+   ],
+   "summary": "CountdownTimer component. Countdown timer to an end date with days/hours/minutes/seconds display, used by the sale banner.",
+   "tags": [
+    "component",
+    "timer",
+    "countdown",
+    "exported"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/timers/CountdownTimer.tsx:CountdownDisplay",
+   "type": "function",
+   "name": "CountdownDisplay",
+   "filePath": "components/timers/CountdownTimer.tsx",
+   "lineRange": [
+    38,
+    74
+   ],
+   "summary": "Renders the day/hour/minute/second boxes of the countdown.",
+   "tags": [
+    "helper",
+    "component",
+    "timer"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/timers/CountdownTimer.tsx:calculateTimeLeft",
+   "type": "function",
+   "name": "calculateTimeLeft",
+   "filePath": "components/timers/CountdownTimer.tsx",
+   "lineRange": [
+    76,
+    89
+   ],
+   "summary": "Computes remaining days, hours, minutes and seconds to the end date.",
+   "tags": [
+    "helper",
+    "component",
+    "timer"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/timers/PromoCountdownTimer.tsx",
+   "type": "file",
+   "name": "PromoCountdownTimer.tsx",
+   "filePath": "components/timers/PromoCountdownTimer.tsx",
+   "summary": "Compact countdown timer variant for promotional product cards.",
+   "tags": [
+    "component",
+    "timer",
+    "countdown",
+    "promotion"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/timers/PromoCountdownTimer.tsx:PromoCountdownTimer",
+   "type": "function",
+   "name": "PromoCountdownTimer",
+   "filePath": "components/timers/PromoCountdownTimer.tsx",
+   "lineRange": [
+    9,
+    34
+   ],
+   "summary": "PromoCountdownTimer component. Compact countdown timer variant for promotional product cards.",
+   "tags": [
+    "component",
+    "timer",
+    "countdown",
+    "exported"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/timers/PromoCountdownTimer.tsx:CountdownDisplay",
+   "type": "function",
+   "name": "CountdownDisplay",
+   "filePath": "components/timers/PromoCountdownTimer.tsx",
+   "lineRange": [
+    36,
+    75
+   ],
+   "summary": "Renders the compact countdown segments.",
+   "tags": [
+    "helper",
+    "component",
+    "timer"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/timers/PromoCountdownTimer.tsx:calculateTimeLeft",
+   "type": "function",
+   "name": "calculateTimeLeft",
+   "filePath": "components/timers/PromoCountdownTimer.tsx",
+   "lineRange": [
+    77,
+    90
+   ],
+   "summary": "Computes remaining time to the promotion end.",
+   "tags": [
+    "helper",
+    "component",
+    "timer"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/ui/ErrorBoundary.tsx",
+   "type": "file",
+   "name": "ErrorBoundary.tsx",
+   "filePath": "components/ui/ErrorBoundary.tsx",
+   "summary": "React class error boundary that catches render errors and shows a fallback UI.",
+   "tags": [
+    "component",
+    "error-handling",
+    "react",
+    "ui"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:components/ui/ErrorBoundary.tsx:ErrorBoundary",
+   "type": "class",
+   "name": "ErrorBoundary",
+   "filePath": "components/ui/ErrorBoundary.tsx",
+   "lineRange": [
+    14,
+    59
+   ],
+   "summary": "React class component implementing getDerivedStateFromError and componentDidCatch to render a fallback when a child throws.",
+   "tags": [
+    "error-handling",
+    "react",
+    "class-component"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/ui/ImageLightbox.tsx",
+   "type": "file",
+   "name": "ImageLightbox.tsx",
+   "filePath": "components/ui/ImageLightbox.tsx",
+   "summary": "Product photo that opens a portalled full-screen, keyboard- and swipe-navigable image gallery.",
+   "tags": [
+    "component",
+    "gallery",
+    "lightbox",
+    "accessibility"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/ui/ImageLightbox.tsx:ImageLightbox",
+   "type": "function",
+   "name": "ImageLightbox",
+   "filePath": "components/ui/ImageLightbox.tsx",
+   "lineRange": [
+    25,
+    114
+   ],
+   "summary": "ImageLightbox component. Product photo that opens a portalled full-screen, keyboard- and swipe-navigable image gallery.",
+   "tags": [
+    "component",
+    "gallery",
+    "lightbox",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/ui/LoadingSpinner.tsx",
+   "type": "file",
+   "name": "LoadingSpinner.tsx",
+   "filePath": "components/ui/LoadingSpinner.tsx",
+   "summary": "Centered loading spinner for page-level loading states.",
+   "tags": [
+    "component",
+    "ui",
+    "loading",
+    "presentational"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/ui/LoadingSpinner.tsx:LoadingSpinner",
+   "type": "function",
+   "name": "LoadingSpinner",
+   "filePath": "components/ui/LoadingSpinner.tsx",
+   "lineRange": [
+    7,
+    19
+   ],
+   "summary": "LoadingSpinner component. Centered loading spinner for page-level loading states.",
+   "tags": [
+    "component",
+    "ui",
+    "loading",
+    "exported"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:components/reviews/CustomerFeedback.tsx",
+   "target": "function:components/reviews/CustomerFeedback.tsx:CustomerFeedback",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/reviews/CustomerFeedback.tsx",
+   "target": "function:components/reviews/CustomerFeedback.tsx:CustomerFeedback",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/reviews/CustomerFeedback.tsx",
+   "target": "file:components/carousel/CarouselIndicators.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/reviews/CustomerFeedback.tsx",
+   "target": "file:components/carousel/CarouselNavigation.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/reviews/CustomerFeedback.tsx",
+   "target": "file:components/reviews/ReviewCard.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/reviews/CustomerFeedback.tsx",
+   "target": "file:components/services/ServiceHighlightCard.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/reviews/CustomerFeedback.tsx",
+   "target": "file:components/ui/SectionHeader.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/reviews/CustomerFeedback.tsx",
+   "target": "file:hooks/useCarousel.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/reviews/CustomerFeedback.tsx",
+   "target": "file:lib/service-highlights.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/reviews/CustomerFeedback.tsx",
+   "target": "file:lib/storefront-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/reviews/CustomerFeedback.tsx:CustomerFeedback",
+   "target": "function:hooks/useCarousel.ts:useCarousel",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/reviews/CustomerFeedback.tsx:CustomerFeedback",
+   "target": "function:lib/service-highlights.ts:getServiceHighlights",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/reviews/CustomerFeedback.tsx:CustomerFeedback",
+   "target": "function:lib/storefront-api.ts:storefront",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/reviews/ReviewCard.tsx",
+   "target": "function:components/reviews/ReviewCard.tsx:ReviewCard",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/reviews/ReviewCard.tsx",
+   "target": "function:components/reviews/ReviewCard.tsx:ReviewCard",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/sections/FAQ.tsx",
+   "target": "function:components/sections/FAQ.tsx:FAQItem",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/sections/FAQ.tsx",
+   "target": "function:components/sections/FAQ.tsx:FAQ",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/sections/FAQ.tsx",
+   "target": "function:components/sections/FAQ.tsx:FAQ",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/sections/FAQ.tsx",
+   "target": "file:components/ui/SectionHeader.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/sections/FAQ.tsx",
+   "target": "file:lib/language-utils.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/sections/FAQ.tsx:FAQ",
+   "target": "function:lib/language-utils.ts:isRTL",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/sections/HeroSection.tsx",
+   "target": "function:components/sections/HeroSection.tsx:getHeroText",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/sections/HeroSection.tsx",
+   "target": "function:components/sections/HeroSection.tsx:HeroSection",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/sections/HeroSection.tsx",
+   "target": "function:components/sections/HeroSection.tsx:HeroSection",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/sections/HeroSection.tsx",
+   "target": "file:lib/language-utils.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/sections/HeroSection.tsx:HeroSection",
+   "target": "function:lib/language-utils.ts:isRTL",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/sections/HeroSection.tsx:HeroSection",
+   "target": "function:components/sections/HeroSection.tsx:getHeroText",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/sections/NewsletterForm.tsx",
+   "target": "function:components/sections/NewsletterForm.tsx:NewsletterForm",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/sections/NewsletterForm.tsx",
+   "target": "function:components/sections/NewsletterForm.tsx:NewsletterForm",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/sections/Reels.tsx",
+   "target": "function:components/sections/Reels.tsx:detectVideoPlatform",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/sections/Reels.tsx",
+   "target": "function:components/sections/Reels.tsx:Reels",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/sections/Reels.tsx",
+   "target": "function:components/sections/Reels.tsx:Reels",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/sections/SaleBanner.tsx",
+   "target": "function:components/sections/SaleBanner.tsx:SaleBanner",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/sections/SaleBanner.tsx",
+   "target": "function:components/sections/SaleBanner.tsx:SaleBanner",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/sections/SaleBanner.tsx",
+   "target": "file:components/timers/CountdownTimer.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/sections/SaleBanner.tsx",
+   "target": "file:lib/storefront-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/sections/SaleBanner.tsx:SaleBanner",
+   "target": "function:lib/storefront-api.ts:storefront",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/sections/SocialLinks.tsx",
+   "target": "function:components/sections/SocialLinks.tsx:SocialLinks",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/sections/SocialLinks.tsx",
+   "target": "function:components/sections/SocialLinks.tsx:SocialLinks",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/sections/SocialLinks.tsx",
+   "target": "file:lib/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/sections/TermsSection.tsx",
+   "target": "function:components/sections/TermsSection.tsx:TermsSection",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/sections/TermsSection.tsx",
+   "target": "function:components/sections/TermsSection.tsx:TermsSection",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/services/ServiceHighlightCard.tsx",
+   "target": "function:components/services/ServiceHighlightCard.tsx:ServiceHighlightCard",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/services/ServiceHighlightCard.tsx",
+   "target": "function:components/services/ServiceHighlightCard.tsx:ServiceHighlightCard",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/services/ServiceHighlights.tsx",
+   "target": "function:components/services/ServiceHighlights.tsx:ServiceHighlights",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/services/ServiceHighlights.tsx",
+   "target": "function:components/services/ServiceHighlights.tsx:ServiceHighlights",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/services/ServiceHighlights.tsx",
+   "target": "file:hooks/useCarousel.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/services/ServiceHighlights.tsx:ServiceHighlights",
+   "target": "function:hooks/useCarousel.ts:useCarousel",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/timers/CountdownTimer.tsx",
+   "target": "function:components/timers/CountdownTimer.tsx:CountdownTimer",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/timers/CountdownTimer.tsx",
+   "target": "function:components/timers/CountdownTimer.tsx:CountdownTimer",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/timers/CountdownTimer.tsx",
+   "target": "function:components/timers/CountdownTimer.tsx:CountdownDisplay",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/timers/CountdownTimer.tsx",
+   "target": "function:components/timers/CountdownTimer.tsx:calculateTimeLeft",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "function:components/timers/CountdownTimer.tsx:CountdownDisplay",
+   "target": "function:components/timers/CountdownTimer.tsx:calculateTimeLeft",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/timers/PromoCountdownTimer.tsx",
+   "target": "function:components/timers/PromoCountdownTimer.tsx:PromoCountdownTimer",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/timers/PromoCountdownTimer.tsx",
+   "target": "function:components/timers/PromoCountdownTimer.tsx:PromoCountdownTimer",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/timers/PromoCountdownTimer.tsx",
+   "target": "function:components/timers/PromoCountdownTimer.tsx:CountdownDisplay",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/timers/PromoCountdownTimer.tsx",
+   "target": "function:components/timers/PromoCountdownTimer.tsx:calculateTimeLeft",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "function:components/timers/PromoCountdownTimer.tsx:CountdownDisplay",
+   "target": "function:components/timers/PromoCountdownTimer.tsx:calculateTimeLeft",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/ui/ErrorBoundary.tsx",
+   "target": "class:components/ui/ErrorBoundary.tsx:ErrorBoundary",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/ui/ErrorBoundary.tsx",
+   "target": "class:components/ui/ErrorBoundary.tsx:ErrorBoundary",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/ui/ImageLightbox.tsx",
+   "target": "function:components/ui/ImageLightbox.tsx:ImageLightbox",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/ui/ImageLightbox.tsx",
+   "target": "function:components/ui/ImageLightbox.tsx:ImageLightbox",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/ui/LoadingSpinner.tsx",
+   "target": "function:components/ui/LoadingSpinner.tsx:LoadingSpinner",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/ui/LoadingSpinner.tsx",
+   "target": "function:components/ui/LoadingSpinner.tsx:LoadingSpinner",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

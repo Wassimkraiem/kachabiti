@@ -1,0 +1,1248 @@
+{
+ "nodes": [
+  {
+   "id": "file:components/ui/OrderTracking.tsx",
+   "type": "file",
+   "name": "OrderTracking.tsx",
+   "filePath": "components/ui/OrderTracking.tsx",
+   "summary": "Client component showing a shopper's order progress as a four-step Colissimo tracker (placed, shipped, out for delivery, delivered) with localized status messages, tracking number and RTL support.",
+   "tags": [
+    "component",
+    "delivery-tracking",
+    "i18n",
+    "storefront"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/ui/OrderTracking.tsx:OrderTracking",
+   "type": "function",
+   "name": "OrderTracking",
+   "filePath": "components/ui/OrderTracking.tsx",
+   "lineRange": [
+    65,
+    105
+   ],
+   "summary": "Renders the localized delivery stepper and status message for an order's parcel stage, barcode and last update.",
+   "tags": [
+    "component",
+    "delivery-tracking",
+    "i18n"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/ui/SectionHeader.tsx",
+   "type": "file",
+   "name": "SectionHeader.tsx",
+   "filePath": "components/ui/SectionHeader.tsx",
+   "summary": "Small presentational component rendering a centered section title with an optional subtitle.",
+   "tags": [
+    "component",
+    "ui",
+    "presentational"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/ui/SectionHeader.tsx:SectionHeader",
+   "type": "function",
+   "name": "SectionHeader",
+   "filePath": "components/ui/SectionHeader.tsx",
+   "lineRange": [
+    7,
+    20
+   ],
+   "summary": "Renders a centered h2 heading with an optional subtitle paragraph.",
+   "tags": [
+    "component",
+    "ui",
+    "presentational"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/ui/StockProgress.tsx",
+   "type": "file",
+   "name": "StockProgress.tsx",
+   "filePath": "components/ui/StockProgress.tsx",
+   "summary": "Client component drawing a sold-versus-in-stock progress bar used on promo product cards.",
+   "tags": [
+    "component",
+    "ui",
+    "stock"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/ui/StockProgress.tsx:StockProgress",
+   "type": "function",
+   "name": "StockProgress",
+   "filePath": "components/ui/StockProgress.tsx",
+   "lineRange": [
+    9,
+    31
+   ],
+   "summary": "Computes the sold percentage and renders an accessible progress bar that turns red past 60%.",
+   "tags": [
+    "component",
+    "ui",
+    "stock"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:hooks/useCarousel.ts",
+   "type": "file",
+   "name": "useCarousel.ts",
+   "filePath": "hooks/useCarousel.ts",
+   "summary": "React hook providing slide index state and navigation helpers for simple paginated carousels.",
+   "tags": [
+    "hook",
+    "ui-state",
+    "carousel"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:hooks/useCarousel.ts:useCarousel",
+   "type": "function",
+   "name": "useCarousel",
+   "filePath": "hooks/useCarousel.ts",
+   "lineRange": [
+    8,
+    37
+   ],
+   "summary": "Tracks the current slide and returns next/prev/goTo handlers plus a helper slicing the items for the current slide.",
+   "tags": [
+    "hook",
+    "carousel",
+    "ui-state"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:lib/cart-context.tsx",
+   "type": "file",
+   "name": "cart-context.tsx",
+   "filePath": "lib/cart-context.tsx",
+   "summary": "Client-side shopping cart React context persisted in localStorage (key shopping_cart), with lines keyed by product and variant.",
+   "tags": [
+    "context",
+    "state-management",
+    "cart",
+    "persistence"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/cart-context.tsx:cartLineKey",
+   "type": "function",
+   "name": "cartLineKey",
+   "filePath": "lib/cart-context.tsx",
+   "lineRange": [
+    36,
+    38
+   ],
+   "summary": "Builds the cart line key from a product id and optional variant id.",
+   "tags": [
+    "utility",
+    "cart"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/cart-context.tsx:CartProvider",
+   "type": "function",
+   "name": "CartProvider",
+   "filePath": "lib/cart-context.tsx",
+   "lineRange": [
+    44,
+    139
+   ],
+   "summary": "Context provider holding cart items, totals and add/remove/update/clear actions, synced to localStorage.",
+   "tags": [
+    "context",
+    "provider",
+    "cart",
+    "persistence"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:lib/cart-context.tsx:useCart",
+   "type": "function",
+   "name": "useCart",
+   "filePath": "lib/cart-context.tsx",
+   "lineRange": [
+    141,
+    147
+   ],
+   "summary": "Hook returning the cart context, throwing when used outside CartProvider.",
+   "tags": [
+    "hook",
+    "cart",
+    "context"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/catalog-cache.ts",
+   "type": "file",
+   "name": "catalog-cache.ts",
+   "filePath": "lib/catalog-cache.ts",
+   "summary": "Server-side Next.js data cache for public catalog reads, tagging entries 'catalog' with a 5-minute safety revalidate and exposing invalidation for admin writes.",
+   "tags": [
+    "cache",
+    "server",
+    "catalog",
+    "performance"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/catalog-cache.ts:cachedCatalogQuery",
+   "type": "function",
+   "name": "cachedCatalogQuery",
+   "filePath": "lib/catalog-cache.ts",
+   "lineRange": [
+    22,
+    24
+   ],
+   "summary": "Wraps a loader in unstable_cache under the catalog tag and revalidate window.",
+   "tags": [
+    "cache",
+    "factory",
+    "catalog"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/catalog-cache.ts:invalidateCatalog",
+   "type": "function",
+   "name": "invalidateCatalog",
+   "filePath": "lib/catalog-cache.ts",
+   "lineRange": [
+    26,
+    28
+   ],
+   "summary": "Revalidates the catalog tag so storefront caches refresh after admin mutations.",
+   "tags": [
+    "cache",
+    "invalidation",
+    "catalog"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/categories-cache.ts",
+   "type": "file",
+   "name": "categories-cache.ts",
+   "filePath": "lib/categories-cache.ts",
+   "summary": "Browser-side in-memory cache of the category list (5-minute TTL) shared by the header, listing, category and product pages.",
+   "tags": [
+    "cache",
+    "client",
+    "categories",
+    "data-fetching"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/categories-cache.ts:getCategories",
+   "type": "function",
+   "name": "getCategories",
+   "filePath": "lib/categories-cache.ts",
+   "lineRange": [
+    21,
+    31
+   ],
+   "summary": "Fetches /api/categories once per TTL, sharing the in-flight promise and not caching failures.",
+   "tags": [
+    "cache",
+    "data-fetching",
+    "categories"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/config.ts",
+   "type": "file",
+   "name": "config.ts",
+   "filePath": "lib/config.ts",
+   "summary": "Storefront configuration constants: ratings toggle, contact details, social links with SVG icons, navigation, languages and invoice/shipping defaults from NEXT_PUBLIC env vars.",
+   "tags": [
+    "config",
+    "constants",
+    "storefront",
+    "environment"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/customer-auth.ts",
+   "type": "file",
+   "name": "customer-auth.ts",
+   "filePath": "lib/customer-auth.ts",
+   "summary": "Browser helpers for customer sessions: the NestJS account API client, the cached signed-in customer, auth change events, sign-out, login redirects and the useCustomer hook.",
+   "tags": [
+    "authentication",
+    "client",
+    "hook",
+    "api-client",
+    "session"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/customer-auth.ts:accountApi",
+   "type": "function",
+   "name": "accountApi",
+   "filePath": "lib/customer-auth.ts",
+   "lineRange": [
+    9,
+    20
+   ],
+   "summary": "Fetch wrapper for /api auth and account routes that returns data or throws an Error carrying the API code.",
+   "tags": [
+    "api-client",
+    "authentication"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/customer-auth.ts:getCustomer",
+   "type": "function",
+   "name": "getCustomer",
+   "filePath": "lib/customer-auth.ts",
+   "lineRange": [
+    27,
+    30
+   ],
+   "summary": "Returns the signed-in customer from /api/auth/me, memoized to one request per page load.",
+   "tags": [
+    "authentication",
+    "session"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/customer-auth.ts:announceAuthChange",
+   "type": "function",
+   "name": "announceAuthChange",
+   "filePath": "lib/customer-auth.ts",
+   "lineRange": [
+    33,
+    36
+   ],
+   "summary": "Updates the cached customer and dispatches an event so every useCustomer() refreshes.",
+   "tags": [
+    "authentication",
+    "event-handler"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/customer-auth.ts:signOut",
+   "type": "function",
+   "name": "signOut",
+   "filePath": "lib/customer-auth.ts",
+   "lineRange": [
+    38,
+    41
+   ],
+   "summary": "Calls the sign-out endpoint and announces the signed-out state.",
+   "tags": [
+    "authentication",
+    "session"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/customer-auth.ts:authHref",
+   "type": "function",
+   "name": "authHref",
+   "filePath": "lib/customer-auth.ts",
+   "lineRange": [
+    47,
+    54
+   ],
+   "summary": "Builds the localized login URL with an optional reason and return path.",
+   "tags": [
+    "authentication",
+    "routing",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/customer-auth.ts:currentPath",
+   "type": "function",
+   "name": "currentPath",
+   "filePath": "lib/customer-auth.ts",
+   "lineRange": [
+    57,
+    60
+   ],
+   "summary": "Returns the current browser path and query for redirect-back links.",
+   "tags": [
+    "routing",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/customer-auth.ts:safeRedirect",
+   "type": "function",
+   "name": "safeRedirect",
+   "filePath": "lib/customer-auth.ts",
+   "lineRange": [
+    63,
+    67
+   ],
+   "summary": "Validates a redirect target so only same-site relative paths are followed.",
+   "tags": [
+    "security",
+    "validation",
+    "routing"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/customer-auth.ts:useCustomer",
+   "type": "function",
+   "name": "useCustomer",
+   "filePath": "lib/customer-auth.ts",
+   "lineRange": [
+    70,
+    93
+   ],
+   "summary": "React hook exposing the signed-in customer and loading state, reacting to auth change events.",
+   "tags": [
+    "hook",
+    "authentication",
+    "session"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/customer-auth.ts:customerName",
+   "type": "function",
+   "name": "customerName",
+   "filePath": "lib/customer-auth.ts",
+   "lineRange": [
+    96,
+    100
+   ],
+   "summary": "Derives a display name for a customer from metadata or email.",
+   "tags": [
+    "utility",
+    "formatting"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/customer-auth.ts:goToLogin",
+   "type": "function",
+   "name": "goToLogin",
+   "filePath": "lib/customer-auth.ts",
+   "lineRange": [
+    103,
+    105
+   ],
+   "summary": "Navigates the browser to the login page with a reason and return path.",
+   "tags": [
+    "authentication",
+    "routing"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/favorites.ts",
+   "type": "file",
+   "name": "favorites.ts",
+   "filePath": "lib/favorites.ts",
+   "summary": "Customer favorites client over /api/account/favorites: add, remove, toggle and list favorites, mapping product rows into display-ready favorite cards.",
+   "tags": [
+    "favorites",
+    "api-client",
+    "storefront",
+    "data-model"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/favorites.ts:addToFavorites",
+   "type": "function",
+   "name": "addToFavorites",
+   "filePath": "lib/favorites.ts",
+   "lineRange": [
+    41,
+    49
+   ],
+   "summary": "Adds a product to the signed-in customer's favorites via the account API.",
+   "tags": [
+    "favorites",
+    "api-client"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/favorites.ts:removeFromFavorites",
+   "type": "function",
+   "name": "removeFromFavorites",
+   "filePath": "lib/favorites.ts",
+   "lineRange": [
+    51,
+    59
+   ],
+   "summary": "Removes a product from the customer's favorites via the account API.",
+   "tags": [
+    "favorites",
+    "api-client"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/favorites.ts:toggleFavorite",
+   "type": "function",
+   "name": "toggleFavorite",
+   "filePath": "lib/favorites.ts",
+   "lineRange": [
+    62,
+    66
+   ],
+   "summary": "Adds or removes a favorite depending on its current state.",
+   "tags": [
+    "favorites",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/favorites.ts:getUserFavorites",
+   "type": "function",
+   "name": "getUserFavorites",
+   "filePath": "lib/favorites.ts",
+   "lineRange": [
+    78,
+    91
+   ],
+   "summary": "Loads the customer's favorites with products and transforms them for display.",
+   "tags": [
+    "favorites",
+    "data-fetching"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/favorites.ts:transformProductForFavorite",
+   "type": "function",
+   "name": "transformProductForFavorite",
+   "filePath": "lib/favorites.ts",
+   "lineRange": [
+    93,
+    116
+   ],
+   "summary": "Normalizes a favorite's product row: price, currency, image and review stats.",
+   "tags": [
+    "serialization",
+    "favorites"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/favorites.ts:calculateReviewStats",
+   "type": "function",
+   "name": "calculateReviewStats",
+   "filePath": "lib/favorites.ts",
+   "lineRange": [
+    118,
+    138
+   ],
+   "summary": "Computes average rating and review count from a product's reviews.",
+   "tags": [
+    "utility",
+    "reviews"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/fonts.ts",
+   "type": "file",
+   "name": "fonts.ts",
+   "filePath": "lib/fonts.ts",
+   "summary": "Self-hosted Reem Kufi variable font (Arabic and Latin) loaded with next/font/local for landing page headings.",
+   "tags": [
+    "fonts",
+    "config",
+    "typography"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/footer-config.ts",
+   "type": "file",
+   "name": "footer-config.ts",
+   "filePath": "lib/footer-config.ts",
+   "summary": "Static footer configuration: brand, link sections, newsletter copy and copyright, plus FooterLink/FooterSection types.",
+   "tags": [
+    "config",
+    "constants",
+    "footer"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/get-site-settings.ts",
+   "type": "file",
+   "name": "get-site-settings.ts",
+   "filePath": "lib/get-site-settings.ts",
+   "summary": "Type definition of the shop-wide shipping and tax settings returned by GET /api/storefront/settings.",
+   "tags": [
+    "type-definition",
+    "settings",
+    "shipping"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/home-data.ts",
+   "type": "file",
+   "name": "home-data.ts",
+   "filePath": "lib/home-data.ts",
+   "summary": "Server-side home page loaders (top and promo products, featured categories, sale banners, reels, latest reviews) fetched from the NestJS storefront API and cached under the catalog tag.",
+   "tags": [
+    "data-fetching",
+    "cache",
+    "home-page",
+    "server"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/landing-products.ts",
+   "type": "file",
+   "name": "landing-products.ts",
+   "filePath": "lib/landing-products.ts",
+   "summary": "Type definitions for the product-led landing sections (LandingProduct, SpotlightCollection) served by GET /api/storefront/landing.",
+   "tags": [
+    "type-definition",
+    "landing-page",
+    "data-model"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/language-context.tsx",
+   "type": "file",
+   "name": "language-context.tsx",
+   "filePath": "lib/language-context.tsx",
+   "summary": "React context exposing the current route locale to client components and keeping <html lang> in sync.",
+   "tags": [
+    "context",
+    "i18n",
+    "provider",
+    "hook"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/language-context.tsx:LanguageProvider",
+   "type": "function",
+   "name": "LanguageProvider",
+   "filePath": "lib/language-context.tsx",
+   "lineRange": [
+    12,
+    34
+   ],
+   "summary": "Provides the locale and updates the document lang attribute on locale changes.",
+   "tags": [
+    "provider",
+    "i18n",
+    "context"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/language-context.tsx:useLanguage",
+   "type": "function",
+   "name": "useLanguage",
+   "filePath": "lib/language-context.tsx",
+   "lineRange": [
+    36,
+    42
+   ],
+   "summary": "Hook returning the language context, throwing outside LanguageProvider.",
+   "tags": [
+    "hook",
+    "i18n"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/language-context.tsx:useLanguageSafe",
+   "type": "function",
+   "name": "useLanguageSafe",
+   "filePath": "lib/language-context.tsx",
+   "lineRange": [
+    45,
+    48
+   ],
+   "summary": "Hook returning the language context or a default when no provider is present.",
+   "tags": [
+    "hook",
+    "i18n"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:components/ui/OrderTracking.tsx",
+   "target": "function:components/ui/OrderTracking.tsx:OrderTracking",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/ui/OrderTracking.tsx",
+   "target": "function:components/ui/OrderTracking.tsx:OrderTracking",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/ui/OrderTracking.tsx",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/ui/OrderTracking.tsx",
+   "target": "file:lib/language-utils.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/ui/SectionHeader.tsx",
+   "target": "function:components/ui/SectionHeader.tsx:SectionHeader",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/ui/SectionHeader.tsx",
+   "target": "function:components/ui/SectionHeader.tsx:SectionHeader",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/ui/StockProgress.tsx",
+   "target": "function:components/ui/StockProgress.tsx:StockProgress",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/ui/StockProgress.tsx",
+   "target": "function:components/ui/StockProgress.tsx:StockProgress",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:hooks/useCarousel.ts",
+   "target": "function:hooks/useCarousel.ts:useCarousel",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:hooks/useCarousel.ts",
+   "target": "function:hooks/useCarousel.ts:useCarousel",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/cart-context.tsx",
+   "target": "function:lib/cart-context.tsx:cartLineKey",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/cart-context.tsx",
+   "target": "function:lib/cart-context.tsx:cartLineKey",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/cart-context.tsx",
+   "target": "function:lib/cart-context.tsx:CartProvider",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/cart-context.tsx",
+   "target": "function:lib/cart-context.tsx:CartProvider",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/cart-context.tsx",
+   "target": "function:lib/cart-context.tsx:useCart",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/cart-context.tsx",
+   "target": "function:lib/cart-context.tsx:useCart",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/catalog-cache.ts",
+   "target": "function:lib/catalog-cache.ts:cachedCatalogQuery",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/catalog-cache.ts",
+   "target": "function:lib/catalog-cache.ts:cachedCatalogQuery",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/catalog-cache.ts",
+   "target": "function:lib/catalog-cache.ts:invalidateCatalog",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/catalog-cache.ts",
+   "target": "function:lib/catalog-cache.ts:invalidateCatalog",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/catalog-cache.ts",
+   "target": "file:lib/product-detail.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/categories-cache.ts",
+   "target": "function:lib/categories-cache.ts:getCategories",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/categories-cache.ts",
+   "target": "function:lib/categories-cache.ts:getCategories",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:accountApi",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:accountApi",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:getCustomer",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:getCustomer",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:announceAuthChange",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:announceAuthChange",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:signOut",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:signOut",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:authHref",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:authHref",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:currentPath",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:currentPath",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:safeRedirect",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:safeRedirect",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:useCustomer",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:useCustomer",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:customerName",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:customerName",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:goToLogin",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/customer-auth.ts",
+   "target": "function:lib/customer-auth.ts:goToLogin",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/favorites.ts",
+   "target": "function:lib/favorites.ts:addToFavorites",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/favorites.ts",
+   "target": "function:lib/favorites.ts:addToFavorites",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/favorites.ts",
+   "target": "function:lib/favorites.ts:removeFromFavorites",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/favorites.ts",
+   "target": "function:lib/favorites.ts:removeFromFavorites",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/favorites.ts",
+   "target": "function:lib/favorites.ts:toggleFavorite",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/favorites.ts",
+   "target": "function:lib/favorites.ts:toggleFavorite",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/favorites.ts",
+   "target": "function:lib/favorites.ts:getUserFavorites",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/favorites.ts",
+   "target": "function:lib/favorites.ts:getUserFavorites",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/favorites.ts",
+   "target": "function:lib/favorites.ts:transformProductForFavorite",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/favorites.ts",
+   "target": "function:lib/favorites.ts:calculateReviewStats",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/favorites.ts",
+   "target": "file:lib/customer-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/favorites.ts",
+   "target": "file:lib/product-images.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/home-data.ts",
+   "target": "file:lib/catalog-cache.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/home-data.ts",
+   "target": "file:lib/storefront-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/language-context.tsx",
+   "target": "function:lib/language-context.tsx:LanguageProvider",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/language-context.tsx",
+   "target": "function:lib/language-context.tsx:LanguageProvider",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/language-context.tsx",
+   "target": "function:lib/language-context.tsx:useLanguage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/language-context.tsx",
+   "target": "function:lib/language-context.tsx:useLanguage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/language-context.tsx",
+   "target": "function:lib/language-context.tsx:useLanguageSafe",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/language-context.tsx",
+   "target": "function:lib/language-context.tsx:useLanguageSafe",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/ui/OrderTracking.tsx:OrderTracking",
+   "target": "function:lib/language-utils.ts:isRTL",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/customer-auth.ts:getCustomer",
+   "target": "function:lib/customer-auth.ts:accountApi",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/customer-auth.ts:signOut",
+   "target": "function:lib/customer-auth.ts:accountApi",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/customer-auth.ts:signOut",
+   "target": "function:lib/customer-auth.ts:announceAuthChange",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/customer-auth.ts:useCustomer",
+   "target": "function:lib/customer-auth.ts:getCustomer",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/favorites.ts:addToFavorites",
+   "target": "function:lib/customer-auth.ts:accountApi",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/favorites.ts:removeFromFavorites",
+   "target": "function:lib/customer-auth.ts:accountApi",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/favorites.ts:getUserFavorites",
+   "target": "function:lib/customer-auth.ts:accountApi",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/favorites.ts:toggleFavorite",
+   "target": "function:lib/favorites.ts:addToFavorites",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/favorites.ts:toggleFavorite",
+   "target": "function:lib/favorites.ts:removeFromFavorites",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/favorites.ts:getUserFavorites",
+   "target": "function:lib/favorites.ts:transformProductForFavorite",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/favorites.ts:transformProductForFavorite",
+   "target": "function:lib/product-images.ts:getProductImageUrl",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/home-data.ts",
+   "target": "function:lib/catalog-cache.ts:cachedCatalogQuery",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:lib/home-data.ts",
+   "target": "function:lib/storefront-api.ts:storefront",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:lib/catalog-cache.ts",
+   "target": "function:lib/product-detail.ts:loadProductDetail",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  }
+ ]
+}

@@ -116,7 +116,7 @@ export default function ServiceHighlights() {
     }
 
     return (
-        <section className="w-full py-2 px-1 bg-[#F8EBE8] sm:bg-[#FCF1EE]">
+        <section className="w-full py-2 px-1 bg-surface sm:bg-card">
             <div className="max-w-7xl mx-auto">
                 {/* Desktop: Show all services in a row */}
                 <div className="hidden sm:flex items-center justify-between gap-8">
@@ -135,11 +135,11 @@ export default function ServiceHighlights() {
                                         />
                                     </div>
                                 </div>
-                                <div className="flex flex-col text-[#7A4437]">
+                                <div className="flex flex-col text-accent">
                                     <h3 className="text-sm font-semibold">
                                         {service.title}
                                     </h3>
-                                    <p className="text-xs opacity-70 text-[#A08B85]">
+                                    <p className="text-xs opacity-70 text-mute">
                                         {service.description}
                                     </p>
                                 </div>
@@ -149,7 +149,7 @@ export default function ServiceHighlights() {
 
                     {/* Support Button */}
                     <button
-                        className="shrink-0 w-14 h-14 bg-[#7a3b2e] hover:bg-[#5e2d23] rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110"
+                        className="shrink-0 w-14 h-14 bg-accent hover:bg-accent-hover rounded-full flex items-center justify-center shadow-lg transition-all duration-200 hover:scale-110"
                         aria-label="Chat Support"
                     >
                         <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -181,11 +181,11 @@ export default function ServiceHighlights() {
                                             />
                                         </div>
                                     </div>
-                                    <div className="flex flex-col text-[#7A4437]">
+                                    <div className="flex flex-col text-accent">
                                         <h3 className="text-sm font-semibold">
                                             {service.title}
                                         </h3>
-                                        <p className="text-xs opacity-70 text-[#A08B85]">
+                                        <p className="text-xs opacity-70 text-mute">
                                             {service.description}
                                         </p>
                                     </div>
@@ -201,8 +201,8 @@ export default function ServiceHighlights() {
                                 key={index}
                                 onClick={() => goToSlide(index)}
                                 className={`w-2 h-2 rounded-full transition-colors ${currentSlide === index
-                                    ? 'bg-[#7A4437]'
-                                    : 'bg-[#F8EBE8]'
+                                    ? 'bg-accent'
+                                    : 'bg-surface'
                                     }`}
                                 aria-label={`Go to slide ${index + 1}`}
                                 aria-current={currentSlide === index ? "true" : "false"}

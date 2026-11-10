@@ -1,0 +1,156 @@
+{
+ "nodes": [
+  {
+   "id": "document:docs/DEPLOY.md",
+   "type": "document",
+   "name": "DEPLOY.md",
+   "filePath": "docs/DEPLOY.md",
+   "summary": "Production runbook: site on Vercel and API on one AWS server, costs, one-time setup (AWS, SSH, Terraform, DNS, GitHub, Vercel), everyday deploys, backups and alerts.",
+   "tags": [
+    "documentation",
+    "deployment",
+    "infrastructure",
+    "runbook",
+    "aws"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "document:docs/DOCKER.md",
+   "type": "document",
+   "name": "DOCKER.md",
+   "filePath": "docs/DOCKER.md",
+   "summary": "Guide to running the whole stack locally in Docker: creating .env.docker, starting Postgres and file storage, copying a database, building the app and running the tests.",
+   "tags": [
+    "documentation",
+    "containerization",
+    "local-development",
+    "onboarding"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "document:docs/META.md",
+   "type": "document",
+   "name": "META.md",
+   "filePath": "docs/META.md",
+   "summary": "Setup guide for connecting Facebook, Instagram and WhatsApp through a Meta app: permanent tokens, server env vars, webhook subscription, going live, Meta rules and TikTok notes.",
+   "tags": [
+    "documentation",
+    "integration",
+    "meta",
+    "webhooks",
+    "crm"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "document:docs/MIGRATION-NESTJS-TASKS.md",
+   "type": "document",
+   "name": "MIGRATION-NESTJS-TASKS.md",
+   "filePath": "docs/MIGRATION-NESTJS-TASKS.md",
+   "summary": "Task-by-task plan for phase 0 of the NestJS migration (app setup, DB module, withActor, auth guard, errors, routing, CI) and the categories pilot module.",
+   "tags": [
+    "documentation",
+    "migration",
+    "planning",
+    "nestjs"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "document:docs/MIGRATION-NESTJS.md",
+   "type": "document",
+   "name": "MIGRATION-NESTJS.md",
+   "filePath": "docs/MIGRATION-NESTJS.md",
+   "summary": "Migration plan from Next.js API routes on Supabase to NestJS on plain Postgres: target architecture, Supabase feature replacements, phases, hosting cost, risks and decisions.",
+   "tags": [
+    "documentation",
+    "migration",
+    "architecture",
+    "nestjs",
+    "postgres"
+   ],
+   "complexity": "complex"
+  }
+ ],
+ "edges": [
+  {
+   "source": "document:docs/DEPLOY.md",
+   "target": "resource:infra/terraform/aws.tf",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:docs/DEPLOY.md",
+   "target": "service:deploy/docker-compose.prod.yml",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:docs/DEPLOY.md",
+   "target": "file:deploy/deploy.sh",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:docs/DEPLOY.md",
+   "target": "file:deploy/backup.sh",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:docs/DEPLOY.md",
+   "target": "pipeline:.github/workflows/deploy.yml",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:docs/DOCKER.md",
+   "target": "service:docker-compose.yml",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:docs/META.md",
+   "target": "config:deploy/.env.example",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:docs/MIGRATION-NESTJS.md",
+   "target": "file:api/src/main.ts",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:docs/MIGRATION-NESTJS.md",
+   "target": "file:middleware.ts",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:docs/MIGRATION-NESTJS-TASKS.md",
+   "target": "document:docs/MIGRATION-NESTJS.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:docs/MIGRATION-NESTJS-TASKS.md",
+   "target": "file:middleware.ts",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  }
+ ]
+}

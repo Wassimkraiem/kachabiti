@@ -83,7 +83,7 @@ export default function CustomerFeedback({ initialReviews }: { initialReviews?: 
 
 
     return (
-        <section className="w-full py-16 px-4 bg-[#F5F5F5]">
+        <section className="w-full py-16 px-4 bg-surface">
             <div className="max-w-7xl mx-auto">
                 <SectionHeader
                     title={t.title}

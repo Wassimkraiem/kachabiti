@@ -1,0 +1,696 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 10,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 10,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 10,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "api/test/e2e/auth.e2e.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 130,
+      "nonEmptyLines": 115,
+      "functions": [
+        {
+          "name": "cookiesOf",
+          "startLine": 6,
+          "endLine": 6,
+          "params": [
+            "response"
+          ]
+        },
+        {
+          "name": "jar",
+          "startLine": 7,
+          "endLine": 7,
+          "params": [
+            "lines"
+          ]
+        },
+        {
+          "name": "call",
+          "startLine": 8,
+          "endLine": 19,
+          "params": [
+            "path"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "cookiesOf",
+          "callee": "response.headers.getSetCookie().map",
+          "lineNumber": 6
+        },
+        {
+          "caller": "cookiesOf",
+          "callee": "response.headers.getSetCookie",
+          "lineNumber": 6
+        },
+        {
+          "caller": "cookiesOf",
+          "callee": "c.split",
+          "lineNumber": 6
+        },
+        {
+          "caller": "jar",
+          "callee": "lines.filter((c) => !c.endsWith('=')).join",
+          "lineNumber": 7
+        },
+        {
+          "caller": "jar",
+          "callee": "lines.filter",
+          "lineNumber": 7
+        },
+        {
+          "caller": "jar",
+          "callee": "c.endsWith",
+          "lineNumber": 7
+        },
+        {
+          "caller": "call",
+          "callee": "fetch",
+          "lineNumber": 10
+        },
+        {
+          "caller": "call",
+          "callee": "JSON.stringify",
+          "lineNumber": 13
+        },
+        {
+          "caller": "call",
+          "callee": "r.json",
+          "lineNumber": 17
+        },
+        {
+          "caller": "call",
+          "callee": "cookiesOf",
+          "lineNumber": 18
+        },
+        {
+          "caller": "call",
+          "callee": "r.headers.get",
+          "lineNumber": 18
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "api/test/e2e/catalog.e2e.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 89,
+      "nonEmptyLines": 81,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "api/test/e2e/categories.e2e.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 54,
+      "nonEmptyLines": 46,
+      "functions": [
+        {
+          "name": "anonymous",
+          "startLine": 7,
+          "endLine": 8,
+          "params": [
+            "path",
+            "body"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "anonymous",
+          "callee": "fetch",
+          "lineNumber": 8
+        },
+        {
+          "caller": "anonymous",
+          "callee": "JSON.stringify",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "api/test/e2e/colissimo.e2e.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 178,
+      "nonEmptyLines": 157,
+      "functions": [
+        {
+          "name": "mock",
+          "startLine": 7,
+          "endLine": 8,
+          "params": [
+            "path",
+            "body"
+          ]
+        },
+        {
+          "name": "parcelAt",
+          "startLine": 9,
+          "endLine": 9,
+          "params": [
+            "barcode"
+          ]
+        },
+        {
+          "name": "newOrder",
+          "startLine": 22,
+          "endLine": 28,
+          "params": [
+            "phone"
+          ]
+        },
+        {
+          "name": "delivery",
+          "startLine": 29,
+          "endLine": 29,
+          "params": [
+            "id"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "mock",
+          "callee": "(await fetch(`${MOCK}${path}`, body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : {})).json",
+          "lineNumber": 8
+        },
+        {
+          "caller": "mock",
+          "callee": "fetch",
+          "lineNumber": 8
+        },
+        {
+          "caller": "mock",
+          "callee": "JSON.stringify",
+          "lineNumber": 8
+        },
+        {
+          "caller": "parcelAt",
+          "callee": "mock",
+          "lineNumber": 9
+        },
+        {
+          "caller": "newOrder",
+          "callee": "owner.call",
+          "lineNumber": 23
+        },
+        {
+          "caller": "delivery",
+          "callee": "sql",
+          "lineNumber": 29
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "api/test/e2e/erp.e2e.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 227,
+      "nonEmptyLines": 206,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "api/test/e2e/files.e2e.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 69,
+      "nonEmptyLines": 63,
+      "functions": [
+        {
+          "name": "send",
+          "startLine": 9,
+          "endLine": 12,
+          "params": [
+            "who",
+            "path",
+            "form"
+          ]
+        },
+        {
+          "name": "file",
+          "startLine": 13,
+          "endLine": 13,
+          "params": [
+            "bytes",
+            "type",
+            "name"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "send",
+          "callee": "fetch",
+          "lineNumber": 10
+        },
+        {
+          "caller": "send",
+          "callee": "r.json().catch",
+          "lineNumber": 11
+        },
+        {
+          "caller": "send",
+          "callee": "r.json",
+          "lineNumber": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "api/test/e2e/helpers.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 49,
+      "nonEmptyLines": 44,
+      "functions": [
+        {
+          "name": "sql",
+          "startLine": 14,
+          "endLine": 14,
+          "params": [
+            "text"
+          ]
+        },
+        {
+          "name": "ok",
+          "startLine": 17,
+          "endLine": 20,
+          "params": [
+            "cond",
+            "label",
+            "extra"
+          ]
+        },
+        {
+          "name": "done",
+          "startLine": 21,
+          "endLine": 24,
+          "params": []
+        },
+        {
+          "name": "user",
+          "startLine": 30,
+          "endLine": 49,
+          "params": [
+            "email"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "APP",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "sql",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "ok",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "done",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "user",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "sql",
+          "callee": "pool.query",
+          "lineNumber": 14
+        },
+        {
+          "caller": "ok",
+          "callee": "console.log",
+          "lineNumber": 18
+        },
+        {
+          "caller": "ok",
+          "callee": "JSON.stringify(extra).slice",
+          "lineNumber": 18
+        },
+        {
+          "caller": "ok",
+          "callee": "JSON.stringify",
+          "lineNumber": 18
+        },
+        {
+          "caller": "done",
+          "callee": "console.log",
+          "lineNumber": 22
+        },
+        {
+          "caller": "done",
+          "callee": "pool.end().finally",
+          "lineNumber": 23
+        },
+        {
+          "caller": "done",
+          "callee": "pool.end",
+          "lineNumber": 23
+        },
+        {
+          "caller": "done",
+          "callee": "process.exit",
+          "lineNumber": 23
+        },
+        {
+          "caller": "user",
+          "callee": "sql",
+          "lineNumber": 31
+        },
+        {
+          "caller": "user",
+          "callee": "sql",
+          "lineNumber": 36
+        },
+        {
+          "caller": "user",
+          "callee": "email.split",
+          "lineNumber": 36
+        },
+        {
+          "caller": "user",
+          "callee": "fetch",
+          "lineNumber": 37
+        },
+        {
+          "caller": "user",
+          "callee": "JSON.stringify",
+          "lineNumber": 37
+        },
+        {
+          "caller": "user",
+          "callee": "signIn.json",
+          "lineNumber": 38
+        },
+        {
+          "caller": "user",
+          "callee": "JSON.stringify",
+          "lineNumber": 39
+        },
+        {
+          "caller": "user",
+          "callee": "signIn.headers.getSetCookie().map((c) => c.split(';')[0]).join",
+          "lineNumber": 40
+        },
+        {
+          "caller": "user",
+          "callee": "signIn.headers.getSetCookie().map",
+          "lineNumber": 40
+        },
+        {
+          "caller": "user",
+          "callee": "signIn.headers.getSetCookie",
+          "lineNumber": 40
+        },
+        {
+          "caller": "user",
+          "callee": "c.split",
+          "lineNumber": 40
+        },
+        {
+          "caller": "call",
+          "callee": "fetch",
+          "lineNumber": 42
+        },
+        {
+          "caller": "call",
+          "callee": "JSON.stringify",
+          "lineNumber": 42
+        },
+        {
+          "caller": "call",
+          "callee": "r.json",
+          "lineNumber": 44
+        },
+        {
+          "caller": "call",
+          "callee": "r.headers.get",
+          "lineNumber": 45
+        },
+        {
+          "caller": "user",
+          "callee": "call",
+          "lineNumber": 47
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "api/test/e2e/objectives.e2e.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 118,
+      "nonEmptyLines": 103,
+      "functions": [
+        {
+          "name": "tunisNow",
+          "startLine": 8,
+          "endLine": 8,
+          "params": []
+        },
+        {
+          "name": "progress",
+          "startLine": 12,
+          "endLine": 12,
+          "params": []
+        },
+        {
+          "name": "mine",
+          "startLine": 13,
+          "endLine": 13,
+          "params": []
+        },
+        {
+          "name": "goal",
+          "startLine": 28,
+          "endLine": 28,
+          "params": [
+            "extra"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "tunisNow",
+          "callee": "Date.now",
+          "lineNumber": 8
+        },
+        {
+          "caller": "progress",
+          "callee": "who.call",
+          "lineNumber": 12
+        },
+        {
+          "caller": "mine",
+          "callee": "(await progress()).rows.find",
+          "lineNumber": 13
+        },
+        {
+          "caller": "mine",
+          "callee": "progress",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "api/test/e2e/stock.e2e.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 68,
+      "nonEmptyLines": 60,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "api/test/e2e/tickets.e2e.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 189,
+      "nonEmptyLines": 169,
+      "functions": [
+        {
+          "name": "notes",
+          "startLine": 13,
+          "endLine": 13,
+          "params": [
+            "who",
+            "type"
+          ]
+        },
+        {
+          "name": "tunis",
+          "startLine": 14,
+          "endLine": 14,
+          "params": [
+            "days"
+          ]
+        },
+        {
+          "name": "home",
+          "startLine": 23,
+          "endLine": 23,
+          "params": [
+            "who",
+            "path"
+          ]
+        },
+        {
+          "name": "myDay",
+          "startLine": 59,
+          "endLine": 59,
+          "params": [
+            "who"
+          ]
+        },
+        {
+          "name": "post",
+          "startLine": 124,
+          "endLine": 124,
+          "params": [
+            "who",
+            "form"
+          ]
+        },
+        {
+          "name": "upload",
+          "startLine": 126,
+          "endLine": 126,
+          "params": [
+            "bytes",
+            "type",
+            "name"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "notes",
+          "callee": "sql",
+          "lineNumber": 13
+        },
+        {
+          "caller": "tunis",
+          "callee": "new Date(Date.now() + 3_600_000 + days * 86_400_000).toISOString().slice",
+          "lineNumber": 14
+        },
+        {
+          "caller": "tunis",
+          "callee": "new Date(Date.now() + 3_600_000 + days * 86_400_000).toISOString",
+          "lineNumber": 14
+        },
+        {
+          "caller": "tunis",
+          "callee": "Date.now",
+          "lineNumber": 14
+        },
+        {
+          "caller": "home",
+          "callee": "who.call",
+          "lineNumber": 23
+        },
+        {
+          "caller": "myDay",
+          "callee": "who.call",
+          "lineNumber": 59
+        },
+        {
+          "caller": "post",
+          "callee": "fetch",
+          "lineNumber": 124
+        },
+        {
+          "caller": "upload",
+          "callee": "f.append",
+          "lineNumber": 126
+        },
+        {
+          "caller": "upload",
+          "callee": "f.append",
+          "lineNumber": 126
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    }
+  ]
+}

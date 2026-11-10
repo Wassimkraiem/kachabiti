@@ -1,0 +1,3950 @@
+{
+  "name": "kachabity",
+  "description": "Kachabity is a Next.js storefront for handcrafted Tunisian products with an admin ERP back office (orders, stock, CRM, point of sale, purchasing, accounting), backed by a NestJS API and Postgres. Note: this project has over 100 source files; consider scoping analysis to a subdirectory for faster results.",
+  "languages": [
+    "css",
+    "dockerfile",
+    "hcl",
+    "javascript",
+    "json",
+    "markdown",
+    "shell",
+    "sql",
+    "terraform",
+    "toml",
+    "typescript",
+    "yaml"
+  ],
+  "frameworks": [
+    "Next.js",
+    "React",
+    "NestJS",
+    "Tailwind CSS",
+    "Ant Design",
+    "Kysely",
+    "Docker",
+    "Docker Compose",
+    "Terraform",
+    "GitHub Actions"
+  ],
+  "files": [
+    {
+      "path": ".dockerignore",
+      "language": "unknown",
+      "sizeLines": 9,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".git-ssh-setup.sh",
+      "language": "shell",
+      "sizeLines": 21,
+      "fileCategory": "script"
+    },
+    {
+      "path": ".gitattributes",
+      "language": "unknown",
+      "sizeLines": 3,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".github/scripts/api-changed.mjs",
+      "language": "javascript",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "language": "yaml",
+      "sizeLines": 87,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".github/workflows/deploy.yml",
+      "language": "yaml",
+      "sizeLines": 147,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".ua/config.json",
+      "language": "json",
+      "sizeLines": 1,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".vercelignore",
+      "language": "unknown",
+      "sizeLines": 3,
+      "fileCategory": "code"
+    },
+    {
+      "path": "CLAUDE.md",
+      "language": "markdown",
+      "sizeLines": 177,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "Dockerfile",
+      "language": "dockerfile",
+      "sizeLines": 16,
+      "fileCategory": "infra"
+    },
+    {
+      "path": "README.md",
+      "language": "markdown",
+      "sizeLines": 36,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "api/.env.example",
+      "language": "config",
+      "sizeLines": 30,
+      "fileCategory": "config"
+    },
+    {
+      "path": "api/Dockerfile",
+      "language": "dockerfile",
+      "sizeLines": 25,
+      "fileCategory": "infra"
+    },
+    {
+      "path": "api/Dockerfile.dockerignore",
+      "language": "dockerfile",
+      "sizeLines": 9,
+      "fileCategory": "infra"
+    },
+    {
+      "path": "api/README.md",
+      "language": "markdown",
+      "sizeLines": 51,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "api/eslint.config.mjs",
+      "language": "javascript",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/nest-cli.json",
+      "language": "json",
+      "sizeLines": 9,
+      "fileCategory": "config"
+    },
+    {
+      "path": "api/package.json",
+      "language": "json",
+      "sizeLines": 58,
+      "fileCategory": "config"
+    },
+    {
+      "path": "api/scripts/copy-storage.mjs",
+      "language": "javascript",
+      "sizeLines": 119,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/scripts/db-types.mjs",
+      "language": "javascript",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/scripts/migrate.mjs",
+      "language": "javascript",
+      "sizeLines": 62,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/admin/admin.controllers.ts",
+      "language": "typescript",
+      "sizeLines": 948,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/admin/goals.ts",
+      "language": "typescript",
+      "sizeLines": 208,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/admin/public.controllers.ts",
+      "language": "typescript",
+      "sizeLines": 277,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/admin/team.controller.ts",
+      "language": "typescript",
+      "sizeLines": 335,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/admin/tickets.controller.ts",
+      "language": "typescript",
+      "sizeLines": 268,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/app.module.ts",
+      "language": "typescript",
+      "sizeLines": 175,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/auth/auth.controller.ts",
+      "language": "typescript",
+      "sizeLines": 601,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/auth/auth.guard.ts",
+      "language": "typescript",
+      "sizeLines": 153,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/auth/decorators.ts",
+      "language": "typescript",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/catalog/categories.controller.ts",
+      "language": "typescript",
+      "sizeLines": 146,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/catalog/content.controllers.ts",
+      "language": "typescript",
+      "sizeLines": 276,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/catalog/landing.controller.ts",
+      "language": "typescript",
+      "sizeLines": 116,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/catalog/options.controller.ts",
+      "language": "typescript",
+      "sizeLines": 117,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/catalog/product-images.controller.ts",
+      "language": "typescript",
+      "sizeLines": 122,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/catalog/products.controller.ts",
+      "language": "typescript",
+      "sizeLines": 422,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/catalog/queries.ts",
+      "language": "typescript",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/catalog/revalidate.ts",
+      "language": "typescript",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/catalog/variants.controller.ts",
+      "language": "typescript",
+      "sizeLines": 116,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/common/api.ts",
+      "language": "typescript",
+      "sizeLines": 200,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/common/mail.ts",
+      "language": "typescript",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/common/rate-limit.ts",
+      "language": "typescript",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/common/storage.ts",
+      "language": "typescript",
+      "sizeLines": 137,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/config.ts",
+      "language": "typescript",
+      "sizeLines": 53,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/crm/campaigns.controller.ts",
+      "language": "typescript",
+      "sizeLines": 199,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/crm/crm.controllers.ts",
+      "language": "typescript",
+      "sizeLines": 881,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/crm/meta-webhook.controller.ts",
+      "language": "typescript",
+      "sizeLines": 199,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/db/database.ts",
+      "language": "typescript",
+      "sizeLines": 176,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/db/embed.ts",
+      "language": "typescript",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/db/types.ts",
+      "language": "typescript",
+      "sizeLines": 1220,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/files/files.controllers.ts",
+      "language": "typescript",
+      "sizeLines": 256,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/finance/finance.controllers.ts",
+      "language": "typescript",
+      "sizeLines": 1743,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/health.controller.ts",
+      "language": "typescript",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/instrument.ts",
+      "language": "typescript",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/main.ts",
+      "language": "typescript",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/notifications/notification-events.ts",
+      "language": "typescript",
+      "sizeLines": 240,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/pos/pos.controller.ts",
+      "language": "typescript",
+      "sizeLines": 684,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/purchasing/purchasing.controllers.ts",
+      "language": "typescript",
+      "sizeLines": 781,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/sales/colissimo-portal.controller.ts",
+      "language": "typescript",
+      "sizeLines": 145,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/sales/colissimo-portal.ts",
+      "language": "typescript",
+      "sizeLines": 348,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/sales/colissimo-tracking.ts",
+      "language": "typescript",
+      "sizeLines": 180,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/sales/commerce.ts",
+      "language": "typescript",
+      "sizeLines": 504,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/sales/delivery.controller.ts",
+      "language": "typescript",
+      "sizeLines": 996,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/sales/orders.controller.ts",
+      "language": "typescript",
+      "sizeLines": 374,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/sales/sales.controllers.ts",
+      "language": "typescript",
+      "sizeLines": 688,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/stock/stock.controllers.ts",
+      "language": "typescript",
+      "sizeLines": 686,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/storefront/account.controller.ts",
+      "language": "typescript",
+      "sizeLines": 223,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/src/storefront/storefront.controller.ts",
+      "language": "typescript",
+      "sizeLines": 991,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/test/e2e/auth.e2e.mjs",
+      "language": "javascript",
+      "sizeLines": 130,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/test/e2e/catalog.e2e.mjs",
+      "language": "javascript",
+      "sizeLines": 89,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/test/e2e/categories.e2e.mjs",
+      "language": "javascript",
+      "sizeLines": 54,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/test/e2e/colissimo.e2e.mjs",
+      "language": "javascript",
+      "sizeLines": 178,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/test/e2e/erp.e2e.mjs",
+      "language": "javascript",
+      "sizeLines": 227,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/test/e2e/files.e2e.mjs",
+      "language": "javascript",
+      "sizeLines": 69,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/test/e2e/helpers.mjs",
+      "language": "javascript",
+      "sizeLines": 49,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/test/e2e/objectives.e2e.mjs",
+      "language": "javascript",
+      "sizeLines": 118,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/test/e2e/stock.e2e.mjs",
+      "language": "javascript",
+      "sizeLines": 68,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/test/e2e/tickets.e2e.mjs",
+      "language": "javascript",
+      "sizeLines": 189,
+      "fileCategory": "code"
+    },
+    {
+      "path": "api/tsconfig.build.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    },
+    {
+      "path": "api/tsconfig.json",
+      "language": "json",
+      "sizeLines": 36,
+      "fileCategory": "config"
+    },
+    {
+      "path": "app/[locale]/about/page.tsx",
+      "language": "typescript",
+      "sizeLines": 292,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/auth/page.tsx",
+      "language": "typescript",
+      "sizeLines": 382,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/cart/page.tsx",
+      "language": "typescript",
+      "sizeLines": 204,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/categories/[slug]/page.tsx",
+      "language": "typescript",
+      "sizeLines": 374,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/categories/page.tsx",
+      "language": "typescript",
+      "sizeLines": 244,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/checkout/page.tsx",
+      "language": "typescript",
+      "sizeLines": 1009,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/contact/page.tsx",
+      "language": "typescript",
+      "sizeLines": 273,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/layout.tsx",
+      "language": "typescript",
+      "sizeLines": 148,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/not-found.tsx",
+      "language": "typescript",
+      "sizeLines": 106,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/order-confirmation/page.tsx",
+      "language": "typescript",
+      "sizeLines": 179,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/page.tsx",
+      "language": "typescript",
+      "sizeLines": 172,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/privacy/page.tsx",
+      "language": "typescript",
+      "sizeLines": 294,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/products/[slug]/ProductDetailClient.tsx",
+      "language": "typescript",
+      "sizeLines": 1054,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/products/[slug]/page.tsx",
+      "language": "typescript",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/products/page.tsx",
+      "language": "typescript",
+      "sizeLines": 749,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/settings/README.md",
+      "language": "markdown",
+      "sizeLines": 175,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "app/[locale]/settings/layout.tsx",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/settings/page.tsx",
+      "language": "typescript",
+      "sizeLines": 727,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/shipping/page.tsx",
+      "language": "typescript",
+      "sizeLines": 255,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/[locale]/terms-and-conditions/page.tsx",
+      "language": "typescript",
+      "sizeLines": 319,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/activity/page.tsx",
+      "language": "typescript",
+      "sizeLines": 277,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/cart-analytics/page.tsx",
+      "language": "typescript",
+      "sizeLines": 327,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/categories/[id]/edit/page.tsx",
+      "language": "typescript",
+      "sizeLines": 289,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/categories/new/page.tsx",
+      "language": "typescript",
+      "sizeLines": 223,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/categories/page.tsx",
+      "language": "typescript",
+      "sizeLines": 369,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/colissimo-account/page.tsx",
+      "language": "typescript",
+      "sizeLines": 384,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/customers/[id]/page.tsx",
+      "language": "typescript",
+      "sizeLines": 350,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/customers/comments/page.tsx",
+      "language": "typescript",
+      "sizeLines": 166,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/customers/inbox/page.tsx",
+      "language": "typescript",
+      "sizeLines": 89,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/customers/page.tsx",
+      "language": "typescript",
+      "sizeLines": 214,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/dashboard/page.tsx",
+      "language": "typescript",
+      "sizeLines": 369,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/delivery/page.tsx",
+      "language": "typescript",
+      "sizeLines": 481,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/delivery/print/page.tsx",
+      "language": "typescript",
+      "sizeLines": 71,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/finance/accounting/page.tsx",
+      "language": "typescript",
+      "sizeLines": 491,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/finance/bills/page.tsx",
+      "language": "typescript",
+      "sizeLines": 276,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/finance/documents/page.tsx",
+      "language": "typescript",
+      "sizeLines": 137,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/finance/invoices/[id]/page.tsx",
+      "language": "typescript",
+      "sizeLines": 152,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/finance/invoices/page.tsx",
+      "language": "typescript",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/finance/payments/page.tsx",
+      "language": "typescript",
+      "sizeLines": 193,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/finance/treasury/page.tsx",
+      "language": "typescript",
+      "sizeLines": 265,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/goals/page.tsx",
+      "language": "typescript",
+      "sizeLines": 391,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/landing/page.tsx",
+      "language": "typescript",
+      "sizeLines": 418,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/layout.tsx",
+      "language": "typescript",
+      "sizeLines": 623,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/loading.tsx",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/login/page.tsx",
+      "language": "typescript",
+      "sizeLines": 128,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/marketing/campaigns/page.tsx",
+      "language": "typescript",
+      "sizeLines": 158,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/my-work/page.tsx",
+      "language": "typescript",
+      "sizeLines": 247,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/notifications/page.tsx",
+      "language": "typescript",
+      "sizeLines": 93,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/orders/[id]/page.tsx",
+      "language": "typescript",
+      "sizeLines": 420,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/orders/new/page.tsx",
+      "language": "typescript",
+      "sizeLines": 247,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/orders/page.tsx",
+      "language": "typescript",
+      "sizeLines": 683,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/overview/page.tsx",
+      "language": "typescript",
+      "sizeLines": 311,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/performance/page.tsx",
+      "language": "typescript",
+      "sizeLines": 238,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/pos/page.tsx",
+      "language": "typescript",
+      "sizeLines": 409,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/pos/receipt/[id]/page.tsx",
+      "language": "typescript",
+      "sizeLines": 85,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/pos/sessions/page.tsx",
+      "language": "typescript",
+      "sizeLines": 85,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/products/[id]/edit/page.tsx",
+      "language": "typescript",
+      "sizeLines": 884,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/products/new/page.tsx",
+      "language": "typescript",
+      "sizeLines": 671,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/products/page.tsx",
+      "language": "typescript",
+      "sizeLines": 518,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/promotions/page.tsx",
+      "language": "typescript",
+      "sizeLines": 372,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/purchasing/[id]/page.tsx",
+      "language": "typescript",
+      "sizeLines": 407,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/purchasing/materials/page.tsx",
+      "language": "typescript",
+      "sizeLines": 315,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/purchasing/page.tsx",
+      "language": "typescript",
+      "sizeLines": 64,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/purchasing/prices/page.tsx",
+      "language": "typescript",
+      "sizeLines": 74,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/purchasing/suppliers/page.tsx",
+      "language": "typescript",
+      "sizeLines": 118,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/reels/page.tsx",
+      "language": "typescript",
+      "sizeLines": 441,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/sale-banners/page.tsx",
+      "language": "typescript",
+      "sizeLines": 466,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/settings/page.tsx",
+      "language": "typescript",
+      "sizeLines": 108,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/stock/movements/page.tsx",
+      "language": "typescript",
+      "sizeLines": 181,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/stock/page.tsx",
+      "language": "typescript",
+      "sizeLines": 273,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/stock/restock/page.tsx",
+      "language": "typescript",
+      "sizeLines": 127,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/stock/settings/page.tsx",
+      "language": "typescript",
+      "sizeLines": 224,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/team/page.tsx",
+      "language": "typescript",
+      "sizeLines": 283,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/tickets/page.tsx",
+      "language": "typescript",
+      "sizeLines": 544,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/trash/page.tsx",
+      "language": "typescript",
+      "sizeLines": 228,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/admin/variants/page.tsx",
+      "language": "typescript",
+      "sizeLines": 631,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/api-docs/page.tsx",
+      "language": "typescript",
+      "sizeLines": 98,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/api/internal/revalidate/route.ts",
+      "language": "typescript",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/global-error.tsx",
+      "language": "typescript",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/globals.css",
+      "language": "css",
+      "sizeLines": 110,
+      "fileCategory": "markup"
+    },
+    {
+      "path": "app/layout.tsx",
+      "language": "typescript",
+      "sizeLines": 145,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/manifest.ts",
+      "language": "typescript",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/not-found.tsx",
+      "language": "typescript",
+      "sizeLines": 87,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/page.tsx",
+      "language": "typescript",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/robots.ts",
+      "language": "typescript",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/sitemap.ts",
+      "language": "typescript",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/AdminLanguageSwitcher.tsx",
+      "language": "typescript",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/CategoryExtraFields.tsx",
+      "language": "typescript",
+      "sizeLines": 75,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/ImageUpload.tsx",
+      "language": "typescript",
+      "sizeLines": 151,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/MultiImageUpload.tsx",
+      "language": "typescript",
+      "sizeLines": 151,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/NotificationBell.tsx",
+      "language": "typescript",
+      "sizeLines": 220,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/ProductStockFields.tsx",
+      "language": "typescript",
+      "sizeLines": 94,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/ProductTranslationFields.tsx",
+      "language": "typescript",
+      "sizeLines": 42,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/admin-fetch-cache.ts",
+      "language": "typescript",
+      "sizeLines": 65,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/antd-app.tsx",
+      "language": "typescript",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/delivery/DeliveryStatusTag.tsx",
+      "language": "typescript",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/delivery/EditParcelModal.tsx",
+      "language": "typescript",
+      "sizeLines": 167,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/delivery/OrderDeliveryCard.tsx",
+      "language": "typescript",
+      "sizeLines": 221,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/delivery/ParcelHistoryDrawer.tsx",
+      "language": "typescript",
+      "sizeLines": 82,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/delivery/ParcelLookup.tsx",
+      "language": "typescript",
+      "sizeLines": 126,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/delivery/ParcelProducts.tsx",
+      "language": "typescript",
+      "sizeLines": 204,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/delivery/SendParcelModal.tsx",
+      "language": "typescript",
+      "sizeLines": 262,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/delivery/delivery-api.ts",
+      "language": "typescript",
+      "sizeLines": 132,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/desktop-push.ts",
+      "language": "typescript",
+      "sizeLines": 89,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/erp/EditOrderModal.tsx",
+      "language": "typescript",
+      "sizeLines": 139,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/erp/MonthGoalCard.tsx",
+      "language": "typescript",
+      "sizeLines": 74,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/erp/OrderPaymentsCard.tsx",
+      "language": "typescript",
+      "sizeLines": 180,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/erp/OrderPipelineCard.tsx",
+      "language": "typescript",
+      "sizeLines": 122,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/erp/QuickLinks.tsx",
+      "language": "typescript",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/erp/charts.tsx",
+      "language": "typescript",
+      "sizeLines": 152,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/erp/erp-client.ts",
+      "language": "typescript",
+      "sizeLines": 97,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/erp/purchase-items.ts",
+      "language": "typescript",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/erp/ui.tsx",
+      "language": "typescript",
+      "sizeLines": 213,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/mobile-table-labels.ts",
+      "language": "typescript",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/notification-item.tsx",
+      "language": "typescript",
+      "sizeLines": 74,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/order-status.ts",
+      "language": "typescript",
+      "sizeLines": 70,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/pos/PosAnalyticsTab.tsx",
+      "language": "typescript",
+      "sizeLines": 83,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/pos/PosStockTab.tsx",
+      "language": "typescript",
+      "sizeLines": 98,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/select-search.ts",
+      "language": "typescript",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/stock/MovementChart.tsx",
+      "language": "typescript",
+      "sizeLines": 180,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/stock/MovementModal.tsx",
+      "language": "typescript",
+      "sizeLines": 228,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/stock/ProductVariantsPanel.tsx",
+      "language": "typescript",
+      "sizeLines": 156,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/stock/StockOverview.tsx",
+      "language": "typescript",
+      "sizeLines": 90,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/stock/VariantThumb.tsx",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/admin/stock/stock-client.ts",
+      "language": "typescript",
+      "sizeLines": 93,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/carousel/CarouselIndicators.tsx",
+      "language": "typescript",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/carousel/CarouselNavigation.tsx",
+      "language": "typescript",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/carousel/index.ts",
+      "language": "typescript",
+      "sizeLines": 3,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/cart/AddToCartButton.tsx",
+      "language": "typescript",
+      "sizeLines": 143,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/cart/CartButton.tsx",
+      "language": "typescript",
+      "sizeLines": 68,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/cart/CartDrawer.tsx",
+      "language": "typescript",
+      "sizeLines": 160,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/cart/CartItem.tsx",
+      "language": "typescript",
+      "sizeLines": 327,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/cart/index.ts",
+      "language": "typescript",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/footer/Footer.tsx",
+      "language": "typescript",
+      "sizeLines": 241,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/footer/FooterSection.tsx",
+      "language": "typescript",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/footer/index.ts",
+      "language": "typescript",
+      "sizeLines": 3,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/forms/FormInput.tsx",
+      "language": "typescript",
+      "sizeLines": 60,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/forms/FormSelect.tsx",
+      "language": "typescript",
+      "sizeLines": 65,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/forms/FormTextarea.tsx",
+      "language": "typescript",
+      "sizeLines": 60,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/forms/README.md",
+      "language": "markdown",
+      "sizeLines": 168,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "components/forms/index.ts",
+      "language": "typescript",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/landing/CollectionSpotlight.tsx",
+      "language": "typescript",
+      "sizeLines": 88,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/landing/HowToOrder.tsx",
+      "language": "typescript",
+      "sizeLines": 106,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/landing/LandingProductCard.tsx",
+      "language": "typescript",
+      "sizeLines": 75,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/landing/NewArrivals.tsx",
+      "language": "typescript",
+      "sizeLines": 65,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/landing/ProductRing3D.tsx",
+      "language": "typescript",
+      "sizeLines": 147,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/landing/ProductShowcase.tsx",
+      "language": "typescript",
+      "sizeLines": 144,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/landing/ring-scene.ts",
+      "language": "typescript",
+      "sizeLines": 444,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/layout/MobileHeader.tsx",
+      "language": "typescript",
+      "sizeLines": 304,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/layout/MobileTabBar.tsx",
+      "language": "typescript",
+      "sizeLines": 88,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/layout/SearchBox.tsx",
+      "language": "typescript",
+      "sizeLines": 266,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/layout/StaticHeader.tsx",
+      "language": "typescript",
+      "sizeLines": 434,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/layout/TrafficSource.tsx",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/layout/index.ts",
+      "language": "typescript",
+      "sizeLines": 2,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/products/ProductGrid.tsx",
+      "language": "typescript",
+      "sizeLines": 257,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/products/ProductListCard.tsx",
+      "language": "typescript",
+      "sizeLines": 206,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/products/PromoProductCard.tsx",
+      "language": "typescript",
+      "sizeLines": 111,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/products/PromoProducts.tsx",
+      "language": "typescript",
+      "sizeLines": 156,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/products/TopProducts.tsx",
+      "language": "typescript",
+      "sizeLines": 317,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/products/index.ts",
+      "language": "typescript",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/reviews/CustomerFeedback.tsx",
+      "language": "typescript",
+      "sizeLines": 130,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/reviews/ReviewCard.tsx",
+      "language": "typescript",
+      "sizeLines": 98,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/reviews/index.ts",
+      "language": "typescript",
+      "sizeLines": 3,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/sections/FAQ.tsx",
+      "language": "typescript",
+      "sizeLines": 194,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/sections/HeroSection.tsx",
+      "language": "typescript",
+      "sizeLines": 481,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/sections/NewsletterForm.tsx",
+      "language": "typescript",
+      "sizeLines": 135,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/sections/Reels.tsx",
+      "language": "typescript",
+      "sizeLines": 335,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/sections/SaleBanner.tsx",
+      "language": "typescript",
+      "sizeLines": 124,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/sections/SocialLinks.tsx",
+      "language": "typescript",
+      "sizeLines": 54,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/sections/TermsSection.tsx",
+      "language": "typescript",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/sections/index.ts",
+      "language": "typescript",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/services/ServiceHighlightCard.tsx",
+      "language": "typescript",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/services/ServiceHighlights.tsx",
+      "language": "typescript",
+      "sizeLines": 216,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/services/index.ts",
+      "language": "typescript",
+      "sizeLines": 3,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/timers/CountdownTimer.tsx",
+      "language": "typescript",
+      "sizeLines": 90,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/timers/PromoCountdownTimer.tsx",
+      "language": "typescript",
+      "sizeLines": 91,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/timers/index.ts",
+      "language": "typescript",
+      "sizeLines": 3,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/ui/ErrorBoundary.tsx",
+      "language": "typescript",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/ui/ImageLightbox.tsx",
+      "language": "typescript",
+      "sizeLines": 114,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/ui/LoadingSpinner.tsx",
+      "language": "typescript",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/ui/OrderTracking.tsx",
+      "language": "typescript",
+      "sizeLines": 105,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/ui/SectionHeader.tsx",
+      "language": "typescript",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/ui/StockProgress.tsx",
+      "language": "typescript",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "components/ui/index.ts",
+      "language": "typescript",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "deploy/.env.example",
+      "language": "config",
+      "sizeLines": 48,
+      "fileCategory": "config"
+    },
+    {
+      "path": "deploy/backup.sh",
+      "language": "shell",
+      "sizeLines": 29,
+      "fileCategory": "script"
+    },
+    {
+      "path": "deploy/deploy.sh",
+      "language": "shell",
+      "sizeLines": 65,
+      "fileCategory": "script"
+    },
+    {
+      "path": "deploy/docker-compose.prod.yml",
+      "language": "yaml",
+      "sizeLines": 80,
+      "fileCategory": "infra"
+    },
+    {
+      "path": "docker-compose.yml",
+      "language": "yaml",
+      "sizeLines": 99,
+      "fileCategory": "infra"
+    },
+    {
+      "path": "docs/DEPLOY.md",
+      "language": "markdown",
+      "sizeLines": 194,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/DOCKER.md",
+      "language": "markdown",
+      "sizeLines": 86,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/META.md",
+      "language": "markdown",
+      "sizeLines": 92,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/MIGRATION-NESTJS-TASKS.md",
+      "language": "markdown",
+      "sizeLines": 202,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "docs/MIGRATION-NESTJS.md",
+      "language": "markdown",
+      "sizeLines": 300,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "eslint.config.mjs",
+      "language": "javascript",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "hooks/useCarousel.ts",
+      "language": "typescript",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "infra/terraform/.terraform.lock.hcl",
+      "language": "hcl",
+      "sizeLines": 55,
+      "fileCategory": "code"
+    },
+    {
+      "path": "infra/terraform/aws.tf",
+      "language": "terraform",
+      "sizeLines": 327,
+      "fileCategory": "infra"
+    },
+    {
+      "path": "infra/terraform/backend.hcl.example",
+      "language": "example",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "infra/terraform/cloud-init.yaml",
+      "language": "yaml",
+      "sizeLines": 40,
+      "fileCategory": "config"
+    },
+    {
+      "path": "infra/terraform/outputs.tf",
+      "language": "terraform",
+      "sizeLines": 23,
+      "fileCategory": "infra"
+    },
+    {
+      "path": "infra/terraform/terraform.tfvars.example",
+      "language": "example",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "infra/terraform/variables.tf",
+      "language": "terraform",
+      "sizeLines": 49,
+      "fileCategory": "infra"
+    },
+    {
+      "path": "infra/terraform/versions.tf",
+      "language": "terraform",
+      "sizeLines": 30,
+      "fileCategory": "infra"
+    },
+    {
+      "path": "instrumentation-client.ts",
+      "language": "typescript",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "instrumentation.ts",
+      "language": "typescript",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/abandoned-cart-email.ts",
+      "language": "typescript",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/admin-auth.ts",
+      "language": "typescript",
+      "sizeLines": 113,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/admin-i18n.tsx",
+      "language": "typescript",
+      "sizeLines": 92,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/admin-role-context.tsx",
+      "language": "typescript",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/admin-translations-erp.ts",
+      "language": "typescript",
+      "sizeLines": 1126,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/admin-translations.ts",
+      "language": "typescript",
+      "sizeLines": 937,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/antd-config.ts",
+      "language": "typescript",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/api-access.ts",
+      "language": "typescript",
+      "sizeLines": 79,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/app-env.ts",
+      "language": "typescript",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/auth-session.ts",
+      "language": "typescript",
+      "sizeLines": 53,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/cart-context.tsx",
+      "language": "typescript",
+      "sizeLines": 147,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/catalog-cache.ts",
+      "language": "typescript",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/categories-cache.ts",
+      "language": "typescript",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/colissimo-data.ts",
+      "language": "typescript",
+      "sizeLines": 172,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/colissimo.ts",
+      "language": "typescript",
+      "sizeLines": 310,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/config.ts",
+      "language": "typescript",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/customer-auth.ts",
+      "language": "typescript",
+      "sizeLines": 105,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/erp/constants.ts",
+      "language": "typescript",
+      "sizeLines": 228,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/erp/db-messages.ts",
+      "language": "typescript",
+      "sizeLines": 68,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/erp/meta.ts",
+      "language": "typescript",
+      "sizeLines": 166,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/erp/objectives.ts",
+      "language": "typescript",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/favorites.ts",
+      "language": "typescript",
+      "sizeLines": 138,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/fonts.ts",
+      "language": "typescript",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/footer-config.ts",
+      "language": "typescript",
+      "sizeLines": 56,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/get-site-settings.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/home-data.ts",
+      "language": "typescript",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/landing-config.ts",
+      "language": "typescript",
+      "sizeLines": 95,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/landing-products.ts",
+      "language": "typescript",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/language-context.tsx",
+      "language": "typescript",
+      "sizeLines": 48,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/language-utils.ts",
+      "language": "typescript",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/openapi-erp.ts",
+      "language": "typescript",
+      "sizeLines": 206,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/openapi.ts",
+      "language": "typescript",
+      "sizeLines": 1123,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/order-confirmation-email.ts",
+      "language": "typescript",
+      "sizeLines": 251,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/order-number.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/order-types.ts",
+      "language": "typescript",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/orders.ts",
+      "language": "typescript",
+      "sizeLines": 55,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/product-detail.ts",
+      "language": "typescript",
+      "sizeLines": 30,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/product-images.ts",
+      "language": "typescript",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/product-search.ts",
+      "language": "typescript",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/quick-add.ts",
+      "language": "typescript",
+      "sizeLines": 75,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/report-error.ts",
+      "language": "typescript",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/schemas/auth-schema.ts",
+      "language": "typescript",
+      "sizeLines": 71,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/schemas/checkout-schema.ts",
+      "language": "typescript",
+      "sizeLines": 56,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/sentry-options.ts",
+      "language": "typescript",
+      "sizeLines": 62,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/service-highlights.ts",
+      "language": "typescript",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/stock.ts",
+      "language": "typescript",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/storefront-api.ts",
+      "language": "typescript",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/traffic-source.ts",
+      "language": "typescript",
+      "sizeLines": 77,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/trash-tables.ts",
+      "language": "typescript",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "lib/utils/product-utils.ts",
+      "language": "typescript",
+      "sizeLines": 166,
+      "fileCategory": "code"
+    },
+    {
+      "path": "messages/en/Settings.json",
+      "language": "json",
+      "sizeLines": 5,
+      "fileCategory": "config"
+    },
+    {
+      "path": "middleware.ts",
+      "language": "typescript",
+      "sizeLines": 198,
+      "fileCategory": "code"
+    },
+    {
+      "path": "netlify.toml",
+      "language": "toml",
+      "sizeLines": 24,
+      "fileCategory": "config"
+    },
+    {
+      "path": "next.config.ts",
+      "language": "typescript",
+      "sizeLines": 104,
+      "fileCategory": "code"
+    },
+    {
+      "path": "package.json",
+      "language": "json",
+      "sizeLines": 51,
+      "fileCategory": "config"
+    },
+    {
+      "path": "postcss.config.mjs",
+      "language": "javascript",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "public/admin-sw.js",
+      "language": "javascript",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/db/move-database.mjs",
+      "language": "javascript",
+      "sizeLines": 91,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/docker/colissimo-mock.mjs",
+      "language": "javascript",
+      "sizeLines": 208,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/docker/create-admin.mjs",
+      "language": "javascript",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/docker/env.mjs",
+      "language": "javascript",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/docker/import-database.mjs",
+      "language": "javascript",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/docker/meta-webhook-test.mjs",
+      "language": "javascript",
+      "sizeLines": 52,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/find-unused-code.sh",
+      "language": "shell",
+      "sizeLines": 52,
+      "fileCategory": "script"
+    },
+    {
+      "path": "scripts/import-woocommerce.mjs",
+      "language": "javascript",
+      "sizeLines": 411,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/import/colors.json",
+      "language": "json",
+      "sizeLines": 35,
+      "fileCategory": "config"
+    },
+    {
+      "path": "scripts/import/descriptions.json",
+      "language": "json",
+      "sizeLines": 233,
+      "fileCategory": "config"
+    },
+    {
+      "path": "scripts/import/old-colissimo.mjs",
+      "language": "javascript",
+      "sizeLines": 183,
+      "fileCategory": "code"
+    },
+    {
+      "path": "scripts/import/translations.json",
+      "language": "json",
+      "sizeLines": 409,
+      "fileCategory": "config"
+    },
+    {
+      "path": "scripts/run-next.mjs",
+      "language": "javascript",
+      "sizeLines": 30,
+      "fileCategory": "code"
+    },
+    {
+      "path": "sentry.edge.config.ts",
+      "language": "typescript",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "sentry.server.config.ts",
+      "language": "typescript",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "skills-lock.json",
+      "language": "json",
+      "sizeLines": 17,
+      "fileCategory": "config"
+    },
+    {
+      "path": "supabase/.temp/gotrue-version",
+      "language": "unknown",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "supabase/.temp/linked-project.json",
+      "language": "json",
+      "sizeLines": 0,
+      "fileCategory": "config"
+    },
+    {
+      "path": "supabase/.temp/pooler-url",
+      "language": "unknown",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "supabase/.temp/postgres-version",
+      "language": "unknown",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "supabase/.temp/project-ref",
+      "language": "unknown",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "supabase/.temp/rest-version",
+      "language": "unknown",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "supabase/.temp/storage-migration",
+      "language": "unknown",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "supabase/.temp/storage-version",
+      "language": "unknown",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+      "language": "sql",
+      "sizeLines": 590,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20260928141343_seed_tunisia_shipping_rate.sql",
+      "language": "sql",
+      "sizeLines": 6,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20260928164330_category_hierarchy.sql",
+      "language": "sql",
+      "sizeLines": 7,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20260928183053_customer_accounts.sql",
+      "language": "sql",
+      "sizeLines": 63,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261001112501_stock_management.sql",
+      "language": "sql",
+      "sizeLines": 446,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261001130516_stock_trigger_privileges.sql",
+      "language": "sql",
+      "sizeLines": 14,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261001170000_transactional_writes.sql",
+      "language": "sql",
+      "sizeLines": 386,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+      "language": "sql",
+      "sizeLines": 408,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261002084321_landing_config_and_activity_log.sql",
+      "language": "sql",
+      "sizeLines": 272,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261002090113_permanent_deletes.sql",
+      "language": "sql",
+      "sizeLines": 287,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261004085227_product_search.sql",
+      "language": "sql",
+      "sizeLines": 228,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261004092308_notifications_and_owner_alerts.sql",
+      "language": "sql",
+      "sizeLines": 519,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261004120000_update_delivery_fee_to_8.sql",
+      "language": "sql",
+      "sizeLines": 9,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261005145858_made_to_order_stock.sql",
+      "language": "sql",
+      "sizeLines": 71,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261006142809_colissimo_deliveries.sql",
+      "language": "sql",
+      "sizeLines": 178,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261007104019_delivery_on_validation.sql",
+      "language": "sql",
+      "sizeLines": 84,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261014081317_manual_order_parcel.sql",
+      "language": "sql",
+      "sizeLines": 44,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261014090736_agent_orders_performance.sql",
+      "language": "sql",
+      "sizeLines": 108,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261016120000_erp_sales_crm.sql",
+      "language": "sql",
+      "sizeLines": 1488,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+      "language": "sql",
+      "sizeLines": 895,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261016122000_erp_accounting.sql",
+      "language": "sql",
+      "sizeLines": 1642,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261023204053_own_auth_accounts.sql",
+      "language": "sql",
+      "sizeLines": 127,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261023214627_notifications_from_nestjs.sql",
+      "language": "sql",
+      "sizeLines": 33,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261024134433_plain_postgres_ready.sql",
+      "language": "sql",
+      "sizeLines": 21,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261024160000_objective_prize_tiers.sql",
+      "language": "sql",
+      "sizeLines": 39,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261026150000_colissimo_v2.sql",
+      "language": "sql",
+      "sizeLines": 90,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261028120000_colissimo_history_import.sql",
+      "language": "sql",
+      "sizeLines": 153,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261102120000_edit_order.sql",
+      "language": "sql",
+      "sizeLines": 109,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261104120000_order_traffic_source.sql",
+      "language": "sql",
+      "sizeLines": 6,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261104130000_shop_stock.sql",
+      "language": "sql",
+      "sizeLines": 86,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261104150000_social_comments.sql",
+      "language": "sql",
+      "sizeLines": 116,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261105120000_team_tickets.sql",
+      "language": "sql",
+      "sizeLines": 192,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261105130000_faster_owner_overview.sql",
+      "language": "sql",
+      "sizeLines": 207,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261105131000_orders_open_indexes.sql",
+      "language": "sql",
+      "sizeLines": 9,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261105140000_ticket_comments_and_restore.sql",
+      "language": "sql",
+      "sizeLines": 242,
+      "fileCategory": "data"
+    },
+    {
+      "path": "supabase/migrations/20261105160000_team_ticket_board.sql",
+      "language": "sql",
+      "sizeLines": 8,
+      "fileCategory": "data"
+    },
+    {
+      "path": "tsconfig.json",
+      "language": "json",
+      "sizeLines": 27,
+      "fileCategory": "config"
+    },
+    {
+      "path": "types/product.ts",
+      "language": "typescript",
+      "sizeLines": 118,
+      "fileCategory": "code"
+    },
+    {
+      "path": "types/shims-supabase.d.ts",
+      "language": "typescript",
+      "sizeLines": 3,
+      "fileCategory": "code"
+    },
+    {
+      "path": "vercel.json",
+      "language": "json",
+      "sizeLines": 4,
+      "fileCategory": "config"
+    }
+  ],
+  "totalFiles": 407,
+  "filteredByIgnore": 111,
+  "estimatedComplexity": "large",
+  "importMap": {
+    ".dockerignore": [],
+    ".git-ssh-setup.sh": [],
+    ".gitattributes": [],
+    ".github/scripts/api-changed.mjs": [],
+    ".github/workflows/ci.yml": [],
+    ".github/workflows/deploy.yml": [],
+    ".ua/config.json": [],
+    ".vercelignore": [],
+    "CLAUDE.md": [],
+    "Dockerfile": [],
+    "README.md": [],
+    "api/.env.example": [],
+    "api/Dockerfile": [],
+    "api/Dockerfile.dockerignore": [],
+    "api/README.md": [],
+    "api/eslint.config.mjs": [],
+    "api/nest-cli.json": [],
+    "api/package.json": [],
+    "api/scripts/copy-storage.mjs": [],
+    "api/scripts/db-types.mjs": [],
+    "api/scripts/migrate.mjs": [],
+    "api/src/admin/admin.controllers.ts": [
+      "api/src/admin/goals.ts",
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/embed.ts",
+      "api/src/notifications/notification-events.ts",
+      "api/src/sales/commerce.ts",
+      "lib/admin-auth.ts",
+      "lib/erp/constants.ts",
+      "lib/erp/objectives.ts",
+      "lib/trash-tables.ts"
+    ],
+    "api/src/admin/goals.ts": [
+      "api/src/db/database.ts",
+      "lib/erp/objectives.ts"
+    ],
+    "api/src/admin/public.controllers.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/common/mail.ts",
+      "api/src/db/database.ts",
+      "lib/abandoned-cart-email.ts",
+      "lib/openapi.ts"
+    ],
+    "api/src/admin/team.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/types.ts",
+      "lib/admin-auth.ts"
+    ],
+    "api/src/admin/tickets.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/common/storage.ts",
+      "api/src/db/database.ts",
+      "api/src/files/files.controllers.ts",
+      "api/src/sales/commerce.ts",
+      "lib/erp/constants.ts"
+    ],
+    "api/src/app.module.ts": [
+      "api/src/admin/admin.controllers.ts",
+      "api/src/admin/public.controllers.ts",
+      "api/src/admin/team.controller.ts",
+      "api/src/admin/tickets.controller.ts",
+      "api/src/auth/auth.controller.ts",
+      "api/src/auth/auth.guard.ts",
+      "api/src/catalog/categories.controller.ts",
+      "api/src/catalog/content.controllers.ts",
+      "api/src/catalog/landing.controller.ts",
+      "api/src/catalog/options.controller.ts",
+      "api/src/catalog/product-images.controller.ts",
+      "api/src/catalog/products.controller.ts",
+      "api/src/catalog/variants.controller.ts",
+      "api/src/common/api.ts",
+      "api/src/crm/campaigns.controller.ts",
+      "api/src/crm/crm.controllers.ts",
+      "api/src/crm/meta-webhook.controller.ts",
+      "api/src/db/database.ts",
+      "api/src/files/files.controllers.ts",
+      "api/src/finance/finance.controllers.ts",
+      "api/src/health.controller.ts",
+      "api/src/notifications/notification-events.ts",
+      "api/src/pos/pos.controller.ts",
+      "api/src/purchasing/purchasing.controllers.ts",
+      "api/src/sales/colissimo-portal.controller.ts",
+      "api/src/sales/colissimo-tracking.ts",
+      "api/src/sales/delivery.controller.ts",
+      "api/src/sales/orders.controller.ts",
+      "api/src/sales/sales.controllers.ts",
+      "api/src/stock/stock.controllers.ts",
+      "api/src/storefront/account.controller.ts",
+      "api/src/storefront/storefront.controller.ts"
+    ],
+    "api/src/auth/auth.controller.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/common/mail.ts",
+      "api/src/common/rate-limit.ts",
+      "api/src/config.ts",
+      "api/src/db/database.ts",
+      "api/src/db/types.ts",
+      "lib/auth-session.ts"
+    ],
+    "api/src/auth/auth.guard.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/config.ts",
+      "api/src/db/database.ts",
+      "lib/admin-auth.ts",
+      "lib/api-access.ts",
+      "lib/auth-session.ts"
+    ],
+    "api/src/auth/decorators.ts": [
+      "api/src/auth/auth.guard.ts",
+      "lib/admin-auth.ts"
+    ],
+    "api/src/catalog/categories.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts"
+    ],
+    "api/src/catalog/content.controllers.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts"
+    ],
+    "api/src/catalog/landing.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "lib/landing-config.ts"
+    ],
+    "api/src/catalog/options.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts"
+    ],
+    "api/src/catalog/product-images.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts"
+    ],
+    "api/src/catalog/products.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "lib/stock.ts"
+    ],
+    "api/src/catalog/queries.ts": [
+      "api/src/db/types.ts"
+    ],
+    "api/src/catalog/revalidate.ts": [
+      "api/src/config.ts"
+    ],
+    "api/src/catalog/variants.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/queries.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts"
+    ],
+    "api/src/common/api.ts": [
+      "lib/erp/db-messages.ts"
+    ],
+    "api/src/common/mail.ts": [
+      "api/src/config.ts"
+    ],
+    "api/src/common/rate-limit.ts": [
+      "api/src/common/api.ts"
+    ],
+    "api/src/common/storage.ts": [
+      "api/src/common/api.ts",
+      "api/src/config.ts"
+    ],
+    "api/src/config.ts": [],
+    "api/src/crm/campaigns.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "lib/erp/constants.ts"
+    ],
+    "api/src/crm/crm.controllers.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/embed.ts",
+      "api/src/sales/commerce.ts",
+      "lib/erp/constants.ts",
+      "lib/erp/meta.ts"
+    ],
+    "api/src/crm/meta-webhook.controller.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "lib/erp/meta.ts"
+    ],
+    "api/src/db/database.ts": [
+      "api/src/config.ts",
+      "api/src/db/types.ts"
+    ],
+    "api/src/db/embed.ts": [],
+    "api/src/db/types.ts": [],
+    "api/src/files/files.controllers.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/common/storage.ts",
+      "api/src/db/database.ts",
+      "lib/erp/constants.ts"
+    ],
+    "api/src/finance/finance.controllers.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/embed.ts",
+      "lib/erp/constants.ts"
+    ],
+    "api/src/health.controller.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/db/database.ts"
+    ],
+    "api/src/instrument.ts": [
+      "api/src/config.ts"
+    ],
+    "api/src/main.ts": [
+      "api/src/app.module.ts",
+      "api/src/config.ts",
+      "api/src/instrument.ts"
+    ],
+    "api/src/notifications/notification-events.ts": [
+      "api/src/config.ts",
+      "api/src/db/database.ts"
+    ],
+    "api/src/pos/pos.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/embed.ts",
+      "api/src/sales/commerce.ts",
+      "lib/order-number.ts"
+    ],
+    "api/src/purchasing/purchasing.controllers.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/embed.ts",
+      "lib/erp/constants.ts"
+    ],
+    "api/src/sales/colissimo-portal.controller.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/sales/colissimo-portal.ts"
+    ],
+    "api/src/sales/colissimo-portal.ts": [],
+    "api/src/sales/colissimo-tracking.ts": [
+      "api/src/catalog/revalidate.ts",
+      "api/src/db/database.ts",
+      "lib/colissimo-data.ts",
+      "lib/colissimo.ts"
+    ],
+    "api/src/sales/commerce.ts": [
+      "api/src/db/types.ts"
+    ],
+    "api/src/sales/delivery.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/sales/colissimo-portal.ts",
+      "api/src/sales/colissimo-tracking.ts",
+      "api/src/sales/commerce.ts",
+      "lib/colissimo-data.ts",
+      "lib/colissimo.ts",
+      "lib/erp/constants.ts",
+      "lib/order-number.ts"
+    ],
+    "api/src/sales/orders.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/sales/colissimo-tracking.ts",
+      "api/src/sales/commerce.ts",
+      "lib/colissimo-data.ts",
+      "lib/erp/constants.ts",
+      "lib/order-confirmation-email.ts",
+      "lib/order-number.ts",
+      "lib/order-types.ts"
+    ],
+    "api/src/sales/sales.controllers.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/sales/commerce.ts",
+      "lib/colissimo-data.ts",
+      "lib/erp/constants.ts",
+      "lib/order-number.ts"
+    ],
+    "api/src/stock/stock.controllers.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "lib/stock.ts"
+    ],
+    "api/src/storefront/account.controller.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/embed.ts",
+      "api/src/sales/commerce.ts",
+      "lib/colissimo-data.ts"
+    ],
+    "api/src/storefront/storefront.controller.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/embed.ts",
+      "api/src/sales/commerce.ts",
+      "lib/landing-config.ts",
+      "lib/utils/product-utils.ts"
+    ],
+    "api/test/e2e/auth.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/catalog.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/categories.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/colissimo.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/erp.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/files.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/helpers.mjs": [],
+    "api/test/e2e/objectives.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/stock.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/tickets.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/tsconfig.build.json": [],
+    "api/tsconfig.json": [],
+    "app/[locale]/about/page.tsx": [
+      "lib/config.ts"
+    ],
+    "app/[locale]/auth/page.tsx": [
+      "components/forms/index.ts",
+      "lib/customer-auth.ts",
+      "lib/language-utils.ts",
+      "lib/schemas/auth-schema.ts"
+    ],
+    "app/[locale]/cart/page.tsx": [
+      "components/cart/CartItem.tsx",
+      "components/ui/LoadingSpinner.tsx",
+      "lib/cart-context.tsx",
+      "lib/language-context.tsx",
+      "lib/storefront-api.ts"
+    ],
+    "app/[locale]/categories/[slug]/page.tsx": [
+      "components/products/ProductListCard.tsx",
+      "components/ui/LoadingSpinner.tsx",
+      "lib/categories-cache.ts",
+      "lib/customer-auth.ts",
+      "lib/favorites.ts",
+      "lib/quick-add.ts",
+      "lib/storefront-api.ts",
+      "lib/utils/product-utils.ts"
+    ],
+    "app/[locale]/categories/page.tsx": [
+      "components/ui/LoadingSpinner.tsx",
+      "lib/categories-cache.ts"
+    ],
+    "app/[locale]/checkout/page.tsx": [
+      "components/cart/CartItem.tsx",
+      "components/ui/LoadingSpinner.tsx",
+      "lib/cart-context.tsx",
+      "lib/colissimo-data.ts",
+      "lib/customer-auth.ts",
+      "lib/language-context.tsx",
+      "lib/language-utils.ts",
+      "lib/orders.ts",
+      "lib/schemas/checkout-schema.ts",
+      "lib/storefront-api.ts"
+    ],
+    "app/[locale]/contact/page.tsx": [
+      "components/forms/index.ts",
+      "lib/config.ts"
+    ],
+    "app/[locale]/layout.tsx": [
+      "components/cart/CartDrawer.tsx",
+      "components/footer/Footer.tsx",
+      "components/layout/MobileTabBar.tsx",
+      "components/layout/StaticHeader.tsx",
+      "components/layout/TrafficSource.tsx",
+      "lib/cart-context.tsx",
+      "lib/language-context.tsx",
+      "lib/language-utils.ts"
+    ],
+    "app/[locale]/not-found.tsx": [
+      "lib/config.ts"
+    ],
+    "app/[locale]/order-confirmation/page.tsx": [
+      "lib/config.ts",
+      "lib/language-context.tsx"
+    ],
+    "app/[locale]/page.tsx": [
+      "components/landing/CollectionSpotlight.tsx",
+      "components/landing/HowToOrder.tsx",
+      "components/landing/NewArrivals.tsx",
+      "components/landing/ProductShowcase.tsx",
+      "components/products/ProductGrid.tsx",
+      "components/products/PromoProducts.tsx",
+      "components/products/TopProducts.tsx",
+      "components/reviews/CustomerFeedback.tsx",
+      "components/sections/FAQ.tsx",
+      "components/sections/HeroSection.tsx",
+      "components/sections/Reels.tsx",
+      "components/sections/SaleBanner.tsx",
+      "components/services/ServiceHighlights.tsx",
+      "components/ui/ErrorBoundary.tsx",
+      "components/ui/LoadingSpinner.tsx",
+      "lib/catalog-cache.ts",
+      "lib/config.ts",
+      "lib/home-data.ts",
+      "lib/landing-config.ts",
+      "lib/landing-products.ts",
+      "lib/storefront-api.ts"
+    ],
+    "app/[locale]/privacy/page.tsx": [
+      "components/sections/TermsSection.tsx"
+    ],
+    "app/[locale]/products/[slug]/ProductDetailClient.tsx": [
+      "components/cart/AddToCartButton.tsx",
+      "components/forms/index.ts",
+      "components/ui/ImageLightbox.tsx",
+      "components/ui/LoadingSpinner.tsx",
+      "lib/categories-cache.ts",
+      "lib/config.ts",
+      "lib/customer-auth.ts",
+      "lib/fonts.ts",
+      "lib/language-utils.ts",
+      "lib/product-detail.ts",
+      "lib/storefront-api.ts",
+      "lib/utils/product-utils.ts"
+    ],
+    "app/[locale]/products/[slug]/page.tsx": [
+      "app/[locale]/products/[slug]/ProductDetailClient.tsx",
+      "lib/catalog-cache.ts",
+      "lib/get-site-settings.ts",
+      "lib/storefront-api.ts",
+      "lib/utils/product-utils.ts"
+    ],
+    "app/[locale]/products/page.tsx": [
+      "components/products/ProductListCard.tsx",
+      "components/ui/LoadingSpinner.tsx",
+      "lib/categories-cache.ts",
+      "lib/customer-auth.ts",
+      "lib/favorites.ts",
+      "lib/language-utils.ts",
+      "lib/quick-add.ts",
+      "lib/storefront-api.ts",
+      "lib/utils/product-utils.ts"
+    ],
+    "app/[locale]/settings/README.md": [],
+    "app/[locale]/settings/layout.tsx": [
+      "lib/config.ts"
+    ],
+    "app/[locale]/settings/page.tsx": [
+      "components/forms/index.ts",
+      "components/products/ProductListCard.tsx",
+      "components/ui/OrderTracking.tsx",
+      "lib/customer-auth.ts",
+      "lib/favorites.ts",
+      "lib/orders.ts",
+      "lib/quick-add.ts"
+    ],
+    "app/[locale]/shipping/page.tsx": [
+      "components/sections/TermsSection.tsx",
+      "lib/config.ts"
+    ],
+    "app/[locale]/terms-and-conditions/page.tsx": [
+      "components/sections/TermsSection.tsx",
+      "lib/config.ts"
+    ],
+    "app/admin/activity/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/select-search.ts",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/cart-analytics/page.tsx": [
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/categories/[id]/edit/page.tsx": [
+      "components/admin/CategoryExtraFields.tsx",
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/categories/new/page.tsx": [
+      "components/admin/CategoryExtraFields.tsx",
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/categories/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/colissimo-account/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/DeliveryStatusTag.tsx",
+      "components/admin/delivery/ParcelHistoryDrawer.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "components/admin/erp/charts.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/colissimo-data.ts"
+    ],
+    "app/admin/customers/[id]/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "components/admin/order-status.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/colissimo-data.ts",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/customers/comments/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/customers/inbox/page.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/customers/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/colissimo-data.ts",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/dashboard/page.tsx": [
+      "components/admin/erp/QuickLinks.tsx",
+      "components/admin/stock/StockOverview.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/delivery/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/DeliveryStatusTag.tsx",
+      "components/admin/delivery/EditParcelModal.tsx",
+      "components/admin/delivery/ParcelHistoryDrawer.tsx",
+      "components/admin/delivery/ParcelLookup.tsx",
+      "components/admin/delivery/SendParcelModal.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/colissimo-data.ts"
+    ],
+    "app/admin/delivery/print/page.tsx": [
+      "components/admin/delivery/delivery-api.ts",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/finance/accounting/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/finance/bills/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/finance/documents/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/finance/invoices/[id]/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/finance/invoices/page.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/finance/payments/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/finance/treasury/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/goals/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/charts.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/landing/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/select-search.ts",
+      "lib/admin-i18n.tsx",
+      "lib/landing-config.ts"
+    ],
+    "app/admin/layout.tsx": [
+      "components/admin/AdminLanguageSwitcher.tsx",
+      "components/admin/NotificationBell.tsx",
+      "components/admin/admin-fetch-cache.ts",
+      "components/admin/antd-app.tsx",
+      "components/admin/mobile-table-labels.ts",
+      "lib/admin-auth.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/antd-config.ts"
+    ],
+    "app/admin/loading.tsx": [],
+    "app/admin/login/page.tsx": [
+      "components/admin/AdminLanguageSwitcher.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/customer-auth.ts"
+    ],
+    "app/admin/marketing/campaigns/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/my-work/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/MonthGoalCard.tsx",
+      "components/admin/erp/charts.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "components/admin/order-status.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/notifications/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/notification-item.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/orders/[id]/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/OrderDeliveryCard.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "components/admin/erp/EditOrderModal.tsx",
+      "components/admin/erp/OrderPaymentsCard.tsx",
+      "components/admin/erp/OrderPipelineCard.tsx",
+      "components/admin/order-status.ts",
+      "lib/admin-i18n.tsx",
+      "lib/traffic-source.ts"
+    ],
+    "app/admin/orders/new/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/ParcelProducts.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "components/admin/order-status.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/colissimo-data.ts",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/orders/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/DeliveryStatusTag.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "components/admin/order-status.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/erp/constants.ts",
+      "lib/traffic-source.ts"
+    ],
+    "app/admin/overview/page.tsx": [
+      "components/admin/erp/MonthGoalCard.tsx",
+      "components/admin/erp/charts.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/performance/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/pos/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "components/admin/order-status.ts",
+      "components/admin/pos/PosAnalyticsTab.tsx",
+      "components/admin/pos/PosStockTab.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/pos/receipt/[id]/page.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/pos/sessions/page.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/products/[id]/edit/page.tsx": [
+      "components/admin/ProductStockFields.tsx",
+      "components/admin/ProductTranslationFields.tsx",
+      "components/admin/antd-app.tsx",
+      "components/admin/select-search.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/products/new/page.tsx": [
+      "components/admin/ProductStockFields.tsx",
+      "components/admin/ProductTranslationFields.tsx",
+      "components/admin/antd-app.tsx",
+      "components/admin/select-search.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/products/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/promotions/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/purchasing/[id]/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/purchase-items.ts",
+      "components/admin/erp/ui.tsx",
+      "components/admin/select-search.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/purchasing/materials/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "components/admin/select-search.ts",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/purchasing/page.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/purchasing/prices/page.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/purchasing/suppliers/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/reels/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/sale-banners/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/settings/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/stock/movements/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/stock.ts"
+    ],
+    "app/admin/stock/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/stock/MovementModal.tsx",
+      "components/admin/stock/ProductVariantsPanel.tsx",
+      "components/admin/stock/VariantThumb.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/stock.ts"
+    ],
+    "app/admin/stock/restock/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/stock/MovementModal.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/stock.ts"
+    ],
+    "app/admin/stock/settings/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/team/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-auth.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/tickets/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/trash/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/trash-tables.ts"
+    ],
+    "app/admin/variants/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/api-docs/page.tsx": [],
+    "app/api/internal/revalidate/route.ts": [
+      "lib/catalog-cache.ts"
+    ],
+    "app/global-error.tsx": [],
+    "app/globals.css": [],
+    "app/layout.tsx": [
+      "app/globals.css"
+    ],
+    "app/manifest.ts": [],
+    "app/not-found.tsx": [
+      "components/footer/Footer.tsx",
+      "components/layout/StaticHeader.tsx",
+      "lib/config.ts",
+      "lib/language-utils.ts"
+    ],
+    "app/page.tsx": [
+      "lib/language-utils.ts"
+    ],
+    "app/robots.ts": [],
+    "app/sitemap.ts": [],
+    "components/admin/AdminLanguageSwitcher.tsx": [
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/CategoryExtraFields.tsx": [
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/ImageUpload.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/MultiImageUpload.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/NotificationBell.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/desktop-push.ts",
+      "components/admin/notification-item.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "components/admin/ProductStockFields.tsx": [
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "components/admin/ProductTranslationFields.tsx": [
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/admin-fetch-cache.ts": [],
+    "components/admin/antd-app.tsx": [],
+    "components/admin/delivery/DeliveryStatusTag.tsx": [
+      "components/admin/delivery/delivery-api.ts",
+      "lib/admin-i18n.tsx",
+      "lib/colissimo-data.ts"
+    ],
+    "components/admin/delivery/EditParcelModal.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "lib/admin-i18n.tsx",
+      "lib/colissimo-data.ts"
+    ],
+    "components/admin/delivery/OrderDeliveryCard.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/DeliveryStatusTag.tsx",
+      "components/admin/delivery/EditParcelModal.tsx",
+      "components/admin/delivery/SendParcelModal.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "components/admin/delivery/ParcelHistoryDrawer.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/delivery/ParcelLookup.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/DeliveryStatusTag.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/delivery/ParcelProducts.tsx": [
+      "components/admin/delivery/delivery-api.ts",
+      "components/admin/select-search.ts",
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/delivery/SendParcelModal.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/ParcelProducts.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "components/admin/erp/erp-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/colissimo-data.ts"
+    ],
+    "components/admin/delivery/delivery-api.ts": [
+      "lib/colissimo-data.ts"
+    ],
+    "components/admin/desktop-push.ts": [],
+    "components/admin/erp/EditOrderModal.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/ParcelProducts.tsx",
+      "components/admin/erp/erp-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/colissimo-data.ts"
+    ],
+    "components/admin/erp/MonthGoalCard.tsx": [
+      "components/admin/erp/charts.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "components/admin/erp/OrderPaymentsCard.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/order-status.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "components/admin/erp/OrderPipelineCard.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "components/admin/erp/QuickLinks.tsx": [
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "components/admin/erp/charts.tsx": [],
+    "components/admin/erp/erp-client.ts": [],
+    "components/admin/erp/purchase-items.ts": [
+      "components/admin/erp/erp-client.ts"
+    ],
+    "components/admin/erp/ui.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "components/admin/mobile-table-labels.ts": [],
+    "components/admin/notification-item.tsx": [
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/order-status.ts": [
+      "components/admin/delivery/delivery-api.ts"
+    ],
+    "components/admin/pos/PosAnalyticsTab.tsx": [
+      "components/admin/erp/charts.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "components/admin/pos/PosStockTab.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "components/admin/select-search.ts": [],
+    "components/admin/stock/MovementChart.tsx": [
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/stock/MovementModal.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/select-search.ts",
+      "components/admin/stock/VariantThumb.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/stock.ts"
+    ],
+    "components/admin/stock/ProductVariantsPanel.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/stock/VariantThumb.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/stock.ts"
+    ],
+    "components/admin/stock/StockOverview.tsx": [
+      "components/admin/stock/MovementChart.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/stock.ts"
+    ],
+    "components/admin/stock/VariantThumb.tsx": [],
+    "components/admin/stock/stock-client.ts": [
+      "lib/stock.ts"
+    ],
+    "components/carousel/CarouselIndicators.tsx": [],
+    "components/carousel/CarouselNavigation.tsx": [],
+    "components/carousel/index.ts": [],
+    "components/cart/AddToCartButton.tsx": [
+      "lib/cart-context.tsx",
+      "lib/language-context.tsx"
+    ],
+    "components/cart/CartButton.tsx": [
+      "lib/cart-context.tsx"
+    ],
+    "components/cart/CartDrawer.tsx": [
+      "components/cart/CartItem.tsx",
+      "lib/cart-context.tsx",
+      "lib/language-context.tsx",
+      "lib/language-utils.ts"
+    ],
+    "components/cart/CartItem.tsx": [
+      "lib/cart-context.tsx",
+      "lib/config.ts",
+      "lib/language-context.tsx"
+    ],
+    "components/cart/index.ts": [],
+    "components/footer/Footer.tsx": [
+      "components/footer/FooterSection.tsx",
+      "components/sections/NewsletterForm.tsx",
+      "components/sections/SocialLinks.tsx",
+      "lib/config.ts",
+      "lib/footer-config.ts",
+      "lib/language-context.tsx"
+    ],
+    "components/footer/FooterSection.tsx": [
+      "lib/footer-config.ts"
+    ],
+    "components/footer/index.ts": [],
+    "components/forms/FormInput.tsx": [],
+    "components/forms/FormSelect.tsx": [],
+    "components/forms/FormTextarea.tsx": [],
+    "components/forms/README.md": [],
+    "components/forms/index.ts": [],
+    "components/landing/CollectionSpotlight.tsx": [
+      "components/landing/LandingProductCard.tsx",
+      "lib/fonts.ts",
+      "lib/landing-products.ts",
+      "lib/language-utils.ts"
+    ],
+    "components/landing/HowToOrder.tsx": [
+      "lib/config.ts",
+      "lib/fonts.ts",
+      "lib/language-utils.ts"
+    ],
+    "components/landing/LandingProductCard.tsx": [
+      "lib/landing-products.ts"
+    ],
+    "components/landing/NewArrivals.tsx": [
+      "components/landing/LandingProductCard.tsx",
+      "lib/fonts.ts",
+      "lib/landing-products.ts",
+      "lib/language-utils.ts"
+    ],
+    "components/landing/ProductRing3D.tsx": [
+      "components/landing/ring-scene.ts",
+      "lib/landing-products.ts"
+    ],
+    "components/landing/ProductShowcase.tsx": [
+      "components/landing/ProductRing3D.tsx",
+      "lib/fonts.ts",
+      "lib/landing-products.ts",
+      "lib/language-utils.ts"
+    ],
+    "components/landing/ring-scene.ts": [],
+    "components/layout/MobileHeader.tsx": [
+      "components/layout/SearchBox.tsx",
+      "lib/config.ts",
+      "lib/customer-auth.ts"
+    ],
+    "components/layout/MobileTabBar.tsx": [
+      "lib/cart-context.tsx",
+      "lib/customer-auth.ts"
+    ],
+    "components/layout/SearchBox.tsx": [
+      "lib/product-search.ts",
+      "lib/storefront-api.ts",
+      "lib/utils/product-utils.ts"
+    ],
+    "components/layout/StaticHeader.tsx": [
+      "components/cart/CartButton.tsx",
+      "components/layout/MobileHeader.tsx",
+      "components/layout/SearchBox.tsx",
+      "lib/categories-cache.ts",
+      "lib/config.ts",
+      "lib/customer-auth.ts",
+      "lib/language-context.tsx",
+      "lib/language-utils.ts"
+    ],
+    "components/layout/TrafficSource.tsx": [
+      "lib/traffic-source.ts"
+    ],
+    "components/layout/index.ts": [],
+    "components/products/ProductGrid.tsx": [
+      "lib/categories-cache.ts"
+    ],
+    "components/products/ProductListCard.tsx": [
+      "lib/config.ts"
+    ],
+    "components/products/PromoProductCard.tsx": [
+      "components/cart/AddToCartButton.tsx",
+      "components/timers/PromoCountdownTimer.tsx",
+      "components/ui/StockProgress.tsx",
+      "lib/quick-add.ts",
+      "lib/utils/product-utils.ts",
+      "types/product.ts"
+    ],
+    "components/products/PromoProducts.tsx": [
+      "components/products/PromoProductCard.tsx",
+      "types/product.ts"
+    ],
+    "components/products/TopProducts.tsx": [
+      "components/products/ProductListCard.tsx",
+      "lib/customer-auth.ts",
+      "lib/favorites.ts",
+      "lib/product-images.ts",
+      "lib/quick-add.ts"
+    ],
+    "components/products/index.ts": [],
+    "components/reviews/CustomerFeedback.tsx": [
+      "components/carousel/CarouselIndicators.tsx",
+      "components/carousel/CarouselNavigation.tsx",
+      "components/reviews/ReviewCard.tsx",
+      "components/services/ServiceHighlightCard.tsx",
+      "components/ui/SectionHeader.tsx",
+      "hooks/useCarousel.ts",
+      "lib/service-highlights.ts",
+      "lib/storefront-api.ts"
+    ],
+    "components/reviews/ReviewCard.tsx": [],
+    "components/reviews/index.ts": [],
+    "components/sections/FAQ.tsx": [
+      "components/ui/SectionHeader.tsx",
+      "lib/language-utils.ts"
+    ],
+    "components/sections/HeroSection.tsx": [
+      "lib/language-utils.ts"
+    ],
+    "components/sections/NewsletterForm.tsx": [],
+    "components/sections/Reels.tsx": [],
+    "components/sections/SaleBanner.tsx": [
+      "components/timers/CountdownTimer.tsx",
+      "lib/storefront-api.ts"
+    ],
+    "components/sections/SocialLinks.tsx": [
+      "lib/config.ts"
+    ],
+    "components/sections/TermsSection.tsx": [],
+    "components/sections/index.ts": [],
+    "components/services/ServiceHighlightCard.tsx": [],
+    "components/services/ServiceHighlights.tsx": [
+      "hooks/useCarousel.ts"
+    ],
+    "components/services/index.ts": [],
+    "components/timers/CountdownTimer.tsx": [],
+    "components/timers/PromoCountdownTimer.tsx": [],
+    "components/timers/index.ts": [],
+    "components/ui/ErrorBoundary.tsx": [],
+    "components/ui/ImageLightbox.tsx": [],
+    "components/ui/LoadingSpinner.tsx": [],
+    "components/ui/OrderTracking.tsx": [
+      "lib/colissimo-data.ts",
+      "lib/language-utils.ts"
+    ],
+    "components/ui/SectionHeader.tsx": [],
+    "components/ui/StockProgress.tsx": [],
+    "components/ui/index.ts": [],
+    "deploy/.env.example": [],
+    "deploy/backup.sh": [],
+    "deploy/deploy.sh": [],
+    "deploy/docker-compose.prod.yml": [],
+    "docker-compose.yml": [],
+    "docs/DEPLOY.md": [],
+    "docs/DOCKER.md": [],
+    "docs/META.md": [],
+    "docs/MIGRATION-NESTJS-TASKS.md": [],
+    "docs/MIGRATION-NESTJS.md": [],
+    "eslint.config.mjs": [],
+    "hooks/useCarousel.ts": [],
+    "infra/terraform/.terraform.lock.hcl": [],
+    "infra/terraform/aws.tf": [],
+    "infra/terraform/backend.hcl.example": [],
+    "infra/terraform/cloud-init.yaml": [],
+    "infra/terraform/outputs.tf": [],
+    "infra/terraform/terraform.tfvars.example": [],
+    "infra/terraform/variables.tf": [],
+    "infra/terraform/versions.tf": [],
+    "instrumentation-client.ts": [
+      "lib/sentry-options.ts"
+    ],
+    "instrumentation.ts": [],
+    "lib/abandoned-cart-email.ts": [],
+    "lib/admin-auth.ts": [],
+    "lib/admin-i18n.tsx": [
+      "lib/admin-translations.ts"
+    ],
+    "lib/admin-role-context.tsx": [
+      "lib/admin-auth.ts"
+    ],
+    "lib/admin-translations-erp.ts": [],
+    "lib/admin-translations.ts": [
+      "lib/admin-translations-erp.ts"
+    ],
+    "lib/antd-config.ts": [],
+    "lib/api-access.ts": [
+      "lib/admin-auth.ts",
+      "lib/trash-tables.ts"
+    ],
+    "lib/app-env.ts": [],
+    "lib/auth-session.ts": [],
+    "lib/cart-context.tsx": [],
+    "lib/catalog-cache.ts": [
+      "lib/product-detail.ts"
+    ],
+    "lib/categories-cache.ts": [],
+    "lib/colissimo-data.ts": [],
+    "lib/colissimo.ts": [
+      "lib/colissimo-data.ts"
+    ],
+    "lib/config.ts": [],
+    "lib/customer-auth.ts": [],
+    "lib/erp/constants.ts": [],
+    "lib/erp/db-messages.ts": [
+      "lib/stock.ts"
+    ],
+    "lib/erp/meta.ts": [],
+    "lib/erp/objectives.ts": [],
+    "lib/favorites.ts": [
+      "lib/customer-auth.ts",
+      "lib/product-images.ts"
+    ],
+    "lib/fonts.ts": [],
+    "lib/footer-config.ts": [],
+    "lib/get-site-settings.ts": [],
+    "lib/home-data.ts": [
+      "lib/catalog-cache.ts",
+      "lib/storefront-api.ts"
+    ],
+    "lib/landing-config.ts": [],
+    "lib/landing-products.ts": [],
+    "lib/language-context.tsx": [],
+    "lib/language-utils.ts": [],
+    "lib/openapi-erp.ts": [],
+    "lib/openapi.ts": [
+      "lib/admin-auth.ts",
+      "lib/openapi-erp.ts"
+    ],
+    "lib/order-confirmation-email.ts": [
+      "lib/config.ts",
+      "lib/order-types.ts"
+    ],
+    "lib/order-number.ts": [],
+    "lib/order-types.ts": [],
+    "lib/orders.ts": [
+      "lib/cart-context.tsx",
+      "lib/order-types.ts",
+      "lib/traffic-source.ts"
+    ],
+    "lib/product-detail.ts": [
+      "lib/storefront-api.ts"
+    ],
+    "lib/product-images.ts": [],
+    "lib/product-search.ts": [],
+    "lib/quick-add.ts": [
+      "lib/cart-context.tsx",
+      "lib/language-context.tsx",
+      "lib/storefront-api.ts"
+    ],
+    "lib/report-error.ts": [],
+    "lib/schemas/auth-schema.ts": [],
+    "lib/schemas/checkout-schema.ts": [
+      "lib/colissimo-data.ts"
+    ],
+    "lib/sentry-options.ts": [
+      "lib/app-env.ts"
+    ],
+    "lib/service-highlights.ts": [
+      "lib/config.ts"
+    ],
+    "lib/stock.ts": [],
+    "lib/storefront-api.ts": [],
+    "lib/traffic-source.ts": [],
+    "lib/trash-tables.ts": [
+      "lib/admin-auth.ts"
+    ],
+    "lib/utils/product-utils.ts": [],
+    "messages/en/Settings.json": [],
+    "middleware.ts": [
+      "lib/admin-auth.ts",
+      "lib/auth-session.ts",
+      "lib/language-utils.ts"
+    ],
+    "netlify.toml": [],
+    "next.config.ts": [],
+    "package.json": [],
+    "postcss.config.mjs": [],
+    "public/admin-sw.js": [],
+    "scripts/db/move-database.mjs": [],
+    "scripts/docker/colissimo-mock.mjs": [],
+    "scripts/docker/create-admin.mjs": [],
+    "scripts/docker/env.mjs": [],
+    "scripts/docker/import-database.mjs": [],
+    "scripts/docker/meta-webhook-test.mjs": [],
+    "scripts/find-unused-code.sh": [],
+    "scripts/import-woocommerce.mjs": [],
+    "scripts/import/colors.json": [],
+    "scripts/import/descriptions.json": [],
+    "scripts/import/old-colissimo.mjs": [],
+    "scripts/import/translations.json": [],
+    "scripts/run-next.mjs": [],
+    "sentry.edge.config.ts": [
+      "lib/sentry-options.ts"
+    ],
+    "sentry.server.config.ts": [
+      "lib/sentry-options.ts"
+    ],
+    "skills-lock.json": [],
+    "supabase/.temp/gotrue-version": [],
+    "supabase/.temp/linked-project.json": [],
+    "supabase/.temp/pooler-url": [],
+    "supabase/.temp/postgres-version": [],
+    "supabase/.temp/project-ref": [],
+    "supabase/.temp/rest-version": [],
+    "supabase/.temp/storage-migration": [],
+    "supabase/.temp/storage-version": [],
+    "supabase/migrations/20260928135357_rebuild_storefront_schema.sql": [],
+    "supabase/migrations/20260928141343_seed_tunisia_shipping_rate.sql": [],
+    "supabase/migrations/20260928164330_category_hierarchy.sql": [],
+    "supabase/migrations/20260928183053_customer_accounts.sql": [],
+    "supabase/migrations/20261001112501_stock_management.sql": [],
+    "supabase/migrations/20261001130516_stock_trigger_privileges.sql": [],
+    "supabase/migrations/20261001170000_transactional_writes.sql": [],
+    "supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql": [],
+    "supabase/migrations/20261002084321_landing_config_and_activity_log.sql": [],
+    "supabase/migrations/20261002090113_permanent_deletes.sql": [],
+    "supabase/migrations/20261004085227_product_search.sql": [],
+    "supabase/migrations/20261004092308_notifications_and_owner_alerts.sql": [],
+    "supabase/migrations/20261004120000_update_delivery_fee_to_8.sql": [],
+    "supabase/migrations/20261005145858_made_to_order_stock.sql": [],
+    "supabase/migrations/20261006142809_colissimo_deliveries.sql": [],
+    "supabase/migrations/20261007104019_delivery_on_validation.sql": [],
+    "supabase/migrations/20261014081317_manual_order_parcel.sql": [],
+    "supabase/migrations/20261014090736_agent_orders_performance.sql": [],
+    "supabase/migrations/20261016120000_erp_sales_crm.sql": [],
+    "supabase/migrations/20261016121000_erp_purchasing_pos.sql": [],
+    "supabase/migrations/20261016122000_erp_accounting.sql": [],
+    "supabase/migrations/20261023204053_own_auth_accounts.sql": [],
+    "supabase/migrations/20261023214627_notifications_from_nestjs.sql": [],
+    "supabase/migrations/20261024134433_plain_postgres_ready.sql": [],
+    "supabase/migrations/20261024160000_objective_prize_tiers.sql": [],
+    "supabase/migrations/20261026150000_colissimo_v2.sql": [],
+    "supabase/migrations/20261028120000_colissimo_history_import.sql": [],
+    "supabase/migrations/20261102120000_edit_order.sql": [],
+    "supabase/migrations/20261104120000_order_traffic_source.sql": [],
+    "supabase/migrations/20261104130000_shop_stock.sql": [],
+    "supabase/migrations/20261104150000_social_comments.sql": [],
+    "supabase/migrations/20261105120000_team_tickets.sql": [],
+    "supabase/migrations/20261105130000_faster_owner_overview.sql": [],
+    "supabase/migrations/20261105131000_orders_open_indexes.sql": [],
+    "supabase/migrations/20261105140000_ticket_comments_and_restore.sql": [],
+    "supabase/migrations/20261105160000_team_ticket_board.sql": [],
+    "tsconfig.json": [],
+    "types/product.ts": [],
+    "types/shims-supabase.d.ts": [],
+    "vercel.json": []
+  }
+}

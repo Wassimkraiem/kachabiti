@@ -1,0 +1,6677 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 28,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 28,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 28,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "components/admin/antd-app.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 50,
+      "nonEmptyLines": 44,
+      "functions": [
+        {
+          "name": "AntdAppBridge",
+          "startLine": 24,
+          "endLine": 34,
+          "params": []
+        },
+        {
+          "name": "call",
+          "startLine": 36,
+          "endLine": 42,
+          "params": [
+            "method"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AntdAppBridge",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "message",
+          "line": 44,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AntdAppBridge",
+          "callee": "App.useApp",
+          "lineNumber": 25
+        },
+        {
+          "caller": "AntdAppBridge",
+          "callee": "useEffect",
+          "lineNumber": 27
+        },
+        {
+          "caller": "AntdAppBridge",
+          "callee": "(instance[method] as (...a: typeof args) => unknown)",
+          "lineNumber": 31
+        },
+        {
+          "caller": "call",
+          "callee": "(instance[method] as (...a: typeof args) => unknown)",
+          "lineNumber": 39
+        },
+        {
+          "caller": "call",
+          "callee": "(store.__adminMessageQueue ??= []).push",
+          "lineNumber": 40
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/delivery/DeliveryStatusTag.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 42,
+      "functions": [
+        {
+          "name": "ParcelBadges",
+          "startLine": 12,
+          "endLine": 33,
+          "params": [
+            "{ delivery }"
+          ]
+        },
+        {
+          "name": "DeliveryStatusTag",
+          "startLine": 36,
+          "endLine": 45,
+          "params": [
+            "{ status, reason }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ParcelBadges",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "DeliveryStatusTag",
+          "line": 36,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ParcelBadges",
+          "callee": "useAdminT",
+          "lineNumber": 13
+        },
+        {
+          "caller": "ParcelBadges",
+          "callee": "statusInfo",
+          "lineNumber": 14
+        },
+        {
+          "caller": "ParcelBadges",
+          "callee": "[t(\"What the driver reported, before Colissimo confirms it\"), delivery.driver_reason].filter(Boolean).join",
+          "lineNumber": 19
+        },
+        {
+          "caller": "ParcelBadges",
+          "callee": "[t(\"What the driver reported, before Colissimo confirms it\"), delivery.driver_reason].filter",
+          "lineNumber": 19
+        },
+        {
+          "caller": "ParcelBadges",
+          "callee": "t",
+          "lineNumber": 19
+        },
+        {
+          "caller": "ParcelBadges",
+          "callee": "t",
+          "lineNumber": 20
+        },
+        {
+          "caller": "ParcelBadges",
+          "callee": "t",
+          "lineNumber": 20
+        },
+        {
+          "caller": "ParcelBadges",
+          "callee": "t",
+          "lineNumber": 23
+        },
+        {
+          "caller": "ParcelBadges",
+          "callee": "t",
+          "lineNumber": 27
+        },
+        {
+          "caller": "DeliveryStatusTag",
+          "callee": "useAdminT",
+          "lineNumber": 37
+        },
+        {
+          "caller": "DeliveryStatusTag",
+          "callee": "statusInfo",
+          "lineNumber": 38
+        },
+        {
+          "caller": "DeliveryStatusTag",
+          "callee": "[status !== \"sending\" ? `Colissimo: ${status}` : null, reason].filter(Boolean).join",
+          "lineNumber": 39
+        },
+        {
+          "caller": "DeliveryStatusTag",
+          "callee": "[status !== \"sending\" ? `Colissimo: ${status}` : null, reason].filter",
+          "lineNumber": 39
+        },
+        {
+          "caller": "DeliveryStatusTag",
+          "callee": "t",
+          "lineNumber": 42
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/delivery/EditParcelModal.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 167,
+      "nonEmptyLines": 159,
+      "functions": [
+        {
+          "name": "EditParcelModal",
+          "startLine": 30,
+          "endLine": 167,
+          "params": [
+            "{ delivery, onClose, onSaved }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "EditParcelModal",
+          "line": 30,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "EditParcelModal",
+          "callee": "useAdminT",
+          "lineNumber": 35
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "Form.useForm",
+          "lineNumber": 36
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "useState",
+          "lineNumber": 37
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "canEditParcel",
+          "lineNumber": 38
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "useEffect",
+          "lineNumber": 40
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "form.setFieldsValue",
+          "lineNumber": 42
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "Number",
+          "lineNumber": 50
+        },
+        {
+          "caller": "save",
+          "callee": "form.validateFields",
+          "lineNumber": 57
+        },
+        {
+          "caller": "save",
+          "callee": "setSaving",
+          "lineNumber": 58
+        },
+        {
+          "caller": "save",
+          "callee": "Number",
+          "lineNumber": 64
+        },
+        {
+          "caller": "save",
+          "callee": "Object.fromEntries",
+          "lineNumber": 66
+        },
+        {
+          "caller": "save",
+          "callee": "([\"nom\", \"tel\", \"tel2\", \"gouvernerat\", \"ville\", \"adresse\", \"designation\", \"nb_article\", \"prix\"] as const)\r\n                        .filter((key) => values[key] !== undefined && values[key] !== \"\" && values[key] !== before[key])\r\n                        .map",
+          "lineNumber": 67
+        },
+        {
+          "caller": "save",
+          "callee": "([\"nom\", \"tel\", \"tel2\", \"gouvernerat\", \"ville\", \"adresse\", \"designation\", \"nb_article\", \"prix\"] as const)\r\n                        .filter",
+          "lineNumber": 67
+        },
+        {
+          "caller": "save",
+          "callee": "Object.keys",
+          "lineNumber": 71
+        },
+        {
+          "caller": "save",
+          "callee": "message.info",
+          "lineNumber": 72
+        },
+        {
+          "caller": "save",
+          "callee": "t",
+          "lineNumber": 72
+        },
+        {
+          "caller": "save",
+          "callee": "onClose",
+          "lineNumber": 73
+        },
+        {
+          "caller": "save",
+          "callee": "await deliveryApi",
+          "lineNumber": 76
+        },
+        {
+          "caller": "save",
+          "callee": "message.success",
+          "lineNumber": 77
+        },
+        {
+          "caller": "save",
+          "callee": "t",
+          "lineNumber": 77
+        },
+        {
+          "caller": "save",
+          "callee": "message.success",
+          "lineNumber": 78
+        },
+        {
+          "caller": "save",
+          "callee": "t",
+          "lineNumber": 78
+        },
+        {
+          "caller": "save",
+          "callee": "t",
+          "lineNumber": 78
+        },
+        {
+          "caller": "save",
+          "callee": "deliveryApi",
+          "lineNumber": 80
+        },
+        {
+          "caller": "save",
+          "callee": "message.success",
+          "lineNumber": 81
+        },
+        {
+          "caller": "save",
+          "callee": "t",
+          "lineNumber": 81
+        },
+        {
+          "caller": "save",
+          "callee": "onSaved",
+          "lineNumber": 83
+        },
+        {
+          "caller": "save",
+          "callee": "message.error",
+          "lineNumber": 85
+        },
+        {
+          "caller": "save",
+          "callee": "setSaving",
+          "lineNumber": 87
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 91
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 97
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 97
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 98
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 98
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 99
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 108
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 115
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 116
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 122
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 122
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 126
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 126
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 129
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 134
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 134
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "COLISSIMO_GOVERNORATES.map",
+          "lineNumber": 135
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 137
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 137
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 141
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 141
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 144
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 144
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 151
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 151
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 155
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 155
+        },
+        {
+          "caller": "EditParcelModal",
+          "callee": "t",
+          "lineNumber": 160
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/delivery/OrderDeliveryCard.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 221,
+      "nonEmptyLines": 206,
+      "functions": [
+        {
+          "name": "OrderDeliveryCard",
+          "startLine": 29,
+          "endLine": 221,
+          "params": [
+            "{ order, orderStatus, onOrderChanged, reloadSignal = 0, openSendSignal = 0 }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "OrderDeliveryCard",
+          "line": 29,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "useAdminT",
+          "lineNumber": 38
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "useAdminRole().can",
+          "lineNumber": 39
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "useAdminRole",
+          "lineNumber": 39
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "useState",
+          "lineNumber": 40
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "useState",
+          "lineNumber": 41
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "useState",
+          "lineNumber": 42
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "useState",
+          "lineNumber": 43
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "useState",
+          "lineNumber": 44
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "useState",
+          "lineNumber": 45
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "useCallback",
+          "lineNumber": 47
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "setList",
+          "lineNumber": 49
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "await deliveryApi",
+          "lineNumber": 49
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "message.error",
+          "lineNumber": 51
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "useEffect",
+          "lineNumber": 55
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "load",
+          "lineNumber": 56
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "useEffect",
+          "lineNumber": 59
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "setSendOpen",
+          "lineNumber": 60
+        },
+        {
+          "caller": "refresh",
+          "callee": "setBusy",
+          "lineNumber": 67
+        },
+        {
+          "caller": "refresh",
+          "callee": "await deliveryApi",
+          "lineNumber": 69
+        },
+        {
+          "caller": "refresh",
+          "callee": "message.error",
+          "lineNumber": 70
+        },
+        {
+          "caller": "refresh",
+          "callee": "message.success",
+          "lineNumber": 71
+        },
+        {
+          "caller": "refresh",
+          "callee": "t",
+          "lineNumber": 71
+        },
+        {
+          "caller": "refresh",
+          "callee": "t",
+          "lineNumber": 71
+        },
+        {
+          "caller": "refresh",
+          "callee": "load",
+          "lineNumber": 72
+        },
+        {
+          "caller": "refresh",
+          "callee": "onOrderChanged",
+          "lineNumber": 73
+        },
+        {
+          "caller": "refresh",
+          "callee": "message.error",
+          "lineNumber": 75
+        },
+        {
+          "caller": "refresh",
+          "callee": "setBusy",
+          "lineNumber": 77
+        },
+        {
+          "caller": "link",
+          "callee": "setBusy",
+          "lineNumber": 82
+        },
+        {
+          "caller": "link",
+          "callee": "deliveryApi",
+          "lineNumber": 84
+        },
+        {
+          "caller": "link",
+          "callee": "barcode.trim",
+          "lineNumber": 84
+        },
+        {
+          "caller": "link",
+          "callee": "message.success",
+          "lineNumber": 85
+        },
+        {
+          "caller": "link",
+          "callee": "t",
+          "lineNumber": 85
+        },
+        {
+          "caller": "link",
+          "callee": "setLinkOpen",
+          "lineNumber": 86
+        },
+        {
+          "caller": "link",
+          "callee": "setBarcode",
+          "lineNumber": 87
+        },
+        {
+          "caller": "link",
+          "callee": "load",
+          "lineNumber": 88
+        },
+        {
+          "caller": "link",
+          "callee": "message.error",
+          "lineNumber": 90
+        },
+        {
+          "caller": "link",
+          "callee": "setBusy",
+          "lineNumber": 92
+        },
+        {
+          "caller": "remove",
+          "callee": "setBusy",
+          "lineNumber": 98
+        },
+        {
+          "caller": "remove",
+          "callee": "await deliveryApi",
+          "lineNumber": 100
+        },
+        {
+          "caller": "remove",
+          "callee": "message.warning",
+          "lineNumber": 101
+        },
+        {
+          "caller": "remove",
+          "callee": "t",
+          "lineNumber": 101
+        },
+        {
+          "caller": "remove",
+          "callee": "message.success",
+          "lineNumber": 102
+        },
+        {
+          "caller": "remove",
+          "callee": "t",
+          "lineNumber": 102
+        },
+        {
+          "caller": "remove",
+          "callee": "load",
+          "lineNumber": 103
+        },
+        {
+          "caller": "remove",
+          "callee": "message.error",
+          "lineNumber": 105
+        },
+        {
+          "caller": "remove",
+          "callee": "setBusy",
+          "lineNumber": 107
+        },
+        {
+          "caller": "formatDate",
+          "callee": "new Date(date).toLocaleString",
+          "lineNumber": 111
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 114
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 116
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 117
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 123
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 126
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 133
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "formatDate",
+          "lineNumber": 133
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 134
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "Number",
+          "lineNumber": 134
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 136
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "formatDate",
+          "lineNumber": 137
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 138
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 144
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 147
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 150
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "canEditParcel",
+          "lineNumber": 152
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "setEditing",
+          "lineNumber": 153
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 153
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 155
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "canRemoveParcel",
+          "lineNumber": 156
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 159
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 160
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 161
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 162
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 165
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 173
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "setSendOpen",
+          "lineNumber": 179
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 182
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "setLinkOpen",
+          "lineNumber": 184
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 185
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 190
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "setBarcode",
+          "lineNumber": 190
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "e.target.value.replace",
+          "lineNumber": 190
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 191
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "setEditing",
+          "lineNumber": 200
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "setEditing",
+          "lineNumber": 202
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "load",
+          "lineNumber": 203
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "onOrderChanged",
+          "lineNumber": 204
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "setSendOpen",
+          "lineNumber": 211
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "setSendOpen",
+          "lineNumber": 213
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "message.warning",
+          "lineNumber": 214
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "t",
+          "lineNumber": 214
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "load",
+          "lineNumber": 215
+        },
+        {
+          "caller": "OrderDeliveryCard",
+          "callee": "onOrderChanged",
+          "lineNumber": 216
+        }
+      ],
+      "metrics": {
+        "importCount": 7,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/delivery/ParcelHistoryDrawer.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 82,
+      "nonEmptyLines": 76,
+      "functions": [
+        {
+          "name": "portalStatusColor",
+          "startLine": 17,
+          "endLine": 25,
+          "params": [
+            "status"
+          ]
+        },
+        {
+          "name": "ParcelHistoryDrawer",
+          "startLine": 28,
+          "endLine": 82,
+          "params": [
+            "{ barcode, onClose }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "portalStatusColor",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "ParcelHistoryDrawer",
+          "line": 28,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "portalStatusColor",
+          "callee": "status.toLowerCase",
+          "lineNumber": 18
+        },
+        {
+          "caller": "portalStatusColor",
+          "callee": "s.includes",
+          "lineNumber": 19
+        },
+        {
+          "caller": "portalStatusColor",
+          "callee": "s.includes",
+          "lineNumber": 19
+        },
+        {
+          "caller": "portalStatusColor",
+          "callee": "s.includes",
+          "lineNumber": 20
+        },
+        {
+          "caller": "portalStatusColor",
+          "callee": "s.includes",
+          "lineNumber": 21
+        },
+        {
+          "caller": "portalStatusColor",
+          "callee": "s.includes",
+          "lineNumber": 21
+        },
+        {
+          "caller": "portalStatusColor",
+          "callee": "s.includes",
+          "lineNumber": 22
+        },
+        {
+          "caller": "portalStatusColor",
+          "callee": "s.includes",
+          "lineNumber": 22
+        },
+        {
+          "caller": "portalStatusColor",
+          "callee": "s.includes",
+          "lineNumber": 22
+        },
+        {
+          "caller": "portalStatusColor",
+          "callee": "s.includes",
+          "lineNumber": 23
+        },
+        {
+          "caller": "portalStatusColor",
+          "callee": "s.includes",
+          "lineNumber": 23
+        },
+        {
+          "caller": "portalStatusColor",
+          "callee": "s.includes",
+          "lineNumber": 23
+        },
+        {
+          "caller": "ParcelHistoryDrawer",
+          "callee": "useAdminT",
+          "lineNumber": 29
+        },
+        {
+          "caller": "ParcelHistoryDrawer",
+          "callee": "useApi",
+          "lineNumber": 30
+        },
+        {
+          "caller": "ParcelHistoryDrawer",
+          "callee": "t",
+          "lineNumber": 33
+        },
+        {
+          "caller": "ParcelHistoryDrawer",
+          "callee": "t",
+          "lineNumber": 37
+        },
+        {
+          "caller": "ParcelHistoryDrawer",
+          "callee": "data.fields.map",
+          "lineNumber": 45
+        },
+        {
+          "caller": "ParcelHistoryDrawer",
+          "callee": "t",
+          "lineNumber": 48
+        },
+        {
+          "caller": "ParcelHistoryDrawer",
+          "callee": "data.history.map",
+          "lineNumber": 50
+        },
+        {
+          "caller": "ParcelHistoryDrawer",
+          "callee": "portalStatusColor",
+          "lineNumber": 51
+        },
+        {
+          "caller": "ParcelHistoryDrawer",
+          "callee": "portalStatusColor",
+          "lineNumber": 54
+        },
+        {
+          "caller": "ParcelHistoryDrawer",
+          "callee": "t",
+          "lineNumber": 69
+        },
+        {
+          "caller": "ParcelHistoryDrawer",
+          "callee": "data.changes.map",
+          "lineNumber": 70
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/delivery/ParcelLookup.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 126,
+      "nonEmptyLines": 118,
+      "functions": [
+        {
+          "name": "ParcelLookup",
+          "startLine": 18,
+          "endLine": 126,
+          "params": [
+            "{ disabled, onAdded }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ParcelLookup",
+          "line": 18,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ParcelLookup",
+          "callee": "useAdminT",
+          "lineNumber": 19
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "useState",
+          "lineNumber": 21
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "useState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "useState",
+          "lineNumber": 23
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "useState",
+          "lineNumber": 24
+        },
+        {
+          "caller": "check",
+          "callee": "setChecking",
+          "lineNumber": 28
+        },
+        {
+          "caller": "check",
+          "callee": "setError",
+          "lineNumber": 29
+        },
+        {
+          "caller": "check",
+          "callee": "setResult",
+          "lineNumber": 30
+        },
+        {
+          "caller": "check",
+          "callee": "setResult",
+          "lineNumber": 32
+        },
+        {
+          "caller": "check",
+          "callee": "await deliveryApi",
+          "lineNumber": 32
+        },
+        {
+          "caller": "check",
+          "callee": "setError",
+          "lineNumber": 34
+        },
+        {
+          "caller": "check",
+          "callee": "setChecking",
+          "lineNumber": 36
+        },
+        {
+          "caller": "add",
+          "callee": "setAdding",
+          "lineNumber": 42
+        },
+        {
+          "caller": "add",
+          "callee": "deliveryApi",
+          "lineNumber": 44
+        },
+        {
+          "caller": "add",
+          "callee": "message.success",
+          "lineNumber": 45
+        },
+        {
+          "caller": "add",
+          "callee": "t",
+          "lineNumber": 45
+        },
+        {
+          "caller": "add",
+          "callee": "setResult",
+          "lineNumber": 46
+        },
+        {
+          "caller": "add",
+          "callee": "await deliveryApi",
+          "lineNumber": 46
+        },
+        {
+          "caller": "add",
+          "callee": "onAdded",
+          "lineNumber": 47
+        },
+        {
+          "caller": "add",
+          "callee": "message.error",
+          "lineNumber": 49
+        },
+        {
+          "caller": "add",
+          "callee": "setAdding",
+          "lineNumber": 51
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 56
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 60
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "setBarcode",
+          "lineNumber": 66
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "e.target.value.replace",
+          "lineNumber": 66
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "setResult",
+          "lineNumber": 67
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "setError",
+          "lineNumber": 68
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 73
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 82
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 85
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 91
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 92
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 100
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 100
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 100
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 101
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 105
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 108
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 112
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 113
+        },
+        {
+          "caller": "ParcelLookup",
+          "callee": "t",
+          "lineNumber": 119
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/delivery/ParcelProducts.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 204,
+      "nonEmptyLines": 189,
+      "functions": [
+        {
+          "name": "variantName",
+          "startLine": 50,
+          "endLine": 50,
+          "params": [
+            "v"
+          ]
+        },
+        {
+          "name": "lineIsComplete",
+          "startLine": 53,
+          "endLine": 58,
+          "params": [
+            "line",
+            "variantsByProduct"
+          ]
+        },
+        {
+          "name": "ParcelProducts",
+          "startLine": 65,
+          "endLine": 204,
+          "params": [
+            "{ lines, onChange, onQuote }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "lineIsComplete",
+          "line": 53,
+          "isDefault": false
+        },
+        {
+          "name": "ParcelProducts",
+          "line": 65,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "variantName",
+          "callee": "[v.colors?.display_name || v.colors?.name, v.sizes?.name].filter(Boolean).join",
+          "lineNumber": 50
+        },
+        {
+          "caller": "variantName",
+          "callee": "[v.colors?.display_name || v.colors?.name, v.sizes?.name].filter",
+          "lineNumber": 50
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "useAdminT",
+          "lineNumber": 70
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "useState",
+          "lineNumber": 71
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "useState",
+          "lineNumber": 72
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "useState",
+          "lineNumber": 73
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "useState",
+          "lineNumber": 74
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "useRef",
+          "lineNumber": 75
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "useEffect",
+          "lineNumber": 77
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "fetch(\"/api/products?admin=true&view=summary\")\r\n            .then((res) => res.json())\r\n            .then((json) => setProducts(((json.data ?? []) as ProductOption[]).filter((p) => !p.deleted_at)))\r\n            .catch",
+          "lineNumber": 78
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "fetch(\"/api/products?admin=true&view=summary\")\r\n            .then((res) => res.json())\r\n            .then",
+          "lineNumber": 78
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "fetch(\"/api/products?admin=true&view=summary\")\r\n            .then",
+          "lineNumber": 78
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "fetch",
+          "lineNumber": 78
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "res.json",
+          "lineNumber": 79
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "setProducts",
+          "lineNumber": 80
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "((json.data ?? []) as ProductOption[]).filter",
+          "lineNumber": 80
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "setProducts",
+          "lineNumber": 81
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "useEffect",
+          "lineNumber": 85
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "lines.map((l) => l.product_id).filter",
+          "lineNumber": 86
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "lines.map",
+          "lineNumber": 86
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "fetch(`/api/variants?product_id=${id}`)\r\n                .then((res) => res.json())\r\n                .then((json) => setVariantsByProduct((current) => ({\r\n                    ...current,\r\n                    [id]: ((json.data ?? []) as VariantOption[]).filter((v) => v.is_available !== false),\r\n                })))\r\n                .catch",
+          "lineNumber": 88
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "fetch(`/api/variants?product_id=${id}`)\r\n                .then((res) => res.json())\r\n                .then",
+          "lineNumber": 88
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "fetch(`/api/variants?product_id=${id}`)\r\n                .then",
+          "lineNumber": 88
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "fetch",
+          "lineNumber": 88
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "res.json",
+          "lineNumber": 89
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "setVariantsByProduct",
+          "lineNumber": 90
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "((json.data ?? []) as VariantOption[]).filter",
+          "lineNumber": 92
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "setVariantsByProduct",
+          "lineNumber": 94
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "JSON.stringify",
+          "lineNumber": 99
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "lines.map",
+          "lineNumber": 99
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "useEffect",
+          "lineNumber": 100
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "lines.filter",
+          "lineNumber": 101
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "lineIsComplete",
+          "lineNumber": 101
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "setQuotedByKey",
+          "lineNumber": 104
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "onQuote",
+          "lineNumber": 105
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "setTimeout",
+          "lineNumber": 109
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "deliveryApi<{ lines: QuotedLine[] }>({\r\n                method: \"POST\",\r\n                body: { action: \"quote\", items: complete.map((l) => ({ product_id: l.product_id, variant_id: l.variant_id ?? null, quantity: l.quantity })) },\r\n            })\r\n                .then((result) => {\r\n                    if (cancelled) return;\r\n                    // The server answers in the order the lines were sent.\r\n                    setQuotedByKey(Object.fromEntries(complete.map((l, i) => [l.key, result.lines[i]])));\r\n                    setQuoteError(null);\r\n                    onQuote(allComplete ? result.lines : null);\r\n                })\r\n                .catch",
+          "lineNumber": 110
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "deliveryApi<{ lines: QuotedLine[] }>({\r\n                method: \"POST\",\r\n                body: { action: \"quote\", items: complete.map((l) => ({ product_id: l.product_id, variant_id: l.variant_id ?? null, quantity: l.quantity })) },\r\n            })\r\n                .then",
+          "lineNumber": 110
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "deliveryApi",
+          "lineNumber": 110
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "complete.map",
+          "lineNumber": 112
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "setQuotedByKey",
+          "lineNumber": 117
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "Object.fromEntries",
+          "lineNumber": 117
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "complete.map",
+          "lineNumber": 117
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "setQuoteError",
+          "lineNumber": 118
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "onQuote",
+          "lineNumber": 119
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "setQuoteError",
+          "lineNumber": 123
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "onQuote",
+          "lineNumber": 124
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "clearTimeout",
+          "lineNumber": 129
+        },
+        {
+          "caller": "update",
+          "callee": "onChange",
+          "lineNumber": 135
+        },
+        {
+          "caller": "update",
+          "callee": "lines.map",
+          "lineNumber": 135
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "products.map",
+          "lineNumber": 137
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "[p.name, p.name_fr, p.name_ar].filter(Boolean).join",
+          "lineNumber": 140
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "[p.name, p.name_fr, p.name_ar].filter",
+          "lineNumber": 140
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "lines.map",
+          "lineNumber": 145
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "lineIsComplete",
+          "lineNumber": 147
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "t",
+          "lineNumber": 152
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "update",
+          "lineNumber": 156
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "t",
+          "lineNumber": 161
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "update",
+          "lineNumber": 163
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "variants.map",
+          "lineNumber": 164
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "variantName",
+          "lineNumber": 164
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "variantName",
+          "lineNumber": 164
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "update",
+          "lineNumber": 176
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "Number",
+          "lineNumber": 176
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "t",
+          "lineNumber": 178
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "t",
+          "lineNumber": 180
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "onChange",
+          "lineNumber": 180
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "lines.filter",
+          "lineNumber": 180
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "t",
+          "lineNumber": 183
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "t",
+          "lineNumber": 186
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "t",
+          "lineNumber": 188
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "t",
+          "lineNumber": 189
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "Math.max",
+          "lineNumber": 189
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "onChange",
+          "lineNumber": 198
+        },
+        {
+          "caller": "ParcelProducts",
+          "callee": "t",
+          "lineNumber": 200
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 2,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/delivery/SendParcelModal.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 262,
+      "nonEmptyLines": 250,
+      "functions": [
+        {
+          "name": "initialValues",
+          "startLine": 38,
+          "endLine": 47,
+          "params": [
+            "order"
+          ]
+        },
+        {
+          "name": "SendParcelModal",
+          "startLine": 53,
+          "endLine": 262,
+          "params": [
+            "{ order, open, onClose, onSent }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SendParcelModal",
+          "line": 53,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "initialValues",
+          "callee": "parcelFromOrder",
+          "lineNumber": 39
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "useAdminT",
+          "lineNumber": 59
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "Form.useForm",
+          "lineNumber": 60
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "useState",
+          "lineNumber": 61
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "useState",
+          "lineNumber": 62
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "Form.useWatch",
+          "lineNumber": 63
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "useState",
+          "lineNumber": 65
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "useState",
+          "lineNumber": 66
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "useApi",
+          "lineNumber": 68
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "useEffect",
+          "lineNumber": 70
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "form.resetFields",
+          "lineNumber": 72
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "form.setFieldsValue",
+          "lineNumber": 73
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "initialValues",
+          "lineNumber": 73
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "setError",
+          "lineNumber": 74
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "setLines",
+          "lineNumber": 75
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "setQuote",
+          "lineNumber": 76
+        },
+        {
+          "caller": "onQuote",
+          "callee": "setQuote",
+          "lineNumber": 82
+        },
+        {
+          "caller": "onQuote",
+          "callee": "form.setFieldsValue",
+          "lineNumber": 84
+        },
+        {
+          "caller": "onQuote",
+          "callee": "quoted\r\n                .map((l) => `${l.quantity > 1 ? `${l.quantity}× ` : \"\"}${l.product_name.trim()}${l.variant_label ? ` (${l.variant_label})` : \"\"}`)\r\n                .join(\", \")\r\n                .slice",
+          "lineNumber": 85
+        },
+        {
+          "caller": "onQuote",
+          "callee": "quoted\r\n                .map((l) => `${l.quantity > 1 ? `${l.quantity}× ` : \"\"}${l.product_name.trim()}${l.variant_label ? ` (${l.variant_label})` : \"\"}`)\r\n                .join",
+          "lineNumber": 85
+        },
+        {
+          "caller": "onQuote",
+          "callee": "quoted\r\n                .map",
+          "lineNumber": 85
+        },
+        {
+          "caller": "onQuote",
+          "callee": "l.product_name.trim",
+          "lineNumber": 86
+        },
+        {
+          "caller": "onQuote",
+          "callee": "quoted.reduce",
+          "lineNumber": 89
+        },
+        {
+          "caller": "onQuote",
+          "callee": "quoted.reduce",
+          "lineNumber": 90
+        },
+        {
+          "caller": "submit",
+          "callee": "setError",
+          "lineNumber": 97
+        },
+        {
+          "caller": "submit",
+          "callee": "t",
+          "lineNumber": 97
+        },
+        {
+          "caller": "submit",
+          "callee": "form.validateFields",
+          "lineNumber": 102
+        },
+        {
+          "caller": "submit",
+          "callee": "setSending",
+          "lineNumber": 106
+        },
+        {
+          "caller": "submit",
+          "callee": "setError",
+          "lineNumber": 107
+        },
+        {
+          "caller": "submit",
+          "callee": "await deliveryApi",
+          "lineNumber": 109
+        },
+        {
+          "caller": "submit",
+          "callee": "lines.map",
+          "lineNumber": 114
+        },
+        {
+          "caller": "submit",
+          "callee": "message.success",
+          "lineNumber": 136
+        },
+        {
+          "caller": "submit",
+          "callee": "t",
+          "lineNumber": 136
+        },
+        {
+          "caller": "submit",
+          "callee": "message.success",
+          "lineNumber": 138
+        },
+        {
+          "caller": "submit",
+          "callee": "t",
+          "lineNumber": 138
+        },
+        {
+          "caller": "submit",
+          "callee": "onSent",
+          "lineNumber": 140
+        },
+        {
+          "caller": "submit",
+          "callee": "setError",
+          "lineNumber": 142
+        },
+        {
+          "caller": "submit",
+          "callee": "setSending",
+          "lineNumber": 144
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 148
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 153
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 153
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 154
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 155
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 165
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 166
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 170
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 170
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 174
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 174
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 177
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 184
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 185
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 186
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "COLISSIMO_GOVERNORATES.map",
+          "lineNumber": 189
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 191
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 191
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 195
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 195
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 200
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 202
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 208
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 208
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 212
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 212
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 217
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 218
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 219
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 225
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 229
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 230
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 231
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 236
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 239
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 242
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 248
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 248
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 251
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 251
+        },
+        {
+          "caller": "SendParcelModal",
+          "callee": "t",
+          "lineNumber": 256
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/delivery/delivery-api.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 132,
+      "nonEmptyLines": 118,
+      "functions": [
+        {
+          "name": "canEditParcel",
+          "startLine": 52,
+          "endLine": 52,
+          "params": [
+            "d"
+          ]
+        },
+        {
+          "name": "canRemoveParcel",
+          "startLine": 58,
+          "endLine": 58,
+          "params": [
+            "d"
+          ]
+        },
+        {
+          "name": "deliveryApi",
+          "startLine": 69,
+          "endLine": 83,
+          "params": [
+            "init"
+          ]
+        },
+        {
+          "name": "reportParcelCancellation",
+          "startLine": 117,
+          "endLine": 126,
+          "params": [
+            "parcels",
+            "notify",
+            "t"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "canEditParcel",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "canRemoveParcel",
+          "line": 58,
+          "isDefault": false
+        },
+        {
+          "name": "deliveryApi",
+          "line": 69,
+          "isDefault": false
+        },
+        {
+          "name": "reportParcelCancellation",
+          "line": 117,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "canRemoveParcel",
+          "callee": "[\"En attente\", \"Supprime\"].includes",
+          "lineNumber": 58
+        },
+        {
+          "caller": "deliveryApi",
+          "callee": "fetch",
+          "lineNumber": 70
+        },
+        {
+          "caller": "deliveryApi",
+          "callee": "JSON.stringify",
+          "lineNumber": 73
+        },
+        {
+          "caller": "deliveryApi",
+          "callee": "response.json().catch",
+          "lineNumber": 76
+        },
+        {
+          "caller": "deliveryApi",
+          "callee": "response.json",
+          "lineNumber": 76
+        },
+        {
+          "caller": "reportParcelCancellation",
+          "callee": "notify.success",
+          "lineNumber": 123
+        },
+        {
+          "caller": "reportParcelCancellation",
+          "callee": "t",
+          "lineNumber": 123
+        },
+        {
+          "caller": "reportParcelCancellation",
+          "callee": "notify.warning",
+          "lineNumber": 124
+        },
+        {
+          "caller": "reportParcelCancellation",
+          "callee": "t",
+          "lineNumber": 124
+        },
+        {
+          "caller": "reportParcelCancellation",
+          "callee": "t",
+          "lineNumber": 124
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/desktop-push.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 89,
+      "nonEmptyLines": 76,
+      "functions": [
+        {
+          "name": "desktopSupported",
+          "startLine": 15,
+          "endLine": 17,
+          "params": []
+        },
+        {
+          "name": "registration",
+          "startLine": 19,
+          "endLine": 22,
+          "params": []
+        },
+        {
+          "name": "getDesktopState",
+          "startLine": 24,
+          "endLine": 30,
+          "params": []
+        },
+        {
+          "name": "keyBytes",
+          "startLine": 32,
+          "endLine": 38,
+          "params": [
+            "base64Url"
+          ]
+        },
+        {
+          "name": "save",
+          "startLine": 40,
+          "endLine": 48,
+          "params": [
+            "subscription",
+            "locale"
+          ]
+        },
+        {
+          "name": "enableDesktop",
+          "startLine": 51,
+          "endLine": 67,
+          "params": [
+            "locale"
+          ]
+        },
+        {
+          "name": "disableDesktop",
+          "startLine": 69,
+          "endLine": 81,
+          "params": []
+        },
+        {
+          "name": "refreshDesktop",
+          "startLine": 84,
+          "endLine": 89,
+          "params": [
+            "locale"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "desktopSupported",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "getDesktopState",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "enableDesktop",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "disableDesktop",
+          "line": 69,
+          "isDefault": false
+        },
+        {
+          "name": "refreshDesktop",
+          "line": 84,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "registration",
+          "callee": "navigator.serviceWorker.getRegistration",
+          "lineNumber": 20
+        },
+        {
+          "caller": "registration",
+          "callee": "navigator.serviceWorker.register",
+          "lineNumber": 21
+        },
+        {
+          "caller": "getDesktopState",
+          "callee": "desktopSupported",
+          "lineNumber": 25
+        },
+        {
+          "caller": "getDesktopState",
+          "callee": "navigator.serviceWorker.getRegistration",
+          "lineNumber": 27
+        },
+        {
+          "caller": "getDesktopState",
+          "callee": "reg?.pushManager.getSubscription",
+          "lineNumber": 28
+        },
+        {
+          "caller": "keyBytes",
+          "callee": "(base64Url + \"=\".repeat((4 - (base64Url.length % 4)) % 4)).replace(/-/g, \"+\").replace",
+          "lineNumber": 33
+        },
+        {
+          "caller": "keyBytes",
+          "callee": "(base64Url + \"=\".repeat((4 - (base64Url.length % 4)) % 4)).replace",
+          "lineNumber": 33
+        },
+        {
+          "caller": "keyBytes",
+          "callee": "\"=\".repeat",
+          "lineNumber": 33
+        },
+        {
+          "caller": "keyBytes",
+          "callee": "atob",
+          "lineNumber": 34
+        },
+        {
+          "caller": "keyBytes",
+          "callee": "raw.charCodeAt",
+          "lineNumber": 36
+        },
+        {
+          "caller": "save",
+          "callee": "fetch",
+          "lineNumber": 41
+        },
+        {
+          "caller": "save",
+          "callee": "JSON.stringify",
+          "lineNumber": 44
+        },
+        {
+          "caller": "save",
+          "callee": "subscription.toJSON",
+          "lineNumber": 44
+        },
+        {
+          "caller": "save",
+          "callee": "response.json",
+          "lineNumber": 46
+        },
+        {
+          "caller": "enableDesktop",
+          "callee": "desktopSupported",
+          "lineNumber": 52
+        },
+        {
+          "caller": "enableDesktop",
+          "callee": "Notification.requestPermission",
+          "lineNumber": 53
+        },
+        {
+          "caller": "enableDesktop",
+          "callee": "fetch",
+          "lineNumber": 56
+        },
+        {
+          "caller": "enableDesktop",
+          "callee": "keyResponse.json",
+          "lineNumber": 57
+        },
+        {
+          "caller": "enableDesktop",
+          "callee": "registration",
+          "lineNumber": 60
+        },
+        {
+          "caller": "enableDesktop",
+          "callee": "reg.pushManager.getSubscription",
+          "lineNumber": 63
+        },
+        {
+          "caller": "enableDesktop",
+          "callee": "reg.pushManager.subscribe",
+          "lineNumber": 64
+        },
+        {
+          "caller": "enableDesktop",
+          "callee": "keyBytes",
+          "lineNumber": 64
+        },
+        {
+          "caller": "enableDesktop",
+          "callee": "save",
+          "lineNumber": 65
+        },
+        {
+          "caller": "disableDesktop",
+          "callee": "navigator.serviceWorker.getRegistration",
+          "lineNumber": 70
+        },
+        {
+          "caller": "disableDesktop",
+          "callee": "reg?.pushManager.getSubscription",
+          "lineNumber": 71
+        },
+        {
+          "caller": "disableDesktop",
+          "callee": "fetch",
+          "lineNumber": 73
+        },
+        {
+          "caller": "disableDesktop",
+          "callee": "JSON.stringify",
+          "lineNumber": 76
+        },
+        {
+          "caller": "disableDesktop",
+          "callee": "subscription.unsubscribe",
+          "lineNumber": 78
+        },
+        {
+          "caller": "refreshDesktop",
+          "callee": "desktopSupported",
+          "lineNumber": 85
+        },
+        {
+          "caller": "refreshDesktop",
+          "callee": "navigator.serviceWorker.getRegistration",
+          "lineNumber": 86
+        },
+        {
+          "caller": "refreshDesktop",
+          "callee": "reg?.pushManager.getSubscription",
+          "lineNumber": 87
+        },
+        {
+          "caller": "refreshDesktop",
+          "callee": "save",
+          "lineNumber": 88
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 8,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/erp/EditOrderModal.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 139,
+      "nonEmptyLines": 132,
+      "functions": [
+        {
+          "name": "EditOrderModal",
+          "startLine": 32,
+          "endLine": 139,
+          "params": [
+            "{ order, open, onClose, onSaved }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "EditOrderModal",
+          "line": 32,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "EditOrderModal",
+          "callee": "useAdminT",
+          "lineNumber": 33
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "Form.useForm",
+          "lineNumber": 34
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "useState",
+          "lineNumber": 35
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "useState",
+          "lineNumber": 36
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "useState",
+          "lineNumber": 37
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "useState",
+          "lineNumber": 38
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "useEffect",
+          "lineNumber": 40
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "form.setFieldsValue",
+          "lineNumber": 42
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "Number",
+          "lineNumber": 50
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "Number",
+          "lineNumber": 51
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "setChangeProducts",
+          "lineNumber": 54
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "setLines",
+          "lineNumber": 55
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "order.items.filter((i) => i.product_id).map",
+          "lineNumber": 55
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "order.items.filter",
+          "lineNumber": 55
+        },
+        {
+          "caller": "save",
+          "callee": "form.validateFields",
+          "lineNumber": 59
+        },
+        {
+          "caller": "save",
+          "callee": "message.warning",
+          "lineNumber": 61
+        },
+        {
+          "caller": "save",
+          "callee": "t",
+          "lineNumber": 61
+        },
+        {
+          "caller": "save",
+          "callee": "setSaving",
+          "lineNumber": 64
+        },
+        {
+          "caller": "save",
+          "callee": "api",
+          "lineNumber": 66
+        },
+        {
+          "caller": "save",
+          "callee": "values.phone.replace",
+          "lineNumber": 72
+        },
+        {
+          "caller": "save",
+          "callee": "lines.filter((l) => l.product_id).map",
+          "lineNumber": 80
+        },
+        {
+          "caller": "save",
+          "callee": "lines.filter",
+          "lineNumber": 80
+        },
+        {
+          "caller": "save",
+          "callee": "message.success",
+          "lineNumber": 86
+        },
+        {
+          "caller": "save",
+          "callee": "t",
+          "lineNumber": 86
+        },
+        {
+          "caller": "save",
+          "callee": "onSaved",
+          "lineNumber": 87
+        },
+        {
+          "caller": "save",
+          "callee": "onClose",
+          "lineNumber": 88
+        },
+        {
+          "caller": "save",
+          "callee": "message.error",
+          "lineNumber": 90
+        },
+        {
+          "caller": "save",
+          "callee": "t",
+          "lineNumber": 90
+        },
+        {
+          "caller": "save",
+          "callee": "setSaving",
+          "lineNumber": 92
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 97
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 97
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 97
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 101
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 101
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 105
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 106
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 107
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 109
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "governorateOptions",
+          "lineNumber": 110
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 113
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 114
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 116
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 121
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 125
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "setChangeProducts",
+          "lineNumber": 128
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 128
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 132
+        },
+        {
+          "caller": "EditOrderModal",
+          "callee": "t",
+          "lineNumber": 135
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/erp/MonthGoalCard.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 74,
+      "nonEmptyLines": 69,
+      "functions": [
+        {
+          "name": "MonthGoalCard",
+          "startLine": 35,
+          "endLine": 74,
+          "params": [
+            "{ goal: data, money }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MonthGoalCard",
+          "line": 35,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MonthGoalCard",
+          "callee": "useAdminT",
+          "lineNumber": 36
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "useAdminRole",
+          "lineNumber": 37
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "[\r\n        { label: t(\"Delivered sales\"), value: data.delivered_revenue, target: g.target_revenue, format: money },\r\n        { label: t(\"Gross margin\"), value: data.gross_margin ?? 0, target: g.target_gross_margin, format: money },\r\n        { label: t(\"Orders taken\"), value: data.created, target: g.target_orders },\r\n        { label: t(\"Orders confirmed\"), value: data.confirmed, target: g.target_confirmed },\r\n        { label: t(\"Orders delivered\"), value: data.delivered, target: g.target_delivered },\r\n    ].filter",
+          "lineNumber": 41
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "t",
+          "lineNumber": 42
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "t",
+          "lineNumber": 43
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "t",
+          "lineNumber": 44
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "t",
+          "lineNumber": 45
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "t",
+          "lineNumber": 46
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "t",
+          "lineNumber": 47
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "items.filter",
+          "lineNumber": 48
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "Number",
+          "lineNumber": 48
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "t",
+          "lineNumber": 54
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "t",
+          "lineNumber": 57
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "t",
+          "lineNumber": 57
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "t",
+          "lineNumber": 58
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "t",
+          "lineNumber": 59
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "items.map",
+          "lineNumber": 64
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "Math.max",
+          "lineNumber": 65
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "Math.floor",
+          "lineNumber": 65
+        },
+        {
+          "caller": "MonthGoalCard",
+          "callee": "Number",
+          "lineNumber": 67
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/erp/OrderPaymentsCard.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 180,
+      "nonEmptyLines": 168,
+      "functions": [
+        {
+          "name": "OrderPaymentsCard",
+          "startLine": 39,
+          "endLine": 180,
+          "params": [
+            "{ order, onChanged }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "OrderPaymentsCard",
+          "line": 39,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "useAdminT",
+          "lineNumber": 43
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "useAdminRole",
+          "lineNumber": 44
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "can",
+          "lineNumber": 45
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "useApi",
+          "lineNumber": 46
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "useApi",
+          "lineNumber": 47
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "useState",
+          "lineNumber": 48
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "Form.useForm",
+          "lineNumber": 49
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "useState",
+          "lineNumber": 50
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "Math.max",
+          "lineNumber": 51
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "Number",
+          "lineNumber": 51
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "Number",
+          "lineNumber": 51
+        },
+        {
+          "caller": "money",
+          "callee": "formatMoney",
+          "lineNumber": 52
+        },
+        {
+          "caller": "reload",
+          "callee": "payments.reload",
+          "lineNumber": 55
+        },
+        {
+          "caller": "reload",
+          "callee": "invoices.reload",
+          "lineNumber": 56
+        },
+        {
+          "caller": "reload",
+          "callee": "onChanged",
+          "lineNumber": 57
+        },
+        {
+          "caller": "save",
+          "callee": "form.validateFields",
+          "lineNumber": 61
+        },
+        {
+          "caller": "save",
+          "callee": "setSaving",
+          "lineNumber": 62
+        },
+        {
+          "caller": "save",
+          "callee": "api",
+          "lineNumber": 64
+        },
+        {
+          "caller": "save",
+          "callee": "Math.abs",
+          "lineNumber": 66
+        },
+        {
+          "caller": "save",
+          "callee": "message.success",
+          "lineNumber": 68
+        },
+        {
+          "caller": "save",
+          "callee": "t",
+          "lineNumber": 68
+        },
+        {
+          "caller": "save",
+          "callee": "setOpen",
+          "lineNumber": 69
+        },
+        {
+          "caller": "save",
+          "callee": "reload",
+          "lineNumber": 70
+        },
+        {
+          "caller": "save",
+          "callee": "message.error",
+          "lineNumber": 72
+        },
+        {
+          "caller": "save",
+          "callee": "t",
+          "lineNumber": 72
+        },
+        {
+          "caller": "save",
+          "callee": "setSaving",
+          "lineNumber": 74
+        },
+        {
+          "caller": "remove",
+          "callee": "api",
+          "lineNumber": 80
+        },
+        {
+          "caller": "remove",
+          "callee": "reload",
+          "lineNumber": 81
+        },
+        {
+          "caller": "remove",
+          "callee": "message.error",
+          "lineNumber": 83
+        },
+        {
+          "caller": "remove",
+          "callee": "t",
+          "lineNumber": 83
+        },
+        {
+          "caller": "issueInvoice",
+          "callee": "await api",
+          "lineNumber": 89
+        },
+        {
+          "caller": "issueInvoice",
+          "callee": "message.success",
+          "lineNumber": 90
+        },
+        {
+          "caller": "issueInvoice",
+          "callee": "t",
+          "lineNumber": 90
+        },
+        {
+          "caller": "issueInvoice",
+          "callee": "invoices.reload",
+          "lineNumber": 91
+        },
+        {
+          "caller": "issueInvoice",
+          "callee": "message.error",
+          "lineNumber": 93
+        },
+        {
+          "caller": "issueInvoice",
+          "callee": "t",
+          "lineNumber": 93
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "invoices.data?.find",
+          "lineNumber": 97
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 101
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 101
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "form.resetFields",
+          "lineNumber": 104
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "form.setFieldsValue",
+          "lineNumber": 104
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "setOpen",
+          "lineNumber": 104
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 104
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "Number",
+          "lineNumber": 105
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "form.resetFields",
+          "lineNumber": 105
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "form.setFieldsValue",
+          "lineNumber": 105
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "Number",
+          "lineNumber": 105
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "setOpen",
+          "lineNumber": 105
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 105
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 110
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "money",
+          "lineNumber": 110
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 111
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "money",
+          "lineNumber": 111
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 112
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "money",
+          "lineNumber": 112
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 115
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 123
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 126
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "formatDate",
+          "lineNumber": 126
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 127
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "money",
+          "lineNumber": 127
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 128
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 128
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 129
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 129
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 129
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 129
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 130
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 131
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 131
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 134
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 134
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "remove",
+          "lineNumber": 134
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 135
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 146
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 147
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "[\"cancelled\", \"returned\"].includes",
+          "lineNumber": 149
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 150
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 152
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 152
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 153
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 159
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 159
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "setOpen",
+          "lineNumber": 159
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 159
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 159
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 161
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 164
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "PAYMENT_METHODS.map",
+          "lineNumber": 166
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 166
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "form.setFieldValue",
+          "lineNumber": 167
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 170
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "(Object.keys(MONEY_ACCOUNT_LABELS) as MoneyAccount[]).map",
+          "lineNumber": 171
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "Object.keys",
+          "lineNumber": 171
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 171
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 173
+        },
+        {
+          "caller": "OrderPaymentsCard",
+          "callee": "t",
+          "lineNumber": 174
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/erp/OrderPipelineCard.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 122,
+      "nonEmptyLines": 114,
+      "functions": [
+        {
+          "name": "OrderPipelineCard",
+          "startLine": 39,
+          "endLine": 122,
+          "params": [
+            "{ order, onChanged }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "OrderPipelineCard",
+          "line": 39,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "useAdminT",
+          "lineNumber": 40
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "useAdminRole",
+          "lineNumber": 41
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "useState",
+          "lineNumber": 42
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "order_.indexOf",
+          "lineNumber": 45
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "Math.max",
+          "lineNumber": 48
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "Math.max",
+          "lineNumber": 48
+        },
+        {
+          "caller": "patch",
+          "callee": "setSaving",
+          "lineNumber": 51
+        },
+        {
+          "caller": "patch",
+          "callee": "api",
+          "lineNumber": 53
+        },
+        {
+          "caller": "patch",
+          "callee": "message.success",
+          "lineNumber": 54
+        },
+        {
+          "caller": "patch",
+          "callee": "t",
+          "lineNumber": 54
+        },
+        {
+          "caller": "patch",
+          "callee": "onChanged",
+          "lineNumber": 55
+        },
+        {
+          "caller": "patch",
+          "callee": "message.error",
+          "lineNumber": 57
+        },
+        {
+          "caller": "patch",
+          "callee": "t",
+          "lineNumber": 57
+        },
+        {
+          "caller": "patch",
+          "callee": "setSaving",
+          "lineNumber": 59
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 64
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 71
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "formatDate",
+          "lineNumber": 71
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 72
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "formatDate",
+          "lineNumber": 72
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 73
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 73
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 74
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 74
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 74
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "formatDate",
+          "lineNumber": 74
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "formatDate",
+          "lineNumber": 74
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 75
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "formatDate",
+          "lineNumber": 75
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 76
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 76
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 76
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "patch",
+          "lineNumber": 81
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 82
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 84
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 90
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "patch",
+          "lineNumber": 95
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "CHANNELS.map",
+          "lineNumber": 96
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 96
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 100
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "patch",
+          "lineNumber": 101
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 104
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "patch",
+          "lineNumber": 106
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 109
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "patch",
+          "lineNumber": 110
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 110
+        },
+        {
+          "caller": "OrderPipelineCard",
+          "callee": "t",
+          "lineNumber": 117
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/erp/QuickLinks.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 39,
+      "functions": [
+        {
+          "name": "QuickLinks",
+          "startLine": 11,
+          "endLine": 41,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "QuickLinks",
+          "line": 11,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "QuickLinks",
+          "callee": "useAdminT",
+          "lineNumber": 12
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "useAdminRole",
+          "lineNumber": 13
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "t",
+          "lineNumber": 16
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "t",
+          "lineNumber": 16
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "t",
+          "lineNumber": 17
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "t",
+          "lineNumber": 17
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "can",
+          "lineNumber": 17
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "can",
+          "lineNumber": 17
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "t",
+          "lineNumber": 18
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "t",
+          "lineNumber": 18
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "can",
+          "lineNumber": 18
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "t",
+          "lineNumber": 19
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "t",
+          "lineNumber": 19
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "can",
+          "lineNumber": 19
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "t",
+          "lineNumber": 20
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "t",
+          "lineNumber": 20
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "can",
+          "lineNumber": 20
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "t",
+          "lineNumber": 21
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "t",
+          "lineNumber": 21
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "can",
+          "lineNumber": 21
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "t",
+          "lineNumber": 22
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "t",
+          "lineNumber": 22
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "can",
+          "lineNumber": 22
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "links.filter",
+          "lineNumber": 24
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "shown.map",
+          "lineNumber": 28
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "Math.max",
+          "lineNumber": 29
+        },
+        {
+          "caller": "QuickLinks",
+          "callee": "Math.floor",
+          "lineNumber": 29
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/erp/charts.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 152,
+      "nonEmptyLines": 142,
+      "functions": [
+        {
+          "name": "niceMax",
+          "startLine": 23,
+          "endLine": 29,
+          "params": [
+            "max"
+          ]
+        },
+        {
+          "name": "compact",
+          "startLine": 31,
+          "endLine": 32,
+          "params": [
+            "n"
+          ]
+        },
+        {
+          "name": "BarChart",
+          "startLine": 35,
+          "endLine": 107,
+          "params": [
+            "{ data, height = 200, color = SERIES, format = compact, emptyText = \"—\" }"
+          ]
+        },
+        {
+          "name": "BarList",
+          "startLine": 110,
+          "endLine": 134,
+          "params": [
+            "{ rows, format = compact, color = SERIES, max }"
+          ]
+        },
+        {
+          "name": "TargetBar",
+          "startLine": 137,
+          "endLine": 152,
+          "params": [
+            "{ value, target, format = compact }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "BarChart",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "BarList",
+          "line": 110,
+          "isDefault": false
+        },
+        {
+          "name": "TargetBar",
+          "line": 137,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "niceMax",
+          "callee": "Math.pow",
+          "lineNumber": 25
+        },
+        {
+          "caller": "niceMax",
+          "callee": "Math.floor",
+          "lineNumber": 25
+        },
+        {
+          "caller": "niceMax",
+          "callee": "Math.log10",
+          "lineNumber": 25
+        },
+        {
+          "caller": "compact",
+          "callee": "Math.abs",
+          "lineNumber": 32
+        },
+        {
+          "caller": "compact",
+          "callee": "Math.round",
+          "lineNumber": 32
+        },
+        {
+          "caller": "compact",
+          "callee": "Math.abs",
+          "lineNumber": 32
+        },
+        {
+          "caller": "compact",
+          "callee": "Math.round",
+          "lineNumber": 32
+        },
+        {
+          "caller": "compact",
+          "callee": "Math.round",
+          "lineNumber": 32
+        },
+        {
+          "caller": "BarChart",
+          "callee": "useState",
+          "lineNumber": 42
+        },
+        {
+          "caller": "BarChart",
+          "callee": "useRef",
+          "lineNumber": 43
+        },
+        {
+          "caller": "BarChart",
+          "callee": "useMemo",
+          "lineNumber": 48
+        },
+        {
+          "caller": "BarChart",
+          "callee": "niceMax",
+          "lineNumber": 48
+        },
+        {
+          "caller": "BarChart",
+          "callee": "Math.max",
+          "lineNumber": 48
+        },
+        {
+          "caller": "BarChart",
+          "callee": "data.map",
+          "lineNumber": 48
+        },
+        {
+          "caller": "BarChart",
+          "callee": "data.every",
+          "lineNumber": 49
+        },
+        {
+          "caller": "BarChart",
+          "callee": "Math.max",
+          "lineNumber": 53
+        },
+        {
+          "caller": "BarChart",
+          "callee": "Math.min",
+          "lineNumber": 53
+        },
+        {
+          "caller": "BarChart",
+          "callee": "Math.ceil",
+          "lineNumber": 54
+        },
+        {
+          "caller": "BarChart",
+          "callee": "[0, 0.5, 1].map",
+          "lineNumber": 55
+        },
+        {
+          "caller": "BarChart",
+          "callee": "setHover",
+          "lineNumber": 62
+        },
+        {
+          "caller": "BarChart",
+          "callee": "ticks.map",
+          "lineNumber": 63
+        },
+        {
+          "caller": "BarChart",
+          "callee": "y",
+          "lineNumber": 65
+        },
+        {
+          "caller": "BarChart",
+          "callee": "y",
+          "lineNumber": 65
+        },
+        {
+          "caller": "BarChart",
+          "callee": "y",
+          "lineNumber": 66
+        },
+        {
+          "caller": "BarChart",
+          "callee": "format",
+          "lineNumber": 66
+        },
+        {
+          "caller": "BarChart",
+          "callee": "data.map",
+          "lineNumber": 69
+        },
+        {
+          "caller": "BarChart",
+          "callee": "Math.max",
+          "lineNumber": 71
+        },
+        {
+          "caller": "BarChart",
+          "callee": "Math.min",
+          "lineNumber": 72
+        },
+        {
+          "caller": "BarChart",
+          "callee": "setHover",
+          "lineNumber": 75
+        },
+        {
+          "caller": "BarChart",
+          "callee": "format",
+          "lineNumber": 102
+        },
+        {
+          "caller": "BarList",
+          "callee": "Math.max",
+          "lineNumber": 116
+        },
+        {
+          "caller": "BarList",
+          "callee": "rows.map",
+          "lineNumber": 116
+        },
+        {
+          "caller": "BarList",
+          "callee": "rows.map",
+          "lineNumber": 120
+        },
+        {
+          "caller": "BarList",
+          "callee": "format",
+          "lineNumber": 124
+        },
+        {
+          "caller": "BarList",
+          "callee": "Math.max",
+          "lineNumber": 127
+        },
+        {
+          "caller": "TargetBar",
+          "callee": "format",
+          "lineNumber": 138
+        },
+        {
+          "caller": "TargetBar",
+          "callee": "Math.round",
+          "lineNumber": 139
+        },
+        {
+          "caller": "TargetBar",
+          "callee": "format",
+          "lineNumber": 142
+        },
+        {
+          "caller": "TargetBar",
+          "callee": "format",
+          "lineNumber": 142
+        },
+        {
+          "caller": "TargetBar",
+          "callee": "format",
+          "lineNumber": 144
+        },
+        {
+          "caller": "TargetBar",
+          "callee": "format",
+          "lineNumber": 144
+        },
+        {
+          "caller": "TargetBar",
+          "callee": "Math.min",
+          "lineNumber": 148
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/erp/erp-client.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 97,
+      "nonEmptyLines": 84,
+      "functions": [
+        {
+          "name": "api",
+          "startLine": 14,
+          "endLine": 27,
+          "params": [
+            "url",
+            "init"
+          ]
+        },
+        {
+          "name": "useApi",
+          "startLine": 30,
+          "endLine": 50,
+          "params": [
+            "url"
+          ]
+        },
+        {
+          "name": "formatMoney",
+          "startLine": 55,
+          "endLine": 59,
+          "params": [
+            "value",
+            "locale",
+            "digits"
+          ]
+        },
+        {
+          "name": "formatNumber",
+          "startLine": 61,
+          "endLine": 62,
+          "params": [
+            "value",
+            "locale",
+            "digits"
+          ]
+        },
+        {
+          "name": "formatDate",
+          "startLine": 64,
+          "endLine": 65,
+          "params": [
+            "value",
+            "locale",
+            "withTime"
+          ]
+        },
+        {
+          "name": "percent",
+          "startLine": 67,
+          "endLine": 67,
+          "params": [
+            "part",
+            "whole"
+          ]
+        },
+        {
+          "name": "periodRange",
+          "startLine": 72,
+          "endLine": 84,
+          "params": [
+            "period",
+            "custom"
+          ]
+        },
+        {
+          "name": "day",
+          "startLine": 87,
+          "endLine": 87,
+          "params": [
+            "d"
+          ]
+        },
+        {
+          "name": "download",
+          "startLine": 90,
+          "endLine": 97,
+          "params": [
+            "url"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ApiError",
+          "startLine": 7,
+          "endLine": 11,
+          "methods": [
+            "constructor"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ApiError",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "api",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "useApi",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "formatMoney",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "formatNumber",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "formatDate",
+          "line": 64,
+          "isDefault": false
+        },
+        {
+          "name": "percent",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "periodRange",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "day",
+          "line": 87,
+          "isDefault": false
+        },
+        {
+          "name": "download",
+          "line": 90,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 9
+        },
+        {
+          "caller": "api",
+          "callee": "fetch",
+          "lineNumber": 17
+        },
+        {
+          "caller": "api",
+          "callee": "JSON.stringify",
+          "lineNumber": 20
+        },
+        {
+          "caller": "api",
+          "callee": "response.json().catch",
+          "lineNumber": 22
+        },
+        {
+          "caller": "api",
+          "callee": "response.json",
+          "lineNumber": 22
+        },
+        {
+          "caller": "useApi",
+          "callee": "useState",
+          "lineNumber": 31
+        },
+        {
+          "caller": "useApi",
+          "callee": "useState",
+          "lineNumber": 32
+        },
+        {
+          "caller": "useApi",
+          "callee": "Boolean",
+          "lineNumber": 32
+        },
+        {
+          "caller": "useApi",
+          "callee": "useState",
+          "lineNumber": 33
+        },
+        {
+          "caller": "useApi",
+          "callee": "useCallback",
+          "lineNumber": 34
+        },
+        {
+          "caller": "useApi",
+          "callee": "setLoading",
+          "lineNumber": 36
+        },
+        {
+          "caller": "useApi",
+          "callee": "setError",
+          "lineNumber": 37
+        },
+        {
+          "caller": "useApi",
+          "callee": "setData",
+          "lineNumber": 39
+        },
+        {
+          "caller": "useApi",
+          "callee": "await api",
+          "lineNumber": 39
+        },
+        {
+          "caller": "useApi",
+          "callee": "setError",
+          "lineNumber": 41
+        },
+        {
+          "caller": "useApi",
+          "callee": "setLoading",
+          "lineNumber": 43
+        },
+        {
+          "caller": "useApi",
+          "callee": "useEffect",
+          "lineNumber": 46
+        },
+        {
+          "caller": "useApi",
+          "callee": "load",
+          "lineNumber": 47
+        },
+        {
+          "caller": "formatMoney",
+          "callee": "Number",
+          "lineNumber": 56
+        },
+        {
+          "caller": "formatMoney",
+          "callee": "n.toLocaleString",
+          "lineNumber": 57
+        },
+        {
+          "caller": "formatNumber",
+          "callee": "Number(value ?? 0).toLocaleString",
+          "lineNumber": 62
+        },
+        {
+          "caller": "formatNumber",
+          "callee": "Number",
+          "lineNumber": 62
+        },
+        {
+          "caller": "formatDate",
+          "callee": "new Date(value.length === 10 ? `${value}T12:00:00` : value).toLocaleString",
+          "lineNumber": 65
+        },
+        {
+          "caller": "percent",
+          "callee": "Math.round",
+          "lineNumber": 67
+        },
+        {
+          "caller": "periodRange",
+          "callee": "dayjs",
+          "lineNumber": 73
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.startOf",
+          "lineNumber": 75
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.endOf",
+          "lineNumber": 75
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.subtract(1, \"day\").startOf",
+          "lineNumber": 76
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.subtract",
+          "lineNumber": 76
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.subtract(1, \"day\").endOf",
+          "lineNumber": 76
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.subtract",
+          "lineNumber": 76
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.subtract(6, \"day\").startOf",
+          "lineNumber": 77
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.subtract",
+          "lineNumber": 77
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.endOf",
+          "lineNumber": 77
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.startOf",
+          "lineNumber": 78
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.endOf",
+          "lineNumber": 78
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.subtract(1, \"month\").startOf",
+          "lineNumber": 79
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.subtract",
+          "lineNumber": 79
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.subtract(1, \"month\").endOf",
+          "lineNumber": 79
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.subtract",
+          "lineNumber": 79
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.startOf",
+          "lineNumber": 80
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.endOf",
+          "lineNumber": 80
+        },
+        {
+          "caller": "periodRange",
+          "callee": "custom[0].startOf",
+          "lineNumber": 81
+        },
+        {
+          "caller": "periodRange",
+          "callee": "custom[1].endOf",
+          "lineNumber": 81
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.subtract(29, \"day\").startOf",
+          "lineNumber": 83
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.subtract",
+          "lineNumber": 83
+        },
+        {
+          "caller": "periodRange",
+          "callee": "now.endOf",
+          "lineNumber": 83
+        },
+        {
+          "caller": "day",
+          "callee": "dayjs(d).format",
+          "lineNumber": 87
+        },
+        {
+          "caller": "day",
+          "callee": "dayjs",
+          "lineNumber": 87
+        },
+        {
+          "caller": "download",
+          "callee": "document.createElement",
+          "lineNumber": 91
+        },
+        {
+          "caller": "download",
+          "callee": "document.body.appendChild",
+          "lineNumber": 94
+        },
+        {
+          "caller": "download",
+          "callee": "a.click",
+          "lineNumber": 95
+        },
+        {
+          "caller": "download",
+          "callee": "a.remove",
+          "lineNumber": 96
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 10,
+        "functionCount": 9,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "components/admin/erp/purchase-items.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 61,
+      "nonEmptyLines": 56,
+      "functions": [
+        {
+          "name": "usePurchaseItems",
+          "startLine": 32,
+          "endLine": 61,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "usePurchaseItems",
+          "line": 32,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "usePurchaseItems",
+          "callee": "useState",
+          "lineNumber": 33
+        },
+        {
+          "caller": "usePurchaseItems",
+          "callee": "useEffect",
+          "lineNumber": 34
+        },
+        {
+          "caller": "usePurchaseItems",
+          "callee": "Promise.all([\r\n            api<{ rows: InventoryRow[] }>(\"/api/stock/inventory\").catch(() => ({ rows: [] as InventoryRow[] })),\r\n            api<Material[]>(\"/api/purchasing/materials\").catch(() => [] as Material[]),\r\n        ]).then",
+          "lineNumber": 35
+        },
+        {
+          "caller": "usePurchaseItems",
+          "callee": "Promise.all",
+          "lineNumber": 35
+        },
+        {
+          "caller": "usePurchaseItems",
+          "callee": "api<{ rows: InventoryRow[] }>(\"/api/stock/inventory\").catch",
+          "lineNumber": 36
+        },
+        {
+          "caller": "usePurchaseItems",
+          "callee": "api",
+          "lineNumber": 36
+        },
+        {
+          "caller": "usePurchaseItems",
+          "callee": "api<Material[]>(\"/api/purchasing/materials\").catch",
+          "lineNumber": 37
+        },
+        {
+          "caller": "usePurchaseItems",
+          "callee": "api",
+          "lineNumber": 37
+        },
+        {
+          "caller": "usePurchaseItems",
+          "callee": "setItems",
+          "lineNumber": 39
+        },
+        {
+          "caller": "usePurchaseItems",
+          "callee": "materials.map",
+          "lineNumber": 40
+        },
+        {
+          "caller": "usePurchaseItems",
+          "callee": "inventory.rows.map",
+          "lineNumber": 47
+        },
+        {
+          "caller": "usePurchaseItems",
+          "callee": "[r.color, r.size].filter(Boolean).join",
+          "lineNumber": 48
+        },
+        {
+          "caller": "usePurchaseItems",
+          "callee": "[r.color, r.size].filter",
+          "lineNumber": 48
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/erp/ui.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 213,
+      "nonEmptyLines": 198,
+      "functions": [
+        {
+          "name": "PageHeader",
+          "startLine": 15,
+          "endLine": 31,
+          "params": [
+            "{ title, subtitle, crumbs = [], extra }"
+          ]
+        },
+        {
+          "name": "Kpi",
+          "startLine": 34,
+          "endLine": 56,
+          "params": [
+            "{ title, value, hint, sub, color, loading, prefix }"
+          ]
+        },
+        {
+          "name": "ChannelTag",
+          "startLine": 58,
+          "endLine": 63,
+          "params": [
+            "{ channel }"
+          ]
+        },
+        {
+          "name": "PeriodFilter",
+          "startLine": 66,
+          "endLine": 94,
+          "params": [
+            "{ value, onChange }"
+          ]
+        },
+        {
+          "name": "usePeriod",
+          "startLine": 96,
+          "endLine": 100,
+          "params": [
+            "initial"
+          ]
+        },
+        {
+          "name": "useTeam",
+          "startLine": 112,
+          "endLine": 126,
+          "params": []
+        },
+        {
+          "name": "AgentSelect",
+          "startLine": 129,
+          "endLine": 153,
+          "params": [
+            "{ value, onChange, allowNobody = true, placeholder, style, filter }"
+          ]
+        },
+        {
+          "name": "CampaignSelect",
+          "startLine": 162,
+          "endLine": 178,
+          "params": [
+            "{ value, onChange, style }"
+          ]
+        },
+        {
+          "name": "ListRow",
+          "startLine": 184,
+          "endLine": 208,
+          "params": [
+            "{ avatar, title, description, actions, extra, children }"
+          ]
+        },
+        {
+          "name": "Help",
+          "startLine": 211,
+          "endLine": 213,
+          "params": [
+            "{ children }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "PageHeader",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "Kpi",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "ChannelTag",
+          "line": 58,
+          "isDefault": false
+        },
+        {
+          "name": "PeriodFilter",
+          "line": 66,
+          "isDefault": false
+        },
+        {
+          "name": "usePeriod",
+          "line": 96,
+          "isDefault": false
+        },
+        {
+          "name": "useTeam",
+          "line": 112,
+          "isDefault": false
+        },
+        {
+          "name": "AgentSelect",
+          "line": 129,
+          "isDefault": false
+        },
+        {
+          "name": "CampaignSelect",
+          "line": 162,
+          "isDefault": false
+        },
+        {
+          "name": "ListRow",
+          "line": 184,
+          "isDefault": false
+        },
+        {
+          "name": "Help",
+          "line": 211,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "PageHeader",
+          "callee": "useAdminT",
+          "lineNumber": 16
+        },
+        {
+          "caller": "PageHeader",
+          "callee": "t",
+          "lineNumber": 20
+        },
+        {
+          "caller": "PageHeader",
+          "callee": "crumbs.map",
+          "lineNumber": 20
+        },
+        {
+          "caller": "ChannelTag",
+          "callee": "useAdminT",
+          "lineNumber": 59
+        },
+        {
+          "caller": "ChannelTag",
+          "callee": "t",
+          "lineNumber": 62
+        },
+        {
+          "caller": "PeriodFilter",
+          "callee": "useAdminT",
+          "lineNumber": 67
+        },
+        {
+          "caller": "PeriodFilter",
+          "callee": "onChange",
+          "lineNumber": 73
+        },
+        {
+          "caller": "PeriodFilter",
+          "callee": "t",
+          "lineNumber": 75
+        },
+        {
+          "caller": "PeriodFilter",
+          "callee": "t",
+          "lineNumber": 76
+        },
+        {
+          "caller": "PeriodFilter",
+          "callee": "t",
+          "lineNumber": 77
+        },
+        {
+          "caller": "PeriodFilter",
+          "callee": "t",
+          "lineNumber": 78
+        },
+        {
+          "caller": "PeriodFilter",
+          "callee": "t",
+          "lineNumber": 79
+        },
+        {
+          "caller": "PeriodFilter",
+          "callee": "t",
+          "lineNumber": 80
+        },
+        {
+          "caller": "PeriodFilter",
+          "callee": "t",
+          "lineNumber": 81
+        },
+        {
+          "caller": "PeriodFilter",
+          "callee": "onChange",
+          "lineNumber": 88
+        },
+        {
+          "caller": "PeriodFilter",
+          "callee": "d.isAfter",
+          "lineNumber": 89
+        },
+        {
+          "caller": "PeriodFilter",
+          "callee": "dayjs().endOf",
+          "lineNumber": 89
+        },
+        {
+          "caller": "PeriodFilter",
+          "callee": "dayjs",
+          "lineNumber": 89
+        },
+        {
+          "caller": "usePeriod",
+          "callee": "useState",
+          "lineNumber": 97
+        },
+        {
+          "caller": "usePeriod",
+          "callee": "periodRange",
+          "lineNumber": 98
+        },
+        {
+          "caller": "useTeam",
+          "callee": "useState",
+          "lineNumber": 113
+        },
+        {
+          "caller": "useTeam",
+          "callee": "useEffect",
+          "lineNumber": 114
+        },
+        {
+          "caller": "useTeam",
+          "callee": "api<StaffMember[]>(\"/api/admin/staff\").catch",
+          "lineNumber": 115
+        },
+        {
+          "caller": "useTeam",
+          "callee": "api",
+          "lineNumber": 115
+        },
+        {
+          "caller": "useTeam",
+          "callee": "teamCache.then",
+          "lineNumber": 120
+        },
+        {
+          "caller": "useTeam",
+          "callee": "setTeam",
+          "lineNumber": 120
+        },
+        {
+          "caller": "AgentSelect",
+          "callee": "useAdminT",
+          "lineNumber": 137
+        },
+        {
+          "caller": "AgentSelect",
+          "callee": "useTeam",
+          "lineNumber": 138
+        },
+        {
+          "caller": "AgentSelect",
+          "callee": "onChange",
+          "lineNumber": 142
+        },
+        {
+          "caller": "AgentSelect",
+          "callee": "t",
+          "lineNumber": 143
+        },
+        {
+          "caller": "AgentSelect",
+          "callee": "t",
+          "lineNumber": 148
+        },
+        {
+          "caller": "AgentSelect",
+          "callee": "team.filter((m) => !filter || filter(m)).map",
+          "lineNumber": 149
+        },
+        {
+          "caller": "AgentSelect",
+          "callee": "team.filter",
+          "lineNumber": 149
+        },
+        {
+          "caller": "AgentSelect",
+          "callee": "filter",
+          "lineNumber": 149
+        },
+        {
+          "caller": "CampaignSelect",
+          "callee": "useAdminT",
+          "lineNumber": 163
+        },
+        {
+          "caller": "CampaignSelect",
+          "callee": "useState",
+          "lineNumber": 164
+        },
+        {
+          "caller": "CampaignSelect",
+          "callee": "useEffect",
+          "lineNumber": 165
+        },
+        {
+          "caller": "CampaignSelect",
+          "callee": "api<CampaignOption[]>(\"/api/marketing/campaigns?active=1\").then(setCampaigns).catch",
+          "lineNumber": 166
+        },
+        {
+          "caller": "CampaignSelect",
+          "callee": "api<CampaignOption[]>(\"/api/marketing/campaigns?active=1\").then",
+          "lineNumber": 166
+        },
+        {
+          "caller": "CampaignSelect",
+          "callee": "api",
+          "lineNumber": 166
+        },
+        {
+          "caller": "CampaignSelect",
+          "callee": "setCampaigns",
+          "lineNumber": 166
+        },
+        {
+          "caller": "CampaignSelect",
+          "callee": "onChange",
+          "lineNumber": 171
+        },
+        {
+          "caller": "CampaignSelect",
+          "callee": "t",
+          "lineNumber": 175
+        },
+        {
+          "caller": "CampaignSelect",
+          "callee": "campaigns.map",
+          "lineNumber": 175
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 10,
+        "functionCount": 10,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/notification-item.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 74,
+      "nonEmptyLines": 66,
+      "functions": [
+        {
+          "name": "notificationText",
+          "startLine": 29,
+          "endLine": 34,
+          "params": [
+            "item",
+            "locale"
+          ]
+        },
+        {
+          "name": "Icon",
+          "startLine": 36,
+          "endLine": 43,
+          "params": [
+            "{ item }"
+          ]
+        },
+        {
+          "name": "NotificationItem",
+          "startLine": 45,
+          "endLine": 74,
+          "params": [
+            "{ item, onOpen, compact }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "notificationText",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "NotificationItem",
+          "line": 45,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "NotificationItem",
+          "callee": "useAdminT",
+          "lineNumber": 46
+        },
+        {
+          "caller": "NotificationItem",
+          "callee": "notificationText",
+          "lineNumber": 47
+        },
+        {
+          "caller": "NotificationItem",
+          "callee": "onOpen",
+          "lineNumber": 52
+        },
+        {
+          "caller": "NotificationItem",
+          "callee": "dayjs(item.created_at).locale(locale).fromNow",
+          "lineNumber": 69
+        },
+        {
+          "caller": "NotificationItem",
+          "callee": "dayjs(item.created_at).locale",
+          "lineNumber": 69
+        },
+        {
+          "caller": "NotificationItem",
+          "callee": "dayjs",
+          "lineNumber": 69
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/order-status.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 70,
+      "nonEmptyLines": 59,
+      "functions": [
+        {
+          "name": "orderStatusLabel",
+          "startLine": 50,
+          "endLine": 50,
+          "params": [
+            "status"
+          ]
+        },
+        {
+          "name": "validateOrder",
+          "startLine": 63,
+          "endLine": 65,
+          "params": [
+            "orderId"
+          ]
+        },
+        {
+          "name": "errorCode",
+          "startLine": 67,
+          "endLine": 67,
+          "params": [
+            "error"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ORDER_STATUS_LABELS",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "ORDER_STATUS_COLORS",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "PAYMENT_STATUS_LABELS",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "PAYMENT_STATUS_COLORS",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "ORDER_STATUS_OPTIONS",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "orderStatusLabel",
+          "line": 50,
+          "isDefault": false
+        },
+        {
+          "name": "validateOrder",
+          "line": 63,
+          "isDefault": false
+        },
+        {
+          "name": "errorCode",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "ORDER_ITEM_IMAGE_FALLBACK",
+          "line": 70,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "validateOrder",
+          "callee": "deliveryApi",
+          "lineNumber": 64
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 9,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/pos/PosAnalyticsTab.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 83,
+      "nonEmptyLines": 79,
+      "functions": [
+        {
+          "name": "PosAnalyticsTab",
+          "startLine": 21,
+          "endLine": 83,
+          "params": [
+            "{ shops }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "PosAnalyticsTab",
+          "line": 21,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "useAdminT",
+          "lineNumber": 22
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "usePeriod",
+          "lineNumber": 23
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "useState",
+          "lineNumber": 24
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "useApi",
+          "lineNumber": 25
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "day",
+          "lineNumber": 25
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "day",
+          "lineNumber": 25
+        },
+        {
+          "caller": "money",
+          "callee": "formatMoney",
+          "lineNumber": 26
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 32
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "shops.map",
+          "lineNumber": 32
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 36
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "money",
+          "lineNumber": 36
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 37
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "formatNumber",
+          "lineNumber": 37
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 37
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "money",
+          "lineNumber": 37
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 38
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "formatNumber",
+          "lineNumber": 38
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 39
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "money",
+          "lineNumber": 39
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 41
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "(data?.days ?? []).map",
+          "lineNumber": 43
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "formatDate",
+          "lineNumber": 43
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "formatDate",
+          "lineNumber": 43
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "money",
+          "lineNumber": 43
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 44
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 49
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "(data?.products ?? []).map",
+          "lineNumber": 50
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "money",
+          "lineNumber": 50
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "formatNumber",
+          "lineNumber": 50
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 54
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "(data?.shops ?? []).map",
+          "lineNumber": 55
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "formatNumber",
+          "lineNumber": 55
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 57
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "(data?.methods ?? []).map",
+          "lineNumber": 58
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 58
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 62
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 71
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 72
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 73
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 74
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 75
+        },
+        {
+          "caller": "PosAnalyticsTab",
+          "callee": "t",
+          "lineNumber": 75
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/pos/PosStockTab.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 98,
+      "nonEmptyLines": 90,
+      "functions": [
+        {
+          "name": "isLowStock",
+          "startLine": 27,
+          "endLine": 27,
+          "params": [
+            "r"
+          ]
+        },
+        {
+          "name": "isOutOfStock",
+          "startLine": 28,
+          "endLine": 28,
+          "params": [
+            "r"
+          ]
+        },
+        {
+          "name": "PosStockTab",
+          "startLine": 31,
+          "endLine": 98,
+          "params": [
+            "{ rows, loading, shop, onReload }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "isLowStock",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "isOutOfStock",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "PosStockTab",
+          "line": 31,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "PosStockTab",
+          "callee": "useAdminT",
+          "lineNumber": 32
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "useAdminRole().can",
+          "lineNumber": 33
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "useAdminRole",
+          "lineNumber": 33
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "useState",
+          "lineNumber": 34
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "useState",
+          "lineNumber": 35
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "useMemo",
+          "lineNumber": 37
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "rows.filter",
+          "lineNumber": 37
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "carried.filter",
+          "lineNumber": 38
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "carried.filter",
+          "lineNumber": 39
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "carried.reduce",
+          "lineNumber": 40
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "useMemo",
+          "lineNumber": 42
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "search.trim().toLowerCase",
+          "lineNumber": 43
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "search.trim",
+          "lineNumber": 43
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "list\n            .filter((r) => !term || [r.name, r.label, r.sku, r.code].some((v) => (v ?? \"\").toLowerCase().includes(term)))\n            .sort",
+          "lineNumber": 45
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "list\n            .filter",
+          "lineNumber": 45
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "[r.name, r.label, r.sku, r.code].some",
+          "lineNumber": 46
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "(v ?? \"\").toLowerCase().includes",
+          "lineNumber": 46
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "(v ?? \"\").toLowerCase",
+          "lineNumber": 46
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 53
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "formatNumber",
+          "lineNumber": 53
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 54
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "formatNumber",
+          "lineNumber": 54
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 55
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "formatNumber",
+          "lineNumber": 55
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 56
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "formatNumber",
+          "lineNumber": 56
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 62
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 63
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 72
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 73
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 74
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 77
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "setSearch",
+          "lineNumber": 77
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 86
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 88
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 89
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 90
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "formatMoney",
+          "lineNumber": 90
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 91
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "isOutOfStock",
+          "lineNumber": 91
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "isLowStock",
+          "lineNumber": 91
+        },
+        {
+          "caller": "PosStockTab",
+          "callee": "t",
+          "lineNumber": 92
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 3,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/select-search.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 7,
+      "nonEmptyLines": 7,
+      "functions": [
+        {
+          "name": "searchByText",
+          "startLine": 5,
+          "endLine": 7,
+          "params": [
+            "input",
+            "option"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "searchByText",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "searchByText",
+          "callee": "(option?.searchtext ?? \"\").toLowerCase().includes",
+          "lineNumber": 6
+        },
+        {
+          "caller": "searchByText",
+          "callee": "(option?.searchtext ?? \"\").toLowerCase",
+          "lineNumber": 6
+        },
+        {
+          "caller": "searchByText",
+          "callee": "input.trim().toLowerCase",
+          "lineNumber": 6
+        },
+        {
+          "caller": "searchByText",
+          "callee": "input.trim",
+          "lineNumber": 6
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/admin-i18n.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 92,
+      "nonEmptyLines": 76,
+      "functions": [
+        {
+          "name": "msg",
+          "startLine": 28,
+          "endLine": 28,
+          "params": [
+            "text"
+          ]
+        },
+        {
+          "name": "interpolate",
+          "startLine": 32,
+          "endLine": 34,
+          "params": [
+            "text",
+            "vars"
+          ]
+        },
+        {
+          "name": "AdminI18nProvider",
+          "startLine": 50,
+          "endLine": 88,
+          "params": [
+            "{ children }"
+          ]
+        },
+        {
+          "name": "useAdminT",
+          "startLine": 90,
+          "endLine": 92,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ADMIN_LOCALES",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "DATE_LOCALES",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "msg",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "AdminI18nProvider",
+          "line": 50,
+          "isDefault": false
+        },
+        {
+          "name": "useAdminT",
+          "line": 90,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "interpolate",
+          "callee": "text.replace",
+          "lineNumber": 33
+        },
+        {
+          "caller": "interpolate",
+          "callee": "String",
+          "lineNumber": 33
+        },
+        {
+          "caller": "AdminI18nProvider",
+          "callee": "useState",
+          "lineNumber": 51
+        },
+        {
+          "caller": "AdminI18nProvider",
+          "callee": "useEffect",
+          "lineNumber": 53
+        },
+        {
+          "caller": "AdminI18nProvider",
+          "callee": "localStorage.getItem",
+          "lineNumber": 55
+        },
+        {
+          "caller": "AdminI18nProvider",
+          "callee": "setLocaleState",
+          "lineNumber": 56
+        },
+        {
+          "caller": "AdminI18nProvider",
+          "callee": "navigator.language.startsWith",
+          "lineNumber": 57
+        },
+        {
+          "caller": "AdminI18nProvider",
+          "callee": "setLocaleState",
+          "lineNumber": 57
+        },
+        {
+          "caller": "AdminI18nProvider",
+          "callee": "navigator.language.startsWith",
+          "lineNumber": 58
+        },
+        {
+          "caller": "AdminI18nProvider",
+          "callee": "setLocaleState",
+          "lineNumber": 58
+        },
+        {
+          "caller": "AdminI18nProvider",
+          "callee": "useEffect",
+          "lineNumber": 64
+        },
+        {
+          "caller": "AdminI18nProvider",
+          "callee": "dayjs.locale",
+          "lineNumber": 65
+        },
+        {
+          "caller": "AdminI18nProvider",
+          "callee": "useCallback",
+          "lineNumber": 68
+        },
+        {
+          "caller": "AdminI18nProvider",
+          "callee": "setLocaleState",
+          "lineNumber": 69
+        },
+        {
+          "caller": "AdminI18nProvider",
+          "callee": "localStorage.setItem",
+          "lineNumber": 71
+        },
+        {
+          "caller": "AdminI18nProvider",
+          "callee": "useMemo",
+          "lineNumber": 77
+        },
+        {
+          "caller": "AdminI18nProvider",
+          "callee": "interpolate",
+          "lineNumber": 83
+        },
+        {
+          "caller": "useAdminT",
+          "callee": "useContext",
+          "lineNumber": 91
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 5,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/admin-role-context.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 44,
+      "functions": [
+        {
+          "name": "AdminRoleProvider",
+          "startLine": 21,
+          "endLine": 40,
+          "params": [
+            "{ children }"
+          ]
+        },
+        {
+          "name": "useAdminRole",
+          "startLine": 42,
+          "endLine": 51,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AdminRoleProvider",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "useAdminRole",
+          "line": 42,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AdminRoleProvider",
+          "callee": "useState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "AdminRoleProvider",
+          "callee": "useEffect",
+          "lineNumber": 24
+        },
+        {
+          "caller": "AdminRoleProvider",
+          "callee": "fetch(\"/api/admin/me\")\r\n            .then((res) => (res.ok ? res.json() : null))\r\n            .then((json) => {\r\n                if (!cancelled) setState({ id: json?.data?.id ?? null, role: json?.data?.role ?? null, email: json?.data?.email ?? null, permissions: json?.data?.permissions ?? [], loading: false });\r\n            })\r\n            .catch",
+          "lineNumber": 26
+        },
+        {
+          "caller": "AdminRoleProvider",
+          "callee": "fetch(\"/api/admin/me\")\r\n            .then((res) => (res.ok ? res.json() : null))\r\n            .then",
+          "lineNumber": 26
+        },
+        {
+          "caller": "AdminRoleProvider",
+          "callee": "fetch(\"/api/admin/me\")\r\n            .then",
+          "lineNumber": 26
+        },
+        {
+          "caller": "AdminRoleProvider",
+          "callee": "fetch",
+          "lineNumber": 26
+        },
+        {
+          "caller": "AdminRoleProvider",
+          "callee": "res.json",
+          "lineNumber": 27
+        },
+        {
+          "caller": "AdminRoleProvider",
+          "callee": "setState",
+          "lineNumber": 29
+        },
+        {
+          "caller": "AdminRoleProvider",
+          "callee": "setState",
+          "lineNumber": 32
+        },
+        {
+          "caller": "useAdminRole",
+          "callee": "useContext",
+          "lineNumber": 43
+        },
+        {
+          "caller": "useAdminRole",
+          "callee": "state.permissions.includes",
+          "lineNumber": 49
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/colissimo-data.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 172,
+      "nonEmptyLines": 157,
+      "functions": [
+        {
+          "name": "msg",
+          "startLine": 7,
+          "endLine": 7,
+          "params": [
+            "text"
+          ]
+        },
+        {
+          "name": "governorateOptions",
+          "startLine": 41,
+          "endLine": 43,
+          "params": [
+            "locale"
+          ]
+        },
+        {
+          "name": "governorateLabel",
+          "startLine": 46,
+          "endLine": 49,
+          "params": [
+            "name",
+            "locale"
+          ]
+        },
+        {
+          "name": "normalize",
+          "startLine": 53,
+          "endLine": 54,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "matchGovernorate",
+          "startLine": 60,
+          "endLine": 71,
+          "params": [
+            "...values"
+          ]
+        },
+        {
+          "name": "isFinalParcel",
+          "startLine": 113,
+          "endLine": 113,
+          "params": [
+            "status",
+            "paid"
+          ]
+        },
+        {
+          "name": "customerStage",
+          "startLine": 118,
+          "endLine": 126,
+          "params": [
+            "status"
+          ]
+        },
+        {
+          "name": "statusInfo",
+          "startLine": 128,
+          "endLine": 130,
+          "params": [
+            "status"
+          ]
+        },
+        {
+          "name": "parcelFromOrder",
+          "startLine": 151,
+          "endLine": 172,
+          "params": [
+            "order"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "governorateOptions",
+          "line": 41,
+          "isDefault": false
+        },
+        {
+          "name": "governorateLabel",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "COLISSIMO_GOVERNORATES",
+          "line": 51,
+          "isDefault": false
+        },
+        {
+          "name": "matchGovernorate",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "COLISSIMO_STATUSES",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "FINAL_STATUSES",
+          "line": 111,
+          "isDefault": false
+        },
+        {
+          "name": "isFinalParcel",
+          "line": 113,
+          "isDefault": false
+        },
+        {
+          "name": "customerStage",
+          "line": 118,
+          "isDefault": false
+        },
+        {
+          "name": "statusInfo",
+          "line": 128,
+          "isDefault": false
+        },
+        {
+          "name": "parcelFromOrder",
+          "line": 151,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "governorateOptions",
+          "callee": "GOVERNORATES.map",
+          "lineNumber": 42
+        },
+        {
+          "caller": "governorateLabel",
+          "callee": "GOVERNORATES.find",
+          "lineNumber": 47
+        },
+        {
+          "caller": "normalize",
+          "callee": "value.normalize('NFD').replace(/[̀-ًͯ-ْ]/g, '').toLowerCase().replace(/[^a-z؀-ۿ]+/g, ' ').trim",
+          "lineNumber": 54
+        },
+        {
+          "caller": "normalize",
+          "callee": "value.normalize('NFD').replace(/[̀-ًͯ-ْ]/g, '').toLowerCase().replace",
+          "lineNumber": 54
+        },
+        {
+          "caller": "normalize",
+          "callee": "value.normalize('NFD').replace(/[̀-ًͯ-ْ]/g, '').toLowerCase",
+          "lineNumber": 54
+        },
+        {
+          "caller": "normalize",
+          "callee": "value.normalize('NFD').replace",
+          "lineNumber": 54
+        },
+        {
+          "caller": "normalize",
+          "callee": "value.normalize",
+          "lineNumber": 54
+        },
+        {
+          "caller": "matchGovernorate",
+          "callee": "normalize",
+          "lineNumber": 63
+        },
+        {
+          "caller": "matchGovernorate",
+          "callee": "GOVERNORATES.flatMap(({ name, fr, ar, aliases = [] }) => [name, fr, ar, ...aliases].map((spelling) => ({ name, spelling: normalize(spelling) })))\r\n            .sort",
+          "lineNumber": 65
+        },
+        {
+          "caller": "matchGovernorate",
+          "callee": "GOVERNORATES.flatMap",
+          "lineNumber": 65
+        },
+        {
+          "caller": "matchGovernorate",
+          "callee": "[name, fr, ar, ...aliases].map",
+          "lineNumber": 65
+        },
+        {
+          "caller": "matchGovernorate",
+          "callee": "normalize",
+          "lineNumber": 65
+        },
+        {
+          "caller": "matchGovernorate",
+          "callee": "candidates.find",
+          "lineNumber": 67
+        },
+        {
+          "caller": "matchGovernorate",
+          "callee": "text.includes",
+          "lineNumber": 67
+        },
+        {
+          "caller": "isFinalParcel",
+          "callee": "FINAL_STATUSES.includes",
+          "lineNumber": 113
+        },
+        {
+          "caller": "customerStage",
+          "callee": "statusInfo",
+          "lineNumber": 121
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "order.items\r\n        .map((item) => `${item.quantity > 1 ? `${item.quantity}× ` : ''}${item.product_name.trim()}${item.variant_label ? ` (${item.variant_label})` : ''}`)\r\n        .join(', ')\r\n        .slice",
+          "lineNumber": 152
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "order.items\r\n        .map((item) => `${item.quantity > 1 ? `${item.quantity}× ` : ''}${item.product_name.trim()}${item.variant_label ? ` (${item.variant_label})` : ''}`)\r\n        .join",
+          "lineNumber": 152
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "order.items\r\n        .map",
+          "lineNumber": 152
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "item.product_name.trim",
+          "lineNumber": 153
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "matchGovernorate",
+          "lineNumber": 156
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "`${order.customer_first_name} ${order.customer_last_name}`.trim().slice",
+          "lineNumber": 158
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "`${order.customer_first_name} ${order.customer_last_name}`.trim",
+          "lineNumber": 158
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "(order.customer_phone ?? '').replace(/\\D/g, '').slice",
+          "lineNumber": 159
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "(order.customer_phone ?? '').replace",
+          "lineNumber": 159
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "(order.shipping_city || order.shipping_state || governorate || '').trim().slice",
+          "lineNumber": 161
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "(order.shipping_city || order.shipping_state || governorate || '').trim",
+          "lineNumber": 161
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "(order.shipping_address ?? '').trim().slice",
+          "lineNumber": 162
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "(order.shipping_address ?? '').trim",
+          "lineNumber": 162
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "order.items.reduce",
+          "lineNumber": 164
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "Number",
+          "lineNumber": 165
+        },
+        {
+          "caller": "parcelFromOrder",
+          "callee": "order.order_notes.slice",
+          "lineNumber": 166
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 10,
+        "functionCount": 9,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/erp/constants.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 228,
+      "nonEmptyLines": 194,
+      "functions": [
+        {
+          "name": "msg",
+          "startLine": 6,
+          "endLine": 6,
+          "params": [
+            "text"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CHANNELS",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "CHANNEL_LABELS",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "CHANNEL_COLORS",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "MANUAL_CHANNELS",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "CUSTOMER_STAGES",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "STAGE_LABELS",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "STAGE_COLORS",
+          "line": 49,
+          "isDefault": false
+        },
+        {
+          "name": "PAYMENT_METHODS",
+          "line": 59,
+          "isDefault": false
+        },
+        {
+          "name": "PAYMENT_METHOD_LABELS",
+          "line": 62,
+          "isDefault": false
+        },
+        {
+          "name": "MONEY_ACCOUNTS",
+          "line": 73,
+          "isDefault": false
+        },
+        {
+          "name": "MONEY_ACCOUNT_LABELS",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "BILL_CATEGORIES",
+          "line": 82,
+          "isDefault": false
+        },
+        {
+          "name": "BILL_CATEGORY_LABELS",
+          "line": 88,
+          "isDefault": false
+        },
+        {
+          "name": "BILL_CATEGORY_ACCOUNTS",
+          "line": 108,
+          "isDefault": false
+        },
+        {
+          "name": "FIXED_CATEGORIES",
+          "line": 115,
+          "isDefault": false
+        },
+        {
+          "name": "TREASURY_CATEGORIES",
+          "line": 117,
+          "isDefault": false
+        },
+        {
+          "name": "TREASURY_CATEGORY_LABELS",
+          "line": 123,
+          "isDefault": false
+        },
+        {
+          "name": "AD_PLATFORMS",
+          "line": 136,
+          "isDefault": false
+        },
+        {
+          "name": "AD_PLATFORM_LABELS",
+          "line": 139,
+          "isDefault": false
+        },
+        {
+          "name": "PO_STATUSES",
+          "line": 149,
+          "isDefault": false
+        },
+        {
+          "name": "PO_STATUS_LABELS",
+          "line": 152,
+          "isDefault": false
+        },
+        {
+          "name": "PO_STATUS_COLORS",
+          "line": 161,
+          "isDefault": false
+        },
+        {
+          "name": "MATERIAL_UNITS",
+          "line": 170,
+          "isDefault": false
+        },
+        {
+          "name": "JOURNALS",
+          "line": 172,
+          "isDefault": false
+        },
+        {
+          "name": "JOURNAL_LABELS",
+          "line": 175,
+          "isDefault": false
+        },
+        {
+          "name": "ACCOUNT_TYPES",
+          "line": 183,
+          "isDefault": false
+        },
+        {
+          "name": "ACCOUNT_TYPE_LABELS",
+          "line": 186,
+          "isDefault": false
+        },
+        {
+          "name": "DOCUMENT_KINDS",
+          "line": 194,
+          "isDefault": false
+        },
+        {
+          "name": "DOCUMENT_KIND_LABELS",
+          "line": 197,
+          "isDefault": false
+        },
+        {
+          "name": "OPEN_ORDER_STATUSES",
+          "line": 210,
+          "isDefault": false
+        },
+        {
+          "name": "TICKET_STATUSES",
+          "line": 212,
+          "isDefault": false
+        },
+        {
+          "name": "TICKET_STATUS_LABELS",
+          "line": 215,
+          "isDefault": false
+        },
+        {
+          "name": "TICKET_PRIORITIES",
+          "line": 221,
+          "isDefault": false
+        },
+        {
+          "name": "TICKET_PRIORITY_LABELS",
+          "line": 224,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 34,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

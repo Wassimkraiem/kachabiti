@@ -11,8 +11,8 @@ export default function CarouselIndicators({
     totalSlides, 
     currentSlide, 
     onSlideChange,
-    activeColor = "bg-[#7B4735]",
-    inactiveColor = "bg-gray-300",
+    activeColor = "bg-accent",
+    inactiveColor = "bg-line",
     className = ""
 }: CarouselIndicatorsProps) {
     return (

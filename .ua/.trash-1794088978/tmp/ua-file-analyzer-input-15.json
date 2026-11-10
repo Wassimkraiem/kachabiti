@@ -1,0 +1,1 @@
+{"projectRoot":"C:/Users/Wassi/kachabity","batchFiles":[{"path":".github/workflows/ci.yml","language":"yaml","sizeLines":87,"fileCategory":"infra"},{"path":".github/workflows/deploy.yml","language":"yaml","sizeLines":147,"fileCategory":"infra"}],"batchImportData":{".github/workflows/ci.yml":[],".github/workflows/deploy.yml":[]}}

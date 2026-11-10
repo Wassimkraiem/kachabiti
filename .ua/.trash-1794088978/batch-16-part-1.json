@@ -1,0 +1,1144 @@
+{
+ "nodes": [
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "type": "table",
+   "name": "20260928135357_rebuild_storefront_schema.sql",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Baseline storefront schema: catalog (categories, products, variants, images, discounts), content (promotions, reels, hero sections), users, reviews, favorites, orders, carts and shipping/tax settings, with indexes, views and an updated_at trigger.",
+   "tags": [
+    "database",
+    "migration",
+    "schema-definition",
+    "catalog",
+    "storefront"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:categories",
+   "type": "table",
+   "name": "categories",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Product categories with localized names, nesting and featured position.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:products",
+   "type": "table",
+   "name": "products",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Catalog products with localized texts, pricing, status and search fields.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:colors",
+   "type": "table",
+   "name": "colors",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Color lookup for product variants.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:sizes",
+   "type": "table",
+   "name": "sizes",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Size lookup for product variants.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_variants",
+   "type": "table",
+   "name": "product_variants",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Color and size variants of a product with price and mirrored stock.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_images",
+   "type": "table",
+   "name": "product_images",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Product and variant photos with ordering.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_discounts",
+   "type": "table",
+   "name": "product_discounts",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Time-bound percentage discounts per product.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:promotions",
+   "type": "table",
+   "name": "promotions",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Promotional banners shown on the storefront.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:reels",
+   "type": "table",
+   "name": "reels",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Short video reels shown on the home page.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:hero_sections",
+   "type": "table",
+   "name": "hero_sections",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Hero cards and carousel slides ordered by sort_order.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:small_cards",
+   "type": "table",
+   "name": "small_cards",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Small promotional cards on the home page.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:users",
+   "type": "table",
+   "name": "users",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "User profiles, later the account table with credentials and metadata.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:reviews",
+   "type": "table",
+   "name": "reviews",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Customer product reviews with ratings.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:user_favorites",
+   "type": "table",
+   "name": "user_favorites",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Products favorited by shoppers.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:orders",
+   "type": "table",
+   "name": "orders",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Customer orders with status, totals and shipping details.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:order_items",
+   "type": "table",
+   "name": "order_items",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Order lines with variant, quantity and price.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:newsletter_subscribers",
+   "type": "table",
+   "name": "newsletter_subscribers",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Newsletter email subscriptions.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:carts",
+   "type": "table",
+   "name": "carts",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Server-side carts used for abandoned-cart analytics.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:cart_items",
+   "type": "table",
+   "name": "cart_items",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Lines of tracked carts.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:site_settings",
+   "type": "table",
+   "name": "site_settings",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Key/value settings read by the storefront.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:shipping_rates",
+   "type": "table",
+   "name": "shipping_rates",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Shipping cost per country.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:country_tax_rates",
+   "type": "table",
+   "name": "country_tax_rates",
+   "filePath": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "summary": "Tax rate per country.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928141343_seed_tunisia_shipping_rate.sql",
+   "type": "table",
+   "name": "20260928141343_seed_tunisia_shipping_rate.sql",
+   "filePath": "supabase/migrations/20260928141343_seed_tunisia_shipping_rate.sql",
+   "summary": "Seeds the standard Tunisia shipping rate row (8 TND, free above the global threshold) so calculateShipping stops falling back on every checkout.",
+   "tags": [
+    "database",
+    "migration",
+    "seed-data",
+    "shipping"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928164330_category_hierarchy.sql",
+   "type": "table",
+   "name": "20260928164330_category_hierarchy.sql",
+   "filePath": "supabase/migrations/20260928164330_category_hierarchy.sql",
+   "summary": "Adds categories.parent_id with an index so categories can be nested and category pages include descendant products.",
+   "tags": [
+    "database",
+    "migration",
+    "categories",
+    "hierarchy"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20260928183053_customer_accounts.sql",
+   "type": "table",
+   "name": "20260928183053_customer_accounts.sql",
+   "filePath": "supabase/migrations/20260928183053_customer_accounts.sql",
+   "summary": "Customer accounts: keeps a public.users profile row (name and avatar only) in sync with auth users through a trigger.",
+   "tags": [
+    "database",
+    "migration",
+    "authentication",
+    "trigger"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "table:supabase/migrations/20261001112501_stock_management.sql",
+   "type": "table",
+   "name": "20261001112501_stock_management.sql",
+   "filePath": "supabase/migrations/20261001112501_stock_management.sql",
+   "summary": "Stock management merged from the separate stock app: locations, suppliers, collections, product costs, per-location inventory levels and the append-only stock_movements ledger, with triggers that apply movements, mirror online stock, and generate product codes and SKUs.",
+   "tags": [
+    "database",
+    "migration",
+    "inventory",
+    "trigger",
+    "stock-ledger"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "table:supabase/migrations/20261001112501_stock_management.sql:locations",
+   "type": "table",
+   "name": "locations",
+   "filePath": "supabase/migrations/20261001112501_stock_management.sql",
+   "summary": "Stock locations (warehouse, online, shops).",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261001112501_stock_management.sql:suppliers",
+   "type": "table",
+   "name": "suppliers",
+   "filePath": "supabase/migrations/20261001112501_stock_management.sql",
+   "summary": "Suppliers of goods and materials.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261001112501_stock_management.sql:collections",
+   "type": "table",
+   "name": "collections",
+   "filePath": "supabase/migrations/20261001112501_stock_management.sql",
+   "summary": "Product collections.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261001112501_stock_management.sql:product_costs",
+   "type": "table",
+   "name": "product_costs",
+   "filePath": "supabase/migrations/20261001112501_stock_management.sql",
+   "summary": "Purchase cost per product.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261001112501_stock_management.sql:inventory_levels",
+   "type": "table",
+   "name": "inventory_levels",
+   "filePath": "supabase/migrations/20261001112501_stock_management.sql",
+   "summary": "Stock quantity per variant and location, maintained by trigger.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261001112501_stock_management.sql:stock_movements",
+   "type": "table",
+   "name": "stock_movements",
+   "filePath": "supabase/migrations/20261001112501_stock_management.sql",
+   "summary": "Append-only ledger of stock changes.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261001130516_stock_trigger_privileges.sql",
+   "type": "table",
+   "name": "20261001130516_stock_trigger_privileges.sql",
+   "filePath": "supabase/migrations/20261001130516_stock_trigger_privileges.sql",
+   "summary": "Makes the stock trigger functions SECURITY DEFINER so callers without usage on the private schema can still fire them.",
+   "tags": [
+    "database",
+    "migration",
+    "security",
+    "privileges"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261001170000_transactional_writes.sql",
+   "type": "table",
+   "name": "20261001170000_transactional_writes.sql",
+   "filePath": "supabase/migrations/20261001170000_transactional_writes.sql",
+   "summary": "Wraps multi-step writes (create_order, set_order_status, delete_orders, save_product, record_stock_movements) in Postgres functions so each runs in one transaction.",
+   "tags": [
+    "database",
+    "migration",
+    "transactions",
+    "stored-procedures"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "type": "table",
+   "name": "20261002082656_soft_deletes_and_landing_products.sql",
+   "filePath": "supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "summary": "Introduces soft deletes (deleted_at columns plus a prevent_hard_delete trigger on business tables) and the landing_products table for home page picks.",
+   "tags": [
+    "database",
+    "migration",
+    "soft-delete",
+    "landing-page"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql:landing_products",
+   "type": "table",
+   "name": "landing_products",
+   "filePath": "supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "summary": "Pinned product picks per home page section.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261002084321_landing_config_and_activity_log.sql",
+   "type": "table",
+   "name": "20261002084321_landing_config_and_activity_log.sql",
+   "filePath": "supabase/migrations/20261002084321_landing_config_and_activity_log.sql",
+   "summary": "Makes every home section configurable (landing products, featured categories, landing_config) and adds the append-only activity_log filled by the log_activity trigger.",
+   "tags": [
+    "database",
+    "migration",
+    "audit-log",
+    "landing-page",
+    "trigger"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "table:supabase/migrations/20261002084321_landing_config_and_activity_log.sql:activity_log",
+   "type": "table",
+   "name": "activity_log",
+   "filePath": "supabase/migrations/20261002084321_landing_config_and_activity_log.sql",
+   "summary": "Append-only audit log of staff changes.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261002090113_permanent_deletes.sql",
+   "type": "table",
+   "name": "20261002090113_permanent_deletes.sql",
+   "filePath": "supabase/migrations/20261002090113_permanent_deletes.sql",
+   "summary": "Adds purge_deleted for permanently erasing already soft-deleted rows, trusted actor headers for the activity log, save_landing_page and delete_variant.",
+   "tags": [
+    "database",
+    "migration",
+    "soft-delete",
+    "audit-log",
+    "stored-procedures"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "table:supabase/migrations/20261004085227_product_search.sql",
+   "type": "table",
+   "name": "20261004085227_product_search.sql",
+   "filePath": "supabase/migrations/20261004085227_product_search.sql",
+   "summary": "Product search: normalized search_name/search_text columns maintained by triggers, a trigram index, and the ranked search_products function with fuzzy fallback.",
+   "tags": [
+    "database",
+    "migration",
+    "search",
+    "full-text",
+    "pg-trgm"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql",
+   "type": "table",
+   "name": "20261004092308_notifications_and_owner_alerts.sql",
+   "filePath": "supabase/migrations/20261004092308_notifications_and_owner_alerts.sql",
+   "summary": "Back-office notifications: back_office_users, per-recipient trilingual notifications, push subscriptions, a new-order trigger and owner_alerts rules on activity_log.",
+   "tags": [
+    "database",
+    "migration",
+    "notifications",
+    "trigger",
+    "alerts"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql:back_office_users",
+   "type": "table",
+   "name": "back_office_users",
+   "filePath": "supabase/migrations/20261004092308_notifications_and_owner_alerts.sql",
+   "summary": "Back-office recipients and roles for notifications.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql:notifications",
+   "type": "table",
+   "name": "notifications",
+   "filePath": "supabase/migrations/20261004092308_notifications_and_owner_alerts.sql",
+   "summary": "Per-recipient trilingual back-office notifications.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql:push_subscriptions",
+   "type": "table",
+   "name": "push_subscriptions",
+   "filePath": "supabase/migrations/20261004092308_notifications_and_owner_alerts.sql",
+   "summary": "Web Push subscriptions of back-office browsers.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261004120000_update_delivery_fee_to_8.sql",
+   "type": "table",
+   "name": "20261004120000_update_delivery_fee_to_8.sql",
+   "filePath": "supabase/migrations/20261004120000_update_delivery_fee_to_8.sql",
+   "summary": "Data migration that updates the live Tunisia delivery fee to 8 TND on existing installations.",
+   "tags": [
+    "database",
+    "migration",
+    "shipping",
+    "data-fix"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261005145858_made_to_order_stock.sql",
+   "type": "table",
+   "name": "20261005145858_made_to_order_stock.sql",
+   "filePath": "supabase/migrations/20261005145858_made_to_order_stock.sql",
+   "summary": "Redefines apply_order_stock so validating an order deducts only the units the online location holds; the rest is made to order.",
+   "tags": [
+    "database",
+    "migration",
+    "inventory",
+    "made-to-order"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "table:supabase/migrations/20261006142809_colissimo_deliveries.sql",
+   "type": "table",
+   "name": "20261006142809_colissimo_deliveries.sql",
+   "filePath": "supabase/migrations/20261006142809_colissimo_deliveries.sql",
+   "summary": "Colissimo parcels: the deliveries table (one live parcel per order) and begin/complete/fail_delivery and record_delivery_status functions.",
+   "tags": [
+    "database",
+    "migration",
+    "delivery",
+    "colissimo",
+    "stored-procedures"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "table:supabase/migrations/20261006142809_colissimo_deliveries.sql:deliveries",
+   "type": "table",
+   "name": "deliveries",
+   "filePath": "supabase/migrations/20261006142809_colissimo_deliveries.sql",
+   "summary": "Colissimo parcels, one live parcel per order.",
+   "tags": [
+    "database",
+    "table",
+    "schema-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261007104019_delivery_on_validation.sql",
+   "type": "table",
+   "name": "20261007104019_delivery_on_validation.sql",
+   "filePath": "supabase/migrations/20261007104019_delivery_on_validation.sql",
+   "summary": "Changes complete_delivery and record_delivery_status so creating a parcel validates the order and carrier pickup marks it shipped.",
+   "tags": [
+    "database",
+    "migration",
+    "delivery",
+    "colissimo",
+    "order-status"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "table:supabase/migrations/20261014081317_manual_order_parcel.sql",
+   "type": "table",
+   "name": "20261014081317_manual_order_parcel.sql",
+   "filePath": "supabase/migrations/20261014081317_manual_order_parcel.sql",
+   "summary": "Adds create_order_with_delivery, saving an order, its lines and Colissimo parcel and validating it in one transaction.",
+   "tags": [
+    "database",
+    "migration",
+    "delivery",
+    "orders",
+    "transactions"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "table:supabase/migrations/20261014090736_agent_orders_performance.sql",
+   "type": "table",
+   "name": "20261014090736_agent_orders_performance.sql",
+   "filePath": "supabase/migrations/20261014090736_agent_orders_performance.sql",
+   "summary": "Records which agent created each order (orders.created_by) and adds agent_performance() for comparing agents.",
+   "tags": [
+    "database",
+    "migration",
+    "analytics",
+    "agents",
+    "orders"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:categories",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:products",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:colors",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:sizes",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_variants",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_images",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_discounts",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:promotions",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:reels",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:hero_sections",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:small_cards",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:users",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:reviews",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:user_favorites",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:orders",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:order_items",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:newsletter_subscribers",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:carts",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:cart_items",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:site_settings",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:shipping_rates",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:country_tax_rates",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261001112501_stock_management.sql",
+   "target": "table:supabase/migrations/20261001112501_stock_management.sql:locations",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261001112501_stock_management.sql",
+   "target": "table:supabase/migrations/20261001112501_stock_management.sql:suppliers",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261001112501_stock_management.sql",
+   "target": "table:supabase/migrations/20261001112501_stock_management.sql:collections",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261001112501_stock_management.sql",
+   "target": "table:supabase/migrations/20261001112501_stock_management.sql:product_costs",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261001112501_stock_management.sql",
+   "target": "table:supabase/migrations/20261001112501_stock_management.sql:inventory_levels",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261001112501_stock_management.sql",
+   "target": "table:supabase/migrations/20261001112501_stock_management.sql:stock_movements",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "target": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql:landing_products",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002084321_landing_config_and_activity_log.sql",
+   "target": "table:supabase/migrations/20261002084321_landing_config_and_activity_log.sql:activity_log",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql",
+   "target": "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql:back_office_users",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql",
+   "target": "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql:notifications",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql",
+   "target": "table:supabase/migrations/20261004092308_notifications_and_owner_alerts.sql:push_subscriptions",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261006142809_colissimo_deliveries.sql",
+   "target": "table:supabase/migrations/20261006142809_colissimo_deliveries.sql:deliveries",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20260928164330_category_hierarchy.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:categories",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261001112501_stock_management.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:products",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261001112501_stock_management.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_variants",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261001112501_stock_management.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:orders",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261001112501_stock_management.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:order_items",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_images",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:product_discounts",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:promotions",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:reels",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:hero_sections",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:small_cards",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:orders",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:user_favorites",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "target": "table:supabase/migrations/20261001112501_stock_management.sql:locations",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "target": "table:supabase/migrations/20261001112501_stock_management.sql:suppliers",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "target": "table:supabase/migrations/20261001112501_stock_management.sql:collections",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+   "target": "table:supabase/migrations/20261001112501_stock_management.sql:product_costs",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002084321_landing_config_and_activity_log.sql",
+   "target": "table:supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql:landing_products",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002084321_landing_config_and_activity_log.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:categories",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002084321_landing_config_and_activity_log.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:site_settings",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261002084321_landing_config_and_activity_log.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:users",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261004085227_product_search.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:products",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261014090736_agent_orders_performance.sql",
+   "target": "table:supabase/migrations/20260928135357_rebuild_storefront_schema.sql:orders",
+   "type": "migrates",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "table:supabase/migrations/20261001170000_transactional_writes.sql",
+   "target": "file:lib/orders.ts",
+   "type": "defines_schema",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "table:supabase/migrations/20261001112501_stock_management.sql",
+   "target": "file:lib/stock.ts",
+   "type": "defines_schema",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "table:supabase/migrations/20261002090113_permanent_deletes.sql",
+   "target": "file:lib/trash-tables.ts",
+   "type": "defines_schema",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "table:supabase/migrations/20261002084321_landing_config_and_activity_log.sql",
+   "target": "file:lib/landing-config.ts",
+   "type": "defines_schema",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "table:supabase/migrations/20261004085227_product_search.sql",
+   "target": "file:lib/product-search.ts",
+   "type": "defines_schema",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

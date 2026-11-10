@@ -26,15 +26,15 @@ export default function FormSelect<T extends FieldValues = FieldValues>({
 }: FormSelectProps<T>) {
     return (
         <div className={className}>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-ink mb-2">
                 {label}
                 {required && <span className="text-red-500 ml-1">*</span>}
             </label>
             <select
                 {...register(name)}
-                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-[#7a3b2e] focus:border-transparent transition text-black ${error
+                className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition text-ink ${error
                     ? "border-red-500 focus:ring-red-500"
-                    : "border-gray-300"
+                    : "border-line"
                     }`}
             >
                 {options.map((option) => (

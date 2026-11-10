@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { isRTL } from "@/lib/language-utils";
-import { reemKufi } from "@/lib/fonts";
+import ScrollTrack from "@/components/ui/ScrollTrack";
 import type { SpotlightCollection } from "@/lib/landing-products";
 import LandingProductCard from "./LandingProductCard";
 
@@ -30,59 +30,38 @@ export default function CollectionSpotlight({ locale, collection }: CollectionSp
     const categoryHref = (slug: string) => `/${locale}/products?category=${slug}`;
 
     return (
-        <section
-            dir={isRTL(locale) ? "rtl" : "ltr"}
-            className={`${reemKufi.variable} w-full bg-[var(--wool-brown)] text-[var(--wool-undyed)]`}
+        <ScrollTrack
+            rtl={isRTL(locale)}
+            className="border-y border-line bg-card text-ink"
+            header={
+                <div className="flex flex-wrap items-end justify-between gap-x-8 gap-y-4 text-start">
+                    <div className="min-w-0">
+                        <h2 className="font-display text-4xl font-bold leading-tight text-ink sm:text-6xl">{collection.name}</h2>
+                        <p className="mt-2 hidden max-w-xl text-mute sm:block">{t.count(collection.productCount)}</p>
+                        {collection.subcategories.length > 0 && (
+                            <ul className="scrollbar-hide mt-3 flex gap-2 overflow-x-auto">
+                                {collection.subcategories.map((sub) => (
+                                    <li key={sub.slug} className="shrink-0">
+                                        <Link
+                                            href={categoryHref(sub.slug)}
+                                            className="block rounded-full border border-line px-3.5 py-1.5 text-sm transition-colors hover:border-accent hover:text-accent focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                                        >
+                                            {sub.name}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </div>
+                    <Link href={categoryHref(collection.slug)} className="pill pill-solid">{t.viewCollection}</Link>
+                </div>
+            }
         >
-            <div className="woven-band" aria-hidden="true" />
-            <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] lg:gap-12 lg:py-20">
-                <div className="text-start lg:pt-4">
-                    <h2 className="font-[family-name:var(--font-kufi)] text-5xl font-bold leading-none text-[var(--wool-undyed)] sm:text-6xl">
-                        {collection.name}
-                    </h2>
-                    <p className="mt-5 max-w-xs leading-relaxed text-[var(--wool-undyed)]/75">
-                        {t.count(collection.productCount)}
-                    </p>
-
-                    {collection.subcategories.length > 0 && (
-                        <ul className="mt-5 flex flex-wrap gap-2">
-                            {collection.subcategories.map((sub) => (
-                                <li key={sub.slug}>
-                                    <Link
-                                        href={categoryHref(sub.slug)}
-                                        className="block rounded-full border border-[var(--wool-undyed)]/35 px-3.5 py-1.5 text-sm transition-colors hover:border-[var(--wool-undyed)] hover:bg-[var(--wool-undyed)] hover:text-[var(--wool-brown)] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wool-undyed)]"
-                                    >
-                                        {sub.name}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    )}
-
-                    <Link
-                        href={categoryHref(collection.slug)}
-                        className="mt-8 inline-block rounded-full bg-[var(--wool-undyed)] px-6 py-3 font-medium text-[var(--wool-brown)] transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--wool-undyed)]"
-                    >
-                        {t.viewCollection}
-                    </Link>
+            {collection.products.map((product) => (
+                <div key={product.id} className="track-card">
+                    <LandingProductCard product={product} locale={locale} sizes="300px" />
                 </div>
-
-                <div className="-mx-4 overflow-x-auto px-4 pb-2 [scrollbar-color:rgba(233,225,211,0.35)_transparent] [scrollbar-width:thin] lg:mx-0 lg:px-0">
-                    <ul className="flex snap-x snap-mandatory gap-4 lg:gap-5">
-                        {collection.products.map((product) => (
-                            <li key={product.id} className="w-[60vw] max-w-[240px] shrink-0 snap-start sm:w-60">
-                                <LandingProductCard
-                                    product={product}
-                                    locale={locale}
-                                    tone="dark"
-                                    sizes="240px"
-                                />
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-            <div className="woven-band" aria-hidden="true" />
-        </section>
+            ))}
+        </ScrollTrack>
     );
 }

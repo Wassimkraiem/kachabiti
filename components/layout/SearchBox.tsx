@@ -166,11 +166,11 @@ export default function SearchBox({ locale, rtl, value, onChange, placeholder, v
     const showPanel = open && searchable;
     const dark = variant === "mobile";
     const inputClass = dark
-        ? "w-full py-2 px-4 pr-10 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent placeholder-gray-400"
-        : `color-black w-full py-2 rounded-[15px] font-light border placeholder-[#969696] border-gray-300 br focus:outline-none focus:ring-2 focus:ring-[#7a3b2e] focus:border-transparent ${rtl ? "pl-10 pr-4" : "pl-4 pr-10"}`;
+        ? "w-full py-2 px-4 pr-10 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent placeholder-mute"
+        : `color-black w-full py-2 rounded-[15px] font-light border placeholder-mute border-line br focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent ${rtl ? "pl-10 pr-4" : "pl-4 pr-10"}`;
 
     return (
-        <div ref={containerRef} className={dark ? "relative bg-gray-800 rounded-lg" : "relative bg-[#FAF7F2] rounded-[15px] text-black"}>
+        <div ref={containerRef} className={dark ? "relative bg-gray-800 rounded-lg" : "relative bg-surface rounded-[15px] text-ink"}>
             <form
                 role="search"
                 onSubmit={(event) => {
@@ -203,7 +203,7 @@ export default function SearchBox({ locale, rtl, value, onChange, placeholder, v
                     type="submit"
                     aria-label={placeholder}
                 >
-                    <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-5 h-5 text-mute" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
                 </button>
@@ -214,12 +214,12 @@ export default function SearchBox({ locale, rtl, value, onChange, placeholder, v
                     id={listId}
                     role="listbox"
                     dir={rtl ? "rtl" : "ltr"}
-                    className="absolute inset-x-0 top-full z-50 mt-2 overflow-hidden rounded-xl border border-gray-200 bg-white text-[#2b1a16] shadow-xl"
+                    className="absolute inset-x-0 top-full z-50 mt-2 overflow-hidden rounded-xl border border-line bg-card text-ink shadow-xl"
                 >
                     {loading && suggestions.length === 0 ? (
-                        <p className="px-4 py-3 text-sm text-gray-500">{t.searching}</p>
+                        <p className="px-4 py-3 text-sm text-mute">{t.searching}</p>
                     ) : suggestions.length === 0 && searchedFor === query ? (
-                        <p className="px-4 py-3 text-sm text-gray-500">{t.none.replace("{query}", query)}</p>
+                        <p className="px-4 py-3 text-sm text-mute">{t.none.replace("{query}", query)}</p>
                     ) : (
                         suggestions.map((item, index) => (
                             <Link
@@ -233,16 +233,16 @@ export default function SearchBox({ locale, rtl, value, onChange, placeholder, v
                                     onNavigate?.();
                                 }}
                                 onMouseEnter={() => setActive(index)}
-                                className={`flex items-center gap-3 px-3 py-2 ${active === index ? "bg-[#FAF7F2]" : "hover:bg-[#FAF7F2]"}`}
+                                className={`flex items-center gap-3 px-3 py-2 ${active === index ? "bg-surface" : "hover:bg-surface"}`}
                             >
-                                <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-gray-100">
+                                <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-lg bg-surface">
                                     {item.image && <Image src={item.image} alt="" fill sizes="48px" className="object-cover" />}
                                 </div>
                                 <span className="min-w-0 flex-1 truncate text-sm font-medium">{item.name}</span>
-                                <span className="shrink-0 text-sm font-semibold text-[#7a3b2e]" dir="ltr">
+                                <span className="shrink-0 text-sm font-semibold text-accent" dir="ltr">
                                     {item.price} {CURRENCY}
                                     {item.originalPrice !== null && (
-                                        <span className="ms-1 text-xs font-normal text-gray-400 line-through">{item.originalPrice}</span>
+                                        <span className="ms-1 text-xs font-normal text-mute line-through">{item.originalPrice}</span>
                                     )}
                                 </span>
                             </Link>
@@ -255,7 +255,7 @@ export default function SearchBox({ locale, rtl, value, onChange, placeholder, v
                         aria-selected={active === suggestions.length}
                         onMouseEnter={() => setActive(suggestions.length)}
                         onClick={goToResults}
-                        className={`block w-full border-t border-gray-100 px-4 py-3 text-start text-sm font-medium text-[#7a3b2e] ${active === suggestions.length ? "bg-[#FAF7F2]" : "hover:bg-[#FAF7F2]"}`}
+                        className={`block w-full border-t border-line px-4 py-3 text-start text-sm font-medium text-accent ${active === suggestions.length ? "bg-surface" : "hover:bg-surface"}`}
                     >
                         {t.seeAll.replace("{query}", query)}
                     </button>

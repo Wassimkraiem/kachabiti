@@ -1,0 +1,69 @@
+{
+ "nodes": [
+  {
+   "id": "config:.dockerignore",
+   "type": "config",
+   "name": ".dockerignore",
+   "filePath": ".dockerignore",
+   "summary": "Excludes node_modules, build output, git data, env files, the API and migrations from the web image build context.",
+   "tags": [
+    "configuration",
+    "containerization",
+    "build-system"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "service:Dockerfile",
+   "type": "service",
+   "name": "Dockerfile",
+   "filePath": "Dockerfile",
+   "summary": "Single-stage Node 22 image that installs dependencies, builds the Next.js site with env passed as a build secret, and runs next start on port 3000 as a non-root user.",
+   "tags": [
+    "containerization",
+    "infrastructure",
+    "nextjs",
+    "deployment"
+   ],
+   "complexity": "simple",
+   "languageNotes": "Uses BuildKit --mount=type=secret so .env values never land in an image layer."
+  },
+  {
+   "id": "service:docker-compose.yml",
+   "type": "service",
+   "name": "docker-compose.yml",
+   "filePath": "docker-compose.yml",
+   "summary": "Local stack: web site, NestJS API, Postgres 17, SeaweedFS S3 storage with bucket bootstrap, a socat gateway and the Colissimo mock service.",
+   "tags": [
+    "orchestration",
+    "infrastructure",
+    "local-development",
+    "docker"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "config:.dockerignore",
+   "target": "service:Dockerfile",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "service:docker-compose.yml",
+   "target": "service:Dockerfile",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "service:docker-compose.yml",
+   "target": "service:api/Dockerfile",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  }
+ ]
+}

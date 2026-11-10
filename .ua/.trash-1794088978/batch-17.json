@@ -1,0 +1,214 @@
+{
+ "nodes": [
+  {
+   "id": "file:.git-ssh-setup.sh",
+   "type": "file",
+   "name": ".git-ssh-setup.sh",
+   "filePath": ".git-ssh-setup.sh",
+   "summary": "One-off helper script that switches the git origin remote from HTTPS to SSH and prints the steps to create and register an SSH key on GitHub.",
+   "tags": [
+    "script",
+    "git",
+    "developer-tooling",
+    "setup"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "document:CLAUDE.md",
+   "type": "document",
+   "name": "CLAUDE.md",
+   "filePath": "CLAUDE.md",
+   "summary": "Primary engineering guide for AI assistants and developers: commands, architecture (middleware gate, sessions, i18n, Postgres access rules, stock, ERP, caching) and conventions for the Next.js storefront and NestJS API.",
+   "tags": [
+    "documentation",
+    "architecture",
+    "conventions",
+    "entry-point",
+    "onboarding"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "document:README.md",
+   "type": "document",
+   "name": "README.md",
+   "filePath": "README.md",
+   "summary": "Stock create-next-app README describing how to run the dev server and linking to Next.js and Vercel docs; not project-specific.",
+   "tags": [
+    "documentation",
+    "entry-point",
+    "boilerplate"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "config:netlify.toml",
+   "type": "config",
+   "name": "netlify.toml",
+   "filePath": "netlify.toml",
+   "summary": "Legacy Netlify build configuration running the Next.js build with the Netlify Next.js plugin on Node 20 and catch-all redirects to the server function.",
+   "tags": [
+    "configuration",
+    "deployment",
+    "netlify",
+    "legacy"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "config:package.json",
+   "type": "config",
+   "name": "package.json",
+   "filePath": "package.json",
+   "summary": "Root npm manifest for the Next.js 15 storefront and admin: dev/build/lint scripts, the WooCommerce import and Docker helper scripts, and React 19, antd 6, Sentry, zod and Tailwind v4 dependencies.",
+   "tags": [
+    "configuration",
+    "build-system",
+    "dependencies",
+    "npm-scripts"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "config:skills-lock.json",
+   "type": "config",
+   "name": "skills-lock.json",
+   "filePath": "skills-lock.json",
+   "summary": "Lock file pinning two Supabase agent skills (supabase and postgres best practices) from GitHub by content hash.",
+   "tags": [
+    "configuration",
+    "agent-skills",
+    "lockfile"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "config:tsconfig.json",
+   "type": "config",
+   "name": "tsconfig.json",
+   "filePath": "tsconfig.json",
+   "summary": "TypeScript compiler configuration for the Next.js app with strict mode, bundler module resolution and the @/* path alias.",
+   "tags": [
+    "configuration",
+    "typescript",
+    "build-system"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "config:vercel.json",
+   "type": "config",
+   "name": "vercel.json",
+   "filePath": "vercel.json",
+   "summary": "Vercel configuration whose ignoreCommand skips site builds when a push only touches backend folders (api, supabase, db, deploy, infra).",
+   "tags": [
+    "configuration",
+    "deployment",
+    "ci-cd",
+    "vercel"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "config:package.json",
+   "target": "file:scripts/run-next.mjs",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:package.json",
+   "target": "file:scripts/import-woocommerce.mjs",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:package.json",
+   "target": "file:next.config.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:tsconfig.json",
+   "target": "file:middleware.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:tsconfig.json",
+   "target": "file:app/layout.tsx",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:netlify.toml",
+   "target": "file:next.config.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:vercel.json",
+   "target": "file:next.config.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "document:CLAUDE.md",
+   "target": "file:middleware.ts",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:CLAUDE.md",
+   "target": "file:next.config.ts",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:CLAUDE.md",
+   "target": "file:api/src/main.ts",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:CLAUDE.md",
+   "target": "config:package.json",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:CLAUDE.md",
+   "target": "document:docs/DEPLOY.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:CLAUDE.md",
+   "target": "document:docs/DOCKER.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:README.md",
+   "target": "file:app/layout.tsx",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  }
+ ]
+}

@@ -1,0 +1,390 @@
+{
+ "projectRoot": "C:/Users/Wassi/kachabity",
+ "batchFiles": [
+  {
+   "path": "app/[locale]/about/page.tsx",
+   "language": "typescript",
+   "sizeLines": 292,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/auth/page.tsx",
+   "language": "typescript",
+   "sizeLines": 382,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/cart/page.tsx",
+   "language": "typescript",
+   "sizeLines": 204,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/categories/[slug]/page.tsx",
+   "language": "typescript",
+   "sizeLines": 374,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/categories/page.tsx",
+   "language": "typescript",
+   "sizeLines": 244,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/checkout/page.tsx",
+   "language": "typescript",
+   "sizeLines": 1009,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/contact/page.tsx",
+   "language": "typescript",
+   "sizeLines": 273,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/layout.tsx",
+   "language": "typescript",
+   "sizeLines": 148,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/not-found.tsx",
+   "language": "typescript",
+   "sizeLines": 106,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/order-confirmation/page.tsx",
+   "language": "typescript",
+   "sizeLines": 179,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/page.tsx",
+   "language": "typescript",
+   "sizeLines": 172,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/privacy/page.tsx",
+   "language": "typescript",
+   "sizeLines": 294,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/products/[slug]/ProductDetailClient.tsx",
+   "language": "typescript",
+   "sizeLines": 1054,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/products/[slug]/page.tsx",
+   "language": "typescript",
+   "sizeLines": 31,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/products/page.tsx",
+   "language": "typescript",
+   "sizeLines": 749,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/settings/layout.tsx",
+   "language": "typescript",
+   "sizeLines": 10,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/settings/page.tsx",
+   "language": "typescript",
+   "sizeLines": 727,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/shipping/page.tsx",
+   "language": "typescript",
+   "sizeLines": 255,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/[locale]/terms-and-conditions/page.tsx",
+   "language": "typescript",
+   "sizeLines": 319,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/api/internal/revalidate/route.ts",
+   "language": "typescript",
+   "sizeLines": 15,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/not-found.tsx",
+   "language": "typescript",
+   "sizeLines": 87,
+   "fileCategory": "code"
+  },
+  {
+   "path": "app/page.tsx",
+   "language": "typescript",
+   "sizeLines": 6,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/carousel/CarouselIndicators.tsx",
+   "language": "typescript",
+   "sizeLines": 34,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/carousel/CarouselNavigation.tsx",
+   "language": "typescript",
+   "sizeLines": 37,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/cart/AddToCartButton.tsx",
+   "language": "typescript",
+   "sizeLines": 143,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/cart/CartButton.tsx",
+   "language": "typescript",
+   "sizeLines": 68,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/cart/CartDrawer.tsx",
+   "language": "typescript",
+   "sizeLines": 160,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/cart/CartItem.tsx",
+   "language": "typescript",
+   "sizeLines": 327,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/footer/Footer.tsx",
+   "language": "typescript",
+   "sizeLines": 241,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/footer/FooterSection.tsx",
+   "language": "typescript",
+   "sizeLines": 31,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/forms/index.ts",
+   "language": "typescript",
+   "sizeLines": 5,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/landing/CollectionSpotlight.tsx",
+   "language": "typescript",
+   "sizeLines": 88,
+   "fileCategory": "code"
+  }
+ ],
+ "batchImportData": {
+  "app/[locale]/about/page.tsx": [
+   "lib/config.ts"
+  ],
+  "app/[locale]/auth/page.tsx": [
+   "components/forms/index.ts",
+   "lib/customer-auth.ts",
+   "lib/language-utils.ts",
+   "lib/schemas/auth-schema.ts"
+  ],
+  "app/[locale]/cart/page.tsx": [
+   "components/cart/CartItem.tsx",
+   "components/ui/LoadingSpinner.tsx",
+   "lib/cart-context.tsx",
+   "lib/language-context.tsx",
+   "lib/storefront-api.ts"
+  ],
+  "app/[locale]/categories/[slug]/page.tsx": [
+   "components/products/ProductListCard.tsx",
+   "components/ui/LoadingSpinner.tsx",
+   "lib/categories-cache.ts",
+   "lib/customer-auth.ts",
+   "lib/favorites.ts",
+   "lib/quick-add.ts",
+   "lib/storefront-api.ts",
+   "lib/utils/product-utils.ts"
+  ],
+  "app/[locale]/categories/page.tsx": [
+   "components/ui/LoadingSpinner.tsx",
+   "lib/categories-cache.ts"
+  ],
+  "app/[locale]/checkout/page.tsx": [
+   "components/cart/CartItem.tsx",
+   "components/ui/LoadingSpinner.tsx",
+   "lib/cart-context.tsx",
+   "lib/colissimo-data.ts",
+   "lib/customer-auth.ts",
+   "lib/language-context.tsx",
+   "lib/language-utils.ts",
+   "lib/orders.ts",
+   "lib/schemas/checkout-schema.ts",
+   "lib/storefront-api.ts"
+  ],
+  "app/[locale]/contact/page.tsx": [
+   "components/forms/index.ts",
+   "lib/config.ts"
+  ],
+  "app/[locale]/layout.tsx": [
+   "components/cart/CartDrawer.tsx",
+   "components/footer/Footer.tsx",
+   "components/layout/MobileTabBar.tsx",
+   "components/layout/StaticHeader.tsx",
+   "components/layout/TrafficSource.tsx",
+   "lib/cart-context.tsx",
+   "lib/language-context.tsx",
+   "lib/language-utils.ts"
+  ],
+  "app/[locale]/not-found.tsx": [
+   "lib/config.ts"
+  ],
+  "app/[locale]/order-confirmation/page.tsx": [
+   "lib/config.ts",
+   "lib/language-context.tsx"
+  ],
+  "app/[locale]/page.tsx": [
+   "components/landing/CollectionSpotlight.tsx",
+   "components/landing/HowToOrder.tsx",
+   "components/landing/NewArrivals.tsx",
+   "components/landing/ProductShowcase.tsx",
+   "components/products/ProductGrid.tsx",
+   "components/products/PromoProducts.tsx",
+   "components/products/TopProducts.tsx",
+   "components/reviews/CustomerFeedback.tsx",
+   "components/sections/FAQ.tsx",
+   "components/sections/HeroSection.tsx",
+   "components/sections/Reels.tsx",
+   "components/sections/SaleBanner.tsx",
+   "components/services/ServiceHighlights.tsx",
+   "components/ui/ErrorBoundary.tsx",
+   "components/ui/LoadingSpinner.tsx",
+   "lib/catalog-cache.ts",
+   "lib/config.ts",
+   "lib/home-data.ts",
+   "lib/landing-config.ts",
+   "lib/landing-products.ts",
+   "lib/storefront-api.ts"
+  ],
+  "app/[locale]/privacy/page.tsx": [
+   "components/sections/TermsSection.tsx"
+  ],
+  "app/[locale]/products/[slug]/ProductDetailClient.tsx": [
+   "components/cart/AddToCartButton.tsx",
+   "components/forms/index.ts",
+   "components/ui/ImageLightbox.tsx",
+   "components/ui/LoadingSpinner.tsx",
+   "lib/categories-cache.ts",
+   "lib/config.ts",
+   "lib/customer-auth.ts",
+   "lib/fonts.ts",
+   "lib/language-utils.ts",
+   "lib/product-detail.ts",
+   "lib/storefront-api.ts",
+   "lib/utils/product-utils.ts"
+  ],
+  "app/[locale]/products/[slug]/page.tsx": [
+   "app/[locale]/products/[slug]/ProductDetailClient.tsx",
+   "lib/catalog-cache.ts",
+   "lib/get-site-settings.ts",
+   "lib/storefront-api.ts",
+   "lib/utils/product-utils.ts"
+  ],
+  "app/[locale]/products/page.tsx": [
+   "components/products/ProductListCard.tsx",
+   "components/ui/LoadingSpinner.tsx",
+   "lib/categories-cache.ts",
+   "lib/customer-auth.ts",
+   "lib/favorites.ts",
+   "lib/language-utils.ts",
+   "lib/quick-add.ts",
+   "lib/storefront-api.ts",
+   "lib/utils/product-utils.ts"
+  ],
+  "app/[locale]/settings/layout.tsx": [
+   "lib/config.ts"
+  ],
+  "app/[locale]/settings/page.tsx": [
+   "components/forms/index.ts",
+   "components/products/ProductListCard.tsx",
+   "components/ui/OrderTracking.tsx",
+   "lib/customer-auth.ts",
+   "lib/favorites.ts",
+   "lib/orders.ts",
+   "lib/quick-add.ts"
+  ],
+  "app/[locale]/shipping/page.tsx": [
+   "components/sections/TermsSection.tsx",
+   "lib/config.ts"
+  ],
+  "app/[locale]/terms-and-conditions/page.tsx": [
+   "components/sections/TermsSection.tsx",
+   "lib/config.ts"
+  ],
+  "app/api/internal/revalidate/route.ts": [
+   "lib/catalog-cache.ts"
+  ],
+  "app/not-found.tsx": [
+   "components/footer/Footer.tsx",
+   "components/layout/StaticHeader.tsx",
+   "lib/config.ts",
+   "lib/language-utils.ts"
+  ],
+  "app/page.tsx": [
+   "lib/language-utils.ts"
+  ],
+  "components/carousel/CarouselIndicators.tsx": [],
+  "components/carousel/CarouselNavigation.tsx": [],
+  "components/cart/AddToCartButton.tsx": [
+   "lib/cart-context.tsx",
+   "lib/language-context.tsx"
+  ],
+  "components/cart/CartButton.tsx": [
+   "lib/cart-context.tsx"
+  ],
+  "components/cart/CartDrawer.tsx": [
+   "components/cart/CartItem.tsx",
+   "lib/cart-context.tsx",
+   "lib/language-context.tsx",
+   "lib/language-utils.ts"
+  ],
+  "components/cart/CartItem.tsx": [
+   "lib/cart-context.tsx",
+   "lib/config.ts",
+   "lib/language-context.tsx"
+  ],
+  "components/footer/Footer.tsx": [
+   "components/footer/FooterSection.tsx",
+   "components/sections/NewsletterForm.tsx",
+   "components/sections/SocialLinks.tsx",
+   "lib/config.ts",
+   "lib/footer-config.ts",
+   "lib/language-context.tsx"
+  ],
+  "components/footer/FooterSection.tsx": [
+   "lib/footer-config.ts"
+  ],
+  "components/forms/index.ts": [],
+  "components/landing/CollectionSpotlight.tsx": [
+   "components/landing/LandingProductCard.tsx",
+   "lib/fonts.ts",
+   "lib/landing-products.ts",
+   "lib/language-utils.ts"
+  ]
+ }
+}

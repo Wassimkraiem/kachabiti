@@ -3,6 +3,7 @@ import { cachedCatalogQuery } from "@/lib/catalog-cache";
 import HeroSection from "@/components/sections/HeroSection";
 import TopProducts from "@/components/products/TopProducts";
 import ErrorBoundary from "@/components/ui/ErrorBoundary";
+import Reveal from "@/components/ui/Reveal";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import { Fragment, Suspense } from "react";
 import PromoProducts from "@/components/products/PromoProducts";
@@ -48,24 +49,10 @@ async function getLandingData(locale: string): Promise<LandingData> {
   }
 }
 
-const RING_MAX = 16;
-const RING_MIN = 8; // fewer cards look sparse, and the 3D ring needs at least 4
-
-// The 3D ring: exactly the admin's ring picks, in order, repeated to fill the ring when there are
-// few of them. With no picks, the showcase pieces then the newest products.
-function ringProducts(data: LandingData): LandingProduct[] {
-  const picked = data.ringPicks.filter((p) => p.image).slice(0, RING_MAX);
-  if (picked.length > 0) {
-    const cards = [...picked];
-    while (cards.length < RING_MIN) cards.push(...picked);
-    return cards;
-  }
-  const cards: LandingProduct[] = [];
-  for (const product of [...data.showcase, ...data.newArrivals]) {
-    if (cards.length === RING_MAX) break;
-    if (product.image && !cards.some((p) => p.id === product.id)) cards.push(product);
-  }
-  return cards;
+// The hero fan: the admin's showcase picks first, topped up with the newest products.
+function heroProducts(data: LandingData): LandingProduct[] {
+  const all = [...data.showcase, ...data.newArrivals];
+  return all.filter((product, index) => all.findIndex((p) => p.id === product.id) === index);
 }
 
 // Hero rows change rarely: serve them from the Next.js data cache.
@@ -101,10 +88,10 @@ async function HeroContent({ locale }: { locale: string }) {
     return (
       <div className="w-full py-8 px-4">
         <div className="max-w-7xl mx-auto text-center">
-          <h2 className="text-2xl font-bold text-[#2b1a16] mb-4">
+          <h2 className="text-2xl font-bold text-ink mb-4">
             {t.welcome}
           </h2>
-          <p className="text-[#7a3b2e]">
+          <p className="text-accent">
             {t.discover}
           </p>
         </div>
@@ -139,8 +126,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
     showcase: (
       <ProductShowcase
         locale={locale}
-        products={landing.showcase}
-        ringProducts={ringProducts(landing)}
+        products={heroProducts(landing)}
         collectionSlug={landing.spotlight?.slug ?? null}
         freeShippingThreshold={landing.freeShippingThreshold}
       />
@@ -160,12 +146,16 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
 
   return (
     <ErrorBoundary>
-      <main className="min-h-screen bg-white">
+      <main className="min-h-screen bg-surface">
         {SHOW_HERO_CAROUSEL && <HeroContent locale={locale} />}
         <Suspense fallback={<LoadingSpinner />}>
           {landing.layout
             .filter((section) => section.visible)
-            .map((section) => <Fragment key={section.key}>{sections[section.key]}</Fragment>)}
+            .map((section) =>
+              // The hero is on screen at once; the rest fades in as it is scrolled to.
+              section.key === 'showcase'
+                ? <Fragment key={section.key}>{sections[section.key]}</Fragment>
+                : <Reveal key={section.key}>{sections[section.key]}</Reveal>)}
         </Suspense>
       </main>
     </ErrorBoundary>

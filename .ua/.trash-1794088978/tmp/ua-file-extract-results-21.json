@@ -1,0 +1,388 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 5,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 5
+    }
+  },
+  "results": [
+    {
+      "path": "infra/terraform/aws.tf",
+      "language": "terraform",
+      "fileCategory": "infra",
+      "totalLines": 327,
+      "nonEmptyLines": 288,
+      "resources": [
+        {
+          "name": "aws_security_group.server",
+          "kind": "aws_security_group",
+          "startLine": 24,
+          "endLine": 57
+        },
+        {
+          "name": "aws_key_pair.admin",
+          "kind": "aws_key_pair",
+          "startLine": 59,
+          "endLine": 62
+        },
+        {
+          "name": "aws_iam_role.server",
+          "kind": "aws_iam_role",
+          "startLine": 65,
+          "endLine": 71
+        },
+        {
+          "name": "aws_iam_role_policy.server_buckets",
+          "kind": "aws_iam_role_policy",
+          "startLine": 73,
+          "endLine": 91
+        },
+        {
+          "name": "aws_iam_role_policy.server_metrics",
+          "kind": "aws_iam_role_policy",
+          "startLine": 94,
+          "endLine": 106
+        },
+        {
+          "name": "aws_iam_instance_profile.server",
+          "kind": "aws_iam_instance_profile",
+          "startLine": 108,
+          "endLine": 111
+        },
+        {
+          "name": "aws_instance.server",
+          "kind": "aws_instance",
+          "startLine": 113,
+          "endLine": 145
+        },
+        {
+          "name": "aws_eip.server",
+          "kind": "aws_eip",
+          "startLine": 148,
+          "endLine": 152
+        },
+        {
+          "name": "aws_iam_role.snapshots",
+          "kind": "aws_iam_role",
+          "startLine": 156,
+          "endLine": 162
+        },
+        {
+          "name": "aws_iam_role_policy_attachment.snapshots",
+          "kind": "aws_iam_role_policy_attachment",
+          "startLine": 164,
+          "endLine": 167
+        },
+        {
+          "name": "aws_dlm_lifecycle_policy.server",
+          "kind": "aws_dlm_lifecycle_policy",
+          "startLine": 169,
+          "endLine": 191
+        },
+        {
+          "name": "random_id.buckets",
+          "kind": "random_id",
+          "startLine": 194,
+          "endLine": 196
+        },
+        {
+          "name": "aws_s3_bucket.products",
+          "kind": "aws_s3_bucket",
+          "startLine": 198,
+          "endLine": 200
+        },
+        {
+          "name": "aws_s3_bucket.documents",
+          "kind": "aws_s3_bucket",
+          "startLine": 202,
+          "endLine": 204
+        },
+        {
+          "name": "aws_s3_bucket.backups",
+          "kind": "aws_s3_bucket",
+          "startLine": 206,
+          "endLine": 208
+        },
+        {
+          "name": "aws_s3_bucket_public_access_block.products",
+          "kind": "aws_s3_bucket_public_access_block",
+          "startLine": 215,
+          "endLine": 221
+        },
+        {
+          "name": "aws_s3_bucket_policy.products_public_read",
+          "kind": "aws_s3_bucket_policy",
+          "startLine": 223,
+          "endLine": 230
+        },
+        {
+          "name": "aws_s3_bucket_lifecycle_configuration.backups",
+          "kind": "aws_s3_bucket_lifecycle_configuration",
+          "startLine": 233,
+          "endLine": 243
+        },
+        {
+          "name": "aws_budgets_budget.monthly",
+          "kind": "aws_budgets_budget",
+          "startLine": 246,
+          "endLine": 268
+        },
+        {
+          "name": "aws_sns_topic.alerts",
+          "kind": "aws_sns_topic",
+          "startLine": 271,
+          "endLine": 273
+        },
+        {
+          "name": "aws_sns_topic_subscription.alerts_email",
+          "kind": "aws_sns_topic_subscription",
+          "startLine": 275,
+          "endLine": 279
+        },
+        {
+          "name": "aws_cloudwatch_metric_alarm.backup_missing",
+          "kind": "aws_cloudwatch_metric_alarm",
+          "startLine": 282,
+          "endLine": 295
+        },
+        {
+          "name": "aws_cloudwatch_metric_alarm.server_system_check",
+          "kind": "aws_cloudwatch_metric_alarm",
+          "startLine": 298,
+          "endLine": 311
+        },
+        {
+          "name": "aws_cloudwatch_metric_alarm.server_instance_check",
+          "kind": "aws_cloudwatch_metric_alarm",
+          "startLine": 314,
+          "endLine": 327
+        },
+        {
+          "name": "data.aws_vpc.default",
+          "kind": "data.aws_vpc",
+          "startLine": 6,
+          "endLine": 8
+        },
+        {
+          "name": "data.aws_ami.ubuntu",
+          "kind": "data.aws_ami",
+          "startLine": 10,
+          "endLine": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0,
+        "resourceCount": 26
+      }
+    },
+    {
+      "path": "infra/terraform/cloud-init.yaml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 40,
+      "nonEmptyLines": 35,
+      "sections": [
+        {
+          "heading": "package_update",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "package_upgrade",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "packages",
+          "level": 1,
+          "line": 7
+        },
+        {
+          "heading": "ssh_pwauth",
+          "level": 1,
+          "line": 13
+        },
+        {
+          "heading": "swap",
+          "level": 1,
+          "line": 15
+        },
+        {
+          "heading": "users",
+          "level": 1,
+          "line": 20
+        },
+        {
+          "heading": "write_files",
+          "level": 1,
+          "line": 28
+        },
+        {
+          "heading": "runcmd",
+          "level": 1,
+          "line": 35
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "infra/terraform/outputs.tf",
+      "language": "terraform",
+      "fileCategory": "infra",
+      "totalLines": 23,
+      "nonEmptyLines": 21,
+      "definitions": [
+        {
+          "name": "server_public_ip",
+          "kind": "output",
+          "fields": [],
+          "startLine": 1,
+          "endLine": 4
+        },
+        {
+          "name": "api_url",
+          "kind": "output",
+          "fields": [],
+          "startLine": 6,
+          "endLine": 9
+        },
+        {
+          "name": "server_env",
+          "kind": "output",
+          "fields": [],
+          "startLine": 12,
+          "endLine": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 3,
+        "resourceCount": 0
+      }
+    },
+    {
+      "path": "infra/terraform/variables.tf",
+      "language": "terraform",
+      "fileCategory": "infra",
+      "totalLines": 49,
+      "nonEmptyLines": 45,
+      "definitions": [
+        {
+          "name": "aws_region",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 1,
+          "endLine": 4
+        },
+        {
+          "name": "instance_type",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 8,
+          "endLine": 11
+        },
+        {
+          "name": "disk_gb",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 12,
+          "endLine": 15
+        },
+        {
+          "name": "snapshot_days",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 16,
+          "endLine": 20
+        },
+        {
+          "name": "monthly_budget_usd",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 23,
+          "endLine": 26
+        },
+        {
+          "name": "budget_email",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 27,
+          "endLine": 30
+        },
+        {
+          "name": "admin_ssh_public_key",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 32,
+          "endLine": 35
+        },
+        {
+          "name": "deploy_ssh_public_key",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 36,
+          "endLine": 39
+        },
+        {
+          "name": "ssh_allowed_cidr",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 40,
+          "endLine": 44
+        },
+        {
+          "name": "site_domain",
+          "kind": "variable",
+          "fields": [],
+          "startLine": 46,
+          "endLine": 49
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 10,
+        "resourceCount": 0
+      }
+    },
+    {
+      "path": "infra/terraform/versions.tf",
+      "language": "terraform",
+      "fileCategory": "infra",
+      "totalLines": 30,
+      "nonEmptyLines": 26,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0,
+        "resourceCount": 0
+      }
+    }
+  ]
+}

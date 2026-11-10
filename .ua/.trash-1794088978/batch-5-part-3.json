@@ -1,0 +1,1313 @@
+{
+ "nodes": [
+  {
+   "id": "file:lib/auth-session.ts",
+   "type": "file",
+   "name": "auth-session.ts",
+   "filePath": "lib/auth-session.ts",
+   "summary": "Session token helpers: cookie names and lifetimes, HS256 access JWT signing and verification, and cookie parsing.",
+   "tags": [
+    "security",
+    "authentication",
+    "jwt",
+    "session"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/colissimo.ts",
+   "type": "file",
+   "name": "colissimo.ts",
+   "filePath": "lib/colissimo.ts",
+   "summary": "Colissimo carrier API client covering v1 parcel creation and v2 tracking, hand-over, editing, price change requests and deletion, with retry on transient errors.",
+   "tags": [
+    "integration",
+    "colissimo",
+    "api-client",
+    "delivery"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:lib/erp/meta.ts",
+   "type": "file",
+   "name": "meta.ts",
+   "filePath": "lib/erp/meta.ts",
+   "summary": "Meta (Messenger, Instagram, WhatsApp) integration: webhook signature check, parsing incoming messages and comments, and sending text replies.",
+   "tags": [
+    "integration",
+    "meta",
+    "webhook",
+    "crm"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:lib/erp/objectives.ts",
+   "type": "file",
+   "name": "objectives.ts",
+   "filePath": "lib/erp/objectives.ts",
+   "summary": "Agent objective helpers: normalizing prize tiers, computing commissions, and clamping periods to the analytics start date.",
+   "tags": [
+    "utility",
+    "business-logic",
+    "commissions",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/landing-config.ts",
+   "type": "file",
+   "name": "landing-config.ts",
+   "filePath": "lib/landing-config.ts",
+   "summary": "Home page landing configuration: section keys, defaults, and normalization and parsing of the stored landing_config JSON.",
+   "tags": [
+    "config",
+    "landing-page",
+    "validation",
+    "shared"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:lib/openapi-erp.ts",
+   "type": "file",
+   "name": "openapi-erp.ts",
+   "filePath": "lib/openapi-erp.ts",
+   "summary": "Hand-written OpenAPI path and tag definitions for the ERP routes, merged into the main spec.",
+   "tags": [
+    "api-schema",
+    "documentation",
+    "openapi",
+    "erp"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:lib/openapi.ts",
+   "type": "file",
+   "name": "openapi.ts",
+   "filePath": "lib/openapi.ts",
+   "summary": "Builds the hand-written OpenAPI specification served at /api/docs, covering storefront, admin and ERP routes.",
+   "tags": [
+    "api-schema",
+    "documentation",
+    "openapi"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:lib/order-number.ts",
+   "type": "file",
+   "name": "order-number.ts",
+   "filePath": "lib/order-number.ts",
+   "summary": "Generates human-readable order numbers.",
+   "tags": [
+    "utility",
+    "orders"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/trash-tables.ts",
+   "type": "file",
+   "name": "trash-tables.ts",
+   "filePath": "lib/trash-tables.ts",
+   "summary": "Lists the soft-deletable tables shown in Admin Deleted items with their area permissions, plus a type guard.",
+   "tags": [
+    "config",
+    "soft-delete",
+    "shared",
+    "type-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:middleware.ts",
+   "type": "file",
+   "name": "middleware.ts",
+   "filePath": "middleware.ts",
+   "summary": "Next.js middleware that gates admin pages by role and permission, refreshes expired sessions, refuses cross-origin writes, and redirects storefront paths to a locale.",
+   "tags": [
+    "middleware",
+    "security",
+    "i18n",
+    "entry-point",
+    "routing"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/auth-session.ts:signAccessToken",
+   "type": "function",
+   "name": "signAccessToken",
+   "filePath": "lib/auth-session.ts",
+   "lineRange": [
+    22,
+    33
+   ],
+   "summary": "Signs a 15-minute HS256 access JWT.",
+   "tags": [
+    "jwt",
+    "authentication",
+    "security"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/auth-session.ts:verifyAccessToken",
+   "type": "function",
+   "name": "verifyAccessToken",
+   "filePath": "lib/auth-session.ts",
+   "lineRange": [
+    36,
+    44
+   ],
+   "summary": "Verifies an access JWT and returns its claims.",
+   "tags": [
+    "jwt",
+    "authentication",
+    "security"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/auth-session.ts:readCookie",
+   "type": "function",
+   "name": "readCookie",
+   "filePath": "lib/auth-session.ts",
+   "lineRange": [
+    47,
+    53
+   ],
+   "summary": "Reads a cookie value from a Cookie header.",
+   "tags": [
+    "utility",
+    "cookies",
+    "session"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:lib/colissimo.ts:ColissimoError",
+   "type": "class",
+   "name": "ColissimoError",
+   "filePath": "lib/colissimo.ts",
+   "lineRange": [
+    44,
+    49
+   ],
+   "summary": "Error type carrying Colissimo error codes.",
+   "tags": [
+    "error-handling",
+    "colissimo",
+    "api-client"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/colissimo.ts:createParcel",
+   "type": "function",
+   "name": "createParcel",
+   "filePath": "lib/colissimo.ts",
+   "lineRange": [
+    74,
+    104
+   ],
+   "summary": "Creates a parcel through the v1 API.",
+   "tags": [
+    "colissimo",
+    "api-client",
+    "delivery"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/colissimo.ts:callV2",
+   "type": "function",
+   "name": "callV2",
+   "filePath": "lib/colissimo.ts",
+   "lineRange": [
+    131,
+    160
+   ],
+   "summary": "Calls the v2 API with one retry on rate limit and database errors.",
+   "tags": [
+    "api-client",
+    "retry",
+    "colissimo"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/colissimo.ts:call",
+   "type": "function",
+   "name": "call",
+   "filePath": "lib/colissimo.ts",
+   "lineRange": [
+    51,
+    71
+   ],
+   "summary": "Calls the v1 API endpoint.",
+   "tags": [
+    "api-client",
+    "colissimo",
+    "http"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/colissimo.ts:trackParcels",
+   "type": "function",
+   "name": "trackParcels",
+   "filePath": "lib/colissimo.ts",
+   "lineRange": [
+    184,
+    204
+   ],
+   "summary": "Batch-tracks parcels by barcode.",
+   "tags": [
+    "colissimo",
+    "tracking",
+    "api-client"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/colissimo.ts:handOverParcels",
+   "type": "function",
+   "name": "handOverParcels",
+   "filePath": "lib/colissimo.ts",
+   "lineRange": [
+    224,
+    239
+   ],
+   "summary": "Validates parcels for pickup hand-over.",
+   "tags": [
+    "colissimo",
+    "delivery",
+    "api-client"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/colissimo.ts:editParcel",
+   "type": "function",
+   "name": "editParcel",
+   "filePath": "lib/colissimo.ts",
+   "lineRange": [
+    258,
+    274
+   ],
+   "summary": "Edits a parcel at Colissimo.",
+   "tags": [
+    "colissimo",
+    "delivery",
+    "api-client"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/colissimo.ts:requestPriceChange",
+   "type": "function",
+   "name": "requestPriceChange",
+   "filePath": "lib/colissimo.ts",
+   "lineRange": [
+    277,
+    288
+   ],
+   "summary": "Requests a price change on a printed parcel.",
+   "tags": [
+    "colissimo",
+    "pricing",
+    "api-client"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/colissimo.ts:deleteParcels",
+   "type": "function",
+   "name": "deleteParcels",
+   "filePath": "lib/colissimo.ts",
+   "lineRange": [
+    291,
+    310
+   ],
+   "summary": "Deletes parcels at Colissimo.",
+   "tags": [
+    "colissimo",
+    "delivery",
+    "api-client"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/colissimo.ts:trackParcel",
+   "type": "function",
+   "name": "trackParcel",
+   "filePath": "lib/colissimo.ts",
+   "lineRange": [
+    207,
+    211
+   ],
+   "summary": "Tracks a single parcel.",
+   "tags": [
+    "colissimo",
+    "tracking",
+    "api-client"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/colissimo.ts:colissimoConfigured",
+   "type": "function",
+   "name": "colissimoConfigured",
+   "filePath": "lib/colissimo.ts",
+   "lineRange": [
+    19,
+    21
+   ],
+   "summary": "True when Colissimo tokens are set.",
+   "tags": [
+    "config",
+    "colissimo",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/erp/meta.ts:parseWebhook",
+   "type": "function",
+   "name": "parseWebhook",
+   "filePath": "lib/erp/meta.ts",
+   "lineRange": [
+    52,
+    92
+   ],
+   "summary": "Parses incoming Meta webhook messages.",
+   "tags": [
+    "webhook",
+    "parsing",
+    "meta"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/erp/meta.ts:parseComments",
+   "type": "function",
+   "name": "parseComments",
+   "filePath": "lib/erp/meta.ts",
+   "lineRange": [
+    108,
+    140
+   ],
+   "summary": "Parses Page and Instagram comment events.",
+   "tags": [
+    "webhook",
+    "parsing",
+    "meta"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/erp/meta.ts:sendMetaText",
+   "type": "function",
+   "name": "sendMetaText",
+   "filePath": "lib/erp/meta.ts",
+   "lineRange": [
+    143,
+    166
+   ],
+   "summary": "Sends a text reply via Messenger, Instagram or WhatsApp.",
+   "tags": [
+    "messaging",
+    "api-client",
+    "meta"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/erp/meta.ts:validSignature",
+   "type": "function",
+   "name": "validSignature",
+   "filePath": "lib/erp/meta.ts",
+   "lineRange": [
+    29,
+    35
+   ],
+   "summary": "Verifies the webhook HMAC signature.",
+   "tags": [
+    "security",
+    "webhook",
+    "meta"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/erp/meta.ts:metaConfigured",
+   "type": "function",
+   "name": "metaConfigured",
+   "filePath": "lib/erp/meta.ts",
+   "lineRange": [
+    21,
+    26
+   ],
+   "summary": "True when Meta credentials are set.",
+   "tags": [
+    "config",
+    "meta",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/erp/objectives.ts:commissionFor",
+   "type": "function",
+   "name": "commissionFor",
+   "filePath": "lib/erp/objectives.ts",
+   "lineRange": [
+    36,
+    51
+   ],
+   "summary": "Computes an agent commission from goals and results.",
+   "tags": [
+    "commissions",
+    "business-logic",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/erp/objectives.ts:normalizeTiers",
+   "type": "function",
+   "name": "normalizeTiers",
+   "filePath": "lib/erp/objectives.ts",
+   "lineRange": [
+    22,
+    31
+   ],
+   "summary": "Normalizes and sorts prize tiers.",
+   "tags": [
+    "validation",
+    "commissions",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/erp/objectives.ts:clampToStart",
+   "type": "function",
+   "name": "clampToStart",
+   "filePath": "lib/erp/objectives.ts",
+   "lineRange": [
+    57,
+    61
+   ],
+   "summary": "Clamps a period to the analytics start date.",
+   "tags": [
+    "utility",
+    "analytics",
+    "erp"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/landing-config.ts:normalizeLandingConfig",
+   "type": "function",
+   "name": "normalizeLandingConfig",
+   "filePath": "lib/landing-config.ts",
+   "lineRange": [
+    59,
+    87
+   ],
+   "summary": "Fills and validates a landing config against defaults.",
+   "tags": [
+    "validation",
+    "config",
+    "landing-page"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:lib/landing-config.ts:parseLandingConfig",
+   "type": "function",
+   "name": "parseLandingConfig",
+   "filePath": "lib/landing-config.ts",
+   "lineRange": [
+    89,
+    95
+   ],
+   "summary": "Parses stored landing config JSON.",
+   "tags": [
+    "parsing",
+    "config",
+    "landing-page"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/openapi.ts:arrayResponse",
+   "type": "function",
+   "name": "arrayResponse",
+   "filePath": "lib/openapi.ts",
+   "lineRange": [
+    8,
+    25
+   ],
+   "summary": "Builds an OpenAPI array response schema.",
+   "tags": [
+    "openapi",
+    "utility",
+    "api-schema"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/openapi.ts:objectResponse",
+   "type": "function",
+   "name": "objectResponse",
+   "filePath": "lib/openapi.ts",
+   "lineRange": [
+    27,
+    41
+   ],
+   "summary": "Builds an OpenAPI object response schema.",
+   "tags": [
+    "openapi",
+    "utility",
+    "api-schema"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/openapi.ts:messageResponse",
+   "type": "function",
+   "name": "messageResponse",
+   "filePath": "lib/openapi.ts",
+   "lineRange": [
+    43,
+    57
+   ],
+   "summary": "Builds an OpenAPI message response schema.",
+   "tags": [
+    "openapi",
+    "utility",
+    "api-schema"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/openapi.ts:errorResponse",
+   "type": "function",
+   "name": "errorResponse",
+   "filePath": "lib/openapi.ts",
+   "lineRange": [
+    59,
+    72
+   ],
+   "summary": "Builds an OpenAPI error response schema.",
+   "tags": [
+    "openapi",
+    "utility",
+    "api-schema"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/order-number.ts:generateOrderNumber",
+   "type": "function",
+   "name": "generateOrderNumber",
+   "filePath": "lib/order-number.ts",
+   "lineRange": [
+    4,
+    8
+   ],
+   "summary": "Generates a unique order number.",
+   "tags": [
+    "orders",
+    "utility",
+    "id-generation"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/trash-tables.ts:isTrashTable",
+   "type": "function",
+   "name": "isTrashTable",
+   "filePath": "lib/trash-tables.ts",
+   "lineRange": [
+    28,
+    29
+   ],
+   "summary": "Type guard for trash table names.",
+   "tags": [
+    "validation",
+    "soft-delete",
+    "type-guard"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:middleware.ts:middleware",
+   "type": "function",
+   "name": "middleware",
+   "filePath": "middleware.ts",
+   "lineRange": [
+    112,
+    120
+   ],
+   "summary": "Next.js middleware entry that delegates to handle.",
+   "tags": [
+    "middleware",
+    "entry-point",
+    "routing"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:middleware.ts:handle",
+   "type": "function",
+   "name": "handle",
+   "filePath": "middleware.ts",
+   "lineRange": [
+    122,
+    193
+   ],
+   "summary": "Gates admin routes, refreshes sessions, blocks foreign writes and localizes paths.",
+   "tags": [
+    "middleware",
+    "security",
+    "routing"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:middleware.ts:refreshSession",
+   "type": "function",
+   "name": "refreshSession",
+   "filePath": "middleware.ts",
+   "lineRange": [
+    58,
+    80
+   ],
+   "summary": "Refreshes an expired access cookie through the API.",
+   "tags": [
+    "session",
+    "authentication",
+    "middleware"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:middleware.ts:logRefusal",
+   "type": "function",
+   "name": "logRefusal",
+   "filePath": "middleware.ts",
+   "lineRange": [
+    84,
+    95
+   ],
+   "summary": "Logs a refused admin page access.",
+   "tags": [
+    "logging",
+    "security",
+    "middleware"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:middleware.ts:foreignWrite",
+   "type": "function",
+   "name": "foreignWrite",
+   "filePath": "middleware.ts",
+   "lineRange": [
+    100,
+    110
+   ],
+   "summary": "Detects writes from a foreign Origin.",
+   "tags": [
+    "security",
+    "csrf",
+    "middleware"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/openapi.ts",
+   "target": "file:lib/admin-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/openapi.ts",
+   "target": "file:lib/openapi-erp.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/trash-tables.ts",
+   "target": "file:lib/admin-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:middleware.ts",
+   "target": "file:lib/admin-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:middleware.ts",
+   "target": "file:lib/auth-session.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:middleware.ts",
+   "target": "file:lib/language-utils.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/auth-session.ts",
+   "target": "function:lib/auth-session.ts:signAccessToken",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/auth-session.ts",
+   "target": "function:lib/auth-session.ts:signAccessToken",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/auth-session.ts",
+   "target": "function:lib/auth-session.ts:verifyAccessToken",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/auth-session.ts",
+   "target": "function:lib/auth-session.ts:verifyAccessToken",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/auth-session.ts",
+   "target": "function:lib/auth-session.ts:readCookie",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/auth-session.ts",
+   "target": "function:lib/auth-session.ts:readCookie",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "class:lib/colissimo.ts:ColissimoError",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "class:lib/colissimo.ts:ColissimoError",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:createParcel",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:createParcel",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:callV2",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:call",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:trackParcels",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:trackParcels",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:handOverParcels",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:handOverParcels",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:editParcel",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:editParcel",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:requestPriceChange",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:requestPriceChange",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:deleteParcels",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:deleteParcels",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:trackParcel",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:trackParcel",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:colissimoConfigured",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/colissimo.ts",
+   "target": "function:lib/colissimo.ts:colissimoConfigured",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/erp/meta.ts",
+   "target": "function:lib/erp/meta.ts:parseWebhook",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/erp/meta.ts",
+   "target": "function:lib/erp/meta.ts:parseWebhook",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/erp/meta.ts",
+   "target": "function:lib/erp/meta.ts:parseComments",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/erp/meta.ts",
+   "target": "function:lib/erp/meta.ts:parseComments",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/erp/meta.ts",
+   "target": "function:lib/erp/meta.ts:sendMetaText",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/erp/meta.ts",
+   "target": "function:lib/erp/meta.ts:sendMetaText",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/erp/meta.ts",
+   "target": "function:lib/erp/meta.ts:validSignature",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/erp/meta.ts",
+   "target": "function:lib/erp/meta.ts:validSignature",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/erp/meta.ts",
+   "target": "function:lib/erp/meta.ts:metaConfigured",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/erp/meta.ts",
+   "target": "function:lib/erp/meta.ts:metaConfigured",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/erp/objectives.ts",
+   "target": "function:lib/erp/objectives.ts:commissionFor",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/erp/objectives.ts",
+   "target": "function:lib/erp/objectives.ts:commissionFor",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/erp/objectives.ts",
+   "target": "function:lib/erp/objectives.ts:normalizeTiers",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/erp/objectives.ts",
+   "target": "function:lib/erp/objectives.ts:normalizeTiers",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/erp/objectives.ts",
+   "target": "function:lib/erp/objectives.ts:clampToStart",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/erp/objectives.ts",
+   "target": "function:lib/erp/objectives.ts:clampToStart",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/landing-config.ts",
+   "target": "function:lib/landing-config.ts:normalizeLandingConfig",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/landing-config.ts",
+   "target": "function:lib/landing-config.ts:normalizeLandingConfig",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/landing-config.ts",
+   "target": "function:lib/landing-config.ts:parseLandingConfig",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/landing-config.ts",
+   "target": "function:lib/landing-config.ts:parseLandingConfig",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/openapi.ts",
+   "target": "function:lib/openapi.ts:arrayResponse",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/openapi.ts",
+   "target": "function:lib/openapi.ts:objectResponse",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/openapi.ts",
+   "target": "function:lib/openapi.ts:messageResponse",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/openapi.ts",
+   "target": "function:lib/openapi.ts:errorResponse",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/order-number.ts",
+   "target": "function:lib/order-number.ts:generateOrderNumber",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/order-number.ts",
+   "target": "function:lib/order-number.ts:generateOrderNumber",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/trash-tables.ts",
+   "target": "function:lib/trash-tables.ts:isTrashTable",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/trash-tables.ts",
+   "target": "function:lib/trash-tables.ts:isTrashTable",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:middleware.ts",
+   "target": "function:middleware.ts:middleware",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:middleware.ts",
+   "target": "function:middleware.ts:middleware",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:middleware.ts",
+   "target": "function:middleware.ts:handle",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:middleware.ts",
+   "target": "function:middleware.ts:refreshSession",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:middleware.ts",
+   "target": "function:middleware.ts:logRefusal",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:middleware.ts",
+   "target": "function:middleware.ts:foreignWrite",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "function:middleware.ts:middleware",
+   "target": "function:middleware.ts:handle",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:middleware.ts:handle",
+   "target": "function:middleware.ts:refreshSession",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:middleware.ts:handle",
+   "target": "function:middleware.ts:foreignWrite",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:middleware.ts:handle",
+   "target": "function:middleware.ts:logRefusal",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:middleware.ts:handle",
+   "target": "function:lib/auth-session.ts:verifyAccessToken",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:middleware.ts:handle",
+   "target": "function:lib/admin-auth.ts:adminHome",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/colissimo.ts:createParcel",
+   "target": "function:lib/colissimo.ts:call",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/colissimo.ts:trackParcels",
+   "target": "function:lib/colissimo.ts:callV2",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/colissimo.ts:trackParcel",
+   "target": "function:lib/colissimo.ts:trackParcels",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/colissimo.ts:handOverParcels",
+   "target": "function:lib/colissimo.ts:callV2",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/colissimo.ts:editParcel",
+   "target": "function:lib/colissimo.ts:callV2",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/colissimo.ts:requestPriceChange",
+   "target": "function:lib/colissimo.ts:callV2",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/colissimo.ts:deleteParcels",
+   "target": "function:lib/colissimo.ts:callV2",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/landing-config.ts:parseLandingConfig",
+   "target": "function:lib/landing-config.ts:normalizeLandingConfig",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:lib/erp/objectives.ts:commissionFor",
+   "target": "function:lib/erp/objectives.ts:normalizeTiers",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

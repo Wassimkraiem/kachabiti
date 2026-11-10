@@ -1,0 +1,395 @@
+{
+ "nodes": [
+  {
+   "id": "resource:infra/terraform/aws.tf",
+   "type": "resource",
+   "name": "aws.tf",
+   "filePath": "infra/terraform/aws.tf",
+   "summary": "Main Terraform for production AWS: security group, IAM instance role, the ARM EC2 server with Elastic IP and daily snapshots, S3 buckets for products/documents/backups, a monthly budget, and CloudWatch alarms via SNS email.",
+   "tags": [
+    "infrastructure",
+    "deployment",
+    "terraform",
+    "aws",
+    "monitoring"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "resource:infra/terraform/aws.tf:aws_instance.server",
+   "type": "resource",
+   "name": "aws_instance.server",
+   "filePath": "infra/terraform/aws.tf",
+   "summary": "EC2 instance running Postgres, the NestJS API and Caddy, bootstrapped by cloud-init.",
+   "tags": [
+    "compute",
+    "ec2",
+    "server"
+   ],
+   "complexity": "simple",
+   "lineRange": [
+    113,
+    145
+   ]
+  },
+  {
+   "id": "resource:infra/terraform/aws.tf:aws_security_group.server",
+   "type": "resource",
+   "name": "aws_security_group.server",
+   "filePath": "infra/terraform/aws.tf",
+   "summary": "Security group allowing HTTP/HTTPS publicly and SSH only from the allowed CIDR.",
+   "tags": [
+    "networking",
+    "security",
+    "firewall"
+   ],
+   "complexity": "simple",
+   "lineRange": [
+    24,
+    57
+   ]
+  },
+  {
+   "id": "resource:infra/terraform/aws.tf:aws_iam_role.server",
+   "type": "resource",
+   "name": "aws_iam_role.server",
+   "filePath": "infra/terraform/aws.tf",
+   "summary": "Instance role the server uses to sign S3 and CloudWatch calls without static keys.",
+   "tags": [
+    "iam",
+    "security",
+    "instance-role"
+   ],
+   "complexity": "simple",
+   "lineRange": [
+    65,
+    71
+   ]
+  },
+  {
+   "id": "resource:infra/terraform/aws.tf:aws_eip.server",
+   "type": "resource",
+   "name": "aws_eip.server",
+   "filePath": "infra/terraform/aws.tf",
+   "summary": "Elastic IP giving the API server a stable public address.",
+   "tags": [
+    "networking",
+    "ip-address",
+    "dns"
+   ],
+   "complexity": "simple",
+   "lineRange": [
+    148,
+    152
+   ]
+  },
+  {
+   "id": "resource:infra/terraform/aws.tf:aws_dlm_lifecycle_policy.server",
+   "type": "resource",
+   "name": "aws_dlm_lifecycle_policy.server",
+   "filePath": "infra/terraform/aws.tf",
+   "summary": "Data Lifecycle Manager policy taking daily disk snapshots of the server.",
+   "tags": [
+    "backup",
+    "snapshots",
+    "ebs"
+   ],
+   "complexity": "simple",
+   "lineRange": [
+    169,
+    191
+   ]
+  },
+  {
+   "id": "resource:infra/terraform/aws.tf:aws_s3_bucket.products",
+   "type": "resource",
+   "name": "aws_s3_bucket.products",
+   "filePath": "infra/terraform/aws.tf",
+   "summary": "Public-read S3 bucket holding product images.",
+   "tags": [
+    "storage",
+    "s3",
+    "public-assets"
+   ],
+   "complexity": "simple",
+   "lineRange": [
+    198,
+    200
+   ]
+  },
+  {
+   "id": "resource:infra/terraform/aws.tf:aws_s3_bucket.documents",
+   "type": "resource",
+   "name": "aws_s3_bucket.documents",
+   "filePath": "infra/terraform/aws.tf",
+   "summary": "Private S3 bucket for accounting documents and ticket attachments.",
+   "tags": [
+    "storage",
+    "s3",
+    "private"
+   ],
+   "complexity": "simple",
+   "lineRange": [
+    202,
+    204
+   ]
+  },
+  {
+   "id": "resource:infra/terraform/aws.tf:aws_s3_bucket.backups",
+   "type": "resource",
+   "name": "aws_s3_bucket.backups",
+   "filePath": "infra/terraform/aws.tf",
+   "summary": "S3 bucket receiving hourly database dumps, expired by a 30-day lifecycle rule.",
+   "tags": [
+    "storage",
+    "s3",
+    "backup"
+   ],
+   "complexity": "simple",
+   "lineRange": [
+    206,
+    208
+   ]
+  },
+  {
+   "id": "resource:infra/terraform/aws.tf:aws_budgets_budget.monthly",
+   "type": "resource",
+   "name": "aws_budgets_budget.monthly",
+   "filePath": "infra/terraform/aws.tf",
+   "summary": "Monthly AWS cost budget that emails alerts as spend approaches the limit.",
+   "tags": [
+    "cost",
+    "budget",
+    "alerting"
+   ],
+   "complexity": "simple",
+   "lineRange": [
+    246,
+    268
+   ]
+  },
+  {
+   "id": "resource:infra/terraform/aws.tf:aws_cloudwatch_metric_alarm.backup_missing",
+   "type": "resource",
+   "name": "aws_cloudwatch_metric_alarm.backup_missing",
+   "filePath": "infra/terraform/aws.tf",
+   "summary": "Alarm that fires when the BackupSucceeded metric stops arriving from backup.sh.",
+   "tags": [
+    "monitoring",
+    "alarm",
+    "backup"
+   ],
+   "complexity": "simple",
+   "lineRange": [
+    282,
+    295
+   ]
+  },
+  {
+   "id": "resource:infra/terraform/aws.tf:aws_sns_topic.alerts",
+   "type": "resource",
+   "name": "aws_sns_topic.alerts",
+   "filePath": "infra/terraform/aws.tf",
+   "summary": "SNS topic delivering CloudWatch alarm emails.",
+   "tags": [
+    "alerting",
+    "sns",
+    "monitoring"
+   ],
+   "complexity": "simple",
+   "lineRange": [
+    271,
+    273
+   ]
+  },
+  {
+   "id": "config:infra/terraform/cloud-init.yaml",
+   "type": "config",
+   "name": "cloud-init.yaml",
+   "filePath": "infra/terraform/cloud-init.yaml",
+   "summary": "Cloud-init first-boot config for the server: installs Docker, fail2ban and unattended upgrades, creates a key-only deploy user and /opt/kachabity, adds swap and the hourly backup cron.",
+   "tags": [
+    "configuration",
+    "infrastructure",
+    "provisioning",
+    "cloud-init"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "resource:infra/terraform/outputs.tf",
+   "type": "resource",
+   "name": "outputs.tf",
+   "filePath": "infra/terraform/outputs.tf",
+   "summary": "Terraform outputs exposing the server public IP, the API URL and the env values (buckets, region, file URL) to paste into the server .env.",
+   "tags": [
+    "infrastructure",
+    "terraform",
+    "outputs"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "resource:infra/terraform/variables.tf",
+   "type": "resource",
+   "name": "variables.tf",
+   "filePath": "infra/terraform/variables.tf",
+   "summary": "Terraform input variables: region, instance type, disk size, snapshot retention, budget amount and email, SSH keys and CIDR, and the site domain.",
+   "tags": [
+    "infrastructure",
+    "terraform",
+    "variables",
+    "configuration"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "resource:infra/terraform/versions.tf",
+   "type": "resource",
+   "name": "versions.tf",
+   "filePath": "infra/terraform/versions.tf",
+   "summary": "Terraform version and provider pins (aws ~> 6, random ~> 3.6), the S3 state backend and the AWS provider with default project tags.",
+   "tags": [
+    "infrastructure",
+    "terraform",
+    "providers"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "resource:infra/terraform/aws.tf",
+   "target": "resource:infra/terraform/aws.tf:aws_instance.server",
+   "type": "provisions",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "resource:infra/terraform/aws.tf",
+   "target": "resource:infra/terraform/aws.tf:aws_security_group.server",
+   "type": "provisions",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "resource:infra/terraform/aws.tf",
+   "target": "resource:infra/terraform/aws.tf:aws_iam_role.server",
+   "type": "provisions",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "resource:infra/terraform/aws.tf",
+   "target": "resource:infra/terraform/aws.tf:aws_eip.server",
+   "type": "provisions",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "resource:infra/terraform/aws.tf",
+   "target": "resource:infra/terraform/aws.tf:aws_dlm_lifecycle_policy.server",
+   "type": "provisions",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "resource:infra/terraform/aws.tf",
+   "target": "resource:infra/terraform/aws.tf:aws_s3_bucket.products",
+   "type": "provisions",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "resource:infra/terraform/aws.tf",
+   "target": "resource:infra/terraform/aws.tf:aws_s3_bucket.documents",
+   "type": "provisions",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "resource:infra/terraform/aws.tf",
+   "target": "resource:infra/terraform/aws.tf:aws_s3_bucket.backups",
+   "type": "provisions",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "resource:infra/terraform/aws.tf",
+   "target": "resource:infra/terraform/aws.tf:aws_budgets_budget.monthly",
+   "type": "provisions",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "resource:infra/terraform/aws.tf",
+   "target": "resource:infra/terraform/aws.tf:aws_cloudwatch_metric_alarm.backup_missing",
+   "type": "provisions",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "resource:infra/terraform/aws.tf",
+   "target": "resource:infra/terraform/aws.tf:aws_sns_topic.alerts",
+   "type": "provisions",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "resource:infra/terraform/aws.tf",
+   "target": "config:infra/terraform/cloud-init.yaml",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "resource:infra/terraform/aws.tf",
+   "target": "resource:infra/terraform/variables.tf",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "resource:infra/terraform/aws.tf:aws_instance.server",
+   "target": "service:deploy/docker-compose.prod.yml",
+   "type": "deploys",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "config:infra/terraform/cloud-init.yaml",
+   "target": "file:deploy/backup.sh",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "resource:infra/terraform/outputs.tf",
+   "target": "resource:infra/terraform/aws.tf",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "resource:infra/terraform/outputs.tf",
+   "target": "config:deploy/.env.example",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "resource:infra/terraform/variables.tf",
+   "target": "resource:infra/terraform/aws.tf",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "resource:infra/terraform/versions.tf",
+   "target": "resource:infra/terraform/aws.tf",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  }
+ ]
+}

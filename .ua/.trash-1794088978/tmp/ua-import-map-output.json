@@ -1,0 +1,1482 @@
+{
+  "scriptCompleted": true,
+  "stats": {
+    "filesScanned": 407,
+    "filesWithImports": 212,
+    "totalEdges": 852
+  },
+  "failures": [],
+  "importMap": {
+    ".dockerignore": [],
+    ".git-ssh-setup.sh": [],
+    ".gitattributes": [],
+    ".github/scripts/api-changed.mjs": [],
+    ".github/workflows/ci.yml": [],
+    ".github/workflows/deploy.yml": [],
+    ".ua/config.json": [],
+    ".vercelignore": [],
+    "CLAUDE.md": [],
+    "Dockerfile": [],
+    "README.md": [],
+    "api/.env.example": [],
+    "api/Dockerfile": [],
+    "api/Dockerfile.dockerignore": [],
+    "api/README.md": [],
+    "api/eslint.config.mjs": [],
+    "api/nest-cli.json": [],
+    "api/package.json": [],
+    "api/scripts/copy-storage.mjs": [],
+    "api/scripts/db-types.mjs": [],
+    "api/scripts/migrate.mjs": [],
+    "api/src/admin/admin.controllers.ts": [
+      "api/src/admin/goals.ts",
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/embed.ts",
+      "api/src/notifications/notification-events.ts",
+      "api/src/sales/commerce.ts",
+      "lib/admin-auth.ts",
+      "lib/erp/constants.ts",
+      "lib/erp/objectives.ts",
+      "lib/trash-tables.ts"
+    ],
+    "api/src/admin/goals.ts": [
+      "api/src/db/database.ts",
+      "lib/erp/objectives.ts"
+    ],
+    "api/src/admin/public.controllers.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/common/mail.ts",
+      "api/src/db/database.ts",
+      "lib/abandoned-cart-email.ts",
+      "lib/openapi.ts"
+    ],
+    "api/src/admin/team.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/types.ts",
+      "lib/admin-auth.ts"
+    ],
+    "api/src/admin/tickets.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/common/storage.ts",
+      "api/src/db/database.ts",
+      "api/src/files/files.controllers.ts",
+      "api/src/sales/commerce.ts",
+      "lib/erp/constants.ts"
+    ],
+    "api/src/app.module.ts": [
+      "api/src/admin/admin.controllers.ts",
+      "api/src/admin/public.controllers.ts",
+      "api/src/admin/team.controller.ts",
+      "api/src/admin/tickets.controller.ts",
+      "api/src/auth/auth.controller.ts",
+      "api/src/auth/auth.guard.ts",
+      "api/src/catalog/categories.controller.ts",
+      "api/src/catalog/content.controllers.ts",
+      "api/src/catalog/landing.controller.ts",
+      "api/src/catalog/options.controller.ts",
+      "api/src/catalog/product-images.controller.ts",
+      "api/src/catalog/products.controller.ts",
+      "api/src/catalog/variants.controller.ts",
+      "api/src/common/api.ts",
+      "api/src/crm/campaigns.controller.ts",
+      "api/src/crm/crm.controllers.ts",
+      "api/src/crm/meta-webhook.controller.ts",
+      "api/src/db/database.ts",
+      "api/src/files/files.controllers.ts",
+      "api/src/finance/finance.controllers.ts",
+      "api/src/health.controller.ts",
+      "api/src/notifications/notification-events.ts",
+      "api/src/pos/pos.controller.ts",
+      "api/src/purchasing/purchasing.controllers.ts",
+      "api/src/sales/colissimo-portal.controller.ts",
+      "api/src/sales/colissimo-tracking.ts",
+      "api/src/sales/delivery.controller.ts",
+      "api/src/sales/orders.controller.ts",
+      "api/src/sales/sales.controllers.ts",
+      "api/src/stock/stock.controllers.ts",
+      "api/src/storefront/account.controller.ts",
+      "api/src/storefront/storefront.controller.ts"
+    ],
+    "api/src/auth/auth.controller.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/common/mail.ts",
+      "api/src/common/rate-limit.ts",
+      "api/src/config.ts",
+      "api/src/db/database.ts",
+      "api/src/db/types.ts",
+      "lib/auth-session.ts"
+    ],
+    "api/src/auth/auth.guard.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/config.ts",
+      "api/src/db/database.ts",
+      "lib/admin-auth.ts",
+      "lib/api-access.ts",
+      "lib/auth-session.ts"
+    ],
+    "api/src/auth/decorators.ts": [
+      "api/src/auth/auth.guard.ts",
+      "lib/admin-auth.ts"
+    ],
+    "api/src/catalog/categories.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts"
+    ],
+    "api/src/catalog/content.controllers.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts"
+    ],
+    "api/src/catalog/landing.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "lib/landing-config.ts"
+    ],
+    "api/src/catalog/options.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts"
+    ],
+    "api/src/catalog/product-images.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts"
+    ],
+    "api/src/catalog/products.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "lib/stock.ts"
+    ],
+    "api/src/catalog/queries.ts": [
+      "api/src/db/types.ts"
+    ],
+    "api/src/catalog/revalidate.ts": [
+      "api/src/config.ts"
+    ],
+    "api/src/catalog/variants.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/queries.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts"
+    ],
+    "api/src/common/api.ts": [
+      "lib/erp/db-messages.ts"
+    ],
+    "api/src/common/mail.ts": [
+      "api/src/config.ts"
+    ],
+    "api/src/common/rate-limit.ts": [
+      "api/src/common/api.ts"
+    ],
+    "api/src/common/storage.ts": [
+      "api/src/common/api.ts",
+      "api/src/config.ts"
+    ],
+    "api/src/config.ts": [],
+    "api/src/crm/campaigns.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "lib/erp/constants.ts"
+    ],
+    "api/src/crm/crm.controllers.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/embed.ts",
+      "api/src/sales/commerce.ts",
+      "lib/erp/constants.ts",
+      "lib/erp/meta.ts"
+    ],
+    "api/src/crm/meta-webhook.controller.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "lib/erp/meta.ts"
+    ],
+    "api/src/db/database.ts": [
+      "api/src/config.ts",
+      "api/src/db/types.ts"
+    ],
+    "api/src/db/embed.ts": [],
+    "api/src/db/types.ts": [],
+    "api/src/files/files.controllers.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/common/storage.ts",
+      "api/src/db/database.ts",
+      "lib/erp/constants.ts"
+    ],
+    "api/src/finance/finance.controllers.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/embed.ts",
+      "lib/erp/constants.ts"
+    ],
+    "api/src/health.controller.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/db/database.ts"
+    ],
+    "api/src/instrument.ts": [
+      "api/src/config.ts"
+    ],
+    "api/src/main.ts": [
+      "api/src/app.module.ts",
+      "api/src/config.ts",
+      "api/src/instrument.ts"
+    ],
+    "api/src/notifications/notification-events.ts": [
+      "api/src/config.ts",
+      "api/src/db/database.ts"
+    ],
+    "api/src/pos/pos.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/embed.ts",
+      "api/src/sales/commerce.ts",
+      "lib/order-number.ts"
+    ],
+    "api/src/purchasing/purchasing.controllers.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/embed.ts",
+      "lib/erp/constants.ts"
+    ],
+    "api/src/sales/colissimo-portal.controller.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/sales/colissimo-portal.ts"
+    ],
+    "api/src/sales/colissimo-portal.ts": [],
+    "api/src/sales/colissimo-tracking.ts": [
+      "api/src/catalog/revalidate.ts",
+      "api/src/db/database.ts",
+      "lib/colissimo-data.ts",
+      "lib/colissimo.ts"
+    ],
+    "api/src/sales/commerce.ts": [
+      "api/src/db/types.ts"
+    ],
+    "api/src/sales/delivery.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/sales/colissimo-portal.ts",
+      "api/src/sales/colissimo-tracking.ts",
+      "api/src/sales/commerce.ts",
+      "lib/colissimo-data.ts",
+      "lib/colissimo.ts",
+      "lib/erp/constants.ts",
+      "lib/order-number.ts"
+    ],
+    "api/src/sales/orders.controller.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/sales/colissimo-tracking.ts",
+      "api/src/sales/commerce.ts",
+      "lib/colissimo-data.ts",
+      "lib/erp/constants.ts",
+      "lib/order-confirmation-email.ts",
+      "lib/order-number.ts",
+      "lib/order-types.ts"
+    ],
+    "api/src/sales/sales.controllers.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/sales/commerce.ts",
+      "lib/colissimo-data.ts",
+      "lib/erp/constants.ts",
+      "lib/order-number.ts"
+    ],
+    "api/src/stock/stock.controllers.ts": [
+      "api/src/auth/auth.guard.ts",
+      "api/src/auth/decorators.ts",
+      "api/src/catalog/revalidate.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "lib/stock.ts"
+    ],
+    "api/src/storefront/account.controller.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/embed.ts",
+      "api/src/sales/commerce.ts",
+      "lib/colissimo-data.ts"
+    ],
+    "api/src/storefront/storefront.controller.ts": [
+      "api/src/auth/decorators.ts",
+      "api/src/common/api.ts",
+      "api/src/db/database.ts",
+      "api/src/db/embed.ts",
+      "api/src/sales/commerce.ts",
+      "lib/landing-config.ts",
+      "lib/utils/product-utils.ts"
+    ],
+    "api/test/e2e/auth.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/catalog.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/categories.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/colissimo.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/erp.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/files.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/helpers.mjs": [],
+    "api/test/e2e/objectives.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/stock.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/test/e2e/tickets.e2e.mjs": [
+      "api/test/e2e/helpers.mjs"
+    ],
+    "api/tsconfig.build.json": [],
+    "api/tsconfig.json": [],
+    "app/[locale]/about/page.tsx": [
+      "lib/config.ts"
+    ],
+    "app/[locale]/auth/page.tsx": [
+      "components/forms/index.ts",
+      "lib/customer-auth.ts",
+      "lib/language-utils.ts",
+      "lib/schemas/auth-schema.ts"
+    ],
+    "app/[locale]/cart/page.tsx": [
+      "components/cart/CartItem.tsx",
+      "components/ui/LoadingSpinner.tsx",
+      "lib/cart-context.tsx",
+      "lib/language-context.tsx",
+      "lib/storefront-api.ts"
+    ],
+    "app/[locale]/categories/[slug]/page.tsx": [
+      "components/products/ProductListCard.tsx",
+      "components/ui/LoadingSpinner.tsx",
+      "lib/categories-cache.ts",
+      "lib/customer-auth.ts",
+      "lib/favorites.ts",
+      "lib/quick-add.ts",
+      "lib/storefront-api.ts",
+      "lib/utils/product-utils.ts"
+    ],
+    "app/[locale]/categories/page.tsx": [
+      "components/ui/LoadingSpinner.tsx",
+      "lib/categories-cache.ts"
+    ],
+    "app/[locale]/checkout/page.tsx": [
+      "components/cart/CartItem.tsx",
+      "components/ui/LoadingSpinner.tsx",
+      "lib/cart-context.tsx",
+      "lib/colissimo-data.ts",
+      "lib/customer-auth.ts",
+      "lib/language-context.tsx",
+      "lib/language-utils.ts",
+      "lib/orders.ts",
+      "lib/schemas/checkout-schema.ts",
+      "lib/storefront-api.ts"
+    ],
+    "app/[locale]/contact/page.tsx": [
+      "components/forms/index.ts",
+      "lib/config.ts"
+    ],
+    "app/[locale]/layout.tsx": [
+      "components/cart/CartDrawer.tsx",
+      "components/footer/Footer.tsx",
+      "components/layout/MobileTabBar.tsx",
+      "components/layout/StaticHeader.tsx",
+      "components/layout/TrafficSource.tsx",
+      "lib/cart-context.tsx",
+      "lib/language-context.tsx",
+      "lib/language-utils.ts"
+    ],
+    "app/[locale]/not-found.tsx": [
+      "lib/config.ts"
+    ],
+    "app/[locale]/order-confirmation/page.tsx": [
+      "lib/config.ts",
+      "lib/language-context.tsx"
+    ],
+    "app/[locale]/page.tsx": [
+      "components/landing/CollectionSpotlight.tsx",
+      "components/landing/HowToOrder.tsx",
+      "components/landing/NewArrivals.tsx",
+      "components/landing/ProductShowcase.tsx",
+      "components/products/ProductGrid.tsx",
+      "components/products/PromoProducts.tsx",
+      "components/products/TopProducts.tsx",
+      "components/reviews/CustomerFeedback.tsx",
+      "components/sections/FAQ.tsx",
+      "components/sections/HeroSection.tsx",
+      "components/sections/Reels.tsx",
+      "components/sections/SaleBanner.tsx",
+      "components/services/ServiceHighlights.tsx",
+      "components/ui/ErrorBoundary.tsx",
+      "components/ui/LoadingSpinner.tsx",
+      "lib/catalog-cache.ts",
+      "lib/config.ts",
+      "lib/home-data.ts",
+      "lib/landing-config.ts",
+      "lib/landing-products.ts",
+      "lib/storefront-api.ts"
+    ],
+    "app/[locale]/privacy/page.tsx": [
+      "components/sections/TermsSection.tsx"
+    ],
+    "app/[locale]/products/[slug]/ProductDetailClient.tsx": [
+      "components/cart/AddToCartButton.tsx",
+      "components/forms/index.ts",
+      "components/ui/ImageLightbox.tsx",
+      "components/ui/LoadingSpinner.tsx",
+      "lib/categories-cache.ts",
+      "lib/config.ts",
+      "lib/customer-auth.ts",
+      "lib/fonts.ts",
+      "lib/language-utils.ts",
+      "lib/product-detail.ts",
+      "lib/storefront-api.ts",
+      "lib/utils/product-utils.ts"
+    ],
+    "app/[locale]/products/[slug]/page.tsx": [
+      "app/[locale]/products/[slug]/ProductDetailClient.tsx",
+      "lib/catalog-cache.ts",
+      "lib/get-site-settings.ts",
+      "lib/storefront-api.ts",
+      "lib/utils/product-utils.ts"
+    ],
+    "app/[locale]/products/page.tsx": [
+      "components/products/ProductListCard.tsx",
+      "components/ui/LoadingSpinner.tsx",
+      "lib/categories-cache.ts",
+      "lib/customer-auth.ts",
+      "lib/favorites.ts",
+      "lib/language-utils.ts",
+      "lib/quick-add.ts",
+      "lib/storefront-api.ts",
+      "lib/utils/product-utils.ts"
+    ],
+    "app/[locale]/settings/README.md": [],
+    "app/[locale]/settings/layout.tsx": [
+      "lib/config.ts"
+    ],
+    "app/[locale]/settings/page.tsx": [
+      "components/forms/index.ts",
+      "components/products/ProductListCard.tsx",
+      "components/ui/OrderTracking.tsx",
+      "lib/customer-auth.ts",
+      "lib/favorites.ts",
+      "lib/orders.ts",
+      "lib/quick-add.ts"
+    ],
+    "app/[locale]/shipping/page.tsx": [
+      "components/sections/TermsSection.tsx",
+      "lib/config.ts"
+    ],
+    "app/[locale]/terms-and-conditions/page.tsx": [
+      "components/sections/TermsSection.tsx",
+      "lib/config.ts"
+    ],
+    "app/admin/activity/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/select-search.ts",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/cart-analytics/page.tsx": [
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/categories/[id]/edit/page.tsx": [
+      "components/admin/CategoryExtraFields.tsx",
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/categories/new/page.tsx": [
+      "components/admin/CategoryExtraFields.tsx",
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/categories/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/colissimo-account/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/DeliveryStatusTag.tsx",
+      "components/admin/delivery/ParcelHistoryDrawer.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "components/admin/erp/charts.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/colissimo-data.ts"
+    ],
+    "app/admin/customers/[id]/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "components/admin/order-status.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/colissimo-data.ts",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/customers/comments/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/customers/inbox/page.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/customers/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/colissimo-data.ts",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/dashboard/page.tsx": [
+      "components/admin/erp/QuickLinks.tsx",
+      "components/admin/stock/StockOverview.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/delivery/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/DeliveryStatusTag.tsx",
+      "components/admin/delivery/EditParcelModal.tsx",
+      "components/admin/delivery/ParcelHistoryDrawer.tsx",
+      "components/admin/delivery/ParcelLookup.tsx",
+      "components/admin/delivery/SendParcelModal.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/colissimo-data.ts"
+    ],
+    "app/admin/delivery/print/page.tsx": [
+      "components/admin/delivery/delivery-api.ts",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/finance/accounting/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/finance/bills/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/finance/documents/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/finance/invoices/[id]/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/finance/invoices/page.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/finance/payments/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/finance/treasury/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/goals/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/charts.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/landing/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/select-search.ts",
+      "lib/admin-i18n.tsx",
+      "lib/landing-config.ts"
+    ],
+    "app/admin/layout.tsx": [
+      "components/admin/AdminLanguageSwitcher.tsx",
+      "components/admin/NotificationBell.tsx",
+      "components/admin/admin-fetch-cache.ts",
+      "components/admin/antd-app.tsx",
+      "components/admin/mobile-table-labels.ts",
+      "lib/admin-auth.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/antd-config.ts"
+    ],
+    "app/admin/loading.tsx": [],
+    "app/admin/login/page.tsx": [
+      "components/admin/AdminLanguageSwitcher.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/customer-auth.ts"
+    ],
+    "app/admin/marketing/campaigns/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/my-work/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/MonthGoalCard.tsx",
+      "components/admin/erp/charts.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "components/admin/order-status.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/notifications/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/notification-item.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/orders/[id]/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/OrderDeliveryCard.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "components/admin/erp/EditOrderModal.tsx",
+      "components/admin/erp/OrderPaymentsCard.tsx",
+      "components/admin/erp/OrderPipelineCard.tsx",
+      "components/admin/order-status.ts",
+      "lib/admin-i18n.tsx",
+      "lib/traffic-source.ts"
+    ],
+    "app/admin/orders/new/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/ParcelProducts.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "components/admin/order-status.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/colissimo-data.ts",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/orders/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/DeliveryStatusTag.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "components/admin/order-status.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/erp/constants.ts",
+      "lib/traffic-source.ts"
+    ],
+    "app/admin/overview/page.tsx": [
+      "components/admin/erp/MonthGoalCard.tsx",
+      "components/admin/erp/charts.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/performance/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/pos/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "components/admin/order-status.ts",
+      "components/admin/pos/PosAnalyticsTab.tsx",
+      "components/admin/pos/PosStockTab.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/pos/receipt/[id]/page.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/pos/sessions/page.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/products/[id]/edit/page.tsx": [
+      "components/admin/ProductStockFields.tsx",
+      "components/admin/ProductTranslationFields.tsx",
+      "components/admin/antd-app.tsx",
+      "components/admin/select-search.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/products/new/page.tsx": [
+      "components/admin/ProductStockFields.tsx",
+      "components/admin/ProductTranslationFields.tsx",
+      "components/admin/antd-app.tsx",
+      "components/admin/select-search.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/products/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/promotions/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/purchasing/[id]/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/purchase-items.ts",
+      "components/admin/erp/ui.tsx",
+      "components/admin/select-search.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/purchasing/materials/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "components/admin/select-search.ts",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/purchasing/page.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/purchasing/prices/page.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/purchasing/suppliers/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/reels/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/sale-banners/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/settings/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "app/admin/stock/movements/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/stock.ts"
+    ],
+    "app/admin/stock/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/stock/MovementModal.tsx",
+      "components/admin/stock/ProductVariantsPanel.tsx",
+      "components/admin/stock/VariantThumb.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/stock.ts"
+    ],
+    "app/admin/stock/restock/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/stock/MovementModal.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/stock.ts"
+    ],
+    "app/admin/stock/settings/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/team/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-auth.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/admin/tickets/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "app/admin/trash/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/trash-tables.ts"
+    ],
+    "app/admin/variants/page.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "app/api-docs/page.tsx": [],
+    "app/api/internal/revalidate/route.ts": [
+      "lib/catalog-cache.ts"
+    ],
+    "app/global-error.tsx": [],
+    "app/globals.css": [],
+    "app/layout.tsx": [
+      "app/globals.css"
+    ],
+    "app/manifest.ts": [],
+    "app/not-found.tsx": [
+      "components/footer/Footer.tsx",
+      "components/layout/StaticHeader.tsx",
+      "lib/config.ts",
+      "lib/language-utils.ts"
+    ],
+    "app/page.tsx": [
+      "lib/language-utils.ts"
+    ],
+    "app/robots.ts": [],
+    "app/sitemap.ts": [],
+    "components/admin/AdminLanguageSwitcher.tsx": [
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/CategoryExtraFields.tsx": [
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/ImageUpload.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/MultiImageUpload.tsx": [
+      "components/admin/antd-app.tsx",
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/NotificationBell.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/desktop-push.ts",
+      "components/admin/notification-item.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "components/admin/ProductStockFields.tsx": [
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "components/admin/ProductTranslationFields.tsx": [
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/admin-fetch-cache.ts": [],
+    "components/admin/antd-app.tsx": [],
+    "components/admin/delivery/DeliveryStatusTag.tsx": [
+      "components/admin/delivery/delivery-api.ts",
+      "lib/admin-i18n.tsx",
+      "lib/colissimo-data.ts"
+    ],
+    "components/admin/delivery/EditParcelModal.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "lib/admin-i18n.tsx",
+      "lib/colissimo-data.ts"
+    ],
+    "components/admin/delivery/OrderDeliveryCard.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/DeliveryStatusTag.tsx",
+      "components/admin/delivery/EditParcelModal.tsx",
+      "components/admin/delivery/SendParcelModal.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "components/admin/delivery/ParcelHistoryDrawer.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/delivery/ParcelLookup.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/DeliveryStatusTag.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/delivery/ParcelProducts.tsx": [
+      "components/admin/delivery/delivery-api.ts",
+      "components/admin/select-search.ts",
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/delivery/SendParcelModal.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/ParcelProducts.tsx",
+      "components/admin/delivery/delivery-api.ts",
+      "components/admin/erp/erp-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/colissimo-data.ts"
+    ],
+    "components/admin/delivery/delivery-api.ts": [
+      "lib/colissimo-data.ts"
+    ],
+    "components/admin/desktop-push.ts": [],
+    "components/admin/erp/EditOrderModal.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/delivery/ParcelProducts.tsx",
+      "components/admin/erp/erp-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/colissimo-data.ts"
+    ],
+    "components/admin/erp/MonthGoalCard.tsx": [
+      "components/admin/erp/charts.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "components/admin/erp/OrderPaymentsCard.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/order-status.ts",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "components/admin/erp/OrderPipelineCard.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "components/admin/erp/QuickLinks.tsx": [
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "components/admin/erp/charts.tsx": [],
+    "components/admin/erp/erp-client.ts": [],
+    "components/admin/erp/purchase-items.ts": [
+      "components/admin/erp/erp-client.ts"
+    ],
+    "components/admin/erp/ui.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "components/admin/mobile-table-labels.ts": [],
+    "components/admin/notification-item.tsx": [
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/order-status.ts": [
+      "components/admin/delivery/delivery-api.ts"
+    ],
+    "components/admin/pos/PosAnalyticsTab.tsx": [
+      "components/admin/erp/charts.tsx",
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/erp/constants.ts"
+    ],
+    "components/admin/pos/PosStockTab.tsx": [
+      "components/admin/erp/erp-client.ts",
+      "components/admin/erp/ui.tsx",
+      "lib/admin-i18n.tsx",
+      "lib/admin-role-context.tsx"
+    ],
+    "components/admin/select-search.ts": [],
+    "components/admin/stock/MovementChart.tsx": [
+      "lib/admin-i18n.tsx"
+    ],
+    "components/admin/stock/MovementModal.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/select-search.ts",
+      "components/admin/stock/VariantThumb.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/stock.ts"
+    ],
+    "components/admin/stock/ProductVariantsPanel.tsx": [
+      "components/admin/antd-app.tsx",
+      "components/admin/stock/VariantThumb.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/stock.ts"
+    ],
+    "components/admin/stock/StockOverview.tsx": [
+      "components/admin/stock/MovementChart.tsx",
+      "components/admin/stock/stock-client.ts",
+      "lib/admin-i18n.tsx",
+      "lib/stock.ts"
+    ],
+    "components/admin/stock/VariantThumb.tsx": [],
+    "components/admin/stock/stock-client.ts": [
+      "lib/stock.ts"
+    ],
+    "components/carousel/CarouselIndicators.tsx": [],
+    "components/carousel/CarouselNavigation.tsx": [],
+    "components/carousel/index.ts": [],
+    "components/cart/AddToCartButton.tsx": [
+      "lib/cart-context.tsx",
+      "lib/language-context.tsx"
+    ],
+    "components/cart/CartButton.tsx": [
+      "lib/cart-context.tsx"
+    ],
+    "components/cart/CartDrawer.tsx": [
+      "components/cart/CartItem.tsx",
+      "lib/cart-context.tsx",
+      "lib/language-context.tsx",
+      "lib/language-utils.ts"
+    ],
+    "components/cart/CartItem.tsx": [
+      "lib/cart-context.tsx",
+      "lib/config.ts",
+      "lib/language-context.tsx"
+    ],
+    "components/cart/index.ts": [],
+    "components/footer/Footer.tsx": [
+      "components/footer/FooterSection.tsx",
+      "components/sections/NewsletterForm.tsx",
+      "components/sections/SocialLinks.tsx",
+      "lib/config.ts",
+      "lib/footer-config.ts",
+      "lib/language-context.tsx"
+    ],
+    "components/footer/FooterSection.tsx": [
+      "lib/footer-config.ts"
+    ],
+    "components/footer/index.ts": [],
+    "components/forms/FormInput.tsx": [],
+    "components/forms/FormSelect.tsx": [],
+    "components/forms/FormTextarea.tsx": [],
+    "components/forms/README.md": [],
+    "components/forms/index.ts": [],
+    "components/landing/CollectionSpotlight.tsx": [
+      "components/landing/LandingProductCard.tsx",
+      "lib/fonts.ts",
+      "lib/landing-products.ts",
+      "lib/language-utils.ts"
+    ],
+    "components/landing/HowToOrder.tsx": [
+      "lib/config.ts",
+      "lib/fonts.ts",
+      "lib/language-utils.ts"
+    ],
+    "components/landing/LandingProductCard.tsx": [
+      "lib/landing-products.ts"
+    ],
+    "components/landing/NewArrivals.tsx": [
+      "components/landing/LandingProductCard.tsx",
+      "lib/fonts.ts",
+      "lib/landing-products.ts",
+      "lib/language-utils.ts"
+    ],
+    "components/landing/ProductRing3D.tsx": [
+      "components/landing/ring-scene.ts",
+      "lib/landing-products.ts"
+    ],
+    "components/landing/ProductShowcase.tsx": [
+      "components/landing/ProductRing3D.tsx",
+      "lib/fonts.ts",
+      "lib/landing-products.ts",
+      "lib/language-utils.ts"
+    ],
+    "components/landing/ring-scene.ts": [],
+    "components/layout/MobileHeader.tsx": [
+      "components/layout/SearchBox.tsx",
+      "lib/config.ts",
+      "lib/customer-auth.ts"
+    ],
+    "components/layout/MobileTabBar.tsx": [
+      "lib/cart-context.tsx",
+      "lib/customer-auth.ts"
+    ],
+    "components/layout/SearchBox.tsx": [
+      "lib/product-search.ts",
+      "lib/storefront-api.ts",
+      "lib/utils/product-utils.ts"
+    ],
+    "components/layout/StaticHeader.tsx": [
+      "components/cart/CartButton.tsx",
+      "components/layout/MobileHeader.tsx",
+      "components/layout/SearchBox.tsx",
+      "lib/categories-cache.ts",
+      "lib/config.ts",
+      "lib/customer-auth.ts",
+      "lib/language-context.tsx",
+      "lib/language-utils.ts"
+    ],
+    "components/layout/TrafficSource.tsx": [
+      "lib/traffic-source.ts"
+    ],
+    "components/layout/index.ts": [],
+    "components/products/ProductGrid.tsx": [
+      "lib/categories-cache.ts"
+    ],
+    "components/products/ProductListCard.tsx": [
+      "lib/config.ts"
+    ],
+    "components/products/PromoProductCard.tsx": [
+      "components/cart/AddToCartButton.tsx",
+      "components/timers/PromoCountdownTimer.tsx",
+      "components/ui/StockProgress.tsx",
+      "lib/quick-add.ts",
+      "lib/utils/product-utils.ts",
+      "types/product.ts"
+    ],
+    "components/products/PromoProducts.tsx": [
+      "components/products/PromoProductCard.tsx",
+      "types/product.ts"
+    ],
+    "components/products/TopProducts.tsx": [
+      "components/products/ProductListCard.tsx",
+      "lib/customer-auth.ts",
+      "lib/favorites.ts",
+      "lib/product-images.ts",
+      "lib/quick-add.ts"
+    ],
+    "components/products/index.ts": [],
+    "components/reviews/CustomerFeedback.tsx": [
+      "components/carousel/CarouselIndicators.tsx",
+      "components/carousel/CarouselNavigation.tsx",
+      "components/reviews/ReviewCard.tsx",
+      "components/services/ServiceHighlightCard.tsx",
+      "components/ui/SectionHeader.tsx",
+      "hooks/useCarousel.ts",
+      "lib/service-highlights.ts",
+      "lib/storefront-api.ts"
+    ],
+    "components/reviews/ReviewCard.tsx": [],
+    "components/reviews/index.ts": [],
+    "components/sections/FAQ.tsx": [
+      "components/ui/SectionHeader.tsx",
+      "lib/language-utils.ts"
+    ],
+    "components/sections/HeroSection.tsx": [
+      "lib/language-utils.ts"
+    ],
+    "components/sections/NewsletterForm.tsx": [],
+    "components/sections/Reels.tsx": [],
+    "components/sections/SaleBanner.tsx": [
+      "components/timers/CountdownTimer.tsx",
+      "lib/storefront-api.ts"
+    ],
+    "components/sections/SocialLinks.tsx": [
+      "lib/config.ts"
+    ],
+    "components/sections/TermsSection.tsx": [],
+    "components/sections/index.ts": [],
+    "components/services/ServiceHighlightCard.tsx": [],
+    "components/services/ServiceHighlights.tsx": [
+      "hooks/useCarousel.ts"
+    ],
+    "components/services/index.ts": [],
+    "components/timers/CountdownTimer.tsx": [],
+    "components/timers/PromoCountdownTimer.tsx": [],
+    "components/timers/index.ts": [],
+    "components/ui/ErrorBoundary.tsx": [],
+    "components/ui/ImageLightbox.tsx": [],
+    "components/ui/LoadingSpinner.tsx": [],
+    "components/ui/OrderTracking.tsx": [
+      "lib/colissimo-data.ts",
+      "lib/language-utils.ts"
+    ],
+    "components/ui/SectionHeader.tsx": [],
+    "components/ui/StockProgress.tsx": [],
+    "components/ui/index.ts": [],
+    "deploy/.env.example": [],
+    "deploy/backup.sh": [],
+    "deploy/deploy.sh": [],
+    "deploy/docker-compose.prod.yml": [],
+    "docker-compose.yml": [],
+    "docs/DEPLOY.md": [],
+    "docs/DOCKER.md": [],
+    "docs/META.md": [],
+    "docs/MIGRATION-NESTJS-TASKS.md": [],
+    "docs/MIGRATION-NESTJS.md": [],
+    "eslint.config.mjs": [],
+    "hooks/useCarousel.ts": [],
+    "infra/terraform/.terraform.lock.hcl": [],
+    "infra/terraform/aws.tf": [],
+    "infra/terraform/backend.hcl.example": [],
+    "infra/terraform/cloud-init.yaml": [],
+    "infra/terraform/outputs.tf": [],
+    "infra/terraform/terraform.tfvars.example": [],
+    "infra/terraform/variables.tf": [],
+    "infra/terraform/versions.tf": [],
+    "instrumentation-client.ts": [
+      "lib/sentry-options.ts"
+    ],
+    "instrumentation.ts": [],
+    "lib/abandoned-cart-email.ts": [],
+    "lib/admin-auth.ts": [],
+    "lib/admin-i18n.tsx": [
+      "lib/admin-translations.ts"
+    ],
+    "lib/admin-role-context.tsx": [
+      "lib/admin-auth.ts"
+    ],
+    "lib/admin-translations-erp.ts": [],
+    "lib/admin-translations.ts": [
+      "lib/admin-translations-erp.ts"
+    ],
+    "lib/antd-config.ts": [],
+    "lib/api-access.ts": [
+      "lib/admin-auth.ts",
+      "lib/trash-tables.ts"
+    ],
+    "lib/app-env.ts": [],
+    "lib/auth-session.ts": [],
+    "lib/cart-context.tsx": [],
+    "lib/catalog-cache.ts": [
+      "lib/product-detail.ts"
+    ],
+    "lib/categories-cache.ts": [],
+    "lib/colissimo-data.ts": [],
+    "lib/colissimo.ts": [
+      "lib/colissimo-data.ts"
+    ],
+    "lib/config.ts": [],
+    "lib/customer-auth.ts": [],
+    "lib/erp/constants.ts": [],
+    "lib/erp/db-messages.ts": [
+      "lib/stock.ts"
+    ],
+    "lib/erp/meta.ts": [],
+    "lib/erp/objectives.ts": [],
+    "lib/favorites.ts": [
+      "lib/customer-auth.ts",
+      "lib/product-images.ts"
+    ],
+    "lib/fonts.ts": [],
+    "lib/footer-config.ts": [],
+    "lib/get-site-settings.ts": [],
+    "lib/home-data.ts": [
+      "lib/catalog-cache.ts",
+      "lib/storefront-api.ts"
+    ],
+    "lib/landing-config.ts": [],
+    "lib/landing-products.ts": [],
+    "lib/language-context.tsx": [],
+    "lib/language-utils.ts": [],
+    "lib/openapi-erp.ts": [],
+    "lib/openapi.ts": [
+      "lib/admin-auth.ts",
+      "lib/openapi-erp.ts"
+    ],
+    "lib/order-confirmation-email.ts": [
+      "lib/config.ts",
+      "lib/order-types.ts"
+    ],
+    "lib/order-number.ts": [],
+    "lib/order-types.ts": [],
+    "lib/orders.ts": [
+      "lib/cart-context.tsx",
+      "lib/order-types.ts",
+      "lib/traffic-source.ts"
+    ],
+    "lib/product-detail.ts": [
+      "lib/storefront-api.ts"
+    ],
+    "lib/product-images.ts": [],
+    "lib/product-search.ts": [],
+    "lib/quick-add.ts": [
+      "lib/cart-context.tsx",
+      "lib/language-context.tsx",
+      "lib/storefront-api.ts"
+    ],
+    "lib/report-error.ts": [],
+    "lib/schemas/auth-schema.ts": [],
+    "lib/schemas/checkout-schema.ts": [
+      "lib/colissimo-data.ts"
+    ],
+    "lib/sentry-options.ts": [
+      "lib/app-env.ts"
+    ],
+    "lib/service-highlights.ts": [
+      "lib/config.ts"
+    ],
+    "lib/stock.ts": [],
+    "lib/storefront-api.ts": [],
+    "lib/traffic-source.ts": [],
+    "lib/trash-tables.ts": [
+      "lib/admin-auth.ts"
+    ],
+    "lib/utils/product-utils.ts": [],
+    "messages/en/Settings.json": [],
+    "middleware.ts": [
+      "lib/admin-auth.ts",
+      "lib/auth-session.ts",
+      "lib/language-utils.ts"
+    ],
+    "netlify.toml": [],
+    "next.config.ts": [],
+    "package.json": [],
+    "postcss.config.mjs": [],
+    "public/admin-sw.js": [],
+    "scripts/db/move-database.mjs": [],
+    "scripts/docker/colissimo-mock.mjs": [],
+    "scripts/docker/create-admin.mjs": [],
+    "scripts/docker/env.mjs": [],
+    "scripts/docker/import-database.mjs": [],
+    "scripts/docker/meta-webhook-test.mjs": [],
+    "scripts/find-unused-code.sh": [],
+    "scripts/import-woocommerce.mjs": [],
+    "scripts/import/colors.json": [],
+    "scripts/import/descriptions.json": [],
+    "scripts/import/old-colissimo.mjs": [],
+    "scripts/import/translations.json": [],
+    "scripts/run-next.mjs": [],
+    "sentry.edge.config.ts": [
+      "lib/sentry-options.ts"
+    ],
+    "sentry.server.config.ts": [
+      "lib/sentry-options.ts"
+    ],
+    "skills-lock.json": [],
+    "supabase/.temp/gotrue-version": [],
+    "supabase/.temp/linked-project.json": [],
+    "supabase/.temp/pooler-url": [],
+    "supabase/.temp/postgres-version": [],
+    "supabase/.temp/project-ref": [],
+    "supabase/.temp/rest-version": [],
+    "supabase/.temp/storage-migration": [],
+    "supabase/.temp/storage-version": [],
+    "supabase/migrations/20260928135357_rebuild_storefront_schema.sql": [],
+    "supabase/migrations/20260928141343_seed_tunisia_shipping_rate.sql": [],
+    "supabase/migrations/20260928164330_category_hierarchy.sql": [],
+    "supabase/migrations/20260928183053_customer_accounts.sql": [],
+    "supabase/migrations/20261001112501_stock_management.sql": [],
+    "supabase/migrations/20261001130516_stock_trigger_privileges.sql": [],
+    "supabase/migrations/20261001170000_transactional_writes.sql": [],
+    "supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql": [],
+    "supabase/migrations/20261002084321_landing_config_and_activity_log.sql": [],
+    "supabase/migrations/20261002090113_permanent_deletes.sql": [],
+    "supabase/migrations/20261004085227_product_search.sql": [],
+    "supabase/migrations/20261004092308_notifications_and_owner_alerts.sql": [],
+    "supabase/migrations/20261004120000_update_delivery_fee_to_8.sql": [],
+    "supabase/migrations/20261005145858_made_to_order_stock.sql": [],
+    "supabase/migrations/20261006142809_colissimo_deliveries.sql": [],
+    "supabase/migrations/20261007104019_delivery_on_validation.sql": [],
+    "supabase/migrations/20261014081317_manual_order_parcel.sql": [],
+    "supabase/migrations/20261014090736_agent_orders_performance.sql": [],
+    "supabase/migrations/20261016120000_erp_sales_crm.sql": [],
+    "supabase/migrations/20261016121000_erp_purchasing_pos.sql": [],
+    "supabase/migrations/20261016122000_erp_accounting.sql": [],
+    "supabase/migrations/20261023204053_own_auth_accounts.sql": [],
+    "supabase/migrations/20261023214627_notifications_from_nestjs.sql": [],
+    "supabase/migrations/20261024134433_plain_postgres_ready.sql": [],
+    "supabase/migrations/20261024160000_objective_prize_tiers.sql": [],
+    "supabase/migrations/20261026150000_colissimo_v2.sql": [],
+    "supabase/migrations/20261028120000_colissimo_history_import.sql": [],
+    "supabase/migrations/20261102120000_edit_order.sql": [],
+    "supabase/migrations/20261104120000_order_traffic_source.sql": [],
+    "supabase/migrations/20261104130000_shop_stock.sql": [],
+    "supabase/migrations/20261104150000_social_comments.sql": [],
+    "supabase/migrations/20261105120000_team_tickets.sql": [],
+    "supabase/migrations/20261105130000_faster_owner_overview.sql": [],
+    "supabase/migrations/20261105131000_orders_open_indexes.sql": [],
+    "supabase/migrations/20261105140000_ticket_comments_and_restore.sql": [],
+    "supabase/migrations/20261105160000_team_ticket_board.sql": [],
+    "tsconfig.json": [],
+    "types/product.ts": [],
+    "types/shims-supabase.d.ts": [],
+    "vercel.json": []
+  }
+}

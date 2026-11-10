@@ -25,8 +25,8 @@ export default function MobileTabBar({ locale }: { locale: string }) {
     if (/^\/products\/[^/]+/.test(rest) || rest.startsWith("/checkout")) return null;
 
     const tab = (active: boolean) =>
-        `relative flex h-full flex-1 flex-col items-center justify-center gap-0.5 text-[11px] font-medium outline-none transition-colors focus-visible:bg-black/5 ${
-            active ? "text-[#7a3b2e]" : "text-[#6f5f57]"
+        `relative flex h-full flex-1 flex-col items-center justify-center gap-0.5 text-[11px] font-medium outline-none transition-colors focus-visible:bg-ink/5 ${
+            active ? "text-accent" : "text-mute"
         }`;
     const icon = "h-6 w-6";
 
@@ -35,7 +35,7 @@ export default function MobileTabBar({ locale }: { locale: string }) {
             <div className="h-[calc(4rem+env(safe-area-inset-bottom))] sm:hidden" aria-hidden="true" />
             <nav
                 aria-label={t.nav}
-                className="fixed inset-x-0 bottom-0 z-40 border-t border-[#ece4da] bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur sm:hidden"
+                className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur sm:hidden"
             >
                 <div className="flex h-16 items-stretch">
                     <Link href={`/${locale}`} className={tab(rest === "/")} aria-current={rest === "/" ? "page" : undefined}>
@@ -63,7 +63,7 @@ export default function MobileTabBar({ locale }: { locale: string }) {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                             </svg>
                             {totalItems > 0 && (
-                                <span className="absolute -top-1.5 -end-2.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#7a3b2e] px-1 text-[10px] font-bold leading-none text-white">
+                                <span className="absolute -top-1.5 -end-2.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-accent px-1 text-[10px] font-bold leading-none text-white">
                                     {totalItems > 99 ? "99+" : totalItems}
                                 </span>
                             )}

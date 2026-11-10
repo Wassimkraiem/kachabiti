@@ -1,0 +1,1250 @@
+{
+ "nodes": [
+  {
+   "id": "file:app/admin/finance/bills/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/finance/bills/page.tsx",
+   "summary": "Finance page for supplier bills and expenses: list, create, categorize and record bill payments.",
+   "tags": [
+    "component",
+    "admin-page",
+    "finance",
+    "bills"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/finance/bills/page.tsx:BillsPage",
+   "type": "function",
+   "name": "BillsPage",
+   "filePath": "app/admin/finance/bills/page.tsx",
+   "lineRange": [
+    47,
+    276
+   ],
+   "summary": "Default-exported client component for this route. Finance page for supplier bills and expenses: list, create, categorize and record bill payments.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/finance/documents/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/finance/documents/page.tsx",
+   "summary": "Finance page for uploading and listing business documents stored in the private documents bucket, with kinds and expiry dates.",
+   "tags": [
+    "component",
+    "admin-page",
+    "finance",
+    "documents",
+    "upload"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/finance/documents/page.tsx:DocumentsPage",
+   "type": "function",
+   "name": "DocumentsPage",
+   "filePath": "app/admin/finance/documents/page.tsx",
+   "lineRange": [
+    32,
+    137
+   ],
+   "summary": "Default-exported client component for this route. Finance page for uploading and listing business documents stored in the private documents bucket, with kinds and expiry dates.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/finance/invoices/[id]/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/finance/invoices/[id]/page.tsx",
+   "summary": "Printable sales invoice / credit note detail page that loads an issued invoice and renders it with formatted amounts.",
+   "tags": [
+    "component",
+    "admin-page",
+    "finance",
+    "invoice",
+    "print"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/finance/invoices/[id]/page.tsx:InvoicePage",
+   "type": "function",
+   "name": "InvoicePage",
+   "filePath": "app/admin/finance/invoices/[id]/page.tsx",
+   "lineRange": [
+    41,
+    152
+   ],
+   "summary": "Default-exported client component for this route. Printable sales invoice / credit note detail page that loads an issued invoice and renders it with formatted amounts.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/finance/invoices/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/finance/invoices/page.tsx",
+   "summary": "Finance list of issued sales invoices and credit notes from /api/finance/invoices.",
+   "tags": [
+    "component",
+    "admin-page",
+    "finance",
+    "invoice",
+    "list"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/finance/invoices/page.tsx:InvoicesPage",
+   "type": "function",
+   "name": "InvoicesPage",
+   "filePath": "app/admin/finance/invoices/page.tsx",
+   "lineRange": [
+    29,
+    63
+   ],
+   "summary": "Default-exported client component for this route. Finance list of issued sales invoices and credit notes from /api/finance/invoices.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/admin/finance/payments/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/finance/payments/page.tsx",
+   "summary": "Finance page listing order payments by account (cash, bank, carrier) and recording carrier remittances.",
+   "tags": [
+    "component",
+    "admin-page",
+    "finance",
+    "payments"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/finance/payments/page.tsx:PaymentsPage",
+   "type": "function",
+   "name": "PaymentsPage",
+   "filePath": "app/admin/finance/payments/page.tsx",
+   "lineRange": [
+    39,
+    193
+   ],
+   "summary": "Default-exported client component for this route. Finance page listing order payments by account (cash, bank, carrier) and recording carrier remittances.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/finance/treasury/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/finance/treasury/page.tsx",
+   "summary": "Treasury page showing cash/bank balances and movements, recording transfers, and importing bank statement CSVs for reconciliation.",
+   "tags": [
+    "component",
+    "admin-page",
+    "finance",
+    "treasury",
+    "csv-import"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/finance/treasury/page.tsx:parseBankCsv",
+   "type": "function",
+   "name": "parseBankCsv",
+   "filePath": "app/admin/finance/treasury/page.tsx",
+   "lineRange": [
+    31,
+    52
+   ],
+   "summary": "Parses a bank statement CSV into dated, signed statement lines for import.",
+   "tags": [
+    "helper",
+    "component",
+    "internal"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/admin/finance/treasury/page.tsx:TreasuryPage",
+   "type": "function",
+   "name": "TreasuryPage",
+   "filePath": "app/admin/finance/treasury/page.tsx",
+   "lineRange": [
+    58,
+    265
+   ],
+   "summary": "Default-exported client component for this route. Treasury page showing cash/bank balances and movements, recording transfers, and importing bank statement CSVs for reconciliation.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/goals/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/goals/page.tsx",
+   "summary": "Objectives and commissions page where admins set monthly business goals and per-agent targets, commissions and prize tiers, and view team progress charts.",
+   "tags": [
+    "component",
+    "admin-page",
+    "objectives",
+    "commissions",
+    "analytics"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/goals/page.tsx:GoalsPage",
+   "type": "function",
+   "name": "GoalsPage",
+   "filePath": "app/admin/goals/page.tsx",
+   "lineRange": [
+    79,
+    391
+   ],
+   "summary": "Default-exported client component for this route. Objectives and commissions page where admins set monthly business goals and per-agent targets, commissions and prize tiers, and view team progress charts.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/landing/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/landing/page.tsx",
+   "summary": "Admin landing-page editor configuring home section order, visibility, list sizes, autofill, pinned products and featured categories, saved through /api/landing.",
+   "tags": [
+    "component",
+    "admin-page",
+    "marketing",
+    "landing-config",
+    "cms"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/landing/page.tsx:OrderedList",
+   "type": "function",
+   "name": "OrderedList",
+   "filePath": "app/admin/landing/page.tsx",
+   "lineRange": [
+    92,
+    127
+   ],
+   "summary": "Reorderable list component for pinned landing products with move-up/down and remove controls.",
+   "tags": [
+    "helper",
+    "component",
+    "internal"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/admin/landing/page.tsx:LandingPage",
+   "type": "function",
+   "name": "LandingPage",
+   "filePath": "app/admin/landing/page.tsx",
+   "lineRange": [
+    141,
+    418
+   ],
+   "summary": "Default-exported client component for this route. Admin landing-page editor configuring home section order, visibility, list sizes, autofill, pinned products and featured categories, saved through /api/landing.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/marketing/campaigns/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/marketing/campaigns/page.tsx",
+   "summary": "Marketing campaigns page for creating and listing ad campaigns with channels and performance figures.",
+   "tags": [
+    "component",
+    "admin-page",
+    "marketing",
+    "campaigns"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/marketing/campaigns/page.tsx:CampaignsPage",
+   "type": "function",
+   "name": "CampaignsPage",
+   "filePath": "app/admin/marketing/campaigns/page.tsx",
+   "lineRange": [
+    36,
+    158
+   ],
+   "summary": "Default-exported client component for this route. Marketing campaigns page for creating and listing ad campaigns with channels and performance figures.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/my-work/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/my-work/page.tsx",
+   "summary": "My day page for agents showing their monthly goal progress, assigned orders, CRM follow-up tasks and open team tickets.",
+   "tags": [
+    "component",
+    "admin-page",
+    "dashboard",
+    "agent",
+    "tasks"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/my-work/page.tsx:MyWorkPage",
+   "type": "function",
+   "name": "MyWorkPage",
+   "filePath": "app/admin/my-work/page.tsx",
+   "lineRange": [
+    52,
+    247
+   ],
+   "summary": "Default-exported client component for this route. My day page for agents showing their monthly goal progress, assigned orders, CRM follow-up tasks and open team tickets.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/notifications/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/notifications/page.tsx",
+   "summary": "Admin notifications center listing the signed-in staff member notifications with mark-as-read actions.",
+   "tags": [
+    "component",
+    "admin-page",
+    "notifications"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/notifications/page.tsx:NotificationsPage",
+   "type": "function",
+   "name": "NotificationsPage",
+   "filePath": "app/admin/notifications/page.tsx",
+   "lineRange": [
+    15,
+    93
+   ],
+   "summary": "Default-exported client component for this route. Admin notifications center listing the signed-in staff member notifications with mark-as-read actions.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/orders/[id]/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/orders/[id]/page.tsx",
+   "summary": "Admin order detail page showing lines, customer, status, pipeline, payments, delivery card and traffic source, with edit and validate actions.",
+   "tags": [
+    "component",
+    "admin-page",
+    "orders",
+    "order-detail"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/orders/[id]/page.tsx:OrderDetailPage",
+   "type": "function",
+   "name": "OrderDetailPage",
+   "filePath": "app/admin/orders/[id]/page.tsx",
+   "lineRange": [
+    79,
+    419
+   ],
+   "summary": "Default-exported client component for this route. Admin order detail page showing lines, customer, status, pipeline, payments, delivery card and traffic source, with edit and validate actions.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/orders/new/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/orders/new/page.tsx",
+   "summary": "Agent order-entry form that creates manual orders via /api/sales/orders with product lines, channel, governorate and duplicate-phone warnings.",
+   "tags": [
+    "component",
+    "admin-page",
+    "orders",
+    "form"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/orders/new/page.tsx:NewOrderPage",
+   "type": "function",
+   "name": "NewOrderPage",
+   "filePath": "app/admin/orders/new/page.tsx",
+   "lineRange": [
+    31,
+    238
+   ],
+   "summary": "Default-exported client component for this route. Agent order-entry form that creates manual orders via /api/sales/orders with product lines, channel, governorate and duplicate-phone warnings.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/orders/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/orders/page.tsx",
+   "summary": "Admin orders list with server-side paging, filtering by status/agent/channel, search, bulk status changes and deletes, delivery tags and traffic sources.",
+   "tags": [
+    "component",
+    "admin-page",
+    "orders",
+    "list"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/orders/page.tsx:AdminOrdersPage",
+   "type": "function",
+   "name": "AdminOrdersPage",
+   "filePath": "app/admin/orders/page.tsx",
+   "lineRange": [
+    74,
+    682
+   ],
+   "summary": "Default-exported client component for this route. Admin orders list with server-side paging, filtering by status/agent/channel, search, bulk status changes and deletes, delivery tags and traffic sources.",
+   "tags": [
+    "component",
+    "react",
+    "page"
+   ],
+   "complexity": "complex"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:app/admin/finance/bills/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/bills/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/bills/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/bills/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/bills/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/bills/page.tsx",
+   "target": "function:app/admin/finance/bills/page.tsx:BillsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/finance/bills/page.tsx",
+   "target": "function:app/admin/finance/bills/page.tsx:BillsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/finance/documents/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/documents/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/documents/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/documents/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/documents/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/documents/page.tsx",
+   "target": "function:app/admin/finance/documents/page.tsx:DocumentsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/finance/documents/page.tsx",
+   "target": "function:app/admin/finance/documents/page.tsx:DocumentsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/finance/invoices/[id]/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/invoices/[id]/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/invoices/[id]/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/invoices/[id]/page.tsx",
+   "target": "function:app/admin/finance/invoices/[id]/page.tsx:InvoicePage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/finance/invoices/[id]/page.tsx",
+   "target": "function:app/admin/finance/invoices/[id]/page.tsx:InvoicePage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/finance/invoices/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/invoices/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/invoices/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/invoices/page.tsx",
+   "target": "function:app/admin/finance/invoices/page.tsx:InvoicesPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/finance/invoices/page.tsx",
+   "target": "function:app/admin/finance/invoices/page.tsx:InvoicesPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/finance/payments/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/payments/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/payments/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/payments/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/payments/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/payments/page.tsx",
+   "target": "function:app/admin/finance/payments/page.tsx:PaymentsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/finance/payments/page.tsx",
+   "target": "function:app/admin/finance/payments/page.tsx:PaymentsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/finance/treasury/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/treasury/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/treasury/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/treasury/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/treasury/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/finance/treasury/page.tsx",
+   "target": "function:app/admin/finance/treasury/page.tsx:parseBankCsv",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/finance/treasury/page.tsx",
+   "target": "function:app/admin/finance/treasury/page.tsx:TreasuryPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/finance/treasury/page.tsx",
+   "target": "function:app/admin/finance/treasury/page.tsx:TreasuryPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/goals/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/goals/page.tsx",
+   "target": "file:components/admin/erp/charts.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/goals/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/goals/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/goals/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/goals/page.tsx",
+   "target": "function:app/admin/goals/page.tsx:GoalsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/goals/page.tsx",
+   "target": "function:app/admin/goals/page.tsx:GoalsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/landing/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/landing/page.tsx",
+   "target": "file:components/admin/select-search.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/landing/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/landing/page.tsx",
+   "target": "file:lib/landing-config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/landing/page.tsx",
+   "target": "function:app/admin/landing/page.tsx:OrderedList",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/landing/page.tsx",
+   "target": "function:app/admin/landing/page.tsx:LandingPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/landing/page.tsx",
+   "target": "function:app/admin/landing/page.tsx:LandingPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/marketing/campaigns/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/marketing/campaigns/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/marketing/campaigns/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/marketing/campaigns/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/marketing/campaigns/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/marketing/campaigns/page.tsx",
+   "target": "function:app/admin/marketing/campaigns/page.tsx:CampaignsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/marketing/campaigns/page.tsx",
+   "target": "function:app/admin/marketing/campaigns/page.tsx:CampaignsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/my-work/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/my-work/page.tsx",
+   "target": "file:components/admin/erp/MonthGoalCard.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/my-work/page.tsx",
+   "target": "file:components/admin/erp/charts.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/my-work/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/my-work/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/my-work/page.tsx",
+   "target": "file:components/admin/order-status.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/my-work/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/my-work/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/my-work/page.tsx",
+   "target": "function:app/admin/my-work/page.tsx:MyWorkPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/my-work/page.tsx",
+   "target": "function:app/admin/my-work/page.tsx:MyWorkPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/notifications/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/notifications/page.tsx",
+   "target": "file:components/admin/notification-item.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/notifications/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/notifications/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/notifications/page.tsx",
+   "target": "function:app/admin/notifications/page.tsx:NotificationsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/notifications/page.tsx",
+   "target": "function:app/admin/notifications/page.tsx:NotificationsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/orders/[id]/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/[id]/page.tsx",
+   "target": "file:components/admin/delivery/OrderDeliveryCard.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/[id]/page.tsx",
+   "target": "file:components/admin/delivery/delivery-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/[id]/page.tsx",
+   "target": "file:components/admin/erp/EditOrderModal.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/[id]/page.tsx",
+   "target": "file:components/admin/erp/OrderPaymentsCard.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/[id]/page.tsx",
+   "target": "file:components/admin/erp/OrderPipelineCard.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/[id]/page.tsx",
+   "target": "file:components/admin/order-status.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/[id]/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/[id]/page.tsx",
+   "target": "file:lib/traffic-source.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/[id]/page.tsx",
+   "target": "function:app/admin/orders/[id]/page.tsx:OrderDetailPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/orders/[id]/page.tsx",
+   "target": "function:app/admin/orders/[id]/page.tsx:OrderDetailPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/orders/new/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/new/page.tsx",
+   "target": "file:components/admin/delivery/ParcelProducts.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/new/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/new/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/new/page.tsx",
+   "target": "file:components/admin/order-status.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/new/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/new/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/new/page.tsx",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/new/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/new/page.tsx",
+   "target": "function:app/admin/orders/new/page.tsx:NewOrderPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/orders/new/page.tsx",
+   "target": "function:app/admin/orders/new/page.tsx:NewOrderPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/orders/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/page.tsx",
+   "target": "file:components/admin/delivery/DeliveryStatusTag.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/page.tsx",
+   "target": "file:components/admin/delivery/delivery-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/page.tsx",
+   "target": "file:components/admin/order-status.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/page.tsx",
+   "target": "file:lib/traffic-source.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/orders/page.tsx",
+   "target": "function:app/admin/orders/page.tsx:AdminOrdersPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/orders/page.tsx",
+   "target": "function:app/admin/orders/page.tsx:AdminOrdersPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

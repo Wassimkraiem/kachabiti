@@ -74,20 +74,20 @@ export default function SaleBanner({ initialPromotions }: { initialPromotions?: 
     const hasEndDate = Boolean(promotion.ends_at && new Date(promotion.ends_at) > new Date());
 
     return (
-        <section className="w-full py-1 px-2 bg-[#ECE5DD] h-[400px]">
+        <section className="w-full py-1 px-2 bg-card h-[400px]">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col lg:flex-row items-center gap-12">
                     {/* Left Content */}
                     <div className="flex-1 text-center lg:text-center">
-                        <h2 className="text-5xl lg:text-6xl font-bold text-[#2b1a16] mb-4">
+                        <h2 className="text-5xl lg:text-6xl font-bold text-ink mb-4">
                             {promotion.title}
                             {promotion.discount_percent > 0 && (
-                                <span className="text-[#842E1B]"> {promotion.discount_percent}%</span>
+                                <span className="text-accent"> {promotion.discount_percent}%</span>
                             )}
                         </h2>
 
                         {promotion.subtitle && (
-                            <p className=" text-gray-600 text-[16px] font-normal max-w-lg mb-8 mx-auto lg:mx-0">
+                            <p className=" text-mute text-[16px] font-normal max-w-lg mb-8 mx-auto lg:mx-0">
                                 {promotion.subtitle}
                             </p>
                         )}
@@ -101,7 +101,7 @@ export default function SaleBanner({ initialPromotions }: { initialPromotions?: 
 
                         <Link
                             href={`/${locale}/products`}
-                            className="inline-block bg-[#842E1B] text-white px-12 py-4 rounded-[9px] text-lg font-semibold hover:bg-[#6b2516] transition-colors uppercase"
+                            className="inline-block bg-accent text-white px-12 py-4 rounded-[9px] text-lg font-semibold hover:bg-accent-hover transition-colors uppercase"
                         >
                             {t.shopNow}
                         </Link>

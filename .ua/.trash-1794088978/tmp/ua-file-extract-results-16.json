@@ -1,0 +1,2624 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 36,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 36,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 36
+    }
+  },
+  "results": [
+    {
+      "path": "supabase/migrations/20260928135357_rebuild_storefront_schema.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 590,
+      "nonEmptyLines": 531,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "name_ar",
+            "name_fr",
+            "slug",
+            "description",
+            "image_url",
+            "sort_order",
+            "is_featured",
+            "deleted_at",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 28,
+          "endLine": 41
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "name_ar",
+            "name_fr",
+            "slug",
+            "description",
+            "description_ar",
+            "description_fr",
+            "category_id",
+            "base_price",
+            "status",
+            "sold_count",
+            "product_details",
+            "weight",
+            "shipping_info",
+            "deleted_at",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 43,
+          "endLine": 62
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "hex_code",
+            "rgb_code",
+            "display_name",
+            "sort_order",
+            "description",
+            "deleted_at",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 70,
+          "endLine": 81
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "display_name",
+            "sort_order",
+            "description",
+            "deleted_at",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 83,
+          "endLine": 92
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "product_id",
+            "size_id",
+            "color_id",
+            "sku",
+            "price",
+            "stock",
+            "is_available",
+            "deleted_at",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 96,
+          "endLine": 108
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "product_id",
+            "variant_id",
+            "image_url",
+            "alt_text",
+            "is_main",
+            "position",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 114,
+          "endLine": 124
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "product_id",
+            "discount_percent",
+            "starts_at",
+            "ends_at",
+            "active",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 129,
+          "endLine": 139
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "title",
+            "subtitle",
+            "badge_text",
+            "discount_percent",
+            "image_url",
+            "starts_at",
+            "ends_at",
+            "active",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 149,
+          "endLine": 161
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "title",
+            "description",
+            "username",
+            "thumbnail_url",
+            "video_url",
+            "sort_order",
+            "active",
+            "is_new",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 163,
+          "endLine": 175
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "title",
+            "title_ar",
+            "title_fr",
+            "subtitle",
+            "subtitle_ar",
+            "subtitle_fr",
+            "sub_subtitle",
+            "sub_subtitle_ar",
+            "sub_subtitle_fr",
+            "cta_label",
+            "cta_label_ar",
+            "cta_label_fr",
+            "cta_href",
+            "image_url",
+            "left_image_url",
+            "background_image_url",
+            "bg_color",
+            "text_color",
+            "is_active",
+            "sort_order",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 177,
+          "endLine": 201
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "title",
+            "title_ar",
+            "title_fr",
+            "subtitle",
+            "subtitle_ar",
+            "subtitle_fr",
+            "sub_subtitle",
+            "sub_subtitle_ar",
+            "sub_subtitle_fr",
+            "cta_href",
+            "image_url",
+            "background_image_url",
+            "bg_color",
+            "text_color",
+            "is_active",
+            "sort_order",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 203,
+          "endLine": 223
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "avatar_url",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 231,
+          "endLine": 237
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "product_id",
+            "user_id",
+            "user_name",
+            "rating",
+            "comment",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 239,
+          "endLine": 248
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "user_id",
+            "product_id",
+            "created_at"
+          ],
+          "startLine": 253,
+          "endLine": 259
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "order_number",
+            "user_id",
+            "customer_email",
+            "customer_first_name",
+            "customer_last_name",
+            "customer_phone",
+            "shipping_address",
+            "shipping_city",
+            "shipping_state",
+            "shipping_zip",
+            "shipping_country",
+            "subtotal",
+            "shipping_cost",
+            "total",
+            "order_notes",
+            "status",
+            "payment_status",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 263,
+          "endLine": 286
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "order_id",
+            "product_id",
+            "product_name",
+            "product_name_ar",
+            "product_name_fr",
+            "product_image",
+            "quantity",
+            "price",
+            "subtotal",
+            "created_at"
+          ],
+          "startLine": 292,
+          "endLine": 304
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "email",
+            "status",
+            "subscribed_at",
+            "unsubscribed_at",
+            "ip_address",
+            "user_agent",
+            "referrer",
+            "metadata"
+          ],
+          "startLine": 309,
+          "endLine": 319
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "user_id",
+            "session_id",
+            "status",
+            "last_activity_at",
+            "expires_at",
+            "converted_to_order_id",
+            "device_info",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 322,
+          "endLine": 334
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "cart_id",
+            "product_id",
+            "quantity",
+            "price_at_add",
+            "added_at",
+            "updated_at"
+          ],
+          "startLine": 340,
+          "endLine": 349
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "setting_key",
+            "setting_value",
+            "setting_type",
+            "description",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 397,
+          "endLine": 405
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "country",
+            "country_code",
+            "shipping_method",
+            "base_rate",
+            "free_shipping_threshold",
+            "estimated_days_min",
+            "estimated_days_max",
+            "is_active",
+            "display_order",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 407,
+          "endLine": 421
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "country",
+            "country_code",
+            "tax_rate",
+            "tax_name",
+            "description",
+            "is_active",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 423,
+          "endLine": 433
+        },
+        {
+          "name": "public",
+          "kind": "view",
+          "fields": [],
+          "startLine": 354,
+          "endLine": 354
+        },
+        {
+          "name": "public",
+          "kind": "view",
+          "fields": [],
+          "startLine": 377,
+          "endLine": 377
+        },
+        {
+          "name": "products_category_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 64,
+          "endLine": 64
+        },
+        {
+          "name": "products_live_created_at_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 65,
+          "endLine": 65
+        },
+        {
+          "name": "products_live_sold_count_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 67,
+          "endLine": 67
+        },
+        {
+          "name": "product_variants_product_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 110,
+          "endLine": 110
+        },
+        {
+          "name": "product_variants_size_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 111,
+          "endLine": 111
+        },
+        {
+          "name": "product_variants_color_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 112,
+          "endLine": 112
+        },
+        {
+          "name": "product_images_product_id_position_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 126,
+          "endLine": 126
+        },
+        {
+          "name": "product_images_variant_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 127,
+          "endLine": 127
+        },
+        {
+          "name": "product_discounts_active_product_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 141,
+          "endLine": 141
+        },
+        {
+          "name": "reviews_product_id_created_at_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 250,
+          "endLine": 250
+        },
+        {
+          "name": "reviews_user_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 251,
+          "endLine": 251
+        },
+        {
+          "name": "user_favorites_product_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 261,
+          "endLine": 261
+        },
+        {
+          "name": "orders_user_id_created_at_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 288,
+          "endLine": 288
+        },
+        {
+          "name": "orders_created_at_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 289,
+          "endLine": 289
+        },
+        {
+          "name": "order_items_order_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 306,
+          "endLine": 306
+        },
+        {
+          "name": "order_items_product_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 307,
+          "endLine": 307
+        },
+        {
+          "name": "carts_user_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 336,
+          "endLine": 336
+        },
+        {
+          "name": "carts_converted_to_order_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 337,
+          "endLine": 337
+        },
+        {
+          "name": "carts_active_last_activity_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 338,
+          "endLine": 338
+        },
+        {
+          "name": "cart_items_product_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 351,
+          "endLine": 351
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 44
+      }
+    },
+    {
+      "path": "supabase/migrations/20260928141343_seed_tunisia_shipping_rate.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 6,
+      "nonEmptyLines": 6,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20260928164330_category_hierarchy.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 7,
+      "nonEmptyLines": 6,
+      "definitions": [
+        {
+          "name": "categories_parent_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 7,
+          "endLine": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 1
+      }
+    },
+    {
+      "path": "supabase/migrations/20260928183053_customer_accounts.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 63,
+      "nonEmptyLines": 53,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261001112501_stock_management.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 446,
+      "nonEmptyLines": 390,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "sells_online",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 18,
+          "endLine": 24
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "email",
+            "phone",
+            "notes",
+            "created_at",
+            "updated_at"
+          ],
+          "startLine": 29,
+          "endLine": 37
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "created_at"
+          ],
+          "startLine": 39,
+          "endLine": 43
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "product_id",
+            "cost",
+            "updated_at"
+          ],
+          "startLine": 61,
+          "endLine": 65
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "variant_id",
+            "location_id",
+            "available",
+            "updated_at"
+          ],
+          "startLine": 74,
+          "endLine": 80
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "variant_id",
+            "sku",
+            "product_name",
+            "location_id",
+            "type",
+            "quantity",
+            "reference",
+            "note",
+            "order_id",
+            "created_by",
+            "created_by_email",
+            "created_at"
+          ],
+          "startLine": 97,
+          "endLine": 116
+        },
+        {
+          "name": "public",
+          "kind": "view",
+          "fields": [],
+          "startLine": 382,
+          "endLine": 382
+        },
+        {
+          "name": "locations_single_online_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 27,
+          "endLine": 27
+        },
+        {
+          "name": "products_supplier_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 57,
+          "endLine": 57
+        },
+        {
+          "name": "products_collection_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 58,
+          "endLine": 58
+        },
+        {
+          "name": "inventory_levels_location_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 82,
+          "endLine": 82
+        },
+        {
+          "name": "order_items_variant_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 94,
+          "endLine": 94
+        },
+        {
+          "name": "stock_movements_created_at_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 118,
+          "endLine": 118
+        },
+        {
+          "name": "stock_movements_variant_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 119,
+          "endLine": 119
+        },
+        {
+          "name": "stock_movements_location_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 120,
+          "endLine": 120
+        },
+        {
+          "name": "stock_movements_order_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 121,
+          "endLine": 121
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 16
+      }
+    },
+    {
+      "path": "supabase/migrations/20261001130516_stock_trigger_privileges.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 14,
+      "nonEmptyLines": 13,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261001170000_transactional_writes.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 386,
+      "nonEmptyLines": 360,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261002082656_soft_deletes_and_landing_products.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 408,
+      "nonEmptyLines": 367,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "section",
+            "product_id",
+            "position",
+            "created_by",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 289,
+          "endLine": 298
+        },
+        {
+          "name": "locations_name_live_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 27,
+          "endLine": 27
+        },
+        {
+          "name": "suppliers_name_live_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 28,
+          "endLine": 28
+        },
+        {
+          "name": "collections_name_live_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 29,
+          "endLine": 29
+        },
+        {
+          "name": "landing_products_section_product_live_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 300,
+          "endLine": 300
+        },
+        {
+          "name": "landing_products_section_position_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 302,
+          "endLine": 302
+        },
+        {
+          "name": "landing_products_product_id_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 304,
+          "endLine": 304
+        },
+        {
+          "name": "landing_products_created_by_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 305,
+          "endLine": 305
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 8
+      }
+    },
+    {
+      "path": "supabase/migrations/20261002084321_landing_config_and_activity_log.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 272,
+      "nonEmptyLines": 241,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "created_at",
+            "actor_id",
+            "actor_email",
+            "actor_role",
+            "source",
+            "action",
+            "entity",
+            "entity_id",
+            "label",
+            "changes"
+          ],
+          "startLine": 124,
+          "endLine": 136
+        },
+        {
+          "name": "activity_log_created_at_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 138,
+          "endLine": 138
+        },
+        {
+          "name": "activity_log_actor_created_at_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 139,
+          "endLine": 139
+        },
+        {
+          "name": "activity_log_entity_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 140,
+          "endLine": 140
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 4
+      }
+    },
+    {
+      "path": "supabase/migrations/20261002090113_permanent_deletes.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 287,
+      "nonEmptyLines": 263,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261004085227_product_search.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 228,
+      "nonEmptyLines": 211,
+      "definitions": [
+        {
+          "name": "products_search_text_trgm_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 99,
+          "endLine": 99
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 1
+      }
+    },
+    {
+      "path": "supabase/migrations/20261004092308_notifications_and_owner_alerts.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 519,
+      "nonEmptyLines": 472,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "user_id",
+            "email",
+            "role",
+            "permissions",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 24,
+          "endLine": 32
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "created_at",
+            "recipient_id",
+            "kind",
+            "type",
+            "severity",
+            "title",
+            "body",
+            "url",
+            "data",
+            "read_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 70,
+          "endLine": 84
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "user_id",
+            "endpoint",
+            "p256dh",
+            "auth",
+            "locale",
+            "user_agent",
+            "last_success_at",
+            "last_error",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 107,
+          "endLine": 120
+        },
+        {
+          "name": "notifications_recipient_created_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 86,
+          "endLine": 86
+        },
+        {
+          "name": "notifications_recipient_unread_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 88,
+          "endLine": 88
+        },
+        {
+          "name": "push_subscriptions_user_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 122,
+          "endLine": 122
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 6
+      }
+    },
+    {
+      "path": "supabase/migrations/20261004120000_update_delivery_fee_to_8.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261005145858_made_to_order_stock.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 71,
+      "nonEmptyLines": 68,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261006142809_colissimo_deliveries.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 178,
+      "nonEmptyLines": 165,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "order_id",
+            "provider",
+            "barcode",
+            "label_url",
+            "label_zebra_url",
+            "or",
+            "status_reason",
+            "status_changed_at",
+            "recipient_name",
+            "phone",
+            "governorate",
+            "city",
+            "address",
+            "cod_amount",
+            "items_count",
+            "designation",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 6,
+          "endLine": 32
+        },
+        {
+          "name": "deliveries_order_live_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 34,
+          "endLine": 34
+        },
+        {
+          "name": "deliveries_barcode_live_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 36,
+          "endLine": 36
+        },
+        {
+          "name": "deliveries_created_at_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 38,
+          "endLine": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 4
+      }
+    },
+    {
+      "path": "supabase/migrations/20261007104019_delivery_on_validation.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 84,
+      "nonEmptyLines": 79,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261014081317_manual_order_parcel.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 44,
+      "nonEmptyLines": 38,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261014090736_agent_orders_performance.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 108,
+      "nonEmptyLines": 99,
+      "definitions": [
+        {
+          "name": "orders_created_by_created_at_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 5,
+          "endLine": 5
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 1
+      }
+    },
+    {
+      "path": "supabase/migrations/20261016120000_erp_sales_crm.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 1488,
+      "nonEmptyLines": 1383,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "value",
+            "updated_at"
+          ],
+          "startLine": 34,
+          "endLine": 38
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "platform",
+            "starts_on",
+            "ends_on",
+            "budget",
+            "notes",
+            "active",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 63,
+          "endLine": 78
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "campaign_id",
+            "spend_date",
+            "amount",
+            "account",
+            "note",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 82,
+          "endLine": 94
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "phone_alt",
+            "full_name",
+            "email",
+            "governorate",
+            "city",
+            "address",
+            "assigned_to",
+            "assigned_to_email",
+            "tags",
+            "notes",
+            "user_id",
+            "anonymized_at",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 103,
+          "endLine": 133
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "customer_id",
+            "channel",
+            "direction",
+            "body",
+            "order_id",
+            "Instagram",
+            "WhatsApp",
+            "sender_name",
+            "read_at",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 142,
+          "endLine": 159
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "customer_id",
+            "order_id",
+            "title",
+            "notes",
+            "due_at",
+            "assigned_to",
+            "assigned_to_email",
+            "done_at",
+            "done_by",
+            "reminded_at",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 168,
+          "endLine": 185
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "provider",
+            "reference",
+            "received_on",
+            "gross_amount",
+            "fees",
+            "net_amount",
+            "account",
+            "note",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 393,
+          "endLine": 408
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "order_id",
+            "amount",
+            "method",
+            "account",
+            "received_at",
+            "reference",
+            "note",
+            "remittance_id",
+            "pos_session_id",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 412,
+          "endLine": 429
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "account",
+            "direction",
+            "amount",
+            "category",
+            "occurred_on",
+            "label",
+            "reference",
+            "pos_session_id",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 527,
+          "endLine": 546
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "user_id",
+            "user_email",
+            "month",
+            "target_orders",
+            "target_confirmed",
+            "target_delivered",
+            "target_revenue",
+            "commission_value",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 554,
+          "endLine": 571
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "month",
+            "target_revenue",
+            "with",
+            "target_delivered",
+            "target_gross_margin",
+            "max_return_rate",
+            "ad_budget",
+            "notes",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 1462,
+          "endLine": 1478
+        },
+        {
+          "name": "ad_spend_date_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 96,
+          "endLine": 96
+        },
+        {
+          "name": "ad_spend_campaign_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 97,
+          "endLine": 97
+        },
+        {
+          "name": "customers_phone_live_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 135,
+          "endLine": 135
+        },
+        {
+          "name": "customers_assigned_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 136,
+          "endLine": 136
+        },
+        {
+          "name": "customers_stage_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 137,
+          "endLine": 137
+        },
+        {
+          "name": "customers_created_at_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 138,
+          "endLine": 138
+        },
+        {
+          "name": "customers_external_ids_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 139,
+          "endLine": 139
+        },
+        {
+          "name": "customer_interactions_customer_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 161,
+          "endLine": 161
+        },
+        {
+          "name": "customer_interactions_external_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 163,
+          "endLine": 163
+        },
+        {
+          "name": "customer_interactions_unread_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 164,
+          "endLine": 164
+        },
+        {
+          "name": "crm_tasks_open_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 187,
+          "endLine": 187
+        },
+        {
+          "name": "crm_tasks_customer_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 188,
+          "endLine": 188
+        },
+        {
+          "name": "orders_channel_created_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 224,
+          "endLine": 224
+        },
+        {
+          "name": "orders_customer_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 225,
+          "endLine": 225
+        },
+        {
+          "name": "orders_assigned_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 226,
+          "endLine": 226
+        },
+        {
+          "name": "orders_campaign_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 227,
+          "endLine": 227
+        },
+        {
+          "name": "orders_delivered_at_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 228,
+          "endLine": 228
+        },
+        {
+          "name": "orders_phone_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 229,
+          "endLine": 229
+        },
+        {
+          "name": "order_payments_order_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 431,
+          "endLine": 431
+        },
+        {
+          "name": "order_payments_received_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 432,
+          "endLine": 432
+        },
+        {
+          "name": "order_payments_carrier_open_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 433,
+          "endLine": 433
+        },
+        {
+          "name": "treasury_movements_date_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 548,
+          "endLine": 548
+        },
+        {
+          "name": "agent_goals_user_month_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 573,
+          "endLine": 573
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 34
+      }
+    },
+    {
+      "path": "supabase/migrations/20261016121000_erp_purchasing_pos.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 895,
+      "nonEmptyLines": 827,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "name",
+            "code",
+            "unit",
+            "supplier_id",
+            "stock",
+            "avg_cost",
+            "reorder_point",
+            "notes",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 21,
+          "endLine": 34
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "material_id",
+            "type",
+            "quantity",
+            "unit_cost",
+            "reference",
+            "note",
+            "purchase_receipt_id",
+            "production_id",
+            "created_by",
+            "created_by_email",
+            "created_at"
+          ],
+          "startLine": 39,
+          "endLine": 55
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "product_id",
+            "material_id",
+            "quantity",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 111,
+          "endLine": 119
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "product_id",
+            "labor_cost",
+            "overhead_cost",
+            "notes",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 124,
+          "endLine": 132
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "number",
+            "supplier_id",
+            "the",
+            "order_date",
+            "expected_date",
+            "location_id",
+            "notes",
+            "subtotal",
+            "vat_amount",
+            "total",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 326,
+          "endLine": 345
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "purchase_order_id",
+            "variant_id",
+            "material_id",
+            "description",
+            "quantity",
+            "unit_cost",
+            "vat_rate",
+            "received_quantity",
+            "rejected_quantity",
+            "position",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 349,
+          "endLine": 365
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "number",
+            "purchase_order_id",
+            "received_on",
+            "location_id",
+            "status",
+            "notes",
+            "validated_at",
+            "validated_by",
+            "validated_by_email",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 373,
+          "endLine": 389
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "receipt_id",
+            "po_line_id",
+            "quantity_accepted",
+            "quantity_rejected",
+            "reject_reason",
+            "created_at"
+          ],
+          "startLine": 391,
+          "endLine": 400
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "number",
+            "location_id",
+            "status",
+            "opened_at",
+            "opened_by",
+            "opened_by_email",
+            "opening_float",
+            "closed_at",
+            "closed_by",
+            "closed_by_email",
+            "expected_cash",
+            "counted_cash",
+            "difference",
+            "notes",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 644,
+          "endLine": 663
+        },
+        {
+          "name": "raw_materials_code_live_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 36,
+          "endLine": 36
+        },
+        {
+          "name": "material_movements_material_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 57,
+          "endLine": 57
+        },
+        {
+          "name": "product_bom_live_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 121,
+          "endLine": 121
+        },
+        {
+          "name": "purchase_orders_supplier_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 347,
+          "endLine": 347
+        },
+        {
+          "name": "purchase_order_lines_po_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 367,
+          "endLine": 367
+        },
+        {
+          "name": "purchase_order_lines_variant_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 368,
+          "endLine": 368
+        },
+        {
+          "name": "purchase_order_lines_material_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 369,
+          "endLine": 369
+        },
+        {
+          "name": "purchase_receipt_lines_receipt_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 402,
+          "endLine": 402
+        },
+        {
+          "name": "pos_sessions_one_open_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 665,
+          "endLine": 665
+        },
+        {
+          "name": "orders_pos_session_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 670,
+          "endLine": 670
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 19
+      }
+    },
+    {
+      "path": "supabase/migrations/20261016122000_erp_accounting.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 1642,
+      "nonEmptyLines": 1542,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "code",
+            "name",
+            "name_ar",
+            "class",
+            "type",
+            "is_active",
+            "is_system",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 70,
+          "endLine": 82
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "value"
+          ],
+          "startLine": 138,
+          "endLine": 141
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "AC",
+            "CA",
+            "BQ",
+            "OD",
+            "number",
+            "label",
+            "source_type",
+            "source_id",
+            "source_event",
+            "status",
+            "posted_at",
+            "posted_by",
+            "posted_by_email",
+            "reversal_of",
+            "reversed_at",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 163,
+          "endLine": 184
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "entry_id",
+            "account_code",
+            "label",
+            "debit",
+            "credit",
+            "partner_type",
+            "partner_id",
+            "partner_name",
+            "position",
+            "created_at"
+          ],
+          "startLine": 192,
+          "endLine": 205
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "number",
+            "supplier_id",
+            "payee",
+            "supplier_reference",
+            "cost_type",
+            "account_code",
+            "bill_date",
+            "due_date",
+            "amount_ht",
+            "vat_amount",
+            "stamp",
+            "total",
+            "paid_amount",
+            "status",
+            "notes",
+            "document_id",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 488,
+          "endLine": 516
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "bill_id",
+            "amount",
+            "paid_on",
+            "account",
+            "method",
+            "reference",
+            "note",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 522,
+          "endLine": 536
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "number",
+            "kind",
+            "order_id",
+            "credit_note_for",
+            "invoice_date",
+            "customer_name",
+            "customer_phone",
+            "customer_address",
+            "customer_tax_id",
+            "lines",
+            "amount_ht",
+            "vat_rate",
+            "vat_amount",
+            "stamp",
+            "total",
+            "status",
+            "notes",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 597,
+          "endLine": 621
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "statement_date",
+            "label",
+            "amount",
+            "import_batch",
+            "matched_line_id",
+            "matched_at",
+            "matched_by",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 716,
+          "endLine": 731
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "kind",
+            "title",
+            "storage_path",
+            "mime_type",
+            "size_bytes",
+            "related_type",
+            "partner_name",
+            "document_date",
+            "expires_on",
+            "notes",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 772,
+          "endLine": 792
+        },
+        {
+          "name": "journal_entries_source_live_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 187,
+          "endLine": 187
+        },
+        {
+          "name": "journal_entries_date_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 189,
+          "endLine": 189
+        },
+        {
+          "name": "journal_entries_status_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 190,
+          "endLine": 190
+        },
+        {
+          "name": "journal_lines_entry_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 207,
+          "endLine": 207
+        },
+        {
+          "name": "journal_lines_account_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 208,
+          "endLine": 208
+        },
+        {
+          "name": "journal_lines_partner_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 209,
+          "endLine": 209
+        },
+        {
+          "name": "bills_due_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 518,
+          "endLine": 518
+        },
+        {
+          "name": "bills_date_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 519,
+          "endLine": 519
+        },
+        {
+          "name": "bills_supplier_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 520,
+          "endLine": 520
+        },
+        {
+          "name": "bill_payments_bill_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 538,
+          "endLine": 538
+        },
+        {
+          "name": "sales_invoices_order_live_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 623,
+          "endLine": 623
+        },
+        {
+          "name": "bank_statement_lines_date_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 733,
+          "endLine": 733
+        },
+        {
+          "name": "documents_related_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 794,
+          "endLine": 794
+        },
+        {
+          "name": "documents_expiry_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 795,
+          "endLine": 795
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 23
+      }
+    },
+    {
+      "path": "supabase/migrations/20261023204053_own_auth_accounts.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 127,
+      "nonEmptyLines": 116,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "user_id",
+            "token_hash",
+            "user_agent",
+            "created_at",
+            "last_used_at",
+            "expires_at",
+            "revoked_at"
+          ],
+          "startLine": 76,
+          "endLine": 85
+        },
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "token_hash",
+            "user_id",
+            "purpose",
+            "created_at",
+            "expires_at",
+            "used_at"
+          ],
+          "startLine": 89,
+          "endLine": 96
+        },
+        {
+          "name": "users_email_key",
+          "kind": "index",
+          "fields": [],
+          "startLine": 16,
+          "endLine": 16
+        },
+        {
+          "name": "user_sessions_user_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 86,
+          "endLine": 86
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 4
+      }
+    },
+    {
+      "path": "supabase/migrations/20261023214627_notifications_from_nestjs.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 33,
+      "nonEmptyLines": 29,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261024134433_plain_postgres_ready.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 21,
+      "nonEmptyLines": 19,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261024160000_objective_prize_tiers.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 39,
+      "nonEmptyLines": 35,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261026150000_colissimo_v2.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 90,
+      "nonEmptyLines": 84,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261028120000_colissimo_history_import.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 153,
+      "nonEmptyLines": 148,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261102120000_edit_order.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 109,
+      "nonEmptyLines": 103,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261104120000_order_traffic_source.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 6,
+      "nonEmptyLines": 6,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261104130000_shop_stock.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 86,
+      "nonEmptyLines": 82,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261104150000_social_comments.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 116,
+      "nonEmptyLines": 105,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "platform",
+            "external_id",
+            "post_id",
+            "post_url",
+            "author_id",
+            "author_name",
+            "body",
+            "phone",
+            "customer_id",
+            "task_id",
+            "commented_at",
+            "handled_at",
+            "handled_by",
+            "handled_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 6,
+          "endLine": 26
+        },
+        {
+          "name": "social_comments_list",
+          "kind": "index",
+          "fields": [],
+          "startLine": 28,
+          "endLine": 28
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 2
+      }
+    },
+    {
+      "path": "supabase/migrations/20261105120000_team_tickets.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 192,
+      "nonEmptyLines": 179,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "title",
+            "description",
+            "status",
+            "priority",
+            "due_date",
+            "assigned_to",
+            "assigned_to_email",
+            "done_at",
+            "created_by",
+            "created_by_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 4,
+          "endLine": 19
+        },
+        {
+          "name": "team_tickets_open_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 21,
+          "endLine": 21
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 2
+      }
+    },
+    {
+      "path": "supabase/migrations/20261105130000_faster_owner_overview.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 207,
+      "nonEmptyLines": 206,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    },
+    {
+      "path": "supabase/migrations/20261105131000_orders_open_indexes.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 9,
+      "nonEmptyLines": 8,
+      "definitions": [
+        {
+          "name": "orders_to_confirm_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 4,
+          "endLine": 4
+        },
+        {
+          "name": "orders_confirmed_at_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 9,
+          "endLine": 9
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 2
+      }
+    },
+    {
+      "path": "supabase/migrations/20261105140000_ticket_comments_and_restore.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 242,
+      "nonEmptyLines": 223,
+      "definitions": [
+        {
+          "name": "public",
+          "kind": "table",
+          "fields": [
+            "id",
+            "ticket_id",
+            "body",
+            "image_path",
+            "author_id",
+            "author_email",
+            "created_at",
+            "updated_at",
+            "deleted_at"
+          ],
+          "startLine": 5,
+          "endLine": 16
+        },
+        {
+          "name": "team_ticket_comments_ticket_idx",
+          "kind": "index",
+          "fields": [],
+          "startLine": 18,
+          "endLine": 18
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 2
+      }
+    },
+    {
+      "path": "supabase/migrations/20261105160000_team_ticket_board.sql",
+      "language": "sql",
+      "fileCategory": "data",
+      "totalLines": 8,
+      "nonEmptyLines": 6,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "definitionCount": 0
+      }
+    }
+  ]
+}

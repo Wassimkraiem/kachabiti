@@ -34,7 +34,7 @@ export default function PromoProductCard({ product, locale = 'en', categorySlug 
     return (
         <div className="rounded-2xl transition-shadow">
             <div className="flex flex-col lg:flex-row">
-                <div className="relative aspect-[4/5] w-full shrink-0 overflow-hidden rounded-2xl bg-[#f3efe9] lg:aspect-auto lg:h-[220px] lg:w-[220px] xl:h-[250px] xl:w-[250px] 2xl:h-[270px] 2xl:w-[270px]">
+                <div className="relative aspect-[4/5] w-full shrink-0 overflow-hidden rounded-2xl bg-surface lg:aspect-auto lg:h-[220px] lg:w-[220px] xl:h-[250px] xl:w-[250px] 2xl:h-[270px] 2xl:w-[270px]">
                     <Link href={productUrl}>
                         <Image
                             src={product?.image_url || '/assets/images/logo.svg'}
@@ -46,7 +46,7 @@ export default function PromoProductCard({ product, locale = 'en', categorySlug 
                     </Link>
                     {/* Discount Badge */}
                     {product.discount_percent && product.discount_percent > 0 && (
-                        <span className="absolute start-2 top-2 rounded-full bg-[#842E1B] px-2.5 py-0.5 text-sm font-semibold text-white" dir="ltr">
+                        <span className="absolute start-2 top-2 rounded-full bg-accent px-2.5 py-0.5 text-sm font-semibold text-white" dir="ltr">
                             -{Math.round(product.discount_percent ?? 0)}%
                         </span>
                     )}
@@ -57,18 +57,18 @@ export default function PromoProductCard({ product, locale = 'en', categorySlug 
                     <div className="space-y-2 lg:space-y-2.5 lg:pt-5">
                         {/* Title */}
                         <Link href={productUrl}>
-                            <h3 className="text-[16px] font-medium text-[#842E1B] hover:text-[#842E1B] transition leading-tight">
+                            <h3 className="text-[16px] font-medium text-accent hover:text-accent transition leading-tight">
                                 {getProductName(product, locale)}
                             </h3>
                         </Link>
 
                         {/* Price */}
                         <div className="flex items-baseline gap-2 py-2">
-                            <span className="text-[14px] font-medium text-[#000000]">
+                            <span className="text-[14px] font-medium text-ink">
                                 {Math.round(discountedPrice)} {product.currency}
                             </span>
                             {product.discount_percent && product.discount_percent > 0 && (
-                                <span className="text-[13px] text-gray-400 line-through">
+                                <span className="text-[13px] text-mute line-through">
                                     {basePrice} {product.currency || 'TND'}
                                 </span>
                             )}

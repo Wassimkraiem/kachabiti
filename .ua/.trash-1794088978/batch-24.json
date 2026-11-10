@@ -1,0 +1,655 @@
+{
+ "nodes": [
+  {
+   "id": "file:components/products/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "components/products/index.ts",
+   "summary": "Barrel re-exporting the storefront product components: ProductGrid, PromoProductCard, PromoProducts and TopProducts.",
+   "tags": [
+    "barrel",
+    "component",
+    "storefront"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/reviews/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "components/reviews/index.ts",
+   "summary": "Barrel re-exporting the review components CustomerFeedback and ReviewCard.",
+   "tags": [
+    "barrel",
+    "component",
+    "reviews"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/sections/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "components/sections/index.ts",
+   "summary": "Barrel re-exporting home page section components: HeroSection, NewsletterForm, SaleBanner, SocialLinks and TermsSection.",
+   "tags": [
+    "barrel",
+    "component",
+    "landing-page"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/services/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "components/services/index.ts",
+   "summary": "Barrel re-exporting ServiceHighlightCard and ServiceHighlights for the storefront service highlights strip.",
+   "tags": [
+    "barrel",
+    "component",
+    "storefront"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/timers/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "components/timers/index.ts",
+   "summary": "Barrel re-exporting the CountdownTimer and PromoCountdownTimer promotion timer components.",
+   "tags": [
+    "barrel",
+    "component",
+    "promotions"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/ui/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "components/ui/index.ts",
+   "summary": "Barrel re-exporting shared UI primitives: ErrorBoundary, LoadingSpinner, SectionHeader and StockProgress.",
+   "tags": [
+    "barrel",
+    "component",
+    "ui"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:eslint.config.mjs",
+   "type": "file",
+   "name": "eslint.config.mjs",
+   "filePath": "eslint.config.mjs",
+   "summary": "ESLint flat config extending next/core-web-vitals and next/typescript via FlatCompat, ignoring the NestJS api/ folder and build output, and disabling no-explicit-any for legacy code.",
+   "tags": [
+    "config",
+    "linting",
+    "build-system"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:infra/terraform/.terraform.lock.hcl",
+   "type": "file",
+   "name": ".terraform.lock.hcl",
+   "filePath": "infra/terraform/.terraform.lock.hcl",
+   "summary": "Terraform dependency lock file pinning the hashicorp/aws and hashicorp/random provider versions and checksums for the production infrastructure.",
+   "tags": [
+    "infrastructure",
+    "terraform",
+    "dependency-lock"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:infra/terraform/backend.hcl.example",
+   "type": "file",
+   "name": "backend.hcl.example",
+   "filePath": "infra/terraform/backend.hcl.example",
+   "summary": "Example Terraform S3 backend config (state bucket, key, eu-north-1 region, encryption, lockfile) to copy into a git-ignored backend.hcl before terraform init.",
+   "tags": [
+    "infrastructure",
+    "terraform",
+    "configuration",
+    "example"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:infra/terraform/terraform.tfvars.example",
+   "type": "file",
+   "name": "terraform.tfvars.example",
+   "filePath": "infra/terraform/terraform.tfvars.example",
+   "summary": "Example Terraform variables for production: AWS region, budget alert email, API site domain and admin/deploy SSH public keys.",
+   "tags": [
+    "infrastructure",
+    "terraform",
+    "configuration",
+    "example"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:instrumentation.ts",
+   "type": "file",
+   "name": "instrumentation.ts",
+   "filePath": "instrumentation.ts",
+   "summary": "Next.js instrumentation hook that loads the Sentry server or edge config depending on runtime and reports request errors via Sentry.captureRequestError.",
+   "tags": [
+    "entry-point",
+    "monitoring",
+    "sentry",
+    "error-handling"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:lib/admin-translations-erp.ts",
+   "type": "file",
+   "name": "admin-translations-erp.ts",
+   "filePath": "lib/admin-translations-erp.ts",
+   "summary": "Large table of [English, French, Arabic] translation rows for the ERP admin screens (orders pipeline, CRM, till, purchasing, finance, accounting, owner overview), merged into the main admin translations.",
+   "tags": [
+    "i18n",
+    "translations",
+    "admin",
+    "erp",
+    "data-table"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:lib/admin-translations.ts",
+   "type": "file",
+   "name": "admin-translations.ts",
+   "filePath": "lib/admin-translations.ts",
+   "summary": "Builds the French and Arabic admin dictionaries keyed by English UI text, combining the core admin entries with the ERP entries (core rows win on duplicates).",
+   "tags": [
+    "i18n",
+    "translations",
+    "admin",
+    "data-table"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:lib/report-error.ts",
+   "type": "file",
+   "name": "report-error.ts",
+   "filePath": "lib/report-error.ts",
+   "summary": "Helper that sends caught, handled errors to Sentry tagged with the app area, for code paths that turn errors into responses or fallbacks.",
+   "tags": [
+    "utility",
+    "monitoring",
+    "sentry",
+    "error-handling"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "config:messages/en/Settings.json",
+   "type": "config",
+   "name": "Settings.json",
+   "filePath": "messages/en/Settings.json",
+   "summary": "Placeholder next-intl English message file for a Settings namespace with a title and lorem-ipsum description; next-intl is largely unused.",
+   "tags": [
+    "configuration",
+    "i18n",
+    "next-intl",
+    "legacy"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:next.config.ts",
+   "type": "file",
+   "name": "next.config.ts",
+   "filePath": "next.config.ts",
+   "summary": "Next.js configuration: rewrites /api/* to the NestJS API (NEST_URL), exposes ENV as NEXT_PUBLIC_APP_ENV, sets client router staleTimes, ignores build-time type/lint errors, whitelists remote image hosts including FILES_PUBLIC_URL, and wraps the config with Sentry.",
+   "tags": [
+    "config",
+    "build-system",
+    "routing",
+    "sentry"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:postcss.config.mjs",
+   "type": "file",
+   "name": "postcss.config.mjs",
+   "filePath": "postcss.config.mjs",
+   "summary": "PostCSS config enabling the Tailwind CSS v4 plugin (@tailwindcss/postcss).",
+   "tags": [
+    "config",
+    "build-system",
+    "tailwind"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:public/admin-sw.js",
+   "type": "file",
+   "name": "admin-sw.js",
+   "filePath": "public/admin-sw.js",
+   "summary": "Back-office service worker that shows Web Push notifications (RTL for Arabic, sticky for alerts and orders) and opens or focuses the related admin page when clicked.",
+   "tags": [
+    "service-worker",
+    "web-push",
+    "notifications",
+    "admin"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:scripts/db/move-database.mjs",
+   "type": "file",
+   "name": "move-database.mjs",
+   "filePath": "scripts/db/move-database.mjs",
+   "summary": "Copies the public, private and migration-history schemas from a source Postgres to a target Postgres 17 via a dockerized pg_dump/psql, then compares row counts per table; used for the Supabase move and backups/restores.",
+   "tags": [
+    "script",
+    "database",
+    "migration",
+    "docker"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:scripts/docker/colissimo-mock.mjs",
+   "type": "file",
+   "name": "colissimo-mock.mjs",
+   "filePath": "scripts/docker/colissimo-mock.mjs",
+   "summary": "In-memory HTTP stand-in for the Colissimo carrier APIs (v1 parcel creation and v2 track/validate/price change/edit/delete) with their rules and error codes, plus /__mock control endpoints for tests in local Docker and CI.",
+   "tags": [
+    "mock",
+    "test",
+    "delivery",
+    "colissimo",
+    "http-server"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:scripts/docker/create-admin.mjs",
+   "type": "file",
+   "name": "create-admin.mjs",
+   "filePath": "scripts/docker/create-admin.mjs",
+   "summary": "Creates or resets the local owner account admin@kachabity.local in the Docker Postgres with a bcrypt hash of LOCAL_PASSWORD from .env.docker.",
+   "tags": [
+    "script",
+    "docker",
+    "auth",
+    "seed"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:scripts/docker/env.mjs",
+   "type": "file",
+   "name": "env.mjs",
+   "filePath": "scripts/docker/env.mjs",
+   "summary": "Generates .env.docker for the local Docker stack with random AUTH_SECRET and REVALIDATE_SECRET plus local database, API and S3 storage settings, keeping an existing file.",
+   "tags": [
+    "script",
+    "docker",
+    "configuration",
+    "setup"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:scripts/docker/import-database.mjs",
+   "type": "file",
+   "name": "import-database.mjs",
+   "filePath": "scripts/docker/import-database.mjs",
+   "summary": "Imports a read-only copy of a source database into the local Docker db via move-database.mjs, applies newer migrations, neutralizes passwords, sessions and e-mailed links, then recreates the local owner.",
+   "tags": [
+    "script",
+    "docker",
+    "database",
+    "import"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:scripts/docker/meta-webhook-test.mjs",
+   "type": "file",
+   "name": "meta-webhook-test.mjs",
+   "filePath": "scripts/docker/meta-webhook-test.mjs",
+   "summary": "Sends HMAC-signed Meta-style webhook events (verification challenge, Facebook/Instagram comments, Messenger message) to the local API to exercise the CRM comment and inbox flow.",
+   "tags": [
+    "script",
+    "test",
+    "webhook",
+    "meta",
+    "crm"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:scripts/find-unused-code.sh",
+   "type": "file",
+   "name": "find-unused-code.sh",
+   "filePath": "scripts/find-unused-code.sh",
+   "summary": "Legacy shell report that lists potentially unused exports (ts-prune), unused packages (depcheck), large files, duplicated locale patterns, console statements and commented JSX.",
+   "tags": [
+    "script",
+    "code-quality",
+    "maintenance"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:instrumentation.ts:register",
+   "type": "function",
+   "name": "register",
+   "filePath": "instrumentation.ts",
+   "lineRange": [
+    3,
+    10
+   ],
+   "summary": "Dynamically imports the Sentry server or edge configuration based on NEXT_RUNTIME.",
+   "tags": [
+    "monitoring",
+    "sentry",
+    "bootstrap"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:lib/report-error.ts:reportError",
+   "type": "function",
+   "name": "reportError",
+   "filePath": "lib/report-error.ts",
+   "lineRange": [
+    6,
+    8
+   ],
+   "summary": "Captures an exception in Sentry with an area tag and optional non-PII extra fields.",
+   "tags": [
+    "utility",
+    "error-handling",
+    "sentry"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:scripts/db/move-database.mjs:docker",
+   "type": "function",
+   "name": "docker",
+   "filePath": "scripts/db/move-database.mjs",
+   "lineRange": [
+    27,
+    36
+   ],
+   "summary": "Runs a command in a throwaway postgres:17 container with the work directory mounted, failing on a non-zero exit.",
+   "tags": [
+    "utility",
+    "docker",
+    "database"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:scripts/docker/colissimo-mock.mjs:trackOrder",
+   "type": "function",
+   "name": "trackOrder",
+   "filePath": "scripts/docker/colissimo-mock.mjs",
+   "lineRange": [
+    28,
+    47
+   ],
+   "summary": "Mock v2 track_order: returns the state and history of the requested parcel barcodes.",
+   "tags": [
+    "mock",
+    "delivery",
+    "tracking"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:scripts/docker/colissimo-mock.mjs:validateOrders",
+   "type": "function",
+   "name": "validateOrders",
+   "filePath": "scripts/docker/colissimo-mock.mjs",
+   "lineRange": [
+    49,
+    65
+   ],
+   "summary": "Mock v2 validate_orders: hands parcels over in a manifest, rejecting unknown or already-validated barcodes.",
+   "tags": [
+    "mock",
+    "delivery",
+    "validation"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:scripts/docker/colissimo-mock.mjs:priceChange",
+   "type": "function",
+   "name": "priceChange",
+   "filePath": "scripts/docker/colissimo-mock.mjs",
+   "lineRange": [
+    67,
+    81
+   ],
+   "summary": "Mock v2 price_change: records a price change request for a printed parcel.",
+   "tags": [
+    "mock",
+    "delivery",
+    "pricing"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:scripts/docker/colissimo-mock.mjs:editOrder",
+   "type": "function",
+   "name": "editOrder",
+   "filePath": "scripts/docker/colissimo-mock.mjs",
+   "lineRange": [
+    95,
+    118
+   ],
+   "summary": "Mock v2 edit_order: edits a parcel's fields while Colissimo has not yet taken it, validating governorate and amounts.",
+   "tags": [
+    "mock",
+    "delivery",
+    "validation"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:scripts/docker/colissimo-mock.mjs:deleteOrder",
+   "type": "function",
+   "name": "deleteOrder",
+   "filePath": "scripts/docker/colissimo-mock.mjs",
+   "lineRange": [
+    120,
+    137
+   ],
+   "summary": "Mock v2 delete_order: deletes a parcel unless it has already been picked up.",
+   "tags": [
+    "mock",
+    "delivery"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:scripts/docker/colissimo-mock.mjs:handle",
+   "type": "function",
+   "name": "handle",
+   "filePath": "scripts/docker/colissimo-mock.mjs",
+   "lineRange": [
+    141,
+    196
+   ],
+   "summary": "Main request router: serves /__mock control endpoints, the v1 post.php parcel creation and dispatches v2 API actions with token checks and an outage switch.",
+   "tags": [
+    "mock",
+    "http-server",
+    "routing"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:instrumentation.ts",
+   "target": "function:instrumentation.ts:register",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:instrumentation.ts",
+   "target": "function:instrumentation.ts:register",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:lib/report-error.ts",
+   "target": "function:lib/report-error.ts:reportError",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/report-error.ts",
+   "target": "function:lib/report-error.ts:reportError",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:scripts/db/move-database.mjs",
+   "target": "function:scripts/db/move-database.mjs:docker",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:scripts/docker/colissimo-mock.mjs",
+   "target": "function:scripts/docker/colissimo-mock.mjs:trackOrder",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:scripts/docker/colissimo-mock.mjs",
+   "target": "function:scripts/docker/colissimo-mock.mjs:validateOrders",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:scripts/docker/colissimo-mock.mjs",
+   "target": "function:scripts/docker/colissimo-mock.mjs:priceChange",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:scripts/docker/colissimo-mock.mjs",
+   "target": "function:scripts/docker/colissimo-mock.mjs:editOrder",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:scripts/docker/colissimo-mock.mjs",
+   "target": "function:scripts/docker/colissimo-mock.mjs:deleteOrder",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:scripts/docker/colissimo-mock.mjs",
+   "target": "function:scripts/docker/colissimo-mock.mjs:handle",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:lib/admin-translations.ts",
+   "target": "file:lib/admin-translations-erp.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:lib/admin-i18n.tsx",
+   "target": "file:lib/admin-translations.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:instrumentation.ts",
+   "target": "file:sentry.server.config.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:instrumentation.ts",
+   "target": "file:sentry.edge.config.ts",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:scripts/docker/import-database.mjs",
+   "target": "file:scripts/db/move-database.mjs",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:scripts/docker/import-database.mjs",
+   "target": "file:scripts/docker/create-admin.mjs",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:scripts/docker/create-admin.mjs",
+   "target": "file:scripts/docker/env.mjs",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:scripts/docker/meta-webhook-test.mjs",
+   "target": "file:scripts/docker/env.mjs",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:infra/terraform/backend.hcl.example",
+   "target": "file:infra/terraform/terraform.tfvars.example",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:infra/terraform/.terraform.lock.hcl",
+   "target": "file:infra/terraform/terraform.tfvars.example",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "file:lib/report-error.ts",
+   "target": "file:instrumentation.ts",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  }
+ ]
+}

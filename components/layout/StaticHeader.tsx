@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { headerConfig } from '@/lib/config';
 import { useLanguageSafe } from '@/lib/language-context';
@@ -11,7 +10,7 @@ import CartButton from '../cart/CartButton';
 import SearchBox from './SearchBox';
 import MobileHeader from './MobileHeader';
 import { useCustomer } from '@/lib/customer-auth';
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useSearchParams, usePathname } from "next/navigation";
 
 const translations = {
     en: {
@@ -106,7 +105,6 @@ interface StaticHeaderProps {
 }
 
 export default function StaticHeader({ locale: propLocale }: StaticHeaderProps = {}) {
-    const router = useRouter();
     const pathname = usePathname();
     const searchParams = useSearchParams();
 
@@ -189,121 +187,108 @@ export default function StaticHeader({ locale: propLocale }: StaticHeaderProps =
         return `/${locale}/products?${params.toString()}`;
     };
 
+    const languageHref = (code: string) => {
+        const rest = (pathname || '').replace(/^\/(en|fr|ar)(?=\/|$)/, '');
+        const query = searchParams.toString();
+        return `/${code}${rest}${query ? `?${query}` : ''}`;
+    };
+    const navLink = "text-sm text-ink/85 transition-colors hover:text-accent";
+
     return (
-        <header className="sticky top-0 z-40 w-full sm:static" dir={mounted ? (rtl ? 'rtl' : 'ltr') : 'ltr'}>
-            {/* Top Bar - Desktop */}
-            <div className="bg-primary text-white py-4 min-h-[64px] hidden sm:block">
-                <div className={`max-w-7xl mx-auto flex justify-between items-center text-sm h-8 px-4`}>
-                    <div className={`flex items-center ${mounted && rtl ? 'space-x-reverse space-x-4' : 'space-x-4'}`}>
-                        <span dir="ltr">{headerConfig.contact.phone}</span>
-                    </div>
-
-                    <div className={`flex items-center ${mounted && rtl ? 'space-x-reverse space-x-2' : 'space-x-2'}`}>
-                        <span>{t.followUs}</span>
-                        <div className={`flex ${mounted && rtl ? 'space-x-reverse space-x-2' : 'space-x-2'} justify-center`}>
-                            {Object.entries(headerConfig.social).map(([platform, data]) => (
-                                <a
-                                    key={platform}
-                                    href={data.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="hover:text-gray-300"
-                                    aria-label={`Follow us on ${platform}`}
-                                >
-                                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d={data.icon} />
-                                    </svg>
-                                </a>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className={`flex items-center ${mounted && rtl ? 'space-x-reverse space-x-4' : 'space-x-4'} min-h-[32px]`}>
-                        {/* Authentication removed - sign in/register link removed */}
-                        <div className="relative group">
-                            <button className={`flex items-center ${mounted && rtl ? 'flex-row-reverse space-x-reverse space-x-1' : 'space-x-1'} hover:text-gray-300`}>
-                                <span>{headerConfig.languages.find(lang => lang.code === locale)?.flag || '🇺🇸'}</span>
-                                <span>{headerConfig.languages.find(lang => lang.code === locale)?.name || 'English'}</span>
-                                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </button>
-                            <div className={`absolute ${mounted && rtl ? 'left-0' : 'right-0'} mt-2 w-48 bg-white rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50`}>
-                                <div className="py-1">
-                                    {headerConfig.languages.map((lang) => {
-                                        // Preserve current path when switching languages
-                                        const currentPath = pathname || '';
-                                        // Remove current locale from path if it exists
-                                        const pathWithoutLocale = currentPath.replace(/^\/(en|fr|ar)/, '') || '/';
-                                        // Build new path with selected language
-                                        let newPath = pathWithoutLocale === '/' ? `/${lang.code}` : `/${lang.code}${pathWithoutLocale}`;
-
-                                        // Preserve search params if they exist
-                                        const queryString = searchParams.toString();
-                                        if (queryString) {
-                                            newPath += `?${queryString}`;
-                                        }
-
-                                        return (
+        <header className="sticky top-0 z-40 w-full border-b border-line bg-surface/90 backdrop-blur" dir={mounted ? (rtl ? 'rtl' : 'ltr') : 'ltr'}>
+            {/* Desktop: navigation, centred wordmark, then search, language, account and cart */}
+            <div className="mx-auto hidden h-[72px] max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-6 px-4 sm:grid">
+                <nav className="flex items-center gap-6">
+                    <div
+                        className="relative"
+                        onMouseEnter={() => setIsCategoriesOpen(true)}
+                        onMouseLeave={() => setIsCategoriesOpen(false)}
+                    >
+                        <button
+                            type="button"
+                            className={`${navLink} flex items-center gap-1`}
+                            aria-expanded={isCategoriesOpen}
+                            onClick={() => setIsCategoriesOpen((open) => !open)}
+                        >
+                            <span>{t.categories}</span>
+                            <svg className={`h-4 w-4 transition-transform ${isCategoriesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </button>
+                        <div className={`absolute start-0 top-full z-50 w-60 pt-3 transition-opacity duration-200 ${isCategoriesOpen ? 'visible opacity-100' : 'invisible opacity-0'}`}>
+                            <div className="rounded-xl border border-line bg-card py-2 shadow-xl">
+                                {isLoadingCategories ? (
+                                    <div className="px-4 py-2 text-sm text-mute">{t.loading}</div>
+                                ) : categories.length > 0 ? (
+                                    <>
+                                        <Link href={`/${locale}/categories`} className="block px-4 py-2 font-medium text-accent hover:bg-ink/5">
+                                            {t.allCategories}
+                                        </Link>
+                                        {categories.map((category) => (
                                             <Link
-                                                key={lang.code}
-                                                href={newPath}
-                                                className={`flex items-center ${mounted && rtl ? 'flex-row-reverse space-x-reverse' : 'space-x-2'} px-4 py-2 text-sm text-gray-700 hover:bg-gray-100`}
+                                                key={category.id}
+                                                href={`/${locale}/products?category=${category.slug}`}
+                                                className="block py-2 pe-4 text-sm text-ink/85 hover:bg-ink/5 hover:text-accent"
+                                                style={{ paddingInlineStart: 16 + (category.depth ?? 0) * 16 }}
                                             >
-                                                <span>{lang.flag}</span>
-                                                <span>{lang.name}</span>
+                                                {getCategoryName(category, locale)}
                                             </Link>
-                                        );
-                                    })}
-                                </div>
+                                        ))}
+                                    </>
+                                ) : (
+                                    <div className="px-4 py-2 text-sm text-mute">{t.noCategoriesFound}</div>
+                                )}
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <Link href={`/${locale}/products?promo=true`} className={navLink}>{t.discounts}</Link>
+                    <Link href={`/${locale}/about`} className={`${navLink} hidden lg:inline`}>{t.aboutUs}</Link>
+                    <Link href={`/${locale}/contact`} className={`${navLink} hidden lg:inline`}>{t.contactUs}</Link>
+                </nav>
 
-            {/* Main Header - Desktop */}
-            <div className="bg-white border-b border-gray-200 py-4 px-4 hidden sm:block">
-                <div className="max-w-7xl mx-auto flex justify-between items-center min-h-[72px]">
-                    <div className="cursor-pointer flex items-center space-x-2 shrink-0" onClick={() => router.push(`/${locale}`)}>
-                        <Image
-                            src="/assets/images/logoKachabity.jpg"
-                            alt="logo"
-                            width={60}
-                            height={60}
-                            priority
-                            className="object-contain"
-                        />
-                    </div>
+                <Link href={`/${locale}`} className="font-display text-3xl font-bold leading-none text-ink" aria-label="Kachabiti">
+                    قشابيتي
+                </Link>
 
-                    {/* Search - Keep original design */}
-                    <div className="flex-1 max-w-lg mx-8">
+                <div className="flex items-center justify-end gap-4">
+                    <div className="w-40 lg:w-64">
                         <SearchBox
                             locale={locale}
                             rtl={rtl}
                             value={search}
                             onChange={setSearch}
-                            placeholder={t.searchPlaceholder + ' ...'}
+                            placeholder={t.searchPlaceholder.trim() + ' …'}
                             variant="desktop"
                             resultsHref={searchResultsHref}
                         />
                     </div>
-
-                    {/* Account + Cart */}
-                    <div className="flex items-center gap-5 shrink-0">
-                        <Link
-                            href={user ? `/${locale}/settings` : `/${locale}/auth`}
-                            className="flex items-center gap-2 text-sm font-medium text-[#2b1a16] hover:text-[#7a3b2e] transition-colors"
-                        >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
-                            {user ? t.myAccount : t.logIn}
-                        </Link>
-                        <CartButton />
+                    <div className="flex items-center gap-2 text-xs uppercase" dir="ltr">
+                        {headerConfig.languages.map((lang) => (
+                            <Link
+                                key={lang.code}
+                                href={languageHref(lang.code)}
+                                aria-label={lang.name}
+                                aria-current={lang.code === locale ? 'true' : undefined}
+                                className={lang.code === locale ? 'font-bold text-accent' : 'text-mute transition-colors hover:text-ink'}
+                            >
+                                {lang.code}
+                            </Link>
+                        ))}
                     </div>
+                    <Link
+                        href={user ? `/${locale}/settings` : `/${locale}/auth`}
+                        className="text-ink transition-colors hover:text-accent"
+                        aria-label={user ? t.myAccount : t.logIn}
+                        title={user ? t.myAccount : t.logIn}
+                    >
+                        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                    </Link>
+                    <CartButton />
                 </div>
             </div>
+
             {/* Phones: compact bar with menu drawer and search panel */}
             <MobileHeader
                 locale={locale}
@@ -316,119 +301,6 @@ export default function StaticHeader({ locale: propLocale }: StaticHeaderProps =
                 resultsHref={searchResultsHref}
                 labels={t}
             />
-
-            {/* Navigation Bar - Desktop */}
-            <div className="bg-black text-white py-3 px-4 min-h-[52px] hidden sm:block">
-                <div className={`max-w-7xl mx-auto flex justify-between items-center ${mounted && rtl ? 'flex-row-reverse' : ''}`}>
-                    <nav className={`flex ${mounted && rtl ? 'space-x-reverse space-x-8' : 'space-x-8'}`}>
-                        {headerConfig.navigation.map((item) => (
-                            item.label === "Categories" ? (
-                                <div
-                                    key={item.href}
-                                    className="relative"
-                                    onMouseEnter={() => setIsCategoriesOpen(true)}
-                                    onMouseLeave={() => setIsCategoriesOpen(false)}
-                                >
-                                    <button
-                                        className="text-white hover:text-gray-300 transition flex items-center space-x-1"
-                                    >
-
-                                        <>
-
-                                            <span>{t.categories}</span>
-                                            <svg
-                                                className={`w-4 h-4 transition-transform ${isCategoriesOpen ? 'rotate-180' : ''}`}
-                                                fill="none"
-                                                stroke="currentColor"
-                                                viewBox="0 0 24 24"
-                                            >
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                            </svg>
-                                        </>
-
-
-                                    </button>
-
-                                    {/* Dropdown Menu */}
-                                    <div
-                                        className={`absolute top-full ${rtl ? 'right-0' : 'left-0'} mt-2 w-56 bg-white rounded-md shadow-lg transition-all duration-200 z-50 ${isCategoriesOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-                                            }`}
-                                    >
-                                        <div className="py-2">
-                                            {isLoadingCategories ? (
-                                                <div className={`px-4 py-2 text-sm text-gray-500 ${rtl ? 'text-right' : 'text-left'}`}>{t.loading}</div>
-                                            ) : categories.length > 0 ? (
-                                                <>
-                                                    <Link
-                                                        key={'all-categories'}
-                                                        href={`/${locale}/categories`}
-                                                        className={`block px-4 py-1 text-lg font-medium text-gray-700 hover:bg-gray-100 hover:text-[#7a3b2e] transition ${rtl ? 'text-right' : 'text-left'}`}
-                                                    >
-                                                        {t.allCategories}
-                                                    </Link>
-                                                    {
-                                                        categories.map((category) => (
-                                                            <Link
-                                                                key={category.id}
-                                                                href={`/${locale}/products?category=${category.slug}`}
-                                                                className={`block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-[#7a3b2e] transition ${rtl ? 'text-right' : 'text-left'}`}
-                                                                style={{ paddingInlineStart: 16 + (category.depth ?? 0) * 16 }}
-                                                            >
-                                                                {getCategoryName(category, locale)}
-                                                            </Link>
-                                                        ))
-                                                    }
-
-                                                </>
-
-                                            ) : (
-                                                <div className={`px-4 py-2 text-sm text-gray-500 ${rtl ? 'text-right' : 'text-left'}`}>{t.noCategoriesFound}</div>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            ) : item.label === "Discounts" ?
-                                <Link
-                                    key={`/${locale}/products?promo=true`}
-                                    href={`/${locale}/products?promo=true`}
-                                    className="text-white hover:text-gray-300 transition"
-                                >
-                                    {t.discounts}
-                                </Link>
-                                : item.label === "About Us" ?
-                                    <Link
-                                        key={item.href}
-                                        href={`/${locale}${item.href}`}
-                                        className="text-white hover:text-gray-300 transition"
-                                    >
-                                        {t.aboutUs}
-                                    </Link>
-                                    : item.label === "Contact Us" ?
-                                        <Link
-                                            key={item.href}
-                                            href={`/${locale}${item.href}`}
-                                            className="text-white hover:text-gray-300 transition"
-                                        >
-                                            {t.contactUs}
-                                        </Link>
-                                        :
-                                        (
-                                            <Link
-                                                key={item.href}
-                                                href={item.href}
-                                                className="text-white hover:text-gray-300 transition"
-                                            >
-                                                {item.label}
-                                            </Link>
-                                        )
-                        ))}
-                    </nav>
-                    <div className={`gap-5 cursor-pointer flex items-center ${mounted && rtl ? 'flex-row-reverse space-x-reverse space-x-2' : 'space-x-2'} border border-[#FFFFFF] px-4 py-2 rounded-[11px]`} onClick={() => router.push(`/${locale}/products`)} >
-                        <Image src="/assets/images/icons/Cup.svg" alt="handmade" width={16} height={16} />
-                        <span className="font-medium">{t.handmade}</span>
-                    </div>
-                </div>
-            </div>
         </header>
     );
 }

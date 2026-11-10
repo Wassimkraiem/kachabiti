@@ -1,0 +1,69 @@
+{
+ "nodes": [
+  {
+   "id": "config:scripts/import/colors.json",
+   "type": "config",
+   "name": "colors.json",
+   "filePath": "scripts/import/colors.json",
+   "summary": "Lookup table mapping WooCommerce color names to hex codes used when importing product variants.",
+   "tags": [
+    "configuration",
+    "import",
+    "data-mapping",
+    "colors"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "config:scripts/import/descriptions.json",
+   "type": "config",
+   "name": "descriptions.json",
+   "filePath": "scripts/import/descriptions.json",
+   "summary": "English and French product descriptions keyed by WooCommerce product id, applied by the WooCommerce importer.",
+   "tags": [
+    "configuration",
+    "import",
+    "i18n",
+    "content"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "config:scripts/import/translations.json",
+   "type": "config",
+   "name": "translations.json",
+   "filePath": "scripts/import/translations.json",
+   "summary": "Arabic-to-English/French translation tables for categories (with slugs and sort order) and product names used by the WooCommerce importer.",
+   "tags": [
+    "configuration",
+    "import",
+    "i18n",
+    "data-mapping"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "config:scripts/import/colors.json",
+   "target": "file:scripts/import-woocommerce.mjs",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:scripts/import/descriptions.json",
+   "target": "file:scripts/import-woocommerce.mjs",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:scripts/import/translations.json",
+   "target": "file:scripts/import-woocommerce.mjs",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  }
+ ]
+}

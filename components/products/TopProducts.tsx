@@ -220,16 +220,16 @@ export default function TopProducts({ locale = 'en', initialProducts }: TopProdu
 
 
     return (
-        <section className="w-full py-16 px-4 bg-white relative overflow-hidden">
+        <section className="w-full py-16 px-4 bg-card relative overflow-hidden">
 
 
             <div className="max-w-7xl mx-auto relative z-10">
                 {/* Header */}
                 <div className="text-center mb-12 ">
-                    <h2 className="text-4xl font-bold text-[#2b1a16] mb-2">
+                    <h2 className="text-4xl font-bold text-ink mb-2">
                         {t.topSold}
                     </h2>
-                    <p className="text-gray-500 text-sm">
+                    <p className="text-mute text-sm">
                         {t.browseProducts}
                     </p>
                     <Image src="/assets/images/highlight.svg" alt="Decorative" height={100} width={150} className="mx-auto block mt-4" />
@@ -247,12 +247,12 @@ export default function TopProducts({ locale = 'en', initialProducts }: TopProdu
                                 {/* Loading skeleton */}
                                 {[1, 2, 3, 4, 5, 6].map((i) => (
                                     <div key={i} className="w-64 shrink-0">
-                                        <div className="bg-white rounded-2xl shadow-md overflow-hidden">
-                                            <div className="relative h-80 bg-gray-200 animate-pulse" />
+                                        <div className="bg-card rounded-2xl shadow-md overflow-hidden">
+                                            <div className="relative h-80 bg-line animate-pulse" />
                                             <div className="p-4 space-y-2">
-                                                <div className="h-4 bg-gray-200 animate-pulse rounded w-3/4" />
-                                                <div className="h-3 bg-gray-200 animate-pulse rounded w-1/2" />
-                                                <div className="h-6 bg-gray-200 animate-pulse rounded w-1/3" />
+                                                <div className="h-4 bg-line animate-pulse rounded w-3/4" />
+                                                <div className="h-3 bg-line animate-pulse rounded w-1/2" />
+                                                <div className="h-6 bg-line animate-pulse rounded w-1/3" />
                                             </div>
                                         </div>
                                     </div>
@@ -283,10 +283,10 @@ export default function TopProducts({ locale = 'en', initialProducts }: TopProdu
                             {canScrollLeft && (
                                 <button
                                     onClick={handlePrev}
-                                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition"
+                                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-card rounded-full shadow-lg flex items-center justify-center hover:bg-surface transition"
                                     aria-label="Previous"
                                 >
-                                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="w-5 h-5 text-mute" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                     </svg>
                                 </button>
@@ -295,10 +295,10 @@ export default function TopProducts({ locale = 'en', initialProducts }: TopProdu
                             {canScrollRight && (
                                 <button
                                     onClick={handleNext}
-                                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-50 transition"
+                                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 bg-card rounded-full shadow-lg flex items-center justify-center hover:bg-surface transition"
                                     aria-label="Next"
                                 >
-                                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg className="w-5 h-5 text-mute" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                     </svg>
                                 </button>

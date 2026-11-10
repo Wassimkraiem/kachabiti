@@ -1,0 +1,160 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 5,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 5,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "instrumentation-client.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 16,
+      "nonEmptyLines": 14,
+      "exports": [
+        {
+          "name": "onRouterTransitionStart",
+          "line": 16,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/app-env.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 7,
+      "exports": [
+        {
+          "name": "APP_ENV",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "isProduction",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "isLocal",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/sentry-options.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 62,
+      "nonEmptyLines": 56,
+      "functions": [
+        {
+          "name": "scrubEvent",
+          "startLine": 34,
+          "endLine": 46,
+          "params": [
+            "event"
+          ]
+        },
+        {
+          "name": "createSentryOptions",
+          "startLine": 48,
+          "endLine": 59,
+          "params": [
+            "dsn"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createSentryOptions",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "sentryOptions",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "backendSentryOptions",
+          "line": 62,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "scrubEvent",
+          "callee": "Object.keys",
+          "lineNumber": 39
+        },
+        {
+          "caller": "scrubEvent",
+          "callee": "/^(authorization|cookie|x-admin-)/i.test",
+          "lineNumber": 40
+        },
+        {
+          "caller": "createSentryOptions",
+          "callee": "Boolean",
+          "lineNumber": 52
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "sentry.edge.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 22,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "sentry.server.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 4,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,613 @@
+{
+ "nodes": [
+  {
+   "id": "file:api/src/crm/crm.controllers.ts",
+   "type": "file",
+   "name": "crm.controllers.ts",
+   "filePath": "api/src/crm/crm.controllers.ts",
+   "summary": "CRM API: customers (list, detail, merge, duplicates, anonymize), interactions with Meta replies, follow-up tasks and social post comments.",
+   "tags": [
+    "api-handler",
+    "crm",
+    "customers",
+    "nestjs"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/crm/crm.controllers.ts:CustomersController",
+   "type": "class",
+   "name": "CustomersController",
+   "filePath": "api/src/crm/crm.controllers.ts",
+   "lineRange": [
+    87,
+    415
+   ],
+   "summary": "Customer CRM endpoints.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/crm/crm.controllers.ts:InteractionsController",
+   "type": "class",
+   "name": "InteractionsController",
+   "filePath": "api/src/crm/crm.controllers.ts",
+   "lineRange": [
+    443,
+    609
+   ],
+   "summary": "Customer conversations and Meta replies.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/crm/crm.controllers.ts:TasksController",
+   "type": "class",
+   "name": "TasksController",
+   "filePath": "api/src/crm/crm.controllers.ts",
+   "lineRange": [
+    632,
+    763
+   ],
+   "summary": "CRM follow-up tasks.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/crm/crm.controllers.ts:CommentsController",
+   "type": "class",
+   "name": "CommentsController",
+   "filePath": "api/src/crm/crm.controllers.ts",
+   "lineRange": [
+    774,
+    881
+   ],
+   "summary": "Social post comments listing and handling.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/src/crm/meta-webhook.controller.ts",
+   "type": "file",
+   "name": "meta-webhook.controller.ts",
+   "filePath": "api/src/crm/meta-webhook.controller.ts",
+   "summary": "Public signature-checked Meta webhook receiving Messenger, Instagram and WhatsApp messages and post comments into the CRM.",
+   "tags": [
+    "api-handler",
+    "webhook",
+    "crm",
+    "integration",
+    "nestjs"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/crm/meta-webhook.controller.ts:MetaWebhookController",
+   "type": "class",
+   "name": "MetaWebhookController",
+   "filePath": "api/src/crm/meta-webhook.controller.ts",
+   "lineRange": [
+    33,
+    199
+   ],
+   "summary": "Meta webhook verify and receive endpoints.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:api/src/db/database.ts",
+   "type": "file",
+   "name": "database.ts",
+   "filePath": "api/src/db/database.ts",
+   "summary": "Kysely/pg Database service with withActor transactions that set activity-log settings, typed db.call for Postgres functions, LISTEN support, and the global DatabaseModule.",
+   "tags": [
+    "service",
+    "database",
+    "data-access",
+    "nestjs"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/db/database.ts:Database",
+   "type": "class",
+   "name": "Database",
+   "filePath": "api/src/db/database.ts",
+   "lineRange": [
+    30,
+    172
+   ],
+   "summary": "Database service with transactions, function calls and LISTEN.",
+   "tags": [
+    "class",
+    "nestjs",
+    "service"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/db/database.ts:DatabaseModule",
+   "type": "class",
+   "name": "DatabaseModule",
+   "filePath": "api/src/db/database.ts",
+   "lineRange": [
+    176,
+    176
+   ],
+   "summary": "Global NestJS module providing Database.",
+   "tags": [
+    "class",
+    "nestjs",
+    "service"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/db/embed.ts",
+   "type": "file",
+   "name": "embed.ts",
+   "filePath": "api/src/db/embed.ts",
+   "summary": "Helpers building JSON one/many embeds that filter out soft-deleted rows.",
+   "tags": [
+    "utility",
+    "database",
+    "query"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/db/embed.ts:one",
+   "type": "function",
+   "name": "one",
+   "filePath": "api/src/db/embed.ts",
+   "lineRange": [
+    12,
+    23
+   ],
+   "summary": "Embeds a single related row as JSON.",
+   "tags": [
+    "function",
+    "utility",
+    "db"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/db/embed.ts:many",
+   "type": "function",
+   "name": "many",
+   "filePath": "api/src/db/embed.ts",
+   "lineRange": [
+    25,
+    36
+   ],
+   "summary": "Embeds related rows as a JSON array.",
+   "tags": [
+    "function",
+    "utility",
+    "db"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/db/types.ts",
+   "type": "file",
+   "name": "types.ts",
+   "filePath": "api/src/db/types.ts",
+   "summary": "Generated Kysely database type definitions for every Postgres table.",
+   "tags": [
+    "type-definition",
+    "database",
+    "data-model",
+    "generated"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:api/src/files/files.controllers.ts",
+   "type": "file",
+   "name": "files.controllers.ts",
+   "filePath": "api/src/files/files.controllers.ts",
+   "summary": "Image upload API to the public products bucket and a documents API for private files with signed links.",
+   "tags": [
+    "api-handler",
+    "storage",
+    "uploads",
+    "nestjs"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/files/files.controllers.ts:UploadImageController",
+   "type": "class",
+   "name": "UploadImageController",
+   "filePath": "api/src/files/files.controllers.ts",
+   "lineRange": [
+    50,
+    78
+   ],
+   "summary": "Image upload endpoint.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:api/src/files/files.controllers.ts:DocumentsController",
+   "type": "class",
+   "name": "DocumentsController",
+   "filePath": "api/src/files/files.controllers.ts",
+   "lineRange": [
+    111,
+    256
+   ],
+   "summary": "Private documents endpoints with signed links.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "file:api/src/db/embed.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "file:api/src/sales/commerce.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "file:lib/erp/meta.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "class:api/src/crm/crm.controllers.ts:CustomersController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "class:api/src/crm/crm.controllers.ts:CustomersController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "class:api/src/crm/crm.controllers.ts:InteractionsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "class:api/src/crm/crm.controllers.ts:InteractionsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "class:api/src/crm/crm.controllers.ts:TasksController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "class:api/src/crm/crm.controllers.ts:TasksController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "class:api/src/crm/crm.controllers.ts:CommentsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/crm/crm.controllers.ts",
+   "target": "class:api/src/crm/crm.controllers.ts:CommentsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/crm/meta-webhook.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/meta-webhook.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/meta-webhook.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/meta-webhook.controller.ts",
+   "target": "file:lib/erp/meta.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/crm/meta-webhook.controller.ts",
+   "target": "class:api/src/crm/meta-webhook.controller.ts:MetaWebhookController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/crm/meta-webhook.controller.ts",
+   "target": "class:api/src/crm/meta-webhook.controller.ts:MetaWebhookController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/db/database.ts",
+   "target": "file:api/src/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/db/database.ts",
+   "target": "file:api/src/db/types.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/db/database.ts",
+   "target": "class:api/src/db/database.ts:Database",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/db/database.ts",
+   "target": "class:api/src/db/database.ts:Database",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/db/database.ts",
+   "target": "class:api/src/db/database.ts:DatabaseModule",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/db/database.ts",
+   "target": "class:api/src/db/database.ts:DatabaseModule",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/db/embed.ts",
+   "target": "function:api/src/db/embed.ts:one",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/db/embed.ts",
+   "target": "function:api/src/db/embed.ts:one",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/db/embed.ts",
+   "target": "function:api/src/db/embed.ts:many",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/db/embed.ts",
+   "target": "function:api/src/db/embed.ts:many",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/files/files.controllers.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/files/files.controllers.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/files/files.controllers.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/files/files.controllers.ts",
+   "target": "file:api/src/common/storage.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/files/files.controllers.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/files/files.controllers.ts",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/files/files.controllers.ts",
+   "target": "class:api/src/files/files.controllers.ts:UploadImageController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/files/files.controllers.ts",
+   "target": "class:api/src/files/files.controllers.ts:UploadImageController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/files/files.controllers.ts",
+   "target": "class:api/src/files/files.controllers.ts:DocumentsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/files/files.controllers.ts",
+   "target": "class:api/src/files/files.controllers.ts:DocumentsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/crm/meta-webhook.controller.ts:MetaWebhookController",
+   "target": "function:lib/erp/meta.ts:validSignature",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/crm/meta-webhook.controller.ts:MetaWebhookController",
+   "target": "function:lib/erp/meta.ts:parseWebhook",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/crm/meta-webhook.controller.ts:MetaWebhookController",
+   "target": "function:lib/erp/meta.ts:parseComments",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/crm/crm.controllers.ts:InteractionsController",
+   "target": "function:lib/erp/meta.ts:sendMetaText",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/files/files.controllers.ts:DocumentsController",
+   "target": "function:api/src/common/storage.ts:signedUrl",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/files/files.controllers.ts:UploadImageController",
+   "target": "function:api/src/common/storage.ts:putObject",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

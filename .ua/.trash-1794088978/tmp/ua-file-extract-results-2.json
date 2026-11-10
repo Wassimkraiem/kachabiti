@@ -1,0 +1,4555 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 32,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 32,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 32,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "components/landing/HowToOrder.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 106,
+      "nonEmptyLines": 99,
+      "functions": [
+        {
+          "name": "HowToOrder",
+          "startLine": 63,
+          "endLine": 106,
+          "params": [
+            "{ locale, freeShippingThreshold }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "HowToOrder",
+          "line": 63,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "HowToOrder",
+          "callee": "t.steps",
+          "lineNumber": 66
+        },
+        {
+          "caller": "HowToOrder",
+          "callee": "isRTL",
+          "lineNumber": 69
+        },
+        {
+          "caller": "HowToOrder",
+          "callee": "steps.map",
+          "lineNumber": 77
+        },
+        {
+          "caller": "HowToOrder",
+          "callee": "phone.replace",
+          "lineNumber": 95
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/landing/LandingProductCard.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 75,
+      "nonEmptyLines": 70,
+      "functions": [
+        {
+          "name": "LandingProductCard",
+          "startLine": 15,
+          "endLine": 75,
+          "params": [
+            "{\r\n    product,\r\n    locale,\r\n    tone = \"light\",\r\n    sizes,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LandingProductCard",
+          "line": 15,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/landing/NewArrivals.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 65,
+      "nonEmptyLines": 60,
+      "functions": [
+        {
+          "name": "NewArrivals",
+          "startLine": 30,
+          "endLine": 65,
+          "params": [
+            "{ locale, products }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "NewArrivals",
+          "line": 30,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "NewArrivals",
+          "callee": "isRTL",
+          "lineNumber": 35
+        },
+        {
+          "caller": "NewArrivals",
+          "callee": "products.map",
+          "lineNumber": 53
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/landing/ProductRing3D.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 147,
+      "nonEmptyLines": 132,
+      "functions": [
+        {
+          "name": "textureUrl",
+          "startLine": 28,
+          "endLine": 30,
+          "params": [
+            "src"
+          ]
+        },
+        {
+          "name": "canUse3D",
+          "startLine": 32,
+          "endLine": 41,
+          "params": []
+        },
+        {
+          "name": "ProductRing3D",
+          "startLine": 43,
+          "endLine": 147,
+          "params": [
+            "{ locale, products, children, className = \"\" }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProductRing3D",
+          "line": 43,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "textureUrl",
+          "callee": "encodeURIComponent",
+          "lineNumber": 29
+        },
+        {
+          "caller": "canUse3D",
+          "callee": "window.matchMedia",
+          "lineNumber": 33
+        },
+        {
+          "caller": "canUse3D",
+          "callee": "document.createElement",
+          "lineNumber": 36
+        },
+        {
+          "caller": "canUse3D",
+          "callee": "canvas.getContext",
+          "lineNumber": 37
+        },
+        {
+          "caller": "canUse3D",
+          "callee": "canvas.getContext",
+          "lineNumber": 37
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "useRouter",
+          "lineNumber": 45
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "useRef",
+          "lineNumber": 46
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "useRef",
+          "lineNumber": 47
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "useState",
+          "lineNumber": 48
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "useState",
+          "lineNumber": 49
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "useState",
+          "lineNumber": 50
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "products.filter",
+          "lineNumber": 52
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "items.map((p) => p.id).join",
+          "lineNumber": 53
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "items.map",
+          "lineNumber": 53
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "useEffect",
+          "lineNumber": 55
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "canUse3D",
+          "lineNumber": 57
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "import(\"./ring-scene\")\r\n            .then(({ createRingScene }) => {\r\n                if (cancelled) return;\r\n                sceneRef.current = createRingScene(\r\n                    container,\r\n                    items.map((p) => ({ imageUrl: textureUrl(p.image as string) })),\r\n                    {\r\n                        direction: locale === \"ar\" ? \"rtl\" : \"ltr\",\r\n                        onReady: () => setReady(true),\r\n                        onFrontChange: setFront,\r\n                        onSelect: (index) => router.push(`/${locale}/products/${items[index].slug}`),\r\n                        onInteract: () => setShowHint(false),\r\n                    }\r\n                );\r\n            })\r\n            .catch",
+          "lineNumber": 60
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "import(\"./ring-scene\")\r\n            .then",
+          "lineNumber": 60
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "import",
+          "lineNumber": 60
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "createRingScene",
+          "lineNumber": 63
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "items.map",
+          "lineNumber": 65
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "textureUrl",
+          "lineNumber": 65
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "setReady",
+          "lineNumber": 68
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "router.push",
+          "lineNumber": 70
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "setShowHint",
+          "lineNumber": 71
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "console.error",
+          "lineNumber": 75
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "sceneRef.current?.dispose",
+          "lineNumber": 79
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "setReady",
+          "lineNumber": 81
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "sceneRef.current?.step",
+          "lineNumber": 109
+        },
+        {
+          "caller": "ProductRing3D",
+          "callee": "sceneRef.current?.step",
+          "lineNumber": 134
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/landing/ProductShowcase.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 144,
+      "nonEmptyLines": 134,
+      "functions": [
+        {
+          "name": "StaticBackdrop",
+          "startLine": 48,
+          "endLine": 67,
+          "params": [
+            "{ products }"
+          ]
+        },
+        {
+          "name": "ProductShowcase",
+          "startLine": 71,
+          "endLine": 144,
+          "params": [
+            "{ locale, products, ringProducts, collectionSlug, freeShippingThreshold }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProductShowcase",
+          "line": 71,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "StaticBackdrop",
+          "callee": "products.map",
+          "lineNumber": 51
+        },
+        {
+          "caller": "ProductShowcase",
+          "callee": "isRTL",
+          "lineNumber": 74
+        },
+        {
+          "caller": "ProductShowcase",
+          "callee": "t.freeDelivery",
+          "lineNumber": 135
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/landing/ring-scene.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 444,
+      "nonEmptyLines": 408,
+      "functions": [
+        {
+          "name": "curvedCardGeometry",
+          "startLine": 132,
+          "endLine": 142,
+          "params": [
+            "radius"
+          ]
+        },
+        {
+          "name": "wrapAngle",
+          "startLine": 144,
+          "endLine": 147,
+          "params": [
+            "a"
+          ]
+        },
+        {
+          "name": "createRingScene",
+          "startLine": 149,
+          "endLine": 444,
+          "params": [
+            "container",
+            "items",
+            "options"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createRingScene",
+          "line": 149,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "curvedCardGeometry",
+          "callee": "pos.getX",
+          "lineNumber": 136
+        },
+        {
+          "caller": "curvedCardGeometry",
+          "callee": "pos.setX",
+          "lineNumber": 137
+        },
+        {
+          "caller": "curvedCardGeometry",
+          "callee": "Math.sin",
+          "lineNumber": 137
+        },
+        {
+          "caller": "curvedCardGeometry",
+          "callee": "pos.setZ",
+          "lineNumber": 138
+        },
+        {
+          "caller": "curvedCardGeometry",
+          "callee": "Math.cos",
+          "lineNumber": 138
+        },
+        {
+          "caller": "curvedCardGeometry",
+          "callee": "geometry.computeBoundingSphere",
+          "lineNumber": 140
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "renderer.setPixelRatio",
+          "lineNumber": 151
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "Math.min",
+          "lineNumber": 151
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "renderer.setClearColor",
+          "lineNumber": 152
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "container.appendChild",
+          "lineNumber": 159
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "Math.max",
+          "lineNumber": 166
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "scene.add",
+          "lineNumber": 170
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "curvedCardGeometry",
+          "lineNumber": 171
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "Math.min",
+          "lineNumber": 173
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "renderer.capabilities.getMaxAnisotropy",
+          "lineNumber": 173
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "items.map",
+          "lineNumber": 179
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "mesh.position.set",
+          "lineNumber": 196
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "Math.sin",
+          "lineNumber": 196
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "Math.cos",
+          "lineNumber": 196
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "ring.add",
+          "lineNumber": 199
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "loader.load",
+          "lineNumber": 202
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "ribbon.position.set",
+          "lineNumber": 230
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "scene.add",
+          "lineNumber": 232
+        },
+        {
+          "caller": "resize",
+          "callee": "renderer.setSize",
+          "lineNumber": 242
+        },
+        {
+          "caller": "resize",
+          "callee": "renderer.getPixelRatio",
+          "lineNumber": 243
+        },
+        {
+          "caller": "resize",
+          "callee": "Math.tan",
+          "lineNumber": 245
+        },
+        {
+          "caller": "resize",
+          "callee": "THREE.MathUtils.degToRad",
+          "lineNumber": 245
+        },
+        {
+          "caller": "resize",
+          "callee": "Math.max",
+          "lineNumber": 250
+        },
+        {
+          "caller": "resize",
+          "callee": "camera.position.set",
+          "lineNumber": 255
+        },
+        {
+          "caller": "resize",
+          "callee": "camera.lookAt",
+          "lineNumber": 256
+        },
+        {
+          "caller": "resize",
+          "callee": "camera.setViewOffset",
+          "lineNumber": 260
+        },
+        {
+          "caller": "resize",
+          "callee": "camera.updateProjectionMatrix",
+          "lineNumber": 261
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "resize",
+          "lineNumber": 263
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "resizeObserver.observe",
+          "lineNumber": 265
+        },
+        {
+          "caller": "pick",
+          "callee": "canvas.getBoundingClientRect",
+          "lineNumber": 282
+        },
+        {
+          "caller": "pick",
+          "callee": "pointer.set",
+          "lineNumber": 283
+        },
+        {
+          "caller": "pick",
+          "callee": "raycaster.setFromCamera",
+          "lineNumber": 284
+        },
+        {
+          "caller": "pick",
+          "callee": "raycaster.intersectObjects",
+          "lineNumber": 285
+        },
+        {
+          "caller": "pick",
+          "callee": "Math.cos",
+          "lineNumber": 289
+        },
+        {
+          "caller": "frontIndex",
+          "callee": "Math.round",
+          "lineNumber": 293
+        },
+        {
+          "caller": "onPointerDown",
+          "callee": "canvas.setPointerCapture",
+          "lineNumber": 303
+        },
+        {
+          "caller": "onPointerMove",
+          "callee": "Math.abs",
+          "lineNumber": 313
+        },
+        {
+          "caller": "onPointerMove",
+          "callee": "options.onInteract",
+          "lineNumber": 318
+        },
+        {
+          "caller": "onPointerMove",
+          "callee": "pick",
+          "lineNumber": 323
+        },
+        {
+          "caller": "onPointerUp",
+          "callee": "pick",
+          "lineNumber": 332
+        },
+        {
+          "caller": "onPointerUp",
+          "callee": "frontIndex",
+          "lineNumber": 334
+        },
+        {
+          "caller": "onPointerUp",
+          "callee": "options.onSelect",
+          "lineNumber": 335
+        },
+        {
+          "caller": "onPointerUp",
+          "callee": "wrapAngle",
+          "lineNumber": 337
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "canvas.addEventListener",
+          "lineNumber": 345
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "canvas.addEventListener",
+          "lineNumber": 346
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "canvas.addEventListener",
+          "lineNumber": 347
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "canvas.addEventListener",
+          "lineNumber": 348
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "canvas.addEventListener",
+          "lineNumber": 349
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "clock.getDelta",
+          "lineNumber": 356
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "intersection.observe",
+          "lineNumber": 358
+        },
+        {
+          "caller": "tick",
+          "callee": "requestAnimationFrame",
+          "lineNumber": 363
+        },
+        {
+          "caller": "tick",
+          "callee": "Math.min",
+          "lineNumber": 365
+        },
+        {
+          "caller": "tick",
+          "callee": "clock.getDelta",
+          "lineNumber": 365
+        },
+        {
+          "caller": "tick",
+          "callee": "Math.min",
+          "lineNumber": 370
+        },
+        {
+          "caller": "tick",
+          "callee": "Math.abs",
+          "lineNumber": 371
+        },
+        {
+          "caller": "tick",
+          "callee": "Math.min",
+          "lineNumber": 379
+        },
+        {
+          "caller": "tick",
+          "callee": "Math.cos",
+          "lineNumber": 386
+        },
+        {
+          "caller": "tick",
+          "callee": "Math.min",
+          "lineNumber": 388
+        },
+        {
+          "caller": "tick",
+          "callee": "Math.min",
+          "lineNumber": 392
+        },
+        {
+          "caller": "tick",
+          "callee": "card.mesh.scale.set",
+          "lineNumber": 394
+        },
+        {
+          "caller": "tick",
+          "callee": "frontIndex",
+          "lineNumber": 398
+        },
+        {
+          "caller": "tick",
+          "callee": "options.onFrontChange",
+          "lineNumber": 401
+        },
+        {
+          "caller": "tick",
+          "callee": "renderer.render",
+          "lineNumber": 404
+        },
+        {
+          "caller": "tick",
+          "callee": "options.onReady",
+          "lineNumber": 408
+        },
+        {
+          "caller": "createRingScene",
+          "callee": "tick",
+          "lineNumber": 411
+        },
+        {
+          "caller": "step",
+          "callee": "Math.round",
+          "lineNumber": 416
+        },
+        {
+          "caller": "step",
+          "callee": "options.onInteract",
+          "lineNumber": 420
+        },
+        {
+          "caller": "dispose",
+          "callee": "cancelAnimationFrame",
+          "lineNumber": 424
+        },
+        {
+          "caller": "dispose",
+          "callee": "resizeObserver.disconnect",
+          "lineNumber": 425
+        },
+        {
+          "caller": "dispose",
+          "callee": "intersection.disconnect",
+          "lineNumber": 426
+        },
+        {
+          "caller": "dispose",
+          "callee": "canvas.removeEventListener",
+          "lineNumber": 427
+        },
+        {
+          "caller": "dispose",
+          "callee": "canvas.removeEventListener",
+          "lineNumber": 428
+        },
+        {
+          "caller": "dispose",
+          "callee": "canvas.removeEventListener",
+          "lineNumber": 429
+        },
+        {
+          "caller": "dispose",
+          "callee": "canvas.removeEventListener",
+          "lineNumber": 430
+        },
+        {
+          "caller": "dispose",
+          "callee": "canvas.removeEventListener",
+          "lineNumber": 431
+        },
+        {
+          "caller": "dispose",
+          "callee": "card.material.dispose",
+          "lineNumber": 433
+        },
+        {
+          "caller": "dispose",
+          "callee": "card.texture?.dispose",
+          "lineNumber": 434
+        },
+        {
+          "caller": "dispose",
+          "callee": "geometry.dispose",
+          "lineNumber": 436
+        },
+        {
+          "caller": "dispose",
+          "callee": "blankTexture.dispose",
+          "lineNumber": 437
+        },
+        {
+          "caller": "dispose",
+          "callee": "ribbon.geometry.dispose",
+          "lineNumber": 438
+        },
+        {
+          "caller": "dispose",
+          "callee": "ribbonMaterial.dispose",
+          "lineNumber": 439
+        },
+        {
+          "caller": "dispose",
+          "callee": "renderer.dispose",
+          "lineNumber": 440
+        },
+        {
+          "caller": "dispose",
+          "callee": "canvas.remove",
+          "lineNumber": 441
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/layout/MobileHeader.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 304,
+      "nonEmptyLines": 286,
+      "functions": [
+        {
+          "name": "MobileHeader",
+          "startLine": 52,
+          "endLine": 304,
+          "params": [
+            "{ locale, rtl, user, categories, search, onSearchChange, searchPlaceholder, resultsHref, labels }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MobileHeader",
+          "line": 52,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MobileHeader",
+          "callee": "useRouter",
+          "lineNumber": 54
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "usePathname",
+          "lineNumber": 55
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "useSearchParams",
+          "lineNumber": 56
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "useState",
+          "lineNumber": 57
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "useState",
+          "lineNumber": 58
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "useState",
+          "lineNumber": 59
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "useRef",
+          "lineNumber": 60
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "useEffect",
+          "lineNumber": 63
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "setMenuOpen",
+          "lineNumber": 64
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "setSearchOpen",
+          "lineNumber": 65
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "useEffect",
+          "lineNumber": 69
+        },
+        {
+          "caller": "onKey",
+          "callee": "setMenuOpen",
+          "lineNumber": 73
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "window.addEventListener",
+          "lineNumber": 74
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "window.removeEventListener",
+          "lineNumber": 77
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "useEffect",
+          "lineNumber": 81
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "searchPanel.current?.querySelector(\"input\")?.focus",
+          "lineNumber": 82
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "searchPanel.current?.querySelector",
+          "lineNumber": 82
+        },
+        {
+          "caller": "languageHref",
+          "callee": "(pathname || \"\").replace",
+          "lineNumber": 86
+        },
+        {
+          "caller": "languageHref",
+          "callee": "searchParams.toString",
+          "lineNumber": 87
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "headerConfig.contact.phone.replace",
+          "lineNumber": 90
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "setMenuOpen",
+          "lineNumber": 99
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "setSearchOpen",
+          "lineNumber": 113
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "setSearchOpen",
+          "lineNumber": 142
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "setMenuOpen",
+          "lineNumber": 151
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "(e.target as HTMLElement).closest",
+          "lineNumber": 162
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "setMenuOpen",
+          "lineNumber": 162
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "setMenuOpen",
+          "lineNumber": 168
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "(user.user_metadata?.full_name || user.email || \"?\").charAt(0).toUpperCase",
+          "lineNumber": 184
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "(user.user_metadata?.full_name || user.email || \"?\").charAt",
+          "lineNumber": 184
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "setCategoriesOpen",
+          "lineNumber": 198
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "categories.map",
+          "lineNumber": 211
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "headerConfig.languages.map",
+          "lineNumber": 235
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "languageHref",
+          "lineNumber": 238
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "Object.entries(headerConfig.social).map",
+          "lineNumber": 265
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "Object.entries",
+          "lineNumber": 265
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "signOut",
+          "lineNumber": 288
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "setMenuOpen",
+          "lineNumber": 289
+        },
+        {
+          "caller": "MobileHeader",
+          "callee": "router.push",
+          "lineNumber": 290
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/layout/MobileTabBar.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 82,
+      "functions": [
+        {
+          "name": "MobileTabBar",
+          "startLine": 18,
+          "endLine": 88,
+          "params": [
+            "{ locale }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MobileTabBar",
+          "line": 18,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MobileTabBar",
+          "callee": "usePathname",
+          "lineNumber": 19
+        },
+        {
+          "caller": "MobileTabBar",
+          "callee": "useCart",
+          "lineNumber": 20
+        },
+        {
+          "caller": "MobileTabBar",
+          "callee": "useCustomer",
+          "lineNumber": 21
+        },
+        {
+          "caller": "MobileTabBar",
+          "callee": "pathname.replace",
+          "lineNumber": 24
+        },
+        {
+          "caller": "MobileTabBar",
+          "callee": "/^\\/products\\/[^/]+/.test",
+          "lineNumber": 25
+        },
+        {
+          "caller": "MobileTabBar",
+          "callee": "rest.startsWith",
+          "lineNumber": 25
+        },
+        {
+          "caller": "MobileTabBar",
+          "callee": "tab",
+          "lineNumber": 41
+        },
+        {
+          "caller": "MobileTabBar",
+          "callee": "tab",
+          "lineNumber": 49
+        },
+        {
+          "caller": "MobileTabBar",
+          "callee": "rest.startsWith",
+          "lineNumber": 49
+        },
+        {
+          "caller": "MobileTabBar",
+          "callee": "rest.startsWith",
+          "lineNumber": 50
+        },
+        {
+          "caller": "MobileTabBar",
+          "callee": "tab",
+          "lineNumber": 60
+        },
+        {
+          "caller": "MobileTabBar",
+          "callee": "rest.startsWith",
+          "lineNumber": 60
+        },
+        {
+          "caller": "MobileTabBar",
+          "callee": "tab",
+          "lineNumber": 75
+        },
+        {
+          "caller": "MobileTabBar",
+          "callee": "rest.startsWith",
+          "lineNumber": 75
+        },
+        {
+          "caller": "MobileTabBar",
+          "callee": "rest.startsWith",
+          "lineNumber": 75
+        },
+        {
+          "caller": "MobileTabBar",
+          "callee": "rest.startsWith",
+          "lineNumber": 76
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/layout/SearchBox.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 266,
+      "nonEmptyLines": 248,
+      "functions": [
+        {
+          "name": "mainImage",
+          "startLine": 41,
+          "endLine": 45,
+          "params": [
+            "images"
+          ]
+        },
+        {
+          "name": "loadSuggestions",
+          "startLine": 48,
+          "endLine": 65,
+          "params": [
+            "query",
+            "locale"
+          ]
+        },
+        {
+          "name": "SearchBox",
+          "startLine": 81,
+          "endLine": 266,
+          "params": [
+            "{ locale, rtl, value, onChange, placeholder, variant, onNavigate, resultsHref }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SearchBox",
+          "line": 81,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "mainImage",
+          "callee": "(images ?? []).filter",
+          "lineNumber": 42
+        },
+        {
+          "caller": "mainImage",
+          "callee": "list.find",
+          "lineNumber": 44
+        },
+        {
+          "caller": "mainImage",
+          "callee": "[...list].sort",
+          "lineNumber": 44
+        },
+        {
+          "caller": "loadSuggestions",
+          "callee": "query.trim",
+          "lineNumber": 49
+        },
+        {
+          "caller": "loadSuggestions",
+          "callee": "/d/.test",
+          "lineNumber": 50
+        },
+        {
+          "caller": "loadSuggestions",
+          "callee": "await storefront",
+          "lineNumber": 51
+        },
+        {
+          "caller": "loadSuggestions",
+          "callee": "encodeURIComponent",
+          "lineNumber": 51
+        },
+        {
+          "caller": "loadSuggestions",
+          "callee": "rows\r\n        .map",
+          "lineNumber": 52
+        },
+        {
+          "caller": "loadSuggestions",
+          "callee": "Number",
+          "lineNumber": 54
+        },
+        {
+          "caller": "loadSuggestions",
+          "callee": "Number",
+          "lineNumber": 55
+        },
+        {
+          "caller": "loadSuggestions",
+          "callee": "getProductName",
+          "lineNumber": 59
+        },
+        {
+          "caller": "loadSuggestions",
+          "callee": "mainImage",
+          "lineNumber": 60
+        },
+        {
+          "caller": "loadSuggestions",
+          "callee": "Math.round",
+          "lineNumber": 61
+        },
+        {
+          "caller": "loadSuggestions",
+          "callee": "Math.round",
+          "lineNumber": 62
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "useRouter",
+          "lineNumber": 82
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "useId",
+          "lineNumber": 84
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "useRef",
+          "lineNumber": 85
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "useState",
+          "lineNumber": 86
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "useState",
+          "lineNumber": 87
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "useState",
+          "lineNumber": 88
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "useState",
+          "lineNumber": 89
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "useState",
+          "lineNumber": 91
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "value.trim",
+          "lineNumber": 93
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "/\\d/.test",
+          "lineNumber": 94
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "useEffect",
+          "lineNumber": 96
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "setSuggestions",
+          "lineNumber": 98
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "setSearchedFor",
+          "lineNumber": 99
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "setLoading",
+          "lineNumber": 100
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "setLoading",
+          "lineNumber": 104
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "setTimeout",
+          "lineNumber": 105
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "loadSuggestions",
+          "lineNumber": 107
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "setSuggestions",
+          "lineNumber": 109
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "setSearchedFor",
+          "lineNumber": 110
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "setActive",
+          "lineNumber": 111
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "console.error",
+          "lineNumber": 114
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "setSuggestions",
+          "lineNumber": 115
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "setLoading",
+          "lineNumber": 117
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "clearTimeout",
+          "lineNumber": 122
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "useEffect",
+          "lineNumber": 127
+        },
+        {
+          "caller": "onPointerDown",
+          "callee": "containerRef.current?.contains",
+          "lineNumber": 129
+        },
+        {
+          "caller": "onPointerDown",
+          "callee": "setOpen",
+          "lineNumber": 129
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "document.addEventListener",
+          "lineNumber": 131
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "document.removeEventListener",
+          "lineNumber": 132
+        },
+        {
+          "caller": "goToResults",
+          "callee": "setOpen",
+          "lineNumber": 136
+        },
+        {
+          "caller": "goToResults",
+          "callee": "router.push",
+          "lineNumber": 137
+        },
+        {
+          "caller": "goToResults",
+          "callee": "resultsHref",
+          "lineNumber": 137
+        },
+        {
+          "caller": "goToResults",
+          "callee": "onNavigate",
+          "lineNumber": 138
+        },
+        {
+          "caller": "goToProduct",
+          "callee": "setOpen",
+          "lineNumber": 142
+        },
+        {
+          "caller": "goToProduct",
+          "callee": "router.push",
+          "lineNumber": 143
+        },
+        {
+          "caller": "goToProduct",
+          "callee": "onNavigate",
+          "lineNumber": 144
+        },
+        {
+          "caller": "onKeyDown",
+          "callee": "event.preventDefault",
+          "lineNumber": 150
+        },
+        {
+          "caller": "onKeyDown",
+          "callee": "setOpen",
+          "lineNumber": 151
+        },
+        {
+          "caller": "onKeyDown",
+          "callee": "setActive",
+          "lineNumber": 152
+        },
+        {
+          "caller": "onKeyDown",
+          "callee": "event.preventDefault",
+          "lineNumber": 154
+        },
+        {
+          "caller": "onKeyDown",
+          "callee": "setOpen",
+          "lineNumber": 155
+        },
+        {
+          "caller": "onKeyDown",
+          "callee": "setActive",
+          "lineNumber": 156
+        },
+        {
+          "caller": "onKeyDown",
+          "callee": "setOpen",
+          "lineNumber": 158
+        },
+        {
+          "caller": "onKeyDown",
+          "callee": "setActive",
+          "lineNumber": 159
+        },
+        {
+          "caller": "onKeyDown",
+          "callee": "event.preventDefault",
+          "lineNumber": 161
+        },
+        {
+          "caller": "onKeyDown",
+          "callee": "goToProduct",
+          "lineNumber": 162
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "event.preventDefault",
+          "lineNumber": 177
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "goToResults",
+          "lineNumber": 178
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "onChange",
+          "lineNumber": 185
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "setOpen",
+          "lineNumber": 186
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "setOpen",
+          "lineNumber": 188
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "t.none.replace",
+          "lineNumber": 222
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "suggestions.map",
+          "lineNumber": 224
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "setOpen",
+          "lineNumber": 232
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "onNavigate",
+          "lineNumber": 233
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "setActive",
+          "lineNumber": 235
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "setActive",
+          "lineNumber": 256
+        },
+        {
+          "caller": "SearchBox",
+          "callee": "t.seeAll.replace",
+          "lineNumber": 260
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/layout/StaticHeader.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 434,
+      "nonEmptyLines": 398,
+      "functions": [
+        {
+          "name": "flattenCategoryTree",
+          "startLine": 78,
+          "endLine": 91,
+          "params": [
+            "all"
+          ]
+        },
+        {
+          "name": "getCategoryName",
+          "startLine": 94,
+          "endLine": 102,
+          "params": [
+            "category",
+            "locale"
+          ]
+        },
+        {
+          "name": "StaticHeader",
+          "startLine": 108,
+          "endLine": 434,
+          "params": [
+            "{ locale: propLocale }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "StaticHeader",
+          "line": 108,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "visit",
+          "callee": "all.filter",
+          "lineNumber": 81
+        },
+        {
+          "caller": "visit",
+          "callee": "out.push",
+          "lineNumber": 82
+        },
+        {
+          "caller": "visit",
+          "callee": "visit",
+          "lineNumber": 83
+        },
+        {
+          "caller": "flattenCategoryTree",
+          "callee": "all.filter",
+          "lineNumber": 86
+        },
+        {
+          "caller": "flattenCategoryTree",
+          "callee": "out.push",
+          "lineNumber": 87
+        },
+        {
+          "caller": "flattenCategoryTree",
+          "callee": "visit",
+          "lineNumber": 88
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "useRouter",
+          "lineNumber": 109
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "usePathname",
+          "lineNumber": 110
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "useSearchParams",
+          "lineNumber": 111
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "useState",
+          "lineNumber": 113
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "useState",
+          "lineNumber": 114
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "useCustomer",
+          "lineNumber": 115
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "useState",
+          "lineNumber": 116
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "useState",
+          "lineNumber": 117
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "useState",
+          "lineNumber": 118
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "useLanguageSafe",
+          "lineNumber": 121
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "isRTL",
+          "lineNumber": 126
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "useEffect",
+          "lineNumber": 129
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "setMounted",
+          "lineNumber": 130
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "useEffect",
+          "lineNumber": 134
+        },
+        {
+          "caller": "handleClickOutside",
+          "callee": "target.closest",
+          "lineNumber": 137
+        },
+        {
+          "caller": "handleClickOutside",
+          "callee": "setIsLanguageMenuOpen",
+          "lineNumber": 138
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "document.addEventListener",
+          "lineNumber": 143
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "document.removeEventListener",
+          "lineNumber": 144
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "useEffect",
+          "lineNumber": 151
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "getCategories",
+          "lineNumber": 154
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "setCategories",
+          "lineNumber": 157
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "flattenCategoryTree",
+          "lineNumber": 157
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "console.error",
+          "lineNumber": 160
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "setCategories",
+          "lineNumber": 162
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "setIsLoadingCategories",
+          "lineNumber": 164
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "fetchCategories",
+          "lineNumber": 168
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "useState",
+          "lineNumber": 171
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "useEffect",
+          "lineNumber": 174
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "setSearch",
+          "lineNumber": 176
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "searchParams.get",
+          "lineNumber": 176
+        },
+        {
+          "caller": "searchResultsHref",
+          "callee": "params.set",
+          "lineNumber": 185
+        },
+        {
+          "caller": "searchResultsHref",
+          "callee": "params.delete",
+          "lineNumber": 187
+        },
+        {
+          "caller": "searchResultsHref",
+          "callee": "params.toString",
+          "lineNumber": 189
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "Object.entries(headerConfig.social).map",
+          "lineNumber": 204
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "Object.entries",
+          "lineNumber": 204
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "headerConfig.languages.find",
+          "lineNumber": 225
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "headerConfig.languages.find",
+          "lineNumber": 226
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "headerConfig.languages.map",
+          "lineNumber": 233
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "currentPath.replace",
+          "lineNumber": 237
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "searchParams.toString",
+          "lineNumber": 242
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "router.push",
+          "lineNumber": 268
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "categories.map",
+          "lineNumber": 312
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "getCategoryName",
+          "lineNumber": 312
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "t.searchPlaceholder.trim",
+          "lineNumber": 315
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "headerConfig.navigation.map",
+          "lineNumber": 324
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "setIsCategoriesOpen",
+          "lineNumber": 329
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "setIsCategoriesOpen",
+          "lineNumber": 330
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "categories.map",
+          "lineNumber": 370
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "getCategoryName",
+          "lineNumber": 377
+        },
+        {
+          "caller": "StaticHeader",
+          "callee": "router.push",
+          "lineNumber": 426
+        }
+      ],
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/layout/TrafficSource.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 8,
+      "functions": [
+        {
+          "name": "TrafficSource",
+          "startLine": 7,
+          "endLine": 10,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "TrafficSource",
+          "line": 7,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "TrafficSource",
+          "callee": "useEffect",
+          "lineNumber": 8
+        },
+        {
+          "caller": "TrafficSource",
+          "callee": "rememberTrafficSource",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/products/ProductGrid.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 257,
+      "nonEmptyLines": 235,
+      "functions": [
+        {
+          "name": "getCategoryName",
+          "startLine": 20,
+          "endLine": 28,
+          "params": [
+            "category",
+            "locale"
+          ]
+        },
+        {
+          "name": "ProductGrid",
+          "startLine": 54,
+          "endLine": 257,
+          "params": [
+            "{ locale = 'en', initialCategories }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProductGrid",
+          "line": 54,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ProductGrid",
+          "callee": "useState",
+          "lineNumber": 55
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "useState",
+          "lineNumber": 56
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "useRef",
+          "lineNumber": 57
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "useState",
+          "lineNumber": 58
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "useState",
+          "lineNumber": 59
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "useEffect",
+          "lineNumber": 63
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "setMounted",
+          "lineNumber": 64
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "useEffect",
+          "lineNumber": 67
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "(await getCategories()).filter",
+          "lineNumber": 70
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "getCategories",
+          "lineNumber": 70
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "setCategories",
+          "lineNumber": 73
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "console.error",
+          "lineNumber": 76
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "setCategories",
+          "lineNumber": 78
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "fetchCategories",
+          "lineNumber": 82
+        },
+        {
+          "caller": "checkScrollPosition",
+          "callee": "setCanScrollLeft",
+          "lineNumber": 89
+        },
+        {
+          "caller": "checkScrollPosition",
+          "callee": "setCanScrollRight",
+          "lineNumber": 90
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "useEffect",
+          "lineNumber": 96
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "checkScrollPosition",
+          "lineNumber": 99
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "container.addEventListener",
+          "lineNumber": 102
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "window.addEventListener",
+          "lineNumber": 103
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "container.removeEventListener",
+          "lineNumber": 105
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "window.removeEventListener",
+          "lineNumber": 106
+        },
+        {
+          "caller": "handlePrev",
+          "callee": "container.scrollBy",
+          "lineNumber": 115
+        },
+        {
+          "caller": "handleNext",
+          "callee": "container.scrollBy",
+          "lineNumber": 126
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "[1, 2, 3, 4, 5, 6].map",
+          "lineNumber": 167
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "categories.map",
+          "lineNumber": 176
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "getCategoryName",
+          "lineNumber": 186
+        },
+        {
+          "caller": "ProductGrid",
+          "callee": "getCategoryName",
+          "lineNumber": 193
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/products/ProductListCard.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 206,
+      "nonEmptyLines": 190,
+      "functions": [
+        {
+          "name": "getProductName",
+          "startLine": 65,
+          "endLine": 73,
+          "params": [
+            "product",
+            "locale"
+          ]
+        },
+        {
+          "name": "getProductImage",
+          "startLine": 76,
+          "endLine": 85,
+          "params": [
+            "product"
+          ]
+        },
+        {
+          "name": "formatPrice",
+          "startLine": 88,
+          "endLine": 90,
+          "params": [
+            "price",
+            "currency"
+          ]
+        },
+        {
+          "name": "ProductListCard",
+          "startLine": 105,
+          "endLine": 206,
+          "params": [
+            "{\r\n    product,\r\n    locale,\r\n    isFavorite,\r\n    onToggleFavorite,\r\n    onAddToCart,\r\n    size = \"default\",\r\n    layout = \"grid\",\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProductListCard",
+          "line": 105,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getProductImage",
+          "callee": "[...product.product_images].sort",
+          "lineNumber": 79
+        },
+        {
+          "caller": "getProductImage",
+          "callee": "sortedImages.find",
+          "lineNumber": 80
+        },
+        {
+          "caller": "formatPrice",
+          "callee": "Math.round",
+          "lineNumber": 89
+        },
+        {
+          "caller": "ProductListCard",
+          "callee": "useMemo",
+          "lineNumber": 114
+        },
+        {
+          "caller": "ProductListCard",
+          "callee": "useMemo",
+          "lineNumber": 115
+        },
+        {
+          "caller": "ProductListCard",
+          "callee": "useMemo",
+          "lineNumber": 116
+        },
+        {
+          "caller": "ProductListCard",
+          "callee": "getProductName",
+          "lineNumber": 116
+        },
+        {
+          "caller": "ProductListCard",
+          "callee": "useMemo",
+          "lineNumber": 117
+        },
+        {
+          "caller": "ProductListCard",
+          "callee": "getProductImage",
+          "lineNumber": 117
+        },
+        {
+          "caller": "ProductListCard",
+          "callee": "useMemo",
+          "lineNumber": 119
+        },
+        {
+          "caller": "ProductListCard",
+          "callee": "Math.round",
+          "lineNumber": 146
+        },
+        {
+          "caller": "ProductListCard",
+          "callee": "e.preventDefault",
+          "lineNumber": 151
+        },
+        {
+          "caller": "ProductListCard",
+          "callee": "onToggleFavorite",
+          "lineNumber": 152
+        },
+        {
+          "caller": "ProductListCard",
+          "callee": "rating.toFixed",
+          "lineNumber": 176
+        },
+        {
+          "caller": "ProductListCard",
+          "callee": "formatPrice",
+          "lineNumber": 184
+        },
+        {
+          "caller": "ProductListCard",
+          "callee": "formatPrice",
+          "lineNumber": 186
+        },
+        {
+          "caller": "ProductListCard",
+          "callee": "e.preventDefault",
+          "lineNumber": 190
+        },
+        {
+          "caller": "ProductListCard",
+          "callee": "onAddToCart",
+          "lineNumber": 191
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/products/PromoProductCard.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 111,
+      "nonEmptyLines": 99,
+      "functions": [
+        {
+          "name": "PromoProductCard",
+          "startLine": 21,
+          "endLine": 110,
+          "params": [
+            "{ product, locale = 'en', categorySlug = 'all' }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "PromoProductCard",
+          "line": 21,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "PromoProductCard",
+          "callee": "useQuickAdd",
+          "lineNumber": 24
+        },
+        {
+          "caller": "PromoProductCard",
+          "callee": "getProductName",
+          "lineNumber": 41
+        },
+        {
+          "caller": "PromoProductCard",
+          "callee": "Math.round",
+          "lineNumber": 50
+        },
+        {
+          "caller": "PromoProductCard",
+          "callee": "getProductName",
+          "lineNumber": 61
+        },
+        {
+          "caller": "PromoProductCard",
+          "callee": "Math.round",
+          "lineNumber": 68
+        },
+        {
+          "caller": "PromoProductCard",
+          "callee": "Math.round",
+          "lineNumber": 97
+        },
+        {
+          "caller": "PromoProductCard",
+          "callee": "quickAdd",
+          "lineNumber": 102
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/products/PromoProducts.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 156,
+      "nonEmptyLines": 140,
+      "functions": [
+        {
+          "name": "PromoProducts",
+          "startLine": 36,
+          "endLine": 155,
+          "params": [
+            "{ locale = 'en', initialProducts }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "PromoProducts",
+          "line": 36,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "PromoProducts",
+          "callee": "useState",
+          "lineNumber": 37
+        },
+        {
+          "caller": "PromoProducts",
+          "callee": "useState",
+          "lineNumber": 38
+        },
+        {
+          "caller": "PromoProducts",
+          "callee": "useState",
+          "lineNumber": 39
+        },
+        {
+          "caller": "PromoProducts",
+          "callee": "useEffect",
+          "lineNumber": 42
+        },
+        {
+          "caller": "PromoProducts",
+          "callee": "setMounted",
+          "lineNumber": 43
+        },
+        {
+          "caller": "PromoProducts",
+          "callee": "useEffect",
+          "lineNumber": 46
+        },
+        {
+          "caller": "fetchPromoProducts",
+          "callee": "setIsLoading",
+          "lineNumber": 49
+        },
+        {
+          "caller": "fetchPromoProducts",
+          "callee": "fetch",
+          "lineNumber": 50
+        },
+        {
+          "caller": "fetchPromoProducts",
+          "callee": "console.error",
+          "lineNumber": 55
+        },
+        {
+          "caller": "fetchPromoProducts",
+          "callee": "response.json",
+          "lineNumber": 59
+        },
+        {
+          "caller": "fetchPromoProducts",
+          "callee": "setProducts",
+          "lineNumber": 61
+        },
+        {
+          "caller": "fetchPromoProducts",
+          "callee": "console.error",
+          "lineNumber": 63
+        },
+        {
+          "caller": "fetchPromoProducts",
+          "callee": "setProducts",
+          "lineNumber": 64
+        },
+        {
+          "caller": "fetchPromoProducts",
+          "callee": "setIsLoading",
+          "lineNumber": 66
+        },
+        {
+          "caller": "PromoProducts",
+          "callee": "fetchPromoProducts",
+          "lineNumber": 71
+        },
+        {
+          "caller": "PromoProducts",
+          "callee": "[1, 2, 3].map",
+          "lineNumber": 99
+        },
+        {
+          "caller": "PromoProducts",
+          "callee": "products.map",
+          "lineNumber": 114
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/products/TopProducts.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 318,
+      "nonEmptyLines": 282,
+      "functions": [
+        {
+          "name": "calculateReviewStats",
+          "startLine": 60,
+          "endLine": 80,
+          "params": [
+            "reviews"
+          ]
+        },
+        {
+          "name": "TopProducts",
+          "startLine": 82,
+          "endLine": 318,
+          "params": [
+            "{ locale = 'en', initialProducts }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "TopProducts",
+          "line": 82,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "calculateReviewStats",
+          "callee": "reviews.filter",
+          "lineNumber": 65
+        },
+        {
+          "caller": "calculateReviewStats",
+          "callee": "Number.isNaN",
+          "lineNumber": 66
+        },
+        {
+          "caller": "calculateReviewStats",
+          "callee": "Number",
+          "lineNumber": 66
+        },
+        {
+          "caller": "calculateReviewStats",
+          "callee": "ratedReviews.reduce",
+          "lineNumber": 73
+        },
+        {
+          "caller": "calculateReviewStats",
+          "callee": "Number",
+          "lineNumber": 73
+        },
+        {
+          "caller": "calculateReviewStats",
+          "callee": "Number",
+          "lineNumber": 74
+        },
+        {
+          "caller": "calculateReviewStats",
+          "callee": "(total / ratedReviews.length).toFixed",
+          "lineNumber": 74
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "useState",
+          "lineNumber": 83
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "useState",
+          "lineNumber": 84
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "useState",
+          "lineNumber": 85
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "useRef",
+          "lineNumber": 86
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "useState",
+          "lineNumber": 87
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "useState",
+          "lineNumber": 88
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "useState",
+          "lineNumber": 89
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "useState",
+          "lineNumber": 90
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "useQuickAdd",
+          "lineNumber": 91
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "useEffect",
+          "lineNumber": 94
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "setMounted",
+          "lineNumber": 95
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "fetchUserAndFavorites",
+          "lineNumber": 96
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "getCustomer",
+          "lineNumber": 102
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "setUserId",
+          "lineNumber": 104
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "getUserFavorites",
+          "lineNumber": 107
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "userFavorites.map",
+          "lineNumber": 108
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "setFavorites",
+          "lineNumber": 109
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "console.error",
+          "lineNumber": 112
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "useEffect",
+          "lineNumber": 116
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "fetch",
+          "lineNumber": 120
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "response.json",
+          "lineNumber": 121
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "setProducts",
+          "lineNumber": 124
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "console.error",
+          "lineNumber": 127
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "fetchProducts",
+          "lineNumber": 131
+        },
+        {
+          "caller": "checkScrollPosition",
+          "callee": "setCanScrollLeft",
+          "lineNumber": 137
+        },
+        {
+          "caller": "checkScrollPosition",
+          "callee": "setCanScrollRight",
+          "lineNumber": 138
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "useEffect",
+          "lineNumber": 144
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "checkScrollPosition",
+          "lineNumber": 147
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "container.addEventListener",
+          "lineNumber": 150
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "window.addEventListener",
+          "lineNumber": 151
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "container.removeEventListener",
+          "lineNumber": 153
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "window.removeEventListener",
+          "lineNumber": 154
+        },
+        {
+          "caller": "handlePrev",
+          "callee": "container.scrollBy",
+          "lineNumber": 163
+        },
+        {
+          "caller": "handleNext",
+          "callee": "container.scrollBy",
+          "lineNumber": 174
+        },
+        {
+          "caller": "handleToggleFavorite",
+          "callee": "goToLogin",
+          "lineNumber": 184
+        },
+        {
+          "caller": "handleToggleFavorite",
+          "callee": "setFavorites",
+          "lineNumber": 189
+        },
+        {
+          "caller": "handleToggleFavorite",
+          "callee": "newFavorites.has",
+          "lineNumber": 191
+        },
+        {
+          "caller": "handleToggleFavorite",
+          "callee": "newFavorites.delete",
+          "lineNumber": 192
+        },
+        {
+          "caller": "handleToggleFavorite",
+          "callee": "newFavorites.add",
+          "lineNumber": 194
+        },
+        {
+          "caller": "handleToggleFavorite",
+          "callee": "toggleFavorite",
+          "lineNumber": 201
+        },
+        {
+          "caller": "handleToggleFavorite",
+          "callee": "favorites.has",
+          "lineNumber": 201
+        },
+        {
+          "caller": "handleToggleFavorite",
+          "callee": "console.error",
+          "lineNumber": 204
+        },
+        {
+          "caller": "handleToggleFavorite",
+          "callee": "setFavorites",
+          "lineNumber": 206
+        },
+        {
+          "caller": "handleToggleFavorite",
+          "callee": "newFavorites.has",
+          "lineNumber": 208
+        },
+        {
+          "caller": "handleToggleFavorite",
+          "callee": "newFavorites.delete",
+          "lineNumber": 209
+        },
+        {
+          "caller": "handleToggleFavorite",
+          "callee": "newFavorites.add",
+          "lineNumber": 211
+        },
+        {
+          "caller": "handleToggleFavorite",
+          "callee": "console.error",
+          "lineNumber": 217
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "[1, 2, 3, 4, 5, 6].map",
+          "lineNumber": 248
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "products.map",
+          "lineNumber": 263
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "favorites.has",
+          "lineNumber": 269
+        },
+        {
+          "caller": "TopProducts",
+          "callee": "quickAdd",
+          "lineNumber": 273
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/reviews/CustomerFeedback.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 130,
+      "nonEmptyLines": 113,
+      "functions": [
+        {
+          "name": "CustomerFeedback",
+          "startLine": 48,
+          "endLine": 129,
+          "params": [
+            "{ initialReviews }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CustomerFeedback",
+          "line": 48,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CustomerFeedback",
+          "callee": "useParams",
+          "lineNumber": 49
+        },
+        {
+          "caller": "CustomerFeedback",
+          "callee": "useState",
+          "lineNumber": 52
+        },
+        {
+          "caller": "CustomerFeedback",
+          "callee": "(initialReviews ?? []).slice",
+          "lineNumber": 52
+        },
+        {
+          "caller": "CustomerFeedback",
+          "callee": "useCarousel",
+          "lineNumber": 61
+        },
+        {
+          "caller": "CustomerFeedback",
+          "callee": "useEffect",
+          "lineNumber": 66
+        },
+        {
+          "caller": "fetchReviews",
+          "callee": "await storefront",
+          "lineNumber": 69
+        },
+        {
+          "caller": "fetchReviews",
+          "callee": "setReviews",
+          "lineNumber": 71
+        },
+        {
+          "caller": "fetchReviews",
+          "callee": "console.error",
+          "lineNumber": 74
+        },
+        {
+          "caller": "CustomerFeedback",
+          "callee": "fetchReviews",
+          "lineNumber": 78
+        },
+        {
+          "caller": "CustomerFeedback",
+          "callee": "getServiceHighlights",
+          "lineNumber": 81
+        },
+        {
+          "caller": "CustomerFeedback",
+          "callee": "getCurrentItems",
+          "lineNumber": 82
+        },
+        {
+          "caller": "CustomerFeedback",
+          "callee": "currentReviews.map",
+          "lineNumber": 102
+        },
+        {
+          "caller": "CustomerFeedback",
+          "callee": "serviceHighlights.map",
+          "lineNumber": 117
+        }
+      ],
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/reviews/ReviewCard.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 98,
+      "nonEmptyLines": 86,
+      "functions": [
+        {
+          "name": "ReviewCard",
+          "startLine": 25,
+          "endLine": 97,
+          "params": [
+            "{ review }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ReviewCard",
+          "line": 25,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "renderStars",
+          "callee": "[1, 2, 3, 4, 5].map",
+          "lineNumber": 32
+        },
+        {
+          "caller": "getAvatarColor",
+          "callee": "name.charCodeAt",
+          "lineNumber": 54
+        },
+        {
+          "caller": "ReviewCard",
+          "callee": "getAvatarColor",
+          "lineNumber": 75
+        },
+        {
+          "caller": "ReviewCard",
+          "callee": "userName.charAt(0).toUpperCase",
+          "lineNumber": 77
+        },
+        {
+          "caller": "ReviewCard",
+          "callee": "userName.charAt",
+          "lineNumber": 77
+        },
+        {
+          "caller": "ReviewCard",
+          "callee": "renderStars",
+          "lineNumber": 82
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/sections/FAQ.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 194,
+      "nonEmptyLines": 184,
+      "functions": [
+        {
+          "name": "FAQItem",
+          "startLine": 106,
+          "endLine": 142,
+          "params": [
+            "{ question, answer, isOpen, onToggle, rtl }"
+          ]
+        },
+        {
+          "name": "FAQ",
+          "startLine": 144,
+          "endLine": 194,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "FAQ",
+          "line": 144,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "FAQ",
+          "callee": "useParams",
+          "lineNumber": 145
+        },
+        {
+          "caller": "FAQ",
+          "callee": "isRTL",
+          "lineNumber": 148
+        },
+        {
+          "caller": "FAQ",
+          "callee": "useState",
+          "lineNumber": 150
+        },
+        {
+          "caller": "toggleItem",
+          "callee": "setOpenIndex",
+          "lineNumber": 153
+        },
+        {
+          "caller": "FAQ",
+          "callee": "useEffect",
+          "lineNumber": 157
+        },
+        {
+          "caller": "FAQ",
+          "callee": "setTimeout",
+          "lineNumber": 162
+        },
+        {
+          "caller": "FAQ",
+          "callee": "document.getElementById",
+          "lineNumber": 163
+        },
+        {
+          "caller": "FAQ",
+          "callee": "faqSection.scrollIntoView",
+          "lineNumber": 165
+        },
+        {
+          "caller": "FAQ",
+          "callee": "t.questions.map",
+          "lineNumber": 180
+        },
+        {
+          "caller": "FAQ",
+          "callee": "toggleItem",
+          "lineNumber": 186
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/sections/HeroSection.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 481,
+      "nonEmptyLines": 442,
+      "functions": [
+        {
+          "name": "getHeroText",
+          "startLine": 63,
+          "endLine": 81,
+          "params": [
+            "text",
+            "textAr",
+            "textFr",
+            "locale"
+          ]
+        },
+        {
+          "name": "HeroSection",
+          "startLine": 130,
+          "endLine": 481,
+          "params": [
+            "{ heroData, smallCardsData }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "HeroSection",
+          "line": 130,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "HeroSection",
+          "callee": "useRouter",
+          "lineNumber": 131
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "usePathname",
+          "lineNumber": 132
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "useState",
+          "lineNumber": 133
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "useState",
+          "lineNumber": 134
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "pathname?.split",
+          "lineNumber": 137
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "isRTL",
+          "lineNumber": 139
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "useEffect",
+          "lineNumber": 142
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "setMounted",
+          "lineNumber": 143
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "heroData.filter(h => h.sort_order === 0 || h.sort_order === 1).sort",
+          "lineNumber": 151
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "heroData.filter",
+          "lineNumber": 151
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "heroData.find",
+          "lineNumber": 152
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "heroData.filter(h => h.sort_order >= 3).sort",
+          "lineNumber": 153
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "heroData.filter",
+          "lineNumber": 153
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "useEffect",
+          "lineNumber": 157
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "setInterval",
+          "lineNumber": 160
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "setCurrentSlide",
+          "lineNumber": 161
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "clearInterval",
+          "lineNumber": 163
+        },
+        {
+          "caller": "nextSlide",
+          "callee": "setCurrentSlide",
+          "lineNumber": 167
+        },
+        {
+          "caller": "prevSlide",
+          "callee": "setCurrentSlide",
+          "lineNumber": 171
+        },
+        {
+          "caller": "goToSlide",
+          "callee": "setCurrentSlide",
+          "lineNumber": 175
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "router.push",
+          "lineNumber": 225
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "getHeroText",
+          "lineNumber": 228
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "getHeroText",
+          "lineNumber": 260
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "getHeroText",
+          "lineNumber": 263
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "getHeroText",
+          "lineNumber": 266
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "router.push",
+          "lineNumber": 270
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "getHeroText",
+          "lineNumber": 273
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "carouselSlides.map",
+          "lineNumber": 293
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "goToSlide",
+          "lineNumber": 296
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "smallCardsData.slice(0, 3).map",
+          "lineNumber": 326
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "smallCardsData.slice",
+          "lineNumber": 326
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "rightCards.map",
+          "lineNumber": 376
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "router.push",
+          "lineNumber": 379
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "getHeroText",
+          "lineNumber": 401
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "getHeroText",
+          "lineNumber": 404
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "getHeroText",
+          "lineNumber": 407
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "smallCardsData.slice(3, 5).map",
+          "lineNumber": 425
+        },
+        {
+          "caller": "HeroSection",
+          "callee": "smallCardsData.slice",
+          "lineNumber": 425
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/sections/NewsletterForm.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 136,
+      "nonEmptyLines": 122,
+      "functions": [
+        {
+          "name": "NewsletterForm",
+          "startLine": 42,
+          "endLine": 136,
+          "params": [
+            "{\r\n    title,\r\n    subtitle,\r\n    placeholder = \"Enter your email\"\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "NewsletterForm",
+          "line": 42,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "NewsletterForm",
+          "callee": "useParams",
+          "lineNumber": 47
+        },
+        {
+          "caller": "NewsletterForm",
+          "callee": "useState",
+          "lineNumber": 51
+        },
+        {
+          "caller": "NewsletterForm",
+          "callee": "useState",
+          "lineNumber": 52
+        },
+        {
+          "caller": "NewsletterForm",
+          "callee": "useState",
+          "lineNumber": 53
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "e.preventDefault",
+          "lineNumber": 56
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setStatus",
+          "lineNumber": 59
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setMessage",
+          "lineNumber": 60
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test",
+          "lineNumber": 64
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setStatus",
+          "lineNumber": 65
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setMessage",
+          "lineNumber": 66
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setStatus",
+          "lineNumber": 70
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "fetch",
+          "lineNumber": 73
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "JSON.stringify",
+          "lineNumber": 78
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "response.json",
+          "lineNumber": 81
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setStatus",
+          "lineNumber": 84
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setMessage",
+          "lineNumber": 85
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setEmail",
+          "lineNumber": 86
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setTimeout",
+          "lineNumber": 88
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setStatus",
+          "lineNumber": 89
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setMessage",
+          "lineNumber": 90
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setStatus",
+          "lineNumber": 93
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setMessage",
+          "lineNumber": 94
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setStatus",
+          "lineNumber": 97
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setMessage",
+          "lineNumber": 98
+        },
+        {
+          "caller": "NewsletterForm",
+          "callee": "setEmail",
+          "lineNumber": 116
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/sections/Reels.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 335,
+      "nonEmptyLines": 297,
+      "functions": [
+        {
+          "name": "getYouTubeId",
+          "startLine": 32,
+          "endLine": 37,
+          "params": [
+            "url"
+          ]
+        },
+        {
+          "name": "getTikTokId",
+          "startLine": 40,
+          "endLine": 45,
+          "params": [
+            "url"
+          ]
+        },
+        {
+          "name": "getFacebookEmbedUrl",
+          "startLine": 48,
+          "endLine": 51,
+          "params": [
+            "url"
+          ]
+        },
+        {
+          "name": "detectVideoPlatform",
+          "startLine": 54,
+          "endLine": 73,
+          "params": [
+            "url"
+          ]
+        },
+        {
+          "name": "Reels",
+          "startLine": 75,
+          "endLine": 334,
+          "params": [
+            "{ initialReels }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Reels",
+          "line": 75,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getYouTubeId",
+          "callee": "url.match",
+          "lineNumber": 35
+        },
+        {
+          "caller": "getTikTokId",
+          "callee": "url.match",
+          "lineNumber": 43
+        },
+        {
+          "caller": "getFacebookEmbedUrl",
+          "callee": "url.includes",
+          "lineNumber": 49
+        },
+        {
+          "caller": "getFacebookEmbedUrl",
+          "callee": "encodeURIComponent",
+          "lineNumber": 50
+        },
+        {
+          "caller": "detectVideoPlatform",
+          "callee": "getYouTubeId",
+          "lineNumber": 57
+        },
+        {
+          "caller": "detectVideoPlatform",
+          "callee": "getTikTokId",
+          "lineNumber": 62
+        },
+        {
+          "caller": "detectVideoPlatform",
+          "callee": "getFacebookEmbedUrl",
+          "lineNumber": 67
+        },
+        {
+          "caller": "Reels",
+          "callee": "useParams",
+          "lineNumber": 76
+        },
+        {
+          "caller": "Reels",
+          "callee": "useState",
+          "lineNumber": 79
+        },
+        {
+          "caller": "Reels",
+          "callee": "useState",
+          "lineNumber": 80
+        },
+        {
+          "caller": "Reels",
+          "callee": "useRef",
+          "lineNumber": 81
+        },
+        {
+          "caller": "Reels",
+          "callee": "useEffect",
+          "lineNumber": 83
+        },
+        {
+          "caller": "fetchReels",
+          "callee": "fetch",
+          "lineNumber": 86
+        },
+        {
+          "caller": "fetchReels",
+          "callee": "response.json",
+          "lineNumber": 87
+        },
+        {
+          "caller": "fetchReels",
+          "callee": "setReels",
+          "lineNumber": 89
+        },
+        {
+          "caller": "fetchReels",
+          "callee": "console.error",
+          "lineNumber": 92
+        },
+        {
+          "caller": "Reels",
+          "callee": "fetchReels",
+          "lineNumber": 96
+        },
+        {
+          "caller": "handleVideoClick",
+          "callee": "detectVideoPlatform",
+          "lineNumber": 101
+        },
+        {
+          "caller": "handleVideoClick",
+          "callee": "setSelectedVideo",
+          "lineNumber": 103
+        },
+        {
+          "caller": "handleVideoClick",
+          "callee": "window.open",
+          "lineNumber": 106
+        },
+        {
+          "caller": "scrollLeft",
+          "callee": "sliderRef.current.scrollBy",
+          "lineNumber": 112
+        },
+        {
+          "caller": "scrollRight",
+          "callee": "sliderRef.current.scrollBy",
+          "lineNumber": 118
+        },
+        {
+          "caller": "Reels",
+          "callee": "reels.map",
+          "lineNumber": 168
+        },
+        {
+          "caller": "Reels",
+          "callee": "getYouTubeId",
+          "lineNumber": 169
+        },
+        {
+          "caller": "Reels",
+          "callee": "handleVideoClick",
+          "lineNumber": 187
+        },
+        {
+          "caller": "Reels",
+          "callee": "setSelectedVideo",
+          "lineNumber": 309
+        },
+        {
+          "caller": "Reels",
+          "callee": "setSelectedVideo",
+          "lineNumber": 313
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/sections/SaleBanner.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 124,
+      "nonEmptyLines": 108,
+      "functions": [
+        {
+          "name": "pickPromotion",
+          "startLine": 38,
+          "endLine": 43,
+          "params": [
+            "promotions"
+          ]
+        },
+        {
+          "name": "SaleBanner",
+          "startLine": 45,
+          "endLine": 122,
+          "params": [
+            "{ initialPromotions }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SaleBanner",
+          "line": 45,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "pickPromotion",
+          "callee": "promotions.filter",
+          "lineNumber": 40
+        },
+        {
+          "caller": "pickPromotion",
+          "callee": "running.find",
+          "lineNumber": 42
+        },
+        {
+          "caller": "pickPromotion",
+          "callee": "running.find",
+          "lineNumber": 42
+        },
+        {
+          "caller": "SaleBanner",
+          "callee": "useParams",
+          "lineNumber": 46
+        },
+        {
+          "caller": "SaleBanner",
+          "callee": "useState",
+          "lineNumber": 49
+        },
+        {
+          "caller": "SaleBanner",
+          "callee": "pickPromotion",
+          "lineNumber": 49
+        },
+        {
+          "caller": "SaleBanner",
+          "callee": "useState",
+          "lineNumber": 50
+        },
+        {
+          "caller": "SaleBanner",
+          "callee": "useEffect",
+          "lineNumber": 52
+        },
+        {
+          "caller": "SaleBanner",
+          "callee": "setMounted",
+          "lineNumber": 53
+        },
+        {
+          "caller": "SaleBanner",
+          "callee": "useEffect",
+          "lineNumber": 56
+        },
+        {
+          "caller": "fetchPromotion",
+          "callee": "setPromotion",
+          "lineNumber": 60
+        },
+        {
+          "caller": "fetchPromotion",
+          "callee": "pickPromotion",
+          "lineNumber": 60
+        },
+        {
+          "caller": "fetchPromotion",
+          "callee": "await storefront",
+          "lineNumber": 60
+        },
+        {
+          "caller": "fetchPromotion",
+          "callee": "console.error",
+          "lineNumber": 62
+        },
+        {
+          "caller": "SaleBanner",
+          "callee": "fetchPromotion",
+          "lineNumber": 65
+        },
+        {
+          "caller": "SaleBanner",
+          "callee": "Boolean",
+          "lineNumber": 74
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/sections/SocialLinks.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 54,
+      "nonEmptyLines": 49,
+      "functions": [
+        {
+          "name": "SocialLinks",
+          "startLine": 10,
+          "endLine": 53,
+          "params": [
+            "{\r\n    className = \"\",\r\n    iconSize = \"w-10 h-10\"\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SocialLinks",
+          "line": 10,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SocialLinks",
+          "callee": "socialLinks.map",
+          "lineNumber": 37
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/sections/TermsSection.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 19,
+      "functions": [
+        {
+          "name": "TermsSection",
+          "startLine": 7,
+          "endLine": 20,
+          "params": [
+            "{ title, content, isFirst = false }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "TermsSection",
+          "line": 7,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "TermsSection",
+          "callee": "content.map",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/services/ServiceHighlightCard.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 30,
+      "functions": [
+        {
+          "name": "ServiceHighlightCard",
+          "startLine": 10,
+          "endLine": 32,
+          "params": [
+            "{\r\n    icon,\r\n    title,\r\n    description,\r\n    iconAlt\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ServiceHighlightCard",
+          "line": 10,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ServiceHighlightCard",
+          "callee": "description.map",
+          "lineNumber": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/services/ServiceHighlights.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 216,
+      "nonEmptyLines": 202,
+      "functions": [
+        {
+          "name": "ServiceHighlights",
+          "startLine": 78,
+          "endLine": 216,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ServiceHighlights",
+          "line": 78,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ServiceHighlights",
+          "callee": "useParams",
+          "lineNumber": 79
+        },
+        {
+          "caller": "ServiceHighlights",
+          "callee": "t.services.map",
+          "lineNumber": 82
+        },
+        {
+          "caller": "ServiceHighlights",
+          "callee": "useState",
+          "lineNumber": 86
+        },
+        {
+          "caller": "ServiceHighlights",
+          "callee": "useCarousel",
+          "lineNumber": 94
+        },
+        {
+          "caller": "ServiceHighlights",
+          "callee": "useEffect",
+          "lineNumber": 99
+        },
+        {
+          "caller": "ServiceHighlights",
+          "callee": "setMounted",
+          "lineNumber": 100
+        },
+        {
+          "caller": "ServiceHighlights",
+          "callee": "useEffect",
+          "lineNumber": 104
+        },
+        {
+          "caller": "ServiceHighlights",
+          "callee": "setInterval",
+          "lineNumber": 107
+        },
+        {
+          "caller": "ServiceHighlights",
+          "callee": "nextSlide",
+          "lineNumber": 108
+        },
+        {
+          "caller": "ServiceHighlights",
+          "callee": "clearInterval",
+          "lineNumber": 111
+        },
+        {
+          "caller": "ServiceHighlights",
+          "callee": "services.map",
+          "lineNumber": 125
+        },
+        {
+          "caller": "ServiceHighlights",
+          "callee": "services.map",
+          "lineNumber": 168
+        },
+        {
+          "caller": "ServiceHighlights",
+          "callee": "Array.from({ length: totalSlides }).map",
+          "lineNumber": 199
+        },
+        {
+          "caller": "ServiceHighlights",
+          "callee": "Array.from",
+          "lineNumber": 199
+        },
+        {
+          "caller": "ServiceHighlights",
+          "callee": "goToSlide",
+          "lineNumber": 202
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/timers/CountdownTimer.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 90,
+      "nonEmptyLines": 74,
+      "functions": [
+        {
+          "name": "CountdownTimer",
+          "startLine": 9,
+          "endLine": 36,
+          "params": [
+            "{ targetDate }"
+          ]
+        },
+        {
+          "name": "CountdownDisplay",
+          "startLine": 38,
+          "endLine": 74,
+          "params": [
+            "{ deadline }"
+          ]
+        },
+        {
+          "name": "calculateTimeLeft",
+          "startLine": 76,
+          "endLine": 89,
+          "params": [
+            "deadline"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CountdownTimer",
+          "line": 9,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CountdownTimer",
+          "callee": "useState",
+          "lineNumber": 10
+        },
+        {
+          "caller": "CountdownTimer",
+          "callee": "useEffect",
+          "lineNumber": 12
+        },
+        {
+          "caller": "CountdownTimer",
+          "callee": "setMounted",
+          "lineNumber": 13
+        },
+        {
+          "caller": "CountdownTimer",
+          "callee": "[...Array(4)].map",
+          "lineNumber": 19
+        },
+        {
+          "caller": "CountdownTimer",
+          "callee": "Array",
+          "lineNumber": 19
+        },
+        {
+          "caller": "CountdownTimer",
+          "callee": "targetDate.getTime",
+          "lineNumber": 29
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "useState",
+          "lineNumber": 39
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "calculateTimeLeft",
+          "lineNumber": 39
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "useEffect",
+          "lineNumber": 41
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "setInterval",
+          "lineNumber": 42
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "setTimeLeft",
+          "lineNumber": 43
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "calculateTimeLeft",
+          "lineNumber": 43
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "clearInterval",
+          "lineNumber": 46
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "timeUnits.map",
+          "lineNumber": 58
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "String(unit.value).padStart",
+          "lineNumber": 63
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "String",
+          "lineNumber": 63
+        },
+        {
+          "caller": "calculateTimeLeft",
+          "callee": "Date.now",
+          "lineNumber": 77
+        },
+        {
+          "caller": "calculateTimeLeft",
+          "callee": "Math.floor",
+          "lineNumber": 84
+        },
+        {
+          "caller": "calculateTimeLeft",
+          "callee": "Math.floor",
+          "lineNumber": 85
+        },
+        {
+          "caller": "calculateTimeLeft",
+          "callee": "Math.floor",
+          "lineNumber": 86
+        },
+        {
+          "caller": "calculateTimeLeft",
+          "callee": "Math.floor",
+          "lineNumber": 87
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/timers/PromoCountdownTimer.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 91,
+      "nonEmptyLines": 75,
+      "functions": [
+        {
+          "name": "PromoCountdownTimer",
+          "startLine": 9,
+          "endLine": 34,
+          "params": [
+            "{ targetDate }"
+          ]
+        },
+        {
+          "name": "CountdownDisplay",
+          "startLine": 36,
+          "endLine": 75,
+          "params": [
+            "{ deadline }"
+          ]
+        },
+        {
+          "name": "calculateTimeLeft",
+          "startLine": 77,
+          "endLine": 90,
+          "params": [
+            "deadline"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "PromoCountdownTimer",
+          "line": 9,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "PromoCountdownTimer",
+          "callee": "useState",
+          "lineNumber": 10
+        },
+        {
+          "caller": "PromoCountdownTimer",
+          "callee": "useEffect",
+          "lineNumber": 12
+        },
+        {
+          "caller": "PromoCountdownTimer",
+          "callee": "setMounted",
+          "lineNumber": 13
+        },
+        {
+          "caller": "PromoCountdownTimer",
+          "callee": "[...Array(4)].map",
+          "lineNumber": 19
+        },
+        {
+          "caller": "PromoCountdownTimer",
+          "callee": "Array",
+          "lineNumber": 19
+        },
+        {
+          "caller": "PromoCountdownTimer",
+          "callee": "targetDate.getTime",
+          "lineNumber": 31
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "useState",
+          "lineNumber": 37
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "calculateTimeLeft",
+          "lineNumber": 37
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "useEffect",
+          "lineNumber": 39
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "setInterval",
+          "lineNumber": 40
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "setTimeLeft",
+          "lineNumber": 41
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "calculateTimeLeft",
+          "lineNumber": 41
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "clearInterval",
+          "lineNumber": 44
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "timeUnits.map",
+          "lineNumber": 56
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "String(unit.value).padStart",
+          "lineNumber": 61
+        },
+        {
+          "caller": "CountdownDisplay",
+          "callee": "String",
+          "lineNumber": 61
+        },
+        {
+          "caller": "calculateTimeLeft",
+          "callee": "Date.now",
+          "lineNumber": 78
+        },
+        {
+          "caller": "calculateTimeLeft",
+          "callee": "Math.floor",
+          "lineNumber": 85
+        },
+        {
+          "caller": "calculateTimeLeft",
+          "callee": "Math.floor",
+          "lineNumber": 86
+        },
+        {
+          "caller": "calculateTimeLeft",
+          "callee": "Math.floor",
+          "lineNumber": 87
+        },
+        {
+          "caller": "calculateTimeLeft",
+          "callee": "Math.floor",
+          "lineNumber": 88
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/ui/ErrorBoundary.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 51,
+      "classes": [
+        {
+          "name": "ErrorBoundary",
+          "startLine": 14,
+          "endLine": 59,
+          "methods": [
+            "constructor",
+            "getDerivedStateFromError",
+            "componentDidCatch",
+            "render"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "default",
+          "line": 14,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "constructor",
+          "callee": "super",
+          "lineNumber": 16
+        },
+        {
+          "caller": "componentDidCatch",
+          "callee": "console.error",
+          "lineNumber": 25
+        },
+        {
+          "caller": "render",
+          "callee": "window.location.reload",
+          "lineNumber": 46
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "components/ui/ImageLightbox.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 114,
+      "nonEmptyLines": 104,
+      "functions": [
+        {
+          "name": "ImageLightbox",
+          "startLine": 25,
+          "endLine": 114,
+          "params": [
+            "{ images, index, className = \"\" }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ImageLightbox",
+          "line": 25,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ImageLightbox",
+          "callee": "useState",
+          "lineNumber": 26
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "useState",
+          "lineNumber": 27
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "useCallback",
+          "lineNumber": 30
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "setOpenIndex",
+          "lineNumber": 30
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "useCallback",
+          "lineNumber": 31
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "setOpenIndex",
+          "lineNumber": 32
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "useEffect",
+          "lineNumber": 36
+        },
+        {
+          "caller": "onKey",
+          "callee": "close",
+          "lineNumber": 39
+        },
+        {
+          "caller": "onKey",
+          "callee": "step",
+          "lineNumber": 40
+        },
+        {
+          "caller": "onKey",
+          "callee": "step",
+          "lineNumber": 41
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "document.addEventListener",
+          "lineNumber": 43
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "document.removeEventListener",
+          "lineNumber": 47
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "setOpenIndex",
+          "lineNumber": 60
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "Math.max",
+          "lineNumber": 60
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "images.indexOf",
+          "lineNumber": 60
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "createPortal",
+          "lineNumber": 73
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "setTouchStartX",
+          "lineNumber": 80
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "setTouchStartX",
+          "lineNumber": 84
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "Math.abs",
+          "lineNumber": 85
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "step",
+          "lineNumber": 85
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "e.stopPropagation",
+          "lineNumber": 88
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "e.stopPropagation",
+          "lineNumber": 98
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "step",
+          "lineNumber": 98
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "e.stopPropagation",
+          "lineNumber": 101
+        },
+        {
+          "caller": "ImageLightbox",
+          "callee": "step",
+          "lineNumber": 101
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/ui/LoadingSpinner.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 19,
+      "nonEmptyLines": 18,
+      "functions": [
+        {
+          "name": "LoadingSpinner",
+          "startLine": 7,
+          "endLine": 19,
+          "params": [
+            "{\r\n    message = \"Loading...\",\r\n    fullPage = true,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "LoadingSpinner",
+          "line": 7,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

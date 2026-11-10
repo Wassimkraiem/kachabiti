@@ -1,0 +1,145 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 2,
+  "filesSkipped": [
+    ".dockerignore"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 2,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 2
+    }
+  },
+  "results": [
+    {
+      "path": "Dockerfile",
+      "language": "dockerfile",
+      "fileCategory": "infra",
+      "totalLines": 16,
+      "nonEmptyLines": 16,
+      "services": [
+        {
+          "name": "node",
+          "image": "node:22-slim",
+          "ports": [
+            3000
+          ],
+          "startLine": 4,
+          "endLine": 17
+        }
+      ],
+      "steps": [
+        {
+          "name": "FROM node:22-slim",
+          "startLine": 4,
+          "endLine": 4
+        },
+        {
+          "name": "WORKDIR /app",
+          "startLine": 5,
+          "endLine": 5
+        },
+        {
+          "name": "COPY package.json package-lock.json ./",
+          "startLine": 6,
+          "endLine": 6
+        },
+        {
+          "name": "RUN npm ci",
+          "startLine": 7,
+          "endLine": 7
+        },
+        {
+          "name": "COPY . .",
+          "startLine": 8,
+          "endLine": 8
+        },
+        {
+          "name": "RUN --mount=type=secret,id=env,target=/app/.env.production npm r",
+          "startLine": 9,
+          "endLine": 9
+        },
+        {
+          "name": "RUN chown -R node:node /app/.next",
+          "startLine": 11,
+          "endLine": 11
+        },
+        {
+          "name": "ENV NODE_ENV=production \\",
+          "startLine": 12,
+          "endLine": 12
+        },
+        {
+          "name": "USER node",
+          "startLine": 14,
+          "endLine": 14
+        },
+        {
+          "name": "EXPOSE 3000",
+          "startLine": 15,
+          "endLine": 15
+        },
+        {
+          "name": "CMD [\"npx\", \"next\", \"start\", \"-H\", \"0.0.0.0\", \"-p\", \"3000\"]",
+          "startLine": 16,
+          "endLine": 16
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "serviceCount": 1,
+        "stepCount": 11
+      }
+    },
+    {
+      "path": "docker-compose.yml",
+      "language": "yaml",
+      "fileCategory": "infra",
+      "totalLines": 99,
+      "nonEmptyLines": 89,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "services",
+          "level": 1,
+          "line": 5
+        },
+        {
+          "heading": "secrets",
+          "level": 1,
+          "line": 84
+        },
+        {
+          "heading": "configs",
+          "level": 1,
+          "line": 88
+        },
+        {
+          "heading": "volumes",
+          "level": 1,
+          "line": 97
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 5
+      }
+    }
+  ]
+}

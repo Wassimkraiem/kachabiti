@@ -74,14 +74,14 @@ export default function PromoProducts({ locale = 'en', initialProducts }: PromoP
 
     return (
         <>  
-       { products.length >0 && <section className="w-full py-16 px-4 bg-[#FAFAFA]">
+       { products.length >0 && <section className="w-full py-16 px-4 bg-card">
             <div className="max-w-7xl 2xl:max-w-[1581px] mx-auto">
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <h2 className="text-4xl font-bold text-[#2b1a16] mb-2">
+                    <h2 className="text-4xl font-bold text-ink mb-2">
                         {t.promotionalProducts}
                     </h2>
-                    <p className="text-gray-500 text-sm mb-4">
+                    <p className="text-mute text-sm mb-4">
                         {t.limitedTimeOffers}
                     </p>
                     <Image
@@ -97,13 +97,13 @@ export default function PromoProducts({ locale = 'en', initialProducts }: PromoP
                 {isLoading ? (
                     <div className="flex gap-6 overflow-x-auto overflow-y-hidden pb-4 snap-x snap-mandatory scrollbar-hide">
                         {[1, 2, 3].map((i) => (
-                            <div key={i} className="bg-white rounded-2xl border border-[#E3E3E3] overflow-hidden animate-pulse shrink-0 w-[80%] md:w-[45%] lg:w-[400px] xl:w-[490px] 2xl:w-[500px] snap-start">
-                                <div className="h-64 bg-gray-200" />
+                            <div key={i} className="bg-card rounded-2xl border border-line overflow-hidden animate-pulse shrink-0 w-[80%] md:w-[45%] lg:w-[400px] xl:w-[490px] 2xl:w-[500px] snap-start">
+                                <div className="h-64 bg-line" />
                                 <div className="p-6 space-y-4">
-                                    <div className="h-6 bg-gray-200 rounded w-3/4" />
-                                    <div className="h-8 bg-gray-200 rounded w-1/2" />
-                                    <div className="h-4 bg-gray-200 rounded w-full" />
-                                    <div className="h-12 bg-gray-200 rounded w-full" />
+                                    <div className="h-6 bg-line rounded w-3/4" />
+                                    <div className="h-8 bg-line rounded w-1/2" />
+                                    <div className="h-4 bg-line rounded w-full" />
+                                    <div className="h-12 bg-line rounded w-full" />
                                 </div>
                             </div>
                         ))}
@@ -124,7 +124,7 @@ export default function PromoProducts({ locale = 'en', initialProducts }: PromoP
 
                         {/* Scroll Indicator */}
                         {/* {products.length == 3 && (
-                            <div className="flex justify-center items-center gap-2 mt-2 text-sm text-gray-500">
+                            <div className="flex justify-center items-center gap-2 mt-2 text-sm text-mute">
                                 <svg className="w-5 h-5 animate-bounce-x" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                                 </svg>
@@ -138,7 +138,7 @@ export default function PromoProducts({ locale = 'en', initialProducts }: PromoP
                     <div className="text-center mt-4">
                         <Link
                             href={`/${locale}/products?promo=true`}
-                            className="text-[#842E1B] font-medium hover:underline inline-flex items-center gap-2"
+                            className="text-accent font-medium hover:underline inline-flex items-center gap-2"
                         >
                             {t.seeAll}
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">

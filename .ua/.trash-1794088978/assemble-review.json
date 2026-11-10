@@ -1,0 +1,15 @@
+{
+  "fixedSectionOk": true,
+  "nodesRecovered": 1,
+  "edgesRestored": 2,
+  "crossBatchEdgesAdded": 31,
+  "typesRemapped": 0,
+  "complexityRemapped": 0,
+  "notes": [
+    "Merge report had no ID/type/complexity fixes beyond the 2 dangling edges; all node types and complexity values are valid.",
+    "Recovered function:lib/catalog-cache.ts:getCachedProductDetail (lines 15-19) with contains/exports edges from file:lib/catalog-cache.ts and restored both calls edges from the product page.",
+    "All 852 importMap edges were already present.",
+    "Added 31 imports edges for the 11 components/*/index.ts barrels from their re-export statements; scan-result importMap lists these barrels with no imports (scanner misses re-exports). Batch 23's barrel depends_on edges kept.",
+    "Guessed cross-batch IDs service:api/Dockerfile, pipeline:.github/workflows/deploy.yml, file:sentry.server.config.ts all resolve to existing nodes."
+  ]
+}

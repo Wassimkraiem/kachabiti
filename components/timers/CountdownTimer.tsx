@@ -18,8 +18,8 @@ export default function CountdownTimer({ targetDate }: CountdownTimerProps) {
             <div className="flex gap-2 items-center">
                 {[...Array(4)].map((_, i) => (
                     <div key={i} className="flex flex-col items-center">
-                        <div className="text-2xl font-bold text-[#2b1a16] w-12 h-8 bg-gray-200 animate-pulse rounded" />
-                        <div className="text-xs text-gray-500 mt-1 w-8 h-3 bg-gray-200 animate-pulse rounded" />
+                        <div className="text-2xl font-bold text-ink w-12 h-8 bg-line animate-pulse rounded" />
+                        <div className="text-xs text-mute mt-1 w-8 h-3 bg-line animate-pulse rounded" />
                     </div>
                 ))}
             </div>
@@ -58,11 +58,11 @@ function CountdownDisplay({ deadline }: { deadline: number }) {
             {timeUnits.map((unit, index) => (
                 <div key={index} className="flex items-center gap-1.5">
                     <div className="flex flex-col items-center gap-1">
-                        <div className="flex flex-col bg-[#F5F5F5] rounded-md px-2.5 py-2 min-w-[82px] min-h-[80px] items-center justify-center">
-                            <span className="text-[24px] font-medium text-[#2b1a16]">
+                        <div className="flex flex-col bg-surface rounded-md px-2.5 py-2 min-w-[82px] min-h-[80px] items-center justify-center">
+                            <span className="text-[24px] font-medium text-ink">
                                 {String(unit.value).padStart(2, '0')}
                             </span>
-                            <span className="text-[20px] text-black font-light">
+                            <span className="text-[20px] text-ink font-light">
                                 {unit.label}
                             </span>
                         </div>

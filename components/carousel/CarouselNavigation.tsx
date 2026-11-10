@@ -10,10 +10,10 @@ export default function CarouselNavigation({
     className = ""
 }: CarouselNavigationProps) {
     return (
-        <div className={`flex justify-end gap-3 mb-8 text-black ${className}`}>
+        <div className={`flex justify-end gap-3 mb-8 text-ink ${className}`}>
             <button
                 onClick={onPrevious}
-                className="flex items-center gap-2 px-6 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors"
+                className="flex items-center gap-2 px-6 py-2.5 border border-line rounded-lg hover:bg-surface transition-colors"
                 aria-label="Previous slide"
             >
                 <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
@@ -23,7 +23,7 @@ export default function CarouselNavigation({
             </button>
             <button
                 onClick={onNext}
-                className="flex items-center gap-2 px-6 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-100 transition-colors"
+                className="flex items-center gap-2 px-6 py-2.5 border border-line rounded-lg hover:bg-surface transition-colors"
                 aria-label="Next slide"
             >
                 <span className="text-sm font-medium">Next</span>

@@ -1,0 +1,1229 @@
+{
+ "nodes": [
+  {
+   "id": "file:api/src/finance/finance.controllers.ts",
+   "type": "file",
+   "name": "finance.controllers.ts",
+   "filePath": "api/src/finance/finance.controllers.ts",
+   "summary": "NestJS controllers for the Tunisian SCE accounting module: journal entries, chart of accounts, bank reconciliation, supplier bills, sales invoices, financial reports with CSV export, and treasury movements.",
+   "tags": [
+    "api-handler",
+    "accounting",
+    "finance",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:api/src/health.controller.ts",
+   "type": "file",
+   "name": "health.controller.ts",
+   "filePath": "api/src/health.controller.ts",
+   "summary": "Public NestJS health-check endpoint that verifies the API and its Postgres connection are up.",
+   "tags": [
+    "api-handler",
+    "health-check",
+    "nestjs",
+    "monitoring"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/instrument.ts",
+   "type": "file",
+   "name": "instrument.ts",
+   "filePath": "api/src/instrument.ts",
+   "summary": "Initializes Sentry error monitoring for the NestJS API before the application loads, using the API config.",
+   "tags": [
+    "monitoring",
+    "sentry",
+    "bootstrap",
+    "config"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/main.ts",
+   "type": "file",
+   "name": "main.ts",
+   "filePath": "api/src/main.ts",
+   "summary": "NestJS API entry point that loads Sentry instrumentation, creates the AppModule application and starts listening on the configured port.",
+   "tags": [
+    "entry-point",
+    "bootstrap",
+    "nestjs",
+    "server"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/notifications/notification-events.ts",
+   "type": "file",
+   "name": "notification-events.ts",
+   "filePath": "api/src/notifications/notification-events.ts",
+   "summary": "NestJS service that LISTENs on the Postgres notifications channel, streams notification rows to open admin tabs over SSE, sends Web Push, and schedules the daily alerts job.",
+   "tags": [
+    "service",
+    "notifications",
+    "sse",
+    "web-push",
+    "event-handler"
+   ],
+   "complexity": "complex",
+   "languageNotes": "Uses Postgres LISTEN/NOTIFY fanned out to per-recipient server-sent event streams."
+  },
+  {
+   "id": "file:api/src/pos/pos.controller.ts",
+   "type": "file",
+   "name": "pos.controller.ts",
+   "filePath": "api/src/pos/pos.controller.ts",
+   "summary": "NestJS point-of-sale controller: opening and closing till sessions, recording store sales, session summaries, receipts, shop stock catalog, and POS analytics.",
+   "tags": [
+    "api-handler",
+    "pos",
+    "sales",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:api/src/purchasing/purchasing.controllers.ts",
+   "type": "file",
+   "name": "purchasing.controllers.ts",
+   "filePath": "api/src/purchasing/purchasing.controllers.ts",
+   "summary": "NestJS purchasing controllers for purchase orders, goods receipts, raw materials and their movements, product costing/production, and supplier price comparison.",
+   "tags": [
+    "api-handler",
+    "purchasing",
+    "inventory",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:api/src/sales/colissimo-portal.controller.ts",
+   "type": "file",
+   "name": "colissimo-portal.controller.ts",
+   "filePath": "api/src/sales/colissimo-portal.controller.ts",
+   "summary": "Owner-only NestJS controller that lists the whole Colissimo account by scraping the carrier portal and syncs missing parcels into the deliveries table.",
+   "tags": [
+    "api-handler",
+    "colissimo",
+    "delivery",
+    "owner-only",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/src/sales/colissimo-portal.ts",
+   "type": "file",
+   "name": "colissimo-portal.ts",
+   "filePath": "api/src/sales/colissimo-portal.ts",
+   "summary": "Read-only client for the Colissimo website: signs in with portal credentials, keeps the session in memory, and parses HTML pages into parcel lists, parcel details and payouts.",
+   "tags": [
+    "service",
+    "colissimo",
+    "scraping",
+    "html-parsing",
+    "integration"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:api/src/sales/colissimo-tracking.ts",
+   "type": "file",
+   "name": "colissimo-tracking.ts",
+   "filePath": "api/src/sales/colissimo-tracking.ts",
+   "summary": "Scheduled NestJS service that polls Colissimo every 15 minutes for parcels that can still change, records status changes, and cancels parcels for cancelled orders.",
+   "tags": [
+    "service",
+    "colissimo",
+    "scheduler",
+    "delivery-tracking"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/finance/finance.controllers.ts:AccountingController",
+   "type": "class",
+   "name": "AccountingController",
+   "filePath": "api/src/finance/finance.controllers.ts",
+   "lineRange": [
+    109,
+    308
+   ],
+   "summary": "Journal entry endpoints: listing, creating, posting and reversing accounting entries.",
+   "tags": [
+    "controller",
+    "accounting",
+    "api-handler"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/finance/finance.controllers.ts:AccountsController",
+   "type": "class",
+   "name": "AccountsController",
+   "filePath": "api/src/finance/finance.controllers.ts",
+   "lineRange": [
+    347,
+    501
+   ],
+   "summary": "Chart of accounts CRUD plus accounting settings.",
+   "tags": [
+    "controller",
+    "accounting",
+    "api-handler"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/finance/finance.controllers.ts:BankController",
+   "type": "class",
+   "name": "BankController",
+   "filePath": "api/src/finance/finance.controllers.ts",
+   "lineRange": [
+    533,
+    720
+   ],
+   "summary": "Bank statement import, automatic and manual matching, and removal.",
+   "tags": [
+    "controller",
+    "bank-reconciliation",
+    "api-handler"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/finance/finance.controllers.ts:BillsController",
+   "type": "class",
+   "name": "BillsController",
+   "filePath": "api/src/finance/finance.controllers.ts",
+   "lineRange": [
+    773,
+    1006
+   ],
+   "summary": "Supplier bills and expenses: listing, create/update, payments and removal.",
+   "tags": [
+    "controller",
+    "bills",
+    "api-handler"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/finance/finance.controllers.ts:InvoicesController",
+   "type": "class",
+   "name": "InvoicesController",
+   "filePath": "api/src/finance/finance.controllers.ts",
+   "lineRange": [
+    1022,
+    1145
+   ],
+   "summary": "Issues sales invoices and cancels them with credit notes.",
+   "tags": [
+    "controller",
+    "invoices",
+    "api-handler"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/finance/finance.controllers.ts:ReportsController",
+   "type": "class",
+   "name": "ReportsController",
+   "filePath": "api/src/finance/finance.controllers.ts",
+   "lineRange": [
+    1171,
+    1450
+   ],
+   "summary": "Ledger, income statement, balance sheet and FEC-style CSV export.",
+   "tags": [
+    "controller",
+    "reports",
+    "api-handler"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/finance/finance.controllers.ts:TreasuryController",
+   "type": "class",
+   "name": "TreasuryController",
+   "filePath": "api/src/finance/finance.controllers.ts",
+   "lineRange": [
+    1481,
+    1743
+   ],
+   "summary": "Cash and bank treasury movements and balances.",
+   "tags": [
+    "controller",
+    "treasury",
+    "api-handler"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/health.controller.ts:HealthController",
+   "type": "class",
+   "name": "HealthController",
+   "filePath": "api/src/health.controller.ts",
+   "lineRange": [
+    7,
+    16
+   ],
+   "summary": "Health check that pings the database.",
+   "tags": [
+    "controller",
+    "health-check",
+    "monitoring"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:api/src/notifications/notification-events.ts:NotificationEvents",
+   "type": "class",
+   "name": "NotificationEvents",
+   "filePath": "api/src/notifications/notification-events.ts",
+   "lineRange": [
+    69,
+    240
+   ],
+   "summary": "Listens for Postgres notifications, streams them over SSE, sends Web Push and runs daily alerts.",
+   "tags": [
+    "service",
+    "notifications",
+    "sse"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/pos/pos.controller.ts:PosController",
+   "type": "class",
+   "name": "PosController",
+   "filePath": "api/src/pos/pos.controller.ts",
+   "lineRange": [
+    111,
+    684
+   ],
+   "summary": "Till sessions, store sales, receipts, shop catalog and POS analytics endpoints.",
+   "tags": [
+    "controller",
+    "pos",
+    "api-handler"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/purchasing/purchasing.controllers.ts:PurchaseOrdersController",
+   "type": "class",
+   "name": "PurchaseOrdersController",
+   "filePath": "api/src/purchasing/purchasing.controllers.ts",
+   "lineRange": [
+    62,
+    318
+   ],
+   "summary": "Purchase order listing, saving, status changes and removal.",
+   "tags": [
+    "controller",
+    "purchasing",
+    "api-handler"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/purchasing/purchasing.controllers.ts:ReceiptsController",
+   "type": "class",
+   "name": "ReceiptsController",
+   "filePath": "api/src/purchasing/purchasing.controllers.ts",
+   "lineRange": [
+    348,
+    464
+   ],
+   "summary": "Goods receipts: creation and validation into stock.",
+   "tags": [
+    "controller",
+    "purchasing",
+    "api-handler"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/purchasing/purchasing.controllers.ts:MaterialsController",
+   "type": "class",
+   "name": "MaterialsController",
+   "filePath": "api/src/purchasing/purchasing.controllers.ts",
+   "lineRange": [
+    497,
+    660
+   ],
+   "summary": "Raw materials CRUD and material movements.",
+   "tags": [
+    "controller",
+    "materials",
+    "api-handler"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/purchasing/purchasing.controllers.ts:CostingController",
+   "type": "class",
+   "name": "CostingController",
+   "filePath": "api/src/purchasing/purchasing.controllers.ts",
+   "lineRange": [
+    687,
+    765
+   ],
+   "summary": "Bill of materials and labor costing, and production runs.",
+   "tags": [
+    "controller",
+    "costing",
+    "api-handler"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/purchasing/purchasing.controllers.ts:PurchasePricesController",
+   "type": "class",
+   "name": "PurchasePricesController",
+   "filePath": "api/src/purchasing/purchasing.controllers.ts",
+   "lineRange": [
+    770,
+    781
+   ],
+   "summary": "Supplier price comparison endpoint.",
+   "tags": [
+    "controller",
+    "purchasing",
+    "api-handler"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:api/src/sales/colissimo-portal.controller.ts:ColissimoPortalController",
+   "type": "class",
+   "name": "ColissimoPortalController",
+   "filePath": "api/src/sales/colissimo-portal.controller.ts",
+   "lineRange": [
+    35,
+    145
+   ],
+   "summary": "Owner endpoints listing portal parcels and syncing them into deliveries.",
+   "tags": [
+    "controller",
+    "colissimo",
+    "api-handler"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/sales/colissimo-portal.ts:signIn",
+   "type": "function",
+   "name": "signIn",
+   "filePath": "api/src/sales/colissimo-portal.ts",
+   "lineRange": [
+    184,
+    205
+   ],
+   "summary": "Signs in to the Colissimo website and stores the session cookie.",
+   "tags": [
+    "authentication",
+    "scraping",
+    "colissimo"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/sales/colissimo-portal.ts:parseSearch",
+   "type": "function",
+   "name": "parseSearch",
+   "filePath": "api/src/sales/colissimo-portal.ts",
+   "lineRange": [
+    88,
+    112
+   ],
+   "summary": "Parses the portal search results page into parcel rows.",
+   "tags": [
+    "html-parsing",
+    "scraping",
+    "colissimo"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/sales/colissimo-portal.ts:parseParcel",
+   "type": "function",
+   "name": "parseParcel",
+   "filePath": "api/src/sales/colissimo-portal.ts",
+   "lineRange": [
+    115,
+    148
+   ],
+   "summary": "Parses a parcel detail page into its history.",
+   "tags": [
+    "html-parsing",
+    "scraping",
+    "colissimo"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/sales/colissimo-portal.ts:searchParcels",
+   "type": "function",
+   "name": "searchParcels",
+   "filePath": "api/src/sales/colissimo-portal.ts",
+   "lineRange": [
+    223,
+    242
+   ],
+   "summary": "Searches the portal for parcels in a date range.",
+   "tags": [
+    "scraping",
+    "colissimo",
+    "search"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/sales/colissimo-portal.ts:parcelDetail",
+   "type": "function",
+   "name": "parcelDetail",
+   "filePath": "api/src/sales/colissimo-portal.ts",
+   "lineRange": [
+    244,
+    249
+   ],
+   "summary": "Fetches and parses one parcel detail page.",
+   "tags": [
+    "scraping",
+    "colissimo",
+    "tracking"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/sales/colissimo-portal.ts:allParcels",
+   "type": "function",
+   "name": "allParcels",
+   "filePath": "api/src/sales/colissimo-portal.ts",
+   "lineRange": [
+    286,
+    298
+   ],
+   "summary": "Collects every parcel of the account over a period.",
+   "tags": [
+    "scraping",
+    "colissimo",
+    "sync"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/sales/colissimo-portal.ts:payouts",
+   "type": "function",
+   "name": "payouts",
+   "filePath": "api/src/sales/colissimo-portal.ts",
+   "lineRange": [
+    314,
+    348
+   ],
+   "summary": "Reads carrier payouts from the portal.",
+   "tags": [
+    "scraping",
+    "payments",
+    "colissimo"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/sales/colissimo-portal.ts:request",
+   "type": "function",
+   "name": "request",
+   "filePath": "api/src/sales/colissimo-portal.ts",
+   "lineRange": [
+    155,
+    175
+   ],
+   "summary": "Performs an authenticated portal HTTP request, signing in again when signed out.",
+   "tags": [
+    "http",
+    "scraping",
+    "session"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/sales/colissimo-tracking.ts:ColissimoTracking",
+   "type": "class",
+   "name": "ColissimoTracking",
+   "filePath": "api/src/sales/colissimo-tracking.ts",
+   "lineRange": [
+    35,
+    180
+   ],
+   "summary": "Scheduled parcel tracking that records status changes and cancels parcels.",
+   "tags": [
+    "service",
+    "scheduler",
+    "colissimo"
+   ],
+   "complexity": "complex"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "file:api/src/db/embed.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/health.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/health.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/instrument.ts",
+   "target": "file:api/src/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/main.ts",
+   "target": "file:api/src/app.module.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/main.ts",
+   "target": "file:api/src/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/main.ts",
+   "target": "file:api/src/instrument.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/notifications/notification-events.ts",
+   "target": "file:api/src/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/notifications/notification-events.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/pos/pos.controller.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/pos/pos.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/pos/pos.controller.ts",
+   "target": "file:api/src/catalog/revalidate.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/pos/pos.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/pos/pos.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/pos/pos.controller.ts",
+   "target": "file:api/src/db/embed.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/pos/pos.controller.ts",
+   "target": "file:api/src/sales/commerce.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/pos/pos.controller.ts",
+   "target": "file:lib/order-number.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "file:api/src/catalog/revalidate.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "file:api/src/db/embed.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.controller.ts",
+   "target": "file:api/src/sales/colissimo-portal.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/colissimo-tracking.ts",
+   "target": "file:api/src/catalog/revalidate.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/colissimo-tracking.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/colissimo-tracking.ts",
+   "target": "file:lib/colissimo-data.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/sales/colissimo-tracking.ts",
+   "target": "file:lib/colissimo.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "class:api/src/finance/finance.controllers.ts:AccountingController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "class:api/src/finance/finance.controllers.ts:AccountingController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "class:api/src/finance/finance.controllers.ts:AccountsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "class:api/src/finance/finance.controllers.ts:AccountsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "class:api/src/finance/finance.controllers.ts:BankController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "class:api/src/finance/finance.controllers.ts:BankController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "class:api/src/finance/finance.controllers.ts:BillsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "class:api/src/finance/finance.controllers.ts:BillsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "class:api/src/finance/finance.controllers.ts:InvoicesController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "class:api/src/finance/finance.controllers.ts:InvoicesController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "class:api/src/finance/finance.controllers.ts:ReportsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "class:api/src/finance/finance.controllers.ts:ReportsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "class:api/src/finance/finance.controllers.ts:TreasuryController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/finance/finance.controllers.ts",
+   "target": "class:api/src/finance/finance.controllers.ts:TreasuryController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/health.controller.ts",
+   "target": "class:api/src/health.controller.ts:HealthController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/health.controller.ts",
+   "target": "class:api/src/health.controller.ts:HealthController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/notifications/notification-events.ts",
+   "target": "class:api/src/notifications/notification-events.ts:NotificationEvents",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/notifications/notification-events.ts",
+   "target": "class:api/src/notifications/notification-events.ts:NotificationEvents",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/pos/pos.controller.ts",
+   "target": "class:api/src/pos/pos.controller.ts:PosController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/pos/pos.controller.ts",
+   "target": "class:api/src/pos/pos.controller.ts:PosController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "class:api/src/purchasing/purchasing.controllers.ts:PurchaseOrdersController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "class:api/src/purchasing/purchasing.controllers.ts:PurchaseOrdersController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "class:api/src/purchasing/purchasing.controllers.ts:ReceiptsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "class:api/src/purchasing/purchasing.controllers.ts:ReceiptsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "class:api/src/purchasing/purchasing.controllers.ts:MaterialsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "class:api/src/purchasing/purchasing.controllers.ts:MaterialsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "class:api/src/purchasing/purchasing.controllers.ts:CostingController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "class:api/src/purchasing/purchasing.controllers.ts:CostingController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "class:api/src/purchasing/purchasing.controllers.ts:PurchasePricesController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/purchasing/purchasing.controllers.ts",
+   "target": "class:api/src/purchasing/purchasing.controllers.ts:PurchasePricesController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.controller.ts",
+   "target": "class:api/src/sales/colissimo-portal.controller.ts:ColissimoPortalController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.controller.ts",
+   "target": "class:api/src/sales/colissimo-portal.controller.ts:ColissimoPortalController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.ts",
+   "target": "function:api/src/sales/colissimo-portal.ts:signIn",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.ts",
+   "target": "function:api/src/sales/colissimo-portal.ts:parseSearch",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.ts",
+   "target": "function:api/src/sales/colissimo-portal.ts:parseSearch",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.ts",
+   "target": "function:api/src/sales/colissimo-portal.ts:parseParcel",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.ts",
+   "target": "function:api/src/sales/colissimo-portal.ts:parseParcel",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.ts",
+   "target": "function:api/src/sales/colissimo-portal.ts:searchParcels",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.ts",
+   "target": "function:api/src/sales/colissimo-portal.ts:searchParcels",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.ts",
+   "target": "function:api/src/sales/colissimo-portal.ts:parcelDetail",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.ts",
+   "target": "function:api/src/sales/colissimo-portal.ts:parcelDetail",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.ts",
+   "target": "function:api/src/sales/colissimo-portal.ts:allParcels",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.ts",
+   "target": "function:api/src/sales/colissimo-portal.ts:allParcels",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.ts",
+   "target": "function:api/src/sales/colissimo-portal.ts:payouts",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.ts",
+   "target": "function:api/src/sales/colissimo-portal.ts:payouts",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/sales/colissimo-portal.ts",
+   "target": "function:api/src/sales/colissimo-portal.ts:request",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/colissimo-tracking.ts",
+   "target": "class:api/src/sales/colissimo-tracking.ts:ColissimoTracking",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/sales/colissimo-tracking.ts",
+   "target": "class:api/src/sales/colissimo-tracking.ts:ColissimoTracking",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:api/src/sales/colissimo-portal.ts:searchParcels",
+   "target": "function:api/src/sales/colissimo-portal.ts:parseSearch",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:api/src/sales/colissimo-portal.ts:parcelDetail",
+   "target": "function:api/src/sales/colissimo-portal.ts:parseParcel",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:api/src/sales/colissimo-portal.ts:allParcels",
+   "target": "function:api/src/sales/colissimo-portal.ts:searchParcels",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:api/src/sales/colissimo-portal.ts:request",
+   "target": "function:api/src/sales/colissimo-portal.ts:signIn",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/sales/colissimo-portal.controller.ts:ColissimoPortalController",
+   "target": "function:api/src/sales/colissimo-portal.ts:allParcels",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/sales/colissimo-tracking.ts:ColissimoTracking",
+   "target": "function:lib/colissimo.ts:trackParcels",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/sales/colissimo-tracking.ts:ColissimoTracking",
+   "target": "function:lib/colissimo.ts:deleteParcels",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/pos/pos.controller.ts:PosController",
+   "target": "function:api/src/sales/commerce.ts:buildManualOrderLines",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

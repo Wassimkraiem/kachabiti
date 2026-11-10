@@ -1,0 +1,1372 @@
+{
+ "nodes": [
+  {
+   "id": "file:components/landing/HowToOrder.tsx",
+   "type": "file",
+   "name": "HowToOrder.tsx",
+   "filePath": "components/landing/HowToOrder.tsx",
+   "summary": "Landing-page section explaining the ordering steps in en/fr/ar, with RTL layout and a contact call-to-action from the header config.",
+   "tags": [
+    "component",
+    "landing",
+    "i18n",
+    "section"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/landing/HowToOrder.tsx:HowToOrder",
+   "type": "function",
+   "name": "HowToOrder",
+   "filePath": "components/landing/HowToOrder.tsx",
+   "lineRange": [
+    63,
+    106
+   ],
+   "summary": "HowToOrder component. Landing-page section explaining the ordering steps in en/fr/ar, with RTL layout and a contact call-to-action from the header config.",
+   "tags": [
+    "component",
+    "landing",
+    "i18n",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/landing/LandingProductCard.tsx",
+   "type": "file",
+   "name": "LandingProductCard.tsx",
+   "filePath": "components/landing/LandingProductCard.tsx",
+   "summary": "Image-led product card for landing sections showing a portrait photo, name, category and price.",
+   "tags": [
+    "component",
+    "landing",
+    "product-card",
+    "presentational"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/landing/LandingProductCard.tsx:LandingProductCard",
+   "type": "function",
+   "name": "LandingProductCard",
+   "filePath": "components/landing/LandingProductCard.tsx",
+   "lineRange": [
+    15,
+    75
+   ],
+   "summary": "LandingProductCard component. Image-led product card for landing sections showing a portrait photo, name, category and price.",
+   "tags": [
+    "component",
+    "landing",
+    "product-card",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/landing/NewArrivals.tsx",
+   "type": "file",
+   "name": "NewArrivals.tsx",
+   "filePath": "components/landing/NewArrivals.tsx",
+   "summary": "Home-page \"New arrivals\" section that renders landing product picks as LandingProductCard tiles with a localized heading.",
+   "tags": [
+    "component",
+    "landing",
+    "home-section",
+    "i18n"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/landing/NewArrivals.tsx:NewArrivals",
+   "type": "function",
+   "name": "NewArrivals",
+   "filePath": "components/landing/NewArrivals.tsx",
+   "lineRange": [
+    30,
+    65
+   ],
+   "summary": "NewArrivals component. Home-page \"New arrivals\" section that renders landing product picks as LandingProductCard tiles with a localized heading.",
+   "tags": [
+    "component",
+    "landing",
+    "home-section",
+    "exported"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/landing/ProductRing3D.tsx",
+   "type": "file",
+   "name": "ProductRing3D.tsx",
+   "filePath": "components/landing/ProductRing3D.tsx",
+   "summary": "Client wrapper that lazy-loads the three.js ring scene behind a WebGL/reduced-motion capability check, showing static photos until it is ready.",
+   "tags": [
+    "component",
+    "3d",
+    "lazy-loading",
+    "progressive-enhancement"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/landing/ProductRing3D.tsx:canUse3D",
+   "type": "function",
+   "name": "canUse3D",
+   "filePath": "components/landing/ProductRing3D.tsx",
+   "lineRange": [
+    32,
+    41
+   ],
+   "summary": "Checks reduced-motion preference, CPU cores and WebGL support to decide whether to render the 3D ring.",
+   "tags": [
+    "helper",
+    "component",
+    "3d"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/landing/ProductRing3D.tsx:ProductRing3D",
+   "type": "function",
+   "name": "ProductRing3D",
+   "filePath": "components/landing/ProductRing3D.tsx",
+   "lineRange": [
+    43,
+    147
+   ],
+   "summary": "ProductRing3D component. Client wrapper that lazy-loads the three.js ring scene behind a WebGL/reduced-motion capability check, showing static photos until it is ready.",
+   "tags": [
+    "component",
+    "3d",
+    "lazy-loading",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/landing/ProductShowcase.tsx",
+   "type": "file",
+   "name": "ProductShowcase.tsx",
+   "filePath": "components/landing/ProductShowcase.tsx",
+   "summary": "Full-width landing header whose background is the 3D product ring (or a static photo backdrop), with localized heading, text and buttons on top.",
+   "tags": [
+    "component",
+    "landing",
+    "hero",
+    "i18n"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/landing/ProductShowcase.tsx:StaticBackdrop",
+   "type": "function",
+   "name": "StaticBackdrop",
+   "filePath": "components/landing/ProductShowcase.tsx",
+   "lineRange": [
+    48,
+    67
+   ],
+   "summary": "Static full-bleed photo backdrop shown until the 3D ring loads or when 3D is disabled.",
+   "tags": [
+    "helper",
+    "component",
+    "landing"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/landing/ProductShowcase.tsx:ProductShowcase",
+   "type": "function",
+   "name": "ProductShowcase",
+   "filePath": "components/landing/ProductShowcase.tsx",
+   "lineRange": [
+    71,
+    144
+   ],
+   "summary": "ProductShowcase component. Full-width landing header whose background is the 3D product ring (or a static photo backdrop), with localized heading, text and buttons on top.",
+   "tags": [
+    "component",
+    "landing",
+    "hero",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/landing/ring-scene.ts",
+   "type": "file",
+   "name": "ring-scene.ts",
+   "filePath": "components/landing/ring-scene.ts",
+   "summary": "three.js scene for the landing header: product photos on a slowly turning, draggable curved ring with a woven kachabia-stripe ribbon; loaded on demand so three.js stays out of the first page load.",
+   "tags": [
+    "3d",
+    "webgl",
+    "animation",
+    "factory"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:components/landing/ring-scene.ts:curvedCardGeometry",
+   "type": "function",
+   "name": "curvedCardGeometry",
+   "filePath": "components/landing/ring-scene.ts",
+   "lineRange": [
+    132,
+    142
+   ],
+   "summary": "Builds a curved plane geometry so each product card follows the ring radius.",
+   "tags": [
+    "helper",
+    "3d",
+    "webgl"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/landing/ring-scene.ts:createRingScene",
+   "type": "function",
+   "name": "createRingScene",
+   "filePath": "components/landing/ring-scene.ts",
+   "lineRange": [
+    149,
+    444
+   ],
+   "summary": "Creates the WebGL renderer, camera, textured card ring and ribbon with drag, auto-rotation and resize handling; returns a disposable scene handle.",
+   "tags": [
+    "3d",
+    "webgl",
+    "animation",
+    "exported"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/layout/MobileHeader.tsx",
+   "type": "file",
+   "name": "MobileHeader.tsx",
+   "filePath": "components/layout/MobileHeader.tsx",
+   "summary": "Phone header: compact bar with menu drawer, logo and search panel, language switch, contact links and sign-out; cart and account live in the bottom tab bar.",
+   "tags": [
+    "component",
+    "layout",
+    "navigation",
+    "mobile"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:components/layout/MobileHeader.tsx:MobileHeader",
+   "type": "function",
+   "name": "MobileHeader",
+   "filePath": "components/layout/MobileHeader.tsx",
+   "lineRange": [
+    52,
+    304
+   ],
+   "summary": "MobileHeader component. Phone header: compact bar with menu drawer, logo and search panel, language switch, contact links and sign-out; cart and account live in the bottom tab bar.",
+   "tags": [
+    "component",
+    "layout",
+    "navigation",
+    "exported"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/layout/MobileTabBar.tsx",
+   "type": "file",
+   "name": "MobileTabBar.tsx",
+   "filePath": "components/layout/MobileTabBar.tsx",
+   "summary": "Bottom tab bar on phones with cart count and account links, hidden on product and checkout pages, rendering a spacer to avoid covering content.",
+   "tags": [
+    "component",
+    "layout",
+    "navigation",
+    "mobile"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/layout/MobileTabBar.tsx:MobileTabBar",
+   "type": "function",
+   "name": "MobileTabBar",
+   "filePath": "components/layout/MobileTabBar.tsx",
+   "lineRange": [
+    18,
+    88
+   ],
+   "summary": "MobileTabBar component. Bottom tab bar on phones with cart count and account links, hidden on product and checkout pages, rendering a spacer to avoid covering content.",
+   "tags": [
+    "component",
+    "layout",
+    "navigation",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/layout/SearchBox.tsx",
+   "type": "file",
+   "name": "SearchBox.tsx",
+   "filePath": "components/layout/SearchBox.tsx",
+   "summary": "Product search field with ranked suggestions from the storefront API, keyboard navigation and a see-all link, in light (desktop) or dark (mobile menu) style.",
+   "tags": [
+    "component",
+    "search",
+    "autocomplete",
+    "api-client"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:components/layout/SearchBox.tsx:loadSuggestions",
+   "type": "function",
+   "name": "loadSuggestions",
+   "filePath": "components/layout/SearchBox.tsx",
+   "lineRange": [
+    48,
+    65
+   ],
+   "summary": "Fetches ranked product matches from the storefront search API and maps them to localized suggestion items.",
+   "tags": [
+    "helper",
+    "component",
+    "search"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/layout/SearchBox.tsx:SearchBox",
+   "type": "function",
+   "name": "SearchBox",
+   "filePath": "components/layout/SearchBox.tsx",
+   "lineRange": [
+    81,
+    266
+   ],
+   "summary": "SearchBox component. Product search field with ranked suggestions from the storefront API, keyboard navigation and a see-all link, in light (desktop) or dark (mobile menu) style.",
+   "tags": [
+    "component",
+    "search",
+    "autocomplete",
+    "exported"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/layout/StaticHeader.tsx",
+   "type": "file",
+   "name": "StaticHeader.tsx",
+   "filePath": "components/layout/StaticHeader.tsx",
+   "summary": "Main storefront header: logo, navigation, featured category menu with sub-categories, search, language switcher, account and cart button, delegating to MobileHeader on phones.",
+   "tags": [
+    "component",
+    "layout",
+    "navigation",
+    "i18n"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:components/layout/StaticHeader.tsx:flattenCategoryTree",
+   "type": "function",
+   "name": "flattenCategoryTree",
+   "filePath": "components/layout/StaticHeader.tsx",
+   "lineRange": [
+    78,
+    91
+   ],
+   "summary": "Flattens featured top-level categories with their sub-categories depth-first for the menu.",
+   "tags": [
+    "helper",
+    "component",
+    "layout"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/layout/StaticHeader.tsx:StaticHeader",
+   "type": "function",
+   "name": "StaticHeader",
+   "filePath": "components/layout/StaticHeader.tsx",
+   "lineRange": [
+    108,
+    434
+   ],
+   "summary": "StaticHeader component. Main storefront header: logo, navigation, featured category menu with sub-categories, search, language switcher, account and cart button, delegating to MobileHeader on phones.",
+   "tags": [
+    "component",
+    "layout",
+    "navigation",
+    "exported"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/layout/TrafficSource.tsx",
+   "type": "file",
+   "name": "TrafficSource.tsx",
+   "filePath": "components/layout/TrafficSource.tsx",
+   "summary": "Renderless client component that records the visit traffic source (Google, Facebook...) once on the landing page.",
+   "tags": [
+    "component",
+    "analytics",
+    "tracking",
+    "renderless"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/layout/TrafficSource.tsx:TrafficSource",
+   "type": "function",
+   "name": "TrafficSource",
+   "filePath": "components/layout/TrafficSource.tsx",
+   "lineRange": [
+    7,
+    10
+   ],
+   "summary": "TrafficSource component. Renderless client component that records the visit traffic source (Google, Facebook...) once on the landing page.",
+   "tags": [
+    "component",
+    "analytics",
+    "tracking",
+    "exported"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/products/ProductGrid.tsx",
+   "type": "file",
+   "name": "ProductGrid.tsx",
+   "filePath": "components/products/ProductGrid.tsx",
+   "summary": "Horizontally scrollable strip of featured categories with scroll buttons, using server-loaded categories or the shared categories cache.",
+   "tags": [
+    "component",
+    "catalog",
+    "categories",
+    "carousel"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:components/products/ProductGrid.tsx:ProductGrid",
+   "type": "function",
+   "name": "ProductGrid",
+   "filePath": "components/products/ProductGrid.tsx",
+   "lineRange": [
+    54,
+    257
+   ],
+   "summary": "ProductGrid component. Horizontally scrollable strip of featured categories with scroll buttons, using server-loaded categories or the shared categories cache.",
+   "tags": [
+    "component",
+    "catalog",
+    "categories",
+    "exported"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/products/ProductListCard.tsx",
+   "type": "file",
+   "name": "ProductListCard.tsx",
+   "filePath": "components/products/ProductListCard.tsx",
+   "summary": "Product card used in listings and carousels with localized name, sorted main image, price, discount and optional ratings, plus favorite and quick-add actions.",
+   "tags": [
+    "component",
+    "product-card",
+    "catalog",
+    "presentational"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/products/ProductListCard.tsx:getProductImage",
+   "type": "function",
+   "name": "getProductImage",
+   "filePath": "components/products/ProductListCard.tsx",
+   "lineRange": [
+    76,
+    85
+   ],
+   "summary": "Returns the main product image URL, sorted by position.",
+   "tags": [
+    "helper",
+    "component",
+    "product-card"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/products/ProductListCard.tsx:ProductListCard",
+   "type": "function",
+   "name": "ProductListCard",
+   "filePath": "components/products/ProductListCard.tsx",
+   "lineRange": [
+    105,
+    206
+   ],
+   "summary": "ProductListCard component. Product card used in listings and carousels with localized name, sorted main image, price, discount and optional ratings, plus favorite and quick-add actions.",
+   "tags": [
+    "component",
+    "product-card",
+    "catalog",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/products/PromoProductCard.tsx",
+   "type": "file",
+   "name": "PromoProductCard.tsx",
+   "filePath": "components/products/PromoProductCard.tsx",
+   "summary": "Promotional product card with discounted price, countdown timer, stock progress and add-to-cart via quick add.",
+   "tags": [
+    "component",
+    "product-card",
+    "promotion",
+    "cart"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/products/PromoProductCard.tsx:PromoProductCard",
+   "type": "function",
+   "name": "PromoProductCard",
+   "filePath": "components/products/PromoProductCard.tsx",
+   "lineRange": [
+    21,
+    110
+   ],
+   "summary": "PromoProductCard component. Promotional product card with discounted price, countdown timer, stock progress and add-to-cart via quick add.",
+   "tags": [
+    "component",
+    "product-card",
+    "promotion",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/products/PromoProducts.tsx",
+   "type": "file",
+   "name": "PromoProducts.tsx",
+   "filePath": "components/products/PromoProducts.tsx",
+   "summary": "Home-page promotions section listing discounted products as PromoProductCards, from server-loaded data or /api/products/promo.",
+   "tags": [
+    "component",
+    "home-section",
+    "promotion",
+    "data-fetching"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/products/PromoProducts.tsx:PromoProducts",
+   "type": "function",
+   "name": "PromoProducts",
+   "filePath": "components/products/PromoProducts.tsx",
+   "lineRange": [
+    36,
+    155
+   ],
+   "summary": "PromoProducts component. Home-page promotions section listing discounted products as PromoProductCards, from server-loaded data or /api/products/promo.",
+   "tags": [
+    "component",
+    "home-section",
+    "promotion",
+    "exported"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/products/TopProducts.tsx",
+   "type": "file",
+   "name": "TopProducts.tsx",
+   "filePath": "components/products/TopProducts.tsx",
+   "summary": "Home-page top-products carousel with review stats, favorites toggling for signed-in customers and quick add, from server-loaded data or /api/products/top.",
+   "tags": [
+    "component",
+    "home-section",
+    "favorites",
+    "data-fetching"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:components/products/TopProducts.tsx:calculateReviewStats",
+   "type": "function",
+   "name": "calculateReviewStats",
+   "filePath": "components/products/TopProducts.tsx",
+   "lineRange": [
+    60,
+    80
+   ],
+   "summary": "Computes average rating and review count for a product.",
+   "tags": [
+    "helper",
+    "component",
+    "home-section"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/products/TopProducts.tsx:TopProducts",
+   "type": "function",
+   "name": "TopProducts",
+   "filePath": "components/products/TopProducts.tsx",
+   "lineRange": [
+    82,
+    318
+   ],
+   "summary": "TopProducts component. Home-page top-products carousel with review stats, favorites toggling for signed-in customers and quick add, from server-loaded data or /api/products/top.",
+   "tags": [
+    "component",
+    "home-section",
+    "favorites",
+    "exported"
+   ],
+   "complexity": "complex"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:components/landing/HowToOrder.tsx",
+   "target": "function:components/landing/HowToOrder.tsx:HowToOrder",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/landing/HowToOrder.tsx",
+   "target": "function:components/landing/HowToOrder.tsx:HowToOrder",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/landing/HowToOrder.tsx",
+   "target": "file:lib/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/landing/HowToOrder.tsx",
+   "target": "file:lib/fonts.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/landing/HowToOrder.tsx",
+   "target": "file:lib/language-utils.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/landing/HowToOrder.tsx:HowToOrder",
+   "target": "function:lib/language-utils.ts:isRTL",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/landing/LandingProductCard.tsx",
+   "target": "function:components/landing/LandingProductCard.tsx:LandingProductCard",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/landing/LandingProductCard.tsx",
+   "target": "function:components/landing/LandingProductCard.tsx:LandingProductCard",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/landing/LandingProductCard.tsx",
+   "target": "file:lib/landing-products.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/landing/NewArrivals.tsx",
+   "target": "function:components/landing/NewArrivals.tsx:NewArrivals",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/landing/NewArrivals.tsx",
+   "target": "function:components/landing/NewArrivals.tsx:NewArrivals",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/landing/NewArrivals.tsx",
+   "target": "file:components/landing/LandingProductCard.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/landing/NewArrivals.tsx",
+   "target": "file:lib/fonts.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/landing/NewArrivals.tsx",
+   "target": "file:lib/landing-products.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/landing/NewArrivals.tsx",
+   "target": "file:lib/language-utils.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/landing/NewArrivals.tsx:NewArrivals",
+   "target": "function:lib/language-utils.ts:isRTL",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/landing/ProductRing3D.tsx",
+   "target": "function:components/landing/ProductRing3D.tsx:canUse3D",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/landing/ProductRing3D.tsx",
+   "target": "function:components/landing/ProductRing3D.tsx:ProductRing3D",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/landing/ProductRing3D.tsx",
+   "target": "function:components/landing/ProductRing3D.tsx:ProductRing3D",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/landing/ProductRing3D.tsx",
+   "target": "file:components/landing/ring-scene.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/landing/ProductRing3D.tsx",
+   "target": "file:lib/landing-products.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/landing/ProductRing3D.tsx:ProductRing3D",
+   "target": "function:components/landing/ProductRing3D.tsx:canUse3D",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/landing/ProductRing3D.tsx:ProductRing3D",
+   "target": "function:components/landing/ring-scene.ts:createRingScene",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/landing/ProductShowcase.tsx",
+   "target": "function:components/landing/ProductShowcase.tsx:StaticBackdrop",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/landing/ProductShowcase.tsx",
+   "target": "function:components/landing/ProductShowcase.tsx:ProductShowcase",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/landing/ProductShowcase.tsx",
+   "target": "function:components/landing/ProductShowcase.tsx:ProductShowcase",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/landing/ProductShowcase.tsx",
+   "target": "file:components/landing/ProductRing3D.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/landing/ProductShowcase.tsx",
+   "target": "file:lib/fonts.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/landing/ProductShowcase.tsx",
+   "target": "file:lib/landing-products.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/landing/ProductShowcase.tsx",
+   "target": "file:lib/language-utils.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/landing/ProductShowcase.tsx:ProductShowcase",
+   "target": "function:lib/language-utils.ts:isRTL",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/landing/ring-scene.ts",
+   "target": "function:components/landing/ring-scene.ts:curvedCardGeometry",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/landing/ring-scene.ts",
+   "target": "function:components/landing/ring-scene.ts:createRingScene",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/landing/ring-scene.ts",
+   "target": "function:components/landing/ring-scene.ts:createRingScene",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/landing/ring-scene.ts:createRingScene",
+   "target": "function:components/landing/ring-scene.ts:curvedCardGeometry",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/layout/MobileHeader.tsx",
+   "target": "function:components/layout/MobileHeader.tsx:MobileHeader",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/layout/MobileHeader.tsx",
+   "target": "function:components/layout/MobileHeader.tsx:MobileHeader",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/layout/MobileHeader.tsx",
+   "target": "file:components/layout/SearchBox.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/layout/MobileHeader.tsx",
+   "target": "file:lib/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/layout/MobileHeader.tsx",
+   "target": "file:lib/customer-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/layout/MobileHeader.tsx:MobileHeader",
+   "target": "function:lib/customer-auth.ts:signOut",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/layout/MobileTabBar.tsx",
+   "target": "function:components/layout/MobileTabBar.tsx:MobileTabBar",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/layout/MobileTabBar.tsx",
+   "target": "function:components/layout/MobileTabBar.tsx:MobileTabBar",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/layout/MobileTabBar.tsx",
+   "target": "file:lib/cart-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/layout/MobileTabBar.tsx",
+   "target": "file:lib/customer-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/layout/MobileTabBar.tsx:MobileTabBar",
+   "target": "function:lib/cart-context.tsx:useCart",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/layout/MobileTabBar.tsx:MobileTabBar",
+   "target": "function:lib/customer-auth.ts:useCustomer",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/layout/SearchBox.tsx",
+   "target": "function:components/layout/SearchBox.tsx:loadSuggestions",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/layout/SearchBox.tsx",
+   "target": "function:components/layout/SearchBox.tsx:SearchBox",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/layout/SearchBox.tsx",
+   "target": "function:components/layout/SearchBox.tsx:SearchBox",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/layout/SearchBox.tsx",
+   "target": "file:lib/product-search.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/layout/SearchBox.tsx",
+   "target": "file:lib/storefront-api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/layout/SearchBox.tsx",
+   "target": "file:lib/utils/product-utils.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/layout/SearchBox.tsx:loadSuggestions",
+   "target": "function:lib/utils/product-utils.ts:getProductName",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/layout/SearchBox.tsx:SearchBox",
+   "target": "function:components/layout/SearchBox.tsx:loadSuggestions",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/layout/SearchBox.tsx:loadSuggestions",
+   "target": "function:lib/storefront-api.ts:storefront",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/layout/StaticHeader.tsx",
+   "target": "function:components/layout/StaticHeader.tsx:flattenCategoryTree",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/layout/StaticHeader.tsx",
+   "target": "function:components/layout/StaticHeader.tsx:StaticHeader",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/layout/StaticHeader.tsx",
+   "target": "function:components/layout/StaticHeader.tsx:StaticHeader",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/layout/StaticHeader.tsx",
+   "target": "file:components/cart/CartButton.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/layout/StaticHeader.tsx",
+   "target": "file:components/layout/MobileHeader.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/layout/StaticHeader.tsx",
+   "target": "file:components/layout/SearchBox.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/layout/StaticHeader.tsx",
+   "target": "file:lib/categories-cache.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/layout/StaticHeader.tsx",
+   "target": "file:lib/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/layout/StaticHeader.tsx",
+   "target": "file:lib/customer-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/layout/StaticHeader.tsx",
+   "target": "file:lib/language-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/layout/StaticHeader.tsx",
+   "target": "file:lib/language-utils.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/layout/StaticHeader.tsx:StaticHeader",
+   "target": "function:lib/customer-auth.ts:useCustomer",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/layout/StaticHeader.tsx:StaticHeader",
+   "target": "function:lib/language-context.tsx:useLanguageSafe",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/layout/StaticHeader.tsx:StaticHeader",
+   "target": "function:lib/language-utils.ts:isRTL",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/layout/TrafficSource.tsx",
+   "target": "function:components/layout/TrafficSource.tsx:TrafficSource",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/layout/TrafficSource.tsx",
+   "target": "function:components/layout/TrafficSource.tsx:TrafficSource",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/layout/TrafficSource.tsx",
+   "target": "file:lib/traffic-source.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/layout/TrafficSource.tsx:TrafficSource",
+   "target": "function:lib/traffic-source.ts:rememberTrafficSource",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/products/ProductGrid.tsx",
+   "target": "function:components/products/ProductGrid.tsx:ProductGrid",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/products/ProductGrid.tsx",
+   "target": "function:components/products/ProductGrid.tsx:ProductGrid",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/products/ProductGrid.tsx",
+   "target": "file:lib/categories-cache.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/products/ProductListCard.tsx",
+   "target": "function:components/products/ProductListCard.tsx:getProductImage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/products/ProductListCard.tsx",
+   "target": "function:components/products/ProductListCard.tsx:ProductListCard",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/products/ProductListCard.tsx",
+   "target": "function:components/products/ProductListCard.tsx:ProductListCard",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/products/ProductListCard.tsx",
+   "target": "file:lib/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/products/ProductListCard.tsx:ProductListCard",
+   "target": "function:components/products/ProductListCard.tsx:getProductImage",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/products/PromoProductCard.tsx",
+   "target": "function:components/products/PromoProductCard.tsx:PromoProductCard",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/products/PromoProductCard.tsx",
+   "target": "function:components/products/PromoProductCard.tsx:PromoProductCard",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/products/PromoProductCard.tsx",
+   "target": "file:components/cart/AddToCartButton.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/products/PromoProductCard.tsx",
+   "target": "file:components/timers/PromoCountdownTimer.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/products/PromoProductCard.tsx",
+   "target": "file:components/ui/StockProgress.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/products/PromoProductCard.tsx",
+   "target": "file:lib/quick-add.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/products/PromoProductCard.tsx",
+   "target": "file:lib/utils/product-utils.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/products/PromoProductCard.tsx",
+   "target": "file:types/product.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/products/PromoProductCard.tsx:PromoProductCard",
+   "target": "function:lib/quick-add.ts:useQuickAdd",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/products/PromoProductCard.tsx:PromoProductCard",
+   "target": "function:lib/utils/product-utils.ts:getProductName",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/products/PromoProducts.tsx",
+   "target": "function:components/products/PromoProducts.tsx:PromoProducts",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/products/PromoProducts.tsx",
+   "target": "function:components/products/PromoProducts.tsx:PromoProducts",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/products/PromoProducts.tsx",
+   "target": "file:components/products/PromoProductCard.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/products/PromoProducts.tsx",
+   "target": "file:types/product.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/products/TopProducts.tsx",
+   "target": "function:components/products/TopProducts.tsx:calculateReviewStats",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/products/TopProducts.tsx",
+   "target": "function:components/products/TopProducts.tsx:TopProducts",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/products/TopProducts.tsx",
+   "target": "function:components/products/TopProducts.tsx:TopProducts",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/products/TopProducts.tsx",
+   "target": "file:components/products/ProductListCard.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/products/TopProducts.tsx",
+   "target": "file:lib/customer-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/products/TopProducts.tsx",
+   "target": "file:lib/favorites.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/products/TopProducts.tsx",
+   "target": "file:lib/product-images.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/products/TopProducts.tsx",
+   "target": "file:lib/quick-add.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/products/TopProducts.tsx:TopProducts",
+   "target": "function:lib/quick-add.ts:useQuickAdd",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

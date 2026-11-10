@@ -1,0 +1,5980 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 32,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 32,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 32,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "app/[locale]/about/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 292,
+      "nonEmptyLines": 256,
+      "functions": [
+        {
+          "name": "renderHighlighted",
+          "startLine": 161,
+          "endLine": 168,
+          "params": [
+            "text"
+          ]
+        },
+        {
+          "name": "AboutPage",
+          "startLine": 171,
+          "endLine": 291,
+          "params": [
+            "{ params }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AboutPage",
+          "line": 171,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "renderHighlighted",
+          "callee": "text.split",
+          "lineNumber": 162
+        },
+        {
+          "caller": "renderHighlighted",
+          "callee": "HIGHLIGHT_TERMS.join",
+          "lineNumber": 162
+        },
+        {
+          "caller": "renderHighlighted",
+          "callee": "parts.map",
+          "lineNumber": 163
+        },
+        {
+          "caller": "renderHighlighted",
+          "callee": "HIGHLIGHT_TERMS.includes",
+          "lineNumber": 164
+        },
+        {
+          "caller": "AboutPage",
+          "callee": "use",
+          "lineNumber": 172
+        },
+        {
+          "caller": "AboutPage",
+          "callee": "[\"en\", \"fr\", \"ar\"].includes",
+          "lineNumber": 173
+        },
+        {
+          "caller": "AboutPage",
+          "callee": "renderHighlighted",
+          "lineNumber": 197
+        },
+        {
+          "caller": "AboutPage",
+          "callee": "renderHighlighted",
+          "lineNumber": 229
+        },
+        {
+          "caller": "AboutPage",
+          "callee": "text.coFounders.map",
+          "lineNumber": 241
+        },
+        {
+          "caller": "AboutPage",
+          "callee": "Object.entries(headerConfig.social).map",
+          "lineNumber": 269
+        },
+        {
+          "caller": "AboutPage",
+          "callee": "Object.entries",
+          "lineNumber": 269
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/auth/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 382,
+      "nonEmptyLines": 353,
+      "functions": [
+        {
+          "name": "errorMessage",
+          "startLine": 149,
+          "endLine": 157,
+          "params": [
+            "error",
+            "text"
+          ]
+        },
+        {
+          "name": "AuthForms",
+          "startLine": 163,
+          "endLine": 357,
+          "params": [
+            "{ locale }"
+          ]
+        },
+        {
+          "name": "ResetLinkFallback",
+          "startLine": 360,
+          "endLine": 369,
+          "params": [
+            "{ text, onRequestNew }"
+          ]
+        },
+        {
+          "name": "AuthPage",
+          "startLine": 371,
+          "endLine": 382,
+          "params": [
+            "{ params }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AuthPage",
+          "line": 371,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AuthForms",
+          "callee": "useRouter",
+          "lineNumber": 165
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "useSearchParams",
+          "lineNumber": 166
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "safeRedirect",
+          "lineNumber": 167
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "searchParams.get",
+          "lineNumber": 167
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "searchParams.get",
+          "lineNumber": 168
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "searchParams.get",
+          "lineNumber": 171
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "searchParams.get",
+          "lineNumber": 171
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "useState",
+          "lineNumber": 172
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "useState",
+          "lineNumber": 173
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "useState",
+          "lineNumber": 174
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "searchParams.get",
+          "lineNumber": 176
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "useState",
+          "lineNumber": 177
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "useForm",
+          "lineNumber": 179
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "zodResolver",
+          "lineNumber": 179
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "signInSchema",
+          "lineNumber": 179
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "useForm",
+          "lineNumber": 180
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "zodResolver",
+          "lineNumber": 180
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "signUpSchema",
+          "lineNumber": 180
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "useForm",
+          "lineNumber": 181
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "zodResolver",
+          "lineNumber": 181
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "forgotPasswordSchema",
+          "lineNumber": 181
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "useForm",
+          "lineNumber": 182
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "zodResolver",
+          "lineNumber": 182
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "newPasswordSchema",
+          "lineNumber": 182
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "useEffect",
+          "lineNumber": 185
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "getCustomer().then",
+          "lineNumber": 187
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "getCustomer",
+          "lineNumber": 187
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "router.replace",
+          "lineNumber": 188
+        },
+        {
+          "caller": "switchMode",
+          "callee": "setMode",
+          "lineNumber": 193
+        },
+        {
+          "caller": "switchMode",
+          "callee": "setError",
+          "lineNumber": 194
+        },
+        {
+          "caller": "switchMode",
+          "callee": "setNotice",
+          "lineNumber": 195
+        },
+        {
+          "caller": "signedIn",
+          "callee": "announceAuthChange",
+          "lineNumber": 199
+        },
+        {
+          "caller": "signedIn",
+          "callee": "router.replace",
+          "lineNumber": 200
+        },
+        {
+          "caller": "onSignIn",
+          "callee": "setError",
+          "lineNumber": 204
+        },
+        {
+          "caller": "onSignIn",
+          "callee": "signedIn",
+          "lineNumber": 206
+        },
+        {
+          "caller": "onSignIn",
+          "callee": "await accountApi",
+          "lineNumber": 206
+        },
+        {
+          "caller": "onSignIn",
+          "callee": "setError",
+          "lineNumber": 208
+        },
+        {
+          "caller": "onSignIn",
+          "callee": "errorMessage",
+          "lineNumber": 208
+        },
+        {
+          "caller": "onSignUp",
+          "callee": "setError",
+          "lineNumber": 213
+        },
+        {
+          "caller": "onSignUp",
+          "callee": "await accountApi",
+          "lineNumber": 215
+        },
+        {
+          "caller": "onSignUp",
+          "callee": "signedIn",
+          "lineNumber": 218
+        },
+        {
+          "caller": "onSignUp",
+          "callee": "signUpForm.reset",
+          "lineNumber": 219
+        },
+        {
+          "caller": "onSignUp",
+          "callee": "setNotice",
+          "lineNumber": 220
+        },
+        {
+          "caller": "onSignUp",
+          "callee": "text.checkInbox",
+          "lineNumber": 220
+        },
+        {
+          "caller": "onSignUp",
+          "callee": "setMode",
+          "lineNumber": 221
+        },
+        {
+          "caller": "onSignUp",
+          "callee": "setError",
+          "lineNumber": 223
+        },
+        {
+          "caller": "onSignUp",
+          "callee": "errorMessage",
+          "lineNumber": 223
+        },
+        {
+          "caller": "onForgot",
+          "callee": "setError",
+          "lineNumber": 228
+        },
+        {
+          "caller": "onForgot",
+          "callee": "accountApi",
+          "lineNumber": 230
+        },
+        {
+          "caller": "onForgot",
+          "callee": "setNotice",
+          "lineNumber": 231
+        },
+        {
+          "caller": "onForgot",
+          "callee": "text.resetSent",
+          "lineNumber": 231
+        },
+        {
+          "caller": "onForgot",
+          "callee": "setError",
+          "lineNumber": 233
+        },
+        {
+          "caller": "onForgot",
+          "callee": "errorMessage",
+          "lineNumber": 233
+        },
+        {
+          "caller": "onReset",
+          "callee": "setError",
+          "lineNumber": 238
+        },
+        {
+          "caller": "onReset",
+          "callee": "await accountApi",
+          "lineNumber": 240
+        },
+        {
+          "caller": "onReset",
+          "callee": "setNotice",
+          "lineNumber": 241
+        },
+        {
+          "caller": "onReset",
+          "callee": "signedIn",
+          "lineNumber": 242
+        },
+        {
+          "caller": "onReset",
+          "callee": "setRecoveryReady",
+          "lineNumber": 244
+        },
+        {
+          "caller": "onReset",
+          "callee": "setError",
+          "lineNumber": 245
+        },
+        {
+          "caller": "onReset",
+          "callee": "errorMessage",
+          "lineNumber": 245
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "([\"signin\", \"signup\"] as const).map",
+          "lineNumber": 273
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "switchMode",
+          "lineNumber": 279
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "signInForm.handleSubmit",
+          "lineNumber": 304
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "switchMode",
+          "lineNumber": 308
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "signUpForm.handleSubmit",
+          "lineNumber": 319
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "forgotForm.handleSubmit",
+          "lineNumber": 331
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "switchMode",
+          "lineNumber": 336
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "resetForm.handleSubmit",
+          "lineNumber": 344
+        },
+        {
+          "caller": "AuthForms",
+          "callee": "switchMode",
+          "lineNumber": 352
+        },
+        {
+          "caller": "AuthPage",
+          "callee": "use",
+          "lineNumber": 372
+        },
+        {
+          "caller": "AuthPage",
+          "callee": "useMemo",
+          "lineNumber": 373
+        },
+        {
+          "caller": "AuthPage",
+          "callee": "isRTL",
+          "lineNumber": 373
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/cart/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 204,
+      "nonEmptyLines": 185,
+      "functions": [
+        {
+          "name": "CartPage",
+          "startLine": 63,
+          "endLine": 203,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "CartPage",
+          "line": 63,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CartPage",
+          "callee": "useCart",
+          "lineNumber": 64
+        },
+        {
+          "caller": "CartPage",
+          "callee": "useLanguage",
+          "lineNumber": 65
+        },
+        {
+          "caller": "CartPage",
+          "callee": "useState",
+          "lineNumber": 67
+        },
+        {
+          "caller": "CartPage",
+          "callee": "useState",
+          "lineNumber": 68
+        },
+        {
+          "caller": "CartPage",
+          "callee": "useEffect",
+          "lineNumber": 70
+        },
+        {
+          "caller": "fetchShipping",
+          "callee": "await storefront",
+          "lineNumber": 75
+        },
+        {
+          "caller": "fetchShipping",
+          "callee": "setShippingCost",
+          "lineNumber": 76
+        },
+        {
+          "caller": "fetchShipping",
+          "callee": "setIsLoadingShipping",
+          "lineNumber": 77
+        },
+        {
+          "caller": "fetchShipping",
+          "callee": "console.error",
+          "lineNumber": 79
+        },
+        {
+          "caller": "fetchShipping",
+          "callee": "setShippingCost",
+          "lineNumber": 80
+        },
+        {
+          "caller": "fetchShipping",
+          "callee": "setIsLoadingShipping",
+          "lineNumber": 82
+        },
+        {
+          "caller": "CartPage",
+          "callee": "fetchShipping",
+          "lineNumber": 86
+        },
+        {
+          "caller": "CartPage",
+          "callee": "items.map",
+          "lineNumber": 139
+        },
+        {
+          "caller": "CartPage",
+          "callee": "cartLineKey",
+          "lineNumber": 141
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/categories/[slug]/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 374,
+      "nonEmptyLines": 345,
+      "functions": [
+        {
+          "name": "getCategoryName",
+          "startLine": 52,
+          "endLine": 60,
+          "params": [
+            "category",
+            "locale"
+          ]
+        },
+        {
+          "name": "CategoryProductsPage",
+          "startLine": 95,
+          "endLine": 373,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "CategoryProductsPage",
+          "line": 95,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useParams",
+          "lineNumber": 96
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useSearchParams",
+          "lineNumber": 97
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useState",
+          "lineNumber": 102
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useState",
+          "lineNumber": 103
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useState",
+          "lineNumber": 104
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useState",
+          "lineNumber": 105
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useQuickAdd",
+          "lineNumber": 106
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useState",
+          "lineNumber": 107
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useState",
+          "lineNumber": 108
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useState",
+          "lineNumber": 109
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useState",
+          "lineNumber": 110
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useState",
+          "lineNumber": 113
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useState",
+          "lineNumber": 114
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useEffect",
+          "lineNumber": 118
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "getCustomer",
+          "lineNumber": 121
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "setUserId",
+          "lineNumber": 123
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "getUserFavorites",
+          "lineNumber": 126
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "favorites.map",
+          "lineNumber": 127
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "setWishlist",
+          "lineNumber": 128
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "console.error",
+          "lineNumber": 131
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "fetchUserAndFavorites",
+          "lineNumber": 135
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useEffect",
+          "lineNumber": 139
+        },
+        {
+          "caller": "fetchCategory",
+          "callee": "getCategories",
+          "lineNumber": 143
+        },
+        {
+          "caller": "fetchCategory",
+          "callee": "(data || []).find",
+          "lineNumber": 144
+        },
+        {
+          "caller": "fetchCategory",
+          "callee": "setCategory",
+          "lineNumber": 146
+        },
+        {
+          "caller": "fetchCategory",
+          "callee": "setSubcategories",
+          "lineNumber": 147
+        },
+        {
+          "caller": "fetchCategory",
+          "callee": "(data || []).filter",
+          "lineNumber": 147
+        },
+        {
+          "caller": "fetchCategory",
+          "callee": "setCategoryIds",
+          "lineNumber": 148
+        },
+        {
+          "caller": "fetchCategory",
+          "callee": "getDescendantCategoryIds",
+          "lineNumber": 148
+        },
+        {
+          "caller": "fetchCategory",
+          "callee": "console.error",
+          "lineNumber": 151
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "fetchCategory",
+          "lineNumber": 156
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "setProductsLoading",
+          "lineNumber": 165
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "(categoryIds.length ? categoryIds : [category.id]).join",
+          "lineNumber": 168
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "String",
+          "lineNumber": 169
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "String",
+          "lineNumber": 170
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "await storefront",
+          "lineNumber": 172
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "setProducts",
+          "lineNumber": 173
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "setTotalCount",
+          "lineNumber": 174
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "console.error",
+          "lineNumber": 176
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "setProductsLoading",
+          "lineNumber": 178
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "setLoading",
+          "lineNumber": 179
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useEffect",
+          "lineNumber": 183
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "setCurrentPage",
+          "lineNumber": 185
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "fetchProducts",
+          "lineNumber": 186
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "useEffect",
+          "lineNumber": 191
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "fetchProducts",
+          "lineNumber": 193
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "window.scrollTo",
+          "lineNumber": 194
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "goToLogin",
+          "lineNumber": 201
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "setWishlist",
+          "lineNumber": 206
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "newSet.has",
+          "lineNumber": 208
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "newSet.delete",
+          "lineNumber": 209
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "newSet.add",
+          "lineNumber": 211
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "toggleFavorite",
+          "lineNumber": 218
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "wishlist.has",
+          "lineNumber": 218
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "console.error",
+          "lineNumber": 221
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "setWishlist",
+          "lineNumber": 223
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "newSet.has",
+          "lineNumber": 225
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "newSet.delete",
+          "lineNumber": 226
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "newSet.add",
+          "lineNumber": 228
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "console.error",
+          "lineNumber": 234
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "getCategoryName",
+          "lineNumber": 262
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "subcategories.map",
+          "lineNumber": 266
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "getCategoryName",
+          "lineNumber": 272
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "text.showingResults.replace",
+          "lineNumber": 279
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "products.length.toString",
+          "lineNumber": 279
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "Array.from({ length: ITEMS_PER_PAGE }).map",
+          "lineNumber": 287
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "Array.from",
+          "lineNumber": 287
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "products.map",
+          "lineNumber": 308
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "wishlist.has",
+          "lineNumber": 313
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "quickAdd",
+          "lineNumber": 315
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "setCurrentPage",
+          "lineNumber": 324
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "Math.max",
+          "lineNumber": 324
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "Array.from({ length: Math.ceil(totalCount / ITEMS_PER_PAGE) }, (_, i) => i + 1)\n                                            .filter(page => {\n                                                const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);\n                                                return page === 1 ||\n                                                    page === totalPages ||\n                                                    Math.abs(page - currentPage) <= 1;\n                                            })\n                                            .map",
+          "lineNumber": 332
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "Array.from({ length: Math.ceil(totalCount / ITEMS_PER_PAGE) }, (_, i) => i + 1)\n                                            .filter",
+          "lineNumber": 332
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "Array.from",
+          "lineNumber": 332
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "Math.ceil",
+          "lineNumber": 332
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "Math.ceil",
+          "lineNumber": 334
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "Math.abs",
+          "lineNumber": 337
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "setCurrentPage",
+          "lineNumber": 345
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "setCurrentPage",
+          "lineNumber": 359
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "Math.min",
+          "lineNumber": 359
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "Math.ceil",
+          "lineNumber": 359
+        },
+        {
+          "caller": "CategoryProductsPage",
+          "callee": "Math.ceil",
+          "lineNumber": 360
+        }
+      ],
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/categories/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 244,
+      "nonEmptyLines": 223,
+      "functions": [
+        {
+          "name": "getCategoryName",
+          "startLine": 22,
+          "endLine": 30,
+          "params": [
+            "category",
+            "locale"
+          ]
+        },
+        {
+          "name": "CategoriesPage",
+          "startLine": 68,
+          "endLine": 243,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "CategoriesPage",
+          "line": 68,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CategoriesPage",
+          "callee": "useParams",
+          "lineNumber": 69
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "useState",
+          "lineNumber": 73
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "useState",
+          "lineNumber": 74
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "useState",
+          "lineNumber": 77
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "useState",
+          "lineNumber": 78
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "useEffect",
+          "lineNumber": 81
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "setLoading",
+          "lineNumber": 84
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "(await getCategories()).filter",
+          "lineNumber": 91
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "getCategories",
+          "lineNumber": 91
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "all.slice",
+          "lineNumber": 92
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "setCategories",
+          "lineNumber": 96
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "setTotalCount",
+          "lineNumber": 97
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "console.error",
+          "lineNumber": 100
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "setCategories",
+          "lineNumber": 101
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "setTotalCount",
+          "lineNumber": 102
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "setLoading",
+          "lineNumber": 104
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "fetchCategories",
+          "lineNumber": 108
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "useEffect",
+          "lineNumber": 112
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "window.scrollTo",
+          "lineNumber": 113
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "text.showingResults.replace",
+          "lineNumber": 142
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "totalCount.toString",
+          "lineNumber": 142
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "Array.from({ length: ITEMS_PER_PAGE }).map",
+          "lineNumber": 150
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "Array.from",
+          "lineNumber": 150
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "categories.map",
+          "lineNumber": 167
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "getCategoryName",
+          "lineNumber": 177
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "getCategoryName",
+          "lineNumber": 183
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "setCurrentPage",
+          "lineNumber": 194
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "Math.max",
+          "lineNumber": 194
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "Array.from({ length: Math.ceil(totalCount / ITEMS_PER_PAGE) }, (_, i) => i + 1)\n                                            .filter(page => {\n                                                const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);\n                                                return page === 1 ||\n                                                    page === totalPages ||\n                                                    Math.abs(page - currentPage) <= 1;\n                                            })\n                                            .map",
+          "lineNumber": 202
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "Array.from({ length: Math.ceil(totalCount / ITEMS_PER_PAGE) }, (_, i) => i + 1)\n                                            .filter",
+          "lineNumber": 202
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "Array.from",
+          "lineNumber": 202
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "Math.ceil",
+          "lineNumber": 202
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "Math.ceil",
+          "lineNumber": 204
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "Math.abs",
+          "lineNumber": 207
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "setCurrentPage",
+          "lineNumber": 215
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "setCurrentPage",
+          "lineNumber": 229
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "Math.min",
+          "lineNumber": 229
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "Math.ceil",
+          "lineNumber": 229
+        },
+        {
+          "caller": "CategoriesPage",
+          "callee": "Math.ceil",
+          "lineNumber": 230
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/checkout/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 1009,
+      "nonEmptyLines": 941,
+      "functions": [
+        {
+          "name": "CheckoutPage",
+          "startLine": 215,
+          "endLine": 1009,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "CheckoutPage",
+          "line": 215,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CheckoutPage",
+          "callee": "useCart",
+          "lineNumber": 216
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useLanguage",
+          "lineNumber": 217
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useRouter",
+          "lineNumber": 218
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useSearchParams",
+          "lineNumber": 219
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "isRTL",
+          "lineNumber": 221
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "parseInt",
+          "lineNumber": 224
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "searchParams.get",
+          "lineNumber": 224
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useState",
+          "lineNumber": 225
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useState",
+          "lineNumber": 226
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useState",
+          "lineNumber": 227
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useState",
+          "lineNumber": 228
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useState",
+          "lineNumber": 231
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "sessionStorage.getItem",
+          "lineNumber": 233
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "JSON.parse",
+          "lineNumber": 234
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useState",
+          "lineNumber": 239
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "sessionStorage.getItem",
+          "lineNumber": 241
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "JSON.parse",
+          "lineNumber": 242
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useState",
+          "lineNumber": 260
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useState",
+          "lineNumber": 261
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useState",
+          "lineNumber": 262
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useForm",
+          "lineNumber": 270
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "zodResolver",
+          "lineNumber": 271
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "watch",
+          "lineNumber": 288
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "watch",
+          "lineNumber": 289
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "watch",
+          "lineNumber": 290
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useState",
+          "lineNumber": 292
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useState",
+          "lineNumber": 293
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "Math.floor",
+          "lineNumber": 299
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "Math.random",
+          "lineNumber": 299
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "new Date().toLocaleDateString",
+          "lineNumber": 300
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useEffect",
+          "lineNumber": 303
+        },
+        {
+          "caller": "fetchUserId",
+          "callee": "getCustomer",
+          "lineNumber": 305
+        },
+        {
+          "caller": "fetchUserId",
+          "callee": "setUserId",
+          "lineNumber": 307
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "fetchUserId",
+          "lineNumber": 310
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useEffect",
+          "lineNumber": 314
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "sessionStorage.getItem",
+          "lineNumber": 316
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "sessionStorage.getItem",
+          "lineNumber": 317
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "sessionStorage.getItem",
+          "lineNumber": 318
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "setSavedItems",
+          "lineNumber": 322
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "JSON.parse",
+          "lineNumber": 322
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "console.error",
+          "lineNumber": 324
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "setSavedOrderSummary",
+          "lineNumber": 330
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "JSON.parse",
+          "lineNumber": 330
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "console.error",
+          "lineNumber": 332
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "setOrderConfirmed",
+          "lineNumber": 337
+        },
+        {
+          "caller": "handleContinueFromSummary",
+          "callee": "setCurrentStep",
+          "lineNumber": 343
+        },
+        {
+          "caller": "handleContinueFromSummary",
+          "callee": "window.scrollTo",
+          "lineNumber": 344
+        },
+        {
+          "caller": "handleContinueFromInformation",
+          "callee": "setSavedItems",
+          "lineNumber": 359
+        },
+        {
+          "caller": "handleContinueFromInformation",
+          "callee": "setSavedOrderSummary",
+          "lineNumber": 360
+        },
+        {
+          "caller": "handleContinueFromInformation",
+          "callee": "sessionStorage.setItem",
+          "lineNumber": 364
+        },
+        {
+          "caller": "handleContinueFromInformation",
+          "callee": "JSON.stringify",
+          "lineNumber": 364
+        },
+        {
+          "caller": "handleContinueFromInformation",
+          "callee": "sessionStorage.setItem",
+          "lineNumber": 365
+        },
+        {
+          "caller": "handleContinueFromInformation",
+          "callee": "JSON.stringify",
+          "lineNumber": 365
+        },
+        {
+          "caller": "handleContinueFromInformation",
+          "callee": "setCurrentStep",
+          "lineNumber": 368
+        },
+        {
+          "caller": "handleContinueFromInformation",
+          "callee": "window.scrollTo",
+          "lineNumber": 369
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "setIsProcessing",
+          "lineNumber": 373
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "formData.email?.trim",
+          "lineNumber": 378
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "formData.address?.trim",
+          "lineNumber": 382
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "formData.city?.trim",
+          "lineNumber": 383
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "formData.state?.trim",
+          "lineNumber": 384
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "formData.zipCode?.trim",
+          "lineNumber": 385
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "formData.country?.trim",
+          "lineNumber": 386
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "formData.orderNotes?.trim",
+          "lineNumber": 391
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "createOrder",
+          "lineNumber": 394
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "toast.error",
+          "lineNumber": 397
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "setIsProcessing",
+          "lineNumber": 404
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "setSavedItems",
+          "lineNumber": 421
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "setSavedOrderSummary",
+          "lineNumber": 422
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "sessionStorage.setItem",
+          "lineNumber": 426
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "JSON.stringify",
+          "lineNumber": 426
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "sessionStorage.setItem",
+          "lineNumber": 427
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "JSON.stringify",
+          "lineNumber": 427
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "sessionStorage.setItem",
+          "lineNumber": 428
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "clearCart",
+          "lineNumber": 431
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "setIsProcessing",
+          "lineNumber": 434
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "setOrderConfirmed",
+          "lineNumber": 435
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "setCurrentStep",
+          "lineNumber": 436
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "toast.error",
+          "lineNumber": 438
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "setIsProcessing",
+          "lineNumber": 439
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useEffect",
+          "lineNumber": 443
+        },
+        {
+          "caller": "fetchShippingAndTax",
+          "callee": "await storefront",
+          "lineNumber": 450
+        },
+        {
+          "caller": "fetchShippingAndTax",
+          "callee": "encodeURIComponent",
+          "lineNumber": 451
+        },
+        {
+          "caller": "fetchShippingAndTax",
+          "callee": "setShippingCost",
+          "lineNumber": 453
+        },
+        {
+          "caller": "fetchShippingAndTax",
+          "callee": "setTaxRate",
+          "lineNumber": 454
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "fetchShippingAndTax",
+          "lineNumber": 457
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useEffect",
+          "lineNumber": 461
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "router.replace",
+          "lineNumber": 463
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "useEffect",
+          "lineNumber": 467
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "router.push",
+          "lineNumber": 469
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "items.map",
+          "lineNumber": 548
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "cartLineKey",
+          "lineNumber": 550
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "handleFormSubmit",
+          "lineNumber": 576
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "register",
+          "lineNumber": 591
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "register",
+          "lineNumber": 606
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "register",
+          "lineNumber": 623
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "e.target.value.replace(/\\D/g, \"\").slice",
+          "lineNumber": 625
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "e.target.value.replace",
+          "lineNumber": 625
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "register",
+          "lineNumber": 645
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "governorateOptions(locale).map",
+          "lineNumber": 650
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "governorateOptions",
+          "lineNumber": 650
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "register",
+          "lineNumber": 665
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "register",
+          "lineNumber": 682
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "register",
+          "lineNumber": 698
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "setIsSummaryOpen",
+          "lineNumber": 725
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "items.map",
+          "lineNumber": 740
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "cartLineKey",
+          "lineNumber": 742
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "setIsDiscountOpen",
+          "lineNumber": 756
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "register",
+          "lineNumber": 773
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "setIsBillingOpen",
+          "lineNumber": 784
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "subtotal.toFixed",
+          "lineNumber": 802
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "discount.toFixed",
+          "lineNumber": 807
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "shippingCost.toFixed",
+          "lineNumber": 815
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "(taxRate * 100).toFixed",
+          "lineNumber": 820
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "tax.toFixed",
+          "lineNumber": 821
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "total.toFixed",
+          "lineNumber": 827
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "register",
+          "lineNumber": 838
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "[formCity, governorateLabel(formState, locale)].filter(Boolean).join",
+          "lineNumber": 880
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "[formCity, governorateLabel(formState, locale)].filter",
+          "lineNumber": 880
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "governorateLabel",
+          "lineNumber": 880
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "displayItems.map",
+          "lineNumber": 888
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "cartLineKey",
+          "lineNumber": 890
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "savedOrderSummary.subtotal.toFixed",
+          "lineNumber": 904
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "savedOrderSummary.discount.toFixed",
+          "lineNumber": 909
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "savedOrderSummary.shippingCost.toFixed",
+          "lineNumber": 917
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "(savedOrderSummary.taxRate * 100).toFixed",
+          "lineNumber": 922
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "savedOrderSummary.tax.toFixed",
+          "lineNumber": 923
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "savedOrderSummary.total.toFixed",
+          "lineNumber": 929
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "handleFormSubmit",
+          "lineNumber": 940
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "sessionStorage.removeItem",
+          "lineNumber": 970
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "sessionStorage.removeItem",
+          "lineNumber": 971
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "sessionStorage.removeItem",
+          "lineNumber": 972
+        },
+        {
+          "caller": "CheckoutPage",
+          "callee": "router.push",
+          "lineNumber": 974
+        }
+      ],
+      "metrics": {
+        "importCount": 10,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/contact/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 273,
+      "nonEmptyLines": 252,
+      "functions": [
+        {
+          "name": "ContactPage",
+          "startLine": 101,
+          "endLine": 271,
+          "params": [
+            "{ params }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ContactPage",
+          "line": 101,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ContactPage",
+          "callee": "use",
+          "lineNumber": 102
+        },
+        {
+          "caller": "ContactPage",
+          "callee": "[\"en\", \"fr\", \"ar\"].includes",
+          "lineNumber": 103
+        },
+        {
+          "caller": "ContactPage",
+          "callee": "encodeURIComponent",
+          "lineNumber": 105
+        },
+        {
+          "caller": "ContactPage",
+          "callee": "useForm",
+          "lineNumber": 115
+        },
+        {
+          "caller": "ContactPage",
+          "callee": "useState",
+          "lineNumber": 116
+        },
+        {
+          "caller": "ContactPage",
+          "callee": "useState",
+          "lineNumber": 117
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "setSubmitting",
+          "lineNumber": 120
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "setStatus",
+          "lineNumber": 121
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "fetch",
+          "lineNumber": 123
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "JSON.stringify",
+          "lineNumber": 126
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "setStatus",
+          "lineNumber": 129
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "reset",
+          "lineNumber": 130
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "setStatus",
+          "lineNumber": 132
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "setStatus",
+          "lineNumber": 135
+        },
+        {
+          "caller": "onSubmit",
+          "callee": "setSubmitting",
+          "lineNumber": 137
+        },
+        {
+          "caller": "ContactPage",
+          "callee": "handleSubmit",
+          "lineNumber": 161
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/layout.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 148,
+      "nonEmptyLines": 143,
+      "functions": [
+        {
+          "name": "generateMetadata",
+          "startLine": 32,
+          "endLine": 87,
+          "params": [
+            "{ params }"
+          ]
+        },
+        {
+          "name": "LocaleLayout",
+          "startLine": 89,
+          "endLine": 148,
+          "params": [
+            "{\r\n    children,\r\n    params,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "generateMetadata",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "LocaleLayout",
+          "line": 89,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "LocaleLayout",
+          "callee": "isRTL",
+          "lineNumber": 107
+        },
+        {
+          "caller": "LocaleLayout",
+          "callee": "JSON.stringify",
+          "lineNumber": 118
+        }
+      ],
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/not-found.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 106,
+      "nonEmptyLines": 89,
+      "functions": [
+        {
+          "name": "NotFound",
+          "startLine": 29,
+          "endLine": 105,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "NotFound",
+          "line": 29,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "NotFound",
+          "callee": "useRouter",
+          "lineNumber": 30
+        },
+        {
+          "caller": "NotFound",
+          "callee": "usePathname",
+          "lineNumber": 31
+        },
+        {
+          "caller": "NotFound",
+          "callee": "pathname?.split",
+          "lineNumber": 34
+        },
+        {
+          "caller": "NotFound",
+          "callee": "['en', 'fr', 'ar'].includes",
+          "lineNumber": 35
+        },
+        {
+          "caller": "NotFound",
+          "callee": "router.push",
+          "lineNumber": 70
+        },
+        {
+          "caller": "NotFound",
+          "callee": "Object.entries(headerConfig.social).map",
+          "lineNumber": 83
+        },
+        {
+          "caller": "NotFound",
+          "callee": "Object.entries",
+          "lineNumber": 83
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/order-confirmation/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 179,
+      "nonEmptyLines": 165,
+      "functions": [
+        {
+          "name": "OrderConfirmationContent",
+          "startLine": 60,
+          "endLine": 165,
+          "params": []
+        },
+        {
+          "name": "OrderConfirmationPage",
+          "startLine": 167,
+          "endLine": 178,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "OrderConfirmationPage",
+          "line": 167,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "OrderConfirmationContent",
+          "callee": "useLanguage",
+          "lineNumber": 61
+        },
+        {
+          "caller": "OrderConfirmationContent",
+          "callee": "useSearchParams",
+          "lineNumber": 62
+        },
+        {
+          "caller": "OrderConfirmationContent",
+          "callee": "searchParams.get",
+          "lineNumber": 63
+        },
+        {
+          "caller": "OrderConfirmationContent",
+          "callee": "orderNumber.toUpperCase",
+          "lineNumber": 90
+        },
+        {
+          "caller": "OrderConfirmationContent",
+          "callee": "window.print",
+          "lineNumber": 145
+        },
+        {
+          "caller": "OrderConfirmationContent",
+          "callee": "headerConfig.contact.phone.replace",
+          "lineNumber": 157
+        },
+        {
+          "caller": "OrderConfirmationPage",
+          "callee": "useLanguage",
+          "lineNumber": 168
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 173,
+      "nonEmptyLines": 160,
+      "functions": [
+        {
+          "name": "loadLandingData",
+          "startLine": 38,
+          "endLine": 38,
+          "params": [
+            "locale"
+          ]
+        },
+        {
+          "name": "getLandingData",
+          "startLine": 42,
+          "endLine": 49,
+          "params": [
+            "locale"
+          ]
+        },
+        {
+          "name": "ringProducts",
+          "startLine": 56,
+          "endLine": 69,
+          "params": [
+            "data"
+          ]
+        },
+        {
+          "name": "HeroContent",
+          "startLine": 74,
+          "endLine": 114,
+          "params": [
+            "{ locale }"
+          ]
+        },
+        {
+          "name": "getHomeSections",
+          "startLine": 118,
+          "endLine": 129,
+          "params": []
+        },
+        {
+          "name": "Home",
+          "startLine": 131,
+          "endLine": 173,
+          "params": [
+            "{ params }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Home",
+          "line": 131,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "loadLandingData",
+          "callee": "storefront",
+          "lineNumber": 38
+        },
+        {
+          "caller": "loadLandingData",
+          "callee": "encodeURIComponent",
+          "lineNumber": 38
+        },
+        {
+          "caller": "getLandingData",
+          "callee": "cachedCatalogQuery(`landing-v7-${locale}`, () => loadLandingData(locale))",
+          "lineNumber": 44
+        },
+        {
+          "caller": "getLandingData",
+          "callee": "cachedCatalogQuery",
+          "lineNumber": 44
+        },
+        {
+          "caller": "getLandingData",
+          "callee": "loadLandingData",
+          "lineNumber": 44
+        },
+        {
+          "caller": "getLandingData",
+          "callee": "console.error",
+          "lineNumber": 46
+        },
+        {
+          "caller": "ringProducts",
+          "callee": "data.ringPicks.filter((p) => p.image).slice",
+          "lineNumber": 57
+        },
+        {
+          "caller": "ringProducts",
+          "callee": "data.ringPicks.filter",
+          "lineNumber": 57
+        },
+        {
+          "caller": "ringProducts",
+          "callee": "cards.push",
+          "lineNumber": 60
+        },
+        {
+          "caller": "ringProducts",
+          "callee": "cards.some",
+          "lineNumber": 66
+        },
+        {
+          "caller": "ringProducts",
+          "callee": "cards.push",
+          "lineNumber": 66
+        },
+        {
+          "caller": "HeroContent",
+          "callee": "getHeroContent",
+          "lineNumber": 76
+        },
+        {
+          "caller": "HeroContent",
+          "callee": "console.error",
+          "lineNumber": 85
+        },
+        {
+          "caller": "settle",
+          "callee": "console.error",
+          "lineNumber": 119
+        },
+        {
+          "caller": "getHomeSections",
+          "callee": "Promise.all",
+          "lineNumber": 120
+        },
+        {
+          "caller": "getHomeSections",
+          "callee": "settle",
+          "lineNumber": 121
+        },
+        {
+          "caller": "getHomeSections",
+          "callee": "getFeaturedCategories",
+          "lineNumber": 121
+        },
+        {
+          "caller": "getHomeSections",
+          "callee": "settle",
+          "lineNumber": 122
+        },
+        {
+          "caller": "getHomeSections",
+          "callee": "getTopProducts",
+          "lineNumber": 122
+        },
+        {
+          "caller": "getHomeSections",
+          "callee": "settle",
+          "lineNumber": 123
+        },
+        {
+          "caller": "getHomeSections",
+          "callee": "getPromoProducts",
+          "lineNumber": 123
+        },
+        {
+          "caller": "getHomeSections",
+          "callee": "settle",
+          "lineNumber": 124
+        },
+        {
+          "caller": "getHomeSections",
+          "callee": "getSaleBanners",
+          "lineNumber": 124
+        },
+        {
+          "caller": "getHomeSections",
+          "callee": "settle",
+          "lineNumber": 125
+        },
+        {
+          "caller": "getHomeSections",
+          "callee": "getReels",
+          "lineNumber": 125
+        },
+        {
+          "caller": "getHomeSections",
+          "callee": "settle",
+          "lineNumber": 126
+        },
+        {
+          "caller": "getHomeSections",
+          "callee": "getLatestReviews",
+          "lineNumber": 126
+        },
+        {
+          "caller": "getHomeSections",
+          "callee": "Promise.resolve",
+          "lineNumber": 126
+        },
+        {
+          "caller": "Home",
+          "callee": "Promise.all",
+          "lineNumber": 136
+        },
+        {
+          "caller": "Home",
+          "callee": "getLandingData",
+          "lineNumber": 136
+        },
+        {
+          "caller": "Home",
+          "callee": "getHomeSections",
+          "lineNumber": 136
+        },
+        {
+          "caller": "Home",
+          "callee": "ringProducts",
+          "lineNumber": 143
+        },
+        {
+          "caller": "Home",
+          "callee": "landing.layout\r\n            .filter((section) => section.visible)\r\n            .map",
+          "lineNumber": 166
+        },
+        {
+          "caller": "Home",
+          "callee": "landing.layout\r\n            .filter",
+          "lineNumber": 166
+        }
+      ],
+      "metrics": {
+        "importCount": 21,
+        "exportCount": 1,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/privacy/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 294,
+      "nonEmptyLines": 285,
+      "functions": [
+        {
+          "name": "getContent",
+          "startLine": 19,
+          "endLine": 248,
+          "params": []
+        },
+        {
+          "name": "PrivacyPolicyPage",
+          "startLine": 250,
+          "endLine": 292,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "PrivacyPolicyPage",
+          "line": 250,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "PrivacyPolicyPage",
+          "callee": "usePathname",
+          "lineNumber": 251
+        },
+        {
+          "caller": "PrivacyPolicyPage",
+          "callee": "pathname?.split",
+          "lineNumber": 252
+        },
+        {
+          "caller": "PrivacyPolicyPage",
+          "callee": "[\"en\", \"fr\", \"ar\"].includes",
+          "lineNumber": 253
+        },
+        {
+          "caller": "PrivacyPolicyPage",
+          "callee": "getContent",
+          "lineNumber": 255
+        },
+        {
+          "caller": "PrivacyPolicyPage",
+          "callee": "new Date().toLocaleDateString",
+          "lineNumber": 267
+        },
+        {
+          "caller": "PrivacyPolicyPage",
+          "callee": "Object.entries(text.sections).map",
+          "lineNumber": 280
+        },
+        {
+          "caller": "PrivacyPolicyPage",
+          "callee": "Object.entries",
+          "lineNumber": 280
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/products/[slug]/ProductDetailClient.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 1054,
+      "nonEmptyLines": 985,
+      "functions": [
+        {
+          "name": "getCategoryName",
+          "startLine": 103,
+          "endLine": 111,
+          "params": [
+            "category",
+            "locale"
+          ]
+        },
+        {
+          "name": "ProductDetailClient",
+          "startLine": 302,
+          "endLine": 1054,
+          "params": [
+            "{ initialData, freeShippingThreshold }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProductDetailClient",
+          "line": 302,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useParams",
+          "lineNumber": 303
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useSearchParams",
+          "lineNumber": 304
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "searchParams.get",
+          "lineNumber": 308
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 310
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 311
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 312
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 313
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 314
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 315
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 316
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 317
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 319
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 320
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 321
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useEffect",
+          "lineNumber": 322
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "setBuyRowVisible",
+          "lineNumber": 324
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "observer.observe",
+          "lineNumber": 325
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "observer.disconnect",
+          "lineNumber": 326
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 328
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 329
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 330
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 331
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 332
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 333
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useState",
+          "lineNumber": 334
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useCustomer",
+          "lineNumber": 335
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useForm",
+          "lineNumber": 336
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "zodResolver",
+          "lineNumber": 337
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useEffect",
+          "lineNumber": 340
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "loadProductDetail",
+          "lineNumber": 344
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "setProduct",
+          "lineNumber": 348
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "setSimilarProducts",
+          "lineNumber": 349
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "setRelatedCategories",
+          "lineNumber": 350
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "variants.filter",
+          "lineNumber": 354
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "available.find",
+          "lineNumber": 355
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "setSelectedColor",
+          "lineNumber": 357
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "available.find",
+          "lineNumber": 358
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "setSelectedVariant",
+          "lineNumber": 360
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "setSelectedSize",
+          "lineNumber": 361
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "available.find",
+          "lineNumber": 364
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "setSelectedVariant",
+          "lineNumber": 365
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "setSelectedSize",
+          "lineNumber": 366
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "setLoading",
+          "lineNumber": 370
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "await storefront",
+          "lineNumber": 372
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "setReviews",
+          "lineNumber": 373
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "console.error",
+          "lineNumber": 375
+        },
+        {
+          "caller": "fetchProduct",
+          "callee": "setLoading",
+          "lineNumber": 377
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "fetchProduct",
+          "lineNumber": 381
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "useEffect",
+          "lineNumber": 386
+        },
+        {
+          "caller": "fetchCategoryName",
+          "callee": "(await getCategories()).find",
+          "lineNumber": 390
+        },
+        {
+          "caller": "fetchCategoryName",
+          "callee": "getCategories",
+          "lineNumber": 390
+        },
+        {
+          "caller": "fetchCategoryName",
+          "callee": "setCategoryName",
+          "lineNumber": 392
+        },
+        {
+          "caller": "fetchCategoryName",
+          "callee": "getCategoryName",
+          "lineNumber": 392
+        },
+        {
+          "caller": "fetchCategoryName",
+          "callee": "console.error",
+          "lineNumber": 395
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "fetchCategoryName",
+          "lineNumber": 400
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "reviews.reduce",
+          "lineNumber": 406
+        },
+        {
+          "caller": "onSubmitComment",
+          "callee": "Number",
+          "lineNumber": 414
+        },
+        {
+          "caller": "onSubmitComment",
+          "callee": "toast.error",
+          "lineNumber": 416
+        },
+        {
+          "caller": "onSubmitComment",
+          "callee": "setSubmittingComment",
+          "lineNumber": 420
+        },
+        {
+          "caller": "onSubmitComment",
+          "callee": "accountApi",
+          "lineNumber": 423
+        },
+        {
+          "caller": "onSubmitComment",
+          "callee": "(data.comment || '').trim",
+          "lineNumber": 423
+        },
+        {
+          "caller": "onSubmitComment",
+          "callee": "await storefront",
+          "lineNumber": 426
+        },
+        {
+          "caller": "onSubmitComment",
+          "callee": "setReviews",
+          "lineNumber": 429
+        },
+        {
+          "caller": "onSubmitComment",
+          "callee": "reset",
+          "lineNumber": 433
+        },
+        {
+          "caller": "onSubmitComment",
+          "callee": "setSelectedRating",
+          "lineNumber": 434
+        },
+        {
+          "caller": "onSubmitComment",
+          "callee": "setReviewFormOpen",
+          "lineNumber": 435
+        },
+        {
+          "caller": "onSubmitComment",
+          "callee": "toast.success",
+          "lineNumber": 437
+        },
+        {
+          "caller": "onSubmitComment",
+          "callee": "console.error",
+          "lineNumber": 441
+        },
+        {
+          "caller": "onSubmitComment",
+          "callee": "toast.error",
+          "lineNumber": 443
+        },
+        {
+          "caller": "onSubmitComment",
+          "callee": "setSubmittingComment",
+          "lineNumber": 446
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "selectedVariant.images.filter",
+          "lineNumber": 473
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "img.url.trim",
+          "lineNumber": 473
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "selectedVariant.image_url.trim",
+          "lineNumber": 474
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "product.product_images.filter",
+          "lineNumber": 477
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "img.url.trim",
+          "lineNumber": 477
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "product.image_url.trim",
+          "lineNumber": 478
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "product.product_variants\r\n            .filter(v => v.color_id && v.colors && (v.is_available !== false))\r\n            .reduce",
+          "lineNumber": 489
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "product.product_variants\r\n            .filter",
+          "lineNumber": 489
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "acc.find",
+          "lineNumber": 492
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "acc.push",
+          "lineNumber": 493
+        },
+        {
+          "caller": "getAvailableSizes",
+          "callee": "product.product_variants.filter",
+          "lineNumber": 506
+        },
+        {
+          "caller": "getAvailableSizes",
+          "callee": "product.product_variants.filter",
+          "lineNumber": 507
+        },
+        {
+          "caller": "getAvailableSizes",
+          "callee": "variants.reduce",
+          "lineNumber": 509
+        },
+        {
+          "caller": "getAvailableSizes",
+          "callee": "acc.find",
+          "lineNumber": 510
+        },
+        {
+          "caller": "getAvailableSizes",
+          "callee": "acc.push",
+          "lineNumber": 511
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "getAvailableSizes",
+          "lineNumber": 517
+        },
+        {
+          "caller": "handleColorSelect",
+          "callee": "setSelectedColor",
+          "lineNumber": 521
+        },
+        {
+          "caller": "handleColorSelect",
+          "callee": "setSelectedImage",
+          "lineNumber": 522
+        },
+        {
+          "caller": "handleColorSelect",
+          "callee": "product.product_variants.find",
+          "lineNumber": 526
+        },
+        {
+          "caller": "handleColorSelect",
+          "callee": "setSelectedVariant",
+          "lineNumber": 528
+        },
+        {
+          "caller": "handleColorSelect",
+          "callee": "setSelectedSize",
+          "lineNumber": 531
+        },
+        {
+          "caller": "handleColorSelect",
+          "callee": "getAvailableSizes",
+          "lineNumber": 533
+        },
+        {
+          "caller": "handleColorSelect",
+          "callee": "setSelectedSize",
+          "lineNumber": 535
+        },
+        {
+          "caller": "handleSizeSelect",
+          "callee": "setSelectedSize",
+          "lineNumber": 544
+        },
+        {
+          "caller": "handleSizeSelect",
+          "callee": "product.product_variants.find",
+          "lineNumber": 548
+        },
+        {
+          "caller": "handleSizeSelect",
+          "callee": "setSelectedVariant",
+          "lineNumber": 552
+        },
+        {
+          "caller": "handleSizeSelect",
+          "callee": "setSelectedImage",
+          "lineNumber": 553
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "[selectedVariant.colors?.display_name || selectedVariant.colors?.name, selectedVariant.sizes?.name].filter(Boolean).join",
+          "lineNumber": 564
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "[selectedVariant.colors?.display_name || selectedVariant.colors?.name, selectedVariant.sizes?.name].filter",
+          "lineNumber": 564
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "isRTL",
+          "lineNumber": 569
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "getProductName",
+          "lineNumber": 571
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "getProductDescription",
+          "lineNumber": 572
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "availableColors.find",
+          "lineNumber": 574
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "availableSizes.find",
+          "lineNumber": 575
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "productImages.filter",
+          "lineNumber": 577
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "img.url.trim",
+          "lineNumber": 577
+        },
+        {
+          "caller": "Stars",
+          "callee": "[1, 2, 3, 4, 5].map",
+          "lineNumber": 582
+        },
+        {
+          "caller": "Stars",
+          "callee": "Math.round",
+          "lineNumber": 583
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "setTouchStartX",
+          "lineNumber": 612
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "setTouchStartX",
+          "lineNumber": 616
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "Math.abs",
+          "lineNumber": 617
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "setSelectedImage",
+          "lineNumber": 620
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "galleryImages.map",
+          "lineNumber": 629
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "galleryImages.slice(0, 8).map",
+          "lineNumber": 635
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "galleryImages.slice",
+          "lineNumber": 635
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "setSelectedImage",
+          "lineNumber": 639
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "averageRating.toFixed",
+          "lineNumber": 666
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "Math.round",
+          "lineNumber": 679
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "Math.round",
+          "lineNumber": 683
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "Math.round",
+          "lineNumber": 685
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "availableColors.map",
+          "lineNumber": 700
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "handleColorSelect",
+          "lineNumber": 707
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "availableSizes.map",
+          "lineNumber": 728
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "product.product_variants?.some",
+          "lineNumber": 729
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "handleSizeSelect",
+          "lineNumber": 735
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "setQuantity",
+          "lineNumber": 757
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "Math.max",
+          "lineNumber": 757
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "setQuantity",
+          "lineNumber": 766
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "Math.round",
+          "lineNumber": 781
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "Math.round",
+          "lineNumber": 802
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "Math.round",
+          "lineNumber": 803
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "Math.round",
+          "lineNumber": 815
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "text.deliveryCostLine.replace",
+          "lineNumber": 842
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "String",
+          "lineNumber": 842
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "text.freeFrom.replace",
+          "lineNumber": 844
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "String",
+          "lineNumber": 844
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "product.product_details.map",
+          "lineNumber": 874
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "text.freeFrom.replace",
+          "lineNumber": 888
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "String",
+          "lineNumber": 888
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "headerConfig.contact.phone.replace",
+          "lineNumber": 898
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "averageRating.toFixed",
+          "lineNumber": 915
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "text.basedOn.replace",
+          "lineNumber": 918
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "String",
+          "lineNumber": 918
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "authHref",
+          "lineNumber": 926
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "authHref",
+          "lineNumber": 929
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "setReviewFormOpen",
+          "lineNumber": 935
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "handleSubmit",
+          "lineNumber": 939
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "customerName",
+          "lineNumber": 941
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "[1, 2, 3, 4, 5].map",
+          "lineNumber": 946
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "setSelectedRating",
+          "lineNumber": 947
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "setReviewFormOpen",
+          "lineNumber": 962
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "reviews.slice(0, visibleComments).map",
+          "lineNumber": 975
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "reviews.slice",
+          "lineNumber": 975
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "displayName.split(' ').map((n) => n[0]).join('').toUpperCase().slice",
+          "lineNumber": 977
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "displayName.split(' ').map((n) => n[0]).join('').toUpperCase",
+          "lineNumber": 977
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "displayName.split(' ').map((n) => n[0]).join",
+          "lineNumber": 977
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "displayName.split(' ').map",
+          "lineNumber": 977
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "displayName.split",
+          "lineNumber": 977
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "new Date(review.created_at).toLocaleDateString",
+          "lineNumber": 978
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "setVisibleComments",
+          "lineNumber": 1000
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "similarProducts.map",
+          "lineNumber": 1017
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "getProductName",
+          "lineNumber": 1019
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "Math.round",
+          "lineNumber": 1028
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "Math.round",
+          "lineNumber": 1029
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "relatedCategories.map",
+          "lineNumber": 1042
+        },
+        {
+          "caller": "ProductDetailClient",
+          "callee": "getCategoryName",
+          "lineNumber": 1044
+        }
+      ],
+      "metrics": {
+        "importCount": 12,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/products/[slug]/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 28,
+      "functions": [
+        {
+          "name": "generateMetadata",
+          "startLine": 12,
+          "endLine": 23,
+          "params": [
+            "{ params }"
+          ]
+        },
+        {
+          "name": "ProductPage",
+          "startLine": 25,
+          "endLine": 31,
+          "params": [
+            "{ params }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "generateMetadata",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "ProductPage",
+          "line": 25,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "generateMetadata",
+          "callee": "getCachedProductDetail",
+          "lineNumber": 14
+        },
+        {
+          "caller": "generateMetadata",
+          "callee": "getProductDescription(detail.product, locale).slice",
+          "lineNumber": 16
+        },
+        {
+          "caller": "generateMetadata",
+          "callee": "getProductDescription",
+          "lineNumber": 16
+        },
+        {
+          "caller": "generateMetadata",
+          "callee": "getProductName",
+          "lineNumber": 19
+        },
+        {
+          "caller": "ProductPage",
+          "callee": "Promise.all",
+          "lineNumber": 27
+        },
+        {
+          "caller": "ProductPage",
+          "callee": "getCachedProductDetail",
+          "lineNumber": 27
+        },
+        {
+          "caller": "ProductPage",
+          "callee": "storefront",
+          "lineNumber": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/products/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 749,
+      "nonEmptyLines": 694,
+      "functions": [
+        {
+          "name": "getCategoryName",
+          "startLine": 133,
+          "endLine": 141,
+          "params": [
+            "category",
+            "locale"
+          ]
+        },
+        {
+          "name": "ProductsPage",
+          "startLine": 143,
+          "endLine": 748,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProductsPage",
+          "line": 143,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ProductsPage",
+          "callee": "useParams",
+          "lineNumber": 144
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useSearchParams",
+          "lineNumber": 145
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "isRTL",
+          "lineNumber": 148
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 150
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useQuickAdd",
+          "lineNumber": 151
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 152
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 153
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 154
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 155
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 156
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 157
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 158
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 159
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 160
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 163
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 164
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 165
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 166
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 169
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 170
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useState",
+          "lineNumber": 174
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useEffect",
+          "lineNumber": 177
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "searchParams.get",
+          "lineNumber": 190
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "searchParams.get",
+          "lineNumber": 191
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "searchParams.get",
+          "lineNumber": 192
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "searchParams?.get",
+          "lineNumber": 193
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useRouter",
+          "lineNumber": 194
+        },
+        {
+          "caller": "clearSearch",
+          "callee": "searchParams?.toString",
+          "lineNumber": 198
+        },
+        {
+          "caller": "clearSearch",
+          "callee": "params.delete",
+          "lineNumber": 199
+        },
+        {
+          "caller": "clearSearch",
+          "callee": "params.toString",
+          "lineNumber": 200
+        },
+        {
+          "caller": "clearSearch",
+          "callee": "router.push",
+          "lineNumber": 201
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useEffect",
+          "lineNumber": 205
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "fetchCategories",
+          "lineNumber": 206
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "fetchColors",
+          "lineNumber": 207
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "fetchSizes",
+          "lineNumber": 208
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "fetchUserAndFavorites",
+          "lineNumber": 209
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "getCustomer",
+          "lineNumber": 215
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "setUserId",
+          "lineNumber": 217
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "getUserFavorites",
+          "lineNumber": 220
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "favorites.map",
+          "lineNumber": 221
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "setWishlist",
+          "lineNumber": 222
+        },
+        {
+          "caller": "fetchUserAndFavorites",
+          "callee": "console.error",
+          "lineNumber": 225
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useEffect",
+          "lineNumber": 230
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "categories.find",
+          "lineNumber": 233
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "setSelectedCategoryIds",
+          "lineNumber": 235
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "getCategories",
+          "lineNumber": 242
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "setCategories",
+          "lineNumber": 244
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "data.map",
+          "lineNumber": 246
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "setCategoryMap",
+          "lineNumber": 247
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "console.error",
+          "lineNumber": 250
+        },
+        {
+          "caller": "fetchCategories",
+          "callee": "setCategoriesLoaded",
+          "lineNumber": 252
+        },
+        {
+          "caller": "fetchColors",
+          "callee": "(await fetch('/api/colors')).json",
+          "lineNumber": 258
+        },
+        {
+          "caller": "fetchColors",
+          "callee": "fetch",
+          "lineNumber": 258
+        },
+        {
+          "caller": "fetchColors",
+          "callee": "setAvailableColors",
+          "lineNumber": 259
+        },
+        {
+          "caller": "fetchColors",
+          "callee": "console.error",
+          "lineNumber": 261
+        },
+        {
+          "caller": "fetchColors",
+          "callee": "setAvailableColors",
+          "lineNumber": 263
+        },
+        {
+          "caller": "fetchSizes",
+          "callee": "(await fetch('/api/sizes')).json",
+          "lineNumber": 269
+        },
+        {
+          "caller": "fetchSizes",
+          "callee": "fetch",
+          "lineNumber": 269
+        },
+        {
+          "caller": "fetchSizes",
+          "callee": "setAvailableSizes",
+          "lineNumber": 270
+        },
+        {
+          "caller": "fetchSizes",
+          "callee": "console.error",
+          "lineNumber": 272
+        },
+        {
+          "caller": "fetchSizes",
+          "callee": "setAvailableSizes",
+          "lineNumber": 274
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "setProductsLoading",
+          "lineNumber": 280
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "String",
+          "lineNumber": 284
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "String",
+          "lineNumber": 284
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "params.set",
+          "lineNumber": 285
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "params.set",
+          "lineNumber": 286
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "params.set",
+          "lineNumber": 287
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "String",
+          "lineNumber": 287
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "params.set",
+          "lineNumber": 288
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "String",
+          "lineNumber": 288
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "params.set",
+          "lineNumber": 289
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "selectedCategoryIds.forEach",
+          "lineNumber": 293
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "getDescendantCategoryIds(id, categories).forEach",
+          "lineNumber": 293
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "getDescendantCategoryIds",
+          "lineNumber": 293
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "ids.add",
+          "lineNumber": 293
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "params.set",
+          "lineNumber": 294
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "Array.from(ids).join",
+          "lineNumber": 294
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "Array.from",
+          "lineNumber": 294
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "Array.from(selectedSizes).map",
+          "lineNumber": 298
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "Array.from",
+          "lineNumber": 298
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "size.toUpperCase",
+          "lineNumber": 298
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "availableSizes\n                    .filter((size) => [size.code, size.name, size.display_name].some((v) => v && wanted.includes(v.toUpperCase())))\n                    .map",
+          "lineNumber": 299
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "availableSizes\n                    .filter",
+          "lineNumber": 299
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "[size.code, size.name, size.display_name].some",
+          "lineNumber": 300
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "wanted.includes",
+          "lineNumber": 300
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "v.toUpperCase",
+          "lineNumber": 300
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "setProducts",
+          "lineNumber": 303
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "setTotalCount",
+          "lineNumber": 304
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "params.set",
+          "lineNumber": 307
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "sizeIds.join",
+          "lineNumber": 307
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "params.set",
+          "lineNumber": 309
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "Array.from(selectedColors).join",
+          "lineNumber": 309
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "Array.from",
+          "lineNumber": 309
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "await storefront",
+          "lineNumber": 311
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "setProducts",
+          "lineNumber": 312
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "setTotalCount",
+          "lineNumber": 313
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "console.error",
+          "lineNumber": 315
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "setProductsLoading",
+          "lineNumber": 317
+        },
+        {
+          "caller": "fetchProducts",
+          "callee": "setLoading",
+          "lineNumber": 318
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useEffect",
+          "lineNumber": 323
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "setCurrentPage",
+          "lineNumber": 327
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "fetchProducts",
+          "lineNumber": 328
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "goToLogin",
+          "lineNumber": 339
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "setWishlist",
+          "lineNumber": 344
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "newSet.has",
+          "lineNumber": 346
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "newSet.delete",
+          "lineNumber": 347
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "newSet.add",
+          "lineNumber": 349
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "toggleFavorite",
+          "lineNumber": 356
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "wishlist.has",
+          "lineNumber": 356
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "console.error",
+          "lineNumber": 359
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "setWishlist",
+          "lineNumber": 361
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "newSet.has",
+          "lineNumber": 363
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "newSet.delete",
+          "lineNumber": 364
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "newSet.add",
+          "lineNumber": 366
+        },
+        {
+          "caller": "toggleWishlist",
+          "callee": "console.error",
+          "lineNumber": 372
+        },
+        {
+          "caller": "toggleSize",
+          "callee": "setSelectedSizes",
+          "lineNumber": 377
+        },
+        {
+          "caller": "toggleSize",
+          "callee": "newSet.has",
+          "lineNumber": 379
+        },
+        {
+          "caller": "toggleSize",
+          "callee": "newSet.delete",
+          "lineNumber": 380
+        },
+        {
+          "caller": "toggleSize",
+          "callee": "newSet.add",
+          "lineNumber": 382
+        },
+        {
+          "caller": "toggleColor",
+          "callee": "setSelectedColors",
+          "lineNumber": 389
+        },
+        {
+          "caller": "toggleColor",
+          "callee": "newSet.has",
+          "lineNumber": 391
+        },
+        {
+          "caller": "toggleColor",
+          "callee": "newSet.delete",
+          "lineNumber": 392
+        },
+        {
+          "caller": "toggleColor",
+          "callee": "newSet.add",
+          "lineNumber": 394
+        },
+        {
+          "caller": "toggleCategory",
+          "callee": "setSelectedCategoryIds",
+          "lineNumber": 401
+        },
+        {
+          "caller": "toggleCategory",
+          "callee": "newSet.has",
+          "lineNumber": 403
+        },
+        {
+          "caller": "toggleCategory",
+          "callee": "newSet.delete",
+          "lineNumber": 404
+        },
+        {
+          "caller": "toggleCategory",
+          "callee": "newSet.add",
+          "lineNumber": 406
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "useEffect",
+          "lineNumber": 412
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "fetchProducts",
+          "lineNumber": 413
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "window.scrollTo",
+          "lineNumber": 415
+        },
+        {
+          "caller": "FilterContent",
+          "callee": "setPriceRange",
+          "lineNumber": 442
+        },
+        {
+          "caller": "FilterContent",
+          "callee": "parseInt",
+          "lineNumber": 442
+        },
+        {
+          "caller": "FilterContent",
+          "callee": "SIZES.map",
+          "lineNumber": 462
+        },
+        {
+          "caller": "FilterContent",
+          "callee": "toggleSize",
+          "lineNumber": 465
+        },
+        {
+          "caller": "FilterContent",
+          "callee": "selectedSizes.has",
+          "lineNumber": 466
+        },
+        {
+          "caller": "FilterContent",
+          "callee": "setSelectedColors",
+          "lineNumber": 484
+        },
+        {
+          "caller": "FilterContent",
+          "callee": "availableColors.map",
+          "lineNumber": 493
+        },
+        {
+          "caller": "FilterContent",
+          "callee": "toggleColor",
+          "lineNumber": 496
+        },
+        {
+          "caller": "FilterContent",
+          "callee": "selectedColors.has",
+          "lineNumber": 497
+        },
+        {
+          "caller": "FilterContent",
+          "callee": "selectedColors.has",
+          "lineNumber": 505
+        },
+        {
+          "caller": "FilterContent",
+          "callee": "categories.map",
+          "lineNumber": 542
+        },
+        {
+          "caller": "FilterContent",
+          "callee": "selectedCategoryIds.has",
+          "lineNumber": 546
+        },
+        {
+          "caller": "FilterContent",
+          "callee": "toggleCategory",
+          "lineNumber": 547
+        },
+        {
+          "caller": "FilterContent",
+          "callee": "getCategoryName",
+          "lineNumber": 550
+        },
+        {
+          "caller": "FilterContent",
+          "callee": "setIsFilterDrawerOpen",
+          "lineNumber": 560
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "text.showingResults.replace",
+          "lineNumber": 576
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "products.length.toString",
+          "lineNumber": 576
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "setIsFilterDrawerOpen",
+          "lineNumber": 579
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "text.resultsFor.replace",
+          "lineNumber": 604
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "text.showingResults.replace",
+          "lineNumber": 620
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "products.length.toString",
+          "lineNumber": 620
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "Array.from({ length: ITEMS_PER_PAGE }).map",
+          "lineNumber": 628
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "Array.from",
+          "lineNumber": 628
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "products.map",
+          "lineNumber": 649
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "wishlist.has",
+          "lineNumber": 654
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "quickAdd",
+          "lineNumber": 656
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "setCurrentPage",
+          "lineNumber": 666
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "Math.max",
+          "lineNumber": 666
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "Array.from({ length: Math.ceil(totalCount / ITEMS_PER_PAGE) }, (_, i) => i + 1)\n                                            .filter(page => {\n                                                const totalPages = Math.ceil(totalCount / ITEMS_PER_PAGE);\n                                                return page === 1 ||\n                                                    page === totalPages ||\n                                                    Math.abs(page - currentPage) <= 1;\n                                            })\n                                            .map",
+          "lineNumber": 674
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "Array.from({ length: Math.ceil(totalCount / ITEMS_PER_PAGE) }, (_, i) => i + 1)\n                                            .filter",
+          "lineNumber": 674
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "Array.from",
+          "lineNumber": 674
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "Math.ceil",
+          "lineNumber": 674
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "Math.ceil",
+          "lineNumber": 676
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "Math.abs",
+          "lineNumber": 679
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "setCurrentPage",
+          "lineNumber": 687
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "setCurrentPage",
+          "lineNumber": 701
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "Math.min",
+          "lineNumber": 701
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "Math.ceil",
+          "lineNumber": 701
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "Math.ceil",
+          "lineNumber": 702
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "setIsFilterDrawerOpen",
+          "lineNumber": 720
+        },
+        {
+          "caller": "ProductsPage",
+          "callee": "setIsFilterDrawerOpen",
+          "lineNumber": 731
+        }
+      ],
+      "metrics": {
+        "importCount": 9,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/settings/layout.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 10,
+      "functions": [
+        {
+          "name": "SettingsLayout",
+          "startLine": 3,
+          "endLine": 11,
+          "params": [
+            "{ children }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SettingsLayout",
+          "line": 3,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/settings/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 727,
+      "nonEmptyLines": 684,
+      "functions": [
+        {
+          "name": "SettingsPage",
+          "startLine": 236,
+          "endLine": 727,
+          "params": [
+            "{ params }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SettingsPage",
+          "line": 236,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SettingsPage",
+          "callee": "use",
+          "lineNumber": 237
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "[\"en\", \"fr\", \"ar\"].includes",
+          "lineNumber": 238
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "useRouter",
+          "lineNumber": 240
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "useQuickAdd",
+          "lineNumber": 241
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "useCustomer",
+          "lineNumber": 242
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "useRef",
+          "lineNumber": 244
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "useState",
+          "lineNumber": 246
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "useState",
+          "lineNumber": 247
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "useState",
+          "lineNumber": 248
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "useState",
+          "lineNumber": 249
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "useState",
+          "lineNumber": 250
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "useState",
+          "lineNumber": 251
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "useForm",
+          "lineNumber": 254
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "useForm",
+          "lineNumber": 266
+        },
+        {
+          "caller": "fetchOrders",
+          "callee": "setOrdersLoading",
+          "lineNumber": 276
+        },
+        {
+          "caller": "fetchOrders",
+          "callee": "setOrders",
+          "lineNumber": 278
+        },
+        {
+          "caller": "fetchOrders",
+          "callee": "await accountApi",
+          "lineNumber": 278
+        },
+        {
+          "caller": "fetchOrders",
+          "callee": "console.error",
+          "lineNumber": 280
+        },
+        {
+          "caller": "fetchOrders",
+          "callee": "setOrdersLoading",
+          "lineNumber": 282
+        },
+        {
+          "caller": "fetchFavorites",
+          "callee": "setFavoritesLoading",
+          "lineNumber": 288
+        },
+        {
+          "caller": "fetchFavorites",
+          "callee": "getUserFavorites",
+          "lineNumber": 290
+        },
+        {
+          "caller": "fetchFavorites",
+          "callee": "console.error",
+          "lineNumber": 293
+        },
+        {
+          "caller": "fetchFavorites",
+          "callee": "setSavedItems",
+          "lineNumber": 295
+        },
+        {
+          "caller": "fetchFavorites",
+          "callee": "console.error",
+          "lineNumber": 298
+        },
+        {
+          "caller": "fetchFavorites",
+          "callee": "setFavoritesLoading",
+          "lineNumber": 300
+        },
+        {
+          "caller": "handleRemoveFavorite",
+          "callee": "removeFromFavorites",
+          "lineNumber": 308
+        },
+        {
+          "caller": "handleRemoveFavorite",
+          "callee": "setSavedItems",
+          "lineNumber": 312
+        },
+        {
+          "caller": "handleRemoveFavorite",
+          "callee": "prev.filter",
+          "lineNumber": 312
+        },
+        {
+          "caller": "handleRemoveFavorite",
+          "callee": "toast.success",
+          "lineNumber": 313
+        },
+        {
+          "caller": "handleRemoveFavorite",
+          "callee": "console.error",
+          "lineNumber": 315
+        },
+        {
+          "caller": "handleRemoveFavorite",
+          "callee": "toast.error",
+          "lineNumber": 316
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "useEffect",
+          "lineNumber": 321
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "router.replace",
+          "lineNumber": 325
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "authHref",
+          "lineNumber": 325
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "customerName",
+          "lineNumber": 332
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "setUserProfile",
+          "lineNumber": 338
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "profileForm.reset",
+          "lineNumber": 339
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "fetchOrders",
+          "lineNumber": 347
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "fetchFavorites",
+          "lineNumber": 348
+        },
+        {
+          "caller": "handleTabClick",
+          "callee": "signOut",
+          "lineNumber": 355
+        },
+        {
+          "caller": "handleTabClick",
+          "callee": "router.replace",
+          "lineNumber": 356
+        },
+        {
+          "caller": "handleTabClick",
+          "callee": "setActiveTab",
+          "lineNumber": 359
+        },
+        {
+          "caller": "handlePasswordChange",
+          "callee": "toast.error",
+          "lineNumber": 365
+        },
+        {
+          "caller": "handlePasswordChange",
+          "callee": "toast.error",
+          "lineNumber": 366
+        },
+        {
+          "caller": "handlePasswordChange",
+          "callee": "accountApi",
+          "lineNumber": 369
+        },
+        {
+          "caller": "handlePasswordChange",
+          "callee": "toast.error",
+          "lineNumber": 374
+        },
+        {
+          "caller": "handlePasswordChange",
+          "callee": "console.error",
+          "lineNumber": 375
+        },
+        {
+          "caller": "handlePasswordChange",
+          "callee": "toast.error",
+          "lineNumber": 376
+        },
+        {
+          "caller": "handlePasswordChange",
+          "callee": "passwordForm.reset",
+          "lineNumber": 378
+        },
+        {
+          "caller": "handlePasswordChange",
+          "callee": "toast.success",
+          "lineNumber": 379
+        },
+        {
+          "caller": "handleProfileUpdate",
+          "callee": "await accountApi",
+          "lineNumber": 386
+        },
+        {
+          "caller": "handleProfileUpdate",
+          "callee": "data.full_name.trim",
+          "lineNumber": 389
+        },
+        {
+          "caller": "handleProfileUpdate",
+          "callee": "data.phone.trim",
+          "lineNumber": 390
+        },
+        {
+          "caller": "handleProfileUpdate",
+          "callee": "data.country.trim",
+          "lineNumber": 391
+        },
+        {
+          "caller": "handleProfileUpdate",
+          "callee": "data.city.trim",
+          "lineNumber": 392
+        },
+        {
+          "caller": "handleProfileUpdate",
+          "callee": "data.address.trim",
+          "lineNumber": 393
+        },
+        {
+          "caller": "handleProfileUpdate",
+          "callee": "announceAuthChange",
+          "lineNumber": 396
+        },
+        {
+          "caller": "handleProfileUpdate",
+          "callee": "console.error",
+          "lineNumber": 398
+        },
+        {
+          "caller": "handleProfileUpdate",
+          "callee": "toast.error",
+          "lineNumber": 399
+        },
+        {
+          "caller": "handleProfileUpdate",
+          "callee": "toast.success",
+          "lineNumber": 401
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "text.tabs.map",
+          "lineNumber": 425
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "handleTabClick",
+          "lineNumber": 428
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "orders.map",
+          "lineNumber": 463
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "new Date(order.created_at).toLocaleDateString",
+          "lineNumber": 472
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "order.total.toFixed",
+          "lineNumber": 477
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "order.items.map",
+          "lineNumber": 489
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "item.price.toFixed",
+          "lineNumber": 504
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "item.subtotal.toFixed",
+          "lineNumber": 508
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "profileForm.handleSubmit",
+          "lineNumber": 542
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "passwordForm.handleSubmit",
+          "lineNumber": 622
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "passwordForm.register",
+          "lineNumber": 629
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "passwordForm.register",
+          "lineNumber": 640
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "passwordForm.register",
+          "lineNumber": 651
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "savedItems.map",
+          "lineNumber": 688
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "handleRemoveFavorite",
+          "lineNumber": 707
+        },
+        {
+          "caller": "SettingsPage",
+          "callee": "quickAdd",
+          "lineNumber": 708
+        }
+      ],
+      "metrics": {
+        "importCount": 7,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/shipping/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 255,
+      "nonEmptyLines": 247,
+      "functions": [
+        {
+          "name": "getContent",
+          "startLine": 20,
+          "endLine": 210,
+          "params": []
+        },
+        {
+          "name": "ShippingPolicyPage",
+          "startLine": 212,
+          "endLine": 254,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ShippingPolicyPage",
+          "line": 212,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ShippingPolicyPage",
+          "callee": "usePathname",
+          "lineNumber": 213
+        },
+        {
+          "caller": "ShippingPolicyPage",
+          "callee": "pathname?.split",
+          "lineNumber": 214
+        },
+        {
+          "caller": "ShippingPolicyPage",
+          "callee": "[\"en\", \"fr\", \"ar\"].includes",
+          "lineNumber": 215
+        },
+        {
+          "caller": "ShippingPolicyPage",
+          "callee": "getContent",
+          "lineNumber": 217
+        },
+        {
+          "caller": "ShippingPolicyPage",
+          "callee": "new Date().toLocaleDateString",
+          "lineNumber": 229
+        },
+        {
+          "caller": "ShippingPolicyPage",
+          "callee": "Object.entries(text.sections).map",
+          "lineNumber": 242
+        },
+        {
+          "caller": "ShippingPolicyPage",
+          "callee": "Object.entries",
+          "lineNumber": 242
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/terms-and-conditions/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 319,
+      "nonEmptyLines": 308,
+      "functions": [
+        {
+          "name": "getContent",
+          "startLine": 21,
+          "endLine": 253,
+          "params": []
+        },
+        {
+          "name": "TermsAndConditions",
+          "startLine": 255,
+          "endLine": 319,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "TermsAndConditions",
+          "line": 255,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "TermsAndConditions",
+          "callee": "usePathname",
+          "lineNumber": 256
+        },
+        {
+          "caller": "TermsAndConditions",
+          "callee": "pathname?.split",
+          "lineNumber": 259
+        },
+        {
+          "caller": "TermsAndConditions",
+          "callee": "['en', 'fr', 'ar'].includes",
+          "lineNumber": 260
+        },
+        {
+          "caller": "TermsAndConditions",
+          "callee": "getContent",
+          "lineNumber": 262
+        },
+        {
+          "caller": "TermsAndConditions",
+          "callee": "Object.entries(text.sections).map",
+          "lineNumber": 292
+        },
+        {
+          "caller": "TermsAndConditions",
+          "callee": "Object.entries",
+          "lineNumber": 292
+        },
+        {
+          "caller": "TermsAndConditions",
+          "callee": "headerConfig.contact.phone.replace",
+          "lineNumber": 307
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/api/internal/revalidate/route.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 14,
+      "functions": [
+        {
+          "name": "POST",
+          "startLine": 7,
+          "endLine": 15,
+          "params": [
+            "request"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "POST",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "POST",
+          "callee": "request.headers.get",
+          "lineNumber": 9
+        },
+        {
+          "caller": "POST",
+          "callee": "timingSafeEqual",
+          "lineNumber": 10
+        },
+        {
+          "caller": "POST",
+          "callee": "Buffer.from",
+          "lineNumber": 10
+        },
+        {
+          "caller": "POST",
+          "callee": "Buffer.from",
+          "lineNumber": 10
+        },
+        {
+          "caller": "POST",
+          "callee": "NextResponse.json",
+          "lineNumber": 11
+        },
+        {
+          "caller": "POST",
+          "callee": "invalidateCatalog",
+          "lineNumber": 13
+        },
+        {
+          "caller": "POST",
+          "callee": "NextResponse.json",
+          "lineNumber": 14
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/not-found.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 87,
+      "nonEmptyLines": 72,
+      "functions": [
+        {
+          "name": "RootNotFound",
+          "startLine": 11,
+          "endLine": 86,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "RootNotFound",
+          "line": 11,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "RootNotFound",
+          "callee": "useRouter",
+          "lineNumber": 12
+        },
+        {
+          "caller": "RootNotFound",
+          "callee": "usePathname",
+          "lineNumber": 13
+        },
+        {
+          "caller": "RootNotFound",
+          "callee": "pathname?.split",
+          "lineNumber": 16
+        },
+        {
+          "caller": "RootNotFound",
+          "callee": "router.push",
+          "lineNumber": 50
+        },
+        {
+          "caller": "RootNotFound",
+          "callee": "Object.entries(headerConfig.social).map",
+          "lineNumber": 61
+        },
+        {
+          "caller": "RootNotFound",
+          "callee": "Object.entries",
+          "lineNumber": 61
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 7,
+      "nonEmptyLines": 6,
+      "functions": [
+        {
+          "name": "RootPage",
+          "startLine": 4,
+          "endLine": 7,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "RootPage",
+          "line": 4,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "RootPage",
+          "callee": "redirect",
+          "lineNumber": 6
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/carousel/CarouselIndicators.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 34,
+      "nonEmptyLines": 32,
+      "functions": [
+        {
+          "name": "CarouselIndicators",
+          "startLine": 10,
+          "endLine": 33,
+          "params": [
+            "{ \r\n    totalSlides, \r\n    currentSlide, \r\n    onSlideChange,\r\n    activeColor = \"bg-[#7B4735]\",\r\n    inactiveColor = \"bg-gray-300\",\r\n    className = \"\"\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CarouselIndicators",
+          "line": 10,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CarouselIndicators",
+          "callee": "Array.from({ length: totalSlides }).map",
+          "lineNumber": 20
+        },
+        {
+          "caller": "CarouselIndicators",
+          "callee": "Array.from",
+          "lineNumber": 20
+        },
+        {
+          "caller": "CarouselIndicators",
+          "callee": "onSlideChange",
+          "lineNumber": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/carousel/CarouselNavigation.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 35,
+      "functions": [
+        {
+          "name": "CarouselNavigation",
+          "startLine": 7,
+          "endLine": 36,
+          "params": [
+            "{\r\n    onPrevious,\r\n    onNext,\r\n    className = \"\"\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CarouselNavigation",
+          "line": 7,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/cart/AddToCartButton.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 143,
+      "nonEmptyLines": 131,
+      "functions": [
+        {
+          "name": "AddToCartButton",
+          "startLine": 47,
+          "endLine": 142,
+          "params": [
+            "{ product, quantity = 1, variant = \"default\", className = \"\", disabled = false, onAdd }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AddToCartButton",
+          "line": 47,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AddToCartButton",
+          "callee": "useCart",
+          "lineNumber": 48
+        },
+        {
+          "caller": "AddToCartButton",
+          "callee": "useLanguage",
+          "lineNumber": 49
+        },
+        {
+          "caller": "AddToCartButton",
+          "callee": "useState",
+          "lineNumber": 50
+        },
+        {
+          "caller": "AddToCartButton",
+          "callee": "useState",
+          "lineNumber": 51
+        },
+        {
+          "caller": "handleAddToCart",
+          "callee": "setIsAdding",
+          "lineNumber": 55
+        },
+        {
+          "caller": "handleAddToCart",
+          "callee": "onAdd",
+          "lineNumber": 58
+        },
+        {
+          "caller": "handleAddToCart",
+          "callee": "addItem",
+          "lineNumber": 62
+        },
+        {
+          "caller": "handleAddToCart",
+          "callee": "setTimeout",
+          "lineNumber": 66
+        },
+        {
+          "caller": "handleAddToCart",
+          "callee": "setIsAdding",
+          "lineNumber": 67
+        },
+        {
+          "caller": "handleAddToCart",
+          "callee": "setJustAdded",
+          "lineNumber": 68
+        },
+        {
+          "caller": "handleAddToCart",
+          "callee": "setTimeout",
+          "lineNumber": 70
+        },
+        {
+          "caller": "handleAddToCart",
+          "callee": "setJustAdded",
+          "lineNumber": 71
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/cart/CartButton.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 68,
+      "nonEmptyLines": 60,
+      "functions": [
+        {
+          "name": "CartButton",
+          "startLine": 26,
+          "endLine": 67,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "CartButton",
+          "line": 26,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CartButton",
+          "callee": "useRouter",
+          "lineNumber": 27
+        },
+        {
+          "caller": "CartButton",
+          "callee": "usePathname",
+          "lineNumber": 28
+        },
+        {
+          "caller": "CartButton",
+          "callee": "pathname?.split",
+          "lineNumber": 31
+        },
+        {
+          "caller": "CartButton",
+          "callee": "useState",
+          "lineNumber": 35
+        },
+        {
+          "caller": "CartButton",
+          "callee": "useEffect",
+          "lineNumber": 36
+        },
+        {
+          "caller": "CartButton",
+          "callee": "setMounted",
+          "lineNumber": 36
+        },
+        {
+          "caller": "openCart",
+          "callee": "router.push",
+          "lineNumber": 40
+        },
+        {
+          "caller": "CartButton",
+          "callee": "useCart",
+          "lineNumber": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/cart/CartDrawer.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 160,
+      "nonEmptyLines": 147,
+      "functions": [
+        {
+          "name": "CartDrawer",
+          "startLine": 40,
+          "endLine": 159,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "CartDrawer",
+          "line": 40,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CartDrawer",
+          "callee": "useCart",
+          "lineNumber": 41
+        },
+        {
+          "caller": "CartDrawer",
+          "callee": "useLanguage",
+          "lineNumber": 42
+        },
+        {
+          "caller": "CartDrawer",
+          "callee": "isRTL",
+          "lineNumber": 44
+        },
+        {
+          "caller": "CartDrawer",
+          "callee": "useEffect",
+          "lineNumber": 46
+        },
+        {
+          "caller": "CartDrawer",
+          "callee": "items.map",
+          "lineNumber": 111
+        },
+        {
+          "caller": "CartDrawer",
+          "callee": "cartLineKey",
+          "lineNumber": 112
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/cart/CartItem.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 327,
+      "nonEmptyLines": 304,
+      "functions": [
+        {
+          "name": "getImageUrl",
+          "startLine": 32,
+          "endLine": 34,
+          "params": [
+            "image"
+          ]
+        },
+        {
+          "name": "CartItem",
+          "startLine": 36,
+          "endLine": 326,
+          "params": [
+            "{\r\n    item,\r\n    onUpdateQuantity,\r\n    onRemove,\r\n    variant = \"default\",\r\n    showTotal = false,\r\n    reviewsText = \"reviews\",\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CartItem",
+          "line": 36,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getImageUrl",
+          "callee": "image.trim",
+          "lineNumber": 33
+        },
+        {
+          "caller": "CartItem",
+          "callee": "useLanguage",
+          "lineNumber": 44
+        },
+        {
+          "caller": "CartItem",
+          "callee": "getImageUrl",
+          "lineNumber": 50
+        },
+        {
+          "caller": "CartItem",
+          "callee": "onRemove",
+          "lineNumber": 75
+        },
+        {
+          "caller": "CartItem",
+          "callee": "cartLineKey",
+          "lineNumber": 75
+        },
+        {
+          "caller": "CartItem",
+          "callee": "[...Array(5)].map",
+          "lineNumber": 93
+        },
+        {
+          "caller": "CartItem",
+          "callee": "Array",
+          "lineNumber": 93
+        },
+        {
+          "caller": "CartItem",
+          "callee": "Math.floor",
+          "lineNumber": 96
+        },
+        {
+          "caller": "CartItem",
+          "callee": "(item.reviewCount / 1000).toFixed",
+          "lineNumber": 108
+        },
+        {
+          "caller": "CartItem",
+          "callee": "onUpdateQuantity",
+          "lineNumber": 122
+        },
+        {
+          "caller": "CartItem",
+          "callee": "cartLineKey",
+          "lineNumber": 122
+        },
+        {
+          "caller": "CartItem",
+          "callee": "onUpdateQuantity",
+          "lineNumber": 131
+        },
+        {
+          "caller": "CartItem",
+          "callee": "cartLineKey",
+          "lineNumber": 131
+        },
+        {
+          "caller": "CartItem",
+          "callee": "onRemove",
+          "lineNumber": 168
+        },
+        {
+          "caller": "CartItem",
+          "callee": "cartLineKey",
+          "lineNumber": 168
+        },
+        {
+          "caller": "CartItem",
+          "callee": "[...Array(5)].map",
+          "lineNumber": 185
+        },
+        {
+          "caller": "CartItem",
+          "callee": "Array",
+          "lineNumber": 185
+        },
+        {
+          "caller": "CartItem",
+          "callee": "Math.floor",
+          "lineNumber": 188
+        },
+        {
+          "caller": "CartItem",
+          "callee": "(item.reviewCount / 1000).toFixed",
+          "lineNumber": 200
+        },
+        {
+          "caller": "CartItem",
+          "callee": "onUpdateQuantity",
+          "lineNumber": 214
+        },
+        {
+          "caller": "CartItem",
+          "callee": "cartLineKey",
+          "lineNumber": 214
+        },
+        {
+          "caller": "CartItem",
+          "callee": "onUpdateQuantity",
+          "lineNumber": 223
+        },
+        {
+          "caller": "CartItem",
+          "callee": "cartLineKey",
+          "lineNumber": 223
+        },
+        {
+          "caller": "CartItem",
+          "callee": "[...Array(5)].map",
+          "lineNumber": 259
+        },
+        {
+          "caller": "CartItem",
+          "callee": "Array",
+          "lineNumber": 259
+        },
+        {
+          "caller": "CartItem",
+          "callee": "Math.floor",
+          "lineNumber": 262
+        },
+        {
+          "caller": "CartItem",
+          "callee": "onUpdateQuantity",
+          "lineNumber": 285
+        },
+        {
+          "caller": "CartItem",
+          "callee": "cartLineKey",
+          "lineNumber": 285
+        },
+        {
+          "caller": "CartItem",
+          "callee": "onUpdateQuantity",
+          "lineNumber": 294
+        },
+        {
+          "caller": "CartItem",
+          "callee": "cartLineKey",
+          "lineNumber": 294
+        },
+        {
+          "caller": "CartItem",
+          "callee": "itemTotal.toFixed",
+          "lineNumber": 309
+        },
+        {
+          "caller": "CartItem",
+          "callee": "onRemove",
+          "lineNumber": 316
+        },
+        {
+          "caller": "CartItem",
+          "callee": "cartLineKey",
+          "lineNumber": 316
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/footer/Footer.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 242,
+      "nonEmptyLines": 226,
+      "functions": [
+        {
+          "name": "resolveHref",
+          "startLine": 77,
+          "endLine": 113,
+          "params": [
+            "href",
+            "locale"
+          ]
+        },
+        {
+          "name": "withResolvedLinks",
+          "startLine": 115,
+          "endLine": 122,
+          "params": [
+            "section",
+            "locale"
+          ]
+        },
+        {
+          "name": "Footer",
+          "startLine": 124,
+          "endLine": 242,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Footer",
+          "line": 124,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "resolveHref",
+          "callee": "href.trim",
+          "lineNumber": 82
+        },
+        {
+          "caller": "resolveHref",
+          "callee": "trimmedHref.startsWith",
+          "lineNumber": 85
+        },
+        {
+          "caller": "resolveHref",
+          "callee": "trimmedHref.startsWith",
+          "lineNumber": 86
+        },
+        {
+          "caller": "resolveHref",
+          "callee": "trimmedHref.startsWith",
+          "lineNumber": 87
+        },
+        {
+          "caller": "resolveHref",
+          "callee": "trimmedHref.startsWith",
+          "lineNumber": 88
+        },
+        {
+          "caller": "resolveHref",
+          "callee": "trimmedHref.startsWith",
+          "lineNumber": 89
+        },
+        {
+          "caller": "resolveHref",
+          "callee": "trimmedHref.startsWith",
+          "lineNumber": 108
+        },
+        {
+          "caller": "withResolvedLinks",
+          "callee": "section.links.map",
+          "lineNumber": 116
+        },
+        {
+          "caller": "withResolvedLinks",
+          "callee": "resolveHref",
+          "lineNumber": 118
+        },
+        {
+          "caller": "Footer",
+          "callee": "useParams",
+          "lineNumber": 125
+        },
+        {
+          "caller": "Footer",
+          "callee": "useLanguageSafe",
+          "lineNumber": 126
+        },
+        {
+          "caller": "Footer",
+          "callee": "Array.isArray",
+          "lineNumber": 128
+        },
+        {
+          "caller": "Footer",
+          "callee": "useMemo",
+          "lineNumber": 134
+        },
+        {
+          "caller": "Footer",
+          "callee": "useMemo",
+          "lineNumber": 164
+        },
+        {
+          "caller": "Footer",
+          "callee": "translatedSections.map",
+          "lineNumber": 165
+        },
+        {
+          "caller": "Footer",
+          "callee": "withResolvedLinks",
+          "lineNumber": 165
+        },
+        {
+          "caller": "Footer",
+          "callee": "resolvedSections.map",
+          "lineNumber": 200
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/footer/FooterSection.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 27,
+      "functions": [
+        {
+          "name": "FooterSection",
+          "startLine": 10,
+          "endLine": 30,
+          "params": [
+            "{ section }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "FooterSection",
+          "line": 10,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "FooterSection",
+          "callee": "section.links.map",
+          "lineNumber": 17
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/forms/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 3,
+      "exports": [
+        {
+          "name": "FormInput",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "FormSelect",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "FormTextarea",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/landing/CollectionSpotlight.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 88,
+      "nonEmptyLines": 81,
+      "functions": [
+        {
+          "name": "CollectionSpotlight",
+          "startLine": 27,
+          "endLine": 88,
+          "params": [
+            "{ locale, collection }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "CollectionSpotlight",
+          "line": 27,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "CollectionSpotlight",
+          "callee": "isRTL",
+          "lineNumber": 34
+        },
+        {
+          "caller": "CollectionSpotlight",
+          "callee": "t.count",
+          "lineNumber": 44
+        },
+        {
+          "caller": "CollectionSpotlight",
+          "callee": "collection.subcategories.map",
+          "lineNumber": 49
+        },
+        {
+          "caller": "CollectionSpotlight",
+          "callee": "categoryHref",
+          "lineNumber": 52
+        },
+        {
+          "caller": "CollectionSpotlight",
+          "callee": "categoryHref",
+          "lineNumber": 63
+        },
+        {
+          "caller": "CollectionSpotlight",
+          "callee": "collection.products.map",
+          "lineNumber": 72
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    }
+  ]
+}

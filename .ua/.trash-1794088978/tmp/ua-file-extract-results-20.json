@@ -1,0 +1,429 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 5,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 5,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 5
+    }
+  },
+  "results": [
+    {
+      "path": "docs/DEPLOY.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 194,
+      "nonEmptyLines": 166,
+      "sections": [
+        {
+          "heading": "Production: the site on Vercel, the API on one AWS server",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "What it costs",
+          "level": 2,
+          "line": 38
+        },
+        {
+          "heading": "One-time setup",
+          "level": 2,
+          "line": 64
+        },
+        {
+          "heading": "1. AWS",
+          "level": 3,
+          "line": 66
+        },
+        {
+          "heading": "2. SSH keys",
+          "level": 3,
+          "line": 81
+        },
+        {
+          "heading": "3. Terraform",
+          "level": 3,
+          "line": 88
+        },
+        {
+          "heading": "4. DNS",
+          "level": 3,
+          "line": 103
+        },
+        {
+          "heading": "5. GitHub",
+          "level": 3,
+          "line": 110
+        },
+        {
+          "heading": "6. Vercel",
+          "level": 3,
+          "line": 122
+        },
+        {
+          "heading": "7. First deploy and the data",
+          "level": 3,
+          "line": 129
+        },
+        {
+          "heading": "Everyday",
+          "level": 2,
+          "line": 140
+        },
+        {
+          "heading": "Backups",
+          "level": 2,
+          "line": 157
+        },
+        {
+          "heading": "Alerts",
+          "level": 2,
+          "line": 181
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 13
+      }
+    },
+    {
+      "path": "docs/DOCKER.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 86,
+      "nonEmptyLines": 63,
+      "sections": [
+        {
+          "heading": "Run the whole app locally in Docker",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Create `.env.docker`",
+          "level": 2,
+          "line": 10
+        },
+        {
+          "heading": "2. Start the database and the file storage",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "3. Copy a database (needed once, the local one starts empty)",
+          "level": 2,
+          "line": 28
+        },
+        {
+          "heading": "4. Build and start the app",
+          "level": 2,
+          "line": 48
+        },
+        {
+          "heading": "Tests",
+          "level": 2,
+          "line": 63
+        },
+        {
+          "heading": "Notes",
+          "level": 2,
+          "line": 73
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 7
+      }
+    },
+    {
+      "path": "docs/META.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 92,
+      "nonEmptyLines": 67,
+      "sections": [
+        {
+          "heading": "Connecting Facebook, Instagram and WhatsApp (Meta)",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "1. Before you start",
+          "level": 2,
+          "line": 9
+        },
+        {
+          "heading": "2. Create the app",
+          "level": 2,
+          "line": 19
+        },
+        {
+          "heading": "3. Tokens that don't expire",
+          "level": 2,
+          "line": 27
+        },
+        {
+          "heading": "4. Put them on the server",
+          "level": 2,
+          "line": 40
+        },
+        {
+          "heading": "5. Subscribe the webhook",
+          "level": 2,
+          "line": 54
+        },
+        {
+          "heading": "6. Go live",
+          "level": 2,
+          "line": 68
+        },
+        {
+          "heading": "Rules Meta enforces",
+          "level": 2,
+          "line": 80
+        },
+        {
+          "heading": "TikTok",
+          "level": 2,
+          "line": 86
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 9
+      }
+    },
+    {
+      "path": "docs/MIGRATION-NESTJS-TASKS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 202,
+      "nonEmptyLines": 175,
+      "sections": [
+        {
+          "heading": "NestJS migration: phase 0 and the first module, task by task",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Decisions taken here (smaller than the overview)",
+          "level": 2,
+          "line": 15
+        },
+        {
+          "heading": "Phase 0: set up (2–3 days)",
+          "level": 2,
+          "line": 28
+        },
+        {
+          "heading": "0.1 Start from the ERP code",
+          "level": 3,
+          "line": 30
+        },
+        {
+          "heading": "0.2 Create the NestJS app",
+          "level": 3,
+          "line": 35
+        },
+        {
+          "heading": "0.3 Config",
+          "level": 3,
+          "line": 46
+        },
+        {
+          "heading": "0.4 Database module",
+          "level": 3,
+          "line": 60
+        },
+        {
+          "heading": "0.5 Writes carry the staff member (`withActor`)",
+          "level": 3,
+          "line": 68
+        },
+        {
+          "heading": "0.6 Auth guard (port of `requirementFor` in `middleware.ts`)",
+          "level": 3,
+          "line": 84
+        },
+        {
+          "heading": "0.7 Responses and errors (port of `lib/erp/api.ts`)",
+          "level": 3,
+          "line": 95
+        },
+        {
+          "heading": "0.8 Send requests to NestJS one area at a time",
+          "level": 3,
+          "line": 104
+        },
+        {
+          "heading": "0.9 Run and deploy NestJS",
+          "level": 3,
+          "line": 123
+        },
+        {
+          "heading": "0.10 Test suite in the repo",
+          "level": 3,
+          "line": 131
+        },
+        {
+          "heading": "0.11 CI and monitoring",
+          "level": 3,
+          "line": 139
+        },
+        {
+          "heading": "0.12 Rewrites on Netlify",
+          "level": 3,
+          "line": 146
+        },
+        {
+          "heading": "Phase 1, first module: categories (2–3 days)",
+          "level": 2,
+          "line": 153
+        },
+        {
+          "heading": "1.1 Port",
+          "level": 3,
+          "line": 155
+        },
+        {
+          "heading": "1.2 Cache invalidation",
+          "level": 3,
+          "line": 162
+        },
+        {
+          "heading": "1.3 Switch, compare, then remove the old route",
+          "level": 3,
+          "line": 169
+        },
+        {
+          "heading": "1.4 Repeat for the next areas",
+          "level": 3,
+          "line": 176
+        },
+        {
+          "heading": "Done when (phase 0 and the pilot)",
+          "level": 2,
+          "line": 197
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 21
+      }
+    },
+    {
+      "path": "docs/MIGRATION-NESTJS.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 300,
+      "nonEmptyLines": 261,
+      "sections": [
+        {
+          "heading": "Migration plan: Next.js + NestJS + plain Postgres",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Where we start (measured on this branch)",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "Target architecture",
+          "level": 2,
+          "line": 33
+        },
+        {
+          "heading": "Supabase features and their replacements",
+          "level": 2,
+          "line": 52
+        },
+        {
+          "heading": "Database changes (one migration set, written once)",
+          "level": 2,
+          "line": 72
+        },
+        {
+          "heading": "Phases",
+          "level": 2,
+          "line": 92
+        },
+        {
+          "heading": "Phase 0: Prepare (2–3 days)",
+          "level": 3,
+          "line": 97
+        },
+        {
+          "heading": "Phase 1: Move the API, area by area (3–5 weeks)",
+          "level": 3,
+          "line": 112
+        },
+        {
+          "heading": "Phase 2: Browser and server components stop calling Supabase (1–2 weeks)",
+          "level": 3,
+          "line": 144
+        },
+        {
+          "heading": "Phase 3: Auth (1–2 weeks)",
+          "level": 3,
+          "line": 151
+        },
+        {
+          "heading": "Phase 4: Files, realtime, push, jobs (1 week)",
+          "level": 3,
+          "line": 179
+        },
+        {
+          "heading": "Phase 5: Move the database (2–3 days, plus a one-night cut-over)",
+          "level": 3,
+          "line": 194
+        },
+        {
+          "heading": "Phase 6: Clean up (2–3 days)",
+          "level": 3,
+          "line": 228
+        },
+        {
+          "heading": "Hosting and cost",
+          "level": 2,
+          "line": 242
+        },
+        {
+          "heading": "Risks and how the plan handles them",
+          "level": 2,
+          "line": 276
+        },
+        {
+          "heading": "Decisions",
+          "level": 2,
+          "line": 289
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 16
+      }
+    }
+  ]
+}

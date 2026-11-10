@@ -78,7 +78,7 @@ export default function AddToCartButton({ product, quantity = 1, variant = "defa
             <button
                 onClick={handleAddToCart}
                 disabled={disabled || isAdding || justAdded}
-                className={`cursor-pointer rounded-[9px] py-2 px-4 border border-[#E3E3E3] flex items-center gap-2 text-sm text-black hover:text-[#5e2d23] font-medium transition disabled:opacity-50 ${className}`}
+                className={`cursor-pointer rounded-[9px] py-2 px-4 border border-line flex items-center gap-2 text-sm text-ink hover:text-accent font-medium transition disabled:opacity-50 ${className}`}
                 aria-label={text.addToCart}
             >
                 {justAdded ? (
@@ -106,7 +106,7 @@ export default function AddToCartButton({ product, quantity = 1, variant = "defa
             <button
                 onClick={handleAddToCart}
                 disabled={disabled || isAdding || justAdded}
-                className={`px-4 py-2 bg-[#842E1B] text-white text-sm rounded-lg hover:bg-[#6b2516] transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 ${className}`}
+                className={`px-4 py-2 bg-accent text-white text-sm rounded-lg hover:bg-accent-hover transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2 ${className}`}
             >
                 {!justAdded && (
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -122,7 +122,7 @@ export default function AddToCartButton({ product, quantity = 1, variant = "defa
         <button
             onClick={handleAddToCart}
             disabled={disabled || isAdding || justAdded}
-            className={`w-full py-3 px-6 bg-[#842E1B] text-white rounded-lg hover:bg-[#6b2516] transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 ${className}`}
+            className={`w-full py-3 px-6 bg-accent text-white rounded-lg hover:bg-accent-hover transition font-medium disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 ${className}`}
         >
             {!justAdded && (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

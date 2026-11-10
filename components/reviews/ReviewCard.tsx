@@ -32,7 +32,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
                 {[1, 2, 3, 4, 5].map((star) => (
                     <svg
                         key={star}
-                        className={`w-6 h-6 ${star <= rating ? 'text-[#FFA800] fill-[#FFA800]' : 'text-gray-300 fill-none'
+                        className={`w-6 h-6 ${star <= rating ? 'text-[#FFA800] fill-[#FFA800]' : 'text-mute fill-none'
                             }`}
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -56,7 +56,7 @@ export default function ReviewCard({ review }: ReviewCardProps) {
     };
 
     return (
-        <div className="rounded-[5px] h-[300px] p-6 border border-[#E7EAEC]">
+        <div className="rounded-[5px] h-[300px] p-6 border border-line">
             {/* Avatar and Stars */}
             <div className="flex items-center justify-between">
                 {avatarUrl ? (
@@ -84,12 +84,12 @@ export default function ReviewCard({ review }: ReviewCardProps) {
             </div>
 
             {/* Name */}
-            <h3 className="text-lg font-semibold text-[#000000] mb-3 capitalize">
+            <h3 className="text-lg font-semibold text-ink mb-3 capitalize">
                 {userName}
             </h3>
 
             {/* Comment */}
-            <p className="text-[16px] font-light tracking-[2px] text-black leading-relaxed">
+            <p className="text-[16px] font-light tracking-[2px] text-ink leading-relaxed">
                 {review.comment}
             </p>
         </div>

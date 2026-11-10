@@ -1,0 +1,1675 @@
+{
+ "nodes": [
+  {
+   "id": "file:api/src/admin/admin.controllers.ts",
+   "type": "file",
+   "name": "admin.controllers.ts",
+   "filePath": "api/src/admin/admin.controllers.ts",
+   "summary": "NestJS back-office controllers for the owner overview, activity log, ERP settings, objectives and commissions, current-user info, access-denied logging, My day, agent performance, notifications (including the SSE stream and push subscriptions) and the deleted-items trash.",
+   "tags": [
+    "api-handler",
+    "admin",
+    "nestjs",
+    "notifications",
+    "erp"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/admin/admin.controllers.ts:OwnerOverviewController",
+   "type": "class",
+   "name": "OwnerOverviewController",
+   "filePath": "api/src/admin/admin.controllers.ts",
+   "lineRange": [
+    45,
+    96
+   ],
+   "summary": "Owner-only business overview endpoint backed by owner_overview.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/admin/admin.controllers.ts:ActivityController",
+   "type": "class",
+   "name": "ActivityController",
+   "filePath": "api/src/admin/admin.controllers.ts",
+   "lineRange": [
+    101,
+    133
+   ],
+   "summary": "Lists the activity log with filters for admins.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:api/src/admin/admin.controllers.ts:ErpSettingsController",
+   "type": "class",
+   "name": "ErpSettingsController",
+   "filePath": "api/src/admin/admin.controllers.ts",
+   "lineRange": [
+    168,
+    227
+   ],
+   "summary": "Reads and updates erp_settings business rules.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/admin/admin.controllers.ts:GoalsController",
+   "type": "class",
+   "name": "GoalsController",
+   "filePath": "api/src/admin/admin.controllers.ts",
+   "lineRange": [
+    273,
+    373
+   ],
+   "summary": "Manages business and agent goals and reports progress and commissions.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/admin/admin.controllers.ts:MeController",
+   "type": "class",
+   "name": "MeController",
+   "filePath": "api/src/admin/admin.controllers.ts",
+   "lineRange": [
+    382,
+    416
+   ],
+   "summary": "Returns the signed-in back-office user role and permissions and syncs back_office_users.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:api/src/admin/admin.controllers.ts:AccessDeniedController",
+   "type": "class",
+   "name": "AccessDeniedController",
+   "filePath": "api/src/admin/admin.controllers.ts",
+   "lineRange": [
+    421,
+    448
+   ],
+   "summary": "Logs refused admin page visits as access_denied.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:api/src/admin/admin.controllers.ts:MyWorkController",
+   "type": "class",
+   "name": "MyWorkController",
+   "filePath": "api/src/admin/admin.controllers.ts",
+   "lineRange": [
+    453,
+    600
+   ],
+   "summary": "My day data: agent tasks, tickets, orders and month goals.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/admin/admin.controllers.ts:PerformanceController",
+   "type": "class",
+   "name": "PerformanceController",
+   "filePath": "api/src/admin/admin.controllers.ts",
+   "lineRange": [
+    605,
+    620
+   ],
+   "summary": "Agent performance comparison via agent_performance.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:api/src/admin/admin.controllers.ts:StaffController",
+   "type": "class",
+   "name": "StaffController",
+   "filePath": "api/src/admin/admin.controllers.ts",
+   "lineRange": [
+    625,
+    632
+   ],
+   "summary": "Lists staff members for agent pickers.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:api/src/admin/admin.controllers.ts:NotificationsController",
+   "type": "class",
+   "name": "NotificationsController",
+   "filePath": "api/src/admin/admin.controllers.ts",
+   "lineRange": [
+    638,
+    805
+   ],
+   "summary": "Notification list, read state, SSE stream and Web Push subscriptions.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/admin/admin.controllers.ts:TrashController",
+   "type": "class",
+   "name": "TrashController",
+   "filePath": "api/src/admin/admin.controllers.ts",
+   "lineRange": [
+    835,
+    948
+   ],
+   "summary": "Deleted items: list, purge and restore soft-deleted rows.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/admin/admin.controllers.ts:labelOf",
+   "type": "function",
+   "name": "labelOf",
+   "filePath": "api/src/admin/admin.controllers.ts",
+   "lineRange": [
+    811,
+    827
+   ],
+   "summary": "Builds a display label for a trashed row from its name-like columns.",
+   "tags": [
+    "function",
+    "utility",
+    "admin"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/admin/goals.ts",
+   "type": "file",
+   "name": "goals.ts",
+   "filePath": "api/src/admin/goals.ts",
+   "summary": "Computes monthly team and per-agent goal progress, delivered orders per day and commission figures from owner_overview and order data, honoring the analytics start date.",
+   "tags": [
+    "service",
+    "erp",
+    "objectives",
+    "analytics",
+    "utility"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/admin/goals.ts:listTeam",
+   "type": "function",
+   "name": "listTeam",
+   "filePath": "api/src/admin/goals.ts",
+   "lineRange": [
+    8,
+    15
+   ],
+   "summary": "Lists back-office team members.",
+   "tags": [
+    "function",
+    "utility",
+    "admin"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/admin/goals.ts:monthRange",
+   "type": "function",
+   "name": "monthRange",
+   "filePath": "api/src/admin/goals.ts",
+   "lineRange": [
+    18,
+    23
+   ],
+   "summary": "Computes a month date range.",
+   "tags": [
+    "function",
+    "utility",
+    "admin"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/admin/goals.ts:analyticsStart",
+   "type": "function",
+   "name": "analyticsStart",
+   "filePath": "api/src/admin/goals.ts",
+   "lineRange": [
+    26,
+    36
+   ],
+   "summary": "Reads the analytics reset start date from erp_settings.",
+   "tags": [
+    "function",
+    "utility",
+    "admin"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/admin/goals.ts:deliveredByDay",
+   "type": "function",
+   "name": "deliveredByDay",
+   "filePath": "api/src/admin/goals.ts",
+   "lineRange": [
+    46,
+    78
+   ],
+   "summary": "Counts delivered orders per day in a range.",
+   "tags": [
+    "function",
+    "utility",
+    "admin"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/admin/goals.ts:teamProgress",
+   "type": "function",
+   "name": "teamProgress",
+   "filePath": "api/src/admin/goals.ts",
+   "lineRange": [
+    81,
+    128
+   ],
+   "summary": "Measures the business month goal against owner_overview with pace.",
+   "tags": [
+    "function",
+    "utility",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/admin/goals.ts:monthProgress",
+   "type": "function",
+   "name": "monthProgress",
+   "filePath": "api/src/admin/goals.ts",
+   "lineRange": [
+    135,
+    208
+   ],
+   "summary": "Measures each agent monthly targets and commissions.",
+   "tags": [
+    "function",
+    "utility",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/src/admin/public.controllers.ts",
+   "type": "file",
+   "name": "public.controllers.ts",
+   "filePath": "api/src/admin/public.controllers.ts",
+   "summary": "Public NestJS endpoints for abandoned-cart tracking, the contact form, newsletter subscription and campaigns, and serving the OpenAPI spec.",
+   "tags": [
+    "api-handler",
+    "public",
+    "email",
+    "nestjs"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/admin/public.controllers.ts:CartController",
+   "type": "class",
+   "name": "CartController",
+   "filePath": "api/src/admin/public.controllers.ts",
+   "lineRange": [
+    34,
+    75
+   ],
+   "summary": "Tracks abandoned carts and triggers recovery e-mails.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/admin/public.controllers.ts:ContactController",
+   "type": "class",
+   "name": "ContactController",
+   "filePath": "api/src/admin/public.controllers.ts",
+   "lineRange": [
+    80,
+    126
+   ],
+   "summary": "Handles contact form submissions by e-mail.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/admin/public.controllers.ts:NewsletterController",
+   "type": "class",
+   "name": "NewsletterController",
+   "filePath": "api/src/admin/public.controllers.ts",
+   "lineRange": [
+    130,
+    267
+   ],
+   "summary": "Newsletter subscription and campaign sending.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/admin/public.controllers.ts:DocsController",
+   "type": "class",
+   "name": "DocsController",
+   "filePath": "api/src/admin/public.controllers.ts",
+   "lineRange": [
+    272,
+    277
+   ],
+   "summary": "Serves the OpenAPI spec.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/admin/team.controller.ts",
+   "type": "file",
+   "name": "team.controller.ts",
+   "filePath": "api/src/admin/team.controller.ts",
+   "summary": "Admin-only Team API that lists, invites, updates roles and permissions of, removes access for and soft-deletes back-office members, revoking their sessions and logging team changes.",
+   "tags": [
+    "api-handler",
+    "admin",
+    "security",
+    "team-management",
+    "nestjs"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/admin/team.controller.ts:TeamController",
+   "type": "class",
+   "name": "TeamController",
+   "filePath": "api/src/admin/team.controller.ts",
+   "lineRange": [
+    85,
+    335
+   ],
+   "summary": "Team member management with session revocation and logging.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:api/src/admin/team.controller.ts:member",
+   "type": "function",
+   "name": "member",
+   "filePath": "api/src/admin/team.controller.ts",
+   "lineRange": [
+    43,
+    52
+   ],
+   "summary": "Maps a users row to the team member shape returned by the API.",
+   "tags": [
+    "function",
+    "utility",
+    "admin"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/admin/tickets.controller.ts",
+   "type": "file",
+   "name": "tickets.controller.ts",
+   "filePath": "api/src/admin/tickets.controller.ts",
+   "summary": "Team tasks board API: CRUD, drag ordering, assignment and status of team_tickets plus comments with images stored in the private documents bucket.",
+   "tags": [
+    "api-handler",
+    "admin",
+    "tickets",
+    "nestjs"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/admin/tickets.controller.ts:TicketsController",
+   "type": "class",
+   "name": "TicketsController",
+   "filePath": "api/src/admin/tickets.controller.ts",
+   "lineRange": [
+    46,
+    268
+   ],
+   "summary": "Team ticket and comment endpoints.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:api/src/app.module.ts",
+   "type": "file",
+   "name": "app.module.ts",
+   "filePath": "api/src/app.module.ts",
+   "summary": "Root NestJS module wiring every controller, the database module, the global auth guard, response interceptor, exception filter and background services.",
+   "tags": [
+    "entry-point",
+    "nestjs",
+    "module",
+    "configuration"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/app.module.ts:AppModule",
+   "type": "class",
+   "name": "AppModule",
+   "filePath": "api/src/app.module.ts",
+   "lineRange": [
+    175,
+    175
+   ],
+   "summary": "Root application module.",
+   "tags": [
+    "class",
+    "nestjs",
+    "service"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/auth/auth.controller.ts",
+   "type": "file",
+   "name": "auth.controller.ts",
+   "filePath": "api/src/auth/auth.controller.ts",
+   "summary": "Accounts and sessions API: sign-in, sign-up, refresh, sign-out, e-mail confirmation, password forgot/reset/change and profile, using bcrypt, JWT access cookies, hashed refresh tokens and rate limiting.",
+   "tags": [
+    "api-handler",
+    "authentication",
+    "security",
+    "sessions",
+    "nestjs"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/auth/auth.controller.ts:AuthController",
+   "type": "class",
+   "name": "AuthController",
+   "filePath": "api/src/auth/auth.controller.ts",
+   "lineRange": [
+    148,
+    601
+   ],
+   "summary": "All /api/auth endpoints for accounts and sessions.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:api/src/auth/auth.guard.ts",
+   "type": "file",
+   "name": "auth.guard.ts",
+   "filePath": "api/src/auth/auth.guard.ts",
+   "summary": "Global NestJS guard that verifies the kb_access session or a stock API key, resolves role and permissions, and enforces route decorators and apiRequirement rules, logging refusals.",
+   "tags": [
+    "middleware",
+    "authorization",
+    "security",
+    "nestjs"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/auth/auth.guard.ts:AuthGuard",
+   "type": "class",
+   "name": "AuthGuard",
+   "filePath": "api/src/auth/auth.guard.ts",
+   "lineRange": [
+    63,
+    153
+   ],
+   "summary": "Global guard enforcing route access requirements.",
+   "tags": [
+    "class",
+    "nestjs",
+    "service"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/auth/auth.guard.ts:accessToken",
+   "type": "function",
+   "name": "accessToken",
+   "filePath": "api/src/auth/auth.guard.ts",
+   "lineRange": [
+    38,
+    44
+   ],
+   "summary": "Extracts the access token from cookie or bearer header.",
+   "tags": [
+    "function",
+    "utility",
+    "auth"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/auth/auth.guard.ts:hasStockApiKey",
+   "type": "function",
+   "name": "hasStockApiKey",
+   "filePath": "api/src/auth/auth.guard.ts",
+   "lineRange": [
+    47,
+    59
+   ],
+   "summary": "Checks the stock API key header.",
+   "tags": [
+    "function",
+    "utility",
+    "auth"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "file:api/src/admin/goals.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "file:api/src/catalog/revalidate.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "file:api/src/db/embed.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "file:api/src/notifications/notification-events.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "file:api/src/sales/commerce.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "file:lib/admin-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "file:lib/erp/objectives.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "file:lib/trash-tables.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:OwnerOverviewController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:OwnerOverviewController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:ActivityController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:ActivityController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:ErpSettingsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:ErpSettingsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:GoalsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:GoalsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:MeController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:MeController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:AccessDeniedController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:AccessDeniedController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:MyWorkController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:MyWorkController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:PerformanceController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:PerformanceController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:StaffController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:StaffController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:NotificationsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:NotificationsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:TrashController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "class:api/src/admin/admin.controllers.ts:TrashController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/admin.controllers.ts",
+   "target": "function:api/src/admin/admin.controllers.ts:labelOf",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/goals.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/goals.ts",
+   "target": "file:lib/erp/objectives.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/goals.ts",
+   "target": "function:api/src/admin/goals.ts:listTeam",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/goals.ts",
+   "target": "function:api/src/admin/goals.ts:listTeam",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/goals.ts",
+   "target": "function:api/src/admin/goals.ts:monthRange",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/goals.ts",
+   "target": "function:api/src/admin/goals.ts:monthRange",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/goals.ts",
+   "target": "function:api/src/admin/goals.ts:analyticsStart",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/goals.ts",
+   "target": "function:api/src/admin/goals.ts:analyticsStart",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/goals.ts",
+   "target": "function:api/src/admin/goals.ts:deliveredByDay",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/goals.ts",
+   "target": "function:api/src/admin/goals.ts:deliveredByDay",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/goals.ts",
+   "target": "function:api/src/admin/goals.ts:teamProgress",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/goals.ts",
+   "target": "function:api/src/admin/goals.ts:teamProgress",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/goals.ts",
+   "target": "function:api/src/admin/goals.ts:monthProgress",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/goals.ts",
+   "target": "function:api/src/admin/goals.ts:monthProgress",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/public.controllers.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/public.controllers.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/public.controllers.ts",
+   "target": "file:api/src/common/mail.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/public.controllers.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/public.controllers.ts",
+   "target": "file:lib/abandoned-cart-email.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/public.controllers.ts",
+   "target": "file:lib/openapi.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/public.controllers.ts",
+   "target": "class:api/src/admin/public.controllers.ts:CartController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/public.controllers.ts",
+   "target": "class:api/src/admin/public.controllers.ts:CartController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/public.controllers.ts",
+   "target": "class:api/src/admin/public.controllers.ts:ContactController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/public.controllers.ts",
+   "target": "class:api/src/admin/public.controllers.ts:ContactController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/public.controllers.ts",
+   "target": "class:api/src/admin/public.controllers.ts:NewsletterController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/public.controllers.ts",
+   "target": "class:api/src/admin/public.controllers.ts:NewsletterController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/public.controllers.ts",
+   "target": "class:api/src/admin/public.controllers.ts:DocsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/public.controllers.ts",
+   "target": "class:api/src/admin/public.controllers.ts:DocsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/team.controller.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/team.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/team.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/team.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/team.controller.ts",
+   "target": "file:api/src/db/types.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/team.controller.ts",
+   "target": "file:lib/admin-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/team.controller.ts",
+   "target": "class:api/src/admin/team.controller.ts:TeamController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/team.controller.ts",
+   "target": "class:api/src/admin/team.controller.ts:TeamController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/admin/team.controller.ts",
+   "target": "function:api/src/admin/team.controller.ts:member",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/tickets.controller.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/tickets.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/tickets.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/tickets.controller.ts",
+   "target": "file:api/src/common/storage.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/tickets.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/tickets.controller.ts",
+   "target": "file:api/src/files/files.controllers.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/tickets.controller.ts",
+   "target": "file:api/src/sales/commerce.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/tickets.controller.ts",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/admin/tickets.controller.ts",
+   "target": "class:api/src/admin/tickets.controller.ts:TicketsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/admin/tickets.controller.ts",
+   "target": "class:api/src/admin/tickets.controller.ts:TicketsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/admin/admin.controllers.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/admin/public.controllers.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/admin/team.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/admin/tickets.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/auth/auth.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/catalog/categories.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/catalog/content.controllers.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/catalog/landing.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/catalog/options.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/catalog/product-images.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/catalog/products.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/catalog/variants.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/crm/campaigns.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/crm/crm.controllers.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/crm/meta-webhook.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/files/files.controllers.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/finance/finance.controllers.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/health.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/notifications/notification-events.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/pos/pos.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/purchasing/purchasing.controllers.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/sales/colissimo-portal.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/sales/colissimo-tracking.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/sales/delivery.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/sales/orders.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/sales/sales.controllers.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/stock/stock.controllers.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/storefront/account.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "file:api/src/storefront/storefront.controller.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "class:api/src/app.module.ts:AppModule",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/app.module.ts",
+   "target": "class:api/src/app.module.ts:AppModule",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/auth/auth.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/auth.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/auth.controller.ts",
+   "target": "file:api/src/common/mail.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/auth.controller.ts",
+   "target": "file:api/src/common/rate-limit.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/auth.controller.ts",
+   "target": "file:api/src/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/auth.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/auth.controller.ts",
+   "target": "file:api/src/db/types.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/auth.controller.ts",
+   "target": "file:lib/auth-session.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/auth.controller.ts",
+   "target": "class:api/src/auth/auth.controller.ts:AuthController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/auth/auth.controller.ts",
+   "target": "class:api/src/auth/auth.controller.ts:AuthController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/auth/auth.guard.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/auth.guard.ts",
+   "target": "file:api/src/config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/auth.guard.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/auth.guard.ts",
+   "target": "file:lib/admin-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/auth.guard.ts",
+   "target": "file:lib/api-access.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/auth.guard.ts",
+   "target": "file:lib/auth-session.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/auth.guard.ts",
+   "target": "class:api/src/auth/auth.guard.ts:AuthGuard",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/auth/auth.guard.ts",
+   "target": "class:api/src/auth/auth.guard.ts:AuthGuard",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/auth/auth.guard.ts",
+   "target": "function:api/src/auth/auth.guard.ts:accessToken",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/auth/auth.guard.ts",
+   "target": "function:api/src/auth/auth.guard.ts:accessToken",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/auth/auth.guard.ts",
+   "target": "function:api/src/auth/auth.guard.ts:hasStockApiKey",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "class:api/src/auth/auth.guard.ts:AuthGuard",
+   "target": "function:lib/api-access.ts:apiRequirement",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/auth/auth.guard.ts:AuthGuard",
+   "target": "function:lib/auth-session.ts:verifyAccessToken",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/auth/auth.guard.ts:AuthGuard",
+   "target": "function:lib/admin-auth.ts:getPermissions",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/auth/auth.controller.ts:AuthController",
+   "target": "function:lib/auth-session.ts:signAccessToken",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/auth/auth.controller.ts:AuthController",
+   "target": "function:api/src/common/rate-limit.ts:rateLimit",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/auth/auth.controller.ts:AuthController",
+   "target": "function:api/src/common/mail.ts:sendAccountMail",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/admin/admin.controllers.ts:GoalsController",
+   "target": "function:api/src/admin/goals.ts:teamProgress",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/admin/admin.controllers.ts:GoalsController",
+   "target": "function:api/src/admin/goals.ts:monthProgress",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/admin/admin.controllers.ts:TrashController",
+   "target": "function:lib/trash-tables.ts:isTrashTable",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:api/src/admin/goals.ts:monthProgress",
+   "target": "function:lib/erp/objectives.ts:commissionFor",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/admin/public.controllers.ts:CartController",
+   "target": "function:lib/abandoned-cart-email.ts:triggerAbandonedCartCampaign",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

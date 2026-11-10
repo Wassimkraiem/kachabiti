@@ -1,0 +1,320 @@
+{
+ "nodes": [
+  {
+   "id": "file:scripts/import-woocommerce.mjs",
+   "type": "file",
+   "name": "import-woocommerce.mjs",
+   "filePath": "scripts/import-woocommerce.mjs",
+   "summary": "Idempotent CLI importer that reads the WooCommerce product CSV export, merges English/French translations and color data, re-hosts product images as WebP in S3 storage, and upserts products and variants into Postgres (supports --dry-run).",
+   "tags": [
+    "script",
+    "data-import",
+    "woocommerce",
+    "catalog",
+    "migration"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:scripts/import-woocommerce.mjs:htmlToText",
+   "type": "function",
+   "name": "htmlToText",
+   "filePath": "scripts/import-woocommerce.mjs",
+   "lineRange": [
+    55,
+    69
+   ],
+   "summary": "Converts WooCommerce HTML descriptions into plain text with line breaks and decoded entities.",
+   "tags": [
+    "utility",
+    "html",
+    "text-processing"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:scripts/import-woocommerce.mjs:sizeRank",
+   "type": "function",
+   "name": "sizeRank",
+   "filePath": "scripts/import-woocommerce.mjs",
+   "lineRange": [
+    117,
+    127
+   ],
+   "summary": "Computes a sort rank for size labels (numeric and S/M/L style) so variants are ordered consistently.",
+   "tags": [
+    "utility",
+    "sorting",
+    "variants"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:scripts/import-woocommerce.mjs:productCategory",
+   "type": "function",
+   "name": "productCategory",
+   "filePath": "scripts/import-woocommerce.mjs",
+   "lineRange": [
+    138,
+    155
+   ],
+   "summary": "Maps a WooCommerce product to its target category in the catalog.",
+   "tags": [
+    "mapping",
+    "categories",
+    "data-import"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:scripts/import-woocommerce.mjs:worker",
+   "type": "function",
+   "name": "worker",
+   "filePath": "scripts/import-woocommerce.mjs",
+   "lineRange": [
+    304,
+    320
+   ],
+   "summary": "Concurrent upload worker that downloads, resizes and uploads product images to the products bucket.",
+   "tags": [
+    "image-processing",
+    "concurrency",
+    "storage"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:scripts/import-woocommerce.mjs:ensureLookup",
+   "type": "function",
+   "name": "ensureLookup",
+   "filePath": "scripts/import-woocommerce.mjs",
+   "lineRange": [
+    325,
+    339
+   ],
+   "summary": "Ensures lookup rows (e.g. colors or sizes) exist in a table, inserting missing names and returning their ids.",
+   "tags": [
+    "database",
+    "upsert",
+    "lookup"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:scripts/import/old-colissimo.mjs",
+   "type": "file",
+   "name": "old-colissimo.mjs",
+   "filePath": "scripts/import/old-colissimo.mjs",
+   "summary": "One-off, re-runnable importer that loads Colissimo parcels and payouts from the legacy tools' CSV exports into deliveries, then calls import_colissimo_history to create COL- orders, customers and payout records.",
+   "tags": [
+    "script",
+    "data-import",
+    "colissimo",
+    "delivery",
+    "finance"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:scripts/import/old-colissimo.mjs:parseCsv",
+   "type": "function",
+   "name": "parseCsv",
+   "filePath": "scripts/import/old-colissimo.mjs",
+   "lineRange": [
+    17,
+    35
+   ],
+   "summary": "Minimal RFC-style CSV parser handling quoted fields, escaped quotes and embedded newlines, returning objects keyed by header.",
+   "tags": [
+    "parser",
+    "csv",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:scripts/run-next.mjs",
+   "type": "file",
+   "name": "run-next.mjs",
+   "filePath": "scripts/run-next.mjs",
+   "summary": "Launcher that sets NODE_OPTIONS with a longer network-family autoselection timeout and spawns the Next.js CLI, forwarding arguments and exit codes.",
+   "tags": [
+    "entry-point",
+    "script",
+    "dev-tooling",
+    "networking"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:types/shims-supabase.d.ts",
+   "type": "file",
+   "name": "shims-supabase.d.ts",
+   "filePath": "types/shims-supabase.d.ts",
+   "summary": "Ambient module declaration that types @supabase/supabase-js as any, a leftover shim from the Supabase era.",
+   "tags": [
+    "type-definition",
+    "shim",
+    "supabase",
+    "legacy"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "config:supabase/.temp/linked-project.json",
+   "type": "config",
+   "name": "linked-project.json",
+   "filePath": "supabase/.temp/linked-project.json",
+   "summary": "Supabase CLI cache recording the linked hosted project ref, name and organization (legacy, from before the move off Supabase).",
+   "tags": [
+    "configuration",
+    "supabase",
+    "cli-cache",
+    "legacy"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:supabase/.temp/gotrue-version",
+   "type": "file",
+   "name": "gotrue-version",
+   "filePath": "supabase/.temp/gotrue-version",
+   "summary": "Supabase CLI cache file holding the linked project's GoTrue (Supabase Auth) version; generated metadata, not used by the app.",
+   "tags": [
+    "supabase",
+    "cli-cache",
+    "generated",
+    "legacy"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:supabase/.temp/pooler-url",
+   "type": "file",
+   "name": "pooler-url",
+   "filePath": "supabase/.temp/pooler-url",
+   "summary": "Supabase CLI cache file holding the linked project's connection pooler URL; generated metadata, not used by the app.",
+   "tags": [
+    "supabase",
+    "cli-cache",
+    "generated",
+    "legacy"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:supabase/.temp/postgres-version",
+   "type": "file",
+   "name": "postgres-version",
+   "filePath": "supabase/.temp/postgres-version",
+   "summary": "Supabase CLI cache file holding the linked project's Postgres version; generated metadata, not used by the app.",
+   "tags": [
+    "supabase",
+    "cli-cache",
+    "generated",
+    "legacy"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:supabase/.temp/project-ref",
+   "type": "file",
+   "name": "project-ref",
+   "filePath": "supabase/.temp/project-ref",
+   "summary": "Supabase CLI cache file holding the linked project's linked project reference; generated metadata, not used by the app.",
+   "tags": [
+    "supabase",
+    "cli-cache",
+    "generated",
+    "legacy"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:supabase/.temp/rest-version",
+   "type": "file",
+   "name": "rest-version",
+   "filePath": "supabase/.temp/rest-version",
+   "summary": "Supabase CLI cache file holding the linked project's PostgREST version; generated metadata, not used by the app.",
+   "tags": [
+    "supabase",
+    "cli-cache",
+    "generated",
+    "legacy"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:supabase/.temp/storage-migration",
+   "type": "file",
+   "name": "storage-migration",
+   "filePath": "supabase/.temp/storage-migration",
+   "summary": "Supabase CLI cache file holding the linked project's Storage migration marker; generated metadata, not used by the app.",
+   "tags": [
+    "supabase",
+    "cli-cache",
+    "generated",
+    "legacy"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:supabase/.temp/storage-version",
+   "type": "file",
+   "name": "storage-version",
+   "filePath": "supabase/.temp/storage-version",
+   "summary": "Supabase CLI cache file holding the linked project's Storage API version; generated metadata, not used by the app.",
+   "tags": [
+    "supabase",
+    "cli-cache",
+    "generated",
+    "legacy"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:scripts/import-woocommerce.mjs",
+   "target": "function:scripts/import-woocommerce.mjs:htmlToText",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:scripts/import-woocommerce.mjs",
+   "target": "function:scripts/import-woocommerce.mjs:sizeRank",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:scripts/import-woocommerce.mjs",
+   "target": "function:scripts/import-woocommerce.mjs:productCategory",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:scripts/import-woocommerce.mjs",
+   "target": "function:scripts/import-woocommerce.mjs:worker",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:scripts/import-woocommerce.mjs",
+   "target": "function:scripts/import-woocommerce.mjs:ensureLookup",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:scripts/import/old-colissimo.mjs",
+   "target": "function:scripts/import/old-colissimo.mjs:parseCsv",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  }
+ ]
+}

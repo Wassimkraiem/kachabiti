@@ -1,0 +1,1259 @@
+{
+ "nodes": [
+  {
+   "id": "file:app/admin/reels/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/reels/page.tsx",
+   "summary": "Admin page managing storefront video reels: upload media, link products, order and activate them.",
+   "tags": [
+    "component",
+    "admin-page",
+    "marketing",
+    "media",
+    "crud"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/reels/page.tsx:ReelsPage",
+   "type": "function",
+   "name": "ReelsPage",
+   "filePath": "app/admin/reels/page.tsx",
+   "lineRange": [
+    47,
+    440
+   ],
+   "summary": "Fetches reels, uploads thumbnails/videos and creates, edits, reorders and deletes reels.",
+   "tags": [
+    "component",
+    "marketing",
+    "crud"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/sale-banners/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/sale-banners/page.tsx",
+   "summary": "Admin page managing promotional sale banners with localized texts, images, links, dates and activation.",
+   "tags": [
+    "component",
+    "admin-page",
+    "marketing",
+    "banner",
+    "crud"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/sale-banners/page.tsx:SaleBannersPage",
+   "type": "function",
+   "name": "SaleBannersPage",
+   "filePath": "app/admin/sale-banners/page.tsx",
+   "lineRange": [
+    50,
+    465
+   ],
+   "summary": "Lists sale banners and handles create/edit/delete with image upload and localized fields.",
+   "tags": [
+    "component",
+    "marketing",
+    "crud"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/settings/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/settings/page.tsx",
+   "summary": "Business settings page editing erp_settings (sales, POS discount limits, delivery fee) and the analytics start date.",
+   "tags": [
+    "component",
+    "admin-page",
+    "configuration",
+    "erp",
+    "form"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/settings/page.tsx:SettingsPage",
+   "type": "function",
+   "name": "SettingsPage",
+   "filePath": "app/admin/settings/page.tsx",
+   "lineRange": [
+    26,
+    108
+   ],
+   "summary": "Loads ERP settings into a form and saves sales/POS settings and the analytics reset date via /api/admin/erp-settings.",
+   "tags": [
+    "component",
+    "configuration",
+    "form"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/stock/settings/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/stock/settings/page.tsx",
+   "summary": "Stock settings page with generic list editors for locations (shops, online seller, low-stock limit) and other stock lookup lists.",
+   "tags": [
+    "component",
+    "admin-page",
+    "stock",
+    "configuration",
+    "crud"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/stock/settings/page.tsx:buildLists",
+   "type": "function",
+   "name": "buildLists",
+   "filePath": "app/admin/stock/settings/page.tsx",
+   "lineRange": [
+    36,
+    90
+   ],
+   "summary": "Builds the configuration for each editable stock list (endpoint, columns and form fields) using the translator.",
+   "tags": [
+    "factory",
+    "configuration",
+    "stock"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/stock/settings/page.tsx:ListEditor",
+   "type": "function",
+   "name": "ListEditor",
+   "filePath": "app/admin/stock/settings/page.tsx",
+   "lineRange": [
+    92,
+    209
+   ],
+   "summary": "Generic table-plus-modal editor that loads, creates, updates and deletes rows of one stock settings list.",
+   "tags": [
+    "component",
+    "crud",
+    "reusable"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/stock/settings/page.tsx:StockSettingsPage",
+   "type": "function",
+   "name": "StockSettingsPage",
+   "filePath": "app/admin/stock/settings/page.tsx",
+   "lineRange": [
+    211,
+    224
+   ],
+   "summary": "Renders a tab per stock settings list using ListEditor.",
+   "tags": [
+    "component",
+    "stock",
+    "tabs"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/admin/team/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/team/page.tsx",
+   "summary": "Team management page (admin-only) to invite members, change roles and per-member permissions, and remove access via /api/admin/team.",
+   "tags": [
+    "component",
+    "admin-page",
+    "security",
+    "team",
+    "permissions"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/team/page.tsx:PermissionPicker",
+   "type": "function",
+   "name": "PermissionPicker",
+   "filePath": "app/admin/team/page.tsx",
+   "lineRange": [
+    28,
+    50
+   ],
+   "summary": "Checkbox picker for staff permissions with quick preset buttons.",
+   "tags": [
+    "component",
+    "permissions",
+    "form"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/admin/team/page.tsx:TeamPage",
+   "type": "function",
+   "name": "TeamPage",
+   "filePath": "app/admin/team/page.tsx",
+   "lineRange": [
+    64,
+    283
+   ],
+   "summary": "Lists team members and handles inviting, role and permission edits and removal.",
+   "tags": [
+    "component",
+    "team",
+    "crud"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/tickets/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/tickets/page.tsx",
+   "summary": "Team tasks Kanban board with drag-and-drop columns, quick create, in-place ticket view, assignees, priorities, due dates and comments with images.",
+   "tags": [
+    "component",
+    "admin-page",
+    "kanban",
+    "tasks",
+    "collaboration"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/tickets/page.tsx:Person",
+   "type": "function",
+   "name": "Person",
+   "filePath": "app/admin/tickets/page.tsx",
+   "lineRange": [
+    58,
+    72
+   ],
+   "summary": "Renders a team member avatar with initials and a colored background.",
+   "tags": [
+    "component",
+    "presentational",
+    "avatar"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/admin/tickets/page.tsx:QuickCreate",
+   "type": "function",
+   "name": "QuickCreate",
+   "filePath": "app/admin/tickets/page.tsx",
+   "lineRange": [
+    89,
+    112
+   ],
+   "summary": "Inline form creating a ticket in a board column.",
+   "tags": [
+    "component",
+    "form",
+    "tasks"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/admin/tickets/page.tsx:Comments",
+   "type": "function",
+   "name": "Comments",
+   "filePath": "app/admin/tickets/page.tsx",
+   "lineRange": [
+    114,
+    244
+   ],
+   "summary": "Loads, posts and deletes ticket comments, including one optional uploaded image.",
+   "tags": [
+    "component",
+    "comments",
+    "upload"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/tickets/page.tsx:TicketView",
+   "type": "function",
+   "name": "TicketView",
+   "filePath": "app/admin/tickets/page.tsx",
+   "lineRange": [
+    247,
+    354
+   ],
+   "summary": "Editable detail panel for a ticket: title, description, status, priority, assignee and due date, plus comments.",
+   "tags": [
+    "component",
+    "form",
+    "tasks"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/tickets/page.tsx:TicketBoard",
+   "type": "function",
+   "name": "TicketBoard",
+   "filePath": "app/admin/tickets/page.tsx",
+   "lineRange": [
+    356,
+    539
+   ],
+   "summary": "Drag-and-drop board grouping tickets by status, computing positions between neighbours and persisting moves.",
+   "tags": [
+    "component",
+    "kanban",
+    "drag-and-drop"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/tickets/page.tsx:TicketsPage",
+   "type": "function",
+   "name": "TicketsPage",
+   "filePath": "app/admin/tickets/page.tsx",
+   "lineRange": [
+    542,
+    544
+   ],
+   "summary": "Page entry rendering the ticket board.",
+   "tags": [
+    "component",
+    "entry-point",
+    "tasks"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/admin/trash/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/trash/page.tsx",
+   "summary": "Deleted items page listing soft-deleted rows per table, with permanent purge and owner-only restore through /api/admin/trash.",
+   "tags": [
+    "component",
+    "admin-page",
+    "soft-delete",
+    "trash",
+    "security"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/trash/page.tsx:TrashPage",
+   "type": "function",
+   "name": "TrashPage",
+   "filePath": "app/admin/trash/page.tsx",
+   "lineRange": [
+    46,
+    228
+   ],
+   "summary": "Loads trash counts and rows per table and purges or restores selected ids.",
+   "tags": [
+    "component",
+    "soft-delete",
+    "crud"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/variants/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/variants/page.tsx",
+   "summary": "Admin page managing the color and size lookup lists used by product variants, with single and bulk deletes.",
+   "tags": [
+    "component",
+    "admin-page",
+    "catalog",
+    "variants",
+    "crud"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/variants/page.tsx:AdminVariantsPage",
+   "type": "function",
+   "name": "AdminVariantsPage",
+   "filePath": "app/admin/variants/page.tsx",
+   "lineRange": [
+    48,
+    628
+   ],
+   "summary": "Fetches colors and sizes and creates, edits and deletes them in two tables with modal forms.",
+   "tags": [
+    "component",
+    "catalog",
+    "crud"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:components/admin/CategoryExtraFields.tsx",
+   "type": "file",
+   "name": "CategoryExtraFields.tsx",
+   "filePath": "components/admin/CategoryExtraFields.tsx",
+   "summary": "Shared form fields for category pages: parent-category select and extra category options.",
+   "tags": [
+    "component",
+    "form",
+    "category",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/CategoryExtraFields.tsx:CategoryExtraFields",
+   "type": "function",
+   "name": "CategoryExtraFields",
+   "filePath": "components/admin/CategoryExtraFields.tsx",
+   "lineRange": [
+    19,
+    75
+   ],
+   "summary": "Loads categories and renders the parent select and extra fields inside a category form.",
+   "tags": [
+    "component",
+    "form",
+    "category"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/admin/ImageUpload.tsx",
+   "type": "file",
+   "name": "ImageUpload.tsx",
+   "filePath": "components/admin/ImageUpload.tsx",
+   "summary": "Single image upload control for admin forms that posts files to /api/upload/image and shows a preview.",
+   "tags": [
+    "component",
+    "upload",
+    "media",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/ImageUpload.tsx:ImageUpload",
+   "type": "function",
+   "name": "ImageUpload",
+   "filePath": "components/admin/ImageUpload.tsx",
+   "lineRange": [
+    15,
+    149
+   ],
+   "summary": "Validates and uploads one image, reporting the stored URL back to the form value.",
+   "tags": [
+    "component",
+    "upload",
+    "media"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/admin/MultiImageUpload.tsx",
+   "type": "file",
+   "name": "MultiImageUpload.tsx",
+   "filePath": "components/admin/MultiImageUpload.tsx",
+   "summary": "Multi-image upload control for admin forms, uploading each file to /api/upload/image and managing an ordered list of URLs.",
+   "tags": [
+    "component",
+    "upload",
+    "media",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/MultiImageUpload.tsx:MultiImageUpload",
+   "type": "function",
+   "name": "MultiImageUpload",
+   "filePath": "components/admin/MultiImageUpload.tsx",
+   "lineRange": [
+    23,
+    149
+   ],
+   "summary": "Uploads several images, keeps the URL list in the form value and supports removal.",
+   "tags": [
+    "component",
+    "upload",
+    "media"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/admin/NotificationBell.tsx",
+   "type": "file",
+   "name": "NotificationBell.tsx",
+   "filePath": "components/admin/NotificationBell.tsx",
+   "summary": "Admin header notification bell: loads notifications, listens to the SSE stream with pop-ups and a chime, polls every 60 s, marks read and toggles desktop push.",
+   "tags": [
+    "component",
+    "notifications",
+    "realtime",
+    "admin"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:components/admin/NotificationBell.tsx:chime",
+   "type": "function",
+   "name": "chime",
+   "filePath": "components/admin/NotificationBell.tsx",
+   "lineRange": [
+    17,
+    38
+   ],
+   "summary": "Plays a short notification sound with the Web Audio API.",
+   "tags": [
+    "utility",
+    "audio",
+    "notifications"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/NotificationBell.tsx:NotificationBell",
+   "type": "function",
+   "name": "NotificationBell",
+   "filePath": "components/admin/NotificationBell.tsx",
+   "lineRange": [
+    44,
+    220
+   ],
+   "summary": "Manages notification list state, the event stream, unread counts and desktop push toggling in a dropdown.",
+   "tags": [
+    "component",
+    "notifications",
+    "realtime"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/admin/ProductStockFields.tsx",
+   "type": "file",
+   "name": "ProductStockFields.tsx",
+   "filePath": "components/admin/ProductStockFields.tsx",
+   "summary": "Stock-related product form fields (code, supplier, collection, tracking, purchase cost) plus helpers to load and save the product cost via /api/stock/costs.",
+   "tags": [
+    "component",
+    "form",
+    "stock",
+    "costs",
+    "admin"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/ProductStockFields.tsx:ProductStockFields",
+   "type": "function",
+   "name": "ProductStockFields",
+   "filePath": "components/admin/ProductStockFields.tsx",
+   "lineRange": [
+    19,
+    77
+   ],
+   "summary": "Renders supplier, collection, tracking and permission-gated cost fields, loading the lookup lists.",
+   "tags": [
+    "component",
+    "form",
+    "stock"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/admin/ProductStockFields.tsx:loadProductCost",
+   "type": "function",
+   "name": "loadProductCost",
+   "filePath": "components/admin/ProductStockFields.tsx",
+   "lineRange": [
+    79,
+    85
+   ],
+   "summary": "Fetches a product purchase cost from /api/stock/costs, returning null when not permitted.",
+   "tags": [
+    "api-client",
+    "costs",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/ProductStockFields.tsx:saveProductCost",
+   "type": "function",
+   "name": "saveProductCost",
+   "filePath": "components/admin/ProductStockFields.tsx",
+   "lineRange": [
+    87,
+    94
+   ],
+   "summary": "Saves a product purchase cost with PUT /api/stock/costs, throwing on failure.",
+   "tags": [
+    "api-client",
+    "costs",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/admin/ProductTranslationFields.tsx",
+   "type": "file",
+   "name": "ProductTranslationFields.tsx",
+   "filePath": "components/admin/ProductTranslationFields.tsx",
+   "summary": "Form fields for a product French and Arabic name and description translations.",
+   "tags": [
+    "component",
+    "form",
+    "i18n",
+    "admin"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:components/admin/ProductTranslationFields.tsx:ProductTranslationFields",
+   "type": "function",
+   "name": "ProductTranslationFields",
+   "filePath": "components/admin/ProductTranslationFields.tsx",
+   "lineRange": [
+    12,
+    42
+   ],
+   "summary": "Renders the localized name and description inputs for product forms.",
+   "tags": [
+    "component",
+    "form",
+    "i18n"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:app/admin/reels/page.tsx",
+   "target": "function:app/admin/reels/page.tsx:ReelsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/reels/page.tsx",
+   "target": "function:app/admin/reels/page.tsx:ReelsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/reels/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/reels/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/reels/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/sale-banners/page.tsx",
+   "target": "function:app/admin/sale-banners/page.tsx:SaleBannersPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/sale-banners/page.tsx",
+   "target": "function:app/admin/sale-banners/page.tsx:SaleBannersPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/sale-banners/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/sale-banners/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/sale-banners/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/settings/page.tsx",
+   "target": "function:app/admin/settings/page.tsx:SettingsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/settings/page.tsx",
+   "target": "function:app/admin/settings/page.tsx:SettingsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/settings/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/settings/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/settings/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/settings/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/settings/page.tsx",
+   "target": "function:app/admin/stock/settings/page.tsx:buildLists",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/stock/settings/page.tsx",
+   "target": "function:app/admin/stock/settings/page.tsx:ListEditor",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/stock/settings/page.tsx",
+   "target": "function:app/admin/stock/settings/page.tsx:StockSettingsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/stock/settings/page.tsx",
+   "target": "function:app/admin/stock/settings/page.tsx:StockSettingsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/stock/settings/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/settings/page.tsx",
+   "target": "file:components/admin/stock/stock-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/settings/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/stock/settings/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/team/page.tsx",
+   "target": "function:app/admin/team/page.tsx:PermissionPicker",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/team/page.tsx",
+   "target": "function:app/admin/team/page.tsx:TeamPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/team/page.tsx",
+   "target": "function:app/admin/team/page.tsx:TeamPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/team/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/team/page.tsx",
+   "target": "file:components/admin/stock/stock-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/team/page.tsx",
+   "target": "file:lib/admin-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/team/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/team/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/tickets/page.tsx",
+   "target": "function:app/admin/tickets/page.tsx:Person",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/tickets/page.tsx",
+   "target": "function:app/admin/tickets/page.tsx:QuickCreate",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/tickets/page.tsx",
+   "target": "function:app/admin/tickets/page.tsx:Comments",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/tickets/page.tsx",
+   "target": "function:app/admin/tickets/page.tsx:TicketView",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/tickets/page.tsx",
+   "target": "function:app/admin/tickets/page.tsx:TicketBoard",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/tickets/page.tsx",
+   "target": "function:app/admin/tickets/page.tsx:TicketsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/tickets/page.tsx",
+   "target": "function:app/admin/tickets/page.tsx:TicketsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/tickets/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/tickets/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/tickets/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/tickets/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/tickets/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/tickets/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/trash/page.tsx",
+   "target": "function:app/admin/trash/page.tsx:TrashPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/trash/page.tsx",
+   "target": "function:app/admin/trash/page.tsx:TrashPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/trash/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/trash/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/trash/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/trash/page.tsx",
+   "target": "file:lib/trash-tables.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/variants/page.tsx",
+   "target": "function:app/admin/variants/page.tsx:AdminVariantsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/variants/page.tsx",
+   "target": "function:app/admin/variants/page.tsx:AdminVariantsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/variants/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/variants/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/variants/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/CategoryExtraFields.tsx",
+   "target": "function:components/admin/CategoryExtraFields.tsx:CategoryExtraFields",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/CategoryExtraFields.tsx",
+   "target": "function:components/admin/CategoryExtraFields.tsx:CategoryExtraFields",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/CategoryExtraFields.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/ImageUpload.tsx",
+   "target": "function:components/admin/ImageUpload.tsx:ImageUpload",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/ImageUpload.tsx",
+   "target": "function:components/admin/ImageUpload.tsx:ImageUpload",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/ImageUpload.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/ImageUpload.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/MultiImageUpload.tsx",
+   "target": "function:components/admin/MultiImageUpload.tsx:MultiImageUpload",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/MultiImageUpload.tsx",
+   "target": "function:components/admin/MultiImageUpload.tsx:MultiImageUpload",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/MultiImageUpload.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/MultiImageUpload.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/NotificationBell.tsx",
+   "target": "function:components/admin/NotificationBell.tsx:chime",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/NotificationBell.tsx",
+   "target": "function:components/admin/NotificationBell.tsx:NotificationBell",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/NotificationBell.tsx",
+   "target": "function:components/admin/NotificationBell.tsx:NotificationBell",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/NotificationBell.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/NotificationBell.tsx",
+   "target": "file:components/admin/desktop-push.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/NotificationBell.tsx",
+   "target": "file:components/admin/notification-item.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/NotificationBell.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/NotificationBell.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/ProductStockFields.tsx",
+   "target": "function:components/admin/ProductStockFields.tsx:ProductStockFields",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/ProductStockFields.tsx",
+   "target": "function:components/admin/ProductStockFields.tsx:ProductStockFields",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/ProductStockFields.tsx",
+   "target": "function:components/admin/ProductStockFields.tsx:loadProductCost",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/ProductStockFields.tsx",
+   "target": "function:components/admin/ProductStockFields.tsx:loadProductCost",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/ProductStockFields.tsx",
+   "target": "function:components/admin/ProductStockFields.tsx:saveProductCost",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/ProductStockFields.tsx",
+   "target": "function:components/admin/ProductStockFields.tsx:saveProductCost",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/ProductStockFields.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/ProductStockFields.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/admin/ProductTranslationFields.tsx",
+   "target": "function:components/admin/ProductTranslationFields.tsx:ProductTranslationFields",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/admin/ProductTranslationFields.tsx",
+   "target": "function:components/admin/ProductTranslationFields.tsx:ProductTranslationFields",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/admin/ProductTranslationFields.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:components/admin/NotificationBell.tsx:NotificationBell",
+   "target": "function:components/admin/desktop-push.ts:enableDesktop",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/admin/NotificationBell.tsx:NotificationBell",
+   "target": "function:components/admin/desktop-push.ts:disableDesktop",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:components/admin/NotificationBell.tsx:NotificationBell",
+   "target": "function:components/admin/notification-item.tsx:NotificationItem",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

@@ -69,19 +69,19 @@ export default function CartDrawer() {
                 aria-modal="true"
                 aria-label={text.myCart}
                 dir={rtl ? "rtl" : "ltr"}
-                className={`fixed inset-x-0 bottom-0 z-1510 flex max-h-[85dvh] flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl sm:inset-x-auto sm:bottom-auto sm:top-[110px] sm:mt-2 sm:max-h-[calc(100vh-140px)] sm:w-full sm:max-w-[500px] sm:rounded-[12px] sm:border sm:border-gray-200 ${rtl ? 'sm:left-6' : 'sm:right-6'}`}
+                className={`theme-cream fixed inset-x-0 bottom-0 z-1510 flex max-h-[85dvh] flex-col overflow-hidden rounded-t-2xl bg-card shadow-2xl sm:inset-x-auto sm:bottom-auto sm:top-[72px] sm:mt-2 sm:max-h-[calc(100vh-140px)] sm:w-full sm:max-w-[500px] sm:rounded-[12px] sm:border sm:border-line ${rtl ? 'sm:left-6' : 'sm:right-6'}`}
             >
-                <div className={`absolute -top-2 hidden ${rtl ? 'left-10' : 'right-10'} w-4 h-4 bg-white border-t border-l border-gray-200 transform rotate-45 sm:block`}></div>
-                <div className="mx-auto mt-2 h-1 w-10 shrink-0 rounded-full bg-gray-300 sm:hidden" aria-hidden="true" />
+                <div className={`absolute -top-2 hidden ${rtl ? 'left-10' : 'right-10'} w-4 h-4 bg-card border-t border-l border-line transform rotate-45 sm:block`}></div>
+                <div className="mx-auto mt-2 h-1 w-10 shrink-0 rounded-full bg-line sm:hidden" aria-hidden="true" />
                 <div className="flex min-h-0 flex-1 flex-col">
 
-                    <div className="flex shrink-0 items-center justify-between border-b bg-white px-5 py-3 sm:px-8 sm:py-6">
-                        <h2 className="text-[20px] font-bold text-gray-900">
+                    <div className="flex shrink-0 items-center justify-between border-b bg-card px-5 py-3 sm:px-8 sm:py-6">
+                        <h2 className="text-[20px] font-bold text-ink">
                             {text.myCart}
                         </h2>
                         <button
                             onClick={closeCart}
-                            className="-me-2 flex h-11 w-11 items-center justify-center rounded-full text-gray-500 transition hover:bg-gray-100 hover:text-gray-700"
+                            className="-me-2 flex h-11 w-11 items-center justify-center rounded-full text-mute transition hover:bg-surface hover:text-ink"
                             aria-label="Close"
                         >
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -91,17 +91,17 @@ export default function CartDrawer() {
                     </div>
 
                     {/* Cart Items */}
-                    <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain bg-white px-5 pt-4 sm:max-h-100 sm:px-8 sm:pt-6">
+                    <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain bg-card px-5 pt-4 sm:max-h-100 sm:px-8 sm:pt-6">
                         {items.length === 0 ? (
                             <div className="pb-12 flex flex-col items-center justify-center h-full text-center">
-                                <svg className="w-24 h-24 text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <svg className="w-24 h-24 text-mute mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                                 </svg>
-                                <p className="text-gray-500 text-lg mb-2">{text.emptyCart}</p>
+                                <p className="text-mute text-lg mb-2">{text.emptyCart}</p>
                                 <Link
                                     href={`/${locale}`}
                                     onClick={closeCart}
-                                    className="text-[#842E1B] hover:text-[#6b2516] font-medium"
+                                    className="text-accent hover:text-accent font-medium"
                                 >
                                     {text.startShopping}
                                 </Link>
@@ -117,7 +117,7 @@ export default function CartDrawer() {
                                             variant="compact"
                                             reviewsText={text.reviews}
                                         />
-                                        <hr className="my-4 border-gray-100" />
+                                        <hr className="my-4 border-line" />
                                     </React.Fragment>
                                 ))}
                             </div>
@@ -126,18 +126,18 @@ export default function CartDrawer() {
 
                     {/* Footer with Subtotal and Actions */}
                     {items.length > 0 && (
-                        <div className="shrink-0 space-y-3 border-t bg-white px-5 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4 sm:space-y-6 sm:px-8 sm:pb-6">
+                        <div className="shrink-0 space-y-3 border-t bg-card px-5 pb-[calc(1rem+env(safe-area-inset-bottom))] pt-4 sm:space-y-6 sm:px-8 sm:pb-6">
                             {/* Subtotal */}
                             <div className="flex justify-between items-center">
-                                <span className="text-[16px] font-bold text-[#4B1307]">{text.subtotal}</span>
-                                <span className="text-[17px] font-semibold text-[#2b1a16]" dir="ltr">{subtotal} TND</span>
+                                <span className="text-[16px] font-bold text-accent">{text.subtotal}</span>
+                                <span className="text-[17px] font-semibold text-ink" dir="ltr">{subtotal} TND</span>
                             </div>
 
                             {/* Checkout Button */}
                             <Link
                                 href={`/${locale}/checkout`}
                                 onClick={closeCart}
-                                className="block w-full rounded-full bg-[#842E1B] py-3.5 text-center text-lg font-medium text-white transition hover:bg-[#5e2d23]"
+                                className="block w-full rounded-full bg-accent py-3.5 text-center text-lg font-medium text-white transition hover:bg-accent-hover"
                             >
                                 {text.checkout}
                             </Link>
@@ -146,7 +146,7 @@ export default function CartDrawer() {
                             <Link
                                 href={`/${locale}/cart`}
                                 onClick={closeCart}
-                                className="block w-full rounded-full border border-[#7a3b2e] py-3 text-center text-base font-medium text-[#7a3b2e] transition hover:bg-gray-50"
+                                className="block w-full rounded-full border border-accent py-3 text-center text-base font-medium text-accent transition hover:bg-surface"
                             >
                                 {text.viewCart}
                             </Link>

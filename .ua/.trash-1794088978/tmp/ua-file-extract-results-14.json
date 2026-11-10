@@ -1,0 +1,154 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 1,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 1,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 1
+    }
+  },
+  "results": [
+    {
+      "path": "api/Dockerfile",
+      "language": "dockerfile",
+      "fileCategory": "infra",
+      "totalLines": 25,
+      "nonEmptyLines": 24,
+      "services": [
+        {
+          "name": "build",
+          "image": "node:22-alpine",
+          "ports": [],
+          "startLine": 3,
+          "endLine": 12
+        },
+        {
+          "name": "node",
+          "image": "node:22-alpine",
+          "ports": [
+            4000
+          ],
+          "startLine": 13,
+          "endLine": 26
+        }
+      ],
+      "steps": [
+        {
+          "name": "FROM node:22-alpine AS build",
+          "startLine": 3,
+          "endLine": 3
+        },
+        {
+          "name": "WORKDIR /app/api",
+          "startLine": 4,
+          "endLine": 4
+        },
+        {
+          "name": "COPY api/package.json api/package-lock.json ./",
+          "startLine": 5,
+          "endLine": 5
+        },
+        {
+          "name": "RUN npm ci",
+          "startLine": 6,
+          "endLine": 6
+        },
+        {
+          "name": "COPY lib /app/lib",
+          "startLine": 7,
+          "endLine": 7
+        },
+        {
+          "name": "RUN ln -s /app/api/node_modules /app/node_modules",
+          "startLine": 9,
+          "endLine": 9
+        },
+        {
+          "name": "COPY api ./",
+          "startLine": 10,
+          "endLine": 10
+        },
+        {
+          "name": "RUN npm run build",
+          "startLine": 11,
+          "endLine": 11
+        },
+        {
+          "name": "FROM node:22-alpine",
+          "startLine": 13,
+          "endLine": 13
+        },
+        {
+          "name": "ENV NODE_ENV=production",
+          "startLine": 14,
+          "endLine": 14
+        },
+        {
+          "name": "WORKDIR /app/api",
+          "startLine": 15,
+          "endLine": 15
+        },
+        {
+          "name": "COPY api/package.json api/package-lock.json ./",
+          "startLine": 16,
+          "endLine": 16
+        },
+        {
+          "name": "RUN npm ci --omit=dev && npm cache clean --force",
+          "startLine": 17,
+          "endLine": 17
+        },
+        {
+          "name": "COPY --from=build /app/api/dist ./dist",
+          "startLine": 18,
+          "endLine": 18
+        },
+        {
+          "name": "COPY api/scripts ./scripts",
+          "startLine": 20,
+          "endLine": 20
+        },
+        {
+          "name": "COPY supabase/migrations /app/supabase/migrations",
+          "startLine": 21,
+          "endLine": 21
+        },
+        {
+          "name": "COPY db/baseline.sql /app/db/baseline.sql",
+          "startLine": 22,
+          "endLine": 22
+        },
+        {
+          "name": "USER node",
+          "startLine": 23,
+          "endLine": 23
+        },
+        {
+          "name": "EXPOSE 4000",
+          "startLine": 24,
+          "endLine": 24
+        },
+        {
+          "name": "CMD [\"node\", \"dist/api/src/main.js\"]",
+          "startLine": 25,
+          "endLine": 25
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "serviceCount": 2,
+        "stepCount": 20
+      }
+    }
+  ]
+}

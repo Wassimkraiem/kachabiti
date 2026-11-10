@@ -105,23 +105,23 @@ interface FAQItemProps {
 
 function FAQItem({ question, answer, isOpen, onToggle, rtl }: FAQItemProps) {
     return (
-        <div className="bg-white rounded-lg border border-gray-200 overflow-hidden transition-all duration-300">
+        <div className="bg-card rounded-lg border border-line overflow-hidden transition-all duration-300">
             <button
                 onClick={onToggle}
-                className={` w-full px-6 py-4 flex items-center justify-between text-left transition-colors duration-200 ${isOpen ? 'bg-[#FCF4F2]' : 'hover:bg-gray-50'
+                className={` w-full px-6 py-4 flex items-center justify-between text-left transition-colors duration-200 ${isOpen ? 'bg-card' : 'hover:bg-surface'
                     }`}
                 aria-expanded={isOpen}
             >
                 <div className="flex items-center gap-4 flex-1">
                     <div
-                        className={`w-1 h-8 bg-[#842E1B] rounded transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'} ${rtl ? 'order-last' : ''}`}
+                        className={`w-1 h-8 bg-accent rounded transition-all duration-300 ${isOpen ? 'opacity-100' : 'opacity-0'} ${rtl ? 'order-last' : ''}`}
                     ></div>
-                    <span className={`font-medium transition-colors duration-200 ${isOpen ? 'text-[#842E1B]' : 'text-gray-900'} ${rtl ? 'text-right' : 'text-left'}`}>
+                    <span className={`font-medium transition-colors duration-200 ${isOpen ? 'text-accent' : 'text-ink'} ${rtl ? 'text-right' : 'text-left'}`}>
                         {question}
                     </span>
                 </div>
                 <svg
-                    className={`w-5 h-5 text-gray-500 shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''
+                    className={`w-5 h-5 text-mute shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''
                         } ${rtl ? 'order-1' : ''}`}
                     fill="none"
                     stroke="currentColor"
@@ -134,7 +134,7 @@ function FAQItem({ question, answer, isOpen, onToggle, rtl }: FAQItemProps) {
                 className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}
             >
                 <div className={`px-6 py-4 ${rtl ? 'text-right' : 'text-left'}`}>
-                    <p className="text-gray-700 leading-relaxed">{answer}</p>
+                    <p className="text-ink leading-relaxed">{answer}</p>
                 </div>
             </div>
         </div>
@@ -170,7 +170,7 @@ export default function FAQ() {
     }, []);
 
     return (
-        <section id="faqs" className="w-full py-16 px-4 bg-white" dir={rtl ? 'rtl' : 'ltr'}>
+        <section id="faqs" className="w-full py-16 px-4 bg-card" dir={rtl ? 'rtl' : 'ltr'}>
             <div className="max-w-4xl mx-auto">
                 <SectionHeader
                     title={t.title}

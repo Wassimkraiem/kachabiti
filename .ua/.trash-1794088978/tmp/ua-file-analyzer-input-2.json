@@ -1,0 +1,313 @@
+{
+ "projectRoot": "C:/Users/Wassi/kachabity",
+ "batchFiles": [
+  {
+   "path": "components/landing/HowToOrder.tsx",
+   "language": "typescript",
+   "sizeLines": 106,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/landing/LandingProductCard.tsx",
+   "language": "typescript",
+   "sizeLines": 75,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/landing/NewArrivals.tsx",
+   "language": "typescript",
+   "sizeLines": 65,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/landing/ProductRing3D.tsx",
+   "language": "typescript",
+   "sizeLines": 147,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/landing/ProductShowcase.tsx",
+   "language": "typescript",
+   "sizeLines": 144,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/landing/ring-scene.ts",
+   "language": "typescript",
+   "sizeLines": 444,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/layout/MobileHeader.tsx",
+   "language": "typescript",
+   "sizeLines": 304,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/layout/MobileTabBar.tsx",
+   "language": "typescript",
+   "sizeLines": 88,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/layout/SearchBox.tsx",
+   "language": "typescript",
+   "sizeLines": 266,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/layout/StaticHeader.tsx",
+   "language": "typescript",
+   "sizeLines": 434,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/layout/TrafficSource.tsx",
+   "language": "typescript",
+   "sizeLines": 10,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/products/ProductGrid.tsx",
+   "language": "typescript",
+   "sizeLines": 257,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/products/ProductListCard.tsx",
+   "language": "typescript",
+   "sizeLines": 206,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/products/PromoProductCard.tsx",
+   "language": "typescript",
+   "sizeLines": 111,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/products/PromoProducts.tsx",
+   "language": "typescript",
+   "sizeLines": 156,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/products/TopProducts.tsx",
+   "language": "typescript",
+   "sizeLines": 317,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/reviews/CustomerFeedback.tsx",
+   "language": "typescript",
+   "sizeLines": 130,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/reviews/ReviewCard.tsx",
+   "language": "typescript",
+   "sizeLines": 98,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/sections/FAQ.tsx",
+   "language": "typescript",
+   "sizeLines": 194,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/sections/HeroSection.tsx",
+   "language": "typescript",
+   "sizeLines": 481,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/sections/NewsletterForm.tsx",
+   "language": "typescript",
+   "sizeLines": 135,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/sections/Reels.tsx",
+   "language": "typescript",
+   "sizeLines": 335,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/sections/SaleBanner.tsx",
+   "language": "typescript",
+   "sizeLines": 124,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/sections/SocialLinks.tsx",
+   "language": "typescript",
+   "sizeLines": 54,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/sections/TermsSection.tsx",
+   "language": "typescript",
+   "sizeLines": 22,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/services/ServiceHighlightCard.tsx",
+   "language": "typescript",
+   "sizeLines": 33,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/services/ServiceHighlights.tsx",
+   "language": "typescript",
+   "sizeLines": 216,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/timers/CountdownTimer.tsx",
+   "language": "typescript",
+   "sizeLines": 90,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/timers/PromoCountdownTimer.tsx",
+   "language": "typescript",
+   "sizeLines": 91,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/ui/ErrorBoundary.tsx",
+   "language": "typescript",
+   "sizeLines": 59,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/ui/ImageLightbox.tsx",
+   "language": "typescript",
+   "sizeLines": 114,
+   "fileCategory": "code"
+  },
+  {
+   "path": "components/ui/LoadingSpinner.tsx",
+   "language": "typescript",
+   "sizeLines": 19,
+   "fileCategory": "code"
+  }
+ ],
+ "batchImportData": {
+  "components/landing/HowToOrder.tsx": [
+   "lib/config.ts",
+   "lib/fonts.ts",
+   "lib/language-utils.ts"
+  ],
+  "components/landing/LandingProductCard.tsx": [
+   "lib/landing-products.ts"
+  ],
+  "components/landing/NewArrivals.tsx": [
+   "components/landing/LandingProductCard.tsx",
+   "lib/fonts.ts",
+   "lib/landing-products.ts",
+   "lib/language-utils.ts"
+  ],
+  "components/landing/ProductRing3D.tsx": [
+   "components/landing/ring-scene.ts",
+   "lib/landing-products.ts"
+  ],
+  "components/landing/ProductShowcase.tsx": [
+   "components/landing/ProductRing3D.tsx",
+   "lib/fonts.ts",
+   "lib/landing-products.ts",
+   "lib/language-utils.ts"
+  ],
+  "components/landing/ring-scene.ts": [],
+  "components/layout/MobileHeader.tsx": [
+   "components/layout/SearchBox.tsx",
+   "lib/config.ts",
+   "lib/customer-auth.ts"
+  ],
+  "components/layout/MobileTabBar.tsx": [
+   "lib/cart-context.tsx",
+   "lib/customer-auth.ts"
+  ],
+  "components/layout/SearchBox.tsx": [
+   "lib/product-search.ts",
+   "lib/storefront-api.ts",
+   "lib/utils/product-utils.ts"
+  ],
+  "components/layout/StaticHeader.tsx": [
+   "components/cart/CartButton.tsx",
+   "components/layout/MobileHeader.tsx",
+   "components/layout/SearchBox.tsx",
+   "lib/categories-cache.ts",
+   "lib/config.ts",
+   "lib/customer-auth.ts",
+   "lib/language-context.tsx",
+   "lib/language-utils.ts"
+  ],
+  "components/layout/TrafficSource.tsx": [
+   "lib/traffic-source.ts"
+  ],
+  "components/products/ProductGrid.tsx": [
+   "lib/categories-cache.ts"
+  ],
+  "components/products/ProductListCard.tsx": [
+   "lib/config.ts"
+  ],
+  "components/products/PromoProductCard.tsx": [
+   "components/cart/AddToCartButton.tsx",
+   "components/timers/PromoCountdownTimer.tsx",
+   "components/ui/StockProgress.tsx",
+   "lib/quick-add.ts",
+   "lib/utils/product-utils.ts",
+   "types/product.ts"
+  ],
+  "components/products/PromoProducts.tsx": [
+   "components/products/PromoProductCard.tsx",
+   "types/product.ts"
+  ],
+  "components/products/TopProducts.tsx": [
+   "components/products/ProductListCard.tsx",
+   "lib/customer-auth.ts",
+   "lib/favorites.ts",
+   "lib/product-images.ts",
+   "lib/quick-add.ts"
+  ],
+  "components/reviews/CustomerFeedback.tsx": [
+   "components/carousel/CarouselIndicators.tsx",
+   "components/carousel/CarouselNavigation.tsx",
+   "components/reviews/ReviewCard.tsx",
+   "components/services/ServiceHighlightCard.tsx",
+   "components/ui/SectionHeader.tsx",
+   "hooks/useCarousel.ts",
+   "lib/service-highlights.ts",
+   "lib/storefront-api.ts"
+  ],
+  "components/reviews/ReviewCard.tsx": [],
+  "components/sections/FAQ.tsx": [
+   "components/ui/SectionHeader.tsx",
+   "lib/language-utils.ts"
+  ],
+  "components/sections/HeroSection.tsx": [
+   "lib/language-utils.ts"
+  ],
+  "components/sections/NewsletterForm.tsx": [],
+  "components/sections/Reels.tsx": [],
+  "components/sections/SaleBanner.tsx": [
+   "components/timers/CountdownTimer.tsx",
+   "lib/storefront-api.ts"
+  ],
+  "components/sections/SocialLinks.tsx": [
+   "lib/config.ts"
+  ],
+  "components/sections/TermsSection.tsx": [],
+  "components/services/ServiceHighlightCard.tsx": [],
+  "components/services/ServiceHighlights.tsx": [
+   "hooks/useCarousel.ts"
+  ],
+  "components/timers/CountdownTimer.tsx": [],
+  "components/timers/PromoCountdownTimer.tsx": [],
+  "components/ui/ErrorBoundary.tsx": [],
+  "components/ui/ImageLightbox.tsx": [],
+  "components/ui/LoadingSpinner.tsx": []
+ }
+}

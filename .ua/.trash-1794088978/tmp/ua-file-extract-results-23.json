@@ -1,0 +1,1128 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 22,
+  "filesSkipped": [
+    ".gitattributes",
+    ".vercelignore",
+    "app/globals.css"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 22,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 19,
+      "failed": 0,
+      "skipped": 3
+    }
+  },
+  "results": [
+    {
+      "path": ".github/scripts/api-changed.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 37,
+      "functions": [
+        {
+          "name": "run",
+          "startLine": 12,
+          "endLine": 13,
+          "params": [
+            "cmd",
+            "args"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "run",
+          "callee": "execFileSync",
+          "lineNumber": 13
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": ".ua/config.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 1,
+      "nonEmptyLines": 1,
+      "sections": [
+        {
+          "heading": "outputLanguage",
+          "level": 1,
+          "line": 1
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "api/eslint.config.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 39,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "api/scripts/copy-storage.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 119,
+      "nonEmptyLines": 114,
+      "functions": [
+        {
+          "name": "env",
+          "startLine": 14,
+          "endLine": 18,
+          "params": [
+            "name",
+            "fallback"
+          ]
+        },
+        {
+          "name": "source",
+          "startLine": 29,
+          "endLine": 30,
+          "params": [
+            "path"
+          ]
+        },
+        {
+          "name": "target",
+          "startLine": 32,
+          "endLine": 32,
+          "params": [
+            "bucket",
+            "key"
+          ]
+        },
+        {
+          "name": "keys",
+          "startLine": 35,
+          "endLine": 52,
+          "params": [
+            "bucket"
+          ]
+        },
+        {
+          "name": "copy",
+          "startLine": 54,
+          "endLine": 76,
+          "params": [
+            "bucket"
+          ]
+        },
+        {
+          "name": "rewrite",
+          "startLine": 79,
+          "endLine": 116,
+          "params": []
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "env",
+          "callee": "value.replace",
+          "lineNumber": 17
+        },
+        {
+          "caller": "source",
+          "callee": "fetch",
+          "lineNumber": 30
+        },
+        {
+          "caller": "target",
+          "callee": "key.split('/').map(encodeURIComponent).join",
+          "lineNumber": 32
+        },
+        {
+          "caller": "target",
+          "callee": "key.split('/').map",
+          "lineNumber": 32
+        },
+        {
+          "caller": "target",
+          "callee": "key.split",
+          "lineNumber": 32
+        },
+        {
+          "caller": "keys",
+          "callee": "source",
+          "lineNumber": 38
+        },
+        {
+          "caller": "keys",
+          "callee": "JSON.stringify",
+          "lineNumber": 41
+        },
+        {
+          "caller": "keys",
+          "callee": "response.text",
+          "lineNumber": 43
+        },
+        {
+          "caller": "keys",
+          "callee": "response.json",
+          "lineNumber": 44
+        },
+        {
+          "caller": "keys",
+          "callee": "found.push",
+          "lineNumber": 47
+        },
+        {
+          "caller": "keys",
+          "callee": "keys",
+          "lineNumber": 47
+        },
+        {
+          "caller": "keys",
+          "callee": "found.push",
+          "lineNumber": 48
+        },
+        {
+          "caller": "copy",
+          "callee": "keys",
+          "lineNumber": 57
+        },
+        {
+          "caller": "copy",
+          "callee": "s3.fetch",
+          "lineNumber": 58
+        },
+        {
+          "caller": "copy",
+          "callee": "target",
+          "lineNumber": 58
+        },
+        {
+          "caller": "copy",
+          "callee": "source",
+          "lineNumber": 62
+        },
+        {
+          "caller": "copy",
+          "callee": "key.split('/').map(encodeURIComponent).join",
+          "lineNumber": 62
+        },
+        {
+          "caller": "copy",
+          "callee": "key.split('/').map",
+          "lineNumber": 62
+        },
+        {
+          "caller": "copy",
+          "callee": "key.split",
+          "lineNumber": 62
+        },
+        {
+          "caller": "copy",
+          "callee": "s3.fetch",
+          "lineNumber": 64
+        },
+        {
+          "caller": "copy",
+          "callee": "target",
+          "lineNumber": 64
+        },
+        {
+          "caller": "copy",
+          "callee": "file.arrayBuffer",
+          "lineNumber": 66
+        },
+        {
+          "caller": "copy",
+          "callee": "file.headers.get",
+          "lineNumber": 68
+        },
+        {
+          "caller": "copy",
+          "callee": "put.text",
+          "lineNumber": 72
+        },
+        {
+          "caller": "copy",
+          "callee": "console.log",
+          "lineNumber": 75
+        },
+        {
+          "caller": "rewrite",
+          "callee": "env",
+          "lineNumber": 81
+        },
+        {
+          "caller": "rewrite",
+          "callee": "env",
+          "lineNumber": 82
+        },
+        {
+          "caller": "rewrite",
+          "callee": "client.connect",
+          "lineNumber": 83
+        },
+        {
+          "caller": "rewrite",
+          "callee": "client.query",
+          "lineNumber": 85
+        },
+        {
+          "caller": "rewrite",
+          "callee": "client.query",
+          "lineNumber": 87
+        },
+        {
+          "caller": "rewrite",
+          "callee": "client.query('set local session_replication_role = replica').catch",
+          "lineNumber": 88
+        },
+        {
+          "caller": "rewrite",
+          "callee": "client.query",
+          "lineNumber": 88
+        },
+        {
+          "caller": "rewrite",
+          "callee": "client.query",
+          "lineNumber": 88
+        },
+        {
+          "caller": "rewrite",
+          "callee": "client.query",
+          "lineNumber": 89
+        },
+        {
+          "caller": "rewrite",
+          "callee": "column.replace",
+          "lineNumber": 98
+        },
+        {
+          "caller": "rewrite",
+          "callee": "client.query",
+          "lineNumber": 101
+        },
+        {
+          "caller": "rewrite",
+          "callee": "table.replace",
+          "lineNumber": 102
+        },
+        {
+          "caller": "rewrite",
+          "callee": "console.log",
+          "lineNumber": 105
+        },
+        {
+          "caller": "rewrite",
+          "callee": "client.query",
+          "lineNumber": 108
+        },
+        {
+          "caller": "rewrite",
+          "callee": "console.log",
+          "lineNumber": 109
+        },
+        {
+          "caller": "rewrite",
+          "callee": "client.query",
+          "lineNumber": 111
+        },
+        {
+          "caller": "rewrite",
+          "callee": "client.end",
+          "lineNumber": 114
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 6,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "api/scripts/db-types.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 17,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "api/scripts/migrate.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 62,
+      "nonEmptyLines": 60,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/[locale]/settings/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 175,
+      "nonEmptyLines": 140,
+      "sections": [
+        {
+          "heading": "Settings Page - Complete Implementation",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Overview",
+          "level": 2,
+          "line": 3
+        },
+        {
+          "heading": "Features Implemented ✅",
+          "level": 2,
+          "line": 6
+        },
+        {
+          "heading": "1. **Authentication Protection**",
+          "level": 3,
+          "line": 8
+        },
+        {
+          "heading": "2. **Tab Navigation System**",
+          "level": 3,
+          "line": 13
+        },
+        {
+          "heading": "3. **Account Information Tab**",
+          "level": 3,
+          "line": 22
+        },
+        {
+          "heading": "4. **Security Tab**",
+          "level": 3,
+          "line": 33
+        },
+        {
+          "heading": "5. **My Orders Tab** ✅",
+          "level": 3,
+          "line": 42
+        },
+        {
+          "heading": "6. **Saved Items Tab** ✅",
+          "level": 3,
+          "line": 57
+        },
+        {
+          "heading": "7. **Logout Functionality**",
+          "level": 3,
+          "line": 73
+        },
+        {
+          "heading": "Multi-Language Support 🌍",
+          "level": 2,
+          "line": 77
+        },
+        {
+          "heading": "Styling",
+          "level": 2,
+          "line": 86
+        },
+        {
+          "heading": "File Structure",
+          "level": 2,
+          "line": 96
+        },
+        {
+          "heading": "Usage",
+          "level": 2,
+          "line": 105
+        },
+        {
+          "heading": "Database Integration",
+          "level": 2,
+          "line": 112
+        },
+        {
+          "heading": "Required Tables:",
+          "level": 3,
+          "line": 114
+        },
+        {
+          "heading": "Current Integration:",
+          "level": 3,
+          "line": 119
+        },
+        {
+          "heading": "Next Steps (Optional Enhancements)",
+          "level": 2,
+          "line": 131
+        },
+        {
+          "heading": "Code Quality",
+          "level": 2,
+          "line": 161
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 19
+      }
+    },
+    {
+      "path": "app/admin/loading.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 9,
+      "functions": [
+        {
+          "name": "AdminLoading",
+          "startLine": 4,
+          "endLine": 10,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AdminLoading",
+          "line": 4,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/api-docs/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 98,
+      "nonEmptyLines": 87,
+      "functions": [
+        {
+          "name": "ApiDocsPage",
+          "startLine": 16,
+          "endLine": 97,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ApiDocsPage",
+          "line": 16,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ApiDocsPage",
+          "callee": "useEffect",
+          "lineNumber": 17
+        },
+        {
+          "caller": "ensureStylesheet",
+          "callee": "document.getElementById",
+          "lineNumber": 19
+        },
+        {
+          "caller": "ensureStylesheet",
+          "callee": "document.createElement",
+          "lineNumber": 20
+        },
+        {
+          "caller": "ensureStylesheet",
+          "callee": "document.head.appendChild",
+          "lineNumber": 24
+        },
+        {
+          "caller": "renderSwagger",
+          "callee": "window.SwaggerUIBundle",
+          "lineNumber": 29
+        },
+        {
+          "caller": "ensureScripts",
+          "callee": "document.getElementById",
+          "lineNumber": 43
+        },
+        {
+          "caller": "ensureScripts",
+          "callee": "document.getElementById",
+          "lineNumber": 44
+        },
+        {
+          "caller": "ensureScripts",
+          "callee": "renderSwagger",
+          "lineNumber": 45
+        },
+        {
+          "caller": "ensureScripts",
+          "callee": "document.getElementById",
+          "lineNumber": 50
+        },
+        {
+          "caller": "ensureScripts",
+          "callee": "document.createElement",
+          "lineNumber": 51
+        },
+        {
+          "caller": "ensureScripts",
+          "callee": "document.getElementById",
+          "lineNumber": 57
+        },
+        {
+          "caller": "ensureScripts",
+          "callee": "document.createElement",
+          "lineNumber": 58
+        },
+        {
+          "caller": "ensureScripts",
+          "callee": "document.body.appendChild",
+          "lineNumber": 63
+        },
+        {
+          "caller": "ensureScripts",
+          "callee": "renderSwagger",
+          "lineNumber": 65
+        },
+        {
+          "caller": "ensureScripts",
+          "callee": "document.body.appendChild",
+          "lineNumber": 68
+        },
+        {
+          "caller": "ensureScripts",
+          "callee": "document.getElementById",
+          "lineNumber": 71
+        },
+        {
+          "caller": "ensureScripts",
+          "callee": "document.createElement",
+          "lineNumber": 72
+        },
+        {
+          "caller": "ensureScripts",
+          "callee": "document.body.appendChild",
+          "lineNumber": 77
+        },
+        {
+          "caller": "ensureScripts",
+          "callee": "renderSwagger",
+          "lineNumber": 79
+        },
+        {
+          "caller": "ApiDocsPage",
+          "callee": "ensureStylesheet",
+          "lineNumber": 84
+        },
+        {
+          "caller": "ApiDocsPage",
+          "callee": "ensureScripts",
+          "lineNumber": 85
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/global-error.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 48,
+      "functions": [
+        {
+          "name": "GlobalError",
+          "startLine": 8,
+          "endLine": 51,
+          "params": [
+            "{ error, reset }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "GlobalError",
+          "line": 8,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "GlobalError",
+          "callee": "useEffect",
+          "lineNumber": 9
+        },
+        {
+          "caller": "GlobalError",
+          "callee": "Sentry.captureException",
+          "lineNumber": 10
+        },
+        {
+          "caller": "GlobalError",
+          "callee": "reset",
+          "lineNumber": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/layout.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 145,
+      "nonEmptyLines": 141,
+      "functions": [
+        {
+          "name": "RootLayout",
+          "startLine": 83,
+          "endLine": 145,
+          "params": [
+            "{\r\n  children,\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "viewport",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "metadata",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "RootLayout",
+          "line": 83,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "RootLayout",
+          "callee": "(await headers()).get",
+          "lineNumber": 89
+        },
+        {
+          "caller": "RootLayout",
+          "callee": "headers",
+          "lineNumber": 89
+        },
+        {
+          "caller": "RootLayout",
+          "callee": "JSON.stringify",
+          "lineNumber": 96
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/manifest.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 21,
+      "nonEmptyLines": 20,
+      "functions": [
+        {
+          "name": "manifest",
+          "startLine": 3,
+          "endLine": 21,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "manifest",
+          "line": 3,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/robots.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 11,
+      "functions": [
+        {
+          "name": "robots",
+          "startLine": 3,
+          "endLine": 12,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "robots",
+          "line": 3,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/sitemap.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 36,
+      "functions": [
+        {
+          "name": "sitemap",
+          "startLine": 3,
+          "endLine": 38,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "sitemap",
+          "line": 3,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/carousel/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 3,
+      "nonEmptyLines": 2,
+      "exports": [
+        {
+          "name": "CarouselIndicators",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "CarouselNavigation",
+          "line": 2,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/cart/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 4,
+      "exports": [
+        {
+          "name": "AddToCartButton",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "CartButton",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "CartDrawer",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "CartItem",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/footer/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 3,
+      "nonEmptyLines": 2,
+      "exports": [
+        {
+          "name": "Footer",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "FooterSection",
+          "line": 2,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/forms/FormInput.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 60,
+      "nonEmptyLines": 57,
+      "functions": [
+        {
+          "name": "FormInput",
+          "startLine": 15,
+          "endLine": 59,
+          "params": [
+            "{\r\n    label,\r\n    name,\r\n    type = \"text\",\r\n    placeholder,\r\n    register,\r\n    error,\r\n    required = false,\r\n    rules,\r\n    className = \"\",\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "FormInput",
+          "line": 15,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "FormInput",
+          "callee": "register",
+          "lineNumber": 34
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/forms/FormSelect.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 65,
+      "nonEmptyLines": 61,
+      "functions": [
+        {
+          "name": "FormSelect",
+          "startLine": 18,
+          "endLine": 64,
+          "params": [
+            "{\r\n    label,\r\n    name,\r\n    options,\r\n    register,\r\n    error,\r\n    required = false,\r\n    className = \"\",\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "FormSelect",
+          "line": 18,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "FormSelect",
+          "callee": "register",
+          "lineNumber": 34
+        },
+        {
+          "caller": "FormSelect",
+          "callee": "options.map",
+          "lineNumber": 40
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/forms/FormTextarea.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 60,
+      "nonEmptyLines": 57,
+      "functions": [
+        {
+          "name": "FormTextarea",
+          "startLine": 15,
+          "endLine": 59,
+          "params": [
+            "{\r\n    label,\r\n    name,\r\n    placeholder,\r\n    register,\r\n    error,\r\n    required = false,\r\n    rows = 4,\r\n    rules,\r\n    className = \"\",\r\n}"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "FormTextarea",
+          "line": 15,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "FormTextarea",
+          "callee": "register",
+          "lineNumber": 33
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/forms/README.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 168,
+      "nonEmptyLines": 135,
+      "sections": [
+        {
+          "heading": "Form Components",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "Components",
+          "level": 2,
+          "line": 5
+        },
+        {
+          "heading": "FormInput",
+          "level": 3,
+          "line": 7
+        },
+        {
+          "heading": "FormSelect",
+          "level": 3,
+          "line": 37
+        },
+        {
+          "heading": "FormTextarea",
+          "level": 3,
+          "line": 68
+        },
+        {
+          "heading": "Styling",
+          "level": 2,
+          "line": 97
+        },
+        {
+          "heading": "Example: Complete Form",
+          "level": 2,
+          "line": 109
+        },
+        {
+          "heading": "Related Files",
+          "level": 2,
+          "line": 163
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 8
+      }
+    },
+    {
+      "path": "components/layout/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 2,
+      "nonEmptyLines": 1,
+      "exports": [
+        {
+          "name": "StaticHeader",
+          "line": 1,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

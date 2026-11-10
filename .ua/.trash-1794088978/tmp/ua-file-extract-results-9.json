@@ -1,0 +1,2936 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 11,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 11,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 11,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "app/admin/stock/movements/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 181,
+      "nonEmptyLines": 168,
+      "functions": [
+        {
+          "name": "variantOf",
+          "startLine": 33,
+          "endLine": 34,
+          "params": [
+            "m"
+          ]
+        },
+        {
+          "name": "MovementsPage",
+          "startLine": 36,
+          "endLine": 181,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "MovementsPage",
+          "line": 36,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "variantOf",
+          "callee": "[m.product_variants?.colors?.display_name || m.product_variants?.colors?.name, m.product_variants?.sizes?.name].filter(Boolean).join",
+          "lineNumber": 34
+        },
+        {
+          "caller": "variantOf",
+          "callee": "[m.product_variants?.colors?.display_name || m.product_variants?.colors?.name, m.product_variants?.sizes?.name].filter",
+          "lineNumber": 34
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "useAdminT",
+          "lineNumber": 37
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "useState",
+          "lineNumber": 38
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "useState",
+          "lineNumber": 39
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "useState",
+          "lineNumber": 40
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "useState",
+          "lineNumber": 41
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "useState",
+          "lineNumber": 42
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "useState",
+          "lineNumber": 43
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "useState",
+          "lineNumber": 44
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "useState",
+          "lineNumber": 45
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "useCallback",
+          "lineNumber": 47
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "String",
+          "lineNumber": 49
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "String",
+          "lineNumber": 49
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "params.set",
+          "lineNumber": 50
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "params.set",
+          "lineNumber": 51
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "search.trim",
+          "lineNumber": 52
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "params.set",
+          "lineNumber": 52
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "search.trim",
+          "lineNumber": 52
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "useCallback",
+          "lineNumber": 58
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "setLoading",
+          "lineNumber": 59
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "fetch",
+          "lineNumber": 61
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "query",
+          "lineNumber": 61
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "res.json",
+          "lineNumber": 62
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "setMovements",
+          "lineNumber": 64
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "setTotal",
+          "lineNumber": 65
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "message.error",
+          "lineNumber": 67
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 67
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "setLoading",
+          "lineNumber": 69
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "useEffect",
+          "lineNumber": 73
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "load",
+          "lineNumber": 74
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "useEffect",
+          "lineNumber": 77
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "apiJson<NamedRow[]>(\"/api/stock/locations\").then(setLocations).catch",
+          "lineNumber": 78
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "apiJson<NamedRow[]>(\"/api/stock/locations\").then",
+          "lineNumber": 78
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "apiJson",
+          "lineNumber": 78
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "fetch",
+          "lineNumber": 83
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "query",
+          "lineNumber": 83
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "res.json",
+          "lineNumber": 84
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "downloadCsv",
+          "lineNumber": 86
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "dayjs().format",
+          "lineNumber": 87
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "dayjs",
+          "lineNumber": 87
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "(json.data as Movement[]).map",
+          "lineNumber": 89
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "dayjs(m.created_at).format",
+          "lineNumber": 90
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "dayjs",
+          "lineNumber": 90
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "t",
+          "lineNumber": 90
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "variantOf",
+          "lineNumber": 90
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "message.info",
+          "lineNumber": 94
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "t",
+          "lineNumber": 94
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "message.error",
+          "lineNumber": 96
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "t",
+          "lineNumber": 96
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 101
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "dayjs(d).format",
+          "lineNumber": 101
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "dayjs",
+          "lineNumber": 101
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 102
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 102
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 104
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "[variantOf(m), m.sku].filter(Boolean).join",
+          "lineNumber": 109
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "[variantOf(m), m.sku].filter",
+          "lineNumber": 109
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "variantOf",
+          "lineNumber": 109
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 113
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 115
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 121
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 130
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 137
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 141
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 142
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 149
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "setSearch",
+          "lineNumber": 151
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "setPage",
+          "lineNumber": 151
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 155
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "setType",
+          "lineNumber": 158
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "setPage",
+          "lineNumber": 158
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "MOVEMENT_TYPES.map",
+          "lineNumber": 159
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 159
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 163
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "setLocationId",
+          "lineNumber": 166
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "setPage",
+          "lineNumber": 166
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "locations.map",
+          "lineNumber": 167
+        },
+        {
+          "caller": "MovementsPage",
+          "callee": "t",
+          "lineNumber": 176
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/admin/stock/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 273,
+      "nonEmptyLines": 254,
+      "functions": [
+        {
+          "name": "InventoryPage",
+          "startLine": 38,
+          "endLine": 273,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "InventoryPage",
+          "line": 38,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "InventoryPage",
+          "callee": "useAdminT",
+          "lineNumber": 39
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useAdminRole().can",
+          "lineNumber": 40
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useAdminRole",
+          "lineNumber": 40
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useState",
+          "lineNumber": 41
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useState",
+          "lineNumber": 42
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useState",
+          "lineNumber": 43
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useState",
+          "lineNumber": 44
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useState",
+          "lineNumber": 45
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useState",
+          "lineNumber": 46
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useState",
+          "lineNumber": 47
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useState",
+          "lineNumber": 48
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useState",
+          "lineNumber": 49
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useCallback",
+          "lineNumber": 51
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "setLoading",
+          "lineNumber": 52
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "setInventory",
+          "lineNumber": 54
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "await apiJson",
+          "lineNumber": 54
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "message.error",
+          "lineNumber": 56
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 56
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "setLoading",
+          "lineNumber": 58
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useEffect",
+          "lineNumber": 62
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "load",
+          "lineNumber": 63
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useEffect",
+          "lineNumber": 66
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "apiJson<{ product_id: string; cost: number }[]>(\"/api/stock/costs\")\r\n            .then((rows) => setCosts(new Map(rows.map((r) => [r.product_id, Number(r.cost)]))))\r\n            .catch",
+          "lineNumber": 68
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "apiJson<{ product_id: string; cost: number }[]>(\"/api/stock/costs\")\r\n            .then",
+          "lineNumber": 68
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "apiJson",
+          "lineNumber": 68
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "setCosts",
+          "lineNumber": 69
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "rows.map",
+          "lineNumber": 69
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "Number",
+          "lineNumber": 69
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useMemo",
+          "lineNumber": 76
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "search.trim().toLowerCase",
+          "lineNumber": 77
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "search.trim",
+          "lineNumber": 77
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "groups.get",
+          "lineNumber": 80
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "groups.set",
+          "lineNumber": 87
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "g.variants.push",
+          "lineNumber": 89
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "Object.entries",
+          "lineNumber": 90
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "[...groups.values()].filter",
+          "lineNumber": 95
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "groups.values",
+          "lineNumber": 95
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "g.variants.some",
+          "lineNumber": 99
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "[g.product_name, g.product_name_ar, g.product_code].some",
+          "lineNumber": 101
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "v?.toLowerCase().includes",
+          "lineNumber": 101
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "v?.toLowerCase",
+          "lineNumber": 101
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "g.variants.some",
+          "lineNumber": 102
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "[v.sku, v.color, v.size].some",
+          "lineNumber": 102
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "x?.toLowerCase().includes",
+          "lineNumber": 102
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "x?.toLowerCase",
+          "lineNumber": 102
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useMemo",
+          "lineNumber": 106
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "rows.filter",
+          "lineNumber": 107
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "rows.reduce",
+          "lineNumber": 109
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "tracked.filter",
+          "lineNumber": 110
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "tracked.filter",
+          "lineNumber": 111
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "rows.filter((r) => !r.stock_tracked).map",
+          "lineNumber": 112
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "rows.filter",
+          "lineNumber": 112
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "rows.reduce",
+          "lineNumber": 113
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "costs.get",
+          "lineNumber": 113
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useMemo",
+          "lineNumber": 117
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "[...new Set(rows.map((r) => r.category).filter(Boolean))].sort",
+          "lineNumber": 117
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "rows.map((r) => r.category).filter",
+          "lineNumber": 117
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "rows.map",
+          "lineNumber": 117
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "useMemo",
+          "lineNumber": 118
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "map.set",
+          "lineNumber": 120
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "[...map].map",
+          "lineNumber": 121
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "downloadCsv",
+          "lineNumber": 125
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "new Date().toISOString().slice",
+          "lineNumber": 126
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "new Date().toISOString",
+          "lineNumber": 126
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "t",
+          "lineNumber": 127
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "t",
+          "lineNumber": 127
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "t",
+          "lineNumber": 127
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "locations.map",
+          "lineNumber": 127
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "t",
+          "lineNumber": 127
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "t",
+          "lineNumber": 127
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "t",
+          "lineNumber": 127
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "products.flatMap((g) => g.variants).map",
+          "lineNumber": 128
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "products.flatMap",
+          "lineNumber": 128
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "variantLabel",
+          "lineNumber": 129
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "locations.map",
+          "lineNumber": 130
+        },
+        {
+          "caller": "exportCsv",
+          "callee": "t",
+          "lineNumber": 131
+        },
+        {
+          "caller": "toggle",
+          "callee": "setExpanded",
+          "lineNumber": 137
+        },
+        {
+          "caller": "toggle",
+          "callee": "keys.includes",
+          "lineNumber": 137
+        },
+        {
+          "caller": "toggle",
+          "callee": "keys.filter",
+          "lineNumber": 137
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 141
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "[g.product_code, g.category].filter(Boolean).join",
+          "lineNumber": 149
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "[g.product_code, g.category].filter",
+          "lineNumber": 149
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 151
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 152
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 160
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "locations.map",
+          "lineNumber": 161
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 168
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 170
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 174
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 177
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 178
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 181
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "e.stopPropagation",
+          "lineNumber": 188
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 188
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 197
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 198
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 201
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 202
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "setMovementOpen",
+          "lineNumber": 203
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 203
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 208
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "setStatus",
+          "lineNumber": 210
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 211
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "setStatus",
+          "lineNumber": 215
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 216
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "setStatus",
+          "lineNumber": 220
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 221
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 226
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 233
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "setSearch",
+          "lineNumber": 233
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 234
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "categories.map",
+          "lineNumber": 234
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 235
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 238
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "(Object.keys(STATUS_LABELS) as StockStatus[]).map",
+          "lineNumber": 242
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "Object.keys",
+          "lineNumber": 242
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 242
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "t",
+          "lineNumber": 244
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "toggle",
+          "lineNumber": 254
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "toggle",
+          "lineNumber": 257
+        },
+        {
+          "caller": "InventoryPage",
+          "callee": "setMovementOpen",
+          "lineNumber": 265
+        }
+      ],
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/admin/stock/restock/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 127,
+      "nonEmptyLines": 113,
+      "functions": [
+        {
+          "name": "suggestedQuantity",
+          "startLine": 16,
+          "endLine": 16,
+          "params": [
+            "r"
+          ]
+        },
+        {
+          "name": "RestockPage",
+          "startLine": 18,
+          "endLine": 127,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "RestockPage",
+          "line": 18,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "suggestedQuantity",
+          "callee": "Math.max",
+          "lineNumber": 16
+        },
+        {
+          "caller": "suggestedQuantity",
+          "callee": "Math.max",
+          "lineNumber": 16
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "useAdminT",
+          "lineNumber": 19
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "useState",
+          "lineNumber": 20
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "useState",
+          "lineNumber": 21
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "useState",
+          "lineNumber": 22
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "useState",
+          "lineNumber": 23
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "useCallback",
+          "lineNumber": 25
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "setLoading",
+          "lineNumber": 26
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "setInventory",
+          "lineNumber": 28
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "await apiJson",
+          "lineNumber": 28
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "message.error",
+          "lineNumber": 30
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "t",
+          "lineNumber": 30
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "setLoading",
+          "lineNumber": 32
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "useEffect",
+          "lineNumber": 36
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "load",
+          "lineNumber": 37
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "useMemo",
+          "lineNumber": 41
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "inventory.rows.filter",
+          "lineNumber": 42
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "bySupplier.has",
+          "lineNumber": 46
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "bySupplier.set",
+          "lineNumber": 46
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "t",
+          "lineNumber": 46
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "bySupplier.get(key)!.rows.push",
+          "lineNumber": 47
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "bySupplier.get",
+          "lineNumber": 47
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "[...bySupplier.entries()].sort",
+          "lineNumber": 49
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "bySupplier.entries",
+          "lineNumber": 49
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "inventory.locations.find",
+          "lineNumber": 52
+        },
+        {
+          "caller": "receive",
+          "callee": "setPreset",
+          "lineNumber": 55
+        },
+        {
+          "caller": "receive",
+          "callee": "rows.map",
+          "lineNumber": 55
+        },
+        {
+          "caller": "receive",
+          "callee": "suggestedQuantity",
+          "lineNumber": 55
+        },
+        {
+          "caller": "receive",
+          "callee": "setModalOpen",
+          "lineNumber": 56
+        },
+        {
+          "caller": "exportList",
+          "callee": "downloadCsv",
+          "lineNumber": 60
+        },
+        {
+          "caller": "exportList",
+          "callee": "supplier.toLowerCase().replace",
+          "lineNumber": 61
+        },
+        {
+          "caller": "exportList",
+          "callee": "supplier.toLowerCase",
+          "lineNumber": 61
+        },
+        {
+          "caller": "exportList",
+          "callee": "t",
+          "lineNumber": 62
+        },
+        {
+          "caller": "exportList",
+          "callee": "t",
+          "lineNumber": 62
+        },
+        {
+          "caller": "exportList",
+          "callee": "t",
+          "lineNumber": 62
+        },
+        {
+          "caller": "exportList",
+          "callee": "t",
+          "lineNumber": 62
+        },
+        {
+          "caller": "exportList",
+          "callee": "t",
+          "lineNumber": 62
+        },
+        {
+          "caller": "exportList",
+          "callee": "t",
+          "lineNumber": 62
+        },
+        {
+          "caller": "exportList",
+          "callee": "rows.map",
+          "lineNumber": 63
+        },
+        {
+          "caller": "exportList",
+          "callee": "variantLabel",
+          "lineNumber": 63
+        },
+        {
+          "caller": "exportList",
+          "callee": "suggestedQuantity",
+          "lineNumber": 63
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "t",
+          "lineNumber": 69
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "t",
+          "lineNumber": 71
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "t",
+          "lineNumber": 71
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "t",
+          "lineNumber": 77
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "groups.map",
+          "lineNumber": 80
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "t",
+          "lineNumber": 84
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "exportList",
+          "lineNumber": 87
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "t",
+          "lineNumber": 87
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "receive",
+          "lineNumber": 88
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "t",
+          "lineNumber": 88
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "t",
+          "lineNumber": 100
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "[variantLabel(r), r.sku].join",
+          "lineNumber": 104
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "variantLabel",
+          "lineNumber": 104
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "t",
+          "lineNumber": 108
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "t",
+          "lineNumber": 109
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "t",
+          "lineNumber": 110
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "suggestedQuantity",
+          "lineNumber": 110
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "t",
+          "lineNumber": 111
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "t",
+          "lineNumber": 111
+        },
+        {
+          "caller": "RestockPage",
+          "callee": "setModalOpen",
+          "lineNumber": 119
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/stock/MovementChart.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 180,
+      "nonEmptyLines": 169,
+      "functions": [
+        {
+          "name": "MovementChart",
+          "startLine": 27,
+          "endLine": 180,
+          "params": [
+            "{ data }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MovementChart",
+          "line": 27,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MovementChart",
+          "callee": "useAdminT",
+          "lineNumber": 28
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "useState",
+          "lineNumber": 29
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "useState",
+          "lineNumber": 30
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "useRef",
+          "lineNumber": 31
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "useMemo",
+          "lineNumber": 33
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "Math.max",
+          "lineNumber": 34
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "data.flatMap",
+          "lineNumber": 34
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "Math.pow",
+          "lineNumber": 35
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "Math.floor",
+          "lineNumber": 35
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "Math.log10",
+          "lineNumber": 35
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "Math.ceil",
+          "lineNumber": 36
+        },
+        {
+          "caller": "onMove",
+          "callee": "svgRef.current!.getBoundingClientRect",
+          "lineNumber": 49
+        },
+        {
+          "caller": "onMove",
+          "callee": "setHover",
+          "lineNumber": 52
+        },
+        {
+          "caller": "onMove",
+          "callee": "Math.min",
+          "lineNumber": 52
+        },
+        {
+          "caller": "onMove",
+          "callee": "Math.max",
+          "lineNumber": 52
+        },
+        {
+          "caller": "onMove",
+          "callee": "Math.round",
+          "lineNumber": 52
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "SERIES.map",
+          "lineNumber": 61
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "t",
+          "lineNumber": 64
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "setShowTable",
+          "lineNumber": 67
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "t",
+          "lineNumber": 68
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "t",
+          "lineNumber": 68
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "[...data].reverse",
+          "lineNumber": 78
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "t",
+          "lineNumber": 80
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "dayjs(d).format",
+          "lineNumber": 80
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "dayjs",
+          "lineNumber": 80
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "t",
+          "lineNumber": 81
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "t",
+          "lineNumber": 82
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "t",
+          "lineNumber": 83
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "t",
+          "lineNumber": 84
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "t",
+          "lineNumber": 94
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "setHover",
+          "lineNumber": 96
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "ticks.map",
+          "lineNumber": 99
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "y",
+          "lineNumber": 101
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "y",
+          "lineNumber": 101
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "y",
+          "lineNumber": 102
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "[0, Math.floor(last / 2), last].map",
+          "lineNumber": 105
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "Math.floor",
+          "lineNumber": 105
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "x",
+          "lineNumber": 106
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "dayjs(data[i].day).format",
+          "lineNumber": 107
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "dayjs",
+          "lineNumber": 107
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "SERIES.map",
+          "lineNumber": 110
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "data.map((d, i) => `${x(i)},${y(d[s.key])}`).join",
+          "lineNumber": 118
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "data.map",
+          "lineNumber": 118
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "x",
+          "lineNumber": 118
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "y",
+          "lineNumber": 118
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "(() => {\r\n                            const ends = SERIES.map((s) => ({ ...s, ly: y(data[last][s.key]) }));\r\n                            if (Math.abs(ends[0].ly - ends[1].ly) < 14) {\r\n                                const mid = (ends[0].ly + ends[1].ly) / 2;\r\n                                const upper = ends[0].ly <= ends[1].ly ? 0 : 1;\r\n                                ends[upper].ly = mid - 7;\r\n                                ends[1 - upper].ly = mid + 7;\r\n                            }\r\n                            return ends.map((s) => (\r\n                                <text key={s.key} x={x(last) + 8} y={s.ly} dy=\"0.32em\" fontSize={12} fill=\"#52514e\">\r\n                                    {t(s.short)} {data[last][s.key]}\r\n                                </text>\r\n                            ));\r\n                        })",
+          "lineNumber": 122
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "SERIES.map",
+          "lineNumber": 123
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "y",
+          "lineNumber": 123
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "Math.abs",
+          "lineNumber": 124
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "ends.map",
+          "lineNumber": 130
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "x",
+          "lineNumber": 131
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "t",
+          "lineNumber": 132
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "x",
+          "lineNumber": 138
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "x",
+          "lineNumber": 138
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "SERIES.map",
+          "lineNumber": 139
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "x",
+          "lineNumber": 140
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "y",
+          "lineNumber": 140
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "x",
+          "lineNumber": 151
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "x",
+          "lineNumber": 152
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "dayjs(hovered.day).format",
+          "lineNumber": 163
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "dayjs",
+          "lineNumber": 163
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "SERIES.map",
+          "lineNumber": 164
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "t",
+          "lineNumber": 168
+        },
+        {
+          "caller": "MovementChart",
+          "callee": "t",
+          "lineNumber": 172
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/stock/MovementModal.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 228,
+      "nonEmptyLines": 212,
+      "functions": [
+        {
+          "name": "MovementModal",
+          "startLine": 48,
+          "endLine": 228,
+          "params": [
+            "{ open, onClose, onSaved, rows, locations, preset }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MovementModal",
+          "line": 48,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "MovementModal",
+          "callee": "useAdminT",
+          "lineNumber": 49
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "Form.useForm",
+          "lineNumber": 50
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "useState",
+          "lineNumber": 51
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "useState",
+          "lineNumber": 52
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "useState",
+          "lineNumber": 53
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "Form.useWatch",
+          "lineNumber": 54
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "Form.useWatch",
+          "lineNumber": 55
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "useEffect",
+          "lineNumber": 57
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "locations.find",
+          "lineNumber": 59
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "form.setFieldsValue",
+          "lineNumber": 60
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "setLines",
+          "lineNumber": 67
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "preset.lines.map",
+          "lineNumber": 69
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "setError",
+          "lineNumber": 72
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "useMemo",
+          "lineNumber": 75
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "rows.map",
+          "lineNumber": 77
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "variantLabel",
+          "lineNumber": 79
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "variantLabel",
+          "lineNumber": 83
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "useMemo",
+          "lineNumber": 89
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "rows.map",
+          "lineNumber": 89
+        },
+        {
+          "caller": "updateLine",
+          "callee": "setLines",
+          "lineNumber": 92
+        },
+        {
+          "caller": "updateLine",
+          "callee": "current.map",
+          "lineNumber": 92
+        },
+        {
+          "caller": "submit",
+          "callee": "form.validateFields",
+          "lineNumber": 95
+        },
+        {
+          "caller": "submit",
+          "callee": "lines\r\n            .filter((l) => l.variant_id && l.quantity)\r\n            .map",
+          "lineNumber": 96
+        },
+        {
+          "caller": "submit",
+          "callee": "lines\r\n            .filter",
+          "lineNumber": 96
+        },
+        {
+          "caller": "submit",
+          "callee": "Number",
+          "lineNumber": 100
+        },
+        {
+          "caller": "submit",
+          "callee": "Number",
+          "lineNumber": 102
+        },
+        {
+          "caller": "submit",
+          "callee": "setError",
+          "lineNumber": 105
+        },
+        {
+          "caller": "submit",
+          "callee": "setSaving",
+          "lineNumber": 108
+        },
+        {
+          "caller": "submit",
+          "callee": "setError",
+          "lineNumber": 109
+        },
+        {
+          "caller": "submit",
+          "callee": "await apiJson",
+          "lineNumber": 111
+        },
+        {
+          "caller": "submit",
+          "callee": "JSON.stringify",
+          "lineNumber": 113
+        },
+        {
+          "caller": "submit",
+          "callee": "message.success",
+          "lineNumber": 115
+        },
+        {
+          "caller": "submit",
+          "callee": "t",
+          "lineNumber": 115
+        },
+        {
+          "caller": "submit",
+          "callee": "onSaved",
+          "lineNumber": 116
+        },
+        {
+          "caller": "submit",
+          "callee": "onClose",
+          "lineNumber": 117
+        },
+        {
+          "caller": "submit",
+          "callee": "setError",
+          "lineNumber": 119
+        },
+        {
+          "caller": "submit",
+          "callee": "t",
+          "lineNumber": 119
+        },
+        {
+          "caller": "submit",
+          "callee": "setSaving",
+          "lineNumber": 121
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 131
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 135
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 136
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 141
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "MOVEMENT_TYPES.map",
+          "lineNumber": 142
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 142
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 144
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 144
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "locations.map",
+          "lineNumber": 145
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 150
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 151
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "locations\r\n                                    .filter((l) => l.id !== locationId)\r\n                                    .map",
+          "lineNumber": 155
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "locations\r\n                                    .filter",
+          "lineNumber": 155
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 162
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 164
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "lines.map",
+          "lineNumber": 166
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "rowById.get",
+          "lineNumber": 167
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 175
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "updateLine",
+          "lineNumber": 179
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 182
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "updateLine",
+          "lineNumber": 187
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 191
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "updateLine",
+          "lineNumber": 197
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 204
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "setLines",
+          "lineNumber": 206
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "current.filter",
+          "lineNumber": 206
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "setLines",
+          "lineNumber": 211
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 212
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 217
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 218
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 220
+        },
+        {
+          "caller": "MovementModal",
+          "callee": "t",
+          "lineNumber": 221
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/stock/ProductVariantsPanel.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 156,
+      "nonEmptyLines": 147,
+      "functions": [
+        {
+          "name": "ProductVariantsPanel",
+          "startLine": 24,
+          "endLine": 156,
+          "params": [
+            "{ variants, locations, onSaved }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ProductVariantsPanel",
+          "line": 24,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "useAdminT",
+          "lineNumber": 25
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "useState",
+          "lineNumber": 27
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "useState",
+          "lineNumber": 28
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "useState",
+          "lineNumber": 29
+        },
+        {
+          "caller": "valueOf",
+          "callee": "key",
+          "lineNumber": 34
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "useMemo",
+          "lineNumber": 35
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "Object.entries(edits).filter",
+          "lineNumber": 37
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "Object.entries",
+          "lineNumber": 37
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "k.split",
+          "lineNumber": 38
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "variants.find",
+          "lineNumber": 39
+        },
+        {
+          "caller": "save",
+          "callee": "setSaving",
+          "lineNumber": 47
+        },
+        {
+          "caller": "save",
+          "callee": "changes.map",
+          "lineNumber": 50
+        },
+        {
+          "caller": "save",
+          "callee": "k.split",
+          "lineNumber": 51
+        },
+        {
+          "caller": "save",
+          "callee": "apiJson",
+          "lineNumber": 54
+        },
+        {
+          "caller": "save",
+          "callee": "JSON.stringify",
+          "lineNumber": 56
+        },
+        {
+          "caller": "save",
+          "callee": "message.success",
+          "lineNumber": 58
+        },
+        {
+          "caller": "save",
+          "callee": "t",
+          "lineNumber": 58
+        },
+        {
+          "caller": "save",
+          "callee": "setEdits",
+          "lineNumber": 59
+        },
+        {
+          "caller": "save",
+          "callee": "onSaved",
+          "lineNumber": 60
+        },
+        {
+          "caller": "save",
+          "callee": "message.error",
+          "lineNumber": 62
+        },
+        {
+          "caller": "save",
+          "callee": "t",
+          "lineNumber": 62
+        },
+        {
+          "caller": "save",
+          "callee": "setSaving",
+          "lineNumber": 64
+        },
+        {
+          "caller": "toggleTracking",
+          "callee": "setTracking",
+          "lineNumber": 70
+        },
+        {
+          "caller": "toggleTracking",
+          "callee": "apiJson",
+          "lineNumber": 72
+        },
+        {
+          "caller": "toggleTracking",
+          "callee": "JSON.stringify",
+          "lineNumber": 72
+        },
+        {
+          "caller": "toggleTracking",
+          "callee": "message.success",
+          "lineNumber": 73
+        },
+        {
+          "caller": "toggleTracking",
+          "callee": "t",
+          "lineNumber": 73
+        },
+        {
+          "caller": "toggleTracking",
+          "callee": "t",
+          "lineNumber": 73
+        },
+        {
+          "caller": "toggleTracking",
+          "callee": "onSaved",
+          "lineNumber": 74
+        },
+        {
+          "caller": "toggleTracking",
+          "callee": "message.error",
+          "lineNumber": 76
+        },
+        {
+          "caller": "toggleTracking",
+          "callee": "t",
+          "lineNumber": 76
+        },
+        {
+          "caller": "toggleTracking",
+          "callee": "setTracking",
+          "lineNumber": 78
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "t",
+          "lineNumber": 84
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "variantLabel",
+          "lineNumber": 92
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "locations.map",
+          "lineNumber": 99
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "valueOf",
+          "lineNumber": 105
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "setEdits",
+          "lineNumber": 114
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "key",
+          "lineNumber": 114
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "t",
+          "lineNumber": 115
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "variantLabel",
+          "lineNumber": 115
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "t",
+          "lineNumber": 117
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "t",
+          "lineNumber": 123
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "t",
+          "lineNumber": 127
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "t",
+          "lineNumber": 128
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "t",
+          "lineNumber": 141
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "t",
+          "lineNumber": 143
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "t",
+          "lineNumber": 143
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "setEdits",
+          "lineNumber": 148
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "t",
+          "lineNumber": 148
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "t",
+          "lineNumber": 150
+        },
+        {
+          "caller": "ProductVariantsPanel",
+          "callee": "t",
+          "lineNumber": 150
+        }
+      ],
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/stock/StockOverview.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 90,
+      "nonEmptyLines": 82,
+      "functions": [
+        {
+          "name": "StockOverview",
+          "startLine": 25,
+          "endLine": 90,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "StockOverview",
+          "line": 25,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "StockOverview",
+          "callee": "useAdminT",
+          "lineNumber": 26
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "useState",
+          "lineNumber": 27
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "useState",
+          "lineNumber": 28
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "useEffect",
+          "lineNumber": 30
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "apiJson<Overview>(\"/api/stock/overview\").then(setData).catch",
+          "lineNumber": 31
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "apiJson<Overview>(\"/api/stock/overview\").then",
+          "lineNumber": 31
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "apiJson",
+          "lineNumber": 31
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "setError",
+          "lineNumber": 31
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "t",
+          "lineNumber": 34
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "t",
+          "lineNumber": 42
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "t",
+          "lineNumber": 44
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "t",
+          "lineNumber": 47
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "t",
+          "lineNumber": 50
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "t",
+          "lineNumber": 53
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "t",
+          "lineNumber": 58
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "t",
+          "lineNumber": 63
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "t",
+          "lineNumber": 63
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "t",
+          "lineNumber": 65
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "data.recent.map",
+          "lineNumber": 68
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "t",
+          "lineNumber": 76
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "dayjs(m.created_at).format",
+          "lineNumber": 77
+        },
+        {
+          "caller": "StockOverview",
+          "callee": "dayjs",
+          "lineNumber": 77
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/stock/VariantThumb.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 11,
+      "functions": [
+        {
+          "name": "VariantThumb",
+          "startLine": 6,
+          "endLine": 13,
+          "params": [
+            "{ src, size = 40 }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "VariantThumb",
+          "line": 6,
+          "isDefault": true
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/stock/stock-client.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 93,
+      "nonEmptyLines": 83,
+      "functions": [
+        {
+          "name": "variantLabel",
+          "startLine": 63,
+          "endLine": 65,
+          "params": [
+            "row"
+          ]
+        },
+        {
+          "name": "apiJson",
+          "startLine": 68,
+          "endLine": 78,
+          "params": [
+            "url",
+            "init"
+          ]
+        },
+        {
+          "name": "downloadCsv",
+          "startLine": 81,
+          "endLine": 93,
+          "params": [
+            "filename",
+            "header",
+            "rows"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "STATUS_COLORS",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "MOVEMENT_COLORS",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "variantLabel",
+          "line": 63,
+          "isDefault": false
+        },
+        {
+          "name": "apiJson",
+          "line": 68,
+          "isDefault": false
+        },
+        {
+          "name": "downloadCsv",
+          "line": 81,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "variantLabel",
+          "callee": "[row.color, row.size].filter(Boolean).join",
+          "lineNumber": 64
+        },
+        {
+          "caller": "variantLabel",
+          "callee": "[row.color, row.size].filter",
+          "lineNumber": 64
+        },
+        {
+          "caller": "apiJson",
+          "callee": "fetch",
+          "lineNumber": 69
+        },
+        {
+          "caller": "apiJson",
+          "callee": "res.json().catch",
+          "lineNumber": 73
+        },
+        {
+          "caller": "apiJson",
+          "callee": "res.json",
+          "lineNumber": 73
+        },
+        {
+          "caller": "escape",
+          "callee": "String",
+          "lineNumber": 83
+        },
+        {
+          "caller": "escape",
+          "callee": "/[\",\\n]/.test",
+          "lineNumber": 84
+        },
+        {
+          "caller": "escape",
+          "callee": "text.replace",
+          "lineNumber": 84
+        },
+        {
+          "caller": "downloadCsv",
+          "callee": "[header, ...rows].map((row) => row.map(escape).join(\",\")).join",
+          "lineNumber": 86
+        },
+        {
+          "caller": "downloadCsv",
+          "callee": "[header, ...rows].map",
+          "lineNumber": 86
+        },
+        {
+          "caller": "downloadCsv",
+          "callee": "row.map(escape).join",
+          "lineNumber": 86
+        },
+        {
+          "caller": "downloadCsv",
+          "callee": "row.map",
+          "lineNumber": 86
+        },
+        {
+          "caller": "downloadCsv",
+          "callee": "URL.createObjectURL",
+          "lineNumber": 87
+        },
+        {
+          "caller": "downloadCsv",
+          "callee": "document.createElement",
+          "lineNumber": 88
+        },
+        {
+          "caller": "downloadCsv",
+          "callee": "link.click",
+          "lineNumber": 91
+        },
+        {
+          "caller": "downloadCsv",
+          "callee": "URL.revokeObjectURL",
+          "lineNumber": 92
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 5,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/erp/db-messages.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 68,
+      "nonEmptyLines": 64,
+      "functions": [
+        {
+          "name": "knownDbError",
+          "startLine": 52,
+          "endLine": 68,
+          "params": [
+            "error"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "DB_MESSAGES",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "knownDbError",
+          "line": 52,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "knownDbError",
+          "callee": "/insufficient_stock|no_online_location|variants_with_stock|negative_count|invalid_transfer/.test",
+          "lineNumber": 55
+        },
+        {
+          "caller": "knownDbError",
+          "callee": "stockErrorMessage",
+          "lineNumber": 56
+        },
+        {
+          "caller": "knownDbError",
+          "callee": "message.match",
+          "lineNumber": 58
+        },
+        {
+          "caller": "knownDbError",
+          "callee": "message.includes",
+          "lineNumber": 61
+        },
+        {
+          "caller": "knownDbError",
+          "callee": "key.toUpperCase",
+          "lineNumber": 61
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/stock.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 51,
+      "nonEmptyLines": 45,
+      "functions": [
+        {
+          "name": "stockStatus",
+          "startLine": 29,
+          "endLine": 34,
+          "params": [
+            "available",
+            "reorderPoint",
+            "tracked"
+          ]
+        },
+        {
+          "name": "stockErrorMessage",
+          "startLine": 37,
+          "endLine": 51,
+          "params": [
+            "error"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "MOVEMENT_TYPES",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "MOVEMENT_LABELS",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "STATUS_LABELS",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "stockStatus",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "stockErrorMessage",
+          "line": 37,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "stockErrorMessage",
+          "callee": "message.match",
+          "lineNumber": 39
+        },
+        {
+          "caller": "stockErrorMessage",
+          "callee": "message.includes",
+          "lineNumber": 41
+        },
+        {
+          "caller": "stockErrorMessage",
+          "callee": "message.match",
+          "lineNumber": 42
+        },
+        {
+          "caller": "stockErrorMessage",
+          "callee": "message.includes",
+          "lineNumber": 44
+        },
+        {
+          "caller": "stockErrorMessage",
+          "callee": "message.includes",
+          "lineNumber": 45
+        },
+        {
+          "caller": "stockErrorMessage",
+          "callee": "message.includes",
+          "lineNumber": 46
+        },
+        {
+          "caller": "stockErrorMessage",
+          "callee": "message.includes",
+          "lineNumber": 47
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    }
+  ]
+}

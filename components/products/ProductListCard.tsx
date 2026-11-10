@@ -131,7 +131,7 @@ export default function ProductListCard({
     return (
         <article className={`${width} min-w-0 shrink-0`}>
             {/* Photo */}
-            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[#f3efe9]">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-surface">
                 <Link href={productUrl} aria-label={productName} className="block h-full w-full">
                     <Image
                         src={productImage}
@@ -142,7 +142,7 @@ export default function ProductListCard({
                     />
                 </Link>
                 {hasDiscount && (
-                    <span className="absolute start-2 top-2 rounded-full bg-[#842E1B] px-2 py-0.5 text-xs font-semibold text-white">
+                    <span className="absolute start-2 top-2 rounded-full bg-accent px-2 py-0.5 text-xs font-semibold text-white">
                         -{Math.round(product.discount_percent ?? 0)}%
                     </span>
                 )}
@@ -151,12 +151,12 @@ export default function ProductListCard({
                         e.preventDefault();
                         onToggleFavorite(product.id);
                     }}
-                    className="absolute end-1.5 top-1.5 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow-sm outline-none backdrop-blur transition hover:bg-white focus-visible:ring-2 focus-visible:ring-[#842E1B]"
+                    className="absolute end-1.5 top-1.5 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 shadow-sm outline-none backdrop-blur transition hover:bg-card focus-visible:ring-2 focus-visible:ring-accent"
                     aria-label={isFavorite ? `${t.removeFavorite}: ${productName}` : `${t.addToFavorites}: ${productName}`}
                     aria-pressed={isFavorite}
                     type="button"
                 >
-                    <svg className={`h-5 w-5 ${isFavorite ? "fill-[#842E1B] text-[#842E1B]" : "fill-none text-[#5b4a42]"}`} stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg className={`h-5 w-5 ${isFavorite ? "fill-accent text-accent" : "fill-none text-ink"}`} stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                 </button>
@@ -165,12 +165,12 @@ export default function ProductListCard({
             {/* Details */}
             <div className="pt-2.5">
                 <Link href={productUrl}>
-                    <h3 className="line-clamp-2 min-h-[2.5rem] text-sm leading-5 text-[#2b1a16] transition hover:text-[#7a3b2e]">{productName}</h3>
+                    <h3 className="line-clamp-2 min-h-[2.5rem] text-sm leading-5 text-ink transition hover:text-accent">{productName}</h3>
                 </Link>
 
                 {SHOW_RATINGS && reviewCount > 0 && (
-                    <div className="mt-1 flex items-center gap-1 text-xs text-[#6f5f57]" aria-label={`${rating} / 5`}>
-                        <svg className="h-3.5 w-3.5 fill-[#842E1B]" viewBox="0 0 20 20" aria-hidden="true">
+                    <div className="mt-1 flex items-center gap-1 text-xs text-mute" aria-label={`${rating} / 5`}>
+                        <svg className="h-3.5 w-3.5 fill-accent" viewBox="0 0 20 20" aria-hidden="true">
                             <path d="M10 1.5l2.6 5.3 5.9.9-4.3 4.1 1 5.8L10 14.9l-5.2 2.7 1-5.8L1.5 7.7l5.9-.9L10 1.5z" />
                         </svg>
                         <span>{rating.toFixed(1)}</span>
@@ -180,17 +180,17 @@ export default function ProductListCard({
 
                 <div className="mt-2 flex items-center justify-between gap-2">
                     <div className="flex min-w-0 flex-col">
-                        <span className={`text-[15px] font-semibold ${hasDiscount ? "text-[#842E1B]" : "text-[#2b1a16]"}`}>
+                        <span className={`text-[15px] font-semibold ${hasDiscount ? "text-accent" : "text-ink"}`}>
                             {formatPrice(discountedPrice, currency)}
                         </span>
-                        {hasDiscount && <span className="text-xs text-[#9a8b82] line-through">{formatPrice(product.base_price, currency)}</span>}
+                        {hasDiscount && <span className="text-xs text-mute line-through">{formatPrice(product.base_price, currency)}</span>}
                     </div>
                     <button
                         onClick={(e) => {
                             e.preventDefault();
                             onAddToCart(product);
                         }}
-                        className="flex h-11 min-w-11 shrink-0 items-center justify-center gap-1.5 rounded-full bg-[#2b1a16] px-3 text-sm font-medium text-white outline-none transition hover:bg-[#7a3b2e] focus-visible:ring-2 focus-visible:ring-[#842E1B] focus-visible:ring-offset-2"
+                        className="flex h-11 min-w-11 shrink-0 items-center justify-center gap-1.5 rounded-full bg-ink px-3 text-sm font-medium text-white outline-none transition hover:bg-accent focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
                         aria-label={`${t.add}: ${productName}`}
                         type="button"
                     >

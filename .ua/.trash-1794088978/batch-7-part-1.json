@@ -1,0 +1,1211 @@
+{
+ "nodes": [
+  {
+   "id": "file:app/admin/overview/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/overview/page.tsx",
+   "summary": "Owner-only Business overview dashboard showing delivered sales, gross and estimated net margin, cash/bank/carrier balances, receivables, stock value and breakdowns from /api/owner/overview, filtered by period, channel, agent and campaign.",
+   "tags": [
+    "component",
+    "admin-page",
+    "dashboard",
+    "analytics",
+    "erp"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/overview/page.tsx:OwnerOverviewPage",
+   "type": "function",
+   "name": "OwnerOverviewPage",
+   "filePath": "app/admin/overview/page.tsx",
+   "lineRange": [
+    44,
+    298
+   ],
+   "summary": "Fetches the owner overview for the chosen filters and renders KPIs, the monthly goal card, P&L lines and bar-chart breakdowns.",
+   "tags": [
+    "component",
+    "dashboard",
+    "analytics"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/overview/page.tsx:PnlLine",
+   "type": "function",
+   "name": "PnlLine",
+   "filePath": "app/admin/overview/page.tsx",
+   "lineRange": [
+    300,
+    311
+   ],
+   "summary": "Renders one labelled profit-and-loss row with a formatted amount, optionally emphasized.",
+   "tags": [
+    "component",
+    "presentational",
+    "finance"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/admin/performance/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/performance/page.tsx",
+   "summary": "Admin Agent performance page comparing back-office agents over a date range (orders taken, confirmed, delivered, returns) using GET /api/admin/performance.",
+   "tags": [
+    "component",
+    "admin-page",
+    "analytics",
+    "performance"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/performance/page.tsx:AgentPerformancePage",
+   "type": "function",
+   "name": "AgentPerformancePage",
+   "filePath": "app/admin/performance/page.tsx",
+   "lineRange": [
+    52,
+    238
+   ],
+   "summary": "Loads agent_performance metrics for a period and renders a sortable comparison table with rate summaries.",
+   "tags": [
+    "component",
+    "analytics",
+    "table"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/pos/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/pos/page.tsx",
+   "summary": "Point-of-sale till screen: opens and closes cash sessions per shop, builds in-store sales with discounts and payments, and hosts the shop Stock and Analytics tabs.",
+   "tags": [
+    "component",
+    "admin-page",
+    "pos",
+    "sales",
+    "erp"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/pos/page.tsx:PosPage",
+   "type": "function",
+   "name": "PosPage",
+   "filePath": "app/admin/pos/page.tsx",
+   "lineRange": [
+    40,
+    409
+   ],
+   "summary": "Manages till session state, cart lines, product lookup, payments and sale submission, plus stock and analytics tabs for the selected shop.",
+   "tags": [
+    "component",
+    "pos",
+    "state-management"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/pos/receipt/[id]/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/pos/receipt/[id]/page.tsx",
+   "summary": "Printable till receipt for a point-of-sale order, showing lines, totals and payments.",
+   "tags": [
+    "component",
+    "admin-page",
+    "pos",
+    "receipt",
+    "print"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/pos/receipt/[id]/page.tsx:ReceiptPage",
+   "type": "function",
+   "name": "ReceiptPage",
+   "filePath": "app/admin/pos/receipt/[id]/page.tsx",
+   "lineRange": [
+    27,
+    85
+   ],
+   "summary": "Loads one store sale by id and renders a print-friendly receipt with items, totals and payment methods.",
+   "tags": [
+    "component",
+    "pos",
+    "print"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/pos/sessions/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/pos/sessions/page.tsx",
+   "summary": "Lists point-of-sale till sessions with opening/closing times, expected versus counted cash and differences.",
+   "tags": [
+    "component",
+    "admin-page",
+    "pos",
+    "table"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/pos/sessions/page.tsx:PosSessionsPage",
+   "type": "function",
+   "name": "PosSessionsPage",
+   "filePath": "app/admin/pos/sessions/page.tsx",
+   "lineRange": [
+    35,
+    85
+   ],
+   "summary": "Fetches till sessions and renders them in a table with cash reconciliation columns.",
+   "tags": [
+    "component",
+    "pos",
+    "table"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/admin/products/[id]/edit/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/products/[id]/edit/page.tsx",
+   "summary": "Admin product edit form covering translations, pricing, category, images, variants with per-variant photos, stock fields and purchase cost, saved through PUT /api/products.",
+   "tags": [
+    "component",
+    "admin-page",
+    "form",
+    "product",
+    "catalog"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/products/[id]/edit/page.tsx:EditProductPage",
+   "type": "function",
+   "name": "EditProductPage",
+   "filePath": "app/admin/products/[id]/edit/page.tsx",
+   "lineRange": [
+    71,
+    883
+   ],
+   "summary": "Loads a product (and its cost when permitted), manages the large antd form for details, images and variants, uploads images and saves the product and cost.",
+   "tags": [
+    "component",
+    "form",
+    "product"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/products/new/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/products/new/page.tsx",
+   "summary": "Admin create-product form with translations, pricing, category, images, variants, opening stock and purchase cost, posting to /api/products.",
+   "tags": [
+    "component",
+    "admin-page",
+    "form",
+    "product",
+    "catalog"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/products/new/page.tsx:CreateProductPage",
+   "type": "function",
+   "name": "CreateProductPage",
+   "filePath": "app/admin/products/new/page.tsx",
+   "lineRange": [
+    67,
+    670
+   ],
+   "summary": "Builds and submits a new product with variants and images, then saves its purchase cost separately.",
+   "tags": [
+    "component",
+    "form",
+    "product"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/products/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/products/page.tsx",
+   "summary": "Admin products list with search, category and status filters, status toggles, single and bulk soft deletes, using the summary product API.",
+   "tags": [
+    "component",
+    "admin-page",
+    "table",
+    "product",
+    "catalog"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/products/page.tsx:AdminProductsPage",
+   "type": "function",
+   "name": "AdminProductsPage",
+   "filePath": "app/admin/products/page.tsx",
+   "lineRange": [
+    75,
+    518
+   ],
+   "summary": "Fetches the product summary list and categories, filters them client-side and handles status changes and bulk deletes.",
+   "tags": [
+    "component",
+    "table",
+    "product"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/promotions/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/promotions/page.tsx",
+   "summary": "Admin promotions page for managing product discounts (percentage, validity window, active flag) stored in product_discounts.",
+   "tags": [
+    "component",
+    "admin-page",
+    "marketing",
+    "discounts",
+    "form"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/promotions/page.tsx:PromotionsPage",
+   "type": "function",
+   "name": "PromotionsPage",
+   "filePath": "app/admin/promotions/page.tsx",
+   "lineRange": [
+    50,
+    371
+   ],
+   "summary": "Lists, creates, edits and deletes product discounts through a table and modal form.",
+   "tags": [
+    "component",
+    "marketing",
+    "crud"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/purchasing/[id]/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/purchasing/[id]/page.tsx",
+   "summary": "Purchase order detail and editor: lines for variants, raw materials or free text, status workflow, goods receipts and receipt validation into stock.",
+   "tags": [
+    "component",
+    "admin-page",
+    "purchasing",
+    "erp",
+    "form"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/purchasing/[id]/page.tsx:PurchaseOrderPage",
+   "type": "function",
+   "name": "PurchaseOrderPage",
+   "filePath": "app/admin/purchasing/[id]/page.tsx",
+   "lineRange": [
+    65,
+    407
+   ],
+   "summary": "Loads or creates a purchase order, edits its lines and supplier, saves it and records and validates goods receipts.",
+   "tags": [
+    "component",
+    "purchasing",
+    "form"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "file:app/admin/purchasing/materials/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/purchasing/materials/page.tsx",
+   "summary": "Raw materials page managing material stock and movements, plus a costing drawer for each product bill of materials, labor and overhead.",
+   "tags": [
+    "component",
+    "admin-page",
+    "purchasing",
+    "costing",
+    "erp"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:app/admin/purchasing/materials/page.tsx:MaterialsPage",
+   "type": "function",
+   "name": "MaterialsPage",
+   "filePath": "app/admin/purchasing/materials/page.tsx",
+   "lineRange": [
+    55,
+    210
+   ],
+   "summary": "Lists raw materials with stock and records material movements and edits.",
+   "tags": [
+    "component",
+    "purchasing",
+    "inventory"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/purchasing/materials/page.tsx:CostingDrawer",
+   "type": "function",
+   "name": "CostingDrawer",
+   "filePath": "app/admin/purchasing/materials/page.tsx",
+   "lineRange": [
+    212,
+    315
+   ],
+   "summary": "Drawer editing a product bill of materials and labor/overhead costs, saved as the product costing.",
+   "tags": [
+    "component",
+    "costing",
+    "form"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/purchasing/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/purchasing/page.tsx",
+   "summary": "Purchase orders list showing supplier, status and totals, linking to each order.",
+   "tags": [
+    "component",
+    "admin-page",
+    "purchasing",
+    "table"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/purchasing/page.tsx:PurchaseOrdersPage",
+   "type": "function",
+   "name": "PurchaseOrdersPage",
+   "filePath": "app/admin/purchasing/page.tsx",
+   "lineRange": [
+    29,
+    64
+   ],
+   "summary": "Fetches purchase orders and renders them in a status-tagged table with a new-order action.",
+   "tags": [
+    "component",
+    "purchasing",
+    "table"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/admin/purchasing/prices/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/purchasing/prices/page.tsx",
+   "summary": "Supplier price comparison page listing purchase prices per item across suppliers.",
+   "tags": [
+    "component",
+    "admin-page",
+    "purchasing",
+    "analytics"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/purchasing/prices/page.tsx:PriceComparisonPage",
+   "type": "function",
+   "name": "PriceComparisonPage",
+   "filePath": "app/admin/purchasing/prices/page.tsx",
+   "lineRange": [
+    28,
+    74
+   ],
+   "summary": "Loads purchase_price_comparison data and renders it as a table.",
+   "tags": [
+    "component",
+    "purchasing",
+    "table"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/admin/purchasing/suppliers/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/admin/purchasing/suppliers/page.tsx",
+   "summary": "Supplier directory page with create, edit and delete of supplier records.",
+   "tags": [
+    "component",
+    "admin-page",
+    "purchasing",
+    "crud"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/admin/purchasing/suppliers/page.tsx:SuppliersPage",
+   "type": "function",
+   "name": "SuppliersPage",
+   "filePath": "app/admin/purchasing/suppliers/page.tsx",
+   "lineRange": [
+    30,
+    118
+   ],
+   "summary": "Lists suppliers and edits them through a modal form, gated by role permissions.",
+   "tags": [
+    "component",
+    "purchasing",
+    "crud"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:app/admin/overview/page.tsx",
+   "target": "function:app/admin/overview/page.tsx:OwnerOverviewPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/overview/page.tsx",
+   "target": "function:app/admin/overview/page.tsx:OwnerOverviewPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/overview/page.tsx",
+   "target": "function:app/admin/overview/page.tsx:PnlLine",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/overview/page.tsx",
+   "target": "file:components/admin/erp/MonthGoalCard.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/overview/page.tsx",
+   "target": "file:components/admin/erp/charts.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/overview/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/overview/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/overview/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/overview/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/performance/page.tsx",
+   "target": "function:app/admin/performance/page.tsx:AgentPerformancePage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/performance/page.tsx",
+   "target": "function:app/admin/performance/page.tsx:AgentPerformancePage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/performance/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/performance/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/page.tsx",
+   "target": "function:app/admin/pos/page.tsx:PosPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/pos/page.tsx",
+   "target": "function:app/admin/pos/page.tsx:PosPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/pos/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/page.tsx",
+   "target": "file:components/admin/order-status.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/page.tsx",
+   "target": "file:components/admin/pos/PosAnalyticsTab.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/page.tsx",
+   "target": "file:components/admin/pos/PosStockTab.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/receipt/[id]/page.tsx",
+   "target": "function:app/admin/pos/receipt/[id]/page.tsx:ReceiptPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/pos/receipt/[id]/page.tsx",
+   "target": "function:app/admin/pos/receipt/[id]/page.tsx:ReceiptPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/pos/receipt/[id]/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/receipt/[id]/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/receipt/[id]/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/sessions/page.tsx",
+   "target": "function:app/admin/pos/sessions/page.tsx:PosSessionsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/pos/sessions/page.tsx",
+   "target": "function:app/admin/pos/sessions/page.tsx:PosSessionsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/pos/sessions/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/sessions/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/sessions/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/pos/sessions/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/products/[id]/edit/page.tsx",
+   "target": "function:app/admin/products/[id]/edit/page.tsx:EditProductPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/products/[id]/edit/page.tsx",
+   "target": "function:app/admin/products/[id]/edit/page.tsx:EditProductPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/products/[id]/edit/page.tsx",
+   "target": "file:components/admin/ProductStockFields.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/products/[id]/edit/page.tsx",
+   "target": "file:components/admin/ProductTranslationFields.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/products/[id]/edit/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/products/[id]/edit/page.tsx",
+   "target": "file:components/admin/select-search.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/products/[id]/edit/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/products/[id]/edit/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/products/new/page.tsx",
+   "target": "function:app/admin/products/new/page.tsx:CreateProductPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/products/new/page.tsx",
+   "target": "function:app/admin/products/new/page.tsx:CreateProductPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/products/new/page.tsx",
+   "target": "file:components/admin/ProductStockFields.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/products/new/page.tsx",
+   "target": "file:components/admin/ProductTranslationFields.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/products/new/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/products/new/page.tsx",
+   "target": "file:components/admin/select-search.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/products/new/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/products/new/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/products/page.tsx",
+   "target": "function:app/admin/products/page.tsx:AdminProductsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/products/page.tsx",
+   "target": "function:app/admin/products/page.tsx:AdminProductsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/products/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/products/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/products/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/promotions/page.tsx",
+   "target": "function:app/admin/promotions/page.tsx:PromotionsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/promotions/page.tsx",
+   "target": "function:app/admin/promotions/page.tsx:PromotionsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/promotions/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/promotions/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/[id]/page.tsx",
+   "target": "function:app/admin/purchasing/[id]/page.tsx:PurchaseOrderPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/purchasing/[id]/page.tsx",
+   "target": "function:app/admin/purchasing/[id]/page.tsx:PurchaseOrderPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/purchasing/[id]/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/[id]/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/[id]/page.tsx",
+   "target": "file:components/admin/erp/purchase-items.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/[id]/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/[id]/page.tsx",
+   "target": "file:components/admin/select-search.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/[id]/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/[id]/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/[id]/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/materials/page.tsx",
+   "target": "function:app/admin/purchasing/materials/page.tsx:MaterialsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/purchasing/materials/page.tsx",
+   "target": "function:app/admin/purchasing/materials/page.tsx:MaterialsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/purchasing/materials/page.tsx",
+   "target": "function:app/admin/purchasing/materials/page.tsx:CostingDrawer",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/purchasing/materials/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/materials/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/materials/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/materials/page.tsx",
+   "target": "file:components/admin/select-search.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/materials/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/materials/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/page.tsx",
+   "target": "function:app/admin/purchasing/page.tsx:PurchaseOrdersPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/purchasing/page.tsx",
+   "target": "function:app/admin/purchasing/page.tsx:PurchaseOrdersPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/purchasing/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/page.tsx",
+   "target": "file:lib/erp/constants.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/prices/page.tsx",
+   "target": "function:app/admin/purchasing/prices/page.tsx:PriceComparisonPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/purchasing/prices/page.tsx",
+   "target": "function:app/admin/purchasing/prices/page.tsx:PriceComparisonPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/purchasing/prices/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/prices/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/prices/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/suppliers/page.tsx",
+   "target": "function:app/admin/purchasing/suppliers/page.tsx:SuppliersPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/purchasing/suppliers/page.tsx",
+   "target": "function:app/admin/purchasing/suppliers/page.tsx:SuppliersPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/admin/purchasing/suppliers/page.tsx",
+   "target": "file:components/admin/antd-app.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/suppliers/page.tsx",
+   "target": "file:components/admin/erp/erp-client.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/suppliers/page.tsx",
+   "target": "file:components/admin/erp/ui.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/suppliers/page.tsx",
+   "target": "file:lib/admin-i18n.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/admin/purchasing/suppliers/page.tsx",
+   "target": "file:lib/admin-role-context.tsx",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "function:app/admin/products/[id]/edit/page.tsx:EditProductPage",
+   "target": "function:components/admin/ProductStockFields.tsx:loadProductCost",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:app/admin/products/[id]/edit/page.tsx:EditProductPage",
+   "target": "function:components/admin/ProductStockFields.tsx:saveProductCost",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:app/admin/products/new/page.tsx:CreateProductPage",
+   "target": "function:components/admin/ProductStockFields.tsx:saveProductCost",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:app/admin/overview/page.tsx:OwnerOverviewPage",
+   "target": "function:components/admin/erp/MonthGoalCard.tsx:MonthGoalCard",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:app/admin/pos/page.tsx:PosPage",
+   "target": "function:components/admin/pos/PosStockTab.tsx:PosStockTab",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:app/admin/pos/page.tsx:PosPage",
+   "target": "function:components/admin/pos/PosAnalyticsTab.tsx:PosAnalyticsTab",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "function:app/admin/purchasing/[id]/page.tsx:PurchaseOrderPage",
+   "target": "function:components/admin/erp/purchase-items.ts:usePurchaseItems",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

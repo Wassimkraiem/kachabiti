@@ -1,0 +1,170 @@
+{
+ "nodes": [
+  {
+   "id": "config:api/.env.example",
+   "type": "config",
+   "name": ".env.example",
+   "filePath": "api/.env.example",
+   "summary": "Example environment for running the NestJS API locally: database and LISTEN URLs, AUTH_SECRET, SMTP, S3 storage, VAPID push keys, owner/admin emails, revalidation secret, Sentry, ENV and PORT.",
+   "tags": [
+    "configuration",
+    "environment",
+    "secrets-template",
+    "api"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "service:api/Dockerfile.dockerignore",
+   "type": "service",
+   "name": "Dockerfile.dockerignore",
+   "filePath": "api/Dockerfile.dockerignore",
+   "summary": "Dockerfile-specific ignore list that restricts the repo-root build context to lib, api, migrations and the baseline SQL, excluding node_modules, dist and .env.",
+   "tags": [
+    "containerization",
+    "infrastructure",
+    "build-context"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "document:api/README.md",
+   "type": "document",
+   "name": "README.md",
+   "filePath": "api/README.md",
+   "summary": "Guide to the NestJS API: how to run it, how it fits behind the Next.js /api rewrite, the end-to-end test suites and the Docker image.",
+   "tags": [
+    "documentation",
+    "api",
+    "nestjs",
+    "onboarding"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "config:api/nest-cli.json",
+   "type": "config",
+   "name": "nest-cli.json",
+   "filePath": "api/nest-cli.json",
+   "summary": "Nest CLI configuration setting the source root, clean output builds and the api/src/main entry file.",
+   "tags": [
+    "configuration",
+    "nestjs",
+    "build-system"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "config:api/package.json",
+   "type": "config",
+   "name": "package.json",
+   "filePath": "api/package.json",
+   "summary": "npm manifest for the NestJS 11 API: build/start scripts, the chained e2e test suites, DB type generation, and dependencies such as Kysely, pg and web-push.",
+   "tags": [
+    "configuration",
+    "build-system",
+    "dependencies",
+    "nestjs"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "config:api/tsconfig.build.json",
+   "type": "config",
+   "name": "tsconfig.build.json",
+   "filePath": "api/tsconfig.build.json",
+   "summary": "Build-only TypeScript config extending the API tsconfig and excluding tests and output folders.",
+   "tags": [
+    "configuration",
+    "typescript",
+    "build-system"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "config:api/tsconfig.json",
+   "type": "config",
+   "name": "tsconfig.json",
+   "filePath": "api/tsconfig.json",
+   "summary": "TypeScript configuration for the NestJS API with decorator metadata and the @shared/* alias to root lib files.",
+   "tags": [
+    "configuration",
+    "typescript",
+    "nestjs"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "config:api/.env.example",
+   "target": "file:api/src/main.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "service:api/Dockerfile.dockerignore",
+   "target": "service:api/Dockerfile",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:api/README.md",
+   "target": "file:api/src/main.ts",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:api/README.md",
+   "target": "file:api/src/app.module.ts",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:api/README.md",
+   "target": "document:docs/MIGRATION-NESTJS.md",
+   "type": "related",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "config:api/nest-cli.json",
+   "target": "file:api/src/main.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:api/package.json",
+   "target": "file:api/src/main.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:api/package.json",
+   "target": "file:api/scripts/migrate.mjs",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:api/tsconfig.json",
+   "target": "file:api/src/main.ts",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:api/tsconfig.build.json",
+   "target": "config:api/tsconfig.json",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  }
+ ]
+}

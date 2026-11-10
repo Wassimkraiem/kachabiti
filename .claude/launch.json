@@ -1,0 +1,13 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "storefront-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": [
+        "C:/Users/Wassi/AppData/Local/Temp/claude/6a25bde1d4aa5dd0/c1e0b804-3964-47a0-b066-447197c6315e/scratchpad/preview.mjs"
+      ],
+      "port": 3000
+    }
+  ]
+}

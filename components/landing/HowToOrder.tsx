@@ -66,35 +66,35 @@ export default function HowToOrder({ locale, freeShippingThreshold }: HowToOrder
     const steps = t.steps(freeShippingThreshold);
 
     return (
-        <section dir={isRTL(locale) ? "rtl" : "ltr"} className={`${reemKufi.variable} w-full bg-white px-4 py-16`}>
+        <section dir={isRTL(locale) ? "rtl" : "ltr"} className={`${reemKufi.variable} w-full bg-surface px-4 py-16`}>
             <div className="mx-auto max-w-7xl">
-                <h2 className="text-start font-[family-name:var(--font-kufi)] text-3xl font-bold text-[var(--wool-ink)] sm:text-4xl">
+                <h2 className="text-start font-[family-name:var(--font-kufi)] text-3xl font-bold text-ink sm:text-4xl">
                     {t.title}
                 </h2>
 
                 <div className="mt-10 grid gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,1fr)] lg:gap-12">
-                    <ol className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+                    <ol className="stagger grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
                         {steps.map((step, index) => (
-                            <li key={step.title} className="border-t-2 border-[var(--wool-camel)]/40 pt-5 text-start">
+                            <li key={step.title} className="border-t-2 border-accent/40 pt-5 text-start">
                                 <span
-                                    className="font-[family-name:var(--font-kufi)] text-4xl font-bold leading-none text-[var(--wool-maroon)]"
+                                    className="font-[family-name:var(--font-kufi)] text-4xl font-bold leading-none text-accent"
                                     aria-hidden="true"
                                 >
                                     {index + 1}
                                 </span>
-                                <h3 className="mt-3 font-semibold text-[var(--wool-ink)]">{step.title}</h3>
-                                <p className="mt-1.5 text-sm leading-relaxed text-[#6f5f57]">{step.text}</p>
+                                <h3 className="mt-3 font-semibold text-ink">{step.title}</h3>
+                                <p className="mt-1.5 text-sm leading-relaxed text-mute">{step.text}</p>
                             </li>
                         ))}
                     </ol>
 
-                    <div className="rounded-[14px] bg-[var(--wool-brown)] p-6 text-start text-[var(--wool-undyed)]">
+                    <div className="rounded-[14px] border border-line bg-card p-6 text-start text-ink">
                         <p className="font-[family-name:var(--font-kufi)] text-xl font-semibold">{t.helpTitle}</p>
-                        <p className="mt-2 text-sm leading-relaxed text-[var(--wool-undyed)]/75">{t.helpText}</p>
+                        <p className="mt-2 text-sm leading-relaxed text-ink/75">{t.helpText}</p>
                         <a
                             href={`tel:${phone.replace(/\s/g, "")}`}
                             dir="ltr"
-                            className="mt-5 inline-block rounded-full bg-[var(--wool-undyed)] px-5 py-2.5 font-semibold text-[var(--wool-brown)] transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--wool-undyed)]"
+                            className="mt-5 inline-block rounded-full bg-ink px-5 py-2.5 font-semibold text-surface transition-colors hover:bg-accent focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ink"
                         >
                             {phone}
                         </a>

@@ -69,7 +69,7 @@ export default function OrderTracking({ orderStatus, delivery, locale }: { order
     const off = step === undefined;
 
     return (
-        <div dir={isRTL(locale) ? "rtl" : "ltr"} className="mt-4 rounded-md bg-gray-50 p-4">
+        <div dir={isRTL(locale) ? "rtl" : "ltr"} className="mt-4 rounded-md bg-surface p-4">
             {!off && (
                 <ol className="mb-3 flex items-start" aria-label={text.steps.join(", ")}>
                     {text.steps.map((label, index) => {
@@ -77,24 +77,24 @@ export default function OrderTracking({ orderStatus, delivery, locale }: { order
                         return (
                             <li key={label} className="flex flex-1 flex-col items-center text-center" aria-current={index === step ? "step" : undefined}>
                                 <div className="flex w-full items-center">
-                                    <span className={`h-0.5 flex-1 ${index === 0 ? "invisible" : reached ? "bg-[#7a3b2e]" : "bg-gray-300"}`} />
-                                    <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${reached ? "bg-[#7a3b2e] text-white" : "bg-gray-200 text-gray-500"}`}>
+                                    <span className={`h-0.5 flex-1 ${index === 0 ? "invisible" : reached ? "bg-accent" : "bg-line"}`} />
+                                    <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold ${reached ? "bg-accent text-white" : "bg-line text-mute"}`}>
                                         {reached ? "✓" : index + 1}
                                     </span>
-                                    <span className={`h-0.5 flex-1 ${index === text.steps.length - 1 ? "invisible" : index < step ? "bg-[#7a3b2e]" : "bg-gray-300"}`} />
+                                    <span className={`h-0.5 flex-1 ${index === text.steps.length - 1 ? "invisible" : index < step ? "bg-accent" : "bg-line"}`} />
                                 </div>
-                                <span className={`mt-1 text-xs ${reached ? "font-medium text-gray-900" : "text-gray-500"}`}>{label}</span>
+                                <span className={`mt-1 text-xs ${reached ? "font-medium text-ink" : "text-mute"}`}>{label}</span>
                             </li>
                         );
                     })}
                 </ol>
             )}
-            <p className={`text-sm ${stage === "returned" || stage === "problem" || stage === "cancelled" ? "text-amber-700" : "text-gray-700"}`}>
+            <p className={`text-sm ${stage === "returned" || stage === "problem" || stage === "cancelled" ? "text-amber-700" : "text-ink"}`}>
                 {text[stage]}
             </p>
             {delivery?.barcode && stage !== "cancelled" && (
-                <p className="mt-1 text-xs text-gray-500">
-                    {text.tracking}: <span className="font-mono text-gray-900" dir="ltr">{delivery.barcode}</span>
+                <p className="mt-1 text-xs text-mute">
+                    {text.tracking}: <span className="font-mono text-ink" dir="ltr">{delivery.barcode}</span>
                     {delivery.updated_at && (
                         <> · {text.updated} {new Date(delivery.updated_at).toLocaleDateString(locale)}</>
                     )}

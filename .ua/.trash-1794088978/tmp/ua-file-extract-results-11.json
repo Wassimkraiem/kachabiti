@@ -1,0 +1,1102 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 6,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 6,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 6,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "app/admin/layout.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 623,
+      "nonEmptyLines": 598,
+      "functions": [
+        {
+          "name": "withLinks",
+          "startLine": 193,
+          "endLine": 205,
+          "params": [
+            "items",
+            "t"
+          ]
+        },
+        {
+          "name": "menuFor",
+          "startLine": 261,
+          "endLine": 280,
+          "params": [
+            "role",
+            "permissions",
+            "t"
+          ]
+        },
+        {
+          "name": "AdminLayout",
+          "startLine": 284,
+          "endLine": 299,
+          "params": [
+            "{ children }"
+          ]
+        },
+        {
+          "name": "AdminConfig",
+          "startLine": 302,
+          "endLine": 374,
+          "params": [
+            "{ children }"
+          ]
+        },
+        {
+          "name": "AdminShell",
+          "startLine": 376,
+          "endLine": 619,
+          "params": [
+            "{ children }"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AdminLayout",
+          "line": 284,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "withLinks",
+          "callee": "items.map",
+          "lineNumber": 194
+        },
+        {
+          "caller": "withLinks",
+          "callee": "String",
+          "lineNumber": 196
+        },
+        {
+          "caller": "withLinks",
+          "callee": "withLinks",
+          "lineNumber": 197
+        },
+        {
+          "caller": "withLinks",
+          "callee": "t",
+          "lineNumber": 198
+        },
+        {
+          "caller": "withLinks",
+          "callee": "key.startsWith",
+          "lineNumber": 201
+        },
+        {
+          "caller": "allowed",
+          "callee": "permissions.includes",
+          "lineNumber": 267
+        },
+        {
+          "caller": "keep",
+          "callee": "items.flatMap",
+          "lineNumber": 270
+        },
+        {
+          "caller": "keep",
+          "callee": "allowed",
+          "lineNumber": 272
+        },
+        {
+          "caller": "keep",
+          "callee": "String",
+          "lineNumber": 272
+        },
+        {
+          "caller": "keep",
+          "callee": "keep",
+          "lineNumber": 274
+        },
+        {
+          "caller": "menuFor",
+          "callee": "withLinks",
+          "lineNumber": 279
+        },
+        {
+          "caller": "menuFor",
+          "callee": "keep",
+          "lineNumber": 279
+        },
+        {
+          "caller": "AdminLayout",
+          "callee": "usePathname",
+          "lineNumber": 285
+        },
+        {
+          "caller": "AdminConfig",
+          "callee": "useAdminT",
+          "lineNumber": 303
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "useAdminT",
+          "lineNumber": 377
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "usePathname",
+          "lineNumber": 378
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "useAdminRole",
+          "lineNumber": 379
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "useMemo",
+          "lineNumber": 380
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "menuFor",
+          "lineNumber": 380
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "useRouter",
+          "lineNumber": 381
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "useState",
+          "lineNumber": 382
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "useAdminT",
+          "lineNumber": 383
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "Grid.useBreakpoint",
+          "lineNumber": 385
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "useState",
+          "lineNumber": 387
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "useState",
+          "lineNumber": 388
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "useMobileTableLabels",
+          "lineNumber": 389
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "useEffect",
+          "lineNumber": 390
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "setDrawerOpen",
+          "lineNumber": 390
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "useState",
+          "lineNumber": 392
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "useEffect",
+          "lineNumber": 393
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "setPendingKey",
+          "lineNumber": 393
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "useMemo",
+          "lineNumber": 396
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "MENU_KEYS.filter((key) => pathname === key || pathname?.startsWith(`${key}/`)).sort",
+          "lineNumber": 398
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "MENU_KEYS.filter",
+          "lineNumber": 398
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "pathname?.startsWith",
+          "lineNumber": 398
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "useMemo",
+          "lineNumber": 402
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "pathname?.startsWith",
+          "lineNumber": 403
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "pathname?.startsWith",
+          "lineNumber": 406
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "pathname?.startsWith",
+          "lineNumber": 409
+        },
+        {
+          "caller": "handleMenuClick",
+          "callee": "key.startsWith",
+          "lineNumber": 416
+        },
+        {
+          "caller": "handleMenuClick",
+          "callee": "setPendingKey",
+          "lineNumber": 417
+        },
+        {
+          "caller": "handleMenuClick",
+          "callee": "router.push",
+          "lineNumber": 420
+        },
+        {
+          "caller": "handleMenuClick",
+          "callee": "router.push",
+          "lineNumber": 423
+        },
+        {
+          "caller": "handleMenuClick",
+          "callee": "router.push",
+          "lineNumber": 425
+        },
+        {
+          "caller": "handleSignOut",
+          "callee": "fetch(\"/api/auth/sign-out\", { method: \"POST\" }).catch",
+          "lineNumber": 430
+        },
+        {
+          "caller": "handleSignOut",
+          "callee": "fetch",
+          "lineNumber": 430
+        },
+        {
+          "caller": "handleSignOut",
+          "callee": "router.replace",
+          "lineNumber": 431
+        },
+        {
+          "caller": "handleSignOut",
+          "callee": "router.refresh",
+          "lineNumber": 432
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "t",
+          "lineNumber": 458
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "t",
+          "lineNumber": 461
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "keys.includes",
+          "lineNumber": 478
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "openKeys.includes",
+          "lineNumber": 478
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "keys.includes",
+          "lineNumber": 479
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "openKeys.includes",
+          "lineNumber": 479
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "keys.includes",
+          "lineNumber": 480
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "openKeys.includes",
+          "lineNumber": 480
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "setTimeout",
+          "lineNumber": 482
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "pathname?.startsWith",
+          "lineNumber": 483
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "router.push",
+          "lineNumber": 483
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "setTimeout",
+          "lineNumber": 489
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "router.push",
+          "lineNumber": 492
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "setTimeout",
+          "lineNumber": 499
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "router.push",
+          "lineNumber": 502
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "t",
+          "lineNumber": 515
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "t",
+          "lineNumber": 515
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "t",
+          "lineNumber": 515
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "setDrawerOpen",
+          "lineNumber": 523
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "t",
+          "lineNumber": 573
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "setDrawerOpen",
+          "lineNumber": 575
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "setCollapsed",
+          "lineNumber": 575
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "t",
+          "lineNumber": 579
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "t",
+          "lineNumber": 596
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "t",
+          "lineNumber": 599
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "t",
+          "lineNumber": 601
+        },
+        {
+          "caller": "AdminShell",
+          "callee": "t",
+          "lineNumber": 602
+        }
+      ],
+      "metrics": {
+        "importCount": 9,
+        "exportCount": 1,
+        "functionCount": 5,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/admin/login/page.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 128,
+      "nonEmptyLines": 114,
+      "functions": [
+        {
+          "name": "fetchBackOfficeRole",
+          "startLine": 16,
+          "endLine": 22,
+          "params": []
+        },
+        {
+          "name": "safeNextPath",
+          "startLine": 25,
+          "endLine": 27,
+          "params": [
+            "next"
+          ]
+        },
+        {
+          "name": "AdminLoginForm",
+          "startLine": 29,
+          "endLine": 120,
+          "params": []
+        },
+        {
+          "name": "AdminLoginPage",
+          "startLine": 122,
+          "endLine": 128,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AdminLoginPage",
+          "line": 122,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fetchBackOfficeRole",
+          "callee": "fetch(\"/api/admin/me\").catch",
+          "lineNumber": 18
+        },
+        {
+          "caller": "fetchBackOfficeRole",
+          "callee": "fetch",
+          "lineNumber": 18
+        },
+        {
+          "caller": "fetchBackOfficeRole",
+          "callee": "res.json",
+          "lineNumber": 19
+        },
+        {
+          "caller": "safeNextPath",
+          "callee": "next.startsWith",
+          "lineNumber": 26
+        },
+        {
+          "caller": "safeNextPath",
+          "callee": "next.startsWith",
+          "lineNumber": 26
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "useAdminT",
+          "lineNumber": 30
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "useRouter",
+          "lineNumber": 31
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "useSearchParams",
+          "lineNumber": 32
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "safeNextPath",
+          "lineNumber": 33
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "searchParams.get",
+          "lineNumber": 33
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "useState",
+          "lineNumber": 35
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "useState",
+          "lineNumber": 36
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "useState",
+          "lineNumber": 37
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "useEffect",
+          "lineNumber": 41
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "accountApi<Customer | null>(\"auth/me\").catch(() => null).then",
+          "lineNumber": 43
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "accountApi<Customer | null>(\"auth/me\").catch",
+          "lineNumber": 43
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "accountApi",
+          "lineNumber": 43
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "fetchBackOfficeRole",
+          "lineNumber": 46
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "router.replace",
+          "lineNumber": 49
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "router.refresh",
+          "lineNumber": 50
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "setSignedInEmail",
+          "lineNumber": 52
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setSubmitting",
+          "lineNumber": 61
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setError",
+          "lineNumber": 62
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "accountApi",
+          "lineNumber": 64
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setError",
+          "lineNumber": 66
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "t",
+          "lineNumber": 66
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setSubmitting",
+          "lineNumber": 67
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "fetchBackOfficeRole",
+          "lineNumber": 71
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setSignedInEmail",
+          "lineNumber": 73
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "setSubmitting",
+          "lineNumber": 74
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "router.replace",
+          "lineNumber": 77
+        },
+        {
+          "caller": "handleSubmit",
+          "callee": "router.refresh",
+          "lineNumber": 78
+        },
+        {
+          "caller": "handleSignOut",
+          "callee": "accountApi(\"auth/sign-out\", { body: {} }).catch",
+          "lineNumber": 82
+        },
+        {
+          "caller": "handleSignOut",
+          "callee": "accountApi",
+          "lineNumber": 82
+        },
+        {
+          "caller": "handleSignOut",
+          "callee": "setSignedInEmail",
+          "lineNumber": 83
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "t",
+          "lineNumber": 90
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "t",
+          "lineNumber": 93
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "t",
+          "lineNumber": 100
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "t",
+          "lineNumber": 101
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "t",
+          "lineNumber": 107
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "t",
+          "lineNumber": 110
+        },
+        {
+          "caller": "AdminLoginForm",
+          "callee": "t",
+          "lineNumber": 114
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/AdminLanguageSwitcher.tsx",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 18,
+      "nonEmptyLines": 16,
+      "functions": [
+        {
+          "name": "AdminLanguageSwitcher",
+          "startLine": 7,
+          "endLine": 18,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AdminLanguageSwitcher",
+          "line": 7,
+          "isDefault": true
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "AdminLanguageSwitcher",
+          "callee": "useAdminT",
+          "lineNumber": 8
+        },
+        {
+          "caller": "AdminLanguageSwitcher",
+          "callee": "setLocale",
+          "lineNumber": 13
+        },
+        {
+          "caller": "AdminLanguageSwitcher",
+          "callee": "ADMIN_LOCALES.map",
+          "lineNumber": 14
+        },
+        {
+          "caller": "AdminLanguageSwitcher",
+          "callee": "t",
+          "lineNumber": 15
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/admin-fetch-cache.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 65,
+      "nonEmptyLines": 58,
+      "functions": [
+        {
+          "name": "installAdminFetchCache",
+          "startLine": 31,
+          "endLine": 65,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "installAdminFetchCache",
+          "line": 31,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "window.fetch.bind",
+          "lineNumber": 34
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "String",
+          "lineNumber": 38
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "(init?.method ?? request?.method ?? \"GET\").toUpperCase",
+          "lineNumber": 39
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "CACHED_PATHS.has",
+          "lineNumber": 41
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "originalFetch",
+          "lineNumber": 42
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "entries.keys",
+          "lineNumber": 45
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "key.startsWith",
+          "lineNumber": 45
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "entries.delete",
+          "lineNumber": 45
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "originalFetch",
+          "lineNumber": 46
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "entries.get",
+          "lineNumber": 50
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "Date.now",
+          "lineNumber": 51
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "originalFetch(input, init).then",
+          "lineNumber": 52
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "originalFetch",
+          "lineNumber": 52
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "res.headers.entries",
+          "lineNumber": 54
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "res.text",
+          "lineNumber": 55
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "Date.now",
+          "lineNumber": 57
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "entries.set",
+          "lineNumber": 58
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "response.then((r) => r.status >= 400 && entries.delete(key)).catch",
+          "lineNumber": 60
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "response.then",
+          "lineNumber": 60
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "entries.delete",
+          "lineNumber": 60
+        },
+        {
+          "caller": "installAdminFetchCache",
+          "callee": "entries.delete",
+          "lineNumber": 60
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/admin/mobile-table-labels.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 50,
+      "nonEmptyLines": 47,
+      "functions": [
+        {
+          "name": "labelTables",
+          "startLine": 11,
+          "endLine": 32,
+          "params": [
+            "root"
+          ]
+        },
+        {
+          "name": "useMobileTableLabels",
+          "startLine": 34,
+          "endLine": 50,
+          "params": [
+            "root",
+            "enabled"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "useMobileTableLabels",
+          "line": 34,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "labelTables",
+          "callee": "root.querySelectorAll<HTMLTableElement>(\".ant-table table\").forEach",
+          "lineNumber": 12
+        },
+        {
+          "caller": "labelTables",
+          "callee": "root.querySelectorAll",
+          "lineNumber": 12
+        },
+        {
+          "caller": "labelTables",
+          "callee": "table.querySelector",
+          "lineNumber": 13
+        },
+        {
+          "caller": "labelTables",
+          "callee": "headerRow.querySelectorAll<HTMLTableCellElement>(\"th\").forEach",
+          "lineNumber": 17
+        },
+        {
+          "caller": "labelTables",
+          "callee": "headerRow.querySelectorAll",
+          "lineNumber": 17
+        },
+        {
+          "caller": "labelTables",
+          "callee": "th.classList.contains",
+          "lineNumber": 18
+        },
+        {
+          "caller": "labelTables",
+          "callee": "th.classList.contains",
+          "lineNumber": 18
+        },
+        {
+          "caller": "labelTables",
+          "callee": "(th.querySelector(\".ant-table-column-title\")?.textContent ?? th.textContent ?? \"\").trim",
+          "lineNumber": 19
+        },
+        {
+          "caller": "labelTables",
+          "callee": "th.querySelector",
+          "lineNumber": 19
+        },
+        {
+          "caller": "labelTables",
+          "callee": "titles.push",
+          "lineNumber": 20
+        },
+        {
+          "caller": "labelTables",
+          "callee": "table.querySelectorAll<HTMLTableRowElement>(\":scope > tbody > tr\").forEach",
+          "lineNumber": 22
+        },
+        {
+          "caller": "labelTables",
+          "callee": "table.querySelectorAll",
+          "lineNumber": 22
+        },
+        {
+          "caller": "labelTables",
+          "callee": "row.classList.contains",
+          "lineNumber": 23
+        },
+        {
+          "caller": "labelTables",
+          "callee": "row.classList.contains",
+          "lineNumber": 23
+        },
+        {
+          "caller": "labelTables",
+          "callee": "row.classList.contains",
+          "lineNumber": 23
+        },
+        {
+          "caller": "labelTables",
+          "callee": "row.querySelectorAll<HTMLTableCellElement>(\":scope > td\").forEach",
+          "lineNumber": 25
+        },
+        {
+          "caller": "labelTables",
+          "callee": "row.querySelectorAll",
+          "lineNumber": 25
+        },
+        {
+          "caller": "labelTables",
+          "callee": "td.getAttribute",
+          "lineNumber": 27
+        },
+        {
+          "caller": "labelTables",
+          "callee": "td.setAttribute",
+          "lineNumber": 27
+        },
+        {
+          "caller": "useMobileTableLabels",
+          "callee": "useEffect",
+          "lineNumber": 35
+        },
+        {
+          "caller": "schedule",
+          "callee": "cancelAnimationFrame",
+          "lineNumber": 39
+        },
+        {
+          "caller": "schedule",
+          "callee": "requestAnimationFrame",
+          "lineNumber": 40
+        },
+        {
+          "caller": "schedule",
+          "callee": "labelTables",
+          "lineNumber": 40
+        },
+        {
+          "caller": "useMobileTableLabels",
+          "callee": "schedule",
+          "lineNumber": 42
+        },
+        {
+          "caller": "useMobileTableLabels",
+          "callee": "observer.observe",
+          "lineNumber": 44
+        },
+        {
+          "caller": "useMobileTableLabels",
+          "callee": "observer.disconnect",
+          "lineNumber": 46
+        },
+        {
+          "caller": "useMobileTableLabels",
+          "callee": "cancelAnimationFrame",
+          "lineNumber": 47
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/antd-config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 35,
+      "exports": [
+        {
+          "name": "antdTheme",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

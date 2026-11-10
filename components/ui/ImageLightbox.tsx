@@ -62,7 +62,7 @@ export default function ImageLightbox({ images, index, className = "" }: ImageLi
                 aria-label={current.alt}
             >
                 <Image src={current.src} alt={current.alt} fill priority sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover object-top" />
-                <span className="absolute bottom-3 end-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/85 text-[#2b1a16] shadow-sm" aria-hidden="true">
+                <span className="absolute bottom-3 end-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/85 text-ink shadow-sm" aria-hidden="true">
                     <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" />
                     </svg>

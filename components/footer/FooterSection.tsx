@@ -10,7 +10,7 @@ interface FooterSectionProps {
 export default function FooterSection({ section }: FooterSectionProps) {
     return (
         <div>
-            <h3 className="text-lg font-semibold text-[#2b1a16] mb-4">
+            <h3 className="text-lg font-semibold text-ink mb-4">
                 {section.title}
             </h3>
             <ul className="space-y-0.5 sm:space-y-2">
@@ -18,7 +18,7 @@ export default function FooterSection({ section }: FooterSectionProps) {
                     <li key={link.href}>
                         <Link
                             href={link.href}
-                            className="inline-flex min-h-11 items-center text-gray-600 hover:text-[#842E1B] transition-colors text-sm sm:min-h-0"
+                            className="inline-flex min-h-11 items-center text-mute hover:text-accent transition-colors text-sm sm:min-h-0"
                         >
                             {link.label}
                         </Link>

@@ -1,0 +1,20 @@
+{
+ "nodes": [
+  {
+   "id": "service:api/Dockerfile",
+   "type": "service",
+   "name": "Dockerfile",
+   "filePath": "api/Dockerfile",
+   "summary": "Multi-stage Alpine build of the NestJS API: compiles with the shared lib files, then a production image with runtime deps, migration scripts, migrations and the baseline schema, serving on port 4000.",
+   "tags": [
+    "containerization",
+    "infrastructure",
+    "nestjs",
+    "deployment"
+   ],
+   "complexity": "simple",
+   "languageNotes": "Multi-stage build keeps dev dependencies and sources out of the runtime image."
+  }
+ ],
+ "edges": []
+}

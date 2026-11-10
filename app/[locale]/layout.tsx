@@ -8,6 +8,7 @@ import TrafficSource from '@/components/layout/TrafficSource';
 import StaticHeader from '@/components/layout/StaticHeader';
 import Footer from '@/components/footer/Footer';
 import { Suspense } from 'react';
+import { reemKufi } from '@/lib/fonts';
 import Script from "next/script";
 
 // Language-specific metadata
@@ -98,6 +99,9 @@ export default async function LocaleLayout({
     return (
         <LanguageProvider locale={locale}>
             <CartProvider>
+              <div className={`storefront ${reemKufi.variable}`}>
+                {/* Without JavaScript nothing adds .is-in, so show revealed content at once. */}
+                <noscript><style>{`.reveal{opacity:1;transform:none}`}</style></noscript>
                 {/* Header and footer live here so they stay mounted across navigations
                     (no refetching categories/session or re-rendering them on every page). */}
                 <Suspense>
@@ -142,6 +146,7 @@ export default async function LocaleLayout({
                         })
                     }}
                 />
+              </div>
             </CartProvider>
         </LanguageProvider>
     );

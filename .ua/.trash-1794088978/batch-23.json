@@ -1,0 +1,826 @@
+{
+ "nodes": [
+  {
+   "id": "file:.gitattributes",
+   "type": "file",
+   "name": ".gitattributes",
+   "filePath": ".gitattributes",
+   "summary": "Git attributes forcing LF line endings for shell scripts and the Terraform cloud-init file so they run on Linux even from a Windows checkout.",
+   "tags": [
+    "configuration",
+    "git",
+    "line-endings",
+    "deployment"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:.github/scripts/api-changed.mjs",
+   "type": "file",
+   "name": "api-changed.mjs",
+   "filePath": ".github/scripts/api-changed.mjs",
+   "summary": "CI helper that diffs two commits and prints api=true when the API, migrations, baseline, deploy files, or any lib/ file the API compiles against changed; drives whether deploy.yml redeploys the NestJS server.",
+   "tags": [
+    "ci-cd",
+    "script",
+    "change-detection",
+    "deployment",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "config:.ua/config.json",
+   "type": "config",
+   "name": "config.json",
+   "filePath": ".ua/config.json",
+   "summary": "Understand-Anything tool configuration setting the knowledge-graph output language to English.",
+   "tags": [
+    "configuration",
+    "tooling",
+    "metadata"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:.vercelignore",
+   "type": "file",
+   "name": ".vercelignore",
+   "filePath": ".vercelignore",
+   "summary": "Vercel ignore file excluding the root api/ NestJS folder so Vercel does not turn it into serverless functions.",
+   "tags": [
+    "configuration",
+    "deployment",
+    "vercel",
+    "build-system"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/eslint.config.mjs",
+   "type": "file",
+   "name": "eslint.config.mjs",
+   "filePath": "api/eslint.config.mjs",
+   "summary": "ESLint flat config for the NestJS API combining recommended JS and type-checked typescript-eslint rules with Prettier, Node/Jest globals and relaxed any/floating-promise rules.",
+   "tags": [
+    "configuration",
+    "linting",
+    "typescript",
+    "build-system"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/scripts/copy-storage.mjs",
+   "type": "file",
+   "name": "copy-storage.mjs",
+   "filePath": "api/scripts/copy-storage.mjs",
+   "summary": "One-off migration script that copies the Supabase Storage buckets (products, documents) to S3-compatible storage via aws4fetch and, with --rewrite, rewrites stored product-image URLs in Postgres to the new public file host.",
+   "tags": [
+    "migration",
+    "script",
+    "storage",
+    "s3",
+    "data-pipeline"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/scripts/copy-storage.mjs:keys",
+   "type": "function",
+   "name": "keys",
+   "filePath": "api/scripts/copy-storage.mjs",
+   "lineRange": [
+    35,
+    52
+   ],
+   "summary": "Lists every object key in a Supabase bucket by paging through folder levels.",
+   "tags": [
+    "storage",
+    "pagination",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/scripts/copy-storage.mjs:copy",
+   "type": "function",
+   "name": "copy",
+   "filePath": "api/scripts/copy-storage.mjs",
+   "lineRange": [
+    54,
+    76
+   ],
+   "summary": "Copies each object of a bucket to S3, skipping objects already present, so the script is safe to re-run.",
+   "tags": [
+    "storage",
+    "s3",
+    "migration"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/scripts/copy-storage.mjs:rewrite",
+   "type": "function",
+   "name": "rewrite",
+   "filePath": "api/scripts/copy-storage.mjs",
+   "lineRange": [
+    79,
+    116
+   ],
+   "summary": "Replaces old Supabase storage URLs in database tables with the FILES_PUBLIC_URL address.",
+   "tags": [
+    "database",
+    "migration",
+    "url-rewrite"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/scripts/db-types.mjs",
+   "type": "file",
+   "name": "db-types.mjs",
+   "filePath": "api/scripts/db-types.mjs",
+   "summary": "Regenerates the Kysely database types (src/db/types.ts) with kysely-codegen and patches Int8 and Timestamp types to match the API value parsers.",
+   "tags": [
+    "script",
+    "codegen",
+    "database",
+    "type-definition"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/scripts/migrate.mjs",
+   "type": "file",
+   "name": "migrate.mjs",
+   "filePath": "api/scripts/migrate.mjs",
+   "summary": "Migration runner for plain Postgres: loads db/baseline.sql into an empty database, then applies each pending supabase/migrations file in its own transaction and records it in schema_migrations, with a --dry-run mode.",
+   "tags": [
+    "migration",
+    "database",
+    "script",
+    "entry-point"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "document:app/[locale]/settings/README.md",
+   "type": "document",
+   "name": "README.md",
+   "filePath": "app/[locale]/settings/README.md",
+   "summary": "Historical implementation notes for the customer settings page describing its tabs (orders, account info, security, saved items, logout), auth protection and profile editing.",
+   "tags": [
+    "documentation",
+    "settings",
+    "account"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/admin/loading.tsx",
+   "type": "file",
+   "name": "loading.tsx",
+   "filePath": "app/admin/loading.tsx",
+   "summary": "Next.js loading boundary for the admin area showing a centered Ant Design spinner while the next admin page loads.",
+   "tags": [
+    "component",
+    "loading",
+    "admin",
+    "ui"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/admin/loading.tsx:AdminLoading",
+   "type": "function",
+   "name": "AdminLoading",
+   "filePath": "app/admin/loading.tsx",
+   "lineRange": [
+    4,
+    10
+   ],
+   "summary": "Renders a large antd Spin centered in the admin content area.",
+   "tags": [
+    "component",
+    "loading",
+    "admin"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/api-docs/page.tsx",
+   "type": "file",
+   "name": "page.tsx",
+   "filePath": "app/api-docs/page.tsx",
+   "summary": "Client page that loads swagger-ui from a CDN and renders the OpenAPI spec served at /api/docs.",
+   "tags": [
+    "component",
+    "api-docs",
+    "swagger",
+    "page"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/api-docs/page.tsx:ApiDocsPage",
+   "type": "function",
+   "name": "ApiDocsPage",
+   "filePath": "app/api-docs/page.tsx",
+   "lineRange": [
+    16,
+    97
+   ],
+   "summary": "Injects the swagger-ui stylesheet and scripts once, then initializes SwaggerUIBundle against /api/docs.",
+   "tags": [
+    "component",
+    "api-docs",
+    "swagger"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/global-error.tsx",
+   "type": "file",
+   "name": "global-error.tsx",
+   "filePath": "app/global-error.tsx",
+   "summary": "Root-level Next.js error boundary that reports the crash to Sentry and renders a trilingual (ar/fr/en) fallback page with a retry button.",
+   "tags": [
+    "error-handling",
+    "component",
+    "monitoring",
+    "i18n"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/global-error.tsx:GlobalError",
+   "type": "function",
+   "name": "GlobalError",
+   "filePath": "app/global-error.tsx",
+   "lineRange": [
+    8,
+    51
+   ],
+   "summary": "Captures the error with Sentry and renders its own html/body with a localized error message and reset button.",
+   "tags": [
+    "error-handling",
+    "component",
+    "sentry"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/globals.css",
+   "type": "file",
+   "name": "globals.css",
+   "filePath": "app/globals.css",
+   "summary": "Global Tailwind v4 stylesheet defining brand color tokens, theme font variables, custom font sizes and base styles.",
+   "tags": [
+    "styles",
+    "tailwind",
+    "theme",
+    "design-tokens"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/layout.tsx",
+   "type": "file",
+   "name": "layout.tsx",
+   "filePath": "app/layout.tsx",
+   "summary": "Root Next.js layout: self-hosted fonts, viewport and SEO metadata, Organization JSON-LD, html lang from the x-locale header, and the react-hot-toast Toaster.",
+   "tags": [
+    "entry-point",
+    "layout",
+    "seo",
+    "metadata",
+    "component"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/layout.tsx:RootLayout",
+   "type": "function",
+   "name": "RootLayout",
+   "filePath": "app/layout.tsx",
+   "lineRange": [
+    83,
+    145
+   ],
+   "summary": "Async server layout that reads the locale from request headers and renders the html shell with structured data, fonts and toaster.",
+   "tags": [
+    "layout",
+    "component",
+    "i18n"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/manifest.ts",
+   "type": "file",
+   "name": "manifest.ts",
+   "filePath": "app/manifest.ts",
+   "summary": "Next.js web app manifest route describing the Kachabity PWA name, colors, start URL and icon.",
+   "tags": [
+    "pwa",
+    "metadata",
+    "config"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/manifest.ts:manifest",
+   "type": "function",
+   "name": "manifest",
+   "filePath": "app/manifest.ts",
+   "lineRange": [
+    3,
+    21
+   ],
+   "summary": "Returns the MetadataRoute.Manifest object for the installable web app.",
+   "tags": [
+    "pwa",
+    "metadata"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/robots.ts",
+   "type": "file",
+   "name": "robots.ts",
+   "filePath": "app/robots.ts",
+   "summary": "Next.js robots route allowing all crawlers except /private/ and pointing to the sitemap.",
+   "tags": [
+    "seo",
+    "metadata",
+    "config"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/robots.ts:robots",
+   "type": "function",
+   "name": "robots",
+   "filePath": "app/robots.ts",
+   "lineRange": [
+    3,
+    12
+   ],
+   "summary": "Returns robots rules and the sitemap URL.",
+   "tags": [
+    "seo",
+    "metadata"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/sitemap.ts",
+   "type": "file",
+   "name": "sitemap.ts",
+   "filePath": "app/sitemap.ts",
+   "summary": "Next.js sitemap route listing the main static storefront pages with change frequency and priority.",
+   "tags": [
+    "seo",
+    "sitemap",
+    "metadata"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/sitemap.ts:sitemap",
+   "type": "function",
+   "name": "sitemap",
+   "filePath": "app/sitemap.ts",
+   "lineRange": [
+    3,
+    38
+   ],
+   "summary": "Returns a static list of sitemap entries for home, products, categories, about and contact.",
+   "tags": [
+    "seo",
+    "sitemap"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/carousel/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "components/carousel/index.ts",
+   "summary": "Barrel re-exporting the CarouselIndicators and CarouselNavigation components.",
+   "tags": [
+    "barrel",
+    "component",
+    "carousel"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/cart/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "components/cart/index.ts",
+   "summary": "Barrel re-exporting the cart UI components: AddToCartButton, CartButton, CartDrawer and CartItem.",
+   "tags": [
+    "barrel",
+    "component",
+    "cart"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/footer/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "components/footer/index.ts",
+   "summary": "Barrel re-exporting the Footer and FooterSection components.",
+   "tags": [
+    "barrel",
+    "component",
+    "footer"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:components/forms/FormInput.tsx",
+   "type": "file",
+   "name": "FormInput.tsx",
+   "filePath": "components/forms/FormInput.tsx",
+   "summary": "Reusable labelled text input wired to react-hook-form register with required marker and validation error display.",
+   "tags": [
+    "component",
+    "form",
+    "validation",
+    "react-hook-form"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/forms/FormInput.tsx:FormInput",
+   "type": "function",
+   "name": "FormInput",
+   "filePath": "components/forms/FormInput.tsx",
+   "lineRange": [
+    15,
+    59
+   ],
+   "summary": "Generic input component rendering label, registered input and field error message.",
+   "tags": [
+    "component",
+    "form",
+    "validation"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/forms/FormSelect.tsx",
+   "type": "file",
+   "name": "FormSelect.tsx",
+   "filePath": "components/forms/FormSelect.tsx",
+   "summary": "Reusable labelled select bound to react-hook-form that renders options and shows validation errors.",
+   "tags": [
+    "component",
+    "form",
+    "validation",
+    "react-hook-form"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/forms/FormSelect.tsx:FormSelect",
+   "type": "function",
+   "name": "FormSelect",
+   "filePath": "components/forms/FormSelect.tsx",
+   "lineRange": [
+    18,
+    64
+   ],
+   "summary": "Generic select component rendering label, option list and field error message.",
+   "tags": [
+    "component",
+    "form",
+    "validation"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/forms/FormTextarea.tsx",
+   "type": "file",
+   "name": "FormTextarea.tsx",
+   "filePath": "components/forms/FormTextarea.tsx",
+   "summary": "Reusable labelled textarea bound to react-hook-form with validation error display.",
+   "tags": [
+    "component",
+    "form",
+    "validation",
+    "react-hook-form"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:components/forms/FormTextarea.tsx:FormTextarea",
+   "type": "function",
+   "name": "FormTextarea",
+   "filePath": "components/forms/FormTextarea.tsx",
+   "lineRange": [
+    15,
+    59
+   ],
+   "summary": "Generic textarea component rendering label, registered textarea and field error message.",
+   "tags": [
+    "component",
+    "form",
+    "validation"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "document:components/forms/README.md",
+   "type": "document",
+   "name": "README.md",
+   "filePath": "components/forms/README.md",
+   "summary": "Usage guide for the reusable form components (FormInput, FormSelect, FormTextarea) with React Hook Form + Zod examples and prop lists.",
+   "tags": [
+    "documentation",
+    "form",
+    "component"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:components/layout/index.ts",
+   "type": "file",
+   "name": "index.ts",
+   "filePath": "components/layout/index.ts",
+   "summary": "Barrel re-exporting the StaticHeader layout component.",
+   "tags": [
+    "barrel",
+    "component",
+    "layout"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:api/scripts/copy-storage.mjs",
+   "target": "function:api/scripts/copy-storage.mjs:keys",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/scripts/copy-storage.mjs",
+   "target": "function:api/scripts/copy-storage.mjs:copy",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/scripts/copy-storage.mjs",
+   "target": "function:api/scripts/copy-storage.mjs:rewrite",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/loading.tsx",
+   "target": "function:app/admin/loading.tsx:AdminLoading",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/admin/loading.tsx",
+   "target": "function:app/admin/loading.tsx:AdminLoading",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/api-docs/page.tsx",
+   "target": "function:app/api-docs/page.tsx:ApiDocsPage",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/api-docs/page.tsx",
+   "target": "function:app/api-docs/page.tsx:ApiDocsPage",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/global-error.tsx",
+   "target": "function:app/global-error.tsx:GlobalError",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/global-error.tsx",
+   "target": "function:app/global-error.tsx:GlobalError",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/layout.tsx",
+   "target": "function:app/layout.tsx:RootLayout",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/layout.tsx",
+   "target": "function:app/layout.tsx:RootLayout",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/manifest.ts",
+   "target": "function:app/manifest.ts:manifest",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/manifest.ts",
+   "target": "function:app/manifest.ts:manifest",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/robots.ts",
+   "target": "function:app/robots.ts:robots",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/robots.ts",
+   "target": "function:app/robots.ts:robots",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/sitemap.ts",
+   "target": "function:app/sitemap.ts:sitemap",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:app/sitemap.ts",
+   "target": "function:app/sitemap.ts:sitemap",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/forms/FormInput.tsx",
+   "target": "function:components/forms/FormInput.tsx:FormInput",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/forms/FormInput.tsx",
+   "target": "function:components/forms/FormInput.tsx:FormInput",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/forms/FormSelect.tsx",
+   "target": "function:components/forms/FormSelect.tsx:FormSelect",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/forms/FormSelect.tsx",
+   "target": "function:components/forms/FormSelect.tsx:FormSelect",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:components/forms/FormTextarea.tsx",
+   "target": "function:components/forms/FormTextarea.tsx:FormTextarea",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:components/forms/FormTextarea.tsx",
+   "target": "function:components/forms/FormTextarea.tsx:FormTextarea",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/layout.tsx",
+   "target": "file:app/globals.css",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:components/carousel/index.ts",
+   "target": "file:components/carousel/CarouselIndicators.tsx",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:components/carousel/index.ts",
+   "target": "file:components/carousel/CarouselNavigation.tsx",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:components/cart/index.ts",
+   "target": "file:components/cart/AddToCartButton.tsx",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:components/cart/index.ts",
+   "target": "file:components/cart/CartButton.tsx",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:components/cart/index.ts",
+   "target": "file:components/cart/CartDrawer.tsx",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:components/cart/index.ts",
+   "target": "file:components/cart/CartItem.tsx",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:components/footer/index.ts",
+   "target": "file:components/footer/Footer.tsx",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:components/footer/index.ts",
+   "target": "file:components/footer/FooterSection.tsx",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:components/layout/index.ts",
+   "target": "file:components/layout/StaticHeader.tsx",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "document:components/forms/README.md",
+   "target": "file:components/forms/FormInput.tsx",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:components/forms/README.md",
+   "target": "file:components/forms/FormSelect.tsx",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:components/forms/README.md",
+   "target": "file:components/forms/FormTextarea.tsx",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  },
+  {
+   "source": "document:app/[locale]/settings/README.md",
+   "target": "file:app/[locale]/settings/page.tsx",
+   "type": "documents",
+   "direction": "forward",
+   "weight": 0.5
+  }
+ ]
+}

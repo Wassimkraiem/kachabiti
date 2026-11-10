@@ -1,0 +1,115 @@
+{
+ "nodes": [
+  {
+   "id": "config:deploy/.env.example",
+   "type": "config",
+   "name": ".env.example",
+   "filePath": "deploy/.env.example",
+   "summary": "Template for the production server .env: Postgres credentials, auth and revalidation secrets, site domain, S3 buckets, SMTP, VAPID, Colissimo, Meta/WhatsApp tokens and Sentry.",
+   "tags": [
+    "configuration",
+    "environment",
+    "production",
+    "secrets-template"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:deploy/backup.sh",
+   "type": "file",
+   "name": "backup.sh",
+   "filePath": "deploy/backup.sh",
+   "summary": "Hourly backup script that pg_dumps the production database, uploads it to the S3 backup bucket via rclone, prunes local dumps and reports a CloudWatch metric for the missing-backup alarm.",
+   "tags": [
+    "script",
+    "backup",
+    "database",
+    "monitoring",
+    "deployment"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:deploy/deploy.sh",
+   "type": "file",
+   "name": "deploy.sh",
+   "filePath": "deploy/deploy.sh",
+   "summary": "Zero-downtime API deploy script: backs up, runs pending migrations, starts the new API container beside the old one, waits for health, then retires the old container or rolls back.",
+   "tags": [
+    "script",
+    "deployment",
+    "zero-downtime",
+    "migration",
+    "orchestration"
+   ],
+   "complexity": "moderate",
+   "languageNotes": "POSIX sh with set -eu; uses docker compose --scale and --no-recreate to run old and new containers side by side behind Caddy."
+  },
+  {
+   "id": "service:deploy/docker-compose.prod.yml",
+   "type": "service",
+   "name": "docker-compose.prod.yml",
+   "filePath": "deploy/docker-compose.prod.yml",
+   "summary": "Production compose stack on the EC2 server: Postgres 17 (loopback-only), the NestJS API image with a health check, and Caddy as HTTPS reverse proxy load-balancing across API containers.",
+   "tags": [
+    "orchestration",
+    "infrastructure",
+    "containerization",
+    "reverse-proxy",
+    "production"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "config:deploy/.env.example",
+   "target": "service:deploy/docker-compose.prod.yml",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "config:deploy/.env.example",
+   "target": "file:deploy/backup.sh",
+   "type": "configures",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:deploy/deploy.sh",
+   "target": "service:deploy/docker-compose.prod.yml",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:deploy/deploy.sh",
+   "target": "file:deploy/backup.sh",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:deploy/deploy.sh",
+   "target": "file:api/scripts/migrate.mjs",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "file:deploy/backup.sh",
+   "target": "service:deploy/docker-compose.prod.yml",
+   "type": "depends_on",
+   "direction": "forward",
+   "weight": 0.6
+  },
+  {
+   "source": "service:deploy/docker-compose.prod.yml",
+   "target": "file:api/src/main.ts",
+   "type": "deploys",
+   "direction": "forward",
+   "weight": 0.7
+  }
+ ]
+}

@@ -1,0 +1,51 @@
+Found 37 batch files (25 logical batches, 9 multi-part):
+  batch-1-part-1.json: 41 nodes, 153 edges
+  batch-1-part-2.json: 34 nodes, 77 edges
+  batch-2-part-1.json: 39 nodes, 105 edges
+  batch-2-part-2.json: 39 nodes, 64 edges
+  batch-3-part-1.json: 45 nodes, 78 edges
+  batch-3-part-2.json: 43 nodes, 72 edges
+  batch-4-part-1.json: 38 nodes, 149 edges
+  batch-4-part-2.json: 27 nodes, 68 edges
+  batch-4-part-3.json: 35 nodes, 70 edges
+  batch-4-part-4.json: 17 nodes, 48 edges
+  batch-5-part-1.json: 35 nodes, 93 edges
+  batch-5-part-2.json: 42 nodes, 127 edges
+  batch-5-part-3.json: 45 nodes, 82 edges
+  batch-6-part-1.json: 35 nodes, 102 edges
+  batch-6-part-2.json: 30 nodes, 110 edges
+  batch-7-part-1.json: 30 nodes, 104 edges
+  batch-7-part-2.json: 39 nodes, 89 edges
+  batch-8-part-1.json: 39 nodes, 104 edges
+  batch-8-part-2.json: 61 nodes, 114 edges
+  batch-9.json: 25 nodes, 68 edges
+  batch-10.json: 15 nodes, 27 edges
+  batch-11.json: 17 nodes, 31 edges
+  batch-12.json: 7 nodes, 8 edges
+  batch-13.json: 3 nodes, 3 edges
+  batch-14.json: 1 nodes, 0 edges
+  batch-15.json: 2 nodes, 12 edges
+  batch-16-part-1.json: 52 nodes, 62 edges
+  batch-16-part-2.json: 52 nodes, 63 edges
+  batch-17.json: 8 nodes, 14 edges
+  batch-18.json: 7 nodes, 10 edges
+  batch-19.json: 4 nodes, 7 edges
+  batch-20.json: 5 nodes, 11 edges
+  batch-21.json: 16 nodes, 19 edges
+  batch-22.json: 3 nodes, 3 edges
+  batch-23.json: 38 nodes, 37 edges
+  batch-24.json: 34 nodes, 22 edges
+  batch-25.json: 18 nodes, 6 edges
+
+Input: 1021 nodes, 2212 edges
+
+Could not fix (2 issues — needs agent review):
+  - Edge function:app/[locale]/products/[slug]/page.tsx:ProductPage \u2192 function:lib/catalog-cache.ts:getCachedProductDetail (calls): dropped, missing target 'function:lib/catalog-cache.ts:getCachedProductDetail'
+  - Edge function:app/[locale]/products/[slug]/page.tsx:generateMetadata \u2192 function:lib/catalog-cache.ts:getCachedProductDetail (calls): dropped, missing target 'function:lib/catalog-cache.ts:getCachedProductDetail'
+
+Output: 1021 nodes, 2210 edges
+
+Imports edge recovery:
+  Recovered 0 `imports` edges from importMap (407 entries scanned)
+
+Written to C:\Users\Wassi\kachabity\.ua\intermediate\assembled-graph.json (936 KB)

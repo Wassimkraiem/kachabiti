@@ -1,0 +1,1389 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 22,
+  "filesSkipped": [
+    "infra/terraform/.terraform.lock.hcl",
+    "infra/terraform/backend.hcl.example",
+    "infra/terraform/terraform.tfvars.example"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 22,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 20,
+      "failed": 0,
+      "skipped": 2
+    }
+  },
+  "results": [
+    {
+      "path": "components/products/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 4,
+      "exports": [
+        {
+          "name": "ProductGrid",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "PromoProductCard",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "PromoProducts",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "TopProducts",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/reviews/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 3,
+      "nonEmptyLines": 2,
+      "exports": [
+        {
+          "name": "CustomerFeedback",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "ReviewCard",
+          "line": 2,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/sections/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 6,
+      "nonEmptyLines": 5,
+      "exports": [
+        {
+          "name": "HeroSection",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "NewsletterForm",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "SaleBanner",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "SocialLinks",
+          "line": 4,
+          "isDefault": false
+        },
+        {
+          "name": "TermsSection",
+          "line": 5,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/services/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 3,
+      "nonEmptyLines": 2,
+      "exports": [
+        {
+          "name": "ServiceHighlightCard",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "ServiceHighlights",
+          "line": 2,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/timers/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 3,
+      "nonEmptyLines": 2,
+      "exports": [
+        {
+          "name": "CountdownTimer",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "PromoCountdownTimer",
+          "line": 2,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "components/ui/index.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 4,
+      "exports": [
+        {
+          "name": "ErrorBoundary",
+          "line": 1,
+          "isDefault": false
+        },
+        {
+          "name": "LoadingSpinner",
+          "line": 2,
+          "isDefault": false
+        },
+        {
+          "name": "SectionHeader",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "StockProgress",
+          "line": 4,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "eslint.config.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 37,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "instrumentation.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 11,
+      "functions": [
+        {
+          "name": "register",
+          "startLine": 3,
+          "endLine": 10,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "register",
+          "line": 3,
+          "isDefault": false
+        },
+        {
+          "name": "onRequestError",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "register",
+          "callee": "import",
+          "lineNumber": 5
+        },
+        {
+          "caller": "register",
+          "callee": "import",
+          "lineNumber": 8
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/admin-translations-erp.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 1126,
+      "nonEmptyLines": 1104,
+      "exports": [
+        {
+          "name": "erpEntries",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/admin-translations.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 937,
+      "nonEmptyLines": 919,
+      "functions": [
+        {
+          "name": "build",
+          "startLine": 932,
+          "endLine": 932,
+          "params": [
+            "index"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "adminTranslations",
+          "line": 934,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "build",
+          "callee": "Object.fromEntries",
+          "lineNumber": 932
+        },
+        {
+          "caller": "build",
+          "callee": "[...erpEntries, ...entries].map",
+          "lineNumber": 932
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "lib/report-error.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 8,
+      "nonEmptyLines": 7,
+      "functions": [
+        {
+          "name": "reportError",
+          "startLine": 6,
+          "endLine": 8,
+          "params": [
+            "error",
+            "area",
+            "extra"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "reportError",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "reportError",
+          "callee": "Sentry.captureException",
+          "lineNumber": 7
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "messages/en/Settings.json",
+      "language": "json",
+      "fileCategory": "config",
+      "totalLines": 6,
+      "nonEmptyLines": 6,
+      "sections": [
+        {
+          "heading": "Settings",
+          "level": 1,
+          "line": 2
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 1
+      }
+    },
+    {
+      "path": "next.config.ts",
+      "language": "typescript",
+      "fileCategory": "code",
+      "totalLines": 104,
+      "nonEmptyLines": 94,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "postcss.config.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 4,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "public/admin-sw.js",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 47,
+      "nonEmptyLines": 44,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/db/move-database.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 91,
+      "nonEmptyLines": 84,
+      "functions": [
+        {
+          "name": "docker",
+          "startLine": 27,
+          "endLine": 36,
+          "params": [
+            "args",
+            "input"
+          ]
+        },
+        {
+          "name": "psql",
+          "startLine": 37,
+          "endLine": 37,
+          "params": [
+            "url",
+            "sql"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "docker",
+          "callee": "spawnSync",
+          "lineNumber": 28
+        },
+        {
+          "caller": "docker",
+          "callee": "work.replace",
+          "lineNumber": 28
+        },
+        {
+          "caller": "psql",
+          "callee": "docker",
+          "lineNumber": 37
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/docker/colissimo-mock.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 208,
+      "nonEmptyLines": 193,
+      "functions": [
+        {
+          "name": "fail",
+          "startLine": 21,
+          "endLine": 21,
+          "params": [
+            "error_code",
+            "status_message"
+          ]
+        },
+        {
+          "name": "codesOf",
+          "startLine": 22,
+          "endLine": 22,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "price",
+          "startLine": 23,
+          "endLine": 26,
+          "params": [
+            "value"
+          ]
+        },
+        {
+          "name": "trackOrder",
+          "startLine": 28,
+          "endLine": 47,
+          "params": [
+            "body"
+          ]
+        },
+        {
+          "name": "validateOrders",
+          "startLine": 49,
+          "endLine": 65,
+          "params": [
+            "body"
+          ]
+        },
+        {
+          "name": "priceChange",
+          "startLine": 67,
+          "endLine": 81,
+          "params": [
+            "body"
+          ]
+        },
+        {
+          "name": "editOrder",
+          "startLine": 95,
+          "endLine": 118,
+          "params": [
+            "body"
+          ]
+        },
+        {
+          "name": "deleteOrder",
+          "startLine": 120,
+          "endLine": 137,
+          "params": [
+            "body"
+          ]
+        },
+        {
+          "name": "handle",
+          "startLine": 141,
+          "endLine": 196,
+          "params": [
+            "request"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "codesOf",
+          "callee": "(Array.isArray(value) ? value : String(value ?? '').split(',')).map((c) => String(c).trim().slice(0, 12)).filter",
+          "lineNumber": 22
+        },
+        {
+          "caller": "codesOf",
+          "callee": "(Array.isArray(value) ? value : String(value ?? '').split(',')).map",
+          "lineNumber": 22
+        },
+        {
+          "caller": "codesOf",
+          "callee": "Array.isArray",
+          "lineNumber": 22
+        },
+        {
+          "caller": "codesOf",
+          "callee": "String(value ?? '').split",
+          "lineNumber": 22
+        },
+        {
+          "caller": "codesOf",
+          "callee": "String",
+          "lineNumber": 22
+        },
+        {
+          "caller": "codesOf",
+          "callee": "String(c).trim().slice",
+          "lineNumber": 22
+        },
+        {
+          "caller": "codesOf",
+          "callee": "String(c).trim",
+          "lineNumber": 22
+        },
+        {
+          "caller": "codesOf",
+          "callee": "String",
+          "lineNumber": 22
+        },
+        {
+          "caller": "price",
+          "callee": "String(value ?? '').replace(/dt/i, '').replace(',', '.').trim",
+          "lineNumber": 24
+        },
+        {
+          "caller": "price",
+          "callee": "String(value ?? '').replace(/dt/i, '').replace",
+          "lineNumber": 24
+        },
+        {
+          "caller": "price",
+          "callee": "String(value ?? '').replace",
+          "lineNumber": 24
+        },
+        {
+          "caller": "price",
+          "callee": "String",
+          "lineNumber": 24
+        },
+        {
+          "caller": "price",
+          "callee": "/^\\d{1,5}(\\.\\d{1,3})?$/.test",
+          "lineNumber": 25
+        },
+        {
+          "caller": "price",
+          "callee": "Number",
+          "lineNumber": 25
+        },
+        {
+          "caller": "price",
+          "callee": "Number",
+          "lineNumber": 25
+        },
+        {
+          "caller": "trackOrder",
+          "callee": "codesOf",
+          "lineNumber": 29
+        },
+        {
+          "caller": "trackOrder",
+          "callee": "fail",
+          "lineNumber": 30
+        },
+        {
+          "caller": "trackOrder",
+          "callee": "fail",
+          "lineNumber": 31
+        },
+        {
+          "caller": "trackOrder",
+          "callee": "parcels.get",
+          "lineNumber": 34
+        },
+        {
+          "caller": "validateOrders",
+          "callee": "codesOf",
+          "lineNumber": 50
+        },
+        {
+          "caller": "validateOrders",
+          "callee": "fail",
+          "lineNumber": 51
+        },
+        {
+          "caller": "validateOrders",
+          "callee": "fail",
+          "lineNumber": 52
+        },
+        {
+          "caller": "validateOrders",
+          "callee": "parcels.get",
+          "lineNumber": 56
+        },
+        {
+          "caller": "validateOrders",
+          "callee": "rejetees.push",
+          "lineNumber": 57
+        },
+        {
+          "caller": "validateOrders",
+          "callee": "rejetees.push",
+          "lineNumber": 58
+        },
+        {
+          "caller": "validateOrders",
+          "callee": "rejetees.push",
+          "lineNumber": 59
+        },
+        {
+          "caller": "validateOrders",
+          "callee": "validees.push",
+          "lineNumber": 60
+        },
+        {
+          "caller": "validateOrders",
+          "callee": "fail",
+          "lineNumber": 62
+        },
+        {
+          "caller": "validateOrders",
+          "callee": "parcels.get",
+          "lineNumber": 63
+        },
+        {
+          "caller": "priceChange",
+          "callee": "String(body.code_barre ?? '').trim",
+          "lineNumber": 68
+        },
+        {
+          "caller": "priceChange",
+          "callee": "String",
+          "lineNumber": 68
+        },
+        {
+          "caller": "priceChange",
+          "callee": "fail",
+          "lineNumber": 69
+        },
+        {
+          "caller": "priceChange",
+          "callee": "fail",
+          "lineNumber": 70
+        },
+        {
+          "caller": "priceChange",
+          "callee": "fail",
+          "lineNumber": 71
+        },
+        {
+          "caller": "priceChange",
+          "callee": "price",
+          "lineNumber": 72
+        },
+        {
+          "caller": "priceChange",
+          "callee": "fail",
+          "lineNumber": 73
+        },
+        {
+          "caller": "priceChange",
+          "callee": "parcels.get",
+          "lineNumber": 74
+        },
+        {
+          "caller": "priceChange",
+          "callee": "fail",
+          "lineNumber": 75
+        },
+        {
+          "caller": "priceChange",
+          "callee": "['Livrer', 'Livre'].includes",
+          "lineNumber": 76
+        },
+        {
+          "caller": "priceChange",
+          "callee": "fail",
+          "lineNumber": 76
+        },
+        {
+          "caller": "priceChange",
+          "callee": "fail",
+          "lineNumber": 77
+        },
+        {
+          "caller": "priceChange",
+          "callee": "fail",
+          "lineNumber": 78
+        },
+        {
+          "caller": "priceChange",
+          "callee": "p.prix.toFixed",
+          "lineNumber": 80
+        },
+        {
+          "caller": "priceChange",
+          "callee": "value.toFixed",
+          "lineNumber": 80
+        },
+        {
+          "caller": "editOrder",
+          "callee": "String(body.code_barre ?? '').trim",
+          "lineNumber": 96
+        },
+        {
+          "caller": "editOrder",
+          "callee": "String",
+          "lineNumber": 96
+        },
+        {
+          "caller": "editOrder",
+          "callee": "fail",
+          "lineNumber": 97
+        },
+        {
+          "caller": "editOrder",
+          "callee": "fail",
+          "lineNumber": 98
+        },
+        {
+          "caller": "editOrder",
+          "callee": "Object.keys(EDITABLE).filter",
+          "lineNumber": 99
+        },
+        {
+          "caller": "editOrder",
+          "callee": "Object.keys",
+          "lineNumber": 99
+        },
+        {
+          "caller": "editOrder",
+          "callee": "fail",
+          "lineNumber": 100
+        },
+        {
+          "caller": "editOrder",
+          "callee": "EDITABLE[key]",
+          "lineNumber": 103
+        },
+        {
+          "caller": "editOrder",
+          "callee": "value.startsWith",
+          "lineNumber": 104
+        },
+        {
+          "caller": "editOrder",
+          "callee": "fail",
+          "lineNumber": 104
+        },
+        {
+          "caller": "editOrder",
+          "callee": "parcels.get",
+          "lineNumber": 107
+        },
+        {
+          "caller": "editOrder",
+          "callee": "fail",
+          "lineNumber": 108
+        },
+        {
+          "caller": "editOrder",
+          "callee": "fail",
+          "lineNumber": 109
+        },
+        {
+          "caller": "editOrder",
+          "callee": "fail",
+          "lineNumber": 110
+        },
+        {
+          "caller": "editOrder",
+          "callee": "Object.entries",
+          "lineNumber": 112
+        },
+        {
+          "caller": "editOrder",
+          "callee": "Object.keys",
+          "lineNumber": 116
+        },
+        {
+          "caller": "editOrder",
+          "callee": "fail",
+          "lineNumber": 116
+        },
+        {
+          "caller": "deleteOrder",
+          "callee": "codesOf",
+          "lineNumber": 121
+        },
+        {
+          "caller": "deleteOrder",
+          "callee": "fail",
+          "lineNumber": 122
+        },
+        {
+          "caller": "deleteOrder",
+          "callee": "fail",
+          "lineNumber": 123
+        },
+        {
+          "caller": "deleteOrder",
+          "callee": "parcels.get",
+          "lineNumber": 127
+        },
+        {
+          "caller": "json",
+          "callee": "Response.json",
+          "lineNumber": 143
+        },
+        {
+          "caller": "handle",
+          "callee": "json",
+          "lineNumber": 148
+        },
+        {
+          "caller": "handle",
+          "callee": "request.json",
+          "lineNumber": 152
+        },
+        {
+          "caller": "handle",
+          "callee": "json",
+          "lineNumber": 153
+        },
+        {
+          "caller": "handle",
+          "callee": "url.pathname.startsWith",
+          "lineNumber": 155
+        },
+        {
+          "caller": "handle",
+          "callee": "json",
+          "lineNumber": 157
+        },
+        {
+          "caller": "handle",
+          "callee": "parcels.get",
+          "lineNumber": 157
+        },
+        {
+          "caller": "handle",
+          "callee": "url.searchParams.get",
+          "lineNumber": 157
+        },
+        {
+          "caller": "handle",
+          "callee": "request.json",
+          "lineNumber": 158
+        },
+        {
+          "caller": "handle",
+          "callee": "parcels.get",
+          "lineNumber": 159
+        },
+        {
+          "caller": "handle",
+          "callee": "Response.json",
+          "lineNumber": 160
+        },
+        {
+          "caller": "handle",
+          "callee": "Object.assign",
+          "lineNumber": 161
+        },
+        {
+          "caller": "handle",
+          "callee": "json",
+          "lineNumber": 162
+        },
+        {
+          "caller": "handle",
+          "callee": "request.formData",
+          "lineNumber": 166
+        },
+        {
+          "caller": "handle",
+          "callee": "form.get",
+          "lineNumber": 167
+        },
+        {
+          "caller": "handle",
+          "callee": "json",
+          "lineNumber": 167
+        },
+        {
+          "caller": "handle",
+          "callee": "GOVERNORATES.includes",
+          "lineNumber": 168
+        },
+        {
+          "caller": "handle",
+          "callee": "String",
+          "lineNumber": 168
+        },
+        {
+          "caller": "handle",
+          "callee": "form.get",
+          "lineNumber": 168
+        },
+        {
+          "caller": "handle",
+          "callee": "json",
+          "lineNumber": 168
+        },
+        {
+          "caller": "handle",
+          "callee": "String",
+          "lineNumber": 169
+        },
+        {
+          "caller": "handle",
+          "callee": "parcels.set",
+          "lineNumber": 170
+        },
+        {
+          "caller": "handle",
+          "callee": "String",
+          "lineNumber": 172
+        },
+        {
+          "caller": "handle",
+          "callee": "form.get",
+          "lineNumber": 172
+        },
+        {
+          "caller": "handle",
+          "callee": "String",
+          "lineNumber": 172
+        },
+        {
+          "caller": "handle",
+          "callee": "form.get",
+          "lineNumber": 172
+        },
+        {
+          "caller": "handle",
+          "callee": "String",
+          "lineNumber": 172
+        },
+        {
+          "caller": "handle",
+          "callee": "form.get",
+          "lineNumber": 172
+        },
+        {
+          "caller": "handle",
+          "callee": "String",
+          "lineNumber": 172
+        },
+        {
+          "caller": "handle",
+          "callee": "form.get",
+          "lineNumber": 172
+        },
+        {
+          "caller": "handle",
+          "callee": "String",
+          "lineNumber": 173
+        },
+        {
+          "caller": "handle",
+          "callee": "form.get",
+          "lineNumber": 173
+        },
+        {
+          "caller": "handle",
+          "callee": "Number",
+          "lineNumber": 173
+        },
+        {
+          "caller": "handle",
+          "callee": "form.get",
+          "lineNumber": 173
+        },
+        {
+          "caller": "handle",
+          "callee": "Number",
+          "lineNumber": 173
+        },
+        {
+          "caller": "handle",
+          "callee": "form.get",
+          "lineNumber": 173
+        },
+        {
+          "caller": "handle",
+          "callee": "String",
+          "lineNumber": 174
+        },
+        {
+          "caller": "handle",
+          "callee": "form.get",
+          "lineNumber": 174
+        },
+        {
+          "caller": "handle",
+          "callee": "String",
+          "lineNumber": 174
+        },
+        {
+          "caller": "handle",
+          "callee": "form.get",
+          "lineNumber": 174
+        },
+        {
+          "caller": "handle",
+          "callee": "json",
+          "lineNumber": 176
+        },
+        {
+          "caller": "handle",
+          "callee": "url.pathname.startsWith",
+          "lineNumber": 179
+        },
+        {
+          "caller": "handle",
+          "callee": "url.pathname.slice",
+          "lineNumber": 179
+        },
+        {
+          "caller": "handle",
+          "callee": "json",
+          "lineNumber": 181
+        },
+        {
+          "caller": "handle",
+          "callee": "fail",
+          "lineNumber": 181
+        },
+        {
+          "caller": "handle",
+          "callee": "Response.json",
+          "lineNumber": 183
+        },
+        {
+          "caller": "handle",
+          "callee": "request.headers.get",
+          "lineNumber": 184
+        },
+        {
+          "caller": "handle",
+          "callee": "json",
+          "lineNumber": 185
+        },
+        {
+          "caller": "handle",
+          "callee": "fail",
+          "lineNumber": 185
+        },
+        {
+          "caller": "handle",
+          "callee": "json",
+          "lineNumber": 186
+        },
+        {
+          "caller": "handle",
+          "callee": "fail",
+          "lineNumber": 186
+        },
+        {
+          "caller": "handle",
+          "callee": "request.json",
+          "lineNumber": 189
+        },
+        {
+          "caller": "handle",
+          "callee": "json",
+          "lineNumber": 191
+        },
+        {
+          "caller": "handle",
+          "callee": "fail",
+          "lineNumber": 191
+        },
+        {
+          "caller": "handle",
+          "callee": "json",
+          "lineNumber": 193
+        },
+        {
+          "caller": "handle",
+          "callee": "run",
+          "lineNumber": 193
+        },
+        {
+          "caller": "handle",
+          "callee": "Response.json",
+          "lineNumber": 195
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 9,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/docker/create-admin.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 23,
+      "nonEmptyLines": 21,
+      "functions": [
+        {
+          "name": "value",
+          "startLine": 8,
+          "endLine": 8,
+          "params": [
+            "name"
+          ]
+        },
+        {
+          "name": "quote",
+          "startLine": 11,
+          "endLine": 11,
+          "params": [
+            "text"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "value",
+          "callee": "env.match(new RegExp(`^${name}=(.*)$`, 'm'))?.[1]?.trim",
+          "lineNumber": 8
+        },
+        {
+          "caller": "value",
+          "callee": "env.match",
+          "lineNumber": 8
+        },
+        {
+          "caller": "quote",
+          "callee": "text.replace",
+          "lineNumber": 11
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/docker/env.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 39,
+      "nonEmptyLines": 37,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/docker/import-database.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 36,
+      "nonEmptyLines": 32,
+      "functions": [
+        {
+          "name": "value",
+          "startLine": 10,
+          "endLine": 10,
+          "params": [
+            "name"
+          ]
+        },
+        {
+          "name": "run",
+          "startLine": 15,
+          "endLine": 18,
+          "params": [
+            "command",
+            "args"
+          ]
+        },
+        {
+          "name": "node",
+          "startLine": 19,
+          "endLine": 20,
+          "params": [
+            "script",
+            "extraEnv",
+            "cwd"
+          ]
+        },
+        {
+          "name": "quote",
+          "startLine": 28,
+          "endLine": 28,
+          "params": [
+            "text"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "value",
+          "callee": "env.match(new RegExp(`^${name}=(.*)$`, 'm'))?.[1]?.trim",
+          "lineNumber": 10
+        },
+        {
+          "caller": "value",
+          "callee": "env.match",
+          "lineNumber": 10
+        },
+        {
+          "caller": "run",
+          "callee": "spawnSync",
+          "lineNumber": 16
+        },
+        {
+          "caller": "node",
+          "callee": "run",
+          "lineNumber": 20
+        },
+        {
+          "caller": "quote",
+          "callee": "text.replace",
+          "lineNumber": 28
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/docker/meta-webhook-test.mjs",
+      "language": "javascript",
+      "fileCategory": "code",
+      "totalLines": 52,
+      "nonEmptyLines": 47,
+      "functions": [
+        {
+          "name": "send",
+          "startLine": 28,
+          "endLine": 33,
+          "params": [
+            "label",
+            "payload"
+          ]
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "send",
+          "callee": "JSON.stringify",
+          "lineNumber": 29
+        },
+        {
+          "caller": "send",
+          "callee": "createHmac('sha256', key).update(body).digest",
+          "lineNumber": 30
+        },
+        {
+          "caller": "send",
+          "callee": "createHmac('sha256', key).update",
+          "lineNumber": 30
+        },
+        {
+          "caller": "send",
+          "callee": "createHmac",
+          "lineNumber": 30
+        },
+        {
+          "caller": "send",
+          "callee": "fetch",
+          "lineNumber": 31
+        },
+        {
+          "caller": "send",
+          "callee": "console.log",
+          "lineNumber": 32
+        },
+        {
+          "caller": "send",
+          "callee": "response.text",
+          "lineNumber": 32
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "scripts/find-unused-code.sh",
+      "language": "shell",
+      "fileCategory": "script",
+      "totalLines": 52,
+      "nonEmptyLines": 42,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

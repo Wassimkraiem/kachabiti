@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useCart } from "@/lib/cart-context";
-import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
 
 const translations = {
@@ -50,18 +49,20 @@ export default function CartButton() {
     return (
         <button
             onClick={openCart}
-            className="cursor-pointer flex items-center space-x-2 text-[#2b1a16] hover:text-[#7a3b2e] transition relative"
+            className="cursor-pointer flex items-center gap-2 text-ink hover:text-accent transition relative"
             aria-label="Shopping cart"
         >
             <div className="relative">
-                <Image src="/assets/images/icons/addCart.svg" alt="cart" width={24} height={24} />
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
                 {mounted && totalItems > 0 && (
-                    <span className="absolute -top-2 -right-2 bg-[#842E1B] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                    <span className="absolute -top-2 -end-2 bg-accent text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
                         {totalItems}
                     </span>
                 )}
             </div>
-            <span className="font-medium">{t.cart} </span>
+            <span className="hidden text-sm font-medium lg:inline">{t.cart}</span>
         </button>
     );
 }

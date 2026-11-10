@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { isRTL } from "@/lib/language-utils";
-import { reemKufi } from "@/lib/fonts";
+import ScrollTrack from "@/components/ui/ScrollTrack";
 import type { LandingProduct } from "@/lib/landing-products";
 import LandingProductCard from "./LandingProductCard";
 
@@ -32,34 +32,31 @@ export default function NewArrivals({ locale, products }: NewArrivalsProps) {
     const t = translations[locale as keyof typeof translations] || translations.en;
 
     return (
-        <section dir={isRTL(locale) ? "rtl" : "ltr"} className={`${reemKufi.variable} w-full bg-white px-4 py-16`}>
-            <div className="mx-auto max-w-7xl">
-                <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <ScrollTrack
+            rtl={isRTL(locale)}
+            className="bg-surface"
+            header={
+                <div className="flex flex-wrap items-end justify-between gap-4">
                     <div className="text-start">
-                        <h2 className="font-[family-name:var(--font-kufi)] text-3xl font-bold text-[var(--wool-ink)] sm:text-4xl">
-                            {t.title}
-                        </h2>
-                        <p className="mt-2 text-[#6f5f57]">{t.subtitle}</p>
+                        <h2 className="font-display text-3xl font-bold text-ink sm:text-5xl">{t.title}</h2>
+                        <p className="mt-2 text-mute">{t.subtitle}</p>
                     </div>
-                    <Link
-                        href={`/${locale}/products`}
-                        className="font-medium text-[var(--wool-maroon)] underline decoration-[var(--wool-maroon)]/30 underline-offset-4 hover:decoration-[var(--wool-maroon)]"
-                    >
-                        {t.seeAll}
-                    </Link>
+                    <Link href={`/${locale}/products`} className="pill">{t.seeAll}</Link>
                 </div>
-
-                <div className="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-5">
-                    {products.map((product) => (
-                        <LandingProductCard
-                            key={product.id}
-                            product={product}
-                            locale={locale}
-                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 250px"
-                        />
-                    ))}
+            }
+        >
+            {products.map((product) => (
+                <div key={product.id} className="track-card">
+                    <LandingProductCard product={product} locale={locale} sizes="300px" />
                 </div>
-            </div>
-        </section>
+            ))}
+            {/* The track ends on the way to the whole catalog. */}
+            <Link
+                href={`/${locale}/products`}
+                className="track-card arch group flex aspect-[3/4] items-center justify-center self-start border border-line bg-card p-6 text-center font-display text-2xl font-bold text-ink transition-colors hover:border-accent hover:text-accent"
+            >
+                {t.seeAll}
+            </Link>
+        </ScrollTrack>
     );
 }

@@ -245,20 +245,20 @@ export default function CategoryProductsPage() {
 
     return (
         <>
-            <div className="min-h-screen bg-white py-8">
+            <div className="min-h-screen bg-card py-8">
                 <div className="max-w-7xl mx-auto px-4">
                     {/* Back Button and Category Header */}
                     <div className="mb-8">
                         <a
                             href={`/${locale}/categories`}
-                            className="inline-flex items-center text-[#7a3b2e] hover:text-[#842E1B] mb-4 transition"
+                            className="inline-flex items-center text-accent hover:text-accent mb-4 transition"
                         >
                             <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                             </svg>
                             {text.backToCategories}
                         </a>
-                        <h1 className="text-4xl font-bold text-[#2b1a16] mb-2">
+                        <h1 className="text-4xl font-bold text-ink mb-2">
                             {getCategoryName(category, locale)}
                         </h1>
                         {subcategories.length > 0 && (
@@ -267,7 +267,7 @@ export default function CategoryProductsPage() {
                                     <Link
                                         key={sub.id}
                                         href={`/${locale}/categories/${sub.slug}`}
-                                        className="px-4 py-2 rounded-full border border-gray-300 text-sm text-[#2b1a16] hover:border-[#7a3b2e] hover:text-[#7a3b2e] transition"
+                                        className="px-4 py-2 rounded-full border border-line text-sm text-ink hover:border-accent hover:text-accent transition"
                                     >
                                         {getCategoryName(sub, locale)}
                                     </Link>
@@ -275,7 +275,7 @@ export default function CategoryProductsPage() {
                             </div>
                         )}
                         {!productsLoading && (
-                            <p className="text-gray-600">
+                            <p className="text-mute">
                                 {text.showingResults.replace('{count}', products.length.toString())}
                             </p>
                         )}
@@ -286,21 +286,21 @@ export default function CategoryProductsPage() {
                         <div className="grid grid-cols-2 gap-x-3 gap-y-7 sm:grid-cols-3 sm:gap-x-5 lg:grid-cols-3 xl:grid-cols-4">
                             {Array.from({ length: ITEMS_PER_PAGE }).map((_, index) => (
                                 <div key={index} className="animate-pulse">
-                                            <div className="aspect-[4/5] w-full rounded-2xl bg-gray-200" />
+                                            <div className="aspect-[4/5] w-full rounded-2xl bg-line" />
                                             <div className="space-y-2 pt-3">
-                                                <div className="h-4 w-3/4 rounded bg-gray-200" />
-                                                <div className="h-3 w-1/2 rounded bg-gray-200" />
-                                                <div className="h-3 w-1/3 rounded bg-gray-200" />
+                                                <div className="h-4 w-3/4 rounded bg-line" />
+                                                <div className="h-3 w-1/2 rounded bg-line" />
+                                                <div className="h-3 w-1/3 rounded bg-line" />
                                             </div>
                                         </div>
                             ))}
                         </div>
                     ) : products.length === 0 ? (
                         <div className="text-center py-16">
-                            <svg className="w-24 h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg className="w-24 h-24 mx-auto text-mute mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
                             </svg>
-                            <h3 className="text-xl font-semibold text-gray-900 mb-2">{text.noProducts}</h3>
+                            <h3 className="text-xl font-semibold text-ink mb-2">{text.noProducts}</h3>
                         </div>
                     ) : (
                         <>
@@ -323,7 +323,7 @@ export default function CategoryProductsPage() {
                                     <button
                                         onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                                         disabled={currentPage === 1}
-                                        className="px-4 py-2 border border-gray-300 bg-white text-[#2b1a16] rounded-lg hover:bg-gray-50 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed transition"
+                                        className="px-4 py-2 border border-line bg-card text-ink rounded-lg hover:bg-surface disabled:bg-surface disabled:text-mute disabled:cursor-not-allowed transition"
                                     >
                                         {text.previous}
                                     </button>
@@ -344,8 +344,8 @@ export default function CategoryProductsPage() {
                                                         <button
                                                             onClick={() => setCurrentPage(page)}
                                                             className={`w-10 h-10 rounded-lg transition ${currentPage === page
-                                                                ? 'bg-[#842E1B] text-white'
-                                                                : 'border border-gray-300 bg-white text-[#2b1a16] hover:bg-gray-50'
+                                                                ? 'bg-accent text-white'
+                                                                : 'border border-line bg-card text-ink hover:bg-surface'
                                                                 }`}
                                                         >
                                                             {page}
@@ -358,7 +358,7 @@ export default function CategoryProductsPage() {
                                     <button
                                         onClick={() => setCurrentPage(prev => Math.min(Math.ceil(totalCount / ITEMS_PER_PAGE), prev + 1))}
                                         disabled={currentPage >= Math.ceil(totalCount / ITEMS_PER_PAGE)}
-                                        className="px-4 py-2 border border-gray-300 bg-white text-[#2b1a16] rounded-lg hover:bg-gray-50 disabled:bg-gray-50 disabled:text-gray-400 disabled:cursor-not-allowed transition"
+                                        className="px-4 py-2 border border-line bg-card text-ink rounded-lg hover:bg-surface disabled:bg-surface disabled:text-mute disabled:cursor-not-allowed transition"
                                     >
                                         {text.next}
                                     </button>

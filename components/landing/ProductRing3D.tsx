@@ -108,7 +108,7 @@ export default function ProductRing3D({ locale, products, children, className = 
                             type="button"
                             onClick={() => sceneRef.current?.step(-1)}
                             aria-label={t.previous}
-                            className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--wool-ink)]/15 bg-white text-[var(--wool-ink)] transition-colors hover:border-[var(--wool-ink)]/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wool-maroon)]"
+                            className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/15 bg-card text-ink transition-colors hover:border-ink/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                         >
                             <svg className="h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                                 <path d="M12.5 15 7.5 10l5-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -117,13 +117,13 @@ export default function ProductRing3D({ locale, products, children, className = 
                         <Link
                             href={`/${locale}/products/${current.slug}`}
                             dir={locale === "ar" ? "rtl" : "ltr"}
-                            className="flex min-w-0 max-w-[16rem] flex-col items-center rounded-[12px] bg-white/95 px-4 py-2 text-center shadow-sm ring-1 ring-[var(--wool-ink)]/10 backdrop-blur hover:underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wool-maroon)] sm:max-w-xs"
+                            className="flex min-w-0 max-w-[16rem] flex-col items-center rounded-[12px] bg-surface/95 px-4 py-2 text-center shadow-sm ring-1 ring-ink/10 backdrop-blur hover:underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent sm:max-w-xs"
                         >
-                            <span className="line-clamp-1 text-sm font-medium text-[var(--wool-ink)]">{current.name}</span>
-                            <span className="text-sm font-semibold text-[var(--wool-maroon)]" dir="ltr">
+                            <span className="line-clamp-1 text-sm font-medium text-ink">{current.name}</span>
+                            <span className="text-sm font-semibold text-accent" dir="ltr">
                                 {current.price} {CURRENCY}
                                 {current.originalPrice !== null && (
-                                    <span className="ms-2 font-normal text-[#a3958c] line-through">
+                                    <span className="ms-2 font-normal text-mute line-through">
                                         {current.originalPrice} {CURRENCY}
                                     </span>
                                 )}
@@ -133,7 +133,7 @@ export default function ProductRing3D({ locale, products, children, className = 
                             type="button"
                             onClick={() => sceneRef.current?.step(1)}
                             aria-label={t.next}
-                            className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--wool-ink)]/15 bg-white text-[var(--wool-ink)] transition-colors hover:border-[var(--wool-ink)]/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--wool-maroon)]"
+                            className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/15 bg-card text-ink transition-colors hover:border-ink/40 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                         >
                             <svg className="h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
                                 <path d="m7.5 15 5-5-5-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />

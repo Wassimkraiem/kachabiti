@@ -1,0 +1,918 @@
+{
+ "nodes": [
+  {
+   "id": "file:api/src/auth/decorators.ts",
+   "type": "file",
+   "name": "decorators.ts",
+   "filePath": "api/src/auth/decorators.ts",
+   "summary": "Route access decorators (Public, Requires, RequiresAll, AdminOnly, OwnerOnly) and the CurrentActor/CurrentUserId parameter decorators read by the auth guard.",
+   "tags": [
+    "decorator",
+    "authorization",
+    "nestjs",
+    "utility"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/auth/decorators.ts:Public",
+   "type": "function",
+   "name": "Public",
+   "filePath": "api/src/auth/decorators.ts",
+   "lineRange": [
+    13,
+    13
+   ],
+   "summary": "Marks a route public.",
+   "tags": [
+    "function",
+    "utility",
+    "auth"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/auth/decorators.ts:Requires",
+   "type": "function",
+   "name": "Requires",
+   "filePath": "api/src/auth/decorators.ts",
+   "lineRange": [
+    15,
+    16
+   ],
+   "summary": "Requires any of the given permissions.",
+   "tags": [
+    "function",
+    "utility",
+    "auth"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/auth/decorators.ts:RequiresAll",
+   "type": "function",
+   "name": "RequiresAll",
+   "filePath": "api/src/auth/decorators.ts",
+   "lineRange": [
+    18,
+    19
+   ],
+   "summary": "Requires all of the given permissions.",
+   "tags": [
+    "function",
+    "utility",
+    "auth"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/auth/decorators.ts:AdminOnly",
+   "type": "function",
+   "name": "AdminOnly",
+   "filePath": "api/src/auth/decorators.ts",
+   "lineRange": [
+    20,
+    21
+   ],
+   "summary": "Restricts a route to admins.",
+   "tags": [
+    "function",
+    "utility",
+    "auth"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/auth/decorators.ts:OwnerOnly",
+   "type": "function",
+   "name": "OwnerOnly",
+   "filePath": "api/src/auth/decorators.ts",
+   "lineRange": [
+    22,
+    23
+   ],
+   "summary": "Restricts a route to owners.",
+   "tags": [
+    "function",
+    "utility",
+    "auth"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/catalog/categories.controller.ts",
+   "type": "file",
+   "name": "categories.controller.ts",
+   "filePath": "api/src/catalog/categories.controller.ts",
+   "summary": "CRUD API for nested product categories with slug handling, soft delete and catalog cache invalidation.",
+   "tags": [
+    "api-handler",
+    "catalog",
+    "nestjs",
+    "crud"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/catalog/categories.controller.ts:CategoriesController",
+   "type": "class",
+   "name": "CategoriesController",
+   "filePath": "api/src/catalog/categories.controller.ts",
+   "lineRange": [
+    47,
+    146
+   ],
+   "summary": "Category CRUD endpoints.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/src/catalog/content.controllers.ts",
+   "type": "file",
+   "name": "content.controllers.ts",
+   "filePath": "api/src/catalog/content.controllers.ts",
+   "summary": "Controllers for product discounts, sale banners and reels, sharing generic row pick/update helpers and invalidating the catalog cache on writes.",
+   "tags": [
+    "api-handler",
+    "catalog",
+    "marketing",
+    "nestjs"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/catalog/content.controllers.ts:ProductDiscountsController",
+   "type": "class",
+   "name": "ProductDiscountsController",
+   "filePath": "api/src/catalog/content.controllers.ts",
+   "lineRange": [
+    56,
+    132
+   ],
+   "summary": "Product discount CRUD.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/catalog/content.controllers.ts:SaleBannersController",
+   "type": "class",
+   "name": "SaleBannersController",
+   "filePath": "api/src/catalog/content.controllers.ts",
+   "lineRange": [
+    135,
+    202
+   ],
+   "summary": "Sale banner CRUD.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/catalog/content.controllers.ts:ReelsController",
+   "type": "class",
+   "name": "ReelsController",
+   "filePath": "api/src/catalog/content.controllers.ts",
+   "lineRange": [
+    205,
+    276
+   ],
+   "summary": "Reels CRUD.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/catalog/content.controllers.ts:pick",
+   "type": "function",
+   "name": "pick",
+   "filePath": "api/src/catalog/content.controllers.ts",
+   "lineRange": [
+    20,
+    30
+   ],
+   "summary": "Picks allowed fields from a request body.",
+   "tags": [
+    "function",
+    "utility",
+    "catalog"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/catalog/content.controllers.ts:updateRow",
+   "type": "function",
+   "name": "updateRow",
+   "filePath": "api/src/catalog/content.controllers.ts",
+   "lineRange": [
+    34,
+    53
+   ],
+   "summary": "Generic soft-delete-aware row update helper.",
+   "tags": [
+    "function",
+    "utility",
+    "catalog"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/catalog/landing.controller.ts",
+   "type": "file",
+   "name": "landing.controller.ts",
+   "filePath": "api/src/catalog/landing.controller.ts",
+   "summary": "Landing page configuration API reading and saving section picks, landing_config and featured categories through save_landing_page.",
+   "tags": [
+    "api-handler",
+    "marketing",
+    "landing-page",
+    "nestjs"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/catalog/landing.controller.ts:LandingController",
+   "type": "class",
+   "name": "LandingController",
+   "filePath": "api/src/catalog/landing.controller.ts",
+   "lineRange": [
+    21,
+    116
+   ],
+   "summary": "Landing page config read and save.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/src/catalog/options.controller.ts",
+   "type": "file",
+   "name": "options.controller.ts",
+   "filePath": "api/src/catalog/options.controller.ts",
+   "summary": "Factory that builds identical CRUD controllers for product colors and sizes.",
+   "tags": [
+    "api-handler",
+    "factory",
+    "catalog",
+    "nestjs"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:api/src/catalog/options.controller.ts:optionsController",
+   "type": "function",
+   "name": "optionsController",
+   "filePath": "api/src/catalog/options.controller.ts",
+   "lineRange": [
+    26,
+    111
+   ],
+   "summary": "Factory producing a CRUD controller for an option table (colors or sizes).",
+   "tags": [
+    "function",
+    "utility",
+    "catalog"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/src/catalog/product-images.controller.ts",
+   "type": "file",
+   "name": "product-images.controller.ts",
+   "filePath": "api/src/catalog/product-images.controller.ts",
+   "summary": "API to list, add, reorder and soft-delete product images, invalidating the catalog cache.",
+   "tags": [
+    "api-handler",
+    "catalog",
+    "images",
+    "nestjs"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:api/src/catalog/product-images.controller.ts:ProductImagesController",
+   "type": "class",
+   "name": "ProductImagesController",
+   "filePath": "api/src/catalog/product-images.controller.ts",
+   "lineRange": [
+    26,
+    122
+   ],
+   "summary": "Product image endpoints.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:api/src/catalog/products.controller.ts",
+   "type": "file",
+   "name": "products.controller.ts",
+   "filePath": "api/src/catalog/products.controller.ts",
+   "summary": "Products API for admin and storefront listings, single-product reads and transactional create/update/delete via save_product, with SKU checks and stock-aware error mapping.",
+   "tags": [
+    "api-handler",
+    "catalog",
+    "products",
+    "nestjs",
+    "validation"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:api/src/catalog/products.controller.ts:ProductsController",
+   "type": "class",
+   "name": "ProductsController",
+   "filePath": "api/src/catalog/products.controller.ts",
+   "lineRange": [
+    100,
+    422
+   ],
+   "summary": "Product listing, detail and save endpoints.",
+   "tags": [
+    "api-handler",
+    "nestjs",
+    "controller"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "function:api/src/catalog/products.controller.ts:variantPayload",
+   "type": "function",
+   "name": "variantPayload",
+   "filePath": "api/src/catalog/products.controller.ts",
+   "lineRange": [
+    29,
+    64
+   ],
+   "summary": "Normalizes variant input for save_product.",
+   "tags": [
+    "function",
+    "utility",
+    "catalog"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/catalog/products.controller.ts:checkSkus",
+   "type": "function",
+   "name": "checkSkus",
+   "filePath": "api/src/catalog/products.controller.ts",
+   "lineRange": [
+    66,
+    78
+   ],
+   "summary": "Rejects duplicate variant SKUs.",
+   "tags": [
+    "function",
+    "utility",
+    "catalog"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/catalog/products.controller.ts:saveError",
+   "type": "function",
+   "name": "saveError",
+   "filePath": "api/src/catalog/products.controller.ts",
+   "lineRange": [
+    81,
+    97
+   ],
+   "summary": "Maps save_product database errors to API errors.",
+   "tags": [
+    "function",
+    "utility",
+    "catalog"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:api/src/catalog/queries.ts",
+   "type": "file",
+   "name": "queries.ts",
+   "filePath": "api/src/catalog/queries.ts",
+   "summary": "Shared Kysely query returning product variants joined with their color and size options.",
+   "tags": [
+    "utility",
+    "query",
+    "catalog",
+    "database"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:api/src/catalog/queries.ts:variantsWithOptions",
+   "type": "function",
+   "name": "variantsWithOptions",
+   "filePath": "api/src/catalog/queries.ts",
+   "lineRange": [
+    6,
+    25
+   ],
+   "summary": "Selects variants with their color and size.",
+   "tags": [
+    "function",
+    "utility",
+    "catalog"
+   ],
+   "complexity": "simple"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:api/src/auth/decorators.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/decorators.ts",
+   "target": "file:lib/admin-auth.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/auth/decorators.ts",
+   "target": "function:api/src/auth/decorators.ts:Public",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/auth/decorators.ts",
+   "target": "function:api/src/auth/decorators.ts:Public",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/auth/decorators.ts",
+   "target": "function:api/src/auth/decorators.ts:Requires",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/auth/decorators.ts",
+   "target": "function:api/src/auth/decorators.ts:Requires",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/auth/decorators.ts",
+   "target": "function:api/src/auth/decorators.ts:RequiresAll",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/auth/decorators.ts",
+   "target": "function:api/src/auth/decorators.ts:RequiresAll",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/auth/decorators.ts",
+   "target": "function:api/src/auth/decorators.ts:AdminOnly",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/auth/decorators.ts",
+   "target": "function:api/src/auth/decorators.ts:AdminOnly",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/auth/decorators.ts",
+   "target": "function:api/src/auth/decorators.ts:OwnerOnly",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/auth/decorators.ts",
+   "target": "function:api/src/auth/decorators.ts:OwnerOnly",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/catalog/categories.controller.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/categories.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/categories.controller.ts",
+   "target": "file:api/src/catalog/revalidate.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/categories.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/categories.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/categories.controller.ts",
+   "target": "class:api/src/catalog/categories.controller.ts:CategoriesController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/categories.controller.ts",
+   "target": "class:api/src/catalog/categories.controller.ts:CategoriesController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/catalog/content.controllers.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/content.controllers.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/content.controllers.ts",
+   "target": "file:api/src/catalog/revalidate.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/content.controllers.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/content.controllers.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/content.controllers.ts",
+   "target": "class:api/src/catalog/content.controllers.ts:ProductDiscountsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/content.controllers.ts",
+   "target": "class:api/src/catalog/content.controllers.ts:ProductDiscountsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/catalog/content.controllers.ts",
+   "target": "class:api/src/catalog/content.controllers.ts:SaleBannersController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/content.controllers.ts",
+   "target": "class:api/src/catalog/content.controllers.ts:SaleBannersController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/catalog/content.controllers.ts",
+   "target": "class:api/src/catalog/content.controllers.ts:ReelsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/content.controllers.ts",
+   "target": "class:api/src/catalog/content.controllers.ts:ReelsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/catalog/content.controllers.ts",
+   "target": "function:api/src/catalog/content.controllers.ts:pick",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/content.controllers.ts",
+   "target": "function:api/src/catalog/content.controllers.ts:updateRow",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/landing.controller.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/landing.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/landing.controller.ts",
+   "target": "file:api/src/catalog/revalidate.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/landing.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/landing.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/landing.controller.ts",
+   "target": "file:lib/landing-config.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/landing.controller.ts",
+   "target": "class:api/src/catalog/landing.controller.ts:LandingController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/landing.controller.ts",
+   "target": "class:api/src/catalog/landing.controller.ts:LandingController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/catalog/options.controller.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/options.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/options.controller.ts",
+   "target": "file:api/src/catalog/revalidate.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/options.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/options.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/options.controller.ts",
+   "target": "function:api/src/catalog/options.controller.ts:optionsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/product-images.controller.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/product-images.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/product-images.controller.ts",
+   "target": "file:api/src/catalog/revalidate.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/product-images.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/product-images.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/product-images.controller.ts",
+   "target": "class:api/src/catalog/product-images.controller.ts:ProductImagesController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/product-images.controller.ts",
+   "target": "class:api/src/catalog/product-images.controller.ts:ProductImagesController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/catalog/products.controller.ts",
+   "target": "file:api/src/auth/auth.guard.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/products.controller.ts",
+   "target": "file:api/src/auth/decorators.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/products.controller.ts",
+   "target": "file:api/src/catalog/revalidate.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/products.controller.ts",
+   "target": "file:api/src/common/api.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/products.controller.ts",
+   "target": "file:api/src/db/database.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/products.controller.ts",
+   "target": "file:lib/stock.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/products.controller.ts",
+   "target": "class:api/src/catalog/products.controller.ts:ProductsController",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/products.controller.ts",
+   "target": "class:api/src/catalog/products.controller.ts:ProductsController",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:api/src/catalog/products.controller.ts",
+   "target": "function:api/src/catalog/products.controller.ts:variantPayload",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/products.controller.ts",
+   "target": "function:api/src/catalog/products.controller.ts:checkSkus",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/products.controller.ts",
+   "target": "function:api/src/catalog/products.controller.ts:saveError",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/queries.ts",
+   "target": "file:api/src/db/types.ts",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:api/src/catalog/queries.ts",
+   "target": "function:api/src/catalog/queries.ts:variantsWithOptions",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1
+  },
+  {
+   "source": "file:api/src/catalog/queries.ts",
+   "target": "function:api/src/catalog/queries.ts:variantsWithOptions",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "class:api/src/catalog/products.controller.ts:ProductsController",
+   "target": "function:api/src/catalog/revalidate.ts:invalidateCatalog",
+   "type": "calls",
+   "direction": "forward",
+   "weight": 0.8
+  }
+ ]
+}

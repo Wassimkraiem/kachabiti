@@ -101,11 +101,11 @@ export default function NewsletterForm({
 
     return (
         <div>
-            <h3 className="text-lg font-semibold text-[#2b1a16] mb-2">
+            <h3 className="text-lg font-semibold text-ink mb-2">
                 {title}
             </h3>
             {subtitle && (
-                <p className="text-gray-600 text-sm mb-4">
+                <p className="text-mute text-sm mb-4">
                     {subtitle}
                 </p>
             )}
@@ -115,13 +115,13 @@ export default function NewsletterForm({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder={placeholder}
-                    className="placeholder:text-[#96999D80] min-w-0 flex-1 px-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#842E1B] focus:border-transparent text-sm"
+                    className="placeholder:text-mute min-w-0 flex-1 px-4 py-2.5 border border-line rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-sm"
                     disabled={status === "loading"}
                 />
                 <button
                     type="submit"
                     disabled={status === "loading"}
-                    className="px-6 py-2.5 bg-[#842E1B] text-white rounded-lg hover:bg-[#6b2516] transition-colors font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+                    className="px-6 py-2.5 bg-accent text-white rounded-lg hover:bg-accent-hover transition-colors font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
                 >
                     {status === "loading" ? t.subscribing : t.subscribe}
                 </button>

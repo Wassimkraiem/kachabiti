@@ -202,9 +202,9 @@ export default function HeroSection({ heroData, smallCardsData }: HeroSectionPro
                             {/* Content */}
                             <div className='relative z-10 justify-between items-center flex flex-col align-baseline'>
                                 <div className="text-sm font-medium mb-2" style={{ color: leftCard?.text_color || 'inherit' }}>{t.where}</div>
-                                <div className="text-[16px] font-bold text-black mb-2" style={{ color: leftCard?.text_color || 'inherit' }}>{t.tradition}</div>
-                                <div className="text-[16px] font-semimedium text-black mb-2" style={{ color: leftCard?.text_color || 'inherit' }}>{t.meets}</div>
-                                <div className="text-[16px] font-medium text-black mb-2" style={{ color: leftCard?.text_color || 'inherit' }}>{t.elegance}</div>
+                                <div className="text-[16px] font-bold text-ink mb-2" style={{ color: leftCard?.text_color || 'inherit' }}>{t.tradition}</div>
+                                <div className="text-[16px] font-semimedium text-ink mb-2" style={{ color: leftCard?.text_color || 'inherit' }}>{t.meets}</div>
+                                <div className="text-[16px] font-medium text-ink mb-2" style={{ color: leftCard?.text_color || 'inherit' }}>{t.elegance}</div>
                             </div>
 
                             {leftCard?.left_image_url && (
@@ -223,7 +223,7 @@ export default function HeroSection({ heroData, smallCardsData }: HeroSectionPro
                             {leftCard?.cta_label && (
                                 <button
                                     onClick={() => router.push('/products')}
-                                    className="relative z-10 bg-white cursor-pointer text-[#2b1a16] px-2 py-2 rounded-[8px] text-sm font-medium hover:bg-gray-50 transition"
+                                    className="relative z-10 bg-card cursor-pointer text-ink px-2 py-2 rounded-[8px] text-sm font-medium hover:bg-surface transition"
                                 >
                                     {getHeroText(leftCard.cta_label, leftCard.cta_label_ar, leftCard.cta_label_fr, locale)}
                                 </button>
@@ -251,24 +251,24 @@ export default function HeroSection({ heroData, smallCardsData }: HeroSectionPro
                             {/* Carousel slides are hero_sections rows with sort_order >= 3. */}
                             {!mounted ? (
                                 <div className="absolute inset-0 flex items-center justify-center">
-                                    <div className="text-gray-400">{t.loading}</div>
+                                    <div className="text-mute">{t.loading}</div>
                                 </div>
                             ) : !currentSlideData ? null : (
                                 <div className="absolute inset-0 flex items-center p-8 pb-0">
                                     <div className="flex-1 z-10">
-                                        <div className="text-sm text-[#000000] font-medium mb-2">
+                                        <div className="text-sm text-ink font-medium mb-2">
                                             {getHeroText(currentSlideData.title, currentSlideData.title_ar, currentSlideData.title_fr, locale)}
                                         </div>
-                                        <h1 className="text-[36px]  font-semibold text-[#000000] mb-2">
+                                        <h1 className="text-[36px]  font-semibold text-ink mb-2">
                                             {getHeroText(currentSlideData.subtitle, currentSlideData.subtitle_ar, currentSlideData.subtitle_fr, locale)}
                                         </h1>
-                                        <div className="text-sm text-[#000000] font-medium mb-5">
+                                        <div className="text-sm text-ink font-medium mb-5">
                                             {getHeroText(currentSlideData.sub_subtitle, currentSlideData.sub_subtitle_ar, currentSlideData.sub_subtitle_fr, locale)}
                                         </div>
 
                                         <button
                                             onClick={() => router.push(currentSlideData.cta_href || '/products')}
-                                            className="bg-[#7a3b2e] text-white px-3 py-2 rounded-[8px] border border-black text-lg font-medium hover:bg-[#5e2d23] transition cursor-pointer"
+                                            className="bg-accent text-white px-3 py-2 rounded-[8px] border border-black text-lg font-medium hover:bg-accent-hover transition cursor-pointer"
                                         >
                                             {getHeroText(currentSlideData.cta_label, currentSlideData.cta_label_ar, currentSlideData.cta_label_fr, locale)}
                                         </button>
@@ -294,7 +294,7 @@ export default function HeroSection({ heroData, smallCardsData }: HeroSectionPro
                                             <button
                                                 key={index}
                                                 onClick={() => goToSlide(index)}
-                                                className={`w-2 h-2 rounded-full transition ${index === currentSlide ? 'bg-white' : 'bg-gray-300'
+                                                className={`w-2 h-2 rounded-full transition ${index === currentSlide ? 'bg-card' : 'bg-line'
                                                     }`}
                                             />
                                         ))}
@@ -303,7 +303,7 @@ export default function HeroSection({ heroData, smallCardsData }: HeroSectionPro
                                         onClick={prevSlide}
                                         className="cursor-pointer absolute right-16 top-6    p-2 transition"
                                     >
-                                        <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg className="w-4 h-4 text-mute" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                                         </svg>
                                     </button>
@@ -311,7 +311,7 @@ export default function HeroSection({ heroData, smallCardsData }: HeroSectionPro
                                         onClick={nextSlide}
                                         className="cursor-pointer absolute right-6 top-6    p-2 transition"
                                     >
-                                        <svg className="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <svg className="w-4 h-4 text-mute" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                         </svg>
                                     </button>
@@ -397,13 +397,13 @@ export default function HeroSection({ heroData, smallCardsData }: HeroSectionPro
 
                                 {/* Content */}
                                 <div className="flex-1 relative z-10">
-                                    <div className="text-sm text-[#7a3b2e] font-medium mb-1" style={{ color: card.text_color || '#7a3b2e' }}>
+                                    <div className="text-sm text-accent font-medium mb-1" style={{ color: card.text_color || '#7a3b2e' }}>
                                         {getHeroText(card.title, card.title_ar, card.title_fr, locale) || (index === 0 ? t.bigDeal : t.new)}
                                     </div>
-                                    <h3 className="text-lg font-bold text-[#2b1a16] mb-2" style={{ color: card.text_color || '#2b1a16' }}>
+                                    <h3 className="text-lg font-bold text-ink mb-2" style={{ color: card.text_color || '#2b1a16' }}>
                                         {getHeroText(card.subtitle, card.subtitle_ar, card.subtitle_fr, locale)}
                                     </h3>
-                                    <p className="text-[#6b4e45] mb-4 text-sm" style={{ color: card.text_color ? `${card.text_color}99` : '#6b4e45' }}>
+                                    <p className="text-accent mb-4 text-sm" style={{ color: card.text_color ? `${card.text_color}99` : '#6b4e45' }}>
                                         {getHeroText(card.sub_subtitle, card.sub_subtitle_ar, card.sub_subtitle_fr, locale)}
                                     </p>
                                 </div>

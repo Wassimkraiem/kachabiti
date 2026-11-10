@@ -41,7 +41,7 @@ export default function NotFound() {
             <Suspense fallback={<div className="h-20" />}>
             </Suspense>
 
-            <div className="min-h-screen bg-white flex items-center justify-center px-4 py-16">
+            <div className="min-h-screen bg-card flex items-center justify-center px-4 py-16">
                 <div className="max-w-2xl w-full text-center">
                     {/* 404 SVG Image */}
                     <div className="mb-8">
@@ -56,26 +56,26 @@ export default function NotFound() {
                     </div>
 
                     {/* Oops! Message */}
-                    <h1 className="text-5xl font-bold text-gray-900 mb-4">
+                    <h1 className="text-5xl font-bold text-ink mb-4">
                         {text.oops}
                     </h1>
 
                     {/* Description */}
-                    <p className="text-lg text-gray-600 mb-8 max-w-md mx-auto">
+                    <p className="text-lg text-mute mb-8 max-w-md mx-auto">
                         {text.message}
                     </p>
 
                     {/* Back to Homepage Button */}
                     <button
                         onClick={() => router.push(`/${validLocale}`)}
-                        className="inline-block px-8 py-4 bg-[#7a3b2e] text-white text-lg font-medium rounded-lg hover:bg-[#5e2d23] transition-colors shadow-lg hover:shadow-xl"
+                        className="inline-block px-8 py-4 bg-accent text-white text-lg font-medium rounded-lg hover:bg-accent-hover transition-colors shadow-lg hover:shadow-xl"
                     >
                         {text.backButton}
                     </button>
 
                     {/* Follow us section */}
                     <div className="mt-16">
-                        <p className="text-gray-600 mb-6 font-medium">{text.followUs}</p>
+                        <p className="text-mute mb-6 font-medium">{text.followUs}</p>
 
 
 
@@ -86,7 +86,7 @@ export default function NotFound() {
                                     href={data.url}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="hover:text-gray-300"
+                                    className="hover:text-mute"
                                     aria-label={`Follow us on ${platform}`}
                                 >
                                     <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
