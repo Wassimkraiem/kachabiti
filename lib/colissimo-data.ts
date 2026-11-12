@@ -102,13 +102,15 @@ export const COLISSIMO_STATUSES: Record<string, { label: string; color: string; 
     'Retour recu': { label: msg('Return received'), color: 'red', group: 'returned' },
     // A driver's report (pre-état) only: on the way back.
     'Retour': { label: msg('Being returned'), color: 'red', group: 'returned' },
+    // Ours: an old tool's parcel stuck mid-way that Colissimo's account no longer lists.
+    'OLD-ORDERS-UNKNOWN': { label: msg('Old order, status unknown'), color: 'default', group: 'problem' },
 };
 
 /**
  * Statuses after which a parcel no longer changes, so tracking skips it. A v2 "Livrer" parcel
  * is final once Colissimo marks it paid (see isFinalParcel).
  */
-export const FINAL_STATUSES = ['Livre paye', 'Retour definitif', 'Retour paye', 'Retour recu paye', 'Supprime', 'Rtn definitif', 'Retour recu'];
+export const FINAL_STATUSES = ['Livre paye', 'Retour definitif', 'Retour paye', 'Retour recu paye', 'Supprime', 'Rtn definitif', 'Retour recu', 'OLD-ORDERS-UNKNOWN'];
 
 export const isFinalParcel = (status: string, paid: boolean) => FINAL_STATUSES.includes(status) || (status === 'Livrer' && paid);
 

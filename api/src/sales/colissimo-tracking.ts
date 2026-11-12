@@ -73,13 +73,19 @@ export class ColissimoTracking implements OnModuleInit, OnModuleDestroy {
     query = ids?.length
       ? query.where('id', 'in', ids)
       : query
+          // Parcels the account no longer lists (the old tools' leftovers) are unknown to the API.
+          .where('in_colissimo', '=', true)
           .where('status', 'not in', FINAL_STATUSES)
           .where((eb) =>
             eb.not(
               eb.and([eb('status', '=', 'Livrer'), eb('paid', '=', true)]),
             ),
           );
-    const parcels = await query.limit(2000).execute();
+    // Newest first, so a backlog over the limit never starves the parcels moving today.
+    const parcels = await query
+      .orderBy('created_at', 'desc')
+      .limit(2000)
+      .execute();
 
     const failures: TrackingRun['failures'] = [];
     let changed = 0;

@@ -56,6 +56,8 @@ export const STATUS_CARDS: Card[] = [
     { key: "return_sender", label: msg("Returning to us"), statuses: ["Retour Expediteur", "Rtn client/agence"], icon: <ArrowLeftOutlined />, accent: ACCENT.returned },
     { key: "return_paid", label: msg("Return received and paid"), statuses: ["Retour recu paye", "Retour paye", "Retour recu"], icon: <ArrowLeftOutlined />, accent: ACCENT.returned },
     { key: "return_ship", label: msg("Being returned"), statuses: ["Retour"], icon: <SyncOutlined />, accent: ACCENT.returned },
+    // Not Colissimo's: old tools' parcels stuck mid-way that the account no longer lists ("All my data").
+    { key: "old_unknown", label: msg("Old order, status unknown"), statuses: ["OLD-ORDERS-UNKNOWN"], icon: <QuestionOutlined />, accent: ACCENT.other },
 ];
 const KNOWN = new Set(STATUS_CARDS.flatMap((c) => c.statuses));
 

@@ -20,6 +20,7 @@ import {
   searchParcels,
   tunisTime,
 } from './colissimo-portal';
+import { invalidateCatalog } from '../catalog/revalidate';
 
 const DAY = 86_400_000;
 
@@ -107,24 +108,42 @@ export class ColissimoPortalController implements OnModuleInit {
   }
 
   /**
-   * Adds every parcel of the Colissimo account we don't have yet to deliveries, so the Delivery
-   * tab lists and searches them all. Parcels already here (or removed from the list) are left
-   * alone; new ones aren't linked to an order and API tracking keeps them up to date.
+   * Makes deliveries match the Colissimo account: parcels already here take the account's status,
+   * those we don't have yet are added (not linked to an order; API tracking keeps them up to date),
+   * and in_colissimo marks which ones the account lists.
    */
   @Post('sync')
   @HttpCode(200)
   async sync() {
     const parcels = await fromPortal(allParcels);
     const paid = await fromPortal(payouts);
-    const known = new Set(
-      (
-        await this.db
-          .selectFrom('deliveries')
-          .select('barcode')
-          .where('barcode', 'is not', null)
-          .execute()
-      ).map((d) => d.barcode),
-    );
+    const stored = await this.db
+      .selectFrom('deliveries')
+      .select(['id', 'barcode', 'status', 'paid', 'deleted_at'])
+      .where('barcode', 'is not', null)
+      .execute();
+    const known = new Set(stored.map((d) => d.barcode));
+    // Parcels we already have take the account's status (it's what Colissimo's dashboard counts),
+    // through record_delivery_status so their orders follow: delivered, returned (stock back),
+    // carrier payment. Each parcel in its own transaction, like API tracking.
+    const listed = new Map(parcels.map((p) => [p.barcode, p]));
+    let updated = 0;
+    for (const row of stored) {
+      const parcel = row.deleted_at ? undefined : listed.get(row.barcode!);
+      if (!parcel) continue;
+      const status = deliveryStatus(parcel.status);
+      const paid = status === 'Livre paye' ? true : null;
+      if (row.status === status && (paid === null || row.paid === paid))
+        continue;
+      const moved = await this.db.withActor(null, (trx) =>
+        this.db.call<boolean>(
+          'record_delivery_status',
+          { p_id: row.id, p_status: status, p_reason: null, p_paid: paid },
+          trx,
+        ),
+      );
+      if (moved) updated += 1;
+    }
     const rows = [
       ...new Map(
         parcels
@@ -186,6 +205,7 @@ export class ColissimoPortalController implements OnModuleInit {
         carrier_open: number;
       }>('import_colissimo_history', { p_payouts: paid }, trx),
     );
-    return { found: parcels.length, added: rows.length, ...history };
+    if (updated) await invalidateCatalog(); // returns put stock back
+    return { found: parcels.length, added: rows.length, updated, ...history };
   }
 }
