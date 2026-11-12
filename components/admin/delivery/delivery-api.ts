@@ -59,6 +59,9 @@ export const canEditParcel = (d: Delivery) => !!d.barcode && d.status === "En at
 export const canRequestPriceChange = (d: Delivery) =>
     !!d.barcode && d.status !== "En attente" && !isFinalParcel(d.status, d.paid);
 
+/** Its price can still change: edited at once while waiting, else asked of Colissimo. */
+export const canChangePrice = (d: Delivery) => canEditParcel(d) || canRequestPriceChange(d);
+
 /**
  * Only a parcel waiting for pickup can be removed (it's deleted at Colissimo too), or one that
  * never reached Colissimo or that it already deleted. Validated ones ("A enlever") and later stay.

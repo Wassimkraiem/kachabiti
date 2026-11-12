@@ -14,7 +14,7 @@ import SendParcelModal, { type ParcelOrder } from "./SendParcelModal";
 import {
     canEditParcel,
     canRemoveParcel,
-    canRequestPriceChange,
+    canChangePrice,
     deliveryApi,
     type Delivery,
     type DeliveryList,
@@ -156,8 +156,8 @@ export default function OrderDeliveryCard({ order, orderStatus, onOrderChanged, 
                             <Button icon={<EditOutlined />} onClick={() => setEditing(true)}>{t("Edit parcel")}</Button>
                         )}
                         {/* Owners and admins: staff get no amounts, so the form couldn't show the current price. */}
-                        {canRequestPriceChange(delivery) && role.isAdmin && (
-                            <Button icon={<DollarOutlined />} onClick={() => setEditing(true)}>{t("Price change request")}</Button>
+                        {canChangePrice(delivery) && role.isAdmin && (
+                            <Button icon={<DollarOutlined />} onClick={() => setEditing(true)}>{t("Change price")}</Button>
                         )}
                         <Link href="/admin/delivery">{t("All parcels")}</Link>
                         {canDelete && canRemoveParcel(delivery) && (

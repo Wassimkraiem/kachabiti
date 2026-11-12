@@ -267,8 +267,8 @@ export async function parcelSlip(barcode: string) {
 const SLIP = '<div class="bl-container">';
 
 /**
- * Several slips as one printable document: the first slip's page (its styles print one slip per
- * A4 sheet) with every slip's `.bl-container` in it, in the order given. Without any script or
+ * Several slips as one printable document: the first slip's page (its styles) with every slip's
+ * `.bl-container` in it, in the order given, two per A4 sheet. Without any script or
  * inline handler (the page would print itself on load; the slips need none: the barcode is an
  * image), so it can be served from our address. `missing`: barcodes the website doesn't list.
  */
@@ -287,8 +287,20 @@ export async function slipsDocument(barcodes: string[]) {
     const end = html.slice(start).search(/<script|<\/body>/i);
     return end < 0 ? html.slice(start) : html.slice(start, start + end);
   };
+  // Two slips per A4 sheet (Colissimo's own print style gives each a whole page): half a page
+  // each, a page break after every second one. After their styles, so it wins.
+  const twoPerPage = `<style>@media print {
+    .bl-container { width: 210mm; height: 148.5mm; padding: 6mm 10mm; box-sizing: border-box;
+      overflow: hidden; page-break-after: auto; break-after: auto; page-break-inside: avoid; }
+    .bl-container.bl-page-end { page-break-after: always; break-after: page; }
+  }</style>`;
+  const slips = found.map((slip, i) =>
+    i % 2 === 1 && i < found.length - 1
+      ? block(slip).replace(SLIP, '<div class="bl-container bl-page-end">')
+      : block(slip),
+  );
   const html =
-    `${found[0].slice(0, found[0].indexOf(SLIP))}${found.map(block).join('\n')}</body></html>`
+    `${found[0].slice(0, found[0].indexOf(SLIP))}${twoPerPage}${slips.join('\n')}</body></html>`
       .replace(/<script[\s\S]*?<\/script>/gi, '')
       .replace(/\s+on[a-z]+\s*=\s*("[^"]*"|'[^']*')/gi, '');
   return { html, missing };

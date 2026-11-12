@@ -19,7 +19,7 @@ import ParcelHistoryDrawer from "@/components/admin/delivery/ParcelHistoryDrawer
 import {
     canEditParcel,
     canRemoveParcel,
-    canRequestPriceChange,
+    canChangePrice,
     deliveryApi,
     type Delivery,
     type DeliveryPageData,
@@ -264,8 +264,9 @@ export default function DeliveryPage() {
                             <Button type="link" size="small" icon={<EditOutlined />} onClick={() => setEditing(row)} aria-label={t("Edit")} />
                         </Tooltip>
                     )}
-                    {/* Picked up or printed parcels: Colissimo only takes a price change request (until delivered and paid). */}
-                    {canRequestPriceChange(row) && showMoney && (
+                    {/* Every parcel whose price can still change: changed at once while waiting for pickup,
+                        then a request Colissimo answers (until delivered and paid). EditParcelModal picks which. */}
+                    {canChangePrice(row) && showMoney && (
                         <Button type="link" size="small" icon={<DollarOutlined />} onClick={() => setEditing(row)}>
                             {t("Change price")}
                         </Button>
