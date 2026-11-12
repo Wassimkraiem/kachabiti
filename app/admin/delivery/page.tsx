@@ -6,13 +6,12 @@ import { printSlips } from "@/components/admin/delivery/print-slips";
 import { Alert, Breadcrumb, Button, Card, DatePicker, Input, Modal, Popconfirm, Segmented, Select, Space, Table, Tooltip, Typography } from "antd";
 import type { Dayjs } from "dayjs";
 import type { ColumnsType } from "antd/es/table";
-import { BarcodeOutlined, DeleteOutlined, DollarOutlined, EditOutlined, PlusOutlined, PrinterOutlined, ReloadOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons";
+import { BarcodeOutlined, DeleteOutlined, DollarOutlined, EditOutlined, PrinterOutlined, ReloadOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons";
 import { message } from "@/components/admin/antd-app";
 import { useAdminRole } from "@/lib/admin-role-context";
 import { DATE_LOCALES, useAdminT } from "@/lib/admin-i18n";
 import StatusCards, { statusesOfCard } from "@/components/admin/delivery/StatusCards";
 import DeliveryStatusTag, { ParcelBadges } from "@/components/admin/delivery/DeliveryStatusTag";
-import SendParcelModal from "@/components/admin/delivery/SendParcelModal";
 import ParcelLookup from "@/components/admin/delivery/ParcelLookup";
 import EditParcelModal from "@/components/admin/delivery/EditParcelModal";
 import ParcelHistoryDrawer from "@/components/admin/delivery/ParcelHistoryDrawer";
@@ -73,7 +72,6 @@ export default function DeliveryPage() {
     const [importOpen, setImportOpen] = useState(false);
     const [barcode, setBarcode] = useState("");
     const [importing, setImporting] = useState(false);
-    const [newOpen, setNewOpen] = useState(false);
     const [editing, setEditing] = useState<Delivery | null>(null);
     const [historyFor, setHistoryFor] = useState<string | null>(null);
     const [handingOver, setHandingOver] = useState(false);
@@ -307,16 +305,8 @@ export default function DeliveryPage() {
                         </div>
                     )}
                 </div>
+                {/* No "New parcel" here: orders are added in Orders, and validating one creates its parcel. */}
                 <Space wrap>
-                    <Button
-                        type="primary"
-                        icon={<PlusOutlined />}
-                        disabled={!data?.configured.add}
-                        onClick={() => setNewOpen(true)}
-                        style={{ background: "#7a3b2e", borderColor: "#7a3b2e" }}
-                    >
-                        {t("New parcel")}
-                    </Button>
                     <Button icon={<BarcodeOutlined />} disabled={!data?.configured.tracking} onClick={() => setImportOpen(true)}>{t("Add by barcode")}</Button>
                     <Button
                         icon={<ReloadOutlined />}
@@ -444,21 +434,12 @@ export default function DeliveryPage() {
                             },
                             style: row.barcode ? { cursor: "pointer" } : undefined,
                         })}
-                        locale={{ emptyText: t("No parcels yet. Click “New parcel”, or open an order and click “Send to Colissimo”.") }}
+                        locale={{ emptyText: t("No parcels yet. Open an order and click “Send to Colissimo”.") }}
                     />
                 </Space>
             </Card>
 
             <ParcelHistoryDrawer barcode={historyFor} onClose={() => setHistoryFor(null)} />
-
-            <SendParcelModal
-                open={newOpen}
-                onClose={() => setNewOpen(false)}
-                onSent={() => {
-                    setNewOpen(false);
-                    load();
-                }}
-            />
 
             <EditParcelModal
                 delivery={editing}

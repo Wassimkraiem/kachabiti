@@ -29,8 +29,6 @@ import {
   parcelFromOrder,
   statusInfo,
 } from '@shared/colissimo-data';
-import { MANUAL_CHANNELS, type Channel } from '@shared/erp/constants';
-import { generateOrderNumber } from '@shared/order-number';
 import { CurrentActor, Public } from '../auth/decorators';
 import type { RequestActor } from '../auth/auth.guard';
 import {
@@ -43,11 +41,7 @@ import {
 } from '../common/api';
 import { invalidateCatalog } from '../catalog/revalidate';
 import { Database } from '../db/database';
-import {
-  buildManualOrderLines,
-  ManualLineError,
-  type ManualLineInput,
-} from './commerce';
+import { buildManualOrderLines, ManualLineError } from './commerce';
 import { parcelDetail, PortalError, slipsDocument } from './colissimo-portal';
 import { ColissimoTracking } from './colissimo-tracking';
 
@@ -92,14 +86,11 @@ const barcode = z
   .trim()
   .regex(/^\d{6,20}$/, 'Barcode must be digits');
 const bodySchema = z.discriminatedUnion('action', [
-  // A parcel for an order, or entered by hand; with `items` (no order_id) an order is created and validated.
+  // A parcel for an order (added in Orders); without order_id it's refused.
   z.object({
     action: z.literal('create'),
     order_id: z.guid().optional(),
     parcel: parcelSchema,
-    items: itemsSchema.max(50).optional(),
-    channel: z.enum(MANUAL_CHANNELS as [Channel, ...Channel[]]).optional(),
-    campaign_id: z.guid().nullish(),
   }),
   // Validating an order: its parcel is built from the order and sent, then the order is validated.
   z.object({ action: z.literal('validate'), order_id: z.guid() }),
@@ -489,16 +480,14 @@ export class DeliveryController {
     const body = parsed.data;
     try {
       if (body.action === 'create') {
-        if (!body.order_id && body.items?.length) {
-          return await this.sendNewOrder(
-            body.parcel,
-            body.items,
-            actor,
-            body.channel ?? 'phone',
-            body.campaign_id ?? null,
+        // Orders are added in Orders; a parcel is created only for one of them (validating it).
+        if (!body.order_id)
+          throw new ApiError(
+            'Parcels are created from an order: add the order in Orders, then validate it.',
+            422,
+            'ORDER_REQUIRED',
           );
-        }
-        return await this.sendParcel(body.order_id ?? null, body.parcel, actor);
+        return await this.sendParcel(body.order_id, body.parcel, actor);
       }
       if (body.action === 'validate')
         return await this.validateOrder(body.order_id, actor);
@@ -717,72 +706,6 @@ export class DeliveryController {
         )
         .catch((failError) => Sentry.captureException(failError));
       throw this.savedFailed(created.barcode, undone);
-    }
-  }
-
-  // "New parcel" with products: price the lines, create the parcel at Colissimo, then save the
-  // order, lines and parcel in one transaction (create_order_with_delivery). The order stays to
-  // validate: an agent validates it later (validateOrder then uses this parcel).
-  private async sendNewOrder(
-    parcel: ParcelRequest,
-    items: ManualLineInput[],
-    actor: RequestActor,
-    channel: Channel,
-    campaignId: string | null,
-  ) {
-    if (!colissimoConfigured().add) throw notConfigured('add');
-    const lines = await buildManualOrderLines(this.db, items); // create_order ignores the extra `stock` field
-    const subtotal = lines.reduce((sum, line) => sum + line.subtotal, 0);
-    const [firstName, ...rest] = parcel.nom.trim().split(/\s+/);
-
-    const created = await createParcel(parcel);
-    try {
-      const result = await this.db.withActor(actor, (trx) =>
-        this.db.call<{ delivery: unknown; order: unknown }>(
-          'create_order_with_delivery',
-          {
-            p_order: {
-              order_number: generateOrderNumber(),
-              customer_first_name: firstName,
-              customer_last_name: rest.join(' '),
-              customer_phone: parcel.tel,
-              shipping_address: parcel.adresse,
-              shipping_city: parcel.ville,
-              shipping_state: parcel.gouvernerat,
-              shipping_country: 'Tunisia',
-              // The cash to collect is what the customer pays; above the products, it's the delivery fee.
-              subtotal,
-              shipping_cost: Math.max(0, parcel.prix - subtotal),
-              total: parcel.prix,
-              order_notes: parcel.msg || null,
-              channel,
-              campaign_id: campaignId,
-              assigned_to: actor.userId,
-              assigned_to_email: actor.email,
-            },
-            p_items: lines,
-            p_delivery: {
-              barcode: created.barcode,
-              label_url: created.labelUrl,
-              label_zebra_url: created.labelZebraUrl,
-              request: parcel,
-            },
-            p_actor: actor.userId,
-            p_actor_email: actor.email,
-          },
-          trx,
-        ),
-      );
-      await invalidateCatalog(); // the products left the stock
-      return { delivery: result.delivery, order: result.order, warning: null };
-    } catch (error) {
-      Sentry.captureException(error, {
-        tags: { area: 'admin-delivery', action: 'create-order' },
-      });
-      throw this.savedFailed(
-        created.barcode,
-        await this.undoCreatedParcel(created.barcode),
-      );
     }
   }
 
