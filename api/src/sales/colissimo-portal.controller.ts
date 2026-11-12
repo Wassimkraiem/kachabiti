@@ -1,4 +1,12 @@
-import { Controller, Get, HttpCode, Post, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  HttpCode,
+  OnModuleInit,
+  Post,
+  Query,
+} from '@nestjs/common';
+import { sql } from 'kysely';
 import * as Sentry from '@sentry/nestjs';
 import { OwnerOnly } from '../auth/decorators';
 import { ApiError, zDate } from '../common/api';
@@ -32,8 +40,30 @@ async function fromPortal<T>(work: () => Promise<T>) {
  */
 @Controller('owner/colissimo')
 @OwnerOnly()
-export class ColissimoPortalController {
+export class ColissimoPortalController implements OnModuleInit {
   constructor(private readonly db: Database) {}
+
+  /** The account sync every night at 03:00 Tunis time (02:00 UTC), so Delivery keeps matching. */
+  onModuleInit() {
+    if (!portalConfigured()) return;
+    const next = () => {
+      const now = new Date();
+      const at = new Date(
+        Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 2),
+      );
+      if (at <= now) at.setUTCDate(at.getUTCDate() + 1);
+      setTimeout(() => {
+        this.sync()
+          .catch((error) =>
+            Sentry.captureException(error, {
+              tags: { area: 'colissimo-sync' },
+            }),
+          )
+          .finally(next);
+      }, at.getTime() - now.getTime()).unref();
+    };
+    next();
+  }
 
   @Get()
   async list(@Query() query: { from?: string; to?: string }) {
@@ -131,6 +161,22 @@ export class ColissimoPortalController {
           .onConflict((oc) => oc.doNothing())
           .execute();
     });
+    // Which parcels the account still lists (Admin → Delivery shows those, like Colissimo's own
+    // dashboard): its barcodes, plus every parcel this system sent (it has Colissimo's slip link).
+    // Only after a full read of the account: a failed read throws before this, hiding nothing.
+    if (parcels.length > 0) {
+      const inAccount = parcels.map((p) => p.barcode).filter(Boolean);
+      await this.db.withActor(null, (trx) =>
+        trx
+          .updateTable('deliveries')
+          .set({
+            in_colissimo: sql<boolean>`barcode = any(${inAccount}) or label_url is not null`,
+          })
+          .where('barcode', 'is not', null)
+          .where('deleted_at', 'is', null)
+          .execute(),
+      );
+    }
     // Then orders for the parcels without one, and Colissimo's payouts as money (one transaction).
     const history = await this.db.withActor(null, async (trx) =>
       this.db.call<{

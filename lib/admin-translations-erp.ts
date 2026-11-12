@@ -1054,6 +1054,7 @@ export const erpEntries: [en: string, fr: string, ar: string][] = [
     ["Two slips per A4 sheet", "Deux bons par feuille A4", "وصلان في كل ورقة A4"],
     ["Sales by governorate", "Ventes par gouvernorat", "المبيعات حسب الولاية"],
     ["Waiting", "En attente", "في الانتظار"],
+    ["All my data (incl. old)", "Toutes mes données (avec l'ancien)", "كل بياناتي (مع القديم)"],
     // API keys
     ["API keys", "Clés API", "مفاتيح API"],
     ["Keys for outside systems, such as a developer or a customer-support agent. Each acts as a staff member with only the permissions you tick.", "Des clés pour des systèmes externes, comme un développeur ou un agent de service client. Chacune agit comme un membre de l'équipe avec seulement les permissions cochées.", "مفاتيح لأنظمة خارجية، مثل مطوّر أو وكيل خدمة عملاء. يعمل كل مفتاح كعضو في الفريق بالصلاحيات المحددة فقط."],

@@ -238,6 +238,10 @@ export class DeliveryController {
     const page = q.int('page', 1, 10_000);
     const size = q.int('size', 25, 200);
     let sent = this.live();
+    // What Colissimo's account lists, like its dashboard (deliveries.in_colissimo, kept by the
+    // account sync). Owners and admins may ask for all their data (?scope=all, old tools included).
+    if (!(showMoney && q.get('scope') === 'all'))
+      sent = sent.where('d.in_colissimo', '=', true);
     // Sent between these days (YYYY-MM-DD, Tunis time: UTC+1 all year), both included.
     const from = q.get('from');
     const to = q.get('to');

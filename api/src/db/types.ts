@@ -419,6 +419,7 @@ export interface Deliveries {
   driver_status: string | null;
   governorate: string | null;
   handed_over_at: Timestamp | null;
+  in_colissimo: Generated<boolean>;
   id: Generated<string>;
   items_count: number | null;
   label_url: string | null;

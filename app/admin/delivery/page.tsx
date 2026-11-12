@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { printSlips } from "@/components/admin/delivery/print-slips";
-import { Alert, Breadcrumb, Button, Card, DatePicker, Input, Modal, Popconfirm, Select, Space, Table, Tooltip, Typography } from "antd";
+import { Alert, Breadcrumb, Button, Card, DatePicker, Input, Modal, Popconfirm, Segmented, Select, Space, Table, Tooltip, Typography } from "antd";
 import type { Dayjs } from "dayjs";
 import type { ColumnsType } from "antd/es/table";
 import { BarcodeOutlined, DeleteOutlined, EditOutlined, PlusOutlined, PrinterOutlined, ReloadOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons";
@@ -60,6 +60,8 @@ export default function DeliveryPage() {
     }, [search]);
     // Parcels sent from this system, or imported from Colissimo's website (orders COL-<barcode>).
     const [source, setSource] = useState<"all" | "system" | "imported">("all");
+    // What Colissimo's account lists (matches its dashboard), or every parcel, old tools included.
+    const [scope, setScope] = useState<"colissimo" | "all">("colissimo");
     const [range, setRange] = useState<[Dayjs | null, Dayjs | null] | null>(null);
     // Kept across pages: antd passes back the rows ticked on other pages too.
     const [selectedRows, setSelectedRows] = useState<Delivery[]>([]);
@@ -82,6 +84,7 @@ export default function DeliveryPage() {
         const loadId = ++latestLoad.current;
         setLoading(true);
         const params = new URLSearchParams({ page: String(page), size: String(PAGE_SIZE), tab: "all", source });
+        if (scope === "all") params.append("scope", "all"); // owners and admins: the old tools' parcels too
         // A status card: its statuses (a card with none yet matches nothing, not everything).
         if (filter !== "all") params.append("statuses", statusesOfCard(filter, byStatusRef.current).join(",") || "-");
         if (query) params.append("q", query);
@@ -103,7 +106,7 @@ export default function DeliveryPage() {
         } finally {
             if (loadId === latestLoad.current) setLoading(false);
         }
-    }, [page, filter, source, query, range, lastChange]);
+    }, [page, filter, source, query, range, lastChange, scope]);
 
     useEffect(() => {
         load();
@@ -340,6 +343,17 @@ export default function DeliveryPage() {
                         <Button type={filter === "all" ? "primary" : "default"} onClick={() => { setFilter("all"); setPage(1); }}>
                             {t("All parcels")} ({data?.counts.all ?? 0})
                         </Button>
+                        {showMoney && (
+                            <Segmented
+                                style={{ marginInlineStart: 12 }}
+                                value={scope}
+                                onChange={(value) => { setScope(value as "colissimo" | "all"); setPage(1); }}
+                                options={[
+                                    { value: "colissimo", label: t("Colissimo account") },
+                                    { value: "all", label: t("All my data (incl. old)") },
+                                ]}
+                            />
+                        )}
                     </div>
                     <div className="admin-filters" style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
                         <Input
