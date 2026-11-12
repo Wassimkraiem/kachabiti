@@ -97,13 +97,13 @@ function resolveHref(href: string, locale: string) {
         case "/categories":
             return `/${locale}/categories`;
         case "/discounts":
-            return `/${locale}/products?promo=true`;
+            return `/${locale}/promotions`;
         case "/new":
             return `/${locale}/products?sort=new`;
         case "/bestsellers":
             return `/${locale}/products?sort=popular`;
         case "/faqs":
-            return `/${locale}#faqs`;
+            return `/${locale}/faq`;
         default:
             if (trimmedHref.startsWith("/")) {
                 return `/${locale}${trimmedHref}`;

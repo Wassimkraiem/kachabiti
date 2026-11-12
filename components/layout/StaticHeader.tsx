@@ -389,8 +389,8 @@ export default function StaticHeader({ locale: propLocale }: StaticHeaderProps =
                                 </div>
                             ) : item.label === "Discounts" ?
                                 <Link
-                                    key={`/${locale}/products?promo=true`}
-                                    href={`/${locale}/products?promo=true`}
+                                    key={`/${locale}/promotions`}
+                                    href={`/${locale}/promotions`}
                                     className="text-white hover:text-gray-300 transition"
                                 >
                                     {t.discounts}

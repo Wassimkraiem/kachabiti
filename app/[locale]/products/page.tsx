@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSearchParams, useParams, useRouter } from "next/navigation";
+import { useSearchParams, useParams, useRouter, usePathname } from "next/navigation";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";
 import ProductListCard from "@/components/products/ProductListCard";
 import { getDescendantCategoryIds } from "@/lib/utils/product-utils";
@@ -188,7 +188,8 @@ export default function ProductsPage() {
 
     // Get category from URL if present
     const urlCategory = searchParams.get('category');
-    const promoOnly = searchParams.get('promo');
+    // /promotions is this list with only discounted products (?promo= kept for old links).
+    const promoOnly = usePathname().endsWith('/promotions') ? '1' : searchParams.get('promo');
     const sortParam = searchParams.get('sort');
     const search = searchParams?.get('search') || "";
     const router = useRouter();

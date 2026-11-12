@@ -137,7 +137,7 @@ export default function PromoProducts({ locale = 'en', initialProducts }: PromoP
                 {products.length > 3 && (
                     <div className="text-center mt-4">
                         <Link
-                            href={`/${locale}/products?promo=true`}
+                            href={`/${locale}/promotions`}
                             className="text-[#842E1B] font-medium hover:underline inline-flex items-center gap-2"
                         >
                             {t.seeAll}

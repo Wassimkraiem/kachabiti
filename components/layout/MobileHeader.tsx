@@ -223,7 +223,7 @@ export default function MobileHeader({ locale, rtl, user, categories, search, on
                                     </ul>
                                 )}
                             </li>
-                            <li><Link href={`/${locale}/products?promo=true`} className={row} tabIndex={menuOpen ? 0 : -1}>{labels.discounts}</Link></li>
+                            <li><Link href={`/${locale}/promotions`} className={row} tabIndex={menuOpen ? 0 : -1}>{labels.discounts}</Link></li>
                             <li><Link href={`/${locale}/about`} className={row} tabIndex={menuOpen ? 0 : -1}>{labels.aboutUs}</Link></li>
                             <li><Link href={`/${locale}/contact`} className={row} tabIndex={menuOpen ? 0 : -1}>{labels.contactUs}</Link></li>
                         </ul>

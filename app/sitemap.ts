@@ -6,7 +6,7 @@ import { supportedLanguages, defaultLanguage } from '@/lib/language-utils'
 
 // The public pages and every live category and product, once per language, each listing all
 // languages as hreflang alternates (x-default: Arabic, the default).
-const PAGES = ['', '/products', '/categories', '/about', '/contact', '/shipping', '/privacy', '/terms-and-conditions']
+const PAGES = ['', '/products', '/categories', '/promotions', '/faq', '/about', '/contact', '/shipping', '/privacy', '/terms-and-conditions']
 
 const liveProducts = cachedCatalogQuery('sitemap-products', async () => {
     const rows: { slug: string; updated_at?: string }[] = []
