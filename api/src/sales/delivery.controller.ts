@@ -173,19 +173,16 @@ function dbError(error: any): never {
   throw error;
 }
 
-const PAID = 'Livre paye';
-const asSeen = (status: string) => (status === PAID ? 'Livre' : status);
-
 /**
  * A parcel as staff see it: no cash to collect, price change, order total or Colissimo request
- * (it holds the price), and "delivered and paid" shown as delivered. Owners and admins see all.
+ * (it holds the price). Its status stays Colissimo's, so the status cards count like the owner's
+ * and Colissimo's dashboard. Owners and admins see all.
  */
 function withoutMoney<
   T extends { status: string; order: { total: unknown } | null },
 >(row: T) {
   return {
     ...row,
-    status: asSeen(row.status),
     paid: false,
     cod_amount: null,
     price_change: null,
@@ -309,12 +306,7 @@ export class DeliveryController {
     let shown = sent;
     const tab = q.get('tab');
     // ?statuses=a,b: Colissimo's own statuses (the page's status cards, like Colissimo's dashboard).
-    // Staff don't see payments: for them "delivered and paid" is just delivered (asSeen).
-    let statuses = q.get('statuses')?.split(',').filter(Boolean);
-    if (statuses?.length && !showMoney)
-      statuses = statuses.some((s) => s === 'Livre' || s === 'Livrer')
-        ? [...statuses, PAID]
-        : statuses.filter((s) => s !== PAID).concat('-'); // '-' matches nothing: never an empty list
+    const statuses = q.get('statuses')?.split(',').filter(Boolean);
     if (statuses?.length)
       shown = shown.where(sql<boolean>`d.status = any(${statuses})`);
     else if (tab === 'validate') shown = shown.where(canTake);
@@ -365,7 +357,7 @@ export class DeliveryController {
       counts,
       // Parcels per Colissimo status, and their cash to collect for owners and admins only.
       by_status: groups.map((g) => ({
-        status: showMoney ? g.status : asSeen(g.status),
+        status: g.status,
         n: Number(g.n),
         ...(showMoney ? { amount: Number(g.amount) } : {}),
       })),
@@ -411,7 +403,8 @@ export class DeliveryController {
    */
   @Get('slip')
   @Header('Content-Type', 'text/html; charset=utf-8')
-  @Header('Content-Security-Policy', 'sandbox allow-scripts allow-modals')
+  // No allow-modals: a slip can't open its own print dialog (the print page prints them all once).
+  @Header('Content-Security-Policy', 'sandbox allow-scripts')
   @Header('Cache-Control', 'no-store')
   async slip(@Query('code') code = '') {
     if (!/^\d{6,20}$/.test(code)) throw new ApiError('Enter a valid barcode');

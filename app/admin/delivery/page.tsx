@@ -6,7 +6,7 @@ import { printSlips } from "@/components/admin/delivery/print-slips";
 import { Alert, Breadcrumb, Button, Card, DatePicker, Input, Modal, Popconfirm, Segmented, Select, Space, Table, Tooltip, Typography } from "antd";
 import type { Dayjs } from "dayjs";
 import type { ColumnsType } from "antd/es/table";
-import { BarcodeOutlined, DeleteOutlined, EditOutlined, PlusOutlined, PrinterOutlined, ReloadOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons";
+import { BarcodeOutlined, DeleteOutlined, DollarOutlined, EditOutlined, PlusOutlined, PrinterOutlined, ReloadOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons";
 import { message } from "@/components/admin/antd-app";
 import { useAdminRole } from "@/lib/admin-role-context";
 import { DATE_LOCALES, useAdminT } from "@/lib/admin-i18n";
@@ -19,6 +19,7 @@ import ParcelHistoryDrawer from "@/components/admin/delivery/ParcelHistoryDrawer
 import {
     canEditParcel,
     canRemoveParcel,
+    canRequestPriceChange,
     deliveryApi,
     type Delivery,
     type DeliveryPageData,
@@ -78,6 +79,7 @@ export default function DeliveryPage() {
     const [handingOver, setHandingOver] = useState(false);
     const [handOverResult, setHandOverResult] = useState<HandOverResult | null>(null);
 
+    const listRef = useRef<HTMLDivElement>(null); // the parcel list, scrolled to when a status card is picked
     const latestLoad = useRef(0);
     const byStatusRef = useRef<{ status: string }[]>([]); // the "Other" card's statuses, from the last load
     const load = useCallback(async () => {
@@ -262,6 +264,11 @@ export default function DeliveryPage() {
                             <Button type="link" size="small" icon={<EditOutlined />} onClick={() => setEditing(row)} aria-label={t("Edit")} />
                         </Tooltip>
                     )}
+                    {canRequestPriceChange(row) && showMoney && (
+                        <Tooltip title={t("Price change request")}>
+                            <Button type="link" size="small" icon={<DollarOutlined />} onClick={() => setEditing(row)} aria-label={t("Price change request")} />
+                        </Tooltip>
+                    )}
                     {canDelete && canRemoveParcel(row) && (
                         <Popconfirm
                             styles={{ root: { maxWidth: 360 } }}
@@ -337,7 +344,12 @@ export default function DeliveryPage() {
                         byStatus={data?.by_status ?? []}
                         selected={filter}
                         showMoney={showMoney}
-                        onSelect={(key) => { setFilter(key); setPage(1); }}
+                        onSelect={(key) => {
+                            setFilter(key);
+                            setPage(1);
+                            // Take the person to the parcels of that status (the list sits below the cards).
+                            if (key !== "all") listRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }}
                     />
                     <div>
                         <Button type={filter === "all" ? "primary" : "default"} onClick={() => { setFilter("all"); setPage(1); }}>
@@ -407,6 +419,7 @@ export default function DeliveryPage() {
                             </Popconfirm>
                         )}
                     </div>
+                    <div ref={listRef} style={{ scrollMarginTop: 72 }} />
                     <Table
                         rowKey="id"
                         loading={loading}

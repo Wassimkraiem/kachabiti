@@ -258,7 +258,12 @@ export async function parcelSlip(barcode: string) {
     await page(`recherche.php?code=${encodeURIComponent(barcode)}`)
   ).match(/imprimer\.php\?id=(\d+)/)?.[1];
   if (!id) return null;
-  const html = await page(`imprimer.php?id=${id}`);
+  // The page prints itself on load: /admin/delivery/print puts many slips in one document and
+  // prints that once, so each slip printing on its own would open one dialog per parcel.
+  const html = (await page(`imprimer.php?id=${id}`)).replace(
+    /window\.print\(\)\s*;?/g,
+    '',
+  );
   return /<head[^>]*>/i.test(html)
     ? html.replace(/<head[^>]*>/i, (head) => `${head}<base href="${BASE}">`)
     : `<base href="${BASE}">${html}`;

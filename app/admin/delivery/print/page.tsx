@@ -74,11 +74,12 @@ export default function PrintSlipsPage() {
                         <div className="no-print" style={{ margin: "12px 0 4px" }}>
                             <Text strong style={{ fontFamily: "monospace" }}>{s.label}</Text>
                         </div>
-                        {/* Colissimo's own page: sandboxed, so its scripts can't reach the admin. */}
+                        {/* Colissimo's own page: sandboxed, so its scripts can't reach the admin, and
+                            without allow-modals so it can't open a print dialog of its own. */}
                         <iframe
                             className="slip-frame"
                             src={`/api/delivery/slip?code=${s.barcode}`}
-                            sandbox="allow-scripts allow-modals"
+                            sandbox="allow-scripts"
                             title={s.barcode}
                             onLoad={() => setLoaded((n) => n + 1)}
                         />

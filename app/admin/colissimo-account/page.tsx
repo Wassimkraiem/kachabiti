@@ -291,14 +291,14 @@ export default function ColissimoAccountPage() {
                         <Button icon={<ReloadOutlined />} onClick={reload} loading={loading}>{t("Refresh")}</Button>
                         <Popconfirm
                             styles={{ root: { maxWidth: 360 } }}
-                            title={t("Add every parcel of the Colissimo account to Delivery?")}
-                            description={t("Only the ones Delivery doesn't have yet. Staff can then search them all and open their history.")}
-                            okText={t("Import")}
+                            title={t("Make Delivery match the Colissimo account?")}
+                            description={t("Adds the parcels Delivery doesn't have yet, gives every parcel Colissimo's status, and marks old parcels stuck mid-way as old order, status unknown. It also runs every night.")}
+                            okText={t("Sync with Colissimo")}
                             cancelText={t("Cancel")}
                             onConfirm={sync}
                         >
                             <Button type="primary" icon={<CloudDownloadOutlined />} loading={syncing}>
-                                {t("Import all parcels into Delivery")}
+                                {t("Sync with Colissimo")}
                             </Button>
                         </Popconfirm>
                     </>

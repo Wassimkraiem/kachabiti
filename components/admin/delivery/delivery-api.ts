@@ -1,6 +1,6 @@
 "use client";
 
-import type { StatusGroup } from "@/lib/colissimo-data";
+import { isFinalParcel, type StatusGroup } from "@/lib/colissimo-data";
 
 /** A parcel as GET /api/delivery returns it. */
 export interface Delivery {
@@ -51,6 +51,13 @@ export interface DeliveryPageData extends DeliveryList {
 
 /** A parcel waiting for pickup can be edited at Colissimo. */
 export const canEditParcel = (d: Delivery) => !!d.barcode && d.status === "En attente";
+
+/**
+ * Past "En attente" only a price change request is possible (POST /price_change), until the
+ * parcel is delivered and paid; finished parcels (returned, deleted…) aren't worth asking about.
+ */
+export const canRequestPriceChange = (d: Delivery) =>
+    !!d.barcode && d.status !== "En attente" && !isFinalParcel(d.status, d.paid);
 
 /**
  * Only a parcel waiting for pickup can be removed (it's deleted at Colissimo too), or one that

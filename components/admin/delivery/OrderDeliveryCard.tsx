@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { Alert, Button, Card, Descriptions, Input, Popconfirm, Space, Typography } from "antd";
-import { CarOutlined, DeleteOutlined, EditOutlined, PrinterOutlined, ReloadOutlined, LinkOutlined } from "@ant-design/icons";
+import { CarOutlined, DeleteOutlined, DollarOutlined, EditOutlined, PrinterOutlined, ReloadOutlined, LinkOutlined } from "@ant-design/icons";
 import { printSlips } from "@/components/admin/delivery/print-slips";
 import { message } from "@/components/admin/antd-app";
 import { useAdminRole } from "@/lib/admin-role-context";
@@ -14,6 +14,7 @@ import SendParcelModal, { type ParcelOrder } from "./SendParcelModal";
 import {
     canEditParcel,
     canRemoveParcel,
+    canRequestPriceChange,
     deliveryApi,
     type Delivery,
     type DeliveryList,
@@ -37,7 +38,8 @@ export default function OrderDeliveryCard({ order, orderStatus, onOrderChanged, 
     openSendSignal?: number;
 }) {
     const { t, locale } = useAdminT();
-    const canDelete = useAdminRole().can("delete");
+    const role = useAdminRole();
+    const canDelete = role.can("delete");
     const [list, setList] = useState<DeliveryList | null>(null);
     const [sendOpen, setSendOpen] = useState(false);
     const [linkOpen, setLinkOpen] = useState(false);
@@ -152,6 +154,10 @@ export default function OrderDeliveryCard({ order, orderStatus, onOrderChanged, 
                         )}
                         {canEditParcel(delivery) && (
                             <Button icon={<EditOutlined />} onClick={() => setEditing(true)}>{t("Edit parcel")}</Button>
+                        )}
+                        {/* Owners and admins: staff get no amounts, so the form couldn't show the current price. */}
+                        {canRequestPriceChange(delivery) && role.isAdmin && (
+                            <Button icon={<DollarOutlined />} onClick={() => setEditing(true)}>{t("Price change request")}</Button>
                         )}
                         <Link href="/admin/delivery">{t("All parcels")}</Link>
                         {canDelete && canRemoveParcel(delivery) && (
