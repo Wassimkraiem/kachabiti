@@ -11,6 +11,7 @@ import {
   HttpCode,
 } from '@nestjs/common';
 import type { Request } from 'express';
+import { sql } from 'kysely';
 import { z } from 'zod';
 import { hasFullAccess } from '@shared/admin-auth';
 import { CHANNELS } from '@shared/erp/constants';
@@ -84,8 +85,40 @@ export class OwnerOverviewController {
         this.db.call('product_cost_prices'),
         teamProgress(this.db, month),
       ]);
+    // Per governorate: orders taken, delivered and returned in the period, and delivered sales.
+    // Orders imported from Colissimo have no address: their parcel's governorate stands in.
+    const onlyChannel =
+      channel && (CHANNELS as readonly string[]).includes(channel)
+        ? channel
+        : null;
+    const inPeriod = (column: string) =>
+      sql`${sql.ref(column)} >= ${from} and ${sql.ref(column)} < ${to}`;
+    const governorates = (
+      await sql<{
+        governorate: string;
+        created: number;
+        delivered: number;
+        returned: number;
+        revenue: number;
+      }>`
+        select coalesce(nullif(trim(o.shipping_state), ''),
+                        (select d.governorate from deliveries d
+                          where d.order_id = o.id and d.deleted_at is null limit 1),
+                        '—') as governorate,
+               (count(*) filter (where ${inPeriod('o.created_at')}))::int as created,
+               (count(*) filter (where ${inPeriod('o.delivered_at')}))::int as delivered,
+               (count(*) filter (where ${inPeriod('o.returned_at')}))::int as returned,
+               coalesce(sum(o.total) filter (where ${inPeriod('o.delivered_at')}), 0)::float8 as revenue
+          from orders o
+         where o.deleted_at is null
+           and (${inPeriod('o.created_at')} or ${inPeriod('o.delivered_at')} or ${inPeriod('o.returned_at')})
+           and (${onlyChannel}::text is null or o.channel = ${onlyChannel})
+         group by 1
+         order by revenue desc, created desc`.execute(this.db)
+    ).rows;
     return {
       ...overview,
+      governorates,
       goals,
       campaign_options: campaigns,
       cost_prices: costPrices,

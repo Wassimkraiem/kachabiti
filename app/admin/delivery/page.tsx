@@ -2,14 +2,15 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { Alert, Breadcrumb, Button, Card, DatePicker, Input, Modal, Popconfirm, Segmented, Select, Space, Table, Tooltip, Typography } from "antd";
+import { printSlips } from "@/components/admin/delivery/print-slips";
+import { Alert, Breadcrumb, Button, Card, DatePicker, Input, Modal, Popconfirm, Select, Space, Table, Tooltip, Typography } from "antd";
 import type { Dayjs } from "dayjs";
 import type { ColumnsType } from "antd/es/table";
 import { BarcodeOutlined, DeleteOutlined, EditOutlined, PlusOutlined, PrinterOutlined, ReloadOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons";
 import { message } from "@/components/admin/antd-app";
 import { useAdminRole } from "@/lib/admin-role-context";
 import { DATE_LOCALES, useAdminT } from "@/lib/admin-i18n";
-import type { StatusGroup } from "@/lib/colissimo-data";
+import StatusCards, { statusesOfCard } from "@/components/admin/delivery/StatusCards";
 import DeliveryStatusTag, { ParcelBadges } from "@/components/admin/delivery/DeliveryStatusTag";
 import SendParcelModal from "@/components/admin/delivery/SendParcelModal";
 import ParcelLookup from "@/components/admin/delivery/ParcelLookup";
@@ -28,9 +29,8 @@ import {
 
 const { Title, Text } = Typography;
 
-// "validate": parcels created but not yet validated (handed over) at Colissimo; "pending" is then
-// only the validated ones waiting for the driver.
-type Filter = "all" | "validate" | StatusGroup;
+// "all", or a status card's key (StatusCards: Colissimo's dashboard, status by status).
+type Filter = string;
 const PAGE_SIZE = 25;
 
 /**
@@ -41,7 +41,8 @@ const PAGE_SIZE = 25;
  */
 export default function DeliveryPage() {
     const { t, locale } = useAdminT();
-    const canDelete = useAdminRole().can("delete");
+    const { can, isAdmin: showMoney } = useAdminRole(); // money (amounts, totals): owners and admins only
+    const canDelete = can("delete");
     const [data, setData] = useState<DeliveryPageData | null>(null);
     const [loading, setLoading] = useState(true);
     const [refreshing, setRefreshing] = useState(false);
@@ -63,6 +64,9 @@ export default function DeliveryPage() {
     // Kept across pages: antd passes back the rows ticked on other pages too.
     const [selectedRows, setSelectedRows] = useState<Delivery[]>([]);
     const selected = selectedRows.map((row) => row.id);
+    // Ticked parcels: any with a barcode prints its slip; only some can be removed (canRemoveParcel).
+    const printable = selectedRows.flatMap((row) => (row.barcode ? [row.barcode] : []));
+    const removable = selectedRows.filter(canRemoveParcel).map((row) => row.id);
     const [importOpen, setImportOpen] = useState(false);
     const [barcode, setBarcode] = useState("");
     const [importing, setImporting] = useState(false);
@@ -73,10 +77,13 @@ export default function DeliveryPage() {
     const [handOverResult, setHandOverResult] = useState<HandOverResult | null>(null);
 
     const latestLoad = useRef(0);
+    const byStatusRef = useRef<{ status: string }[]>([]); // the "Other" card's statuses, from the last load
     const load = useCallback(async () => {
         const loadId = ++latestLoad.current;
         setLoading(true);
-        const params = new URLSearchParams({ page: String(page), size: String(PAGE_SIZE), tab: filter, source });
+        const params = new URLSearchParams({ page: String(page), size: String(PAGE_SIZE), tab: "all", source });
+        // A status card: its statuses (a card with none yet matches nothing, not everything).
+        if (filter !== "all") params.append("statuses", statusesOfCard(filter, byStatusRef.current).join(",") || "-");
         if (query) params.append("q", query);
         if (range?.[0]) params.append("from", range[0].format("YYYY-MM-DD"));
         if (range?.[1]) params.append("to", range[1].format("YYYY-MM-DD"));
@@ -87,6 +94,7 @@ export default function DeliveryPage() {
         try {
             const result = await deliveryApi<DeliveryPageData>({ query: params.toString() });
             if (loadId !== latestLoad.current) return; // a newer search or page took over
+            byStatusRef.current = result.by_status;
             setData(result);
             // The last page emptied by a removal: go back to the new last one.
             if (!result.rows.length && result.total > 0 && page > 1) setPage(Math.ceil(result.total / PAGE_SIZE));
@@ -199,12 +207,15 @@ export default function DeliveryPage() {
             key: "destination",
             render: (_, row) => [row.city, row.governorate].filter(Boolean).join(", ") || "—",
         },
-        {
-            title: t("Cash to collect"),
-            dataIndex: "cod_amount",
-            key: "cod_amount",
-            render: (value: number | null) => (value != null ? `${Number(value)} TND` : "—"),
-        },
+        // Owners and admins only: the server sends no amounts to staff (its by_status has none then).
+        ...(showMoney
+            ? [{
+                title: t("Cash to collect"),
+                dataIndex: "cod_amount",
+                key: "cod_amount",
+                render: (value: number | null) => (value != null ? `${Number(value)} TND` : "—"),
+            }]
+            : []),
         {
             title: t("Status"),
             key: "status",
@@ -232,9 +243,9 @@ export default function DeliveryPage() {
             fixed: "right",
             render: (_, row) => (
                 <Space size={0}>
-                    {row.label_url && (
+                    {row.barcode && (
                         <Tooltip title={t("Slip")}>
-                            <Button type="link" size="small" icon={<PrinterOutlined />} href={row.label_url} target="_blank" rel="noopener noreferrer" aria-label={t("Slip")} />
+                            <Button type="link" size="small" icon={<PrinterOutlined />} onClick={() => printSlips(`codes=${row.barcode}`)} aria-label={t("Slip")} />
                         </Tooltip>
                     )}
                     {row.barcode && (
@@ -242,7 +253,8 @@ export default function DeliveryPage() {
                             <Button type="link" size="small" icon={<ReloadOutlined />} onClick={() => refreshStatuses([row.id])} aria-label={t("Check")} />
                         </Tooltip>
                     )}
-                    {canEditParcel(row) && (
+                    {/* Staff get no amounts here (the form would start at 0): they edit from the order's page. */}
+                    {canEditParcel(row) && showMoney && (
                         <Tooltip title={t("Edit")}>
                             <Button type="link" size="small" icon={<EditOutlined />} onClick={() => setEditing(row)} aria-label={t("Edit")} />
                         </Tooltip>
@@ -264,7 +276,6 @@ export default function DeliveryPage() {
         },
     ];
 
-    const filterLabel = (label: string, key: Filter) => `${t(label)} (${data?.counts[key] ?? 0})`;
 
     return (
         <div>
@@ -319,20 +330,16 @@ export default function DeliveryPage() {
 
             <Card>
                 <Space orientation="vertical" size="middle" style={{ width: "100%" }}>
-                    <div style={{ overflowX: "auto" }}>
-                        <Segmented<Filter>
-                            value={filter}
-                            onChange={(value) => { setFilter(value); setPage(1); }}
-                            options={[
-                                { value: "all", label: filterLabel("All", "all") },
-                                { value: "validate", label: filterLabel("To validate", "validate") },
-                                { value: "pending", label: filterLabel("To be picked up", "pending") },
-                                { value: "moving", label: filterLabel("On the way", "moving") },
-                                { value: "delivered", label: filterLabel("Delivered", "delivered") },
-                                { value: "returned", label: filterLabel("Returns", "returned") },
-                                { value: "problem", label: filterLabel("To check", "problem") },
-                            ]}
-                        />
+                    <StatusCards
+                        byStatus={data?.by_status ?? []}
+                        selected={filter}
+                        showMoney={showMoney}
+                        onSelect={(key) => { setFilter(key); setPage(1); }}
+                    />
+                    <div>
+                        <Button type={filter === "all" ? "primary" : "default"} onClick={() => { setFilter("all"); setPage(1); }}>
+                            {t("All parcels")} ({data?.counts.all ?? 0})
+                        </Button>
                     </div>
                     <div className="admin-filters" style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center" }}>
                         <Input
@@ -368,16 +375,21 @@ export default function DeliveryPage() {
                                 </Button>
                             </Popconfirm>
                         )}
-                        {canDelete && selected.length > 0 && (
+                        {printable.length > 0 && (
+                            <Button icon={<PrinterOutlined />} onClick={() => printSlips(`codes=${printable.join(",")}`)}>
+                                {t("Print slips ({count})", { count: printable.length })}
+                            </Button>
+                        )}
+                        {canDelete && removable.length > 0 && (
                             <Popconfirm
                                 styles={{ root: { maxWidth: 360 } }}
-                                title={t("Remove {count} parcel(s)?", { count: selected.length })}
+                                title={t("Remove {count} parcel(s)?", { count: removable.length })}
                                 description={t("Parcels waiting for pickup are deleted at Colissimo too. Ones Colissimo already has stay.")}
                                 okText={t("Remove")}
                                 cancelText={t("Cancel")}
-                                onConfirm={() => remove(selected)}
+                                onConfirm={() => remove(removable)}
                             >
-                                <Button danger icon={<DeleteOutlined />}>{t("Remove ({count})", { count: selected.length })}</Button>
+                                <Button danger icon={<DeleteOutlined />}>{t("Remove ({count})", { count: removable.length })}</Button>
                             </Popconfirm>
                         )}
                     </div>
@@ -386,7 +398,7 @@ export default function DeliveryPage() {
                         loading={loading}
                         dataSource={data?.rows}
                         columns={columns}
-                        rowSelection={{ selectedRowKeys: selected, preserveSelectedRowKeys: true, onChange: (_keys, rows) => setSelectedRows(rows), getCheckboxProps: (row) => ({ disabled: !canEditParcel(row) && !canRemoveParcel(row) }) }}
+                        rowSelection={{ selectedRowKeys: selected, preserveSelectedRowKeys: true, onChange: (_keys, rows) => setSelectedRows(rows), getCheckboxProps: (row) => ({ disabled: !row.barcode && !canRemoveParcel(row) }) }}
                         pagination={{ current: page, pageSize: PAGE_SIZE, total: data?.total ?? 0, showSizeChanger: false }}
                         onChange={(pagination, _filters, sorter) => {
                             setPage(pagination.current ?? 1);

@@ -41,7 +41,24 @@ interface PortalList {
 type Stage = "delivered" | "returned" | "cancelled" | "in_progress";
 
 /** A parcel as this page shows it, from Colissimo's website or from our database. */
-interface Row extends PortalRow { stage: Stage; paid: boolean }
+interface Row extends PortalRow { stage: Stage; paid: boolean; governorate?: string | null }
+
+interface GovernorateRow { governorate: string; parcels: number; delivered: number; amount: number; returned: number }
+
+/** Parcels, deliveries, money and returns per governorate (our records only: the website's list has none). */
+function byGovernorate(rows: Row[]): GovernorateRow[] {
+    const map = new Map<string, GovernorateRow>();
+    for (const row of rows) {
+        if (row.stage === "cancelled") continue;
+        const name = row.governorate?.trim() || "—";
+        const g = map.get(name) ?? { governorate: name, parcels: 0, delivered: 0, amount: 0, returned: 0 };
+        g.parcels++;
+        if (row.stage === "delivered") { g.delivered++; g.amount += row.price ?? 0; }
+        if (row.stage === "returned") g.returned++;
+        map.set(name, g);
+    }
+    return [...map.values()].sort((a, b) => b.amount - a.amount);
+}
 
 /** Colissimo's website wording ("Livré payé", "En cours de livraison", "Rtn définitif"…) → a stage. */
 function stageOf(status: string): Stage {
@@ -73,6 +90,7 @@ function fromRecord(d: Delivery): Row {
         picked_up_at: localTime(d.handed_over_at),
         delivered_at: stage === "delivered" ? localTime(d.status_changed_at) : null,
         order: d.order ? { id: d.order.id, order_number: d.order.order_number } : null,
+        governorate: d.governorate,
         stage,
         paid: stage === "delivered" && (d.paid || d.status === "Livre paye"),
     };
@@ -157,6 +175,7 @@ export default function ColissimoAccountPage() {
     }, [all]);
 
     const stats = useMemo(() => analyse(all), [all]);
+    const governorates = useMemo(() => (source === "records" ? byGovernorate(all) : []), [all, source]);
     const finished = stats.stages.delivered.count + stats.stages.returned.count;
     // Over 3 months, one bar per month (the table below stays per day).
     const chart = useMemo(() => {
@@ -315,6 +334,35 @@ export default function ColissimoAccountPage() {
                     <Kpi loading={loading} title={t("In progress")} value={stats.stages.in_progress.count} sub={money(stats.stages.in_progress.amount)} />
                 </Col>
             </Row>
+
+            {governorates.length > 0 && (
+                <Card title={t("By governorate")} style={{ marginBottom: 16 }}>
+                    <Table
+                        rowKey="governorate"
+                        size="small"
+                        dataSource={governorates}
+                        pagination={{ pageSize: 24, showSizeChanger: false, hideOnSinglePage: true }}
+                        scroll={{ x: "max-content" }}
+                        columns={[
+                            { title: t("Governorate"), dataIndex: "governorate", key: "governorate" },
+                            { title: t("Parcels"), dataIndex: "parcels", key: "parcels", align: "right", sorter: (a, b) => a.parcels - b.parcels },
+                            { title: t("Delivered"), dataIndex: "delivered", key: "delivered", align: "right", sorter: (a, b) => a.delivered - b.delivered },
+                            { title: t("Amount"), dataIndex: "amount", key: "amount", align: "right", defaultSortOrder: "descend", sorter: (a, b) => a.amount - b.amount, render: (v: number) => money(v) },
+                            { title: t("Returned"), dataIndex: "returned", key: "returned", align: "right", sorter: (a, b) => a.returned - b.returned },
+                            {
+                                title: t("Return rate"),
+                                key: "rate",
+                                align: "right",
+                                sorter: (a, b) => (percent(a.returned, a.delivered + a.returned) ?? 0) - (percent(b.returned, b.delivered + b.returned) ?? 0),
+                                render: (_, g) => {
+                                    const rate = percent(g.returned, g.delivered + g.returned);
+                                    return rate === null ? "—" : <Text type={rate >= 30 ? "danger" : undefined}>{rate}%</Text>;
+                                },
+                            },
+                        ]}
+                    />
+                </Card>
+            )}
 
             <Card title={t("Delivered per day")} style={{ marginBottom: 16 }}>
                 <Text type="secondary" style={{ display: "block", marginBottom: 12, fontSize: 13 }}>

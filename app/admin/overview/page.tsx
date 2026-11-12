@@ -26,6 +26,7 @@ interface Overview {
     stock: { value: number; units: number; materials_value: number; low: number; out: number; products_without_cost: number };
     daily: { day: string; created: number; confirmed: number; delivered: number; revenue: number; returned: number; collected: number; ad_spend: number }[];
     channels: { channel: Channel; created: number; confirmed: number; delivered: number; returned: number; revenue: number }[];
+    governorates?: { governorate: string; created: number; delivered: number; returned: number; revenue: number }[];
     products: { product_id: string; name: string; quantity: number; revenue: number; cost: number; margin: number; missing_cost: boolean }[];
     agents: { agent_id: string; email: string | null; created: number; confirmed: number; delivered: number; returned: number; delivered_revenue: number }[];
     campaigns: { campaign_id: string; name: string; platform: string; spend: number; orders: number; delivered: number; revenue: number }[];
@@ -222,6 +223,28 @@ export default function OwnerOverviewPage() {
                     </Card>
                 </Col>
                 <Col xs={24} lg={14}>
+                    <Card title={t("Sales by governorate")} style={{ height: "100%" }}>
+                        <BarList
+                            format={(n) => money(n)}
+                            rows={(data?.governorates ?? []).slice(0, 24).map((g) => {
+                                const done = g.delivered + g.returned;
+                                return {
+                                    key: g.governorate,
+                                    label: g.governorate,
+                                    value: Number(g.revenue),
+                                    sub: t("{created} taken · {delivered} delivered · {returned} returned · return rate {rate}", {
+                                        created: g.created, delivered: g.delivered, returned: g.returned,
+                                        rate: done ? `${Math.round((g.returned / done) * 100)}%` : "—",
+                                    }),
+                                };
+                            })}
+                        />
+                    </Card>
+                </Col>
+            </Row>
+
+            <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
+                <Col xs={24}>
                     <Card title={t("Best products (delivered)")} style={{ height: "100%" }} extra={<Link href="/admin/purchasing/materials?tab=costs">{t("Cost prices")}</Link>}>
                         <Table
                             size="small"

@@ -1,4 +1,4 @@
-import { timingSafeEqual } from 'node:crypto';
+import { createHash, timingSafeEqual } from 'node:crypto';
 import {
   CanActivate,
   ExecutionContext,
@@ -13,6 +13,7 @@ import {
   allows,
   getAdminRole,
   getPermissions,
+  PERMISSIONS,
   type AdminRole,
   type Permission,
   type Requirement,
@@ -23,6 +24,7 @@ import {
   readCookie,
   verifyAccessToken,
 } from '@shared/auth-session';
+import { rateLimit } from '../common/rate-limit';
 import { config } from '../config';
 import { Database } from '../db/database';
 import { PUBLIC, REQUIREMENT } from './decorators';
@@ -83,6 +85,9 @@ export class AuthGuard implements CanActivate {
     request.actor = claims ? this.actorFrom(claims) : null;
     // Any verified user, shoppers included (checkout links the order to them).
     request.userId = typeof claims?.sub === 'string' ? claims.sub : null;
+    // No session: maybe an API key (x-api-key: kb_…), a staff member with the key's permissions.
+    const keyActor = claims ? null : await this.apiKeyActor(request);
+    if (keyActor) request.actor = keyActor;
 
     // The same table middleware.ts uses (lib/api-access.ts), plus the route's own decorator.
     const url = new URL(request.originalUrl, 'http://api');
@@ -99,7 +104,7 @@ export class AuthGuard implements CanActivate {
       if (isPublic) return true;
       throw new ForbiddenException('This route has no access rule');
     }
-    if (!claims) throw new UnauthorizedException('Sign in again');
+    if (!claims && !keyActor) throw new UnauthorizedException('Sign in again');
     const actor = request.actor;
     if (!actor) throw new ForbiddenException('Forbidden');
     if (!rules.every((rule) => allows(rule, actor.role, actor.permissions))) {
@@ -107,6 +112,51 @@ export class AuthGuard implements CanActivate {
       throw new ForbiddenException('Forbidden');
     }
     return true;
+  }
+
+  /**
+   * An API key from Admin → Team → API keys: only its sha256 is stored. It acts as a staff member
+   * with the key's permissions (never hard_delete), recorded as "api-key:<name>" under the admin
+   * who made it. Revoked or expired keys get 401; 300 requests a minute per key.
+   */
+  private async apiKeyActor(request: Request): Promise<RequestActor | null> {
+    const key = request.headers['x-api-key'];
+    if (typeof key !== 'string' || !key.startsWith('kb_') || key.length > 200)
+      return null;
+    rateLimit(`api-key:${key.slice(0, 16)}`, 300, 60_000);
+    const row = await this.db
+      .selectFrom('api_keys')
+      .select([
+        'id',
+        'name',
+        'permissions',
+        'created_by',
+        'expires_at',
+        'last_used_at',
+      ])
+      .where('key_hash', '=', createHash('sha256').update(key).digest('hex'))
+      .where('deleted_at', 'is', null)
+      .executeTakeFirst();
+    if (!row || (row.expires_at && new Date(row.expires_at) <= new Date()))
+      throw new UnauthorizedException('Invalid, revoked or expired API key');
+    if (
+      !row.last_used_at ||
+      Date.now() - new Date(row.last_used_at).getTime() > 60_000
+    )
+      void this.db
+        .updateTable('api_keys')
+        .set({ last_used_at: new Date() })
+        .where('id', '=', row.id)
+        .execute()
+        .catch(() => undefined);
+    return {
+      userId: row.created_by,
+      email: `api-key:${row.name}`,
+      role: 'staff',
+      permissions: row.permissions.filter(
+        (p): p is Permission => p in PERMISSIONS && p !== 'hard_delete',
+      ),
+    };
   }
 
   private async verify(request: Request): Promise<JWTPayload | null> {

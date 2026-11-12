@@ -15,6 +15,7 @@ import { openApiSpec } from '@shared/openapi';
 import { Public } from '../auth/decorators';
 import { Raw } from '../common/api';
 import { gmail } from '../common/mail';
+import { clientIp, rateLimit } from '../common/rate-limit';
 import { Database } from '../db/database';
 
 // Ports of the small routes: cart analytics, recovery e-mails, contact form, newsletter, API docs.
@@ -82,8 +83,11 @@ export class ContactController {
   @HttpCode(200)
   async send(
     @Body() body: Record<string, any>,
+    @Req() request: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
+    // Every message goes out through the shop's mailbox: cap what one address can send.
+    rateLimit(`contact-ip:${clientIp(request)}`, 5, 60 * 60_000);
     const { firstName, lastName, email, phone, message, locale } = body ?? {};
     if (!firstName || !lastName || !email || !message) {
       res.status(400);
@@ -137,6 +141,7 @@ export class NewsletterController {
     @Req() request: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
+    rateLimit(`newsletter-ip:${clientIp(request)}`, 10, 60 * 60_000);
     const email =
       typeof body?.email === 'string' ? body.email.toLowerCase() : '';
     if (!email.includes('@')) {

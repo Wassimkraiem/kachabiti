@@ -752,6 +752,7 @@ export const openApiSpec = {
                     201: messageResponse('Order created'),
                     400: errorResponse(400, 'Invalid order data'),
                     409: errorResponse(409, 'Prices or totals are out of date (code: PRICES_CHANGED, TOTALS_CHANGED, PRODUCT_UNAVAILABLE, OUT_OF_STOCK, VARIANT_REQUIRED)'),
+                    429: errorResponse(429, 'More than 20 orders from this address within an hour'),
                     500: errorResponse(500, 'Unable to create order'),
                 },
             },

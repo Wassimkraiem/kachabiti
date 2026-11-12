@@ -6,7 +6,9 @@ import {
   Post,
   Put,
   Query,
+  Req,
 } from '@nestjs/common';
+import type { Request } from 'express';
 import * as Sentry from '@sentry/nestjs';
 import { sql } from 'kysely';
 import { jsonArrayFrom } from 'kysely/helpers/postgres';
@@ -20,6 +22,7 @@ import { CurrentActor, CurrentUserId, Public } from '../auth/decorators';
 import type { RequestActor } from '../auth/auth.guard';
 import { ApiError, Envelope, idsFrom, params, zDate, zId } from '../common/api';
 import { invalidateCatalog } from '../catalog/revalidate';
+import { clientIp, rateLimit } from '../common/rate-limit';
 import { Database } from '../db/database';
 import { priceOrder } from './commerce';
 import { ColissimoTracking } from './colissimo-tracking';
@@ -106,7 +109,13 @@ export class OrdersController {
 
   /** Public checkout. Amounts are re-priced on the server; the order is linked to a signed-in shopper. */
   @Post()
-  async create(@Body() raw: unknown, @CurrentUserId() userId: string | null) {
+  async create(
+    @Body() raw: unknown,
+    @CurrentUserId() userId: string | null,
+    @Req() request: Request,
+  ) {
+    // Each order notifies the team and opens a customer: cap floods from one address.
+    rateLimit(`checkout-ip:${clientIp(request)}`, 20, 60 * 60_000);
     const parsed = createOrderSchema.safeParse(raw);
     if (!parsed.success) throw new ApiError('Invalid order data');
     const data = parsed.data;
@@ -318,7 +327,7 @@ export class OrdersController {
   }
 
   /**
-   * Status, payment status or notes. Validated, shipped and delivered orders take their tracked
+   * Status or notes. Validated, shipped and delivered orders take their tracked
    * items out of the online location; pending and cancelled ones give them back, in one
    * transaction with the status (set_order_status): a shortage changes nothing.
    */
@@ -329,7 +338,8 @@ export class OrdersController {
   ) {
     if (!body?.id) throw new ApiError('Order ID is required');
     const changes: Record<string, unknown> = {};
-    for (const field of ['status', 'payment_status', 'order_notes']) {
+    // payment_status follows the order's payments (private.refresh_order_paid): never set by hand.
+    for (const field of ['status', 'order_notes']) {
       if (body[field] !== undefined) changes[field] = body[field];
     }
     const parcels =

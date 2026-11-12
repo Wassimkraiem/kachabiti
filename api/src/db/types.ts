@@ -60,6 +60,21 @@ export interface Accounts {
   updated_at: Generated<Timestamp>;
 }
 
+export interface ApiKeys {
+  created_at: Generated<Timestamp>;
+  created_by: string;
+  created_by_email: string | null;
+  deleted_at: Timestamp | null;
+  expires_at: Timestamp | null;
+  id: Generated<string>;
+  key_hash: string;
+  last_used_at: Timestamp | null;
+  name: string;
+  permissions: Generated<string[]>;
+  prefix: string;
+  updated_at: Generated<Timestamp>;
+}
+
 export interface ActivityLog {
   action: string;
   actor_email: string | null;
@@ -1152,6 +1167,7 @@ export interface DB {
   ad_campaigns: AdCampaigns;
   ad_spend: AdSpend;
   agent_goals: AgentGoals;
+  api_keys: ApiKeys;
   auth_tokens: AuthTokens;
   back_office_users: BackOfficeUsers;
   bank_statement_lines: BankStatementLines;

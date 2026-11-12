@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { TeamController } from './admin/team.controller';
+import { ApiKeysController } from './admin/api-keys.controller';
 import { TicketsController } from './admin/tickets.controller';
 import { AuthController } from './auth/auth.controller';
 import { AccountController } from './storefront/account.controller';
@@ -101,6 +102,7 @@ import {
     AuthController,
     AccountController,
     TeamController,
+    ApiKeysController,
     TicketsController,
     UploadImageController,
     DocumentsController,

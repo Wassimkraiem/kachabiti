@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Header,
   HttpCode,
   Post,
   Query,
@@ -32,7 +33,14 @@ import { MANUAL_CHANNELS, type Channel } from '@shared/erp/constants';
 import { generateOrderNumber } from '@shared/order-number';
 import { CurrentActor, Public } from '../auth/decorators';
 import type { RequestActor } from '../auth/auth.guard';
-import { ApiError, idsFrom, params, zDate } from '../common/api';
+import {
+  ApiError,
+  idsFrom,
+  isManager,
+  params,
+  Raw,
+  zDate,
+} from '../common/api';
 import { invalidateCatalog } from '../catalog/revalidate';
 import { Database } from '../db/database';
 import {
@@ -40,7 +48,7 @@ import {
   ManualLineError,
   type ManualLineInput,
 } from './commerce';
-import { parcelDetail, PortalError } from './colissimo-portal';
+import { parcelDetail, parcelSlip, PortalError } from './colissimo-portal';
 import { ColissimoTracking } from './colissimo-tracking';
 
 // Parcels sent to Colissimo (Admin → Delivery, the order page). GET lists them; POST sends,
@@ -165,6 +173,27 @@ function dbError(error: any): never {
   throw error;
 }
 
+const PAID = 'Livre paye';
+const asSeen = (status: string) => (status === PAID ? 'Livre' : status);
+
+/**
+ * A parcel as staff see it: no cash to collect, price change, order total or Colissimo request
+ * (it holds the price), and "delivered and paid" shown as delivered. Owners and admins see all.
+ */
+function withoutMoney<
+  T extends { status: string; order: { total: unknown } | null },
+>(row: T) {
+  return {
+    ...row,
+    status: asSeen(row.status),
+    paid: false,
+    cod_amount: null,
+    price_change: null,
+    request: null,
+    order: row.order ? { ...row.order, total: null } : null,
+  };
+}
+
 @Controller('delivery')
 @Public()
 export class DeliveryController {
@@ -204,7 +233,8 @@ export class DeliveryController {
    * search; `waiting` is what "Validate for pickup" takes when nothing is ticked: every parcel
    * shown that Colissimo can still take, on any page.
    */
-  private async page(q: ReturnType<typeof params>) {
+  /** `showMoney`: owners and admins see each status's cash to collect; staff only the counts. */
+  private async page(q: ReturnType<typeof params>, showMoney: boolean) {
     const page = q.int('page', 1, 10_000);
     const size = q.int('size', 25, 200);
     let sent = this.live();
@@ -236,6 +266,7 @@ export class DeliveryController {
         'd.status',
         hasBarcode.as('has_barcode'),
         (eb) => eb.fn.countAll<number>().as('n'),
+        sql<number>`coalesce(sum(d.cod_amount), 0)`.as('amount'),
       ])
       .groupBy(['d.status', hasBarcode])
       .execute();
@@ -261,7 +292,16 @@ export class DeliveryController {
     const canTake = sql<boolean>`d.status = 'En attente' and d.barcode is not null`;
     let shown = sent;
     const tab = q.get('tab');
-    if (tab === 'validate') shown = shown.where(canTake);
+    // ?statuses=a,b: Colissimo's own statuses (the page's status cards, like Colissimo's dashboard).
+    // Staff don't see payments: for them "delivered and paid" is just delivered (asSeen).
+    let statuses = q.get('statuses')?.split(',').filter(Boolean);
+    if (statuses?.length && !showMoney)
+      statuses = statuses.some((s) => s === 'Livre' || s === 'Livrer')
+        ? [...statuses, PAID]
+        : statuses.filter((s) => s !== PAID).concat('-'); // '-' matches nothing: never an empty list
+    if (statuses?.length)
+      shown = shown.where(sql<boolean>`d.status = any(${statuses})`);
+    else if (tab === 'validate') shown = shown.where(canTake);
     else if (tab && tab !== 'all') {
       const statuses = groups
         .filter((g) => tabOf(g) === tab)
@@ -304,15 +344,24 @@ export class DeliveryController {
       shown.where(canTake).select('d.id').execute(),
     ]);
     return {
-      rows,
+      rows: showMoney ? rows : rows.map(withoutMoney),
       total: Number(count.n),
       counts,
+      // Parcels per Colissimo status, and their cash to collect for owners and admins only.
+      by_status: groups.map((g) => ({
+        status: showMoney ? g.status : asSeen(g.status),
+        n: Number(g.n),
+        ...(showMoney ? { amount: Number(g.amount) } : {}),
+      })),
       waiting: waiting.map((row) => row.id),
     };
   }
 
   @Get()
-  async list(@Query() query: Record<string, string>) {
+  async list(
+    @Query() query: Record<string, string>,
+    @CurrentActor() actor: RequestActor,
+  ) {
     const q = params(query);
     const orderId = q.get('order_id');
     const status = {
@@ -320,23 +369,60 @@ export class DeliveryController {
       // The last automatic check (every 15 minutes), for "checked … ago".
       tracking: this.tracking.lastRun,
     };
-    if (q.get('page')) return { ...(await this.page(q)), ...status };
+    if (q.get('page'))
+      return { ...(await this.page(q, isManager(actor))), ...status };
     // shortcut: without ?page= the whole list is sent, for Admin → Colissimo account's totals
     // (about 12,000 parcels in Nov 2026); give it totals from the server as it nears this limit.
+    // The whole list is for Admin → Colissimo account (owners); staff read pages or one order's parcels.
+    if (!orderId && !isManager(actor))
+      throw new ApiError('Add ?page= to list parcels', 400);
     let list = this.select().orderBy('d.created_at', 'desc').limit(30000);
     if (orderId) list = list.where('d.order_id', '=', orderId);
-    return { rows: await list.execute(), ...status };
+    const rows = await list.execute();
+    return {
+      rows: isManager(actor) ? rows : rows.map(withoutMoney),
+      ...status,
+    };
+  }
+
+  /**
+   * The parcel's half-page delivery slip from Colissimo's website, for /admin/delivery/print.
+   * It's their page and scripts served from our address, so it's sandboxed: the scripts (barcode,
+   * QR code) run, but in an opaque origin that can't read our cookies or pages.
+   */
+  @Get('slip')
+  @Header('Content-Type', 'text/html; charset=utf-8')
+  @Header('Content-Security-Policy', 'sandbox allow-scripts allow-modals')
+  @Header('Cache-Control', 'no-store')
+  async slip(@Query('code') code = '') {
+    if (!/^\d{6,20}$/.test(code)) throw new ApiError('Enter a valid barcode');
+    try {
+      const html = await parcelSlip(code);
+      if (!html)
+        throw new ApiError('Colissimo has no parcel with this barcode', 404);
+      return new Raw(html);
+    } catch (error) {
+      if (error instanceof PortalError) throw new ApiError(error.message, 502);
+      throw error;
+    }
   }
 
   /** A parcel's details and full status history, read from Colissimo's website (any barcode). */
   @Get('history')
-  async history(@Query('code') code = '') {
+  async history(@Query('code') code = '', @CurrentActor() actor: RequestActor) {
     if (!/^\d{6,20}$/.test(code)) throw new ApiError('Enter a valid barcode');
     try {
       const detail = await parcelDetail(code);
       if (!detail)
         throw new ApiError('Colissimo has no parcel with this barcode', 404);
-      return detail;
+      if (isManager(actor)) return detail;
+      // Staff don't see money: drop Colissimo's amount fields (Montant, Prix, frais…).
+      return {
+        ...detail,
+        fields: detail.fields.filter(
+          (f) => !/montant|prix|price|frais|cod|paye|payé/i.test(f.label),
+        ),
+      };
     } catch (error) {
       if (error instanceof PortalError) throw new ApiError(error.message, 502);
       throw error;

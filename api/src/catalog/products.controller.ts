@@ -19,6 +19,7 @@ import {
 import type { RequestActor } from '../auth/auth.guard';
 import { ApiError, idsFrom, slugify } from '../common/api';
 import { Database } from '../db/database';
+import { VARIANT_COLUMNS } from './queries';
 import { invalidateCatalog } from './revalidate';
 
 // Port of app/api/products/route.ts.
@@ -376,7 +377,7 @@ export class ProductsController {
   private variantsQuery() {
     return this.db
       .selectFrom('product_variants as v')
-      .selectAll('v')
+      .select(VARIANT_COLUMNS)
       .select((eb) => [
         jsonObjectFrom(
           eb

@@ -5,64 +5,83 @@ import { useSearchParams } from "next/navigation";
 import { Alert, Button, Space, Spin, Typography } from "antd";
 import { PrinterOutlined } from "@ant-design/icons";
 import { useAdminT } from "@/lib/admin-i18n";
-import { deliveryApi, type Delivery, type DeliveryList } from "@/components/admin/delivery/delivery-api";
+import { deliveryApi, type DeliveryList } from "@/components/admin/delivery/delivery-api";
 
 const { Text } = Typography;
 
+interface Slip {
+    barcode: string;
+    label: string; // order number, or the barcode
+}
+
 /**
- * The Colissimo delivery slips of several orders (?orders=id1,id2), one per A4 sheet, printed in
- * one go. Opened after validating orders in bulk, or from "Print slips" on the orders list.
+ * Colissimo's half-page delivery slips (from its website, GET /api/delivery/slip), two per A4
+ * sheet, printed in one go. ?orders=id1,id2 (Orders list, after validating in bulk) or
+ * ?codes=barcode1,barcode2 (Delivery tab).
  */
 export default function PrintSlipsPage() {
     const { t } = useAdminT();
     const search = useSearchParams();
-    const [slips, setSlips] = useState<Delivery[] | null>(null);
+    const [slips, setSlips] = useState<Slip[] | null>(null);
     const [loaded, setLoaded] = useState(0);
     const orderIds = (search.get("orders") ?? "").split(",").filter(Boolean);
+    const codes = (search.get("codes") ?? "").split(",").filter((c) => /^\d{6,20}$/.test(c));
+    const asked = orderIds.length + codes.length;
 
     useEffect(() => {
         Promise.all(orderIds.map((id) => deliveryApi<DeliveryList>({ query: `order_id=${encodeURIComponent(id)}` }).then((r) => r.rows[0]).catch(() => undefined)))
-            .then((rows) => setSlips(rows.filter((d): d is Delivery => !!d?.label_url)));
+            .then((rows) => setSlips([
+                ...rows.flatMap((d) => (d?.barcode ? [{ barcode: d.barcode, label: d.order?.order_number ?? d.barcode }] : [])),
+                ...codes.map((barcode) => ({ barcode, label: barcode })),
+            ]));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [search]);
 
     // Print once every slip has loaded in its frame.
     useEffect(() => {
-        if (slips?.length && loaded >= slips.length) setTimeout(() => window.print(), 500);
+        if (slips?.length && loaded >= slips.length) setTimeout(() => window.print(), 800);
     }, [slips, loaded]);
 
     if (!slips) return <Spin />;
     return (
         <div>
             <style>{`
-                .slip-frame { display: block; width: 100%; height: 1100px; border: 1px dashed #ccc; background: #fff; }
+                .slip-frame { display: block; width: 100%; height: 560px; border: 1px dashed #ccc; background: #fff; }
                 @media print {
                     body * { visibility: hidden; }
                     .slips, .slips * { visibility: visible; }
                     .slips { position: absolute; inset: 0 auto auto 0; width: 100%; }
-                    .slip-frame { height: 277mm; border: 0; break-after: page; }
+                    .slip { height: 138mm; overflow: hidden; break-inside: avoid; }
+                    .slip:nth-child(2n) { break-after: page; }
+                    .slip-frame { height: 138mm; border: 0; }
                     .no-print { display: none !important; }
-                    @page { size: A4; margin: 10mm; }
+                    @page { size: A4; margin: 8mm; }
                 }
             `}</style>
             <Space className="no-print" wrap style={{ marginBottom: 16 }}>
                 <Button type="primary" icon={<PrinterOutlined />} onClick={() => window.print()} disabled={slips.length === 0}>
                     {t("Print {count} slip(s)", { count: slips.length })}
                 </Button>
-                {orderIds.length > slips.length && (
-                    <Text type="secondary">{t("{count} order(s) have no Colissimo slip yet", { count: orderIds.length - slips.length })}</Text>
+                <Text type="secondary">{t("Two slips per A4 sheet")}</Text>
+                {asked > slips.length && (
+                    <Text type="secondary">{t("{count} order(s) have no Colissimo slip yet", { count: asked - slips.length })}</Text>
                 )}
             </Space>
             {slips.length === 0 && <Alert className="no-print" type="info" showIcon title={t("No delivery slip to print")} />}
             <div className="slips">
-                {slips.map((d) => (
-                    <div key={d.id}>
+                {slips.map((s) => (
+                    <div className="slip" key={s.barcode}>
                         <div className="no-print" style={{ margin: "12px 0 4px" }}>
-                            <Text strong style={{ fontFamily: "monospace" }}>{d.order?.order_number ?? d.barcode}</Text>{" "}
-                            {/* If Colissimo refuses to show its slip in a frame, it can still be opened on its own. */}
-                            <a href={d.label_url!} target="_blank" rel="noopener noreferrer">{t("Open slip")}</a>
+                            <Text strong style={{ fontFamily: "monospace" }}>{s.label}</Text>
                         </div>
-                        <iframe className="slip-frame" src={d.label_url!} title={d.barcode ?? d.id} onLoad={() => setLoaded((n) => n + 1)} />
+                        {/* Colissimo's own page: sandboxed, so its scripts can't reach the admin. */}
+                        <iframe
+                            className="slip-frame"
+                            src={`/api/delivery/slip?code=${s.barcode}`}
+                            sandbox="allow-scripts allow-modals"
+                            title={s.barcode}
+                            onLoad={() => setLoaded((n) => n + 1)}
+                        />
                     </div>
                 ))}
             </div>

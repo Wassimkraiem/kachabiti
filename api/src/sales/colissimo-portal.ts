@@ -248,6 +248,22 @@ export async function parcelDetail(barcode: string) {
   );
 }
 
+/**
+ * The website's half-page delivery slip (imprimer.php?id=…, the parcel's own id, read from its
+ * page; the API's label link is a full page). Returned with a <base> so its images and styles
+ * load, or null when the website doesn't list the parcel.
+ */
+export async function parcelSlip(barcode: string) {
+  const id = (
+    await page(`recherche.php?code=${encodeURIComponent(barcode)}`)
+  ).match(/imprimer\.php\?id=(\d+)/)?.[1];
+  if (!id) return null;
+  const html = await page(`imprimer.php?id=${id}`);
+  return /<head[^>]*>/i.test(html)
+    ? html.replace(/<head[^>]*>/i, (head) => `${head}<base href="${BASE}">`)
+    : `<base href="${BASE}">${html}`;
+}
+
 /** The website's status names → the ones our deliveries use (the API's, see lib/colissimo-data). */
 const STATUSES: Record<string, string> = {
   'En attente': 'En attente',

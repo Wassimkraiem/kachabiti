@@ -22,7 +22,10 @@ const MUTATION_PERMISSIONS: Record<string, Permission[]> = {
 const withDelete = (method: string, area: Permission[]): Requirement =>
     method === 'DELETE' ? { any: area, all: ['delete'] } : { any: area };
 
-export function apiRequirement(pathname: string, method: string, searchParams: URLSearchParams): Requirement | null {
+export function apiRequirement(rawPathname: string, method: string, searchParams: URLSearchParams): Requirement | null {
+    // Express routes ignore case and a trailing slash, so /api/OWNER/overview/ reaches the owner
+    // route: compare the same way, or such a path would match no rule and be served as public.
+    const pathname = rawPathname.toLowerCase().replace(/\/+$/, '') || '/';
     const under = (prefix: string) => pathname === prefix || pathname.startsWith(`${prefix}/`);
 
     // The owner's money overview.

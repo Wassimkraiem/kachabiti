@@ -280,9 +280,16 @@ export class PurchaseOrdersController {
         .updateTable('purchase_orders')
         .set({ status: body.status })
         .where('id', '=', body.id)
+        // Only from the status checked above: a receipt validated meanwhile may have changed it.
+        .where('status', '=', po.status)
         .returningAll()
-        .executeTakeFirstOrThrow(),
+        .executeTakeFirst(),
     );
+    if (!row)
+      throw new ApiError(
+        'This purchase order changed meanwhile. Reload and try again.',
+        409,
+      );
     await invalidateCatalog();
     return row;
   }
@@ -452,14 +459,21 @@ export class ReceiptsController {
         'Only receipts waiting for their check can be cancelled.',
         409,
       );
-    return this.db.withActor(actor, (trx) =>
+    const cancelled = await this.db.withActor(actor, (trx) =>
       trx
         .updateTable('purchase_receipts')
         .set({ status: 'cancelled' })
         .where('id', '=', body.id)
+        .where('status', '=', 'pending') // not one validated meanwhile (its stock is in)
         .returningAll()
-        .executeTakeFirstOrThrow(),
+        .executeTakeFirst(),
     );
+    if (!cancelled)
+      throw new ApiError(
+        'This receipt was already validated or cancelled.',
+        409,
+      );
+    return cancelled;
   }
 }
 

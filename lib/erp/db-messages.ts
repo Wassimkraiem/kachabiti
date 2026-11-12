@@ -37,6 +37,9 @@ export const DB_MESSAGES: [string, string, number][] = [
     ['same_customer', 'Choose two different customers.', 400],
     ['customer_not_found', 'This customer no longer exists.', 404],
     ['payments_not_open', 'Some payments were already paid out or removed. Reload and try again.', 409],
+    // set_order_status's transition rules (private.order_transition_allowed).
+    ['order_already_sent', 'This order has left with the carrier: it can no longer go back to To confirm, Confirmed or Cancelled. Mark it Returned when the goods come back; that puts its stock back.', 409],
+    ['order_status_not_allowed', 'This status change is not allowed: a returned order can only become Validated, Shipped, Delivered or Cancelled, and a cancelled one must be reopened as To confirm or Confirmed first.', 409],
     ['order_not_found', 'Order not found', 404],
     ['invalid_status', 'Unknown order status.', 400],
     ['append_only', 'History cannot be edited; record a correcting movement instead.', 409],

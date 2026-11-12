@@ -45,6 +45,7 @@ export interface DeliveryList {
 export interface DeliveryPageData extends DeliveryList {
     total: number;
     counts: Record<"all" | "validate" | StatusGroup, number>;
+    by_status: { status: string; n: number }[];
     waiting: string[];
 }
 

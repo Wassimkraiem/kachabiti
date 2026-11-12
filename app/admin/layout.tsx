@@ -27,6 +27,7 @@ import {
     ReloadOutlined,
     SettingOutlined,
     TeamOutlined,
+    KeyOutlined,
     DatabaseOutlined,
     BellOutlined,
     HomeOutlined,
@@ -178,6 +179,7 @@ const menuItems: MenuItem[] = [
         label: msg("Administration"),
         children: [
             { key: "/admin/team", icon: <TeamOutlined />, label: msg("Team") },
+            { key: "/admin/team/api-keys", icon: <KeyOutlined />, label: msg("API keys") },
             { key: "/admin/goals", icon: <AimOutlined />, label: msg("Objectives & commissions") },
             { key: "/admin/performance", icon: <TrophyOutlined />, label: msg("Agent performance") },
             { key: "/admin/settings", icon: <ControlOutlined />, label: msg("Business settings") },
@@ -241,6 +243,7 @@ const MENU_PERMISSIONS: Record<string, Permission | "admin" | "owner"> = {
     "/admin/landing": "marketing",
     "/admin/cart-analytics": "analytics",
     "/admin/team": "admin",
+    "/admin/team/api-keys": "admin",
     "/admin/goals": "admin",
     "/admin/settings": "admin",
     "/admin/activity": "admin",

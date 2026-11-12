@@ -12,6 +12,7 @@ import {
   getProductName,
 } from '@shared/utils/product-utils';
 import { Public } from '../auth/decorators';
+import { VARIANT_COLUMNS } from '../catalog/queries';
 import { Raw } from '../common/api';
 import { Database } from '../db/database';
 import { many, one } from '../db/embed';
@@ -874,7 +875,7 @@ export class StorefrontController {
         liveImages().where('variant_id', 'is', null).execute(),
         this.db
           .selectFrom('product_variants as v')
-          .selectAll('v')
+          .select(VARIANT_COLUMNS)
           .select((eb) => [
             one(
               eb,

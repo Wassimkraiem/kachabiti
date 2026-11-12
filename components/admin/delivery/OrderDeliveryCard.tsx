@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { Alert, Button, Card, Descriptions, Input, Popconfirm, Space, Typography } from "antd";
 import { CarOutlined, DeleteOutlined, EditOutlined, PrinterOutlined, ReloadOutlined, LinkOutlined } from "@ant-design/icons";
+import { printSlips } from "@/components/admin/delivery/print-slips";
 import { message } from "@/components/admin/antd-app";
 import { useAdminRole } from "@/lib/admin-role-context";
 import { DATE_LOCALES, useAdminT } from "@/lib/admin-i18n";
@@ -140,8 +141,8 @@ export default function OrderDeliveryCard({ order, orderStatus, onOrderChanged, 
                         )}
                     </Descriptions>
                     <Space wrap>
-                        {delivery.label_url && (
-                            <Button icon={<PrinterOutlined />} href={delivery.label_url} target="_blank" rel="noopener noreferrer">{t("Print delivery slip")}</Button>
+                        {delivery.barcode && (
+                            <Button icon={<PrinterOutlined />} onClick={() => printSlips(`codes=${delivery.barcode}`)}>{t("Print delivery slip")}</Button>
                         )}
                         {delivery.label_zebra_url && (
                             <Button icon={<PrinterOutlined />} href={delivery.label_zebra_url} target="_blank" rel="noopener noreferrer">{t("Zebra label")}</Button>
