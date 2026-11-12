@@ -34,6 +34,8 @@ export interface RequestActor {
   email: string | null;
   role: AdminRole;
   permissions: Permission[];
+  /** Set when an API key made the request: its orders are assigned to the key itself. */
+  apiKeyId?: string;
 }
 
 /** The session's access token: the kb_access cookie, or `Authorization: Bearer` (scripts, tests). */
@@ -152,6 +154,7 @@ export class AuthGuard implements CanActivate {
     return {
       userId: row.created_by,
       email: `api-key:${row.name}`,
+      apiKeyId: row.id,
       role: 'staff',
       permissions: row.permissions.filter(
         (p): p is Permission => p in PERMISSIONS && p !== 'hard_delete',

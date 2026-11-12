@@ -174,10 +174,12 @@ export class SalesOrdersController {
     const subtotal = lines.reduce((sum, line) => sum + line.subtotal, 0);
     const { shipping, total } = await this.amounts(subtotal, body, actor);
 
-    const assignee =
-      body.assigned_to === undefined ? actor.userId : body.assigned_to;
+    // An API key's own orders are assigned to the key (shown as api-key:<name>), so they count
+    // as the chatbot's, not as the admin who made the key.
+    const self = actor.apiKeyId ?? actor.userId;
+    const assignee = body.assigned_to === undefined ? self : body.assigned_to;
     const assigneeEmail = assignee
-      ? assignee === actor.userId
+      ? assignee === self
         ? actor.email
         : await memberEmail(this.db, assignee)
       : null;
