@@ -133,7 +133,7 @@ export default function SendParcelModal({ order, open, onClose, onSent }: {
                 },
             });
             if (withProducts && result.order) {
-                message.success(t("Order {order_number} created and parcel {barcode} sent to Colissimo", { order_number: result.order.order_number, barcode: result.delivery.barcode ?? "" }));
+                message.success(t("Order {order_number} created and parcel {barcode} created at Colissimo. Validate the order when it's ready.", { order_number: result.order.order_number, barcode: result.delivery.barcode ?? "" }));
             } else {
                 message.success(t("Parcel {barcode} created at Colissimo", { barcode: result.delivery.barcode ?? "" }));
             }

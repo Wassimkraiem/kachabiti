@@ -721,7 +721,8 @@ export class DeliveryController {
   }
 
   // "New parcel" with products: price the lines, create the parcel at Colissimo, then save the
-  // order, lines and parcel and validate the order in one transaction (create_order_with_delivery).
+  // order, lines and parcel in one transaction (create_order_with_delivery). The order stays to
+  // validate: an agent validates it later (validateOrder then uses this parcel).
   private async sendNewOrder(
     parcel: ParcelRequest,
     items: ManualLineInput[],
@@ -845,6 +846,37 @@ export class DeliveryController {
         },
         warning:
           'Colissimo is not connected: the order was validated without a parcel.',
+      };
+    }
+
+    // Already at Colissimo ("New parcel" in Delivery creates the parcel, not the validation):
+    // validating uses that parcel and takes the stock out, without creating another one.
+    const existing = await this.select()
+      .where('d.order_id', '=', orderId)
+      .where('d.barcode', 'is not', null)
+      .where('d.status', '!=', 'Supprime')
+      .executeTakeFirst();
+    if (existing) {
+      const updated = await this.db.withActor(actor, (trx) =>
+        this.db.call<{ status: string; stock_deducted: boolean }>(
+          'set_order_status',
+          {
+            p_order_id: orderId,
+            p_changes: { status: 'processing' },
+            p_actor: actor.userId,
+            p_actor_email: actor.email,
+          },
+          trx,
+        ),
+      );
+      await invalidateCatalog(); // validating took its items out of stock
+      return {
+        delivery: existing,
+        order: {
+          status: updated.status,
+          stock_deducted: updated.stock_deducted,
+        },
+        warning: null,
       };
     }
 

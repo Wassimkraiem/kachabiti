@@ -813,7 +813,7 @@ const entries: Entry[] = [
     ["Added by", "Ajoutée par", "أضافه"],
     ["Pick the products in the parcel: an order is created for them and they leave the stock. Leave empty for a parcel without products.", "Choisissez les produits du colis : une commande est créée pour eux et ils sortent du stock. Laissez vide pour un colis sans produits.", "اختر منتجات الطرد: يُنشأ طلب لها وتُخصم من المخزون. اتركه فارغًا لطرد دون منتجات."],
     ["Choose a product and a size/colour on every product line, or remove the line.", "Choisissez un produit et une taille/couleur sur chaque ligne, ou supprimez la ligne.", "اختر منتجًا ومقاسًا/لونًا في كل سطر، أو احذف السطر."],
-    ["Order {order_number} created and parcel {barcode} sent to Colissimo", "Commande {order_number} créée et colis {barcode} envoyé à Colissimo", "تم إنشاء الطلب {order_number} وإرسال الطرد {barcode} إلى Colissimo"],
+    ["Order {order_number} created and parcel {barcode} created at Colissimo. Validate the order when it's ready.", "Commande {order_number} créée et colis {barcode} créé chez Colissimo. Validez la commande quand elle est prête.", "تم إنشاء الطلب {order_number} والطرد {barcode} لدى Colissimo. صادق على الطلب عندما يكون جاهزاً."],
     ["The products' total. Add the delivery fee if the customer pays it.", "Le total des produits. Ajoutez les frais de livraison si le client les paie.", "مجموع المنتجات. أضف رسوم التوصيل إذا كان العميل يدفعها."],
     ["Size / colour", "Taille / couleur", "المقاس / اللون"],
     ["{quantity} × {price} TND = {subtotal} TND", "{quantity} × {price} TND = {subtotal} TND", "{quantity} × {price} د.ت = {subtotal} د.ت"],
