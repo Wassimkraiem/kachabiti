@@ -2,8 +2,8 @@
 -- mid-way (to be picked up, at the depot, out for delivery) and that Colissimo's account no longer
 -- lists: nobody can say what became of them, so they get a final status of their own,
 -- OLD-ORDERS-UNKNOWN (lib/colissimo-data.ts), and tracking leaves them alone. Their orders are
--- left as they are. Runs after the account sync has set in_colissimo; before it (all true) it
--- changes nothing, and running it again later catches the rest.
+-- left as they are. Before the account sync has set in_colissimo (all true) it changes nothing:
+-- the sync itself now marks them too (ColissimoPortalController.sync).
 update public.deliveries
    set status = 'OLD-ORDERS-UNKNOWN',
        status_changed_at = now(),

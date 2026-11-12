@@ -183,18 +183,34 @@ export class ColissimoPortalController implements OnModuleInit {
     // Which parcels the account still lists (Admin → Delivery shows those, like Colissimo's own
     // dashboard): its barcodes, plus every parcel this system sent (it has Colissimo's slip link).
     // Only after a full read of the account: a failed read throws before this, hiding nothing.
+    let archived = 0;
     if (parcels.length > 0) {
       const inAccount = parcels.map((p) => p.barcode).filter(Boolean);
-      await this.db.withActor(null, (trx) =>
-        trx
+      archived = await this.db.withActor(null, async (trx) => {
+        await trx
           .updateTable('deliveries')
           .set({
             in_colissimo: sql<boolean>`barcode = any(${inAccount}) or label_url is not null`,
           })
           .where('barcode', 'is not', null)
           .where('deleted_at', 'is', null)
-          .execute(),
-      );
+          .execute();
+        // The old tools' parcels stuck mid-way that the account no longer lists: nobody can say
+        // what became of them, so they get a final status of their own (their orders stay as is).
+        const result = await trx
+          .updateTable('deliveries')
+          .set({
+            status: 'OLD-ORDERS-UNKNOWN',
+            status_changed_at: sql`now()`,
+            updated_at: sql`now()`,
+          })
+          .where('in_colissimo', '=', false)
+          .where('label_url', 'is', null)
+          .where('deleted_at', 'is', null)
+          .where('status', 'in', ['A enlever', 'Au depot', 'En cours'])
+          .executeTakeFirst();
+        return Number(result.numUpdatedRows);
+      });
     }
     // Then orders for the parcels without one, and Colissimo's payouts as money (one transaction).
     const history = await this.db.withActor(null, async (trx) =>
@@ -206,6 +222,12 @@ export class ColissimoPortalController implements OnModuleInit {
       }>('import_colissimo_history', { p_payouts: paid }, trx),
     );
     if (updated) await invalidateCatalog(); // returns put stock back
-    return { found: parcels.length, added: rows.length, updated, ...history };
+    return {
+      found: parcels.length,
+      added: rows.length,
+      updated,
+      archived,
+      ...history,
+    };
   }
 }

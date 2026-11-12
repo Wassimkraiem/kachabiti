@@ -159,9 +159,10 @@ export default function ColissimoAccountPage() {
     const sync = async () => {
         setSyncing(true);
         try {
-            const result = await api<{ found: number; added: number; updated: number }>("/api/owner/colissimo/sync", { method: "POST" });
+            const result = await api<{ found: number; added: number; updated: number; archived: number }>("/api/owner/colissimo/sync", { method: "POST" });
             message.success(t("{added} new parcel(s) added to Delivery ({found} in the Colissimo account)", result));
             if (result.updated) message.info(t("{updated} parcel status(es) updated from Colissimo", result));
+            if (result.archived) message.info(t("{archived} old parcel(s) marked as old order, status unknown", result));
         } catch (e) {
             message.error(t((e as Error).message));
         } finally {

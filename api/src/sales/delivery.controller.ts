@@ -234,14 +234,26 @@ export class DeliveryController {
    * shown that Colissimo can still take, on any page.
    */
   /** `showMoney`: owners and admins see each status's cash to collect; staff only the counts. */
-  private async page(q: ReturnType<typeof params>, showMoney: boolean) {
+  /** `isOwner`: owners also see the old parcels whose fate is unknown (OLD-ORDERS-UNKNOWN). */
+  private async page(
+    q: ReturnType<typeof params>,
+    showMoney: boolean,
+    isOwner: boolean,
+  ) {
     const page = q.int('page', 1, 10_000);
     const size = q.int('size', 25, 200);
     let sent = this.live();
     // What Colissimo's account lists, like its dashboard (deliveries.in_colissimo, kept by the
     // account sync). Owners and admins may ask for all their data (?scope=all, old tools included).
     if (!(showMoney && q.get('scope') === 'all'))
-      sent = sent.where('d.in_colissimo', '=', true);
+      sent = sent.where((eb) =>
+        isOwner
+          ? eb.or([
+              eb('d.in_colissimo', '=', true),
+              eb('d.status', '=', 'OLD-ORDERS-UNKNOWN'),
+            ])
+          : eb('d.in_colissimo', '=', true),
+      );
     // Sent between these days (YYYY-MM-DD, Tunis time: UTC+1 all year), both included.
     const from = q.get('from');
     const to = q.get('to');
@@ -374,7 +386,10 @@ export class DeliveryController {
       tracking: this.tracking.lastRun,
     };
     if (q.get('page'))
-      return { ...(await this.page(q, isManager(actor))), ...status };
+      return {
+        ...(await this.page(q, isManager(actor), actor.role === 'owner')),
+        ...status,
+      };
     // shortcut: without ?page= the whole list is sent, for Admin → Colissimo account's totals
     // (about 12,000 parcels in Nov 2026); give it totals from the server as it nears this limit.
     // The whole list is for Admin → Colissimo account (owners); staff read pages or one order's parcels.
