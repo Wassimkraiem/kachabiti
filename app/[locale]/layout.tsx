@@ -8,7 +8,6 @@ import TrafficSource from '@/components/layout/TrafficSource';
 import StaticHeader from '@/components/layout/StaticHeader';
 import Footer from '@/components/footer/Footer';
 import { Suspense } from 'react';
-import Script from "next/script";
 import { headers } from "next/headers";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.kachabiti.com";
@@ -16,19 +15,16 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://www.kachabiti.com"
 // Language-specific metadata
 const metadataByLocale: Record<string, Metadata> = {
     en: {
-        title: "Kachabity - Handcrafted Traditional Products | Premium Quality",
-        description: "Discover authentic handcrafted traditional products at Kachabiti. Premium quality HBarnous ROSSINI, Serviette de table, and unique handmade items. 100% authentic craftsmanship.",
-        keywords: "handcrafted, traditional products, HBarnous ROSSINI, Serviette de table, artisan, handmade, premium quality, Tunisia, traditional wear, home accessories",
+        title: "Kachabiti | Handmade Tunisian Kachabia, Burnous & Traditional Clothing",
+        description: "Handmade traditional Tunisian clothing: wool and cashmere kachabia, burnous, dengri, chechia and prayer qamis. Delivery across Tunisia, cash on delivery.",
     },
     fr: {
-        title: "Kachabity - Produits Traditionnels Artisanaux | Qualité Premium",
-        description: "Découvrez des produits traditionnels artisanaux authentiques chez Artisan par Kraiem. Qualité premium HBarnous ROSSINI, Serviette de table et articles uniques faits main. 100% artisanat authentique.",
-        keywords: "artisanal, produits traditionnels, HBarnous ROSSINI, Serviette de table, artisan, fait main, qualité premium, Tunisie, vêtements traditionnels, accessoires maison",
+        title: "Kachabiti | Kachabia, burnous et habits traditionnels tunisiens faits main",
+        description: "Habits traditionnels tunisiens faits main : kachabia en laine et cachemire, burnous, dengri, chéchia et qamis. Livraison partout en Tunisie, paiement à la livraison.",
     },
     ar: {
-        title: "Kachabity - منتجات تقليدية حرفية | جودة ممتازة",
-        description: "اكتشف المنتجات التقليدية الحرفية الأصيلة في حرفي من قبل كريم. جودة ممتازة حبرنوس روسيني، مناديل المائدة، وقطع فريدة مصنوعة يدوياً. 100% حرفية أصيلة.",
-        keywords: "حرفي, منتجات تقليدية, حبرنوس روسيني, مناديل المائدة, حرفي, مصنوع يدوياً, جودة ممتازة, تونس, ملابس تقليدية, إكسسوارات منزلية",
+        title: "قشابيتي Kachabiti | قشابية، برنوس ولباس تقليدي تونسي",
+        description: "لباس تقليدي تونسي مصنوع يدوياً: قشابية صوف وكشمير، برنوس، دنقري، شاشية وقميص صلاة. توصيل لكامل ولايات تونس والدفع عند الاستلام.",
     }
 };
 
@@ -40,9 +36,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     return {
         ...baseMetadata,
         metadataBase: new URL(SITE_URL),
-        authors: [{ name: "Kachabity" }],
-        creator: "Kachabity",
-        publisher: "Kachabity",
+        authors: [{ name: "Kachabiti" }],
+        creator: "Kachabiti",
+        publisher: "Kachabiti",
         robots: {
             index: true,
             follow: true,
@@ -79,7 +75,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         // Each page's own address (the path without query), and the same page in the other languages.
         alternates: {
             canonical: path,
-            languages: Object.fromEntries(["en", "fr", "ar"].map((l) => [l, path.replace(/^\/(en|fr|ar)(?=\/|$)/, `/${l}`)])),
+            languages: Object.fromEntries(
+                ["en", "fr", "ar", "x-default"].map((l) => [l, path.replace(/^\/(en|fr|ar)(?=\/|$)/, `/${l === "x-default" ? "ar" : l}`)])
+            ),
         },
     };
 }
@@ -109,37 +107,6 @@ export default async function LocaleLayout({
                 <MobileTabBar locale={locale} />
                 <CartDrawer />
                 <TrafficSource />
-                <Script
-                    id="json-ld-organization"
-                    type="application/ld+json"
-                    dangerouslySetInnerHTML={{
-                        __html: JSON.stringify({
-                            "@context": "https://schema.org",
-                            "@type": "Organization",
-                            "name": "Kachabiti",
-                            "url": SITE_URL,
-                            "logo": `${SITE_URL}/assets/images/logoKachabity.jpg`,
-                            "contactPoint": {
-                                "@type": "ContactPoint",
-                                "telephone": "+216-55-558-648",
-                                "contactType": "Customer Service"
-                            },
-                            "sameAs": [
-                                "https://www.facebook.com/profile.php?id=61562718525332",
-                                "https://www.instagram.com/kachabitii/",
-                                "https://www.tiktok.com/@kachabitii"
-                            ],
-                            "address": {
-                                "@type": "PostalAddress",
-                                "streetAddress": "123 Artisan Street",
-                                "addressLocality": "Tunis",
-                                "addressRegion": "Tunis",
-                                "postalCode": "1000",
-                                "addressCountry": "TN"
-                            }
-                        })
-                    }}
-                />
             </CartProvider>
         </LanguageProvider>
     );

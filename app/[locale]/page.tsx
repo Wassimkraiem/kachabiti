@@ -19,6 +19,8 @@ import CollectionSpotlight from "@/components/landing/CollectionSpotlight";
 import HowToOrder from "@/components/landing/HowToOrder";
 import type { LandingProduct, SpotlightCollection } from "@/lib/landing-products";
 import { DEFAULT_LANDING_CONFIG, type HomeSectionKey, type LandingConfig } from "@/lib/landing-config";
+import JsonLd from "@/components/JsonLd";
+import { siteJsonLd } from "@/lib/structured-data";
 import { getFeaturedCategories, getTopProducts, getPromoProducts, getSaleBanners, getReels, getLatestReviews } from "@/lib/home-data";
 
 // The hero carousel is hidden until it has its own images; the product showcase leads the page meanwhile.
@@ -161,6 +163,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   return (
     <ErrorBoundary>
       <main className="min-h-screen bg-white">
+        <JsonLd data={siteJsonLd(locale)} />
         {SHOW_HERO_CAROUSEL && <HeroContent locale={locale} />}
         <Suspense fallback={<LoadingSpinner />}>
           {landing.layout

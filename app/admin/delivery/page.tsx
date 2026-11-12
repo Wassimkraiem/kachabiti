@@ -265,8 +265,9 @@ export default function DeliveryPage() {
                         </Tooltip>
                     )}
                     {/* Every parcel whose price can still change: changed at once while waiting for pickup,
-                        then a request Colissimo answers (until delivered and paid). EditParcelModal picks which. */}
-                    {canChangePrice(row) && showMoney && (
+                        then a request Colissimo answers (until delivered and paid). EditParcelModal picks which.
+                        Staff too: they see no amounts, so they type the new price. */}
+                    {canChangePrice(row) && (
                         <Button type="link" size="small" icon={<DollarOutlined />} onClick={() => setEditing(row)}>
                             {t("Change price")}
                         </Button>

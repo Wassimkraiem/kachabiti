@@ -2,6 +2,7 @@ import { NextRequest, NextResponse, type NextFetchEvent } from 'next/server';
 import { supportedLanguages, defaultLanguage, detectLanguageFromHeader, isValidLocale } from './lib/language-utils';
 import { adminHome, allows, getAdminRole, getPermissions, type Requirement } from './lib/admin-auth';
 import { ACCESS_COOKIE, REFRESH_COOKIE, verifyAccessToken } from './lib/auth-session';
+import { legacyAnswer } from './lib/legacy-redirects';
 
 const ADMIN_LOGIN_PATH = '/admin/login';
 
@@ -160,6 +161,16 @@ async function handle(request: NextRequest, event: NextFetchEvent) {
 
     if (pathname === '/api-docs' || pathname.startsWith('/api-docs/') || pathname.startsWith('/api/')) {
         return NextResponse.next({ request: { headers: request.headers } });
+    }
+
+    // Old WooCommerce addresses still in Google: moved for good, or gone (lib/legacy-redirects.ts).
+    const legacy = legacyAnswer(pathname);
+    if (legacy && 'redirect' in legacy) return NextResponse.redirect(new URL(legacy.redirect, request.url), 301);
+    if (legacy) {
+        return new NextResponse(
+            '<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><title>410</title><p>Cette page n’existe plus. <a href="/">Kachabiti</a></p>',
+            { status: 410, headers: { 'content-type': 'text/html; charset=utf-8' } }
+        );
     }
 
     const segments = pathname.split('/');

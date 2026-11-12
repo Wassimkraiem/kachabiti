@@ -299,6 +299,16 @@ const content = {
     }
 };
 
+// Default selection: first available color and its first variant's size.
+function defaultSelection(product: Product | null) {
+    const available = (product?.product_variants ?? []).filter((v: ProductVariant) => v.is_available !== false);
+    const color = available.find((v: ProductVariant) => v.color_id)?.color_id ?? null;
+    const variant = (color
+        ? available.find((v: ProductVariant) => v.color_id === color)
+        : available.find((v: ProductVariant) => v.size_id) ?? available[0]) ?? null;
+    return { color, variant, size: variant?.size_id ?? null };
+}
+
 export default function ProductDetailClient({ initialData, freeShippingThreshold }: { initialData?: ProductDetailData | null; freeShippingThreshold?: number | null }) {
     const params = useParams();
     const searchParams = useSearchParams();
@@ -307,12 +317,16 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
     const slug = params.slug as string;
     const categorySlug = searchParams.get('category');
 
-    const [product, setProduct] = useState<Product | null>();
+    // Start from the server's data so the first HTML already holds the product (title, price,
+    // description, photos) for shoppers and search engines, instead of a loading spinner.
+    const initialProduct = (initialData?.product ?? null) as unknown as Product | null;
+    const [initialPick] = useState(() => defaultSelection(initialProduct));
+    const [product, setProduct] = useState<Product | null | undefined>(initialData ? initialProduct : undefined);
     const [categoryName, setCategoryName] = useState<string>('');
-    const [similarProducts, setSimilarProducts] = useState<Product[]>([]);
-    const [relatedCategories, setRelatedCategories] = useState<Category[]>([]);
+    const [similarProducts, setSimilarProducts] = useState<Product[]>((initialData?.similarProducts ?? []) as unknown as Product[]);
+    const [relatedCategories, setRelatedCategories] = useState<Category[]>((initialData?.relatedCategories ?? []) as Category[]);
     const [reviews, setReviews] = useState<Review[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(!initialData);
     const [selectedImage, setSelectedImage] = useState(0);
     const [quantity, setQuantity] = useState(1);
     // Phones: a sticky buy bar shows whenever the main add-to-cart row is out of view.
@@ -325,9 +339,9 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
         observer.observe(buyRowEl);
         return () => observer.disconnect();
     }, [buyRowEl]);
-    const [selectedColor, setSelectedColor] = useState<string | null>(null);
-    const [selectedSize, setSelectedSize] = useState<string | null>(null);
-    const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null);
+    const [selectedColor, setSelectedColor] = useState<string | null>(initialPick.color);
+    const [selectedSize, setSelectedSize] = useState<string | null>(initialPick.size);
+    const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(initialPick.variant);
     const [submittingComment, setSubmittingComment] = useState(false);
     const [selectedRating, setSelectedRating] = useState(5);
     const [visibleComments, setVisibleComments] = useState(3);
@@ -349,22 +363,10 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                 setSimilarProducts(detail.similarProducts as unknown as Product[]);
                 setRelatedCategories(detail.relatedCategories as Category[]);
 
-                // Default selection: first available color and its first variant's size.
-                const variants = productWithVariants.product_variants ?? [];
-                const available = variants.filter((v: ProductVariant) => v.is_available !== false);
-                const firstColorId = available.find((v: ProductVariant) => v.color_id)?.color_id;
-                if (firstColorId) {
-                    setSelectedColor(firstColorId);
-                    const firstVariant = available.find((v: ProductVariant) => v.color_id === firstColorId);
-                    if (firstVariant) {
-                        setSelectedVariant(firstVariant);
-                        if (firstVariant.size_id) setSelectedSize(firstVariant.size_id);
-                    }
-                } else {
-                    const firstVariant = available.find((v: ProductVariant) => v.size_id) ?? available[0];
-                    if (firstVariant) setSelectedVariant(firstVariant);
-                    if (firstVariant?.size_id) setSelectedSize(firstVariant.size_id);
-                }
+                const pick = defaultSelection(productWithVariants);
+                setSelectedColor(pick.color);
+                setSelectedVariant(pick.variant);
+                setSelectedSize(pick.size);
 
                 // Show the product now; reviews fill in below (they change often, so they aren't cached).
                 setLoading(false);

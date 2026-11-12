@@ -155,8 +155,8 @@ export default function OrderDeliveryCard({ order, orderStatus, onOrderChanged, 
                         {canEditParcel(delivery) && (
                             <Button icon={<EditOutlined />} onClick={() => setEditing(true)}>{t("Edit parcel")}</Button>
                         )}
-                        {/* Owners and admins: staff get no amounts, so the form couldn't show the current price. */}
-                        {canChangePrice(delivery) && role.isAdmin && (
+                        {/* Everyone with orders access; staff see no amounts, so they type the new price. */}
+                        {canChangePrice(delivery) && (
                             <Button icon={<DollarOutlined />} onClick={() => setEditing(true)}>{t("Change price")}</Button>
                         )}
                         <Link href="/admin/delivery">{t("All parcels")}</Link>

@@ -47,10 +47,13 @@ export default function EditParcelModal({ delivery, onClose, onSaved }: {
             adresse: delivery.address ?? "",
             designation: delivery.designation ?? "",
             nb_article: delivery.items_count ?? 1,
-            prix: Number(delivery.price_change?.new_price ?? delivery.cod_amount ?? 0),
+            // Staff get no amounts: the price starts empty (left empty in an edit = unchanged).
+            prix: delivery.price_change ? Number(delivery.price_change.new_price)
+                : delivery.cod_amount != null ? Number(delivery.cod_amount)
+                : undefined,
             reason: undefined,
         });
-    }, [delivery, form]);
+    }, [delivery, editable, form]);
 
     const save = async () => {
         if (!delivery) return;
@@ -152,7 +155,7 @@ export default function EditParcelModal({ delivery, onClose, onSaved }: {
                             <InputNumber min={1} max={999} precision={0} style={{ width: "100%" }} />
                         </Form.Item>
                     )}
-                    <Form.Item name="prix" label={t("Cash to collect (TND)")} rules={[{ required: true, message: t("Required") }]} style={{ flex: "1 1 140px" }}>
+                    <Form.Item name="prix" label={t("Cash to collect (TND)")} rules={[{ required: !editable || delivery?.cod_amount != null, message: t("Required") }]} style={{ flex: "1 1 140px" }}>
                         <InputNumber min={0} max={99999.999} step={1} precision={3} style={{ width: "100%" }} />
                     </Form.Item>
                 </div>

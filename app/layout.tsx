@@ -82,36 +82,6 @@ export default async function RootLayout({
   const lang = (await headers()).get("x-locale") ?? "en";
   return (
     <html lang={lang} suppressHydrationWarning>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              name: "Kachabiti",
-              url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.kachabiti.com",
-              logo: `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.kachabiti.com"}/assets/images/logoKachabity.jpg`,
-              description: "Premium handcrafted traditional products and authentic artisan goods",
-              contactPoint: {
-                "@type": "ContactPoint",
-                telephone: "+216 55 558 648",
-                contactType: "customer service",
-              },
-              address: {
-                "@type": "PostalAddress",
-                addressCountry: "TN",
-                addressLocality: "Tunisia",
-              },
-              sameAs: [
-                "https://www.facebook.com/profile.php?id=61562718525332",
-                "https://www.instagram.com/kachabitii/",
-                "https://www.tiktok.com/@kachabitii",
-              ],
-            }),
-          }}
-        />
-      </head>
       <body className={`${inter.className} ${hando.variable}`} suppressHydrationWarning>
           {children}
           <Toaster

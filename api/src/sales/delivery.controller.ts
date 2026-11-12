@@ -1160,6 +1160,12 @@ export class DeliveryController {
         .returningAll()
         .executeTakeFirstOrThrow(),
     );
+    // Staff may ask for a new price but still don't see amounts (as in withoutMoney).
+    if (!isManager(actor))
+      return {
+        delivery: { ...delivery, cod_amount: null, price_change: null },
+        price_change: { ...priceChange, old_price: null },
+      };
     return { delivery, price_change: priceChange };
   }
 }
