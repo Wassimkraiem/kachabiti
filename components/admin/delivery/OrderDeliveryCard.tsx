@@ -144,7 +144,7 @@ export default function OrderDeliveryCard({ order, orderStatus, onOrderChanged, 
                     </Descriptions>
                     <Space wrap>
                         {delivery.barcode && (
-                            <Button icon={<PrinterOutlined />} onClick={() => printSlips(`codes=${delivery.barcode}`)}>{t("Print delivery slip")}</Button>
+                            <Button icon={<PrinterOutlined />} onClick={() => printSlips(`codes=${delivery.barcode}`, t)}>{t("Print delivery slip")}</Button>
                         )}
                         {delivery.label_zebra_url && (
                             <Button icon={<PrinterOutlined />} href={delivery.label_zebra_url} target="_blank" rel="noopener noreferrer">{t("Zebra label")}</Button>

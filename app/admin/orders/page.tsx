@@ -207,7 +207,7 @@ export default function AdminOrdersPage() {
                 message.success(t("Order {order_number} validated", { order_number: order.order_number }));
             }
             if (result.warning) message.warning(t(result.warning));
-            if (result.delivery?.barcode) printSlips(`orders=${order.id}`);
+            if (result.delivery?.barcode) printSlips(`orders=${order.id}`, t);
             fetchOrders();
         } catch (e) {
             if (errorCode(e) === "NEEDS_DETAILS") {
@@ -240,7 +240,7 @@ export default function AdminOrdersPage() {
         setBulkValidating(false);
         if (validated.length > 0) {
             message.success(t("Validated {count} order(s)", { count: validated.length }));
-            printSlips(`orders=${validated.join(",")}`);
+            printSlips(`orders=${validated.join(",")}`, t);
         }
         setSelectedRows([]);
         fetchOrders();
@@ -544,7 +544,7 @@ export default function AdminOrdersPage() {
                                         <Button type="primary" loading={bulkValidating}>{t("Validate ({count})", { count: toValidate.length })}</Button>
                                     </Popconfirm>
                                 )}
-                                <Button icon={<PrinterOutlined />} onClick={() => printSlips(`orders=${selectedRowKeys.join(",")}`)}>
+                                <Button icon={<PrinterOutlined />} onClick={() => printSlips(`orders=${selectedRowKeys.join(",")}`, t)}>
                                     {t("Print slips ({count})", { count: selectedRowKeys.length })}
                                 </Button>
                                 {isAdmin ? (

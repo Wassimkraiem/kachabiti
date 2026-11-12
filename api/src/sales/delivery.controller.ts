@@ -48,7 +48,7 @@ import {
   ManualLineError,
   type ManualLineInput,
 } from './commerce';
-import { parcelDetail, parcelSlip, PortalError } from './colissimo-portal';
+import { parcelDetail, PortalError, slipsDocument } from './colissimo-portal';
 import { ColissimoTracking } from './colissimo-tracking';
 
 // Parcels sent to Colissimo (Admin → Delivery, the order page). GET lists them; POST sends,
@@ -173,16 +173,18 @@ function dbError(error: any): never {
   throw error;
 }
 
+const PAID = 'Livre paye';
+
 /**
  * A parcel as staff see it: no cash to collect, price change, order total or Colissimo request
- * (it holds the price). Its status stays Colissimo's, so the status cards count like the owner's
- * and Colissimo's dashboard. Owners and admins see all.
+ * (it holds the price), and "delivered and paid" shown as delivered. Owners and admins see all.
  */
 function withoutMoney<
   T extends { status: string; order: { total: unknown } | null },
 >(row: T) {
   return {
     ...row,
+    status: row.status === PAID ? 'Livre' : row.status,
     paid: false,
     cod_amount: null,
     price_change: null,
@@ -306,7 +308,10 @@ export class DeliveryController {
     let shown = sent;
     const tab = q.get('tab');
     // ?statuses=a,b: Colissimo's own statuses (the page's status cards, like Colissimo's dashboard).
-    const statuses = q.get('statuses')?.split(',').filter(Boolean);
+    // "Delivered and paid" is for owners and admins: staff's cards and filters leave those out.
+    let statuses = q.get('statuses')?.split(',').filter(Boolean);
+    if (statuses?.length && !showMoney)
+      statuses = statuses.filter((s) => s !== PAID).concat('-'); // '-' matches nothing: never an empty list
     if (statuses?.length)
       shown = shown.where(sql<boolean>`d.status = any(${statuses})`);
     else if (tab === 'validate') shown = shown.where(canTake);
@@ -356,11 +361,13 @@ export class DeliveryController {
       total: Number(count.n),
       counts,
       // Parcels per Colissimo status, and their cash to collect for owners and admins only.
-      by_status: groups.map((g) => ({
-        status: g.status,
-        n: Number(g.n),
-        ...(showMoney ? { amount: Number(g.amount) } : {}),
-      })),
+      by_status: groups
+        .filter((g) => showMoney || g.status !== PAID)
+        .map((g) => ({
+          status: g.status,
+          n: Number(g.n),
+          ...(showMoney ? { amount: Number(g.amount) } : {}),
+        })),
       waiting: waiting.map((row) => row.id),
     };
   }
@@ -397,22 +404,54 @@ export class DeliveryController {
   }
 
   /**
-   * The parcel's half-page delivery slip from Colissimo's website, for /admin/delivery/print.
-   * It's their page and scripts served from our address, so it's sandboxed: the scripts (barcode,
-   * QR code) run, but in an opaque origin that can't read our cookies or pages.
+   * Colissimo's delivery slips (from its website) as one document, one slip per A4 sheet, which
+   * printSlips() prints in a single dialog: ?codes=barcode1,barcode2 and/or ?orders=id1,id2 (their
+   * live parcels). Scripts are stripped and blocked (CSP), so it's safe from our address.
+   * <meta name="slips-missing"> counts the ones that couldn't be added.
    */
-  @Get('slip')
+  @Get('slips')
   @Header('Content-Type', 'text/html; charset=utf-8')
-  // No allow-modals: a slip can't open its own print dialog (the print page prints them all once).
-  @Header('Content-Security-Policy', 'sandbox allow-scripts')
+  @Header(
+    'Content-Security-Policy',
+    "script-src 'none'; object-src 'none'; frame-ancestors 'self'",
+  )
   @Header('Cache-Control', 'no-store')
-  async slip(@Query('code') code = '') {
-    if (!/^\d{6,20}$/.test(code)) throw new ApiError('Enter a valid barcode');
+  async slips(@Query('codes') codes = '', @Query('orders') orders = '') {
+    const orderIds = orders
+      .split(',')
+      .filter((id) => z.guid().safeParse(id).success);
+    const fromOrders = orderIds.length
+      ? await this.db
+          .selectFrom('deliveries')
+          .select(['order_id', 'barcode'])
+          .where('order_id', 'in', orderIds)
+          .where('barcode', 'is not', null)
+          .where('deleted_at', 'is', null)
+          .where('status', '!=', 'Supprime')
+          .execute()
+      : [];
+    const barcodes = [
+      ...new Set([
+        // In the order the orders were given.
+        ...orderIds.flatMap((id) =>
+          fromOrders.filter((d) => d.order_id === id).map((d) => d.barcode!),
+        ),
+        ...codes.split(',').filter((c) => /^\d{6,20}$/.test(c)),
+      ]),
+    ].slice(0, 200);
+    const asked = orderIds.length + codes.split(',').filter(Boolean).length;
+    if (!barcodes.length) throw new ApiError('No delivery slip to print', 404);
     try {
-      const html = await parcelSlip(code);
+      const { html, missing } = await slipsDocument(barcodes);
       if (!html)
-        throw new ApiError('Colissimo has no parcel with this barcode', 404);
-      return new Raw(html);
+        throw new ApiError('Colissimo has no slip for these parcels', 404);
+      const skipped = Math.max(missing.length, asked - barcodes.length);
+      return new Raw(
+        html.replace(
+          /<head[^>]*>/i,
+          (head) => `${head}<meta name="slips-missing" content="${skipped}">`,
+        ),
+      );
     } catch (error) {
       if (error instanceof PortalError) throw new ApiError(error.message, 502);
       throw error;

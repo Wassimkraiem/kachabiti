@@ -76,14 +76,16 @@ export default function StatusCards({ byStatus, selected, onSelect, showMoney }:
     byStatus: { status: string; n: number; amount?: number }[];
     selected: string;
     onSelect: (key: string) => void;
-    /** Owners and admins: each card's amount. */
+    /** Owners and admins: each card's amount, and the "Delivered and paid" card. */
     showMoney: boolean;
 }) {
     const { t, locale } = useAdminT();
     const total = (statuses: string[]) => byStatus.filter((s) => statuses.includes(s.status)).reduce((sum, s) => ({ n: sum.n + s.n, amount: sum.amount + (s.amount ?? 0) }), { n: 0, amount: 0 });
     const other = byStatus.filter((s) => !KNOWN.has(s.status));
-    // Everyone gets every Colissimo card (staff without amounts); ours only when it has parcels.
-    const visible = STATUS_CARDS.filter((c) => c.key !== "old_unknown" || total(c.statuses).n > 0);
+    // "Delivered and paid" for owners and admins only; ours ("old order") only when it has parcels.
+    const visible = STATUS_CARDS.filter(
+        (c) => (showMoney || c.key !== "paid") && (c.key !== "old_unknown" || total(c.statuses).n > 0),
+    );
     const cards: Card[] = other.length
         ? [...visible, { key: "other", label: msg("Other"), statuses: other.map((s) => s.status), icon: <QuestionOutlined />, accent: ACCENT.other }]
         : visible;

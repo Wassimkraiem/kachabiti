@@ -258,15 +258,40 @@ export async function parcelSlip(barcode: string) {
     await page(`recherche.php?code=${encodeURIComponent(barcode)}`)
   ).match(/imprimer\.php\?id=(\d+)/)?.[1];
   if (!id) return null;
-  // The page prints itself on load: /admin/delivery/print puts many slips in one document and
-  // prints that once, so each slip printing on its own would open one dialog per parcel.
-  const html = (await page(`imprimer.php?id=${id}`)).replace(
-    /window\.print\(\)\s*;?/g,
-    '',
-  );
+  const html = await page(`imprimer.php?id=${id}`);
   return /<head[^>]*>/i.test(html)
     ? html.replace(/<head[^>]*>/i, (head) => `${head}<base href="${BASE}">`)
     : `<base href="${BASE}">${html}`;
+}
+
+const SLIP = '<div class="bl-container">';
+
+/**
+ * Several slips as one printable document: the first slip's page (its styles print one slip per
+ * A4 sheet) with every slip's `.bl-container` in it, in the order given. Without any script or
+ * inline handler (the page would print itself on load; the slips need none: the barcode is an
+ * image), so it can be served from our address. `missing`: barcodes the website doesn't list.
+ */
+export async function slipsDocument(barcodes: string[]) {
+  const pages: (string | null)[] = [];
+  for (let i = 0; i < barcodes.length; i += 5)
+    // a few at a time, gently for their website
+    pages.push(
+      ...(await Promise.all(barcodes.slice(i, i + 5).map(parcelSlip))),
+    );
+  const found = pages.filter((html): html is string => !!html?.includes(SLIP));
+  const missing = barcodes.filter((_, i) => !pages[i]?.includes(SLIP));
+  if (!found.length) return { html: null, missing };
+  const block = (html: string) => {
+    const start = html.indexOf(SLIP);
+    const end = html.slice(start).search(/<script|<\/body>/i);
+    return end < 0 ? html.slice(start) : html.slice(start, start + end);
+  };
+  const html =
+    `${found[0].slice(0, found[0].indexOf(SLIP))}${found.map(block).join('\n')}</body></html>`
+      .replace(/<script[\s\S]*?<\/script>/gi, '')
+      .replace(/\s+on[a-z]+\s*=\s*("[^"]*"|'[^']*')/gi, '');
+  return { html, missing };
 }
 
 /** The website's status names → the ones our deliveries use (the API's, see lib/colissimo-data). */

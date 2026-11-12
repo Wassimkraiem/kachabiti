@@ -250,7 +250,7 @@ export default function DeliveryPage() {
                 <Space size={0}>
                     {row.barcode && (
                         <Tooltip title={t("Slip")}>
-                            <Button type="link" size="small" icon={<PrinterOutlined />} onClick={() => printSlips(`codes=${row.barcode}`)} aria-label={t("Slip")} />
+                            <Button type="link" size="small" icon={<PrinterOutlined />} onClick={() => printSlips(`codes=${row.barcode}`, t)} aria-label={t("Slip")} />
                         </Tooltip>
                     )}
                     {row.barcode && (
@@ -264,10 +264,11 @@ export default function DeliveryPage() {
                             <Button type="link" size="small" icon={<EditOutlined />} onClick={() => setEditing(row)} aria-label={t("Edit")} />
                         </Tooltip>
                     )}
+                    {/* Picked up or printed parcels: Colissimo only takes a price change request (until delivered and paid). */}
                     {canRequestPriceChange(row) && showMoney && (
-                        <Tooltip title={t("Price change request")}>
-                            <Button type="link" size="small" icon={<DollarOutlined />} onClick={() => setEditing(row)} aria-label={t("Price change request")} />
-                        </Tooltip>
+                        <Button type="link" size="small" icon={<DollarOutlined />} onClick={() => setEditing(row)}>
+                            {t("Change price")}
+                        </Button>
                     )}
                     {canDelete && canRemoveParcel(row) && (
                         <Popconfirm
@@ -402,7 +403,7 @@ export default function DeliveryPage() {
                             </Popconfirm>
                         )}
                         {printable.length > 0 && (
-                            <Button icon={<PrinterOutlined />} onClick={() => printSlips(`codes=${printable.join(",")}`)}>
+                            <Button icon={<PrinterOutlined />} onClick={() => printSlips(`codes=${printable.join(",")}`, t)}>
                                 {t("Print slips ({count})", { count: printable.length })}
                             </Button>
                         )}
