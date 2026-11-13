@@ -46,7 +46,7 @@ export const STATUS_CARDS: Card[] = [
     { key: "depot", label: msg("At the depot"), statuses: ["Au depot", "Au magasin"], icon: <HomeOutlined />, accent: ACCENT.moving },
     { key: "return_depot", label: msg("Returned to the depot"), statuses: ["Retour depot", "Rtn depot"], icon: <HomeOutlined />, accent: ACCENT.returned },
     { key: "moving", label: msg("Out for delivery"), statuses: ["En cours"], icon: <CarOutlined />, accent: ACCENT.moving },
-    { key: "check", label: msg("To be checked"), statuses: ["A verifier", "Non recu", "Inconnu"], icon: <QuestionOutlined />, accent: ACCENT.check },
+    { key: "check", label: msg("To be checked"), statuses: ["A verifier", "Non recu"], icon: <QuestionOutlined />, accent: ACCENT.check },
     { key: "delivered", label: msg("Delivered"), statuses: ["Livre", "Livrer"], icon: <CheckCircleOutlined />, accent: ACCENT.delivered },
     { key: "paid", label: msg("Delivered and paid"), statuses: ["Livre paye"], icon: <DollarOutlined />, accent: ACCENT.delivered },
     { key: "exchange_back", label: msg("Exchanges returned"), statuses: ["Echange retourne"], icon: <RollbackOutlined />, accent: ACCENT.exchange },

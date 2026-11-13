@@ -11,8 +11,10 @@ import * as Sentry from '@sentry/nestjs';
 import { OwnerOnly } from '../auth/decorators';
 import { ApiError, zDate } from '../common/api';
 import { Database } from '../db/database';
+import { ColissimoTracking } from './colissimo-tracking';
 import {
   allParcels,
+  cardParcels,
   deliveryStatus,
   payouts,
   PortalError,
@@ -23,6 +25,7 @@ import {
 import { invalidateCatalog } from '../catalog/revalidate';
 
 const DAY = 86_400_000;
+export const SYNC_EVERY_MS = 5 * 60_000;
 
 /** Turns a portal failure into a 502 with its message (and reports the unexpected ones). */
 async function fromPortal<T>(work: () => Promise<T>) {
@@ -42,28 +45,20 @@ async function fromPortal<T>(work: () => Promise<T>) {
 @Controller('owner/colissimo')
 @OwnerOnly()
 export class ColissimoPortalController implements OnModuleInit {
-  constructor(private readonly db: Database) {}
+  constructor(
+    private readonly db: Database,
+    private readonly tracking: ColissimoTracking,
+  ) {}
 
-  /** The account sync every night at 03:00 Tunis time (02:00 UTC), so Delivery keeps matching. */
+  /** The account sync every 5 minutes (a minute after start-up), so Delivery keeps matching. */
   onModuleInit() {
     if (!portalConfigured()) return;
-    const next = () => {
-      const now = new Date();
-      const at = new Date(
-        Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 2),
+    const tick = () =>
+      void this.sync().catch((error) =>
+        Sentry.captureException(error, { tags: { area: 'colissimo-sync' } }),
       );
-      if (at <= now) at.setUTCDate(at.getUTCDate() + 1);
-      setTimeout(() => {
-        this.sync()
-          .catch((error) =>
-            Sentry.captureException(error, {
-              tags: { area: 'colissimo-sync' },
-            }),
-          )
-          .finally(next);
-      }, at.getTime() - now.getTime()).unref();
-    };
-    next();
+    setTimeout(tick, 60_000).unref();
+    setInterval(tick, SYNC_EVERY_MS).unref();
   }
 
   @Get()
@@ -114,9 +109,22 @@ export class ColissimoPortalController implements OnModuleInit {
    */
   @Post('sync')
   @HttpCode(200)
-  async sync() {
+  sync() {
+    // One run at a time: the 5-minute schedule and the owner's button share it.
+    this.running ??= this.run().finally(() => (this.running = null));
+    return this.running;
+  }
+
+  private running: ReturnType<ColissimoPortalController['run']> | null = null;
+
+  private async run() {
     const parcels = await fromPortal(allParcels);
     const paid = await fromPortal(payouts);
+    // The dashboard's cards: the status Colissimo counts each parcel under (its search list names
+    // some differently, e.g. exchanges as "Inconnu"), with its attempts and contents.
+    const cards = await fromPortal(cardParcels);
+    const statusOf = (p: { barcode: string; status: string }) =>
+      cards.get(p.barcode)?.status ?? deliveryStatus(p.status);
     const stored = await this.db
       .selectFrom('deliveries')
       .select(['id', 'barcode', 'status', 'paid', 'deleted_at'])
@@ -131,7 +139,7 @@ export class ColissimoPortalController implements OnModuleInit {
     for (const row of stored) {
       const parcel = row.deleted_at ? undefined : listed.get(row.barcode!);
       if (!parcel) continue;
-      const status = deliveryStatus(parcel.status);
+      const status = statusOf(parcel);
       const paid = status === 'Livre paye' ? true : null;
       if (row.status === status && (paid === null || row.paid === paid))
         continue;
@@ -149,7 +157,7 @@ export class ColissimoPortalController implements OnModuleInit {
         parcels
           .filter((p) => p.barcode && !known.has(p.barcode))
           .map((p) => {
-            const status = deliveryStatus(p.status);
+            const status = statusOf(p);
             const created = tunisTime(p.added_at) ?? new Date();
             return [
               p.barcode,
@@ -158,6 +166,8 @@ export class ColissimoPortalController implements OnModuleInit {
                 recipient_name: p.client || null,
                 phone: p.phones.join(' / ') || null,
                 cod_amount: p.price,
+                designation: cards.get(p.barcode)?.designation ?? null,
+                attempts: cards.get(p.barcode)?.attempts ?? null,
                 status,
                 paid: status === 'Livre paye',
                 created_at: created,
@@ -180,12 +190,16 @@ export class ColissimoPortalController implements OnModuleInit {
           .onConflict((oc) => oc.doNothing())
           .execute();
     });
-    // Which parcels the account still lists (Admin → Delivery shows those, like Colissimo's own
-    // dashboard): its barcodes, plus every parcel this system sent (it has Colissimo's slip link).
-    // Only after a full read of the account: a failed read throws before this, hiding nothing.
+    // Which parcels Colissimo's dashboard counts (Admin → Delivery shows those): the ones on its
+    // cards, plus every parcel this system sent (it has Colissimo's slip link). The account also
+    // lists parcels on no card (pickup anomalies, "Inconnu"); those stay under "All my data". If
+    // the cards couldn't be read, the account's list stands in. Only after a full read of the
+    // account: a failed read throws before this, hiding nothing.
     let archived = 0;
     if (parcels.length > 0) {
-      const inAccount = parcels.map((p) => p.barcode).filter(Boolean);
+      const inAccount = cards.size
+        ? [...cards.keys()]
+        : parcels.map((p) => p.barcode).filter(Boolean);
       archived = await this.db.withActor(null, async (trx) => {
         await trx
           .updateTable('deliveries')
@@ -195,6 +209,37 @@ export class ColissimoPortalController implements OnModuleInit {
           .where('barcode', 'is not', null)
           .where('deleted_at', 'is', null)
           .execute();
+        // Attempts and contents as the dashboard's cards show them (only rows that differ).
+        // Every card a parcel is on too, as the dashboard counts it.
+        const shown = [...cards.values()].map((c) => ({
+          barcode: c.barcode,
+          attempts: c.attempts,
+          designation: c.designation,
+          cards: c.cards ?? [c.status],
+        }));
+        if (shown.length)
+          await sql`
+            update public.deliveries d
+               set attempts = r.attempts,
+                   designation = coalesce(r.designation, d.designation),
+                   dashboard_cards = array(select jsonb_array_elements_text(r.cards)),
+                   updated_at = now()
+              from jsonb_to_recordset(${JSON.stringify(shown)}::jsonb)
+                   as r (barcode text, attempts integer, designation text, cards jsonb)
+             where d.barcode = r.barcode and d.deleted_at is null
+               and (d.attempts is distinct from r.attempts
+                    or d.designation is distinct from coalesce(r.designation, d.designation)
+                    or d.dashboard_cards is distinct from array(select jsonb_array_elements_text(r.cards)))`.execute(
+            trx,
+          );
+        // Parcels no card lists any more: back to their status alone.
+        if (cards.size)
+          await trx
+            .updateTable('deliveries')
+            .set({ dashboard_cards: null })
+            .where('dashboard_cards', 'is not', null)
+            .where(sql<boolean>`barcode <> all(${[...cards.keys()]})`)
+            .execute();
         // The old tools' parcels stuck mid-way that the account no longer lists: nobody can say
         // what became of them, so they get a final status of their own (their orders stay as is).
         const result = await trx
@@ -205,6 +250,10 @@ export class ColissimoPortalController implements OnModuleInit {
             updated_at: sql`now()`,
           })
           .where('in_colissimo', '=', false)
+          // Not in the account's list at all (some listed parcels are on no dashboard card).
+          .where(
+            sql<boolean>`barcode <> all(${parcels.map((p) => p.barcode).filter(Boolean)})`,
+          )
           .where('label_url', 'is', null)
           .where('deleted_at', 'is', null)
           .where('status', 'in', ['A enlever', 'Au depot', 'En cours'])
@@ -222,6 +271,13 @@ export class ColissimoPortalController implements OnModuleInit {
       }>('import_colissimo_history', { p_payouts: paid }, trx),
     );
     if (updated) await invalidateCatalog(); // returns put stock back
+    // Admin → Delivery's "last check": this sync is the scheduled update when it's configured.
+    this.tracking.lastRun = {
+      at: new Date().toISOString(),
+      checked: parcels.length,
+      changed: updated,
+      failures: [],
+    };
     return {
       found: parcels.length,
       added: rows.length,

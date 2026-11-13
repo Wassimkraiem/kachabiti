@@ -102,6 +102,8 @@ export const COLISSIMO_STATUSES: Record<string, { label: string; color: string; 
     'Retour recu': { label: msg('Return received'), color: 'red', group: 'returned' },
     // A driver's report (pre-état) only: on the way back.
     'Retour': { label: msg('Being returned'), color: 'red', group: 'returned' },
+    // Colissimo's dashboard card "Échanges retournés" (read by the account sync).
+    'Echange retourne': { label: msg('Exchanges returned'), color: 'purple', group: 'returned' },
     // Ours: an old tool's parcel stuck mid-way that Colissimo's account no longer lists.
     'OLD-ORDERS-UNKNOWN': { label: msg('Old order, status unknown'), color: 'default', group: 'problem' },
 };

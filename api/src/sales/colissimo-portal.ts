@@ -111,6 +111,87 @@ export function parseSearch(html: string): PortalParcel[] {
     }));
 }
 
+export interface CardParcel {
+  barcode: string;
+  /** Our spelling of the card's status (the one Colissimo's dashboard counts it under). */
+  status: string;
+  /** "Tentatives": delivery attempts; null where the page has no such column. */
+  attempts: number | null;
+  designation: string | null;
+  /** Every card that lists it (cardParcels): a few parcels are on two. */
+  cards?: string[];
+}
+
+/**
+ * The dashboard's cards (load_stats.php), each listing its parcels on its own page, with our
+ * status spelling. Their counts are Colissimo's dashboard: reading them makes Delivery match it.
+ */
+const CARDS: [page: string, status: string][] = [
+  ['attente.php', 'En attente'],
+  ['aenlever.php', 'A enlever'],
+  ['enlever.php', 'Enleve'],
+  ['depot.php', 'Au depot'],
+  ['retn_depot.php', 'Rtn depot'],
+  ['cours.php', 'En cours'],
+  ['verifier.php', 'A verifier'],
+  ['livrer.php', 'Livrer'],
+  ['livre_paye.php', 'Livre paye'],
+  ['colis_echange_retour.php', 'Echange retourne'],
+  ['colis_echange.php', 'Echange'],
+  ['definitif.php', 'Retour definitif'],
+  ['detail.php', 'Retour Inter Agence'],
+  ['rtn_exp.php', 'Retour Expediteur'],
+  ['rtn_recu.php', 'Retour recu paye'],
+  ['rtn_expn_non_valide.php', 'Retour'],
+];
+
+/** One card page's table: columns found by their header, so the pages' different layouts all read. */
+export function parseCard(html: string, status: string): CardParcel[] {
+  const head = html.match(/<thead[\s\S]*?<\/thead>/i)?.[0];
+  if (!head) return [];
+  const headers = [...head.matchAll(/<th[^>]*>([\s\S]*?)<\/th>/gi)].map((m) =>
+    text(m[1]),
+  );
+  // "Code", or "Code généré" on the exchanges page (its return parcel's own code, which the
+  // search list shows as "Inconnu"; its "Code barre" is the original parcel).
+  const code = headers.findIndex((h) => h.startsWith('Code'));
+  const designation = headers.indexOf('Désignation');
+  const attempts = headers.findIndex((h) => /^Tentatives?$/.test(h));
+  if (code < 0) return [];
+  // Header and footer rows are <th> only, so rowsOf() keeps just the parcels.
+  return rowsOf(html).flatMap((cells) => {
+    // From the visible text: the cell's markup holds other numbers (links, ids).
+    const barcode = text(cells[code] ?? '').match(/\b\d{10,13}\b/)?.[0];
+    if (!barcode) return [];
+    return [
+      {
+        barcode,
+        status,
+        attempts:
+          attempts < 0
+            ? null
+            : Number(text(cells[attempts] ?? '').match(/\d+/)?.[0] ?? 0),
+        designation:
+          designation < 0 ? null : blank(text(cells[designation] ?? '')),
+      },
+    ];
+  });
+}
+
+/** Every parcel on the dashboard's cards, by barcode: its card's status, attempts and contents. */
+export async function cardParcels() {
+  const found = new Map<string, CardParcel>();
+  for (const [name, status] of CARDS)
+    for (const parcel of parseCard(await page(name), status)) {
+      // Some parcels sit on two cards (an exchange delivered and paid): the first card gives the
+      // status, and `cards` keeps them all, as the dashboard counts them.
+      const seen = found.get(parcel.barcode);
+      if (seen) seen.cards!.push(status);
+      else found.set(parcel.barcode, { ...parcel, cards: [status] });
+    }
+  return found;
+}
+
 /** A parcel's page (recherche.php?code=…): its fields, changes and status history. */
 export function parseParcel(
   barcode: string,

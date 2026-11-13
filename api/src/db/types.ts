@@ -420,6 +420,8 @@ export interface Deliveries {
   governorate: string | null;
   handed_over_at: Timestamp | null;
   in_colissimo: Generated<boolean>;
+  attempts: number | null;
+  dashboard_cards: string[] | null;
   id: Generated<string>;
   items_count: number | null;
   label_url: string | null;

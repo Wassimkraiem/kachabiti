@@ -199,23 +199,23 @@ export class DeliveryController {
   }
 
   private select(parcels = this.live()) {
-    return parcels
-      .selectAll('d')
-      .select((eb) =>
-        jsonObjectFrom(
-          eb
-            .selectFrom('orders as o')
-            .select([
-              'o.id',
-              'o.order_number',
-              'o.customer_first_name',
-              'o.customer_last_name',
-              'o.status',
-              'o.total',
-            ])
-            .whereRef('o.id', '=', 'd.order_id'),
-        ).as('order'),
-      );
+    return parcels.selectAll('d').select((eb) =>
+      jsonObjectFrom(
+        eb
+          .selectFrom('orders as o')
+          .select([
+            'o.id',
+            'o.order_number',
+            'o.customer_first_name',
+            'o.customer_last_name',
+            'o.status',
+            'o.total',
+            'o.created_by_email', // the staff member who added it (null: the website)
+            'o.channel',
+          ])
+          .whereRef('o.id', '=', 'd.order_id'),
+      ).as('order'),
+    );
   }
 
   /**
@@ -273,8 +273,9 @@ export class DeliveryController {
         hasBarcode.as('has_barcode'),
         (eb) => eb.fn.countAll<number>().as('n'),
         sql<number>`coalesce(sum(d.cod_amount), 0)`.as('amount'),
+        'd.dashboard_cards',
       ])
-      .groupBy(['d.status', hasBarcode])
+      .groupBy(['d.status', hasBarcode, 'd.dashboard_cards'])
       .execute();
     // The same rule as canEditParcel() on the page; statusInfo() stays the one map of statuses.
     const tabOf = (g: { status: string; has_barcode: boolean }) =>
@@ -303,8 +304,13 @@ export class DeliveryController {
     let statuses = q.get('statuses')?.split(',').filter(Boolean);
     if (statuses?.length && !showMoney)
       statuses = statuses.filter((s) => s !== PAID).concat('-'); // '-' matches nothing: never an empty list
+    // A parcel on Colissimo's dashboard matches the cards that list it (some are on two); any
+    // other, its status.
     if (statuses?.length)
-      shown = shown.where(sql<boolean>`d.status = any(${statuses})`);
+      shown = shown.where(
+        sql<boolean>`(coalesce(cardinality(d.dashboard_cards), 0) = 0 and d.status = any(${statuses}))
+          or d.dashboard_cards && ${statuses}::text[]`,
+      );
     else if (tab === 'validate') shown = shown.where(canTake);
     else if (tab && tab !== 'all') {
       const statuses = groups
@@ -352,12 +358,38 @@ export class DeliveryController {
       total: Number(count.n),
       counts,
       // Parcels per Colissimo status, and their cash to collect for owners and admins only.
-      by_status: groups
+      by_status: [
+        // Counted per dashboard card like Colissimo (a parcel on two cards counts on both).
+        ...groups
+          .flatMap((g) =>
+            (g.dashboard_cards?.length ? g.dashboard_cards : [g.status]).map(
+              (status) => ({
+                status,
+                n: Number(g.n),
+                amount: Number(g.amount),
+              }),
+            ),
+          )
+          .reduce((byCard, g) => {
+            const sum = byCard.get(g.status) ?? {
+              status: g.status,
+              n: 0,
+              amount: 0,
+            };
+            byCard.set(g.status, {
+              ...sum,
+              n: sum.n + g.n,
+              amount: sum.amount + g.amount,
+            });
+            return byCard;
+          }, new Map<string, { status: string; n: number; amount: number }>())
+          .values(),
+      ]
         .filter((g) => showMoney || g.status !== PAID)
         .map((g) => ({
           status: g.status,
-          n: Number(g.n),
-          ...(showMoney ? { amount: Number(g.amount) } : {}),
+          n: g.n,
+          ...(showMoney ? { amount: g.amount } : {}),
         })),
       waiting: waiting.map((row) => row.id),
     };
@@ -372,7 +404,7 @@ export class DeliveryController {
     const orderId = q.get('order_id');
     const status = {
       configured: colissimoConfigured(),
-      // The last automatic check (every 15 minutes), for "checked … ago".
+      // The last automatic check (every 5 minutes), for "checked … ago".
       tracking: this.tracking.lastRun,
     };
     if (q.get('page'))

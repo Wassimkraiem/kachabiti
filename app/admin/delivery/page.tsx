@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { printSlips } from "@/components/admin/delivery/print-slips";
-import { Alert, Breadcrumb, Button, Card, DatePicker, Input, Modal, Popconfirm, Segmented, Select, Space, Table, Tooltip, Typography } from "antd";
+import { Alert, Breadcrumb, Button, Card, DatePicker, Input, Modal, Popconfirm, Segmented, Select, Space, Table, Tag, Tooltip, Typography } from "antd";
 import type { Dayjs } from "dayjs";
 import type { ColumnsType } from "antd/es/table";
 import { BarcodeOutlined, DeleteOutlined, DollarOutlined, EditOutlined, PrinterOutlined, ReloadOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons";
@@ -35,7 +35,7 @@ const PAGE_SIZE = 25;
 
 /**
  * Admin → Delivery: the parcels sent to Colissimo from the orders (or added by barcode), with
- * their live status (checked automatically every 15 minutes). Parcels waiting for pickup are
+ * their live status (checked automatically every 5 minutes). Parcels waiting for pickup are
  * handed over in one click (Colissimo's manifest), edited, or deleted at Colissimo. Its API
  * can't list an account's parcels, so parcels created on its website appear once added by barcode.
  */
@@ -179,20 +179,19 @@ export default function DeliveryPage() {
 
     const columns: ColumnsType<Delivery> = [
         {
-            title: t("Barcode / order"),
+            title: t("Order"),
             dataIndex: "barcode",
             key: "barcode",
+            // The order, with the barcode as a copy button (it's on the slip and in the history).
             render: (value: string | null, row) => (
-                <div>
-                    {value ? <Text copyable style={{ fontFamily: "monospace" }}>{value}</Text> : "—"}
-                    <div style={{ fontSize: 12 }}>
-                        {row.order ? (
-                            <Link href={`/admin/orders/${row.order.id}`} style={{ fontFamily: "monospace" }}>{row.order.order_number}</Link>
-                        ) : (
-                            <Text type="secondary">{t("Not linked")}</Text>
-                        )}
-                    </div>
-                </div>
+                <Space size={4} style={{ whiteSpace: "nowrap" }}>
+                    {row.order ? (
+                        <Link href={`/admin/orders/${row.order.id}`} style={{ fontFamily: "monospace", fontSize: 12 }}>{row.order.order_number}</Link>
+                    ) : (
+                        <Text style={{ fontFamily: "monospace", fontSize: 12 }}>{value ?? t("Not linked")}</Text>
+                    )}
+                    {value && <Text copyable={{ text: value, tooltips: [t("Copy barcode {barcode}", { barcode: value }), t("Copied")] }} />}
+                </Space>
             ),
         },
         {
@@ -209,6 +208,26 @@ export default function DeliveryPage() {
             title: t("Destination"),
             key: "destination",
             render: (_, row) => [row.city, row.governorate].filter(Boolean).join(", ") || "—",
+        },
+        {
+            // Colissimo's "Désignation": what the parcel holds, as on its slip.
+            title: t("Article"),
+            dataIndex: "designation",
+            key: "designation",
+            width: 220,
+            render: (value: string | null) => value
+                ? <Text style={{ fontSize: 13 }} ellipsis={{ tooltip: value }}>{value}</Text>
+                : "—",
+        },
+        {
+            title: t("Added by"),
+            key: "added_by",
+            render: (_, row) => {
+                const email = row.order?.created_by_email ?? row.created_by_email;
+                if (email) return <Text style={{ fontSize: 13 }}>{email.split("@")[0]}</Text>;
+                if (row.order?.order_number.startsWith("COL-")) return <Text type="secondary">{t("Colissimo")}</Text>;
+                return <Text type="secondary">{row.order ? t("Website") : "—"}</Text>;
+            },
         },
         // Owners and admins only: the server sends no amounts to staff (its by_status has none then).
         ...(showMoney
@@ -228,6 +247,16 @@ export default function DeliveryPage() {
                     <ParcelBadges delivery={row} />
                 </Space>
             ),
+        },
+        {
+            // Colissimo's "Tentatives": delivery attempts so far (read by the account sync).
+            title: t("Attempts"),
+            dataIndex: "attempts",
+            key: "attempts",
+            align: "center",
+            render: (value: number | null) => value
+                ? <Tag color={value >= 2 ? "red" : "gold"}>{t("{count} attempt(s)", { count: value })}</Tag>
+                : "—",
         },
         {
             title: t("Last change"),
@@ -286,6 +315,9 @@ export default function DeliveryPage() {
             ),
         },
     ];
+    // What agents look at first stays in view next to the customer; the rest scrolls behind Action.
+    const COLUMN_ORDER = ["barcode", "customer", "status", "attempts", "designation", "added_by", "cod_amount", "destination", "status_changed_at", "action"];
+    columns.sort((a, b) => COLUMN_ORDER.indexOf(String(a.key)) - COLUMN_ORDER.indexOf(String(b.key)));
 
 
     return (
@@ -299,8 +331,8 @@ export default function DeliveryPage() {
                         <div>
                             <Text type="secondary" style={{ fontSize: 12 }}>
                                 {data.tracking
-                                    ? t("Statuses update automatically every 15 minutes · last check {time}", { time: formatDate(data.tracking.at) })
-                                    : t("Statuses update automatically every 15 minutes")}
+                                    ? t("Statuses update automatically every 5 minutes · last check {time}", { time: formatDate(data.tracking.at) })
+                                    : t("Statuses update automatically every 5 minutes")}
                             </Text>
                         </div>
                     )}

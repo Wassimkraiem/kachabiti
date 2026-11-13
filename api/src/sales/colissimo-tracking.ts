@@ -14,8 +14,9 @@ import { FINAL_STATUSES } from '@shared/colissimo-data';
 import type { Actor } from '../db/database';
 import { Database } from '../db/database';
 import { invalidateCatalog } from '../catalog/revalidate';
+import { portalConfigured } from './colissimo-portal';
 
-const EVERY_MS = 15 * 60_000;
+const EVERY_MS = 5 * 60_000;
 
 export interface TrackingRun {
   at: string;
@@ -25,8 +26,11 @@ export interface TrackingRun {
 }
 
 /**
- * Keeps parcels in step with Colissimo (v2 tracking, 200 barcodes per request): every 15 minutes
- * for every parcel that can still change, and on demand (Admin → Delivery → Refresh). Changes go
+ * Keeps parcels in step with Colissimo (v2 tracking, 200 barcodes per request): every 5 minutes
+ * for every parcel that can still change, and on demand (Admin → Delivery → Refresh). With the
+ * website login set, the account sync (ColissimoPortalController, every 5 minutes too) does the
+ * scheduled updates instead, from Colissimo's dashboard: both on a timer would overwrite each
+ * other where the API and the dashboard name a status differently. Changes go
  * through record_delivery_status, which moves the order (shipped, delivered, returned) and records
  * cash on delivery. Scheduled runs write without a staff member, so the activity log skips them.
  * One API instance is assumed, as for notifications.
@@ -41,7 +45,7 @@ export class ColissimoTracking implements OnModuleInit, OnModuleDestroy {
   constructor(private readonly db: Database) {}
 
   onModuleInit() {
-    if (!colissimoConfigured().tracking) return;
+    if (!colissimoConfigured().tracking || portalConfigured()) return;
     const tick = () =>
       void this.runScheduled().catch((error) => {
         this.logger.error('Scheduled tracking failed', error);

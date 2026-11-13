@@ -31,13 +31,20 @@ export interface Delivery {
     handed_over_at: string | null;
     /** The last price change asked of Colissimo (it answers later). */
     price_change: { request_id: number | null; old_price: number | null; new_price: number; reason: string | null; at: string } | null;
-    order: { id: string; order_number: string; customer_first_name: string; customer_last_name: string; status: string; total: number } | null;
+    /** Colissimo's delivery attempts ("Tentatives"), from the account sync; null until seen. */
+    attempts: number | null;
+    order: {
+        id: string; order_number: string; customer_first_name: string; customer_last_name: string; status: string; total: number;
+        /** The staff member who added it; null for website orders. */
+        created_by_email: string | null;
+        channel: string;
+    } | null;
 }
 
 export interface DeliveryList {
     rows: Delivery[];
     configured: { add: boolean; tracking: boolean };
-    /** The last automatic check (every 15 minutes), null until the first one. */
+    /** The last automatic check (every 5 minutes), null until the first one. */
     tracking: (RefreshResult & { at: string }) | null;
 }
 
