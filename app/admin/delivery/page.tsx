@@ -183,68 +183,59 @@ export default function DeliveryPage() {
             dataIndex: "barcode",
             key: "barcode",
             // The order, with the barcode as a copy button (it's on the slip and in the history).
-            render: (value: string | null, row) => (
-                <Space size={4} style={{ whiteSpace: "nowrap" }}>
-                    {row.order ? (
-                        <Link href={`/admin/orders/${row.order.id}`} style={{ fontFamily: "monospace", fontSize: 12 }}>{row.order.order_number}</Link>
-                    ) : (
-                        <Text style={{ fontFamily: "monospace", fontSize: 12 }}>{value ?? t("Not linked")}</Text>
-                    )}
-                    {value && <Text copyable={{ text: value, tooltips: [t("Copy barcode {barcode}", { barcode: value }), t("Copied")] }} />}
-                </Space>
-            ),
+            width: 170,
+            // The order with the barcode as a copy button, and who added it underneath.
+            render: (value: string | null, row) => {
+                const email = row.order?.created_by_email ?? row.created_by_email;
+                const by = email
+                    ? email.split("@")[0]
+                    : row.order?.order_number.startsWith("COL-") ? t("Colissimo") : row.order ? t("Website") : null;
+                return (
+                    <div style={{ minWidth: 0 }}>
+                        <div style={{ display: "flex", alignItems: "center", gap: 4, minWidth: 0 }}>
+                            {row.order ? (
+                                <Link href={`/admin/orders/${row.order.id}`} title={row.order.order_number} style={{ fontFamily: "monospace", fontSize: 11, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                                    {row.order.order_number}
+                                </Link>
+                            ) : (
+                                <Text style={{ fontFamily: "monospace", fontSize: 11 }}>{value ?? t("Not linked")}</Text>
+                            )}
+                            {value && <Text copyable={{ text: value, tooltips: [t("Copy barcode {barcode}", { barcode: value }), t("Copied")] }} />}
+                        </div>
+                        {by && <Text type="secondary" style={{ fontSize: 12 }}>{t("Added by")} {by}</Text>}
+                    </div>
+                );
+            },
         },
         {
             title: t("Customer"),
             key: "customer",
-            render: (_, row) => (
-                <div>
-                    <div style={{ fontWeight: 500 }}>{row.recipient_name || (row.order ? `${row.order.customer_first_name} ${row.order.customer_last_name}` : "—")}</div>
-                    {row.phone && <Text type="secondary" style={{ fontSize: 12 }}>{row.phone}</Text>}
-                </div>
-            ),
-        },
-        {
-            title: t("Destination"),
-            key: "destination",
-            render: (_, row) => [row.city, row.governorate].filter(Boolean).join(", ") || "—",
-        },
-        {
-            // Colissimo's "Désignation": what the parcel holds, as on its slip.
-            title: t("Article"),
-            dataIndex: "designation",
-            key: "designation",
-            width: 220,
-            render: (value: string | null) => value
-                ? <Text style={{ fontSize: 13 }} ellipsis={{ tooltip: value }}>{value}</Text>
-                : "—",
-        },
-        {
-            title: t("Added by"),
-            key: "added_by",
+            width: 190,
+            // Name, then phone and destination.
             render: (_, row) => {
-                const email = row.order?.created_by_email ?? row.created_by_email;
-                if (email) return <Text style={{ fontSize: 13 }}>{email.split("@")[0]}</Text>;
-                if (row.order?.order_number.startsWith("COL-")) return <Text type="secondary">{t("Colissimo")}</Text>;
-                return <Text type="secondary">{row.order ? t("Website") : "—"}</Text>;
+                const place = [row.city, row.governorate].filter(Boolean).join(", ");
+                return (
+                    <div style={{ minWidth: 0 }}>
+                        <Text strong ellipsis={{ tooltip: true }} style={{ display: "block" }}>
+                            {row.recipient_name || (row.order ? `${row.order.customer_first_name} ${row.order.customer_last_name}` : "—")}
+                        </Text>
+                        <Text type="secondary" ellipsis={{ tooltip: true }} style={{ display: "block", fontSize: 12 }}>
+                            {[row.phone, place].filter(Boolean).join(" · ") || "—"}
+                        </Text>
+                    </div>
+                );
             },
         },
-        // Owners and admins only: the server sends no amounts to staff (its by_status has none then).
-        ...(showMoney
-            ? [{
-                title: t("Cash to collect"),
-                dataIndex: "cod_amount",
-                key: "cod_amount",
-                render: (value: number | null) => (value != null ? `${Number(value)} TND` : "—"),
-            }]
-            : []),
         {
             title: t("Status"),
-            key: "status",
+            key: "status_changed_at", // sortable by last change, shown under the status
+            width: 200,
+            sorter: true,
             render: (_, row) => (
                 <Space orientation="vertical" size={2}>
                     <DeliveryStatusTag status={row.status} reason={row.status_reason} />
                     <ParcelBadges delivery={row} />
+                    <Text type="secondary" style={{ fontSize: 11 }}>{formatDate(row.status_changed_at ?? row.created_at)}</Text>
                 </Space>
             ),
         },
@@ -253,25 +244,35 @@ export default function DeliveryPage() {
             title: t("Attempts"),
             dataIndex: "attempts",
             key: "attempts",
+            width: 100,
             align: "center",
             render: (value: number | null) => value
-                ? <Tag color={value >= 2 ? "red" : "gold"}>{t("{count} attempt(s)", { count: value })}</Tag>
+                ? <Tooltip title={t("{count} attempt(s)", { count: value })}><Tag color={value >= 2 ? "red" : "gold"} style={{ marginInlineEnd: 0 }}>{value}</Tag></Tooltip>
                 : "—",
         },
         {
-            title: t("Last change"),
-            key: "status_changed_at",
-            sorter: true,
-            render: (_, row) => (
-                <div>
-                    {formatDate(row.status_changed_at ?? row.created_at)}
-                    <div><Text type="secondary" style={{ fontSize: 12 }}>{t("Sent {date}", { date: formatDate(row.created_at) })}</Text></div>
-                </div>
-            ),
+            // Colissimo's "Désignation": what the parcel holds, as on its slip. Takes the space left.
+            title: t("Article"),
+            dataIndex: "designation",
+            key: "designation",
+            render: (value: string | null) => value
+                ? <Text style={{ fontSize: 13 }} ellipsis={{ tooltip: value }}>{value}</Text>
+                : "—",
         },
+        // Owners and admins only: the server sends no amounts to staff (its by_status has none then).
+        ...(showMoney
+            ? [{
+                title: t("Cash to collect"),
+                dataIndex: "cod_amount",
+                key: "cod_amount",
+                width: 110,
+                render: (value: number | null) => (value != null ? `${Number(value)} TND` : "—"),
+            }]
+            : []),
         {
             title: t("Action"),
             key: "action",
+            width: 230,
             fixed: "right",
             render: (_, row) => (
                 <Space size={0}>
@@ -315,9 +316,6 @@ export default function DeliveryPage() {
             ),
         },
     ];
-    // What agents look at first stays in view next to the customer; the rest scrolls behind Action.
-    const COLUMN_ORDER = ["barcode", "customer", "status", "attempts", "designation", "added_by", "cod_amount", "destination", "status_changed_at", "action"];
-    columns.sort((a, b) => COLUMN_ORDER.indexOf(String(a.key)) - COLUMN_ORDER.indexOf(String(b.key)));
 
 
     return (
@@ -457,7 +455,10 @@ export default function DeliveryPage() {
                             const by = Array.isArray(sorter) ? sorter[0] : sorter;
                             setLastChange(by?.order ? (by.order === "ascend" ? "asc" : "desc") : null);
                         }}
-                        scroll={{ x: "max-content" }}
+                        // Fixed widths, the article takes what's left: everything fits on a laptop, and
+                        // narrower screens scroll sideways with Action pinned.
+                        scroll={{ x: 1080 }}
+                        tableLayout="fixed"
                         // A click on the row (not on its links, buttons or checkbox) opens the parcel's history.
                         onRow={(row) => ({
                             onClick: (e) => {
