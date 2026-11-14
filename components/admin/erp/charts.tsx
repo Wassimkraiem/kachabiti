@@ -133,6 +133,50 @@ export function BarList({ rows, format = compact, color = SERIES, max }: {
     );
 }
 
+/** Parts of a whole as a ring: each slice shows its share, with a legend and a hover title. */
+export function Donut({ slices, size = 220, emptyText = "—" }: {
+    slices: { key: string; label: string; value: number; color: string }[];
+    size?: number;
+    emptyText?: string;
+}) {
+    const total = slices.reduce((sum, s) => sum + s.value, 0);
+    if (total <= 0) return <div style={{ height: size, display: "flex", alignItems: "center", justifyContent: "center", color: INK_MUTED, fontSize: 13 }}>{emptyText}</div>;
+    const r = 80, width = 46, circ = 2 * Math.PI * r;
+    let start = 0; // fraction of the ring already drawn, from 12 o'clock clockwise
+    return (
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+            <svg viewBox="0 0 220 220" width={size} height={size} role="img">
+                {slices.filter((s) => s.value > 0).map((s) => {
+                    const share = s.value / total;
+                    const mid = (start + share / 2) * 2 * Math.PI - Math.PI / 2;
+                    const offset = -start * circ;
+                    start += share;
+                    return (
+                        <g key={s.key}>
+                            <circle cx={110} cy={110} r={r} fill="none" stroke={s.color} strokeWidth={width}
+                                strokeDasharray={`${share * circ} ${circ}`} strokeDashoffset={offset} transform="rotate(-90 110 110)">
+                                <title>{`${s.label}: ${s.value} (${Math.round(share * 1000) / 10}%)`}</title>
+                            </circle>
+                            {share >= 0.04 && (
+                                <text x={110 + r * Math.cos(mid)} y={110 + r * Math.sin(mid)} textAnchor="middle" dominantBaseline="middle"
+                                    fontSize={13} fill="#ffffff" style={{ pointerEvents: "none" }}>{`${Math.round(share * 1000) / 10}%`}</text>
+                            )}
+                        </g>
+                    );
+                })}
+            </svg>
+            <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center", fontSize: 13, color: INK }}>
+                {slices.map((s) => (
+                    <span key={s.key} style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
+                        <span style={{ width: 12, height: 12, borderRadius: "50%", background: s.color }} />
+                        {s.label} <span style={{ color: INK_MUTED, fontVariantNumeric: "tabular-nums" }}>{s.value}</span>
+                    </span>
+                ))}
+            </div>
+        </div>
+    );
+}
+
 /** A thin progress bar against an objective (100% = target). */
 export function TargetBar({ value, target, format = compact }: { value: number; target: number | null | undefined; format?: (n: number) => string }) {
     if (!target) return <span style={{ color: INK_MUTED, fontVariantNumeric: "tabular-nums" }}>{format(value)}</span>;

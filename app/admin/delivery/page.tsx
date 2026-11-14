@@ -7,6 +7,7 @@ import { Alert, Breadcrumb, Button, Card, DatePicker, Input, Modal, Popconfirm, 
 import type { Dayjs } from "dayjs";
 import type { ColumnsType } from "antd/es/table";
 import { api } from "@/components/admin/erp/erp-client";
+import { Donut } from "@/components/admin/erp/charts";
 import { BarcodeOutlined, CloudDownloadOutlined, DeleteOutlined, DollarOutlined, EditOutlined, PrinterOutlined, ReloadOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons";
 import { message } from "@/components/admin/antd-app";
 import { useAdminRole } from "@/lib/admin-role-context";
@@ -381,6 +382,18 @@ export default function DeliveryPage() {
             )}
 
             <ParcelLookup disabled={!data?.configured.tracking} onAdded={load} />
+
+            {/* Delivered vs returned parcels, within the dates, source and scope chosen below. */}
+            {!!data && data.counts.delivered + data.counts.returned > 0 && (
+                <Card title={t("Delivery rate")} style={{ marginBottom: 16 }}>
+                    <Donut
+                        slices={[
+                            { key: "delivered", label: t("Delivered"), value: data.counts.delivered, color: "#4caf50" },
+                            { key: "returned", label: t("Returns"), value: data.counts.returned, color: "#f44336" },
+                        ]}
+                    />
+                </Card>
+            )}
 
             <Card>
                 <Space orientation="vertical" size="middle" style={{ width: "100%" }}>

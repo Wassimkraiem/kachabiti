@@ -11,6 +11,7 @@ import * as Sentry from '@sentry/nestjs';
 import { OwnerOnly } from '../auth/decorators';
 import { ApiError, zDate } from '../common/api';
 import { Database } from '../db/database';
+import { statusInfo } from '@shared/colissimo-data';
 import { ColissimoTracking } from './colissimo-tracking';
 import {
   allParcels,
@@ -270,6 +271,25 @@ export class ColissimoPortalController implements OnModuleInit {
         carrier_open: number;
       }>('import_colissimo_history', { p_payouts: paid }, trx),
     );
+    // Status changes above are saved at the sync's time: give delivered parcels, their orders,
+    // carrier payments and draft entries Colissimo's own delivery date (also repairs earlier runs).
+    const delivered = parcels
+      .filter(
+        (p) =>
+          p.barcode &&
+          p.delivered_at &&
+          statusInfo(statusOf(p)).group === 'delivered',
+      )
+      .map((p) => ({ barcode: p.barcode, at: p.delivered_at }));
+    const redated = delivered.length
+      ? await this.db.withActor(null, (trx) =>
+          this.db.call<Record<string, number>>(
+            'redate_deliveries',
+            { p_parcels: delivered },
+            trx,
+          ),
+        )
+      : null;
     if (updated) await invalidateCatalog(); // returns put stock back
     // Admin → Delivery's "last check": this sync is the scheduled update when it's configured.
     this.tracking.lastRun = {
@@ -283,6 +303,7 @@ export class ColissimoPortalController implements OnModuleInit {
       added: rows.length,
       updated,
       archived,
+      redated,
       ...history,
     };
   }
