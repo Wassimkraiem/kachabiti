@@ -1148,6 +1148,8 @@ export const erpEntries: [en: string, fr: string, ar: string][] = [
     ["Deleting anything in the admin only hides it. Here you can restore deleted items or erase them for good. Everything is recorded in the activity history.", "Supprimer un élément dans l'admin ne fait que le masquer. Ici, vous pouvez restaurer les éléments supprimés ou les effacer définitivement. Tout est enregistré dans l'historique d'activité.", "الحذف في لوحة التحكم يخفي العنصر فقط. يمكنك هنا استعادة العناصر المحذوفة أو مسحها نهائيا. يُسجل كل شيء في سجل النشاط."],
     ["Team tasks", "Tâches d'équipe", "مهام الفريق"],
     ["My tasks", "Mes tâches", "مهامي"],
+    ["All tasks", "Toutes les tâches", "كل المهام"],
+    ["Only you see the tasks you keep for yourself (assigned to nobody or to you).", "Vous seul voyez les tâches que vous gardez pour vous (assignées à personne ou à vous).", "أنت وحدك ترى المهام التي تحتفظ بها لنفسك (غير مسندة لأحد أو مسندة إليك)."],
     ["New task", "Nouvelle tâche", "مهمة جديدة"],
     ["Edit task", "Modifier la tâche", "تعديل المهمة"],
     ["Who does what, by when. Drag a task to another column to move it.", "Qui fait quoi, et pour quand. Glissez une tâche vers une autre colonne pour la déplacer.", "من يفعل ماذا ومتى. اسحب المهمة إلى عمود آخر لنقلها."],

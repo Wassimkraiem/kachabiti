@@ -186,4 +186,19 @@ ok(r.status === 409, 'a name taken since cannot be restored', r.status);
 const log = await sql("select action, actor_id from activity_log where entity = 'team_tickets' and entity_id = $1 order by created_at", [ticket.id]);
 ok(log[0]?.action === 'create' && log[0].actor_id === alice.id && log.at(-1)?.action === 'delete', 'changes are in the activity log', log);
 
+// An owner's task kept for themselves (assigned to nobody or to them) is a private note.
+const otherOwner = await user(`owner2-${run}@test.local`, { role: 'owner' });
+const note = (await owner.call(BOARD, 'POST', { title: `Private note ${run}` })).json.data;
+const selfNote = (await owner.call(BOARD, 'POST', { title: `Self note ${run}`, assigned_to: owner.id })).json.data;
+const seen = async (who, id) => (await who.call(BOARD)).json.data.some((t) => t.id === id);
+ok(await seen(owner, note.id) && await seen(owner, selfNote.id), 'the owner sees their own notes');
+ok(!(await seen(alice, note.id)) && !(await seen(alice, selfNote.id)) && !(await seen(otherOwner, note.id)), 'nobody else sees an owner\'s notes, other owners included');
+ok((await alice.call(BOARD, 'PUT', { id: note.id, title: 'Peek' })).status === 404, 'a note can\'t be edited by someone else');
+ok((await otherOwner.call(`${BOARD}?id=${note.id}`, 'DELETE')).status === 404, 'a note can\'t be deleted by someone else');
+ok((await alice.call(`${BOARD}/comments?ticket_id=${note.id}`)).status === 404, 'a note\'s comments stay private');
+const aliceNote = (await alice.call(BOARD, 'POST', { title: `Staff task ${run}` })).json.data;
+ok(await seen(bob, aliceNote.id), 'a staff member\'s unassigned task stays visible to the team');
+await owner.call(BOARD, 'PUT', { id: note.id, assigned_to: bob.id });
+ok(await seen(bob, note.id) && await seen(alice, note.id), 'assigning a note to someone shares it');
+
 done();

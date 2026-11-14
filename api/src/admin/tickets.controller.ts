@@ -52,9 +52,32 @@ export class TicketsController {
     return email;
   }
 
+  /**
+   * An owner's ticket assigned to nobody or to themselves is their private note: only that owner
+   * sees it (the board, edits, deletes and comments). Assigning it to someone shares it.
+   */
+  private visibleTo(actor: RequestActor) {
+    return sql<boolean>`(team_tickets.created_by = ${actor.userId} or not (
+      team_tickets.created_by is not null
+      and (team_tickets.assigned_to is null or team_tickets.assigned_to = team_tickets.created_by)
+      and team_tickets.created_by in (select user_id from back_office_users where role = 'owner' and deleted_at is null)))`;
+  }
+
+  /** 404 for a ticket that is gone or someone else's private note. */
+  private async assertVisible(id: string, actor: RequestActor) {
+    const ticket = await this.db
+      .selectFrom('team_tickets')
+      .select('id')
+      .where('id', '=', id)
+      .where('deleted_at', 'is', null)
+      .where(this.visibleTo(actor))
+      .executeTakeFirst();
+    if (!ticket) throw new ApiError('This task no longer exists.', 404);
+  }
+
   // shortcut: at most 1000 rows, finished ones for 30 days; add paging if a team outgrows it.
   @Get()
-  list() {
+  list(@CurrentActor() actor: RequestActor) {
     return this.db
       .selectFrom('team_tickets')
       .selectAll()
@@ -67,6 +90,7 @@ export class TicketsController {
           .as('comment_count'),
       )
       .where('deleted_at', 'is', null)
+      .where(this.visibleTo(actor))
       .where((eb) =>
         eb.or([
           eb('status', '<>', 'done'),
@@ -132,6 +156,7 @@ export class TicketsController {
         .set(row)
         .where('id', '=', id)
         .where('deleted_at', 'is', null)
+        .where(this.visibleTo(actor))
         .returningAll()
         .executeTakeFirst(),
     );
@@ -155,6 +180,7 @@ export class TicketsController {
       .select(['id', 'created_by'])
       .where('id', 'in', ids)
       .where('deleted_at', 'is', null)
+      .where(this.visibleTo(actor))
       .execute();
     if (tickets.length === 0)
       throw new ApiError('This task no longer exists.', 404);
@@ -179,7 +205,11 @@ export class TicketsController {
 
   /** A ticket's comments, oldest first; image links last an hour. */
   @Get('comments')
-  async comments(@Query('ticket_id', new Zod(zId)) ticketId: string) {
+  async comments(
+    @Query('ticket_id', new Zod(zId)) ticketId: string,
+    @CurrentActor() actor: RequestActor,
+  ) {
+    await this.assertVisible(ticketId, actor);
     const rows = await this.db
       .selectFrom('team_ticket_comments')
       .selectAll()
@@ -214,13 +244,7 @@ export class TicketsController {
       throw new ApiError(
         'Invalid file type. Only JPEG, PNG, WebP, and GIF are allowed.',
       );
-    const ticket = await this.db
-      .selectFrom('team_tickets')
-      .select('id')
-      .where('id', '=', ticket_id)
-      .where('deleted_at', 'is', null)
-      .executeTakeFirst();
-    if (!ticket) throw new ApiError('This task no longer exists.', 404);
+    await this.assertVisible(ticket_id, actor);
     const image_path = file
       ? `tickets/${ticket_id}/${randomUUID()}.${extension}`
       : null;
@@ -249,11 +273,12 @@ export class TicketsController {
   ) {
     const comment = await this.db
       .selectFrom('team_ticket_comments')
-      .select('author_id')
+      .select(['author_id', 'ticket_id'])
       .where('id', '=', id)
       .where('deleted_at', 'is', null)
       .executeTakeFirst();
     if (!comment) throw new ApiError('This comment no longer exists.', 404);
+    await this.assertVisible(comment.ticket_id, actor);
     if (comment.author_id !== actor.userId && !this.canDeleteAny(actor))
       throw new ApiError('Only its author can delete this comment.', 403);
     await this.db.withActor(actor, (trx) =>

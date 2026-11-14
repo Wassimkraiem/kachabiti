@@ -4,7 +4,7 @@ import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import dayjs from "dayjs";
 import { DragDropContext, Draggable, Droppable, type DropResult } from "@hello-pangea/dnd";
-import { Alert, Avatar, Button, DatePicker, Image, Input, Modal, Popconfirm, Popover, Select, Tooltip, Typography } from "antd";
+import { Alert, Avatar, Button, DatePicker, Image, Input, Modal, Popconfirm, Popover, Segmented, Select, Tooltip, Typography } from "antd";
 import { ArrowDownOutlined, ArrowUpOutlined, ClockCircleOutlined, DeleteOutlined, EllipsisOutlined, MessageOutlined, PaperClipOutlined, PlusOutlined, UserOutlined } from "@ant-design/icons";
 import { message } from "@/components/admin/antd-app";
 import { useAdminT } from "@/lib/admin-i18n";
@@ -362,6 +362,9 @@ function TicketBoard() {
     const [creating, setCreating] = useState<TicketStatus | null>(null);
     const [person, setPerson] = useState("");
     const [search, setSearch] = useState("");
+    // Owners start on their own tasks (created by them or assigned to them) and can switch to all.
+    const [scope, setScope] = useState<"mine" | "all">("mine");
+    const onlyMine = isOwner && scope === "mine";
     const today = day(new Date());
 
     // A notification's link: /admin/tickets?id=…
@@ -373,9 +376,12 @@ function TicketBoard() {
     const open = data?.find((row) => row.id === openId) ?? null;
     const columns = useMemo(() => {
         const term = search.trim().toLowerCase();
-        const rows = (data ?? []).filter((row) => (!person || row.assigned_to === person) && (!term || row.title.toLowerCase().includes(term)));
+        const rows = (data ?? []).filter((row) =>
+            (!onlyMine || row.created_by === me || row.assigned_to === me) &&
+            (!person || row.assigned_to === person) &&
+            (!term || row.title.toLowerCase().includes(term)));
         return TICKET_STATUSES.map((status) => ({ status, rows: rows.filter((row) => row.status === status).sort((a, b) => a.position - b.position) }));
-    }, [data, person, search]);
+    }, [data, person, search, onlyMine, me]);
 
     const change = async (id: string, fields: TicketChange) => {
         setData((rows) => rows && rows.map((row) => (row.id === id ? { ...row, ...fields } : row)));
@@ -436,6 +442,15 @@ function TicketBoard() {
             {error && <Alert type="error" showIcon title={t(error)} style={{ marginBottom: 16 }} />}
 
             <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 12, marginBottom: 16 }}>
+                {isOwner && (
+                    <Tooltip title={t("Only you see the tasks you keep for yourself (assigned to nobody or to you).")}>
+                        <Segmented
+                            value={scope}
+                            onChange={(value) => setScope(value as "mine" | "all")}
+                            options={[{ value: "mine", label: t("My tasks") }, { value: "all", label: t("All tasks") }]}
+                        />
+                    </Tooltip>
+                )}
                 <Input.Search allowClear placeholder={t("Search tasks")} aria-label={t("Search tasks")} value={search} onChange={(e) => setSearch(e.target.value)} style={{ width: 220 }} />
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 4, minWidth: 0 }} role="group" aria-label={t("Show this person's tasks")}>
                     {people.map((m) => (
