@@ -6,7 +6,8 @@ import { printSlips } from "@/components/admin/delivery/print-slips";
 import { Alert, Breadcrumb, Button, Card, DatePicker, Input, Modal, Popconfirm, Segmented, Select, Space, Table, Tag, Tooltip, Typography } from "antd";
 import type { Dayjs } from "dayjs";
 import type { ColumnsType } from "antd/es/table";
-import { BarcodeOutlined, DeleteOutlined, DollarOutlined, EditOutlined, PrinterOutlined, ReloadOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons";
+import { api } from "@/components/admin/erp/erp-client";
+import { BarcodeOutlined, CloudDownloadOutlined, DeleteOutlined, DollarOutlined, EditOutlined, PrinterOutlined, ReloadOutlined, SearchOutlined, SendOutlined } from "@ant-design/icons";
 import { message } from "@/components/admin/antd-app";
 import { useAdminRole } from "@/lib/admin-role-context";
 import { DATE_LOCALES, useAdminT } from "@/lib/admin-i18n";
@@ -41,7 +42,7 @@ const PAGE_SIZE = 25;
  */
 export default function DeliveryPage() {
     const { t, locale } = useAdminT();
-    const { can, isAdmin: showMoney } = useAdminRole(); // money (amounts, totals): owners and admins only
+    const { can, isAdmin: showMoney, isOwner } = useAdminRole(); // money (amounts, totals): owners and admins only
     const canDelete = can("delete");
     const [data, setData] = useState<DeliveryPageData | null>(null);
     const [loading, setLoading] = useState(true);
@@ -125,6 +126,21 @@ export default function DeliveryPage() {
             message.error((e as Error).message);
         } finally {
             setRefreshing(false);
+        }
+    };
+
+    // The account sync that fills the status cards (it also runs every 5 minutes); owners only.
+    const [syncing, setSyncing] = useState(false);
+    const syncAccount = async () => {
+        setSyncing(true);
+        try {
+            const result = await api<{ found: number; added: number }>("/api/owner/colissimo/sync", { method: "POST" });
+            message.success(t("{added} new parcel(s) added to Delivery ({found} in the Colissimo account)", result));
+            await load();
+        } catch (e) {
+            message.error(t((e as Error).message));
+        } finally {
+            setSyncing(false);
         }
     };
 
@@ -346,6 +362,11 @@ export default function DeliveryPage() {
                     >
                         {t("Refresh statuses")}
                     </Button>
+                    {isOwner && (
+                        <Button type="primary" icon={<CloudDownloadOutlined />} loading={syncing} onClick={syncAccount}>
+                            {t("Sync with Colissimo")}
+                        </Button>
+                    )}
                 </Space>
             </div>
 

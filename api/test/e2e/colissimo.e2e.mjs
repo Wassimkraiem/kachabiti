@@ -161,9 +161,16 @@ ok(new Set(ordered.map((o) => o.id)).size === 4 && ordered.every((o, i) => !i ||
 r = await owner.call(`/api/orders?handled_by=${owner.id}&status=pending&size=200`);
 ok(r.json.data.every((o) => (o.assigned_to ?? o.created_by) === owner.id && o.status === 'pending'), 'orders filter by who handles them');
 ok((await owner.call('/api/orders?handled_by=nonsense')).status === 400, 'a bad agent id is refused');
+const clerk = await user(`clerk-${run}@test.local`, { role: 'staff', permissions: ['orders'] });
+const [{ live }] = await sql('select count(*)::int as live from orders where deleted_at is null');
+const staffList = (await clerk.call('/api/orders?size=1')).json;
+ok(staffList?.total === Math.min(live, 1000) && (await owner.call('/api/orders?size=1')).json.total === live, 'staff list only the newest 1000 orders', [staffList?.total, live]);
+const [{ oldest }] = await sql('select order_number as oldest from orders where deleted_at is null order by created_at limit 1');
+ok(live <= 1000 || (await clerk.call(`/api/orders?q=${oldest}`)).json.total === 0, 'staff search stays within those orders');
 
 await owner.call('/api/delivery', 'POST', { action: 'validate', order_id: twinA.id });
-r = await owner.call('/api/delivery?page=1&size=1');
+// scope=all: the whole list, including parcels Colissimo's account no longer lists (the default leaves those out).
+r = await owner.call('/api/delivery?page=1&size=1&scope=all');
 const paged = r.json.data;
 ok(paged.rows.length === 1 && paged.total === fullList.length + 1, 'parcels come one page at a time, with the total', paged.total);
 ok(Object.entries(paged.counts).filter(([tab]) => tab !== 'all').reduce((sum, [, n]) => sum + n, 0) === paged.counts.all, 'each parcel counts in one tab', paged.counts);

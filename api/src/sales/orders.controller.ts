@@ -13,6 +13,7 @@ import * as Sentry from '@sentry/nestjs';
 import { sql } from 'kysely';
 import { jsonArrayFrom } from 'kysely/helpers/postgres';
 import { z } from 'zod';
+import { hasFullAccess } from '@shared/admin-auth';
 import { COLISSIMO_GOVERNORATES } from '@shared/colissimo-data';
 import { OPEN_ORDER_STATUSES } from '@shared/erp/constants';
 import { sendOrderConfirmationEmail } from '@shared/order-confirmation-email';
@@ -197,7 +198,10 @@ export class OrdersController {
 
   /** One page of the list (with thumbnails and parcel), or one order with its lines (?id=). */
   @Get()
-  async list(@Query() query: Record<string, string>) {
+  async list(
+    @Query() query: Record<string, string>,
+    @CurrentActor() actor: RequestActor,
+  ) {
     const q = params(query);
     const id = q.get('id');
     let filtered = this.db
@@ -218,6 +222,18 @@ export class OrdersController {
         .execute();
       return rows[0] ?? [];
     }
+    // shortcut: staff list, filter and search only the newest 1000 orders; raise or drop the cap if they need older ones.
+    if (!hasFullAccess(actor.role))
+      filtered = filtered.where(
+        'o.id',
+        'in',
+        this.db
+          .selectFrom('orders')
+          .select('id')
+          .where('deleted_at', 'is', null)
+          .orderBy('created_at', 'desc')
+          .limit(1000),
+      );
     const status = q.get('status');
     if (status && status !== 'all')
       filtered = filtered.where('o.status', '=', status);
