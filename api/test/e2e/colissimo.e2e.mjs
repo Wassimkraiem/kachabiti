@@ -162,11 +162,12 @@ r = await owner.call(`/api/orders?handled_by=${owner.id}&status=pending&size=200
 ok(r.json.data.every((o) => (o.assigned_to ?? o.created_by) === owner.id && o.status === 'pending'), 'orders filter by who handles them');
 ok((await owner.call('/api/orders?handled_by=nonsense')).status === 400, 'a bad agent id is refused');
 const clerk = await user(`clerk-${run}@test.local`, { role: 'staff', permissions: ['orders'] });
-const [{ live }] = await sql('select count(*)::int as live from orders where deleted_at is null');
+// Staff count online orders only: shop sales (channel store) are hidden from them.
+const [{ live, online }] = await sql("select count(*)::int as live, (count(*) filter (where channel <> 'store'))::int as online from orders where deleted_at is null");
 const staffList = (await clerk.call('/api/orders?size=1')).json;
-ok(staffList?.total === Math.min(live, 1000) && (await owner.call('/api/orders?size=1')).json.total === live, 'staff list only the newest 1000 orders', [staffList?.total, live]);
-const [{ oldest }] = await sql('select order_number as oldest from orders where deleted_at is null order by created_at limit 1');
-ok(live <= 1000 || (await clerk.call(`/api/orders?q=${oldest}`)).json.total === 0, 'staff search stays within those orders');
+ok(staffList?.total === Math.min(online, 1000) && (await owner.call('/api/orders?size=1')).json.total === live, 'staff list only the newest 1000 orders', [staffList?.total, online]);
+const [{ oldest }] = await sql("select order_number as oldest from orders where deleted_at is null and channel <> 'store' order by created_at limit 1");
+ok(online <= 1000 || (await clerk.call(`/api/orders?q=${oldest}`)).json.total === 0, 'staff search stays within those orders');
 
 await owner.call('/api/delivery', 'POST', { action: 'validate', order_id: twinA.id });
 // scope=all: the whole list, including parcels Colissimo's account no longer lists (the default leaves those out).

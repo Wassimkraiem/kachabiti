@@ -155,7 +155,7 @@ export function Donut({ slices, size = 220, emptyText = "—" }: {
                         <g key={s.key}>
                             <circle cx={110} cy={110} r={r} fill="none" stroke={s.color} strokeWidth={width}
                                 strokeDasharray={`${share * circ} ${circ}`} strokeDashoffset={offset} transform="rotate(-90 110 110)">
-                                <title>{`${s.label}: ${s.value} (${Math.round(share * 1000) / 10}%)`}</title>
+                                <title>{`${s.label}: ${Math.round(share * 1000) / 10}%`}</title>
                             </circle>
                             {share >= 0.04 && (
                                 <text x={110 + r * Math.cos(mid)} y={110 + r * Math.sin(mid)} textAnchor="middle" dominantBaseline="middle"
@@ -169,7 +169,7 @@ export function Donut({ slices, size = 220, emptyText = "—" }: {
                 {slices.map((s) => (
                     <span key={s.key} style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
                         <span style={{ width: 12, height: 12, borderRadius: "50%", background: s.color }} />
-                        {s.label} <span style={{ color: INK_MUTED, fontVariantNumeric: "tabular-nums" }}>{s.value}</span>
+                        {s.label}
                     </span>
                 ))}
             </div>

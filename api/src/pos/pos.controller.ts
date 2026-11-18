@@ -128,30 +128,70 @@ export class PosController {
   }
 
   /**
+   * A till account (a shop set in Admin → Team) works only in its shop: its tills, sessions,
+   * receipts, stock and sales. Owners, admins and staff without a shop work in every shop.
+   */
+  private assertShop(
+    actor: RequestActor,
+    locationId: string | null | undefined,
+  ) {
+    if (actor.shopId && locationId !== actor.shopId)
+      throw new ApiError('This till belongs to another shop.', 403);
+  }
+
+  private async sessionShop(sessionId: string) {
+    const row = await this.db
+      .selectFrom('pos_sessions')
+      .select('location_id')
+      .where('id', '=', sessionId)
+      .executeTakeFirst();
+    return row?.location_id;
+  }
+
+  /**
    * ?catalog=1&location_id= — products with prices and shop stock. ?receipt= — a sale's receipt.
    * ?session_id= — one session. ?sessions=1 — history. Otherwise: open sessions and shop locations.
    */
   @Get()
-  async get(@Query() query: Record<string, string>) {
+  async get(
+    @Query() query: Record<string, string>,
+    @CurrentActor() actor: RequestActor,
+  ) {
     const q = params(query);
-    if (q.bool('catalog')) return this.sellable(q.get('location_id'));
+    const shop = actor.shopId ?? null;
+    if (q.bool('catalog')) return this.sellable(shop ?? q.get('location_id'));
     const receipt = q.get('receipt');
-    if (receipt) return this.receipt(receipt);
+    if (receipt) {
+      if (shop) {
+        const order = await this.db
+          .selectFrom('orders')
+          .select('location_id')
+          .where('id', '=', receipt)
+          .executeTakeFirst();
+        this.assertShop(actor, order?.location_id);
+      }
+      return this.receipt(receipt);
+    }
     const sessionId = q.get('session_id');
-    if (sessionId) return this.summary(sessionId);
+    if (sessionId) {
+      if (shop) this.assertShop(actor, await this.sessionShop(sessionId));
+      return this.summary(sessionId);
+    }
+    let sessions = this.sessions();
+    if (shop) sessions = sessions.where('s.location_id', '=', shop);
     if (q.bool('sessions'))
-      return this.sessions()
+      return sessions
         .orderBy('s.opened_at', 'desc')
         .limit(q.int('limit', 100, 500))
         .execute();
+    let shops = this.db
+      .selectFrom('locations')
+      .select(['id', 'name', 'sells_online', 'is_shop', 'low_stock_limit'])
+      .where('deleted_at', 'is', null);
+    if (shop) shops = shops.where('id', '=', shop);
     const [open, locations, settings] = await Promise.all([
-      this.sessions().where('s.status', '=', 'open').execute(),
-      this.db
-        .selectFrom('locations')
-        .select(['id', 'name', 'sells_online', 'is_shop', 'low_stock_limit'])
-        .where('deleted_at', 'is', null)
-        .orderBy('name')
-        .execute(),
+      sessions.where('s.status', '=', 'open').execute(),
+      shops.orderBy('name').execute(),
       this.db
         .selectFrom('erp_settings')
         .select('value')
@@ -250,6 +290,13 @@ export class PosController {
     @Body(new Zod(bodySchema)) body: z.infer<typeof bodySchema>,
     @CurrentActor() actor: RequestActor,
   ) {
+    if (actor.shopId)
+      this.assertShop(
+        actor,
+        body.action === 'open'
+          ? body.location_id
+          : await this.sessionShop(body.session_id),
+      );
     if (body.action === 'open') {
       return this.db.withActor(actor, (trx) =>
         this.db.call(

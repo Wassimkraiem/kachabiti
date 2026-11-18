@@ -70,6 +70,15 @@ export function getAdminRole(user: AuthUser | null): AdminRole | null {
 }
 
 /** True when the role comes from OWNER_EMAILS / ADMIN_EMAILS rather than the account itself (can't be changed in the Team page). */
+/**
+ * A till account's shop (`app_metadata.location_id`, set in Admin → Team): its Point of sale only
+ * works there. Staff only; owners and admins work in every shop.
+ */
+export function getShop(user: AuthUser | null): string | null {
+    const id = user?.app_metadata?.location_id;
+    return getAdminRole(user) === 'staff' && typeof id === 'string' ? id : null;
+}
+
 export function isRoleFromSettings(user: AuthUser | null): boolean {
     const role = getAdminRole(user);
     return (role === 'owner' || role === 'admin') && user?.app_metadata?.role !== role;

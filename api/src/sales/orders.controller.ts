@@ -223,17 +223,21 @@ export class OrdersController {
       return rows[0] ?? [];
     }
     // shortcut: staff list, filter and search only the newest 1000 orders; raise or drop the cap if they need older ones.
+    // Shop sales (channel store) are the shops' business: staff don't see them here.
     if (!hasFullAccess(actor.role))
-      filtered = filtered.where(
-        'o.id',
-        'in',
-        this.db
-          .selectFrom('orders')
-          .select('id')
-          .where('deleted_at', 'is', null)
-          .orderBy('created_at', 'desc')
-          .limit(1000),
-      );
+      filtered = filtered
+        .where('o.channel', '<>', 'store')
+        .where(
+          'o.id',
+          'in',
+          this.db
+            .selectFrom('orders')
+            .select('id')
+            .where('deleted_at', 'is', null)
+            .where('channel', '<>', 'store')
+            .orderBy('created_at', 'desc')
+            .limit(1000),
+        );
     const status = q.get('status');
     if (status && status !== 'all')
       filtered = filtered.where('o.status', '=', status);

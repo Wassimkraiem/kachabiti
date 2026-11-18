@@ -5,7 +5,8 @@ import Link from "next/link";
 import { Card, Table, Typography, Space, Button, Tag, Modal, Form, Input, Select, Popconfirm, Tooltip, Alert, Checkbox } from "antd";
 import { message } from "@/components/admin/antd-app";
 import type { ColumnsType } from "antd/es/table";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, ShopOutlined } from "@ant-design/icons";
+import { useApi } from "@/components/admin/erp/erp-client";
 import dayjs from "dayjs";
 import { ALL_PERMISSIONS, DEFAULT_STAFF_PERMISSIONS, PERMISSIONS, PERMISSION_PRESETS, type AdminRole, type Permission } from "@/lib/admin-auth";
 import { useAdminRole } from "@/lib/admin-role-context";
@@ -19,6 +20,8 @@ interface Member {
     email: string;
     role: AdminRole;
     permissions: Permission[];
+    /** A till account's shop: its Point of sale works there alone. */
+    location_id: string | null;
     locked: boolean;
     last_sign_in_at: string | null;
     created_at: string;
@@ -75,6 +78,12 @@ export default function TeamPage() {
     const newRole = Form.useWatch("role", form);
     const [editing, setEditing] = useState<Member | null>(null);
     const [editPermissions, setEditPermissions] = useState<Permission[]>([]);
+    const [editShop, setEditShop] = useState<string | null>(null);
+    // Shops for till accounts (GET /api/pos lists them to owners and admins).
+    const shops = (useApi<{ locations: { id: string; name: string; is_shop: boolean }[] }>("/api/pos").data?.locations ?? [])
+        .filter((l) => l.is_shop)
+        .map((l) => ({ value: l.id, label: l.name }));
+    const shopName = (id: string | null) => shops.find((s) => s.value === id)?.label;
 
     const load = useCallback(async () => {
         setLoading(true);
@@ -91,9 +100,9 @@ export default function TeamPage() {
         load();
     }, [load]);
 
-    const changeRole = async (member: Member, role: AdminRole | null, permissions?: Permission[]) => {
+    const changeRole = async (member: Member, role: AdminRole | null, permissions?: Permission[], location_id?: string | null) => {
         try {
-            await apiJson("/api/admin/team", { method: "PUT", body: JSON.stringify({ id: member.id, role, permissions }) });
+            await apiJson("/api/admin/team", { method: "PUT", body: JSON.stringify({ id: member.id, role, permissions, location_id }) });
             message.success(
                 permissions
                     ? t("Access updated for {email}", { email: member.email })
@@ -165,10 +174,11 @@ export default function TeamPage() {
                     <Text type="secondary">{t("Everything, including team")}</Text>
                 ) : (
                     <Space size={[4, 4]} wrap>
+                        {m.location_id && <Tag color="gold" icon={<ShopOutlined />}>{shopName(m.location_id) ?? t("Shop")}</Tag>}
                         {m.permissions.length === 0 && <Text type="secondary">{t("Dashboard only")}</Text>}
                         {m.permissions.map((p) => <Tag key={p}>{t(PERMISSIONS[p].label)}</Tag>)}
                         {m.email !== myEmail && (
-                            <Button size="small" type="link" onClick={() => { setEditing(m); setEditPermissions(m.permissions); }}>{t("Edit")}</Button>
+                            <Button size="small" type="link" onClick={() => { setEditing(m); setEditPermissions(m.permissions); setEditShop(m.location_id); }}>{t("Edit")}</Button>
                         )}
                     </Space>
                 ),
@@ -227,11 +237,16 @@ export default function TeamPage() {
                 open={!!editing}
                 title={editing ? t("Access for {email}", { email: editing.email }) : ""}
                 okText={t("Save access")}
-                onOk={() => editing && changeRole(editing, "staff", editPermissions)}
+                onOk={() => editing && changeRole(editing, "staff", editPermissions, editShop)}
                 onCancel={() => setEditing(null)}
                 destroyOnHidden
             >
                 <PermissionPicker value={editPermissions} onChange={setEditPermissions} />
+                <div style={{ marginTop: 16 }}>
+                    <Text strong>{t("Shop (till account)")}</Text>
+                    <Select allowClear style={{ width: "100%", marginTop: 6 }} placeholder={t("Every shop")} value={editShop ?? undefined} onChange={(value) => setEditShop(value ?? null)} options={shops} />
+                    <Text type="secondary" style={{ display: "block", fontSize: 12, marginTop: 4 }}>{t("A till account sells, sees and closes only this shop's till.")}</Text>
+                </div>
                 <Text type="secondary" style={{ display: "block", marginTop: 16, fontSize: 12 }}>
                     {t("Changes apply the next time their session refreshes (within an hour) or when they sign in again.")}
                 </Text>
@@ -274,6 +289,11 @@ export default function TeamPage() {
                     {newRole === "staff" && (
                         <Form.Item name="permissions" label={t("What they can do")}>
                             <PermissionPicker />
+                        </Form.Item>
+                    )}
+                    {newRole === "staff" && (
+                        <Form.Item name="location_id" label={t("Shop (till account)")} extra={t("A till account sells, sees and closes only this shop's till.")}>
+                            <Select allowClear placeholder={t("Every shop")} options={shops} />
                         </Form.Item>
                     )}
                 </Form>

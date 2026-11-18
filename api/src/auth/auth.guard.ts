@@ -13,6 +13,7 @@ import {
   allows,
   getAdminRole,
   getPermissions,
+  getShop,
   PERMISSIONS,
   type AdminRole,
   type Permission,
@@ -34,6 +35,8 @@ export interface RequestActor {
   email: string | null;
   role: AdminRole;
   permissions: Permission[];
+  /** A till account's shop: Point of sale only works there (getShop()). */
+  shopId?: string | null;
   /** Set when an API key made the request: its orders are assigned to the key itself. */
   apiKeyId?: string;
 }
@@ -178,6 +181,7 @@ export class AuthGuard implements CanActivate {
       email: user.email,
       role,
       permissions: getPermissions(user),
+      shopId: getShop(user),
     };
   }
 

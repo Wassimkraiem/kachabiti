@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { printSlips } from "@/components/admin/delivery/print-slips";
-import { Alert, Breadcrumb, Button, Card, DatePicker, Input, Modal, Popconfirm, Segmented, Select, Space, Table, Tag, Tooltip, Typography } from "antd";
+import { Alert, Breadcrumb, Button, Card, DatePicker, Grid, Input, Modal, Popconfirm, Segmented, Select, Space, Table, Tag, Tooltip, Typography } from "antd";
 import type { Dayjs } from "dayjs";
 import type { ColumnsType } from "antd/es/table";
 import { api } from "@/components/admin/erp/erp-client";
@@ -44,6 +44,7 @@ const PAGE_SIZE = 25;
 export default function DeliveryPage() {
     const { t, locale } = useAdminT();
     const { can, isAdmin: showMoney, isOwner } = useAdminRole(); // money (amounts, totals): owners and admins only
+    const mobile = Grid.useBreakpoint().md === false; // same test as the admin layout's card tables
     const canDelete = can("delete");
     const [data, setData] = useState<DeliveryPageData | null>(null);
     const [loading, setLoading] = useState(true);
@@ -290,7 +291,7 @@ export default function DeliveryPage() {
             title: t("Action"),
             key: "action",
             width: 230,
-            fixed: "right",
+            fixed: mobile ? undefined : "right",
             render: (_, row) => (
                 <Space size={0}>
                     {row.barcode && (
@@ -490,9 +491,10 @@ export default function DeliveryPage() {
                             setLastChange(by?.order ? (by.order === "ascend" ? "asc" : "desc") : null);
                         }}
                         // Fixed widths, the article takes what's left: everything fits on a laptop, and
-                        // narrower screens scroll sideways with Action pinned.
-                        scroll={{ x: 1080 }}
-                        tableLayout="fixed"
+                        // narrower screens scroll sideways with Action pinned. Phones get the admin's
+                        // card layout instead, which a fixed width would push off the screen.
+                        scroll={mobile ? undefined : { x: 1080 }}
+                        tableLayout={mobile ? undefined : "fixed"}
                         // A click on the row (not on its links, buttons or checkbox) opens the parcel's history.
                         onRow={(row) => ({
                             onClick: (e) => {

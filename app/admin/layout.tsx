@@ -351,6 +351,9 @@ function AdminConfig({ children }: { children: React.ReactNode }) {
                         .admin-mobile .ant-table-tbody > tr.ant-table-expanded-row > td { display: block; text-align: start; }
                         .admin-mobile .ant-table-tbody > tr.ant-table-expanded-row > td::before { display: none; }
                         .admin-mobile .ant-table-tbody > tr > td > * { min-width: 0; max-width: 100%; margin-inline-start: auto; }
+                        /* One-line texts (ellipsis, nowrap links) would size the whole card to their full length: let them wrap. */
+                        .admin-mobile .ant-table-tbody > tr > td .ant-typography-ellipsis,
+                        .admin-mobile .ant-table-tbody > tr > td a { white-space: normal !important; overflow-wrap: anywhere; }
                         .admin-mobile .ant-table-tbody > tr > td .ant-space { flex-wrap: wrap; justify-content: flex-end; }
                         .admin-mobile .ant-table-cell-row-hover, .admin-mobile .ant-table-tbody > tr:hover > td { background: transparent !important; }
                         .admin-mobile .ant-table { background: transparent; }

@@ -16,13 +16,14 @@ import {
   DEFAULT_STAFF_PERMISSIONS,
   getAdminRole,
   getPermissions,
+  getShop,
   isRoleFromSettings,
   type AdminRole,
   type Permission,
 } from '@shared/admin-auth';
 import type { RequestActor } from '../auth/auth.guard';
 import { AdminOnly, CurrentActor } from '../auth/decorators';
-import { ApiError, Zod } from '../common/api';
+import { ApiError, Zod, zId } from '../common/api';
 import { Database } from '../db/database';
 import type { DB } from '../db/types';
 
@@ -45,6 +46,8 @@ const member = (row: Row) => ({
   email: row.email ?? '',
   role: getAdminRole(asUser(row)),
   permissions: getPermissions(asUser(row)),
+  // A till account's shop (staff only): its Point of sale works there alone.
+  location_id: getShop(asUser(row)),
   // OWNER_EMAILS owners and ADMIN_EMAILS admins can't be changed from here.
   locked: isRoleFromSettings(asUser(row)),
   last_sign_in_at: row.last_sign_in_at,
@@ -62,11 +65,13 @@ const createSchema = z.object({
   password: z.string().min(8).max(72).optional().or(z.literal('')),
   role,
   permissions,
+  location_id: zId.nullish(),
 });
 const updateSchema = z.object({
   id: z.string().uuid(),
   role: role.nullable(),
   permissions,
+  location_id: zId.nullish(),
 });
 
 const ownersOnly = () =>
@@ -84,6 +89,19 @@ const settingsEmails = () =>
 @AdminOnly()
 export class TeamController {
   constructor(private readonly db: Database) {}
+
+  /** A till account's shop must be a live shop location (Stock settings → "is a shop"). */
+  private async shop(id: string) {
+    const found = await this.db
+      .selectFrom('locations')
+      .select('id')
+      .where('id', '=', id)
+      .where('is_shop', '=', true)
+      .where('deleted_at', 'is', null)
+      .executeTakeFirst();
+    if (!found) throw new ApiError('Choose one of your shops.');
+    return found.id;
+  }
 
   private accounts() {
     return this.db
@@ -182,12 +200,15 @@ export class TeamController {
     @Body(new Zod(createSchema)) body: z.infer<typeof createSchema>,
   ) {
     if (body.role === 'owner' && actor.role !== 'owner') throw ownersOnly();
-    // Owners and admins have every permission, so only staff store a list.
+    // Owners and admins have every permission and work in every shop, so only staff store these.
     const appMetadata =
       body.role === 'staff'
         ? {
             role: body.role,
             permissions: body.permissions ?? DEFAULT_STAFF_PERMISSIONS,
+            ...(body.location_id
+              ? { location_id: await this.shop(body.location_id) }
+              : {}),
           }
         : { role: body.role };
     const passwordHash = body.password ? await hash(body.password, 10) : null;
@@ -259,8 +280,13 @@ export class TeamController {
         (roleBefore === 'staff'
           ? getPermissions(before)
           : DEFAULT_STAFF_PERMISSIONS);
+      // A shop makes it a till account (undefined keeps it, null removes it).
+      if (body.location_id)
+        appMetadata.location_id = await this.shop(body.location_id);
+      else if (body.location_id === null) delete appMetadata.location_id;
     } else {
       delete appMetadata.permissions;
+      delete appMetadata.location_id;
     }
     return this.db.withActor(null, async (trx) => {
       const row = await trx

@@ -39,7 +39,7 @@ const LOCATION_KEY = "pos_location";
  */
 export default function PosPage() {
     const { t, locale } = useAdminT();
-    const { isAdmin, can } = useAdminRole();
+    const { isAdmin, isOwner, can } = useAdminRole();
     const overview = useApi<Overview>("/api/pos");
     const [tab, setTab] = useState("sell");
     const [locationId, setLocationId] = useState<string | null>(null);
@@ -212,7 +212,8 @@ export default function PosPage() {
                 items={[
                     { key: "sell", label: t("Sell") },
                     { key: "stock", label: <Badge count={lowCount} offset={[12, 0]} size="small">{t("Stock")}</Badge> },
-                    ...(can("analytics") || can("finance") ? [{ key: "analytics", label: t("Analytics") }] : []),
+                    // The income of every shop: owners only.
+                    ...(isOwner ? [{ key: "analytics", label: t("Analytics") }] : []),
                 ]}
             />
 
