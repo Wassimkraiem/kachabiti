@@ -62,7 +62,9 @@ export function lineIsComplete(line: ProductLine, variantsByProduct: Record<stri
  * by the server (POST /api/delivery action `quote`), so the amounts match the order it will create.
  * `onQuote` receives the priced complete lines (or null while some line is incomplete).
  */
-export default function ParcelProducts({ lines, onChange, onQuote }: {
+export default function ParcelProducts({ lines, onChange, onQuote, showPrice = true }: {
+    /** false: no price under each line (items taken back in an exchange aren't charged). */
+    showPrice?: boolean;
     lines: ProductLine[];
     onChange: (lines: ProductLine[]) => void;
     onQuote: (quoted: QuotedLine[] | null) => void;
@@ -180,8 +182,7 @@ export default function ParcelProducts({ lines, onChange, onQuote }: {
                         <Button type="text" danger icon={<DeleteOutlined />} aria-label={t("Remove")} onClick={() => onChange(lines.filter((l) => l.key !== line.key))} />
                         {quote && (
                             <Text type="secondary" style={{ flexBasis: "100%", fontSize: 12 }}>
-                                {t("{quantity} × {price} TND = {subtotal} TND", { quantity: quote.quantity, price: quote.price, subtotal: quote.subtotal })}
-                                {" · "}
+                                {showPrice && <>{t("{quantity} × {price} TND = {subtotal} TND", { quantity: quote.quantity, price: quote.price, subtotal: quote.subtotal })}{" · "}</>}
                                 {quote.stock === null
                                     ? t("Stock not tracked")
                                     : quote.stock >= quote.quantity

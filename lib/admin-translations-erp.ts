@@ -1150,6 +1150,7 @@ export const erpEntries: [en: string, fr: string, ar: string][] = [
     ["My tasks", "Mes tâches", "مهامي"],
     ["All tasks", "Toutes les tâches", "كل المهام"],
     ["Shop (till account)", "Boutique (compte caisse)", "المحل (حساب الصندوق)"],
+    ["Pick the products to take back (with their size/colour).", "Choisissez les produits à reprendre (avec leur taille/couleur).", "اختر المنتجات المسترجعة (مع المقاس/اللون)."],
     ["Exchange: Colissimo takes items back on delivery", "Échange : Colissimo reprend des articles à la livraison", "استبدال: كوليسيمو يسترجع منتجات عند التسليم"],
     ["Every shop", "Toutes les boutiques", "كل المحلات"],
     ["A till account sells, sees and closes only this shop's till.", "Un compte caisse vend, voit et clôture uniquement la caisse de cette boutique.", "حساب الصندوق يبيع ويرى ويغلق صندوق هذا المحل فقط."],

@@ -80,6 +80,8 @@ const createSchema = z.object({
     .object({
       article: z.string().trim().min(1).max(250),
       count: z.number().int().min(1).max(999),
+      // The catalog products taken back (picked in New order); article is their names for Colissimo.
+      items: z.array(itemSchema).max(20).optional(),
     })
     .nullish(),
 });

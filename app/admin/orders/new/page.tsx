@@ -35,6 +35,9 @@ export default function NewOrderPage() {
     const [form] = Form.useForm();
     const [lines, setLines] = useState<ProductLine[]>([{ key: 1, quantity: 1 }]);
     const [quoted, setQuoted] = useState<QuotedLine[] | null>(null);
+    // An exchange's products to take back, picked like the order's own.
+    const [backLines, setBackLines] = useState<ProductLine[]>([{ key: 1, quantity: 1 }]);
+    const [backQuoted, setBackQuoted] = useState<QuotedLine[] | null>(null);
     const [lookup, setLookup] = useState<Lookup | null>(null);
     const [saving, setSaving] = useState(false);
     const phone: string = Form.useWatch("phone", form) ?? "";
@@ -87,6 +90,10 @@ export default function NewOrderPage() {
             message.warning(t("Add at least one product (with its size/colour)."));
             return;
         }
+        if (values.is_exchange && !backQuoted?.length) {
+            message.warning(t("Pick the products to take back (with their size/colour)."));
+            return;
+        }
         setSaving(true);
         try {
             const created = await api<{ id: string; order_number: string }>("/api/sales/orders", {
@@ -110,7 +117,14 @@ export default function NewOrderPage() {
                     assigned_to: values.assigned_to === undefined ? undefined : values.assigned_to,
                     confirmed: values.confirmed ?? false,
                     // Colissimo takes these back on delivery (sent when the order is validated).
-                    exchange: values.is_exchange ? { article: values.exchange_article, count: values.exchange_count ?? 1 } : null,
+                    exchange: values.is_exchange && backQuoted?.length
+                        ? {
+                              // Colissimo's "article à reprendre": the names, as in the parcel's description.
+                              article: backQuoted.map((l) => `${l.quantity > 1 ? `${l.quantity}× ` : ""}${l.product_name}${l.variant_label ? ` (${l.variant_label})` : ""}`).join(", ").slice(0, 250),
+                              count: backQuoted.reduce((sum, l) => sum + l.quantity, 0),
+                              items: backQuoted.map((l) => ({ product_id: l.product_id, variant_id: l.variant_id, quantity: l.quantity })),
+                          }
+                        : null,
                 },
             });
             message.success(t("Order {order_number} created", { order_number: created.order_number }));
@@ -220,18 +234,9 @@ export default function NewOrderPage() {
                                 <Checkbox>{t("Exchange: Colissimo takes items back on delivery")}</Checkbox>
                             </Form.Item>
                             {isExchange && (
-                                <Row gutter={12}>
-                                    <Col span={16}>
-                                        <Form.Item name="exchange_article" label={t("Items to take back")} rules={[{ required: true, whitespace: true, message: t("Required") }]}>
-                                            <Input maxLength={250} />
-                                        </Form.Item>
-                                    </Col>
-                                    <Col span={8}>
-                                        <Form.Item name="exchange_count" label={t("How many")} initialValue={1} rules={[{ required: true, message: t("Required") }]}>
-                                            <InputNumber min={1} max={999} precision={0} style={{ width: "100%" }} />
-                                        </Form.Item>
-                                    </Col>
-                                </Row>
+                                <Form.Item label={t("Items to take back")} required>
+                                    <ParcelProducts lines={backLines} onChange={setBackLines} onQuote={setBackQuoted} showPrice={false} />
+                                </Form.Item>
                             )}
                             <Form.Item name="confirmed" valuePropName="checked">
                                 <Checkbox>{t("The customer already confirmed")}</Checkbox>
