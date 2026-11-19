@@ -181,7 +181,22 @@ export class SalesOrdersController {
   ) {
     const lines = await this.lines(body.items);
     const subtotal = lines.reduce((sum, line) => sum + line.subtotal, 0);
-    const { shipping, total } = await this.amounts(subtotal, body, actor);
+    const amounts = await this.amounts(subtotal, body, actor);
+    const shipping = amounts.shipping;
+    // An exchange: the products taken back are worth their catalog price, taken off what the
+    // customer pays (at most the products' total, so the delivery fee stays). Booked as discount,
+    // so every total (edit, accounting, Colissimo) stays products − discount + delivery.
+    const back = body.exchange?.items?.length
+      ? await this.lines(body.exchange.items)
+      : [];
+    const credit =
+      Math.round(
+        Math.min(
+          back.reduce((sum, line) => sum + line.subtotal, 0),
+          Math.max(0, subtotal - body.discount_amount),
+        ) * 1000,
+      ) / 1000;
+    const total = Math.round((amounts.total - credit) * 1000) / 1000;
 
     // An API key's own orders are assigned to the key (shown as api-key:<name>), so they count
     // as the chatbot's, not as the admin who made the key.
@@ -221,7 +236,7 @@ export class SalesOrdersController {
             assigned_to_email: assigneeEmail,
             created_by: actor.userId,
             created_by_email: actor.email,
-            discount_amount: body.discount_amount,
+            discount_amount: body.discount_amount + credit,
           },
           p_items: lines,
         },
@@ -230,7 +245,7 @@ export class SalesOrdersController {
       if (body.exchange)
         await trx
           .updateTable('orders')
-          .set({ exchange: JSON.stringify(body.exchange) })
+          .set({ exchange: JSON.stringify({ ...body.exchange, credit }) })
           .where('id', '=', result.order.id)
           .execute();
       if (body.confirmed) {

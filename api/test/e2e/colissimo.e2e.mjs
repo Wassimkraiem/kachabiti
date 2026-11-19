@@ -46,10 +46,14 @@ r = await owner.call('/api/sales/orders', 'POST', {
 const swap = r.json?.data;
 const kept = (await sql('select exchange from orders where id = $1', [swap?.id]))[0]?.exchange;
 ok(kept?.article === 'Kachabia T2 to swap' && kept.items?.[0]?.product_id === product.id, 'the order keeps its exchange and the products to take back', kept);
+// The same product back: only the delivery fee is left to collect.
+const [money] = await sql('select subtotal, discount_amount, shipping_cost, total from orders where id = $1', [swap?.id]);
+ok(Number(kept?.credit) === Number(money.subtotal) && Number(money.discount_amount) === Number(money.subtotal) && Number(money.total) === Number(money.shipping_cost), 'an exchange charges only the difference (here the delivery fee)', money);
 ok((await owner.call('/api/sales/orders', 'POST', { customer: { phone: '21000009', first_name: 'S', governorate: 'Tunis', city: 'Tunis', address: '1 rue' }, items: [{ product_id: product.id, variant_id: variant.id, quantity: 1 }], channel: 'phone', exchange: { article: ' ', count: 1 } })).status === 400, 'an exchange needs the items to take back');
 r = await owner.call('/api/delivery', 'POST', { action: 'validate', order_id: swap.id });
 const swapParcel = await parcelAt(r.json?.data?.delivery?.barcode);
 ok(swapParcel?.echange === 'oui' && swapParcel.article === 'Kachabia T2 to swap' && swapParcel.nb_echange === 1, 'Colissimo gets the exchange', swapParcel);
+ok(swapParcel?.prix === 8, 'Colissimo collects only the difference', swapParcel?.prix);
 
 // Edit while waiting for pickup: Colissimo, the parcel and the order change together.
 r = await owner.call('/api/delivery', 'POST', { action: 'edit', id: parcel.id, parcel: { adresse: '2 rue Neuve', tel: '22998877' } });

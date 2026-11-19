@@ -83,6 +83,8 @@ export default function NewOrderPage() {
     }, [phone, form]);
 
     const subtotal = useMemo(() => (quoted ?? []).reduce((s, l) => s + l.subtotal, 0), [quoted]);
+    // An exchange: what's taken back is worth its catalog price, off the products' total (as the server does).
+    const credit = isExchange ? Math.min((backQuoted ?? []).reduce((s, l) => s + l.subtotal, 0), Math.max(0, subtotal - discount)) : 0;
 
     const submit = async () => {
         const values = await form.validateFields();
@@ -245,8 +247,9 @@ export default function NewOrderPage() {
                             <div style={{ borderTop: "1px solid #f0f0f0", paddingTop: 12 }}>
                                 <Line label={t("Products")} value={formatMoney(subtotal, locale)} />
                                 {discount > 0 && <Line label={t("Discount")} value={`− ${formatMoney(discount, locale)}`} />}
+                                {credit > 0 && <Line label={t("Exchange (taken back)")} value={`− ${formatMoney(credit, locale)}`} />}
                                 <Line label={t("Delivery fee")} value={shipping === null ? t("Usual fee") : formatMoney(shipping, locale)} />
-                                <Line label={t("To collect")} value={shipping === null ? `${formatMoney(Math.max(0, subtotal - discount), locale)} + ${t("delivery")}` : formatMoney(Math.max(0, subtotal - discount) + shipping, locale)} strong />
+                                <Line label={t("To collect")} value={shipping === null ? `${formatMoney(Math.max(0, subtotal - discount - credit), locale)} + ${t("delivery")}` : formatMoney(Math.max(0, subtotal - discount - credit) + shipping, locale)} strong />
                             </div>
                             <Button type="primary" block size="large" style={{ marginTop: 16 }} loading={saving} onClick={submit}>
                                 {t("Create order")}
