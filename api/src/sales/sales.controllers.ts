@@ -75,6 +75,13 @@ const createSchema = z.object({
   assigned_to: zId.nullish(),
   // The customer already agreed (the agent confirmed while taking the order).
   confirmed: z.boolean().default(false),
+  // An exchange: Colissimo takes these items back on delivery (sent when the order is validated).
+  exchange: z
+    .object({
+      article: z.string().trim().min(1).max(250),
+      count: z.number().int().min(1).max(999),
+    })
+    .nullish(),
 });
 const patchSchema = z.discriminatedUnion('action', [
   // Assign orders to an agent (null: unassign).
@@ -218,6 +225,12 @@ export class SalesOrdersController {
         },
         trx,
       );
+      if (body.exchange)
+        await trx
+          .updateTable('orders')
+          .set({ exchange: JSON.stringify(body.exchange) })
+          .where('id', '=', result.order.id)
+          .execute();
       if (body.confirmed) {
         await this.db.call(
           'set_order_status',

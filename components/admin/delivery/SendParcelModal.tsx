@@ -42,7 +42,7 @@ function initialValues(order: ParcelOrder): FormValues {
         gouvernerat: parcel.gouvernerat ?? undefined,
         ouvrir: true,
         fragile: false,
-        echange: false,
+        echange: parcel.echange === "oui", // set on the order (Admin → New order)
     };
 }
 

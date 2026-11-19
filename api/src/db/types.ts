@@ -666,6 +666,7 @@ export interface Orders {
   deleted_at: Timestamp | null;
   delivered_at: Timestamp | null;
   discount_amount: Generated<Numeric>;
+  exchange: Json | null;
   id: Generated<string>;
   location_id: string | null;
   order_notes: string | null;

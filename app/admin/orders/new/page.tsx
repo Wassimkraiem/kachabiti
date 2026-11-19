@@ -40,6 +40,7 @@ export default function NewOrderPage() {
     const phone: string = Form.useWatch("phone", form) ?? "";
     const discount: number = Form.useWatch("discount_amount", form) ?? 0;
     const shipping: number | null = Form.useWatch("shipping_cost", form) ?? null;
+    const isExchange: boolean = Form.useWatch("is_exchange", form) ?? false;
     // The usual delivery fee (Business settings) starts filled in; the agent can change it.
     const fee = useApi<{ fee: number }>("/api/sales/orders/delivery-fee").data?.fee;
     useEffect(() => {
@@ -108,6 +109,8 @@ export default function NewOrderPage() {
                     notes: values.notes ?? undefined,
                     assigned_to: values.assigned_to === undefined ? undefined : values.assigned_to,
                     confirmed: values.confirmed ?? false,
+                    // Colissimo takes these back on delivery (sent when the order is validated).
+                    exchange: values.is_exchange ? { article: values.exchange_article, count: values.exchange_count ?? 1 } : null,
                 },
             });
             message.success(t("Order {order_number} created", { order_number: created.order_number }));
@@ -213,6 +216,23 @@ export default function NewOrderPage() {
                             <Form.Item name="notes" label={t("Notes")}>
                                 <Input.TextArea rows={3} maxLength={2000} />
                             </Form.Item>
+                            <Form.Item name="is_exchange" valuePropName="checked" style={{ marginBottom: isExchange ? 8 : undefined }}>
+                                <Checkbox>{t("Exchange: Colissimo takes items back on delivery")}</Checkbox>
+                            </Form.Item>
+                            {isExchange && (
+                                <Row gutter={12}>
+                                    <Col span={16}>
+                                        <Form.Item name="exchange_article" label={t("Items to take back")} rules={[{ required: true, whitespace: true, message: t("Required") }]}>
+                                            <Input maxLength={250} />
+                                        </Form.Item>
+                                    </Col>
+                                    <Col span={8}>
+                                        <Form.Item name="exchange_count" label={t("How many")} initialValue={1} rules={[{ required: true, message: t("Required") }]}>
+                                            <InputNumber min={1} max={999} precision={0} style={{ width: "100%" }} />
+                                        </Form.Item>
+                                    </Col>
+                                </Row>
+                            )}
                             <Form.Item name="confirmed" valuePropName="checked">
                                 <Checkbox>{t("The customer already confirmed")}</Checkbox>
                             </Form.Item>

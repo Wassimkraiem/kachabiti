@@ -144,6 +144,8 @@ export interface OrderForParcel {
     total: number;
     payment_status: string;
     order_notes?: string | null;
+    /** An exchange: Colissimo takes these items back on delivery. */
+    exchange?: { article: string; count: number } | null;
     items: { product_name: string; variant_label?: string | null; quantity: number }[];
 }
 
@@ -168,7 +170,9 @@ export function parcelFromOrder(order: OrderForParcel) {
         nb_article: order.items.reduce((sum, item) => sum + item.quantity, 0) || 1,
         prix: order.payment_status === 'paid' ? 0 : Number(order.total),
         msg: order.order_notes ? order.order_notes.slice(0, 250) : undefined,
-        echange: 'non' as const,
+        echange: (order.exchange ? 'oui' : 'non') as 'oui' | 'non',
+        article: order.exchange?.article.slice(0, 250),
+        nb_echange: order.exchange?.count,
         ouvrir: 1 as const,
         fragile: 0 as const,
         type_colis: 1 as const,

@@ -35,6 +35,20 @@ let r = await owner.call('/api/delivery', 'POST', { action: 'validate', order_id
 const parcel = r.json?.data?.delivery;
 ok(r.json?.success && parcel?.barcode, 'validate creates the parcel', r.json);
 ok((await parcelAt(parcel.barcode))?.etat === 'En attente', 'Colissimo has it waiting for pickup');
+ok((await parcelAt(parcel.barcode))?.echange === 'non', 'an ordinary order is no exchange');
+
+// An exchange set on the order goes to Colissimo when the order is validated.
+r = await owner.call('/api/sales/orders', 'POST', {
+    customer: { phone: '21000009', first_name: 'Salma', last_name: 'Colis', governorate: 'Tunis', city: 'Tunis', address: '1 rue du Test' },
+    items: [{ product_id: product.id, variant_id: variant.id, quantity: 1 }], channel: 'phone', shipping_cost: 8,
+    exchange: { article: 'Kachabia T2 to swap', count: 1 },
+});
+const swap = r.json?.data;
+ok(swap?.id && (await sql('select exchange from orders where id = $1', [swap.id]))[0]?.exchange?.article === 'Kachabia T2 to swap', 'the order keeps its exchange', r.json);
+ok((await owner.call('/api/sales/orders', 'POST', { customer: { phone: '21000009', first_name: 'S', governorate: 'Tunis', city: 'Tunis', address: '1 rue' }, items: [{ product_id: product.id, variant_id: variant.id, quantity: 1 }], channel: 'phone', exchange: { article: ' ', count: 1 } })).status === 400, 'an exchange needs the items to take back');
+r = await owner.call('/api/delivery', 'POST', { action: 'validate', order_id: swap.id });
+const swapParcel = await parcelAt(r.json?.data?.delivery?.barcode);
+ok(swapParcel?.echange === 'oui' && swapParcel.article === 'Kachabia T2 to swap' && swapParcel.nb_echange === 1, 'Colissimo gets the exchange', swapParcel);
 
 // Edit while waiting for pickup: Colissimo, the parcel and the order change together.
 r = await owner.call('/api/delivery', 'POST', { action: 'edit', id: parcel.id, parcel: { adresse: '2 rue Neuve', tel: '22998877' } });

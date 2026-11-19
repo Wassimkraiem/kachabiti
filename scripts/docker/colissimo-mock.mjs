@@ -172,6 +172,7 @@ async function handle(request) {
             nom: String(form.get('nom')), adresse: String(form.get('adresse')), tel: String(form.get('tel')), tel2: String(form.get('tel2') ?? ''),
             designation: String(form.get('designation')), prix: Number(form.get('prix')), nb_article: Number(form.get('nb_article')),
             gouvernerat: String(form.get('gouvernerat')), ville: String(form.get('ville')),
+            echange: String(form.get('echange') ?? 'non'), article: String(form.get('article') ?? ''), nb_echange: Number(form.get('nb_echange') ?? 0),
         });
         return json({ status: 1, status_message: code, lien: `https://colissimo.local/print/imprimer.php?code=${code}`, lien_zebra: `https://colissimo.local/print/zebra.php?code=${code}` });
     }

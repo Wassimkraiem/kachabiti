@@ -758,6 +758,7 @@ export class DeliveryController {
         'o.total',
         'o.payment_status',
         'o.order_notes',
+        'o.exchange',
       ])
       .select((eb) =>
         jsonArrayFrom(
@@ -835,7 +836,13 @@ export class DeliveryController {
       };
     }
 
-    const parcel = parcelSchema.safeParse(parcelFromOrder(order));
+    const parcel = parcelSchema.safeParse(
+      parcelFromOrder({
+        ...order,
+        // Written only by POST /api/sales/orders, which checks this shape.
+        exchange: order.exchange as { article: string; count: number } | null,
+      }),
+    );
     if (!parcel.success) {
       const fields = [
         ...new Set(parcel.error.issues.map((issue) => String(issue.path[0]))),
