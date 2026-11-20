@@ -143,6 +143,7 @@ export default function EditProductPage() {
                         supplier_id: product.supplier_id,
                         collection_id: product.collection_id,
                         stock_tracked: !!product.stock_tracked,
+                        made_to_order: !!product.made_to_order,
                     });
                     loadProductCost(id).then((cost) => form.setFieldValue("cost", cost)).catch(() => undefined);
 
@@ -253,6 +254,7 @@ export default function EditProductPage() {
                 supplier_id: values.supplier_id || null,
                 collection_id: values.collection_id || null,
                 stock_tracked: !!values.stock_tracked,
+                made_to_order: !!values.made_to_order,
                 images: productImageUrls.map((url, index) => ({
                     url,
                     is_main: index === 0,

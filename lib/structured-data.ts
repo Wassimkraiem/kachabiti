@@ -76,11 +76,11 @@ interface Review { rating: number; comment?: string | null; created_at: string; 
 /**
  * Product with its offer as the product page shows it: unit price = round((variant price or base
  * price) × (1 − active discount %)), in TND; in stock when stock isn't tracked or a variant has
- * some, otherwise made to order (every product stays orderable).
+ * some, otherwise made to order when the product is (`made_to_order`), else out of stock.
  */
 export function productJsonLd(detail: ProductDetailData, locale: string, reviews: Review[] = []) {
     const p = detail.product as ProductDetailData['product'] & {
-        slug: string; code?: string | null; base_price: number; currency?: string | null; stock?: number | null; stock_tracked?: boolean;
+        slug: string; code?: string | null; base_price: number; currency?: string | null; stock?: number | null; stock_tracked?: boolean; made_to_order?: boolean;
     };
     const variants = (p.product_variants as { price?: number | null; stock?: number | null; is_available?: boolean; images: { url: string }[] }[])
         .filter((v) => v.is_available !== false);
@@ -96,7 +96,7 @@ export function productJsonLd(detail: ProductDetailData, locale: string, reviews
         .map(absoluteUrl);
     const common = {
         priceCurrency: p.currency || 'TND',
-        availability: inStock ? 'https://schema.org/InStock' : 'https://schema.org/MadeToOrder',
+        availability: inStock ? 'https://schema.org/InStock' : p.made_to_order ? 'https://schema.org/MadeToOrder' : 'https://schema.org/OutOfStock',
         itemCondition: 'https://schema.org/NewCondition',
         url,
         seller: { '@id': ORGANIZATION_ID, '@type': 'Organization', name: BRAND },

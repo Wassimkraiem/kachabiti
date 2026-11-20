@@ -253,6 +253,7 @@ const entries: Entry[] = [
     ["Collection", "Collection", "المجموعة"],
     ["Track stock on the website", "Suivre le stock sur le site", "تتبع المخزون على الموقع"],
     ["On: the shop shows the online location's stock and stops selling at zero. Off: always orderable.", "Activé : la boutique affiche le stock de l'emplacement en ligne et arrête la vente à zéro. Désactivé : toujours commandable.", "مفعّل: يعرض المتجر مخزون موقع البيع عبر الإنترنت ويتوقف البيع عند الصفر. معطّل: متاح للطلب دائماً."],
+    ["On: orderable without stock (sur commande). Off: shown out of stock at zero.", "Activé : commandable sans stock (sur commande). Désactivé : affiché en rupture de stock à zéro.", "مفعّل: يمكن طلبه دون مخزون (حسب الطلب). معطّل: يظهر غير متوفر عند نفاد المخزون."],
     ["Purchase cost (per unit)", "Coût d'achat (par unité)", "سعر الشراء (للوحدة)"],
     ["Only people with the Costs permission see this.", "Visible uniquement par les personnes ayant l'accès « Coûts ».", "يظهر فقط لمن لديهم صلاحية «التكاليف»."],
     ["Name (Arabic)", "Nom (arabe)", "الاسم (بالعربية)"],

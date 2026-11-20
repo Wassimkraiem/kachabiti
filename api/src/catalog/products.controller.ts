@@ -300,18 +300,28 @@ export class ProductsController {
 
     await this.db
       .withActor(actor, (trx) =>
-        this.db.call(
-          'save_product',
-          {
-            p_product_id: body.id,
-            p_product: changes,
-            p_variants: variants,
-            p_images: Array.isArray(body.images) ? body.images : null,
-            p_actor: actor.userId,
-            p_actor_email: actor.email,
-          },
-          trx,
-        ),
+        this.db
+          .call(
+            'save_product',
+            {
+              p_product_id: body.id,
+              p_product: changes,
+              p_variants: variants,
+              p_images: Array.isArray(body.images) ? body.images : null,
+              p_actor: actor.userId,
+              p_actor_email: actor.email,
+            },
+            trx,
+          )
+          .then(() =>
+            typeof body.made_to_order === 'boolean'
+              ? trx
+                  .updateTable('products')
+                  .set({ made_to_order: body.made_to_order })
+                  .where('id', '=', body.id)
+                  .execute()
+              : undefined,
+          ),
       )
       .catch(saveError);
 

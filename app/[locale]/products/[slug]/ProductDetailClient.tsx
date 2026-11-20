@@ -80,6 +80,8 @@ interface Product {
     stock?: number;
     /** Off until the shop's stock is counted: the product stays orderable whatever the stock says. */
     stock_tracked?: boolean;
+    /** Orderable without stock ("sur commande"); otherwise a tracked product at zero is out of stock. */
+    made_to_order?: boolean;
     category_id?: string;
     colors?: string[];
     sizes?: string[];
@@ -138,6 +140,7 @@ const content = {
         status: "Status",
         inStock: "In Stock",
         onOrder: "Made to order",
+        outOfStock: "Out of stock",
         onOrderNote: "This item is prepared after you order. We'll call you to confirm the delivery date.",
         reviews: "reviews",
         quantity: "Quantity",
@@ -193,6 +196,7 @@ const content = {
         status: "Statut",
         inStock: "En stock",
         onOrder: "Sur commande",
+        outOfStock: "Rupture de stock",
         onOrderNote: "Cet article est préparé après votre commande. Nous vous appellerons pour confirmer la date de livraison.",
         reviews: "avis",
         quantity: "Quantité",
@@ -248,6 +252,7 @@ const content = {
         status: "الحالة",
         inStock: "متوفر",
         onOrder: "حسب الطلب",
+        outOfStock: "غير متوفر",
         onOrderNote: "يُحضَّر هذا المنتج بعد طلبك، وسنتصل بك لتأكيد موعد التوصيل.",
         reviews: "تقييم",
         quantity: "الكمية",
@@ -560,8 +565,9 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
     // Get current stock - use variant stock if available
     const currentStock = selectedVariant?.stock ?? product.stock ?? 0;
     const stockTracked = !!product.stock_tracked;
-    // Out-of-stock items can still be ordered: they're made to order ("sur commande").
     const inStock = !stockTracked || currentStock > 0;
+    // Only made-to-order products ("sur commande") can be ordered without stock.
+    const orderable = inStock || !!product.made_to_order;
     const variantLabel = selectedVariant
         ? [selectedVariant.colors?.display_name || selectedVariant.colors?.name, selectedVariant.sizes?.name].filter(Boolean).join(' / ')
         : '';
@@ -668,12 +674,12 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                                 <span>{reviewCount > 0 ? `${averageRating.toFixed(1)} (${reviewCount} ${text.reviews})` : text.noRatingYet}</span>
                             </a>
                             )}
-                            <span className={`inline-flex items-center gap-1.5 font-medium ${inStock ? 'text-[#3f7a3a]' : 'text-[#9a6200]'}`}>
-                                <span className={`h-2 w-2 rounded-full ${inStock ? 'bg-[#3f7a3a]' : 'bg-[#c98a1a]'}`} aria-hidden="true" />
-                                {inStock ? text.inStock : text.onOrder}
+                            <span className={`inline-flex items-center gap-1.5 font-medium ${inStock ? 'text-[#3f7a3a]' : orderable ? 'text-[#9a6200]' : 'text-[#b42318]'}`}>
+                                <span className={`h-2 w-2 rounded-full ${inStock ? 'bg-[#3f7a3a]' : orderable ? 'bg-[#c98a1a]' : 'bg-[#b42318]'}`} aria-hidden="true" />
+                                {inStock ? text.inStock : orderable ? text.onOrder : text.outOfStock}
                             </span>
                         </div>
-                        {!inStock && <p className="mt-2 text-sm text-[#6f5f57]">{text.onOrderNote}</p>}
+                        {!inStock && orderable && <p className="mt-2 text-sm text-[#6f5f57]">{text.onOrderNote}</p>}
 
                         {/* Price */}
                         <div className="mt-6 flex flex-wrap items-baseline gap-x-3 gap-y-1" dir="ltr">
@@ -786,6 +792,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                                     reviewCount: reviewCount
                                 }}
                                 quantity={quantity}
+                                disabled={!orderable}
                                 className="h-12 flex-1 justify-center rounded-full! bg-[var(--wool-maroon)]! text-base hover:bg-[#6b2516]!"
                             />
                         </div>
@@ -820,6 +827,7 @@ export default function ProductDetailClient({ initialData, freeShippingThreshold
                                         reviewCount: reviewCount
                                     }}
                                     quantity={quantity}
+                                    disabled={!orderable}
                                     className="h-12 w-auto! shrink-0 justify-center rounded-full! bg-[var(--wool-maroon)]! px-6! text-base hover:bg-[#6b2516]!"
                                 />
                             </div>

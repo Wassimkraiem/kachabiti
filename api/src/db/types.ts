@@ -785,6 +785,7 @@ export interface Products {
   sold_count: Generated<number>;
   status: Generated<string>;
   stock_tracked: Generated<boolean>;
+  made_to_order: Generated<boolean>;
   supplier_id: string | null;
   updated_at: Generated<Timestamp>;
   weight: Numeric | null;

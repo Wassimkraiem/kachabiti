@@ -64,6 +64,18 @@ export default function ProductStockFields({ showTracking = true }: { showTracki
                         </Form.Item>
                     </Col>
                 )}
+                {showTracking && (
+                    <Col xs={24} md={12}>
+                        <Form.Item
+                            label={t("Made to order")}
+                            name="made_to_order"
+                            valuePropName="checked"
+                            extra={t("On: orderable without stock (sur commande). Off: shown out of stock at zero.")}
+                        >
+                            <Switch />
+                        </Form.Item>
+                    </Col>
+                )}
                 {canSeeCosts && (
                     <Col xs={24} md={12}>
                         <Form.Item label={t("Purchase cost (per unit)")} name="cost" extra={<Text type="secondary">{t("Only people with the Costs permission see this.")}</Text>}>

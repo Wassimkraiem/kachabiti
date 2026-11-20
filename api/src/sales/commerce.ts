@@ -175,6 +175,7 @@ export type OrderPricingErrorCode =
   | 'PRODUCT_UNAVAILABLE'
   | 'PRICES_CHANGED'
   | 'TOTALS_CHANGED'
+  | 'OUT_OF_STOCK'
   | 'VARIANT_REQUIRED';
 
 interface CartLine {
@@ -228,6 +229,7 @@ export async function priceOrder(
         'p.name_fr',
         'p.base_price',
         'p.stock_tracked',
+        'p.made_to_order',
       ])
       .select((eb) =>
         jsonArrayFrom(
@@ -280,6 +282,7 @@ export async function priceOrder(
 
   const basePrices = new Map<string, number>();
   const tracked = new Map<string, boolean>();
+  const madeToOrder = new Set<string>();
   const products = new Map<
     string,
     {
@@ -292,6 +295,7 @@ export async function priceOrder(
   for (const p of productRows) {
     basePrices.set(p.id, Number(p.base_price));
     tracked.set(p.id, p.stock_tracked);
+    if (p.made_to_order) madeToOrder.add(p.id);
     const images = (p.product_images as Image[])
       .filter((img) => !img.variant_id)
       .sort(
@@ -340,7 +344,18 @@ export async function priceOrder(
       return fail('PRICES_CHANGED');
 
     if (variant) {
-      // No stock check: units beyond the stock are made to order ("sur commande").
+      // Made-to-order and untracked products sell past their stock; the rest stop at zero.
+      const wanted = lines
+        .filter(
+          (l) => l.id === line.id && (l.variantId ?? variant.id) === variant.id,
+        )
+        .reduce((sum, l) => sum + l.quantity, 0);
+      if (
+        tracked.get(line.id) &&
+        !madeToOrder.has(line.id) &&
+        wanted > Number(variant.stock)
+      )
+        return fail('OUT_OF_STOCK');
       const color = variant.colors
         ? variant.colors.display_name || variant.colors.name
         : null;
