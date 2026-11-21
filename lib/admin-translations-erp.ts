@@ -1183,4 +1183,9 @@ export const erpEntries: [en: string, fr: string, ar: string][] = [
     ["This status change is not allowed: a returned order can only become Validated, Shipped, Delivered or Cancelled, and a cancelled one must be reopened as To confirm or Confirmed first.", "Ce changement de statut n'est pas permis : une commande retournée peut seulement devenir Validée, Expédiée, Livrée ou Annulée, et une commande annulée doit d'abord être rouverte en À confirmer ou Confirmée.", "تغيير الحالة هذا غير مسموح: الطلب المُرجَع يمكن أن يصبح فقط مصدَّقًا أو مشحونًا أو مُسلَّمًا أو ملغى، والطلب الملغى يجب إعادة فتحه أولًا كقيد التأكيد أو مؤكد."],
     ["This purchase order changed meanwhile. Reload and try again.", "Ce bon de commande a changé entre-temps. Rechargez et réessayez.", "تغيّر أمر الشراء هذا في الأثناء. أعد التحميل وحاول مجددًا."],
     ["This receipt was already validated or cancelled.", "Cette réception a déjà été validée ou annulée.", "تم تصديق هذا الاستلام أو إلغاؤه مسبقًا."],
+    ["Product not on the site (type its name)", "Produit absent du site (tapez son nom)", "منتج غير موجود في الموقع (اكتب اسمه)"],
+    ["Product name", "Nom du produit", "اسم المنتج"],
+    ["Unit price", "Prix unitaire", "سعر الوحدة"],
+    ["Not on the site, no stock taken", "Absent du site, aucun stock retiré", "غير موجود في الموقع، لا يُخصم من المخزون"],
+    ["Enter the name and price of a product that isn't on the site", "Saisissez le nom et le prix du produit absent du site", "أدخل اسم وسعر المنتج غير الموجود في الموقع"],
 ];

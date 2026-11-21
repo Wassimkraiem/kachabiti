@@ -44,7 +44,7 @@ export const erpPaths: Record<string, Record<string, Op>> = {
         post: op('Sales', 'Create an order taken by an agent (priced from the catalog)', {
             requestBody: body({
                 customer: { type: 'object', properties: { phone: { type: 'string' }, first_name: { type: 'string' }, last_name: { type: 'string' }, email: { type: 'string' }, governorate: { type: 'string' }, city: { type: 'string' }, address: { type: 'string' } } },
-                items: { type: 'array', items: { type: 'object', properties: { product_id: uuid, variant_id: uuid, quantity: { type: 'integer' } } } },
+                items: { type: 'array', description: 'A catalog product (product_id), or one not on the site: name and price (unit, TND)', items: { type: 'object', properties: { product_id: uuid, variant_id: uuid, name: { type: 'string' }, price: money, quantity: { type: 'integer' } } } },
                 channel: { type: 'string', enum: ['facebook', 'instagram', 'tiktok', 'whatsapp', 'phone', 'other'] },
                 campaign_id: uuid, shipping_cost: money, discount_amount: money, notes: { type: 'string' }, assigned_to: uuid, confirmed: { type: 'boolean' },
             }, ['customer', 'items', 'channel']),

@@ -10,7 +10,7 @@ import { useAdminT } from "@/lib/admin-i18n";
 import { useAdminRole } from "@/lib/admin-role-context";
 import { governorateOptions } from "@/lib/colissimo-data";
 import { CHANNEL_LABELS, MANUAL_CHANNELS, STAGE_COLORS, STAGE_LABELS, type CustomerStage } from "@/lib/erp/constants";
-import ParcelProducts, { type ProductLine, type QuotedLine } from "@/components/admin/delivery/ParcelProducts";
+import ParcelProducts, { lineItem, type ProductLine, type QuotedLine } from "@/components/admin/delivery/ParcelProducts";
 import { AgentSelect, CampaignSelect, PageHeader } from "@/components/admin/erp/ui";
 import { api, formatDate, formatMoney, useApi } from "@/components/admin/erp/erp-client";
 import { ORDER_STATUS_COLORS, orderStatusLabel } from "@/components/admin/order-status";
@@ -110,7 +110,7 @@ export default function NewOrderPage() {
                         city: values.city,
                         address: values.address,
                     },
-                    items: lines.filter((l) => l.product_id).map((l) => ({ product_id: l.product_id, variant_id: l.variant_id ?? null, quantity: l.quantity })),
+                    items: lines.filter((l) => l.product_id || l.custom).map(lineItem),
                     channel: values.channel,
                     campaign_id: values.campaign_id ?? null,
                     shipping_cost: values.shipping_cost ?? undefined,
@@ -124,7 +124,7 @@ export default function NewOrderPage() {
                               // Colissimo's "article à reprendre": the names, as in the parcel's description.
                               article: backQuoted.map((l) => `${l.quantity > 1 ? `${l.quantity}× ` : ""}${l.product_name}${l.variant_label ? ` (${l.variant_label})` : ""}`).join(", ").slice(0, 250),
                               count: backQuoted.reduce((sum, l) => sum + l.quantity, 0),
-                              items: backQuoted.map((l) => ({ product_id: l.product_id, variant_id: l.variant_id, quantity: l.quantity })),
+                              items: backLines.filter((l) => l.product_id || l.custom).map(lineItem),
                           }
                         : null,
                 },

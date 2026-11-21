@@ -42,11 +42,18 @@ import {
 
 // ── Orders typed in by agents, assignment, confirmation, duplicates ──
 
-const itemSchema = z.object({
-  product_id: zId,
-  variant_id: zId.nullish(),
-  quantity: z.number().int().min(1).max(999),
-});
+// A catalog product, or one not on the site typed in by name with its unit price.
+const itemSchema = z
+  .object({
+    product_id: zId.nullish(),
+    variant_id: zId.nullish(),
+    name: z.string().trim().max(150).nullish(),
+    price: zMoney.nullish(),
+    quantity: z.number().int().min(1).max(999),
+  })
+  .refine((line) => line.product_id || (line.name && (line.price ?? 0) > 0), {
+    message: "Enter the name and price of a product that isn't on the site",
+  });
 const createSchema = z.object({
   customer: z.object({
     phone: z

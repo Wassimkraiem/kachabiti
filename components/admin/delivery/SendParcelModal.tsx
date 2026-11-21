@@ -6,7 +6,7 @@ import { message } from "@/components/admin/antd-app";
 import { useAdminT } from "@/lib/admin-i18n";
 import { COLISSIMO_GOVERNORATES, parcelFromOrder, type OrderForParcel } from "@/lib/colissimo-data";
 import { deliveryApi, type Delivery } from "./delivery-api";
-import ParcelProducts, { type ProductLine, type QuotedLine } from "./ParcelProducts";
+import ParcelProducts, { lineItem, type ProductLine, type QuotedLine } from "./ParcelProducts";
 import { useApi } from "@/components/admin/erp/erp-client";
 
 const { Text } = Typography;
@@ -111,7 +111,7 @@ export default function SendParcelModal({ order, open, onClose, onSent }: {
                 body: {
                     action: "create",
                     order_id: order?.id,
-                    items: withProducts ? lines.map((l) => ({ product_id: l.product_id, variant_id: l.variant_id ?? null, quantity: l.quantity })) : undefined,
+                    items: withProducts ? lines.map(lineItem) : undefined,
                     parcel: {
                         nom: values.nom,
                         tel: values.tel,

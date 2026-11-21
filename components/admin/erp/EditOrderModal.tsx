@@ -5,7 +5,7 @@ import { Checkbox, Col, Form, Input, InputNumber, Modal, Row, Select, Typography
 import { message } from "@/components/admin/antd-app";
 import { useAdminT } from "@/lib/admin-i18n";
 import { governorateOptions } from "@/lib/colissimo-data";
-import ParcelProducts, { type ProductLine, type QuotedLine } from "@/components/admin/delivery/ParcelProducts";
+import ParcelProducts, { lineItem, type ProductLine, type QuotedLine } from "@/components/admin/delivery/ParcelProducts";
 import { api } from "@/components/admin/erp/erp-client";
 
 const { Text } = Typography;
@@ -22,7 +22,7 @@ export interface EditableOrder {
     order_notes?: string;
     shipping_cost: number;
     discount_amount: number;
-    items: { product_id?: string | null; variant_id?: string | null; quantity: number }[];
+    items: { product_id?: string | null; variant_id?: string | null; product_name?: string; price?: number | string; quantity: number }[];
 }
 
 /**
@@ -52,7 +52,10 @@ export default function EditOrderModal({ order, open, onClose, onSaved }: { orde
             notes: order.order_notes,
         });
         setChangeProducts(false);
-        setLines(order.items.filter((i) => i.product_id).map((i, key) => ({ key, product_id: i.product_id!, variant_id: i.variant_id ?? undefined, quantity: i.quantity })));
+        // Lines without a product were typed in (not on the site): they stay typed lines.
+        setLines(order.items.map((i, key) => (i.product_id
+            ? { key, product_id: i.product_id, variant_id: i.variant_id ?? undefined, quantity: i.quantity }
+            : { key, custom: true, name: i.product_name, price: Number(i.price) || undefined, quantity: i.quantity })));
     }, [open, order, form]);
 
     const save = async () => {
@@ -77,7 +80,7 @@ export default function EditOrderModal({ order, open, onClose, onSaved }: { orde
                         city: values.city,
                         address: values.address,
                     },
-                    items: changeProducts ? lines.filter((l) => l.product_id).map((l) => ({ product_id: l.product_id, variant_id: l.variant_id ?? null, quantity: l.quantity })) : undefined,
+                    items: changeProducts ? lines.filter((l) => l.product_id || l.custom).map(lineItem) : undefined,
                     shipping_cost: values.shipping_cost ?? undefined,
                     discount_amount: values.discount_amount ?? 0,
                     notes: values.notes ?? "",

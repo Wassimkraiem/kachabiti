@@ -391,9 +391,12 @@ export async function priceOrder(
 /** A refusal to show the admin as is (unknown product, size/colour missing). */
 export class ManualLineError extends Error {}
 
+/** A catalog product (product_id), or a product not on the site typed in: `name` and `price`. */
 export interface ManualLineInput {
-  product_id: string;
+  product_id?: string | null;
   variant_id?: string | null;
+  name?: string | null;
+  price?: number | null;
   quantity: number;
 }
 
@@ -402,7 +405,11 @@ export interface ManualLineInput {
  * discount%))), plus `stock`: units the online location holds, or null when not stock-tracked.
  */
 export async function buildManualOrderLines(db: Db, input: ManualLineInput[]) {
-  const productIds = [...new Set(input.map((line) => line.product_id))];
+  const productIds = [
+    ...new Set(
+      input.flatMap((line) => (line.product_id ? [line.product_id] : [])),
+    ),
+  ];
   const [productRows, variants, discounts] = await Promise.all([
     db
       .selectFrom('products as p')
@@ -452,6 +459,28 @@ export async function buildManualOrderLines(db: Db, input: ManualLineInput[]) {
   const products = new Map(productRows.map((p) => [p.id, p]));
 
   return input.map((line) => {
+    // A product not on the site: the agent's name and unit price, no photo, no stock.
+    if (!line.product_id) {
+      const name = line.name?.trim();
+      if (!name || line.price == null || !(line.price > 0))
+        throw new ManualLineError(
+          "Enter the name and price of a product that isn't on the site",
+        );
+      const price = Math.round(line.price * 1000) / 1000;
+      return {
+        product_id: null,
+        variant_id: null,
+        variant_label: null,
+        product_name: name,
+        product_name_ar: null,
+        product_name_fr: null,
+        product_image: null,
+        quantity: line.quantity,
+        price,
+        subtotal: Math.round(price * line.quantity * 1000) / 1000,
+        stock: null,
+      };
+    }
     const product = products.get(line.product_id);
     if (!product)
       throw new ManualLineError('A selected product no longer exists');

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Button, InputNumber, Select, Space, Typography } from "antd";
+import { Button, Input, InputNumber, Select, Space, Typography } from "antd";
 import { DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { useAdminT } from "@/lib/admin-i18n";
 import { searchByText } from "@/components/admin/select-search";
@@ -14,11 +14,23 @@ export interface ProductLine {
     product_id?: string;
     variant_id?: string;
     quantity: number;
+    /** A product not on the site: typed in with its name and unit price instead of picked. */
+    custom?: boolean;
+    name?: string;
+    price?: number;
 }
+
+/** What the API takes for a line: a catalog product, or a typed name and unit price. */
+export const lineItem = (l: ProductLine) =>
+    l.custom
+        ? { name: l.name?.trim(), price: l.price, quantity: l.quantity }
+        : { product_id: l.product_id, variant_id: l.variant_id ?? null, quantity: l.quantity };
+
+const CUSTOM = "__custom__";
 
 /** A line as the server priced it (catalog price and discount), with the stock it would take from. */
 export interface QuotedLine {
-    product_id: string;
+    product_id: string | null;
     variant_id: string | null;
     variant_label: string | null;
     product_name: string;
@@ -51,6 +63,7 @@ const variantName = (v: VariantOption) => [v.colors?.display_name || v.colors?.n
 
 /** True when a line can be priced: a product, and a size/colour when the product has several. */
 export function lineIsComplete(line: ProductLine, variantsByProduct: Record<string, VariantOption[]>) {
+    if (line.custom) return !!line.name?.trim() && (line.price ?? 0) > 0;
     if (!line.product_id) return false;
     const variants = variantsByProduct[line.product_id];
     if (!variants) return false;
@@ -98,7 +111,7 @@ export default function ParcelProducts({ lines, onChange, onQuote, showPrice = t
     }, [lines, variantsByProduct]);
 
     // Price the complete lines whenever they change.
-    const quoteKey = JSON.stringify(lines.map((l) => [l.product_id, l.variant_id, l.quantity]));
+    const quoteKey = JSON.stringify(lines.map((l) => [l.custom, l.name, l.price, l.product_id, l.variant_id, l.quantity]));
     useEffect(() => {
         const complete = lines.filter((l) => lineIsComplete(l, variantsByProduct));
         const allComplete = complete.length === lines.length && lines.length > 0;
@@ -111,7 +124,7 @@ export default function ParcelProducts({ lines, onChange, onQuote, showPrice = t
         const timer = setTimeout(() => {
             deliveryApi<{ lines: QuotedLine[] }>({
                 method: "POST",
-                body: { action: "quote", items: complete.map((l) => ({ product_id: l.product_id, variant_id: l.variant_id ?? null, quantity: l.quantity })) },
+                body: { action: "quote", items: complete.map(lineItem) },
             })
                 .then((result) => {
                     if (cancelled) return;
@@ -136,11 +149,14 @@ export default function ParcelProducts({ lines, onChange, onQuote, showPrice = t
 
     const update = (key: number, change: Partial<ProductLine>) => onChange(lines.map((l) => (l.key === key ? { ...l, ...change } : l)));
 
-    const productOptions = products.map((p) => ({
-        value: p.id,
-        label: (locale === "fr" ? p.name_fr : locale === "ar" ? p.name_ar : null) || p.name,
-        searchtext: [p.name, p.name_fr, p.name_ar].filter(Boolean).join(" "),
-    }));
+    const productOptions = [
+        { value: CUSTOM, label: t("Product not on the site (type its name)"), searchtext: t("Product not on the site (type its name)") },
+        ...products.map((p) => ({
+            value: p.id,
+            label: (locale === "fr" ? p.name_fr : locale === "ar" ? p.name_ar : null) || p.name,
+            searchtext: [p.name, p.name_fr, p.name_ar].filter(Boolean).join(" "),
+        })),
+    ];
 
     return (
         <Space orientation="vertical" size={10} style={{ width: "100%" }}>
@@ -152,12 +168,38 @@ export default function ParcelProducts({ lines, onChange, onQuote, showPrice = t
                         <Select
                             showSearch
                             placeholder={t("Product")}
-                            value={line.product_id}
+                            value={line.custom ? CUSTOM : line.product_id}
                             options={productOptions}
                             filterOption={searchByText}
-                            onChange={(value: string) => update(line.key, { product_id: value, variant_id: undefined })}
+                            onChange={(value: string) =>
+                                update(line.key, value === CUSTOM
+                                    ? { custom: true, product_id: undefined, variant_id: undefined }
+                                    : { custom: false, name: undefined, price: undefined, product_id: value, variant_id: undefined })}
                             style={{ flex: "2 1 220px", minWidth: 0 }}
                         />
+                        {line.custom && (
+                            <>
+                                <Input
+                                    placeholder={t("Product name")}
+                                    value={line.name}
+                                    maxLength={150}
+                                    onChange={(e) => update(line.key, { name: e.target.value })}
+                                    status={!line.name?.trim() ? "warning" : undefined}
+                                    style={{ flex: "2 1 180px", minWidth: 0 }}
+                                />
+                                <InputNumber
+                                    placeholder={t("Unit price")}
+                                    min={0}
+                                    step={1}
+                                    value={line.price}
+                                    onChange={(value) => update(line.key, { price: value == null ? undefined : Number(value) })}
+                                    status={!(line.price && line.price > 0) ? "warning" : undefined}
+                                    suffix="TND"
+                                    style={{ width: 130 }}
+                                    aria-label={t("Unit price")}
+                                />
+                            </>
+                        )}
                         {variants && variants.length > 1 && (
                             <Select
                                 placeholder={t("Size / colour")}
@@ -184,7 +226,7 @@ export default function ParcelProducts({ lines, onChange, onQuote, showPrice = t
                             <Text type="secondary" style={{ flexBasis: "100%", fontSize: 12 }}>
                                 {showPrice && <>{t("{quantity} × {price} TND = {subtotal} TND", { quantity: quote.quantity, price: quote.price, subtotal: quote.subtotal })}{" · "}</>}
                                 {quote.stock === null
-                                    ? t("Stock not tracked")
+                                    ? line.custom ? t("Not on the site, no stock taken") : t("Stock not tracked")
                                     : quote.stock >= quote.quantity
                                         ? t("{count} in stock", { count: quote.stock })
                                         : t("{count} in stock, the rest is made to order", { count: Math.max(0, quote.stock) })}

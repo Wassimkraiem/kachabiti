@@ -802,7 +802,7 @@ export const openApiSpec = {
                                 required: ['action'],
                                 properties: {
                                     action: { type: 'string', enum: ['create', 'validate', 'quote', 'track', 'import', 'refresh', 'handover', 'edit', 'price_change'] },
-                                    items: { type: 'array', description: 'create (without order_id) and quote: products of a parcel entered by hand', items: { type: 'object', properties: { product_id: { type: 'string', format: 'uuid' }, variant_id: { type: 'string', format: 'uuid', nullable: true }, quantity: { type: 'integer', minimum: 1 } } } },
+                                    items: { type: 'array', description: 'create (without order_id) and quote: products of a parcel entered by hand', items: { type: 'object', properties: { product_id: { type: 'string', format: 'uuid', nullable: true }, variant_id: { type: 'string', format: 'uuid', nullable: true }, name: { type: 'string', description: 'Without product_id: a product not on the site' }, price: { type: 'number', description: 'Without product_id: its unit price' }, quantity: { type: 'integer', minimum: 1 } } } },
                                     order_id: { type: 'string', format: 'uuid' },
                                     barcode: { type: 'string' },
                                     ids: { type: 'array', items: { type: 'string', format: 'uuid' } },

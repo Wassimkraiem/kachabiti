@@ -38,6 +38,7 @@ import {
   params,
   Raw,
   zDate,
+  zMoney,
 } from '../common/api';
 import { invalidateCatalog } from '../catalog/revalidate';
 import { Database } from '../db/database';
@@ -74,12 +75,19 @@ const parcelSchema = z.object({
   fragile: z.union([z.literal(0), z.literal(1)]),
   type_colis: z.union([z.literal(1), z.literal(2), z.literal(3)]),
 });
+// A catalog product, or one not on the site typed in by name with its unit price.
 const itemsSchema = z.array(
-  z.object({
-    product_id: z.guid(),
-    variant_id: z.guid().nullish(),
-    quantity: z.number().int().min(1).max(999),
-  }),
+  z
+    .object({
+      product_id: z.guid().nullish(),
+      variant_id: z.guid().nullish(),
+      name: z.string().trim().max(150).nullish(),
+      price: zMoney.nullish(),
+      quantity: z.number().int().min(1).max(999),
+    })
+    .refine((line) => line.product_id || (line.name && (line.price ?? 0) > 0), {
+      message: "Enter the name and price of a product that isn't on the site",
+    }),
 );
 const barcode = z
   .string()
