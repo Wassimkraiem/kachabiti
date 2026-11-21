@@ -430,7 +430,10 @@ export async function buildManualOrderLines(db: Db, input: ManualLineInput[]) {
             .where('i.deleted_at', 'is', null),
         ).as('product_images'),
       )
-      .where('p.id', 'in', productIds)
+      // `in ()` is a syntax error: an order of typed-in products only looks up nothing.
+      .where((eb) =>
+        productIds.length ? eb('p.id', 'in', productIds) : eb.lit(false),
+      )
       .where('p.deleted_at', 'is', null)
       .execute(),
     db
@@ -450,7 +453,11 @@ export async function buildManualOrderLines(db: Db, input: ManualLineInput[]) {
             .whereRef('s.id', '=', 'v.size_id'),
         ).as('sizes'),
       ])
-      .where('v.product_id', 'in', productIds)
+      .where((eb) =>
+        productIds.length
+          ? eb('v.product_id', 'in', productIds)
+          : eb.lit(false),
+      )
       .where('v.deleted_at', 'is', null)
       .where('v.is_available', 'is not', false)
       .execute(),
