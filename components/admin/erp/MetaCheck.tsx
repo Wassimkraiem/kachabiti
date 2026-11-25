@@ -25,6 +25,8 @@ const LABELS: Record<string, string> = {
     page_subscription: msg("Page events"),
     webhook_page: msg("Facebook webhook"),
     webhook_instagram: msg("Instagram webhook"),
+    import_facebook: msg("Messenger history read (conversations / messages added)"),
+    import_instagram: msg("Instagram history read (conversations / messages added)"),
 };
 
 /** Asks Meta what is missing for messages and comments to arrive, and repairs the subscriptions. */

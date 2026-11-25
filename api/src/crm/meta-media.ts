@@ -37,6 +37,27 @@ export interface Attachment {
   url?: string;
 }
 
+/** A file as the Graph API lists it (the webhook's shape is another). */
+export interface ApiFile {
+  mime_type?: string;
+  file_url?: string;
+  image_data?: { url?: string };
+  video_data?: { url?: string };
+}
+
+export const apiFiles = (files: ApiFile[]) =>
+  files.flatMap((a) => {
+    const url = a.image_data?.url ?? a.video_data?.url ?? a.file_url;
+    const type = a.mime_type?.startsWith('audio/')
+      ? 'audio'
+      : a.image_data
+        ? 'image'
+        : a.video_data
+          ? 'video'
+          : 'file';
+    return url && metaFile(url) ? [{ type, url }] : [];
+  });
+
 const MAX_BYTES = 25 * 1024 * 1024; // Meta's own limit
 const HOUR = 3600_000;
 const EXTENSIONS: Record<string, string> = {
@@ -198,25 +219,11 @@ export class MetaMedia {
     if (!token) return;
     for (const row of lost) {
       try {
-        const { data } = await graph<{
-          data?: {
-            mime_type?: string;
-            file_url?: string;
-            image_data?: { url?: string };
-            video_data?: { url?: string };
-          }[];
-        }>(`/${encodeURIComponent(row.external_id!)}/attachments`, { token });
-        const found = (data ?? []).flatMap((a) => {
-          const url = a.image_data?.url ?? a.video_data?.url ?? a.file_url;
-          const type = a.mime_type?.startsWith('audio/')
-            ? 'audio'
-            : a.image_data
-              ? 'image'
-              : a.video_data
-                ? 'video'
-                : 'file';
-          return url && metaFile(url) ? [{ type, url }] : [];
-        });
+        const { data } = await graph<{ data?: ApiFile[] }>(
+          `/${encodeURIComponent(row.external_id!)}/attachments`,
+          { token },
+        );
+        const found = apiFiles(data ?? []);
         if (!found.length) continue;
         await this.db.withActor(null, (trx) =>
           trx

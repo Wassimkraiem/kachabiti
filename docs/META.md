@@ -114,7 +114,11 @@ inserts its comments gets the same phone detection, task and notification.
 ## Your own replies
 
 Replies sent from Messenger, Instagram or Business Suite show in Admin → Messenger too: Facebook sends
-them with the Page field `message_echoes`, Instagram with `messages`. Only from the moment it is on.
+them with the Page field `message_echoes`, Instagram with `messages`.
+
+Conversations from before, and messages the webhook missed, are read from Meta 10 s after the API starts
+and every 2 minutes (the 200 latest conversations per platform; 100 messages each on Messenger, 20 on
+Instagram). Check shows the result or Meta's refusal. Messages over an hour old don't notify.
 
 ## Photos, audio, names
 

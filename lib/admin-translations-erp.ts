@@ -1290,6 +1290,8 @@ export const erpEntries: [en: string, fr: string, ar: string][] = [
     ["Instagram account linked to the Page", "Compte Instagram lié à la Page", "حساب إنستغرام مرتبط بالصفحة"],
     ["Page events", "Événements de la Page", "أحداث الصفحة"],
     ["Facebook webhook", "Webhook Facebook", "Webhook فيسبوك"],
+    ["Messenger history read (conversations / messages added)", "Historique Messenger lu (conversations / messages ajoutés)", "قراءة سجل ماسنجر (محادثات / رسائل مضافة)"],
+    ["Instagram history read (conversations / messages added)", "Historique Instagram lu (conversations / messages ajoutés)", "قراءة سجل إنستغرام (محادثات / رسائل مضافة)"],
     ["Instagram webhook", "Webhook Instagram", "Webhook إنستغرام"],
     ["Last event since the server started: Facebook {facebook}, Instagram {instagram}.", "Dernier événement depuis le démarrage du serveur : Facebook {facebook}, Instagram {instagram}.", "آخر حدث منذ تشغيل الخادم: فيسبوك {facebook}، إنستغرام {instagram}."],
     ["Events were refused: META_APP_SECRET is not the secret of the app that sent them ({what}).", "Des événements ont été refusés : META_APP_SECRET n'est pas le secret de l'application qui les a envoyés ({what}).", "رُفضت أحداث: META_APP_SECRET ليس سرّ التطبيق الذي أرسلها ({what})."],

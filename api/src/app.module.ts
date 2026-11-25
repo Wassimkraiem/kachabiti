@@ -61,6 +61,7 @@ import {
 } from './crm/crm.controllers';
 import { MetaConnectionController } from './crm/meta-connection.controller';
 import { MetaHealthController } from './crm/meta-health';
+import { MetaImport } from './crm/meta-import';
 import { MetaMedia, MetaMediaController } from './crm/meta-media';
 import { MetaWebhookController } from './crm/meta-webhook.controller';
 import {
@@ -179,6 +180,7 @@ import {
     NotificationEvents,
     ColissimoTracking,
     MetaMedia,
+    MetaImport,
     PostPublisher,
     { provide: APP_GUARD, useClass: AuthGuard },
     { provide: APP_INTERCEPTOR, useClass: ApiResponseInterceptor },

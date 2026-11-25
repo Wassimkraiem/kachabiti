@@ -11,18 +11,13 @@ import {
 } from '@nestjs/common';
 import * as Sentry from '@sentry/nestjs';
 import type { Request } from 'express';
-import { sql } from 'kysely';
-import {
-  parseComments,
-  parseWebhook,
-  validSignature,
-  type IncomingMessage,
-} from '@shared/erp/meta';
+import { parseComments, parseWebhook, validSignature } from '@shared/erp/meta';
 import { Public } from '../auth/decorators';
 import { ApiError, Raw } from '../common/api';
 import { Database } from '../db/database';
 import { metaConnection, received } from './meta-connection';
 import { MetaMedia } from './meta-media';
+import { keepMessage } from './meta-messages';
 
 /**
  * Port of app/api/webhooks/meta: Messenger, Instagram Direct and WhatsApp messages, and the public
@@ -123,37 +118,9 @@ export class MetaWebhookController {
         );
       }
       for (const message of messages) {
-        const kept = await this.db.withActor(null, async (trx) => {
-          const customerId = await this.customerFor(
-            trx as unknown as Database,
-            message,
-          );
-          const row = await trx
-            .insertInto('customer_interactions')
-            .values({
-              customer_id: customerId,
-              channel: message.channel,
-              direction: message.direction,
-              body: message.text.slice(0, 5000),
-              attachments: message.attachments.length
-                ? JSON.stringify(message.attachments)
-                : null,
-              external_id: message.externalId,
-              sender_name: message.senderName,
-              created_at: message.sentAt,
-            })
-            .onConflict((oc) =>
-              oc.columns(['channel', 'external_id']).doNothing(),
-            )
-            .returning('id')
-            .executeTakeFirst();
-          await trx
-            .updateTable('customers')
-            .set({ updated_at: new Date() })
-            .where('id', '=', customerId)
-            .execute();
-          return { id: row?.id, customer_id: customerId };
-        });
+        const kept = await this.db.withActor(null, (trx) =>
+          keepMessage(trx as unknown as Database, message, null),
+        );
         // Not awaited: Meta wants its answer quickly, and its files and profiles can be slow.
         if (kept.id && message.attachments.length)
           this.media.background(
@@ -171,65 +138,5 @@ export class MetaWebhookController {
       Sentry.captureException(error, { tags: { area: 'meta-webhook' } });
     }
     return new Raw({ received: true });
-  }
-
-  private async customerFor(
-    trx: Database,
-    message: IncomingMessage,
-  ): Promise<string> {
-    const key = message.channel === 'facebook' ? 'messenger' : message.channel;
-    const byId = await trx
-      .selectFrom('customers')
-      .select('id')
-      .where(
-        sql<boolean>`external_ids @> ${JSON.stringify({ [key]: message.senderId })}::jsonb`,
-      )
-      .where('deleted_at', 'is', null)
-      .limit(1)
-      .executeTakeFirst();
-    if (byId) return byId.id;
-
-    let phone: string | null = null;
-    if (message.phone) {
-      phone =
-        (
-          await sql<{
-            p: string | null;
-          }>`select public.normalize_phone(${message.phone}) as p`.execute(trx)
-        ).rows[0]?.p ?? null;
-      if (phone) {
-        const byPhone = await trx
-          .selectFrom('customers')
-          .select(['id', 'external_ids'])
-          .where('phone', '=', phone)
-          .where('deleted_at', 'is', null)
-          .executeTakeFirst();
-        if (byPhone) {
-          await trx
-            .updateTable('customers')
-            .set({
-              external_ids: JSON.stringify({
-                ...((byPhone.external_ids as object) ?? {}),
-                [key]: message.senderId,
-              }),
-            })
-            .where('id', '=', byPhone.id)
-            .execute();
-          return byPhone.id;
-        }
-      }
-    }
-    const created = await trx
-      .insertInto('customers')
-      .values({
-        phone,
-        full_name: message.senderName ?? '',
-        channel: message.channel,
-        stage: 'new',
-        external_ids: JSON.stringify({ [key]: message.senderId }),
-      })
-      .returning('id')
-      .executeTakeFirstOrThrow();
-    return created.id;
   }
 }

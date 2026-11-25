@@ -3,7 +3,12 @@ import { graph } from '@shared/erp/meta';
 import { AdminOnly } from '../auth/decorators';
 import { ApiError } from '../common/api';
 import { Database } from '../db/database';
-import { metaPageToken, PAGE_FIELDS, received } from './meta-connection';
+import {
+  imported,
+  metaPageToken,
+  PAGE_FIELDS,
+  received,
+} from './meta-connection';
 
 export interface TokenInfo {
   is_valid: boolean;
@@ -116,6 +121,10 @@ export class MetaHealthController {
         const have = s?.fields.map((f) => f.name);
         return without(fields, have).join(', ') || null;
       });
+    for (const channel of ['facebook', 'instagram'] as const) {
+      const result = imported[channel];
+      if (result) checks.push({ id: `import_${channel}`, ...result });
+    }
     return { checks, received };
   }
 

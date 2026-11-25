@@ -46,6 +46,11 @@ export const received: Record<string, string | null> = {
   refused: null,
 };
 
+// How the last reading of the Page's conversations went, for Check too (meta-import.ts).
+export const imported: Partial<
+  Record<'facebook' | 'instagram', { ok: boolean; detail: string | null }>
+> = {};
+
 /** The connected Page with its token, or null. */
 export async function metaConnection(db: Database) {
   const row = await db
