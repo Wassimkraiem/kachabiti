@@ -55,3 +55,7 @@ next-env.d.ts
 # NestJS API build output and packages
 /api/node_modules
 /api/dist
+
+# Claude session handoff (personal)
+.claude/handoff.md
+.claude/settings.local.json
