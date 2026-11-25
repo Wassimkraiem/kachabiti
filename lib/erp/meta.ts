@@ -46,6 +46,7 @@ export interface IncomingMessage {
     senderName: string | null;
     phone: string | null;    // WhatsApp only
     text: string;
+    attachments: { type: string; url: string }[]; // Meta's links, which expire
     sentAt: Date;
 }
 
@@ -53,7 +54,18 @@ type Json = Record<string, unknown>;
 const arr = (v: unknown) => (Array.isArray(v) ? (v as Json[]) : []);
 const obj = (v: unknown) => (v && typeof v === 'object' ? (v as Json) : {});
 
-/** Text messages in a webhook payload (attachments are noted as such), the shop's own included. */
+/** True for a link to Meta's file servers (or to the e2e suite's stand-in). */
+export function metaFile(link: string): boolean {
+    try {
+        const url = new URL(link);
+        if (process.env.META_GRAPH_URL && url.origin === new URL(process.env.META_GRAPH_URL).origin) return true;
+        return url.protocol === 'https:' && /\.(fbcdn\.net|fbsbx\.com|cdninstagram\.com)$/.test(url.hostname);
+    } catch {
+        return false;
+    }
+}
+
+/** Messages in a webhook payload (text, and the files that come with it), the shop's own included. */
 export function parseWebhook(payload: Json): IncomingMessage[] {
     const out: IncomingMessage[] = [];
     const object = payload.object;
@@ -73,6 +85,9 @@ export function parseWebhook(payload: Json): IncomingMessage[] {
                     senderName: null,
                     phone: null,
                     text: typeof message.text === 'string' && message.text ? message.text : attachments.length ? `[${attachments.map((a) => a.type).join(', ')}]` : '[message]',
+                    attachments: attachments
+                        .map((a) => ({ type: String(a.type), url: String(obj(a.payload).url ?? '') }))
+                        .filter((a) => metaFile(a.url)),
                     sentAt: new Date(Number(event.timestamp) || Date.now()),
                 });
             }
@@ -91,6 +106,7 @@ export function parseWebhook(payload: Json): IncomingMessage[] {
                         senderName: names.get(from) || null,
                         phone: from,
                         text: typeof text === 'string' ? text : `[${String(message.type ?? 'message')}]`,
+                        attachments: [], // shortcut: WhatsApp files need its media API, add it when WhatsApp is connected
                         sentAt: new Date((Number(message.timestamp) || Date.now() / 1000) * 1000),
                     });
                 }
@@ -162,6 +178,13 @@ export async function graph<T = Json>(path: string, init: { method?: string; tok
     const json = (await response.json().catch(() => ({}))) as Json;
     if (!response.ok) throw new Error(String(obj(json.error).message ?? `Meta refused the message (${response.status})`));
     return json as T;
+}
+
+/** Sends a photo or audio on Messenger or Instagram; Meta reads it at `url`. */
+export async function sendMetaFile(recipientId: string, type: 'image' | 'audio', url: string, token: string): Promise<string | null> {
+    const body = { recipient: { id: recipientId }, messaging_type: 'RESPONSE', message: { attachment: { type, payload: { url } } } };
+    const json = await graph('/me/messages', { method: 'POST', token, body, timeout: 60_000 });
+    return String(json.message_id ?? '') || null;
 }
 
 /** Sends a text reply. Throws with Meta's message when it refuses. */

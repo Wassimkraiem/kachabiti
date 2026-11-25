@@ -21,7 +21,9 @@ import type { RequestActor } from '../auth/auth.guard';
 import { ApiError, isManager, params, Zod, zDate, zId } from '../common/api';
 import { Database } from '../db/database';
 import { many, one } from '../db/embed';
+import { deleteObject } from '../common/storage';
 import { metaPageToken } from './meta-connection';
+import { MetaMedia, replyTarget, type Attachment } from './meta-media';
 import { memberEmail } from '../sales/commerce';
 
 // Ports of app/api/customers, crm/interactions and crm/tasks (rules in lib/api-access.ts).
@@ -87,7 +89,10 @@ const actionSchema = z.discriminatedUnion('action', [
 @Controller('customers')
 @Public()
 export class CustomersController {
-  constructor(private readonly db: Database) {}
+  constructor(
+    private readonly db: Database,
+    private readonly media: MetaMedia,
+  ) {}
 
   /** ?id= (record with orders, conversations, follow-ups) | ?duplicates=1 | list: ?q=&stage=&channel=&assigned=me|none|<id>&page=&size= */
   @Get()
@@ -378,9 +383,11 @@ export class CustomersController {
           'Only owners and admins can erase personal data.',
           403,
         );
+      const files = await this.media.files(body.id);
       await this.db.withActor(actor, (trx) =>
         this.db.call('anonymize_customer', { p_id: body.id }, trx),
       );
+      for (const path of files) await deleteObject('documents', path);
       return { id: body.id };
     }
     const email = body.user_id
@@ -452,7 +459,10 @@ const likeTerm = (term: string | null | undefined) =>
 @Controller('crm/interactions')
 @Public()
 export class InteractionsController {
-  constructor(private readonly db: Database) {}
+  constructor(
+    private readonly db: Database,
+    private readonly media: MetaMedia,
+  ) {}
 
   /**
    * ?customer_id=&channel= — one conversation, oldest first (its latest 500 messages). Otherwise the
@@ -475,7 +485,13 @@ export class InteractionsController {
         .orderBy('created_at', 'desc')
         .limit(500)
         .execute();
-      return latest.reverse();
+      this.media.background(this.media.recover(latest));
+      return latest.reverse().map((row) => ({
+        ...row,
+        attachments: ((row.attachments ?? []) as unknown as Attachment[]).map(
+          (a) => ({ type: a.type }),
+        ),
+      }));
     }
     const channels = channel ? [channel] : CHAT_CHANNELS;
     const like = likeTerm(q.get('q'));
@@ -483,7 +499,8 @@ export class InteractionsController {
       sql<Record<string, unknown>>`
         select l.*, coalesce(u.n, 0)::int as unread,
                json_build_object('full_name', c.full_name, 'phone', c.phone, 'stage', c.stage,
-                                 'assigned_to_email', c.assigned_to_email) as customer
+                                 'assigned_to_email', c.assigned_to_email) as customer,
+               c.external_ids ? ((case l.channel when 'facebook' then 'messenger' else l.channel end) || '_photo') as photo
         from (
           select distinct on (x.customer_id, x.channel)
                  x.customer_id, x.channel, x.direction, x.body, x.created_at, x.sender_name
@@ -510,6 +527,11 @@ export class InteractionsController {
           and x.channel = any(${CHAT_CHANNELS}::text[])
         group by 1`.execute(this.db),
     ]);
+    this.media.background(
+      this.media.profiles(
+        threads.rows as { customer_id: string; channel: string }[],
+      ),
+    );
     return {
       threads: threads.rows,
       unread: Object.fromEntries(counts.rows.map((r) => [r.channel, r.n])),
@@ -533,28 +555,11 @@ export class InteractionsController {
         );
       }
       const channel = body.channel as MetaChannel;
-      const pageToken = await metaPageToken(this.db);
-      if (!metaConfigured(pageToken)[channel])
-        throw new ApiError(
-          `${channel} is not connected yet. Log the message instead.`,
-          503,
-          'NOT_CONFIGURED',
-        );
-      const customer = await this.db
-        .selectFrom('customers')
-        .select(['phone', 'external_ids'])
-        .where('id', '=', body.customer_id)
-        .executeTakeFirst();
-      const ids = (customer?.external_ids ?? {}) as Record<string, string>;
-      const recipient =
-        channel === 'whatsapp'
-          ? (ids.whatsapp ?? (customer?.phone ? `216${customer.phone}` : null))
-          : ids[channel === 'facebook' ? 'messenger' : 'instagram'];
-      if (!recipient)
-        throw new ApiError(
-          'This customer has never written to us on this channel.',
-          409,
-        );
+      const { recipient, pageToken } = await replyTarget(
+        this.db,
+        body.customer_id,
+        channel,
+      );
       try {
         externalId = await sendMetaText(
           channel,

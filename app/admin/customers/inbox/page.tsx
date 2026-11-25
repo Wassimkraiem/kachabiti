@@ -10,7 +10,8 @@ import { PageHeader } from "@/components/admin/erp/ui";
 import { useApi } from "@/components/admin/erp/erp-client";
 import MetaCheck from "@/components/admin/erp/MetaCheck";
 import MetaConnection from "@/components/admin/erp/MetaConnection";
-import { CHAT_CHANNELS, CommentChat, MESSENGER_CSS, MessageChat, MessengerRail, ThreadRow, usePolling, type CommentThread, type MessageThread } from "@/components/admin/erp/messenger";
+import { messageText } from "@/components/admin/erp/messenger-media";
+import { CHAT_CHANNELS, CommentChat, photoOf, MESSENGER_CSS, MessageChat, MessengerRail, ThreadRow, usePolling, type CommentThread, type MessageThread } from "@/components/admin/erp/messenger";
 
 const { Text } = Typography;
 
@@ -113,7 +114,8 @@ function Messenger() {
                                     key={messageKey(th)}
                                     name={th.customer.full_name || th.sender_name || th.customer.phone || ""}
                                     channel={th.channel}
-                                    text={`${th.direction === "out" ? `${t("You")}: ` : ""}${th.body}`}
+                                    photo={photoOf(th)}
+                                    text={`${th.direction === "out" ? `${t("You")}: ` : ""}${messageText(th.body, t)}`}
                                     date={th.created_at}
                                     count={th.unread}
                                     active={!!message && messageKey(message) === messageKey(th)}

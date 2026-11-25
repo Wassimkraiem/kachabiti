@@ -387,6 +387,7 @@ export interface CrmTasks {
 }
 
 export interface CustomerInteractions {
+  attachments: Json | null;
   body: string;
   channel: Generated<string>;
   created_at: Generated<Timestamp>;

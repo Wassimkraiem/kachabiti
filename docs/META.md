@@ -116,6 +116,14 @@ inserts its comments gets the same phone detection, task and notification.
 Replies sent from Messenger, Instagram or Business Suite show in Admin → Messenger too: Facebook sends
 them with the Page field `message_echoes`, Instagram with `messages`. Only from the moment it is on.
 
+## Photos, audio, names
+
+Photos, audio and videos of Messenger and Instagram are copied to the private bucket (Meta's links
+expire). Agents send photos (their own or a product's) and voice messages; not on WhatsApp. Names and
+profile photos come from Meta, which may need Advanced access to `pages_messaging` and **Business Asset
+User Profile Access** (Messenger) or `instagram_manage_messages` (Instagram). Asked again every hour
+while missing.
+
 ## Something doesn't arrive
 
 Admin → Messenger → Connections → **Check the connection** asks Meta what is missing (secret,

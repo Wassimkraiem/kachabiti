@@ -22,6 +22,7 @@ import { Public } from '../auth/decorators';
 import { ApiError, Raw } from '../common/api';
 import { Database } from '../db/database';
 import { metaConnection, received } from './meta-connection';
+import { MetaMedia } from './meta-media';
 
 /**
  * Port of app/api/webhooks/meta: Messenger, Instagram Direct and WhatsApp messages, and the public
@@ -36,7 +37,10 @@ export class MetaWebhookController {
   // message can be traced: Meta not calling, a refused signature, or an event we don't keep.
   private readonly log = new Logger('MetaWebhook');
 
-  constructor(private readonly db: Database) {}
+  constructor(
+    private readonly db: Database,
+    private readonly media: MetaMedia,
+  ) {}
 
   /** Subscription check from Meta's dashboard. */
   @Get()
@@ -119,18 +123,21 @@ export class MetaWebhookController {
         );
       }
       for (const message of messages) {
-        await this.db.withActor(null, async (trx) => {
+        const kept = await this.db.withActor(null, async (trx) => {
           const customerId = await this.customerFor(
             trx as unknown as Database,
             message,
           );
-          await trx
+          const row = await trx
             .insertInto('customer_interactions')
             .values({
               customer_id: customerId,
               channel: message.channel,
               direction: message.direction,
               body: message.text.slice(0, 5000),
+              attachments: message.attachments.length
+                ? JSON.stringify(message.attachments)
+                : null,
               external_id: message.externalId,
               sender_name: message.senderName,
               created_at: message.sentAt,
@@ -138,13 +145,25 @@ export class MetaWebhookController {
             .onConflict((oc) =>
               oc.columns(['channel', 'external_id']).doNothing(),
             )
-            .execute();
+            .returning('id')
+            .executeTakeFirst();
           await trx
             .updateTable('customers')
             .set({ updated_at: new Date() })
             .where('id', '=', customerId)
             .execute();
+          return { id: row?.id, customer_id: customerId };
         });
+        // Not awaited: Meta wants its answer quickly, and its files and profiles can be slow.
+        if (kept.id && message.attachments.length)
+          this.media.background(
+            this.media.copy(kept.id, kept.customer_id, message.attachments),
+          );
+        this.media.background(
+          this.media.profiles([
+            { customer_id: kept.customer_id, channel: message.channel },
+          ]),
+        );
       }
     } catch (error) {
       // Answer 200 anyway: Meta retries failed deliveries for hours and then disables the webhook.

@@ -6,6 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import dayjs from "dayjs";
 import { Alert, Button, Card, Checkbox, Col, DatePicker, Descriptions, Empty, Form, Input, Modal, Popconfirm, Row, Select, Space, Table, Tag, Timeline, Typography } from "antd";
 import { DeleteOutlined, EditOutlined, PhoneOutlined, PlusOutlined, SendOutlined, WhatsAppOutlined } from "@ant-design/icons";
+import { messageText } from "@/components/admin/erp/messenger-media";
 import { message } from "@/components/admin/antd-app";
 import { useAdminT } from "@/lib/admin-i18n";
 import { useAdminRole } from "@/lib/admin-role-context";
@@ -288,7 +289,7 @@ export default function CustomerPage() {
                                                         {i.created_by_email ? ` · ${i.created_by_email}` : i.sender_name ? ` · ${i.sender_name}` : ""}
                                                     </Text>
                                                 </Space>
-                                                <div style={{ whiteSpace: "pre-wrap", marginTop: 4 }}>{i.body}</div>
+                                                <div style={{ whiteSpace: "pre-wrap", marginTop: 4 }}>{messageText(i.body, t)}</div>
                                             </div>
                                         ),
                                     }))}

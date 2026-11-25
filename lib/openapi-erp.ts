@@ -74,6 +74,12 @@ export const erpPaths: Record<string, Record<string, Op>> = {
         put: op('Customers', "Mark a customer's messages read (on one channel, or all)", { requestBody: body({ customer_id: uuid, channel: { type: 'string' } }, ['customer_id']) }),
         delete: op('Customers', 'Remove a note', { parameters: [q('id', 'Note id', 'string', 'uuid')] }),
     },
+    '/api/crm/media': {
+        get: op('Customers', "A message's photo, audio or video (?id=&i=): redirects to a link that lasts an hour"),
+        post: op('Customers', 'Send a photo (JPEG) or audio (WAV) on Messenger or Instagram (multipart: file, customer_id, channel)'),
+    },
+    '/api/crm/media/photo': { get: op('Customers', "A customer's profile photo (?customer_id=&channel=): redirects to it") },
+    '/api/crm/media/products': { get: op('Customers', 'Products with their photos, to send one (?q=)') },
     '/api/crm/comments': {
         get: op('Customers', 'Public comments (?show=all|leads|open&platform=&author=&q=&page=), or one thread per person (?threads=1)'),
         patch: op('Customers', 'Mark comments handled or not', { requestBody: body({ ids: { type: 'array', items: uuid }, handled: { type: 'boolean' } }, ['ids', 'handled']) }),

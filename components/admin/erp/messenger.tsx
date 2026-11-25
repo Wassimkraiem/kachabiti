@@ -9,6 +9,7 @@ import { message } from "@/components/admin/antd-app";
 import { useAdminT } from "@/lib/admin-i18n";
 import { STAGE_COLORS, STAGE_LABELS, type CustomerStage } from "@/lib/erp/constants";
 import { api, formatDate, useApi } from "./erp-client";
+import { Attachments, MediaButtons, messageText } from "./messenger-media";
 
 const { Text } = Typography;
 
@@ -30,6 +31,7 @@ export interface MessageThread {
     created_at: string;
     sender_name: string | null;
     unread: number;
+    photo?: boolean;
     customer: { full_name: string; phone: string | null; stage: CustomerStage; assigned_to_email: string | null };
 }
 
@@ -47,6 +49,7 @@ interface ChatMessage {
     id: string;
     direction: "in" | "out" | "note";
     body: string;
+    attachments?: { type: string }[];
     created_at: string;
     created_by_email: string | null;
 }
@@ -75,14 +78,17 @@ export function usePolling(reload: () => void) {
 
 const timeOf = (value: string) => dayjs(value).format("HH:mm");
 
-export function ChatAvatar({ name, channel, size = 44 }: { name: string; channel: string; size?: number }) {
+/** The address of a thread's profile photo. */
+export const photoOf = (th: MessageThread) => (th.photo ? `/api/crm/media/photo?customer_id=${th.customer_id}&channel=${th.channel}` : undefined);
+
+export function ChatAvatar({ name, channel, photo, size = 44 }: { name: string; channel: string; photo?: string; size?: number }) {
     const c = CHAT_CHANNELS[channel];
     return (
         <Badge
             offset={[-6, size - 8]}
             count={c ? <span title={c.label} style={{ background: "#fff", borderRadius: "50%", color: c.color, fontSize: 15, lineHeight: 1, padding: 1 }}>{c.icon}</span> : undefined}
         >
-            <Avatar size={size} icon={name ? undefined : <UserOutlined />} style={{ background: "#efe6dd", color: "#7a3b2e", fontWeight: 600 }}>
+            <Avatar size={size} src={photo} alt="" icon={name ? undefined : <UserOutlined />} style={{ background: "#efe6dd", color: "#7a3b2e", fontWeight: 600 }}>
                 {name ? [...name][0].toUpperCase() : null}
             </Avatar>
         </Badge>
@@ -90,15 +96,15 @@ export function ChatAvatar({ name, channel, size = 44 }: { name: string; channel
 }
 
 /** One line of the list: avatar, name, latest text, time and what's waiting. */
-export function ThreadRow({ name, channel, text, date, count, active, extra, onClick }: {
-    name: string; channel: string; text: string; date: string; count: number; active: boolean; extra?: ReactNode; onClick: () => void;
+export function ThreadRow({ name, channel, photo, text, date, count, active, extra, onClick }: {
+    name: string; channel: string; photo?: string; text: string; date: string; count: number; active: boolean; extra?: ReactNode; onClick: () => void;
 }) {
     const { t, locale } = useAdminT();
     const d = dayjs(date);
     const when = d.isSame(dayjs(), "day") ? timeOf(date) : d.isSame(dayjs().subtract(1, "day"), "day") ? t("Yesterday") : formatDate(date, locale);
     return (
         <button type="button" className={`msgr-row${active ? " is-active" : ""}`} aria-current={active || undefined} onClick={onClick}>
-            <ChatAvatar name={name} channel={channel} />
+            <ChatAvatar name={name} channel={channel} photo={photo} />
             <span className="msgr-row-main">
                 <span className="msgr-row-line">
                     <span className="msgr-ellipsis" dir="auto" style={{ fontWeight: count ? 700 : 500 }}>{name || t("(no name)")}</span>
@@ -114,12 +120,12 @@ export function ThreadRow({ name, channel, text, date, count, active, extra, onC
     );
 }
 
-function ChatHeader({ name, channel, sub, onBack, actions }: { name: string; channel: string; sub?: ReactNode; onBack: () => void; actions?: ReactNode }) {
+function ChatHeader({ name, channel, photo, sub, onBack, actions }: { name: string; channel: string; photo?: string; sub?: ReactNode; onBack: () => void; actions?: ReactNode }) {
     const { t, locale } = useAdminT();
     return (
         <div className="msgr-chat-head">
             <Button className="msgr-back" type="text" aria-label={t("Back")} icon={locale === "ar" ? <ArrowRightOutlined /> : <ArrowLeftOutlined />} onClick={onBack} />
-            <ChatAvatar name={name} channel={channel} size={38} />
+            <ChatAvatar name={name} channel={channel} photo={photo} size={38} />
             <div style={{ flex: 1, minWidth: 0 }}>
                 <div className="msgr-ellipsis" style={{ fontWeight: 600 }}><bdi>{name || t("(no name)")}</bdi></div>
                 <div className="msgr-ellipsis" style={{ fontSize: 12, color: "#6b6b6b" }}>{CHAT_CHANNELS[channel]?.label ?? channel}{sub}</div>
@@ -195,6 +201,7 @@ export function MessageChat({ thread, connected, onBack, onChange }: { thread: M
             <ChatHeader
                 name={customer.full_name || thread.sender_name || customer.phone || ""}
                 channel={channel}
+                photo={photoOf(thread)}
                 sub={customer.assigned_to_email ? ` · ${customer.assigned_to_email}` : ""}
                 onBack={onBack}
                 actions={
@@ -213,7 +220,8 @@ export function MessageChat({ thread, connected, onBack, onChange }: { thread: M
                 dateOf={(m) => m.created_at}
                 render={(m) => (
                     <div className={`msgr-bubble is-${m.direction}`}>
-                        <div dir="auto" style={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>{m.body}</div>
+                        <Attachments id={m.id} items={m.attachments} />
+                        {!(m.attachments?.length && messageText(m.body, t) !== m.body) && <div dir="auto" style={{ whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>{messageText(m.body, t)}</div>}
                         <div className="msgr-meta">{m.direction !== "in" && m.created_by_email ? `${m.created_by_email} · ` : ""}{timeOf(m.created_at)}</div>
                     </div>
                 )}
@@ -221,6 +229,7 @@ export function MessageChat({ thread, connected, onBack, onChange }: { thread: M
             <div className="msgr-compose">
                 {connected ? (
                     <>
+                        {(channel === "facebook" || channel === "instagram") && <MediaButtons customerId={customer_id} channel={channel} onSent={async () => { await reload(); onChange(); }} />}
                         <Input.TextArea
                             value={text}
                             onChange={(e) => setText(e.target.value)}
@@ -235,7 +244,7 @@ export function MessageChat({ thread, connected, onBack, onChange }: { thread: M
                             placeholder={t("Write a message…")}
                             aria-label={t("Write a message…")}
                             dir="auto"
-                            style={{ borderRadius: 20, padding: "8px 14px" }}
+                            style={{ borderRadius: 20, padding: "8px 14px", flex: 1, minWidth: 0, width: "auto" }}
                         />
                         <Button type="primary" shape="circle" size="large" icon={<SendOutlined />} aria-label={t("Send")} loading={sending} disabled={!text.trim()} onClick={send} />
                     </>
@@ -372,10 +381,11 @@ export const MESSENGER_CSS = `
 .msgr-day { align-self: center; margin: 10px 0 4px; font-size: 12px; color: #6b6b6b; }
 .msgr-bubble { max-width: min(75%, 520px); padding: 8px 12px; border-radius: 18px; align-self: flex-start; background: #f0f0f0; border-end-start-radius: 4px; }
 .msgr-bubble.is-out { align-self: flex-end; background: #7a3b2e; color: #fff; border-radius: 18px; border-end-end-radius: 4px; }
+.msgr-bubble .ant-image, .msgr-bubble .ant-image-img { max-width: 100%; }
 .msgr-bubble.is-note { align-self: center; background: #fff7e0; border-radius: 10px; font-size: 13px; }
 .msgr-meta { margin-top: 2px; font-size: 11px; color: #6b6b6b; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .msgr-bubble.is-out .msgr-meta { color: rgba(255,255,255,.8); justify-content: flex-end; }
-.msgr-compose { display: flex; gap: 10px; align-items: flex-end; padding: 12px 16px; border-top: 1px solid #ececec; }
+.msgr-compose { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: flex-end; padding: 12px 16px; border-top: 1px solid #ececec; }
 @media (max-width: 1199px) {
   .msgr-rail { width: 150px; }
   .msgr-list { width: 270px; }
