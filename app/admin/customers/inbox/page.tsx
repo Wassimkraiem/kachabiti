@@ -5,9 +5,11 @@ import Link from "next/link";
 import { Alert, Badge, Button, Card, Empty, Segmented, Space, Spin, Tag, Typography } from "antd";
 import { ReloadOutlined } from "@ant-design/icons";
 import { useAdminT } from "@/lib/admin-i18n";
+import { useAdminRole } from "@/lib/admin-role-context";
 import { STAGE_COLORS, STAGE_LABELS, type CustomerStage } from "@/lib/erp/constants";
 import { ChannelTag, ListRow, PageHeader } from "@/components/admin/erp/ui";
 import { formatDate, useApi } from "@/components/admin/erp/erp-client";
+import MetaConnection from "@/components/admin/erp/MetaConnection";
 
 const { Text } = Typography;
 
@@ -29,6 +31,7 @@ interface Thread {
  */
 export default function InboxPage() {
     const { t, locale } = useAdminT();
+    const { isAdmin } = useAdminRole();
     const [filter, setFilter] = useState<"all" | "unread">("all");
     const { data, loading, reload } = useApi<{ threads: Thread[]; connected: Record<string, boolean> }>(`/api/crm/interactions?inbox=1${filter === "unread" ? "&unread=1" : ""}`);
     const connected = data?.connected;
@@ -42,6 +45,7 @@ export default function InboxPage() {
                 crumbs={[{ title: t("Customers"), href: "/admin/customers" }]}
                 extra={<Button icon={<ReloadOutlined />} onClick={reload} loading={loading}>{t("Refresh")}</Button>}
             />
+            {isAdmin && <MetaConnection onChange={reload} />}
             {connected && (
                 <Space wrap style={{ marginBottom: 12 }}>
                     {(["facebook", "instagram", "whatsapp"] as const).map((ch) => (

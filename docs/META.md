@@ -24,7 +24,25 @@ notified). Everything arrives at one webhook: `POST https://api.kachabiti.com/ap
 3. App settings → Basic: copy the **App secret** → `META_APP_SECRET`.
 4. Choose any long random text as the verify token → `META_VERIFY_TOKEN`.
 
-## 3. Tokens that don't expire
+## 3. Connect with Facebook (Messenger, Instagram and comments)
+
+No token to copy: an owner or admin connects the Page in Admin → Customers → Inbox. It needs, once:
+
+1. Facebook Login for Business → Settings → Valid OAuth Redirect URIs: the site's exact address
+   (`NEXT_PUBLIC_SITE_URL`) followed by `/api/admin/meta/callback`.
+2. Facebook Login for Business → Configurations → Create: assets Pages and Instagram accounts, and
+   the permissions below without the WhatsApp ones. A system-user token that never expires is best;
+   with a user token Meta may ask to connect again after about 90 days (the Inbox shows the date).
+   Copy its ID → `META_LOGIN_CONFIG_ID`.
+3. App settings → Basic: the **App ID** → `META_APP_ID`.
+
+Put them on the server with `META_APP_SECRET` and `META_VERIFY_TOKEN` (step 4), subscribe the webhook
+(step 5; the button connects the Page itself), then click **Connect with Facebook** and choose the Page.
+One Page at a time: choosing another replaces it. Its token is stored encrypted with a key made from
+`AUTH_SECRET`, so changing that secret means connecting again. A connected Page wins over
+`META_PAGE_ACCESS_TOKEN`, which stays as the fallback. Staff who can't connect see no button.
+
+## 3b. Tokens by hand (WhatsApp, or without the button)
 
 Business settings → Users → **System users** → add one (Admin) → Assign assets: the Page, the
 Instagram account, the WhatsApp account (full control) → **Generate token** for the app, with:
@@ -42,6 +60,8 @@ whatsapp_business_messaging, whatsapp_business_management`
 GitHub → Settings → Secrets → `PROD_ENV`, add (values quoted if they contain spaces):
 
 ```
+META_APP_ID=…
+META_LOGIN_CONFIG_ID=…
 META_APP_SECRET=…
 META_VERIFY_TOKEN=…
 META_PAGE_ACCESS_TOKEN=…

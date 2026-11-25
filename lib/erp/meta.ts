@@ -6,7 +6,9 @@ import { createHmac, timingSafeEqual } from 'crypto';
  *
  *   META_APP_SECRET           verifies webhook signatures (X-Hub-Signature-256)
  *   META_VERIFY_TOKEN         the token entered when subscribing the webhook in Meta's dashboard
- *   META_PAGE_ACCESS_TOKEN    replies on Messenger and Instagram (page linked to the IG account)
+ *   META_PAGE_ACCESS_TOKEN    replies on Messenger and Instagram when no Page is connected in the
+ *                             admin (api/src/crm/meta-connection.controller.ts, which needs
+ *                             META_APP_ID and META_LOGIN_CONFIG_ID)
  *   WHATSAPP_TOKEN            replies on WhatsApp
  *   WHATSAPP_PHONE_NUMBER_ID  the WhatsApp Business number that sends them
  *
@@ -14,14 +16,16 @@ import { createHmac, timingSafeEqual } from 'crypto';
  * (WhatsApp needs an approved template after that); the Graph API returns an error otherwise.
  */
 
-const GRAPH = 'https://graph.facebook.com/v21.0';
+export const META_VERSION = 'v24.0';
+// META_GRAPH_URL: a stand-in for the e2e suite.
+const GRAPH = process.env.META_GRAPH_URL || `https://graph.facebook.com/${META_VERSION}`;
 
 export type MetaChannel = 'facebook' | 'instagram' | 'whatsapp';
 
-export const metaConfigured = () => ({
+export const metaConfigured = (pageToken: string | null) => ({
     webhook: Boolean(process.env.META_APP_SECRET && process.env.META_VERIFY_TOKEN),
-    facebook: Boolean(process.env.META_PAGE_ACCESS_TOKEN),
-    instagram: Boolean(process.env.META_PAGE_ACCESS_TOKEN),
+    facebook: Boolean(pageToken),
+    instagram: Boolean(pageToken),
     whatsapp: Boolean(process.env.WHATSAPP_TOKEN && process.env.WHATSAPP_PHONE_NUMBER_ID),
 });
 
@@ -139,28 +143,37 @@ export function parseComments(payload: Json): IncomingComment[] {
     return out;
 }
 
-/** Sends a text reply. Throws with Meta's message when it refuses. */
-export async function sendMetaText(channel: MetaChannel, recipientId: string, text: string): Promise<string | null> {
-    let url: string;
-    let body: Json;
-    let token: string | undefined;
-    if (channel === 'whatsapp') {
-        token = process.env.WHATSAPP_TOKEN;
-        url = `${GRAPH}/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`;
-        body = { messaging_product: 'whatsapp', to: recipientId, type: 'text', text: { body: text } };
-    } else {
-        token = process.env.META_PAGE_ACCESS_TOKEN;
-        url = `${GRAPH}/me/messages`;
-        body = { recipient: { id: recipientId }, messaging_type: 'RESPONSE', message: { text } };
-    }
-    if (!token) throw new Error(`${channel} is not connected`);
-    const response = await fetch(url, {
-        method: 'POST',
-        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
+/** Calls the Graph API (JSON). Throws with Meta's message when it refuses. */
+export async function graph<T = Json>(path: string, init: { method?: string; token?: string; body?: Json } = {}): Promise<T> {
+    const response = await fetch(`${GRAPH}${path}`, {
+        method: init.method ?? 'GET',
+        headers: {
+            ...(init.token ? { Authorization: `Bearer ${init.token}` } : {}),
+            ...(init.body ? { 'Content-Type': 'application/json' } : {}),
+        },
+        body: init.body ? JSON.stringify(init.body) : undefined,
         signal: AbortSignal.timeout(15_000),
     });
     const json = (await response.json().catch(() => ({}))) as Json;
     if (!response.ok) throw new Error(String(obj(json.error).message ?? `Meta refused the message (${response.status})`));
+    return json as T;
+}
+
+/** Sends a text reply. Throws with Meta's message when it refuses. */
+export async function sendMetaText(channel: MetaChannel, recipientId: string, text: string, pageToken: string | null): Promise<string | null> {
+    let path: string;
+    let body: Json;
+    let token: string | null | undefined;
+    if (channel === 'whatsapp') {
+        token = process.env.WHATSAPP_TOKEN;
+        path = `/${process.env.WHATSAPP_PHONE_NUMBER_ID}/messages`;
+        body = { messaging_product: 'whatsapp', to: recipientId, type: 'text', text: { body: text } };
+    } else {
+        token = pageToken;
+        path = '/me/messages';
+        body = { recipient: { id: recipientId }, messaging_type: 'RESPONSE', message: { text } };
+    }
+    if (!token) throw new Error(`${channel} is not connected`);
+    const json = await graph(path, { method: 'POST', token, body });
     return String(json.message_id ?? arr(json.messages)[0]?.id ?? '') || null;
 }

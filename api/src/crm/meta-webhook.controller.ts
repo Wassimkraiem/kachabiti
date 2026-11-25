@@ -21,6 +21,7 @@ import {
 import { Public } from '../auth/decorators';
 import { ApiError, Raw } from '../common/api';
 import { Database } from '../db/database';
+import { metaConnection } from './meta-connection';
 
 /**
  * Port of app/api/webhooks/meta: Messenger, Instagram Direct and WhatsApp messages, and the public
@@ -66,6 +67,15 @@ export class MetaWebhookController {
     }
     try {
       const payload = JSON.parse(raw);
+      // Another Page subscribed to the same Meta app: its customers aren't ours.
+      // shortcut: Page events only, match instagram_id too once a second Instagram account is subscribed.
+      if (payload.object === 'page' && Array.isArray(payload.entry)) {
+        const connection = await metaConnection(this.db);
+        if (connection)
+          payload.entry = payload.entry.filter(
+            (e: { id?: unknown }) => String(e.id) === connection.page_id,
+          );
+      }
       const comments = parseComments(payload);
       const messages = parseWebhook(payload);
       const fields = [

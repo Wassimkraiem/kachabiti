@@ -59,6 +59,7 @@ import {
   InteractionsController,
   TasksController,
 } from './crm/crm.controllers';
+import { MetaConnectionController } from './crm/meta-connection.controller';
 import { MetaWebhookController } from './crm/meta-webhook.controller';
 import {
   AccountingController,
@@ -133,6 +134,7 @@ import {
     InteractionsController,
     TasksController,
     CommentsController,
+    MetaConnectionController,
     MetaWebhookController,
     CampaignsController,
     PosController,

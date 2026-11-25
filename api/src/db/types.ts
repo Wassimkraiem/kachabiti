@@ -75,6 +75,21 @@ export interface ApiKeys {
   updated_at: Generated<Timestamp>;
 }
 
+export interface MetaConnection {
+  connected_by: string;
+  connected_by_email: string | null;
+  created_at: Generated<Timestamp>;
+  data_access_expires_at: Timestamp | null;
+  deleted_at: Timestamp | null;
+  id: Generated<boolean>;
+  instagram_id: string | null;
+  instagram_username: string | null;
+  page_id: string;
+  page_name: string;
+  token_encrypted: string;
+  updated_at: Generated<Timestamp>;
+}
+
 export interface ActivityLog {
   action: string;
   actor_email: string | null;
@@ -1173,6 +1188,7 @@ export interface DB {
   ad_spend: AdSpend;
   agent_goals: AgentGoals;
   api_keys: ApiKeys;
+  meta_connection: MetaConnection;
   auth_tokens: AuthTokens;
   back_office_users: BackOfficeUsers;
   bank_statement_lines: BankStatementLines;

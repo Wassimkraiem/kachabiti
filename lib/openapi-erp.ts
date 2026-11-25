@@ -91,6 +91,14 @@ export const erpPaths: Record<string, Record<string, Op>> = {
         post: op('Owner', 'Comment on a task (multipart: ticket_id, body and/or an image file up to 5 MB); its assignee and author are notified'),
         delete: op('Owner', 'Soft-delete a comment (its author, or the delete permission)', { parameters: [q('id', 'Comment id', 'string', 'uuid')] }),
     },
+    '/api/admin/meta': {
+        get: op('Customers', 'The connected Facebook Page (owners and admins; never its token)'),
+        post: op('Customers', 'Connect a Page granted at the Facebook sign-in, replacing the previous one', { requestBody: body({ page_id: { type: 'string' } }, ['page_id']) }),
+        delete: op('Customers', 'Disconnect the Page and erase its token'),
+    },
+    '/api/admin/meta/login': { get: op('Customers', 'Redirects to the Facebook sign-in') },
+    '/api/admin/meta/callback': { get: op('Customers', 'Where Facebook comes back (code, state); redirects to the Inbox') },
+    '/api/admin/meta/pages': { get: op('Customers', 'Pages granted at the Facebook sign-in, without tokens (10 minutes)') },
     '/api/webhooks/meta': {
         get: op('Customers', "Meta webhook subscription check (hub.mode, hub.verify_token, hub.challenge). Public."),
         post: op('Customers', 'Messenger / Instagram / WhatsApp messages (signed with X-Hub-Signature-256). Public.'),

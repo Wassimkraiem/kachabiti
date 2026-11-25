@@ -20,6 +20,7 @@ import type { RequestActor } from '../auth/auth.guard';
 import { ApiError, isManager, params, Zod, zDate, zId } from '../common/api';
 import { Database } from '../db/database';
 import { many, one } from '../db/embed';
+import { metaPageToken } from './meta-connection';
 import { memberEmail } from '../sales/commerce';
 
 // Ports of app/api/customers, crm/interactions and crm/tasks (rules in lib/api-access.ts).
@@ -497,7 +498,10 @@ export class InteractionsController {
     const threads = [...latest.values()].sort(
       (a, b) => Number(b.unread > 0) - Number(a.unread > 0),
     );
-    return { threads, connected: metaConfigured() };
+    return {
+      threads,
+      connected: metaConfigured(await metaPageToken(this.db)),
+    };
   }
 
   @Post()
@@ -516,7 +520,8 @@ export class InteractionsController {
         );
       }
       const channel = body.channel as MetaChannel;
-      if (!metaConfigured()[channel])
+      const pageToken = await metaPageToken(this.db);
+      if (!metaConfigured(pageToken)[channel])
         throw new ApiError(
           `${channel} is not connected yet. Log the message instead.`,
           503,
@@ -538,7 +543,12 @@ export class InteractionsController {
           409,
         );
       try {
-        externalId = await sendMetaText(channel, recipient, body.body);
+        externalId = await sendMetaText(
+          channel,
+          recipient,
+          body.body,
+          pageToken,
+        );
       } catch (error) {
         throw new ApiError(
           `Not sent: ${(error as Error).message}`,
@@ -849,7 +859,7 @@ export class CommentsController {
       size,
       leads: leads.n,
       open: open.n,
-      connected: metaConfigured(),
+      connected: metaConfigured(await metaPageToken(this.db)),
     };
   }
 
