@@ -69,10 +69,14 @@ export const erpPaths: Record<string, Record<string, Op>> = {
         delete: op('Customers', 'Soft-delete a customer record', { parameters: [q('id', 'Customer id', 'string', 'uuid')] }),
     },
     '/api/crm/interactions': {
-        get: op('Customers', "A customer's conversation (?customer_id=) or the inbox (?inbox=1&unread=1)"),
+        get: op('Customers', "A customer's conversation (?customer_id=&channel=) or the Messenger list, one thread per customer and channel (?inbox=1&channel=&unread=1&q=)"),
         post: op('Customers', 'Log a message, call or note; send: true replies on Messenger/Instagram/WhatsApp', { requestBody: body({ customer_id: uuid, channel: { type: 'string' }, direction: { type: 'string', enum: ['in', 'out', 'note'] }, body: { type: 'string' }, send: { type: 'boolean' } }, ['customer_id', 'channel', 'direction', 'body']) }),
-        put: op('Customers', "Mark a customer's messages read", { requestBody: body({ customer_id: uuid }, ['customer_id']) }),
+        put: op('Customers', "Mark a customer's messages read (on one channel, or all)", { requestBody: body({ customer_id: uuid, channel: { type: 'string' } }, ['customer_id']) }),
         delete: op('Customers', 'Remove a note', { parameters: [q('id', 'Note id', 'string', 'uuid')] }),
+    },
+    '/api/crm/comments': {
+        get: op('Customers', 'Public comments (?show=all|leads|open&platform=&author=&q=&page=), or one thread per person (?threads=1)'),
+        patch: op('Customers', 'Mark comments handled or not', { requestBody: body({ ids: { type: 'array', items: uuid }, handled: { type: 'boolean' } }, ['ids', 'handled']) }),
     },
     '/api/crm/tasks': {
         get: op('Customers', 'Follow-ups (?customer_id= | ?mine=1 | ?status=open|done|overdue)'),

@@ -8,6 +8,7 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
+import { sql } from 'kysely';
 import { z } from 'zod';
 import { CHANNELS, CUSTOMER_STAGES } from '@shared/erp/constants';
 import {
@@ -437,69 +438,81 @@ const interactionSchema = z.object({
   // Actually send it on the channel (Messenger, Instagram, WhatsApp) instead of only logging it.
   send: z.boolean().default(false),
 });
-const readSchema = z.object({ customer_id: zId });
+const readSchema = z.object({
+  customer_id: zId,
+  channel: z.string().max(20).optional(),
+});
+
+/** Channels with conversations in the Messenger screen. */
+const CHAT_CHANNELS = ['facebook', 'instagram', 'whatsapp', 'tiktok'];
+
+const likeTerm = (term: string | null | undefined) =>
+  term ? `%${term.replace(/[%_]/g, ' ')}%` : null;
 
 @Controller('crm/interactions')
 @Public()
 export class InteractionsController {
   constructor(private readonly db: Database) {}
 
-  /** ?customer_id= — one conversation (oldest first). Otherwise the inbox: latest message per customer, unread first (?unread=1). */
+  /**
+   * ?customer_id=&channel= — one conversation, oldest first (its latest 500 messages). Otherwise the
+   * Messenger list: one thread per customer and channel, latest first (?channel=&unread=1&q=), with
+   * the unread messages per channel.
+   */
   @Get()
   async list(@Query() query: Record<string, string>) {
     const q = params(query);
     const customerId = q.get('customer_id');
+    const channel = q.get('channel');
     if (customerId) {
-      return this.db
+      let rows = this.db
         .selectFrom('customer_interactions')
         .selectAll()
         .where('customer_id', '=', customerId)
-        .where('deleted_at', 'is', null)
-        .orderBy('created_at')
+        .where('deleted_at', 'is', null);
+      if (channel) rows = rows.where('channel', '=', channel);
+      const latest = await rows
+        .orderBy('created_at', 'desc')
         .limit(500)
         .execute();
+      return latest.reverse();
     }
-    let rows = this.db
-      .selectFrom('customer_interactions as x')
-      .select([
-        'x.id',
-        'x.customer_id',
-        'x.channel',
-        'x.direction',
-        'x.body',
-        'x.created_at',
-        'x.read_at',
-        'x.sender_name',
-      ])
-      .select((eb) =>
-        one(
-          eb,
-          'customers as c',
-          ['c.full_name', 'c.phone', 'c.stage', 'c.assigned_to_email'],
-          'c.id',
-          'x.customer_id',
-        ).as('customer'),
-      )
-      .where('x.deleted_at', 'is', null)
-      .where('x.channel', 'in', ['facebook', 'instagram', 'whatsapp', 'tiktok'])
-      .orderBy('x.created_at', 'desc')
-      .limit(1000);
-    if (q.bool('unread'))
-      rows = rows
-        .where('x.direction', '=', 'in')
-        .where('x.read_at', 'is', null);
-    const latest = new Map<string, any>();
-    for (const row of await rows.execute()) {
-      const unread = row.direction === 'in' && !row.read_at ? 1 : 0;
-      const seen = latest.get(row.customer_id);
-      if (seen) seen.unread += unread;
-      else latest.set(row.customer_id, { ...row, unread });
-    }
-    const threads = [...latest.values()].sort(
-      (a, b) => Number(b.unread > 0) - Number(a.unread > 0),
-    );
+    const channels = channel ? [channel] : CHAT_CHANNELS;
+    const like = likeTerm(q.get('q'));
+    const [threads, counts] = await Promise.all([
+      sql<Record<string, unknown>>`
+        select l.*, coalesce(u.n, 0)::int as unread,
+               json_build_object('full_name', c.full_name, 'phone', c.phone, 'stage', c.stage,
+                                 'assigned_to_email', c.assigned_to_email) as customer
+        from (
+          select distinct on (x.customer_id, x.channel)
+                 x.customer_id, x.channel, x.direction, x.body, x.created_at, x.sender_name
+          from customer_interactions x
+          where x.deleted_at is null and x.channel = any(${channels}::text[])
+          order by x.customer_id, x.channel, x.created_at desc
+        ) l
+        join customers c on c.id = l.customer_id and c.deleted_at is null
+        left join (
+          select customer_id, channel, count(*) as n from customer_interactions
+          where direction = 'in' and read_at is null and deleted_at is null
+          group by 1, 2
+        ) u on u.customer_id = l.customer_id and u.channel = l.channel
+        where (not ${q.bool('unread')}::boolean or u.n > 0)
+          and (${like}::text is null or c.full_name ilike ${like}
+               or c.phone ilike ${like} or l.body ilike ${like})
+        order by l.created_at desc
+        limit 200`.execute(this.db),
+      sql<{ channel: string; n: number }>`
+        select x.channel, count(*)::int as n
+        from customer_interactions x
+        join customers c on c.id = x.customer_id and c.deleted_at is null
+        where x.direction = 'in' and x.read_at is null and x.deleted_at is null
+          and x.channel = any(${CHAT_CHANNELS}::text[])
+        group by 1`.execute(this.db),
+    ]);
     return {
-      threads,
+      threads: threads.rows,
+      unread: Object.fromEntries(counts.rows.map((r) => [r.channel, r.n])),
       connected: metaConfigured(await metaPageToken(this.db)),
     };
   }
@@ -582,21 +595,22 @@ export class InteractionsController {
     });
   }
 
-  /** { customer_id } — marks a customer's messages read. */
+  /** { customer_id, channel? } — marks a customer's messages read (on one channel, or all). */
   @Put()
   async markRead(
     @Body(new Zod(readSchema)) body: z.infer<typeof readSchema>,
     @CurrentActor() actor: RequestActor,
   ) {
-    await this.db.withActor(actor, (trx) =>
-      trx
+    await this.db.withActor(actor, (trx) => {
+      let rows = trx
         .updateTable('customer_interactions')
         .set({ read_at: new Date() })
         .where('customer_id', '=', body.customer_id)
         .where('direction', '=', 'in')
-        .where('read_at', 'is', null)
-        .execute(),
-    );
+        .where('read_at', 'is', null);
+      if (body.channel) rows = rows.where('channel', '=', body.channel);
+      return rows.execute();
+    });
     return { customer_id: body.customer_id };
   }
 
@@ -779,15 +793,60 @@ const commentsPatchSchema = z.object({
   handled: z.boolean(),
 });
 
+/** Whose comment it is: Meta's id when it sends one, else the name, else the comment alone. */
+const AUTHOR_KEY = sql<string>`coalesce(sc.author_id, sc.author_name, sc.id::text)`;
+
 @Controller('crm/comments')
 @Public()
 export class CommentsController {
   constructor(private readonly db: Database) {}
 
-  /** ?show=all|leads (with a phone)|open (not handled) &platform=&q=&page= — newest first. */
+  /** One thread per person and platform, latest first, with the comments to handle per platform. */
+  private async threads(q: ReturnType<typeof params>) {
+    const platform = q.get('platform') || null;
+    const show = q.get('show') || 'all';
+    const like = likeTerm(q.get('q'));
+    const [threads, counts] = await Promise.all([
+      sql<Record<string, unknown>>`
+        select t.* from (
+          select sc.platform, ${AUTHOR_KEY} as author,
+                 max(sc.author_name) as author_name,
+                 (array_agg(sc.body order by sc.commented_at desc))[1] as body,
+                 max(sc.commented_at) as commented_at,
+                 max(sc.phone) as phone,
+                 count(*) filter (where sc.handled_at is null)::int as open,
+                 bool_or(${like}::text is null or sc.body ilike ${like}
+                         or sc.author_name ilike ${like} or sc.phone ilike ${like}) as matches
+          from social_comments sc
+          where sc.deleted_at is null and (${platform}::text is null or sc.platform = ${platform})
+          group by 1, 2
+        ) t
+        where t.matches
+          and (${show}::text <> 'leads' or t.phone is not null)
+          and (${show}::text <> 'open' or t.open > 0)
+        order by t.commented_at desc
+        limit 200`.execute(this.db),
+      sql<{ platform: string; n: number }>`
+        select platform, count(*)::int as n from social_comments
+        where deleted_at is null and handled_at is null group by 1`.execute(
+        this.db,
+      ),
+    ]);
+    return {
+      threads: threads.rows,
+      open: Object.fromEntries(counts.rows.map((r) => [r.platform, r.n])),
+      connected: metaConfigured(await metaPageToken(this.db)),
+    };
+  }
+
+  /**
+   * ?threads=1 — the Messenger list, one thread per person. Otherwise the comments, newest first:
+   * ?show=all|leads (with a phone)|open (not handled) &platform=&author= (a thread's key) &q=&page=
+   */
   @Get()
   async list(@Query() query: Record<string, string>) {
     const q = params(query);
+    if (q.bool('threads')) return this.threads(q);
     const page = q.int('page', 1, 10_000);
     const size = q.int('size', 50, 200);
     let filtered = this.db
@@ -799,6 +858,10 @@ export class CommentsController {
       filtered = filtered.where('sc.handled_at', 'is', null);
     if (q.get('platform'))
       filtered = filtered.where('sc.platform', '=', q.get('platform')!);
+    if (q.get('author'))
+      filtered = filtered.where(
+        sql<boolean>`${AUTHOR_KEY} = ${q.get('author')}`,
+      );
     const term = q.get('q');
     if (term) {
       const like = `%${term.replace(/[%_]/g, ' ')}%`;

@@ -1,7 +1,7 @@
 # Connecting Facebook, Instagram and WhatsApp (Meta)
 
-One Meta app feeds the admin's **Inbox** (Messenger, Instagram Direct and WhatsApp messages, with
-replies) and **Comments** (public comments on the Page's and Instagram account's posts; a comment
+One Meta app feeds the admin's **Messenger**, with a Messages tab (Messenger, Instagram Direct and WhatsApp messages, with
+replies) and a **Comments** tab (public comments on the Page's and Instagram account's posts; a comment
 with a Tunisian phone number becomes a customer with a "Call back" task, and the customers team is
 notified). Everything arrives at one webhook: `POST https://api.kachabiti.com/api/webhooks/meta`
 (`api/src/crm/meta-webhook.controller.ts`). Without it the CRM works by hand.
@@ -26,13 +26,13 @@ notified). Everything arrives at one webhook: `POST https://api.kachabiti.com/ap
 
 ## 3. Connect with Facebook (Messenger, Instagram and comments)
 
-No token to copy: an owner or admin connects the Page in Admin → Customers → Inbox. It needs, once:
+No token to copy: an owner or admin connects the Page in Admin → Messenger → Connections. It needs, once:
 
 1. Facebook Login for Business → Settings → Valid OAuth Redirect URIs: the site's exact address
    (`NEXT_PUBLIC_SITE_URL`) followed by `/api/admin/meta/callback`.
 2. Facebook Login for Business → Configurations → Create: assets Pages and Instagram accounts, and
    the permissions below without the WhatsApp ones. A system-user token that never expires is best;
-   with a user token Meta may ask to connect again after about 90 days (the Inbox shows the date).
+   with a user token Meta may ask to connect again after about 90 days (Connections shows the date).
    Copy its ID → `META_LOGIN_CONFIG_ID`.
 3. App settings → Basic: the **App ID** → `META_APP_ID`.
 
@@ -91,16 +91,16 @@ While the app is in **Development** mode, Meta only sends events from people who
 the app (you, testers). To receive your customers' messages and comments:
 
 1. App Review → request **Advanced access** for the permissions in step 3 (Meta wants a short
-   screencast of the Inbox and Comments screens, and a privacy policy page on the site).
+   screencast of the Messenger screen, and a privacy policy page on the site).
 2. Switch the app to **Live**.
 
 Test: comment "num 22 123 456" on a Page post from a tester account → it appears in Admin →
-Customers → Comments within seconds, with a customer and a "Call back" task, and the bell rings.
+Messenger → Comments within seconds, with a customer and a "Call back" task, and the bell rings.
 
 ## Rules Meta enforces
 
 - Replies (Messenger, Instagram) are free only within **24 hours** of the customer's last message;
-  WhatsApp needs an approved **template** after that. The Inbox shows Meta's refusal otherwise.
+  WhatsApp needs an approved **template** after that. Messenger shows Meta's refusal otherwise.
 - Comments are received from the moment the webhook is on: older comments aren't imported.
 
 ## TikTok

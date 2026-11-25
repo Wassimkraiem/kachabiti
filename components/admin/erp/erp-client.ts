@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import dayjs, { type Dayjs } from "dayjs";
 
 /** An API refusal: its English message (show it with t()) and code. */
@@ -31,16 +31,22 @@ export function useApi<T>(url: string | null) {
     const [data, setData] = useState<T | null>(null);
     const [loading, setLoading] = useState(Boolean(url));
     const [error, setError] = useState<string | null>(null);
+    // A slow answer for the previous URL must not replace the current one.
+    const current = useRef(url);
+    useEffect(() => {
+        current.current = url;
+    }, [url]);
     const load = useCallback(async () => {
         if (!url) return;
         setLoading(true);
         setError(null);
         try {
-            setData(await api<T>(url));
+            const next = await api<T>(url);
+            if (current.current === url) setData(next);
         } catch (e) {
-            setError((e as Error).message);
+            if (current.current === url) setError((e as Error).message);
         } finally {
-            setLoading(false);
+            if (current.current === url) setLoading(false);
         }
     }, [url]);
     useEffect(() => {
