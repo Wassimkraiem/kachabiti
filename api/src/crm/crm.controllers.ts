@@ -584,6 +584,13 @@ export class InteractionsController {
           created_by: actor.userId,
           created_by_email: actor.email,
         })
+        // Meta's echo of this reply may have been stored first: keep one, with its sender.
+        .onConflict((oc) =>
+          oc.columns(['channel', 'external_id']).doUpdateSet({
+            created_by: actor.userId,
+            created_by_email: actor.email,
+          }),
+        )
         .returningAll()
         .executeTakeFirstOrThrow();
       await trx

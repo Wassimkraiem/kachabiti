@@ -110,3 +110,20 @@ comments need an approved **TikTok for Business** developer app and its comment 
 polling), and direct messages are only open to some regions through TikTok's partners. The
 `social_comments` table already accepts `tiktok`: once an app is approved, a scheduled job that
 inserts its comments gets the same phone detection, task and notification.
+
+## Your own replies
+
+Replies sent from Messenger, Instagram or Business Suite show in Admin → Messenger too: Facebook sends
+them with the Page field `message_echoes`, Instagram with `messages`. Only from the moment it is on.
+
+## Something doesn't arrive
+
+Admin → Messenger → Connections → **Check the connection** asks Meta what is missing (secret,
+permissions, linked Instagram account, subscriptions) and shows the events refused for a wrong
+secret; **Repair the events** adds the missing subscriptions. It can't see Advanced Access.
+
+## Post calendar
+
+Admin → Marketing → Post calendar (`scheduled_posts`, `api/src/social/`) publishes on the connected
+Page and its Instagram account. The login configuration also needs `pages_manage_posts` and
+`instagram_content_publish`; connect the Page again after adding them.

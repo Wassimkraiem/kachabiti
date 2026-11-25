@@ -60,6 +60,7 @@ import {
   TasksController,
 } from './crm/crm.controllers';
 import { MetaConnectionController } from './crm/meta-connection.controller';
+import { MetaHealthController } from './crm/meta-health';
 import { MetaWebhookController } from './crm/meta-webhook.controller';
 import {
   AccountingController,
@@ -70,6 +71,8 @@ import {
   ReportsController,
   TreasuryController,
 } from './finance/finance.controllers';
+import { PostPublisher } from './social/post-publisher';
+import { SocialController } from './social/social.controller';
 import { PosController } from './pos/pos.controller';
 import {
   CostingController,
@@ -135,7 +138,9 @@ import {
     TasksController,
     CommentsController,
     MetaConnectionController,
+    MetaHealthController,
     MetaWebhookController,
+    SocialController,
     CampaignsController,
     PosController,
     PurchaseOrdersController,
@@ -171,6 +176,7 @@ import {
   providers: [
     NotificationEvents,
     ColissimoTracking,
+    PostPublisher,
     { provide: APP_GUARD, useClass: AuthGuard },
     { provide: APP_INTERCEPTOR, useClass: ApiResponseInterceptor },
     { provide: APP_FILTER, useClass: ApiExceptionFilter },

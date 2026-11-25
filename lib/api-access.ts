@@ -65,6 +65,8 @@ export function apiRequirement(rawPathname: string, method: string, searchParams
     // Campaigns: the order forms list them; marketing manages them and their spend.
     if (under('/api/marketing/campaigns') && method === 'GET') return { any: ['marketing', 'orders', 'finance'] };
     if (under('/api/marketing')) return withDelete(method, ['marketing']);
+    // Scheduled posts on the Page and Instagram. Removing one only takes it off the calendar.
+    if (under('/api/social')) return { any: ['marketing'] };
     if (under('/api/stock')) return withDelete(method, ['stock']);
     if (pathname === '/api/cart/analytics') return { any: ['analytics'] };
     // Home page curation: reads and writes are back-office only.

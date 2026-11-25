@@ -3,8 +3,9 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Typography } from "antd";
-import { ExclamationCircleFilled, InfoCircleFilled, ShoppingCartOutlined, WarningFilled, BellFilled } from "@ant-design/icons";
+import { ExclamationCircleFilled, InfoCircleFilled, MessageOutlined, ShoppingCartOutlined, WarningFilled, BellFilled } from "@ant-design/icons";
 import { useAdminT, type AdminLocale } from "@/lib/admin-i18n";
+import { MESSAGE_NOTIFICATIONS } from "@/lib/erp/notification-types";
 
 dayjs.extend(relativeTime);
 
@@ -35,6 +36,7 @@ export function notificationText(item: Pick<AdminNotification, "title" | "body">
 
 function Icon({ item }: { item: AdminNotification }) {
     const style = { fontSize: 18 };
+    if (MESSAGE_NOTIFICATIONS.includes(item.type)) return <MessageOutlined style={{ ...style, color: "#7a3b2e" }} />;
     if (item.kind === "order") return <ShoppingCartOutlined style={{ ...style, color: "#389e0d" }} />;
     if (item.severity === "critical") return <ExclamationCircleFilled style={{ ...style, color: "#cf1322" }} />;
     if (item.severity === "warning") return <WarningFilled style={{ ...style, color: "#d48806" }} />;

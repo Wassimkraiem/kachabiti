@@ -9,6 +9,7 @@ import { useMobileTableLabels } from "@/components/admin/mobile-table-labels";
 import { installAdminFetchCache } from "@/components/admin/admin-fetch-cache";
 import type { MenuProps } from "antd";
 import {
+    CalendarOutlined,
     DashboardOutlined,
     ShoppingOutlined,
     PlusOutlined,
@@ -164,6 +165,7 @@ const menuItems: MenuItem[] = [
         key: "g-marketing",
         label: msg("Marketing"),
         children: [
+            { key: "/admin/marketing/calendar", icon: <CalendarOutlined />, label: msg("Post calendar") },
             { key: "/admin/marketing/campaigns", icon: <NotificationOutlined />, label: msg("Campaigns & ad spend") },
             { key: "/admin/landing", icon: <HomeOutlined />, label: msg("Landing page") },
             { key: "/admin/sale-banners", icon: <PercentageOutlined />, label: msg("Sale Banners") },
@@ -234,6 +236,7 @@ const MENU_PERMISSIONS: Record<string, Permission | "admin" | "owner"> = {
     "/admin/finance/accounting": "finance",
     "/admin/finance/documents": "finance",
     "/admin/promotions": "discounts",
+    "/admin/marketing/calendar": "marketing",
     "/admin/marketing/campaigns": "marketing",
     "/admin/sale-banners": "marketing",
     "/admin/reels": "marketing",
@@ -585,7 +588,8 @@ function AdminShell({ children }: { children: React.ReactNode }) {
                         </div>
                         <div style={{ display: "flex", gap: mobile ? 4 : 8, alignItems: "center", minWidth: 0 }}>
                             <AdminLanguageSwitcher />
-                            {role && <NotificationBell />}
+                            {role && <NotificationBell scope="messages" />}
+                            {role && <NotificationBell scope="other" />}
                             {role && !mobile && (
                                 <span style={{ color: "#6b7280", fontSize: 13, marginInlineEnd: 8 }}>
                                     {email} · {roleLabel}

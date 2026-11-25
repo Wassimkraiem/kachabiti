@@ -4,24 +4,29 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { App, Badge, Button, Divider, Drawer, Empty, Grid, Popover, Space, Spin, Typography } from "antd";
-import { BellOutlined, NotificationOutlined } from "@ant-design/icons";
+import { BellOutlined, MessageOutlined, NotificationOutlined } from "@ant-design/icons";
 import { useAdminRole } from "@/lib/admin-role-context";
 import { useAdminT } from "@/lib/admin-i18n";
 import { message } from "@/components/admin/antd-app";
 import { disableDesktop, enableDesktop, getDesktopState, refreshDesktop, type DesktopState } from "@/components/admin/desktop-push";
 import { NotificationItem, notificationText, type AdminNotification } from "@/components/admin/notification-item";
+import { listenNotifications, streamIsLive } from "@/components/admin/notification-stream";
+import { MESSAGE_NOTIFICATIONS } from "@/lib/erp/notification-types";
 
 const { Text } = Typography;
 
-// A short two-note chime (no audio file). Browsers allow it once the page has had a click.
-function chime(urgent: boolean) {
+// Short tones (no audio file): a chime for orders and alerts, a soft double "pop" for messages.
+// Browsers allow it once the page has had a click.
+function chime(kind: "order" | "urgent" | "message") {
     try {
         const ctx = new AudioContext();
-        const notes = urgent ? [880, 660, 880] : [660, 880];
+        const notes = { order: [660, 880], urgent: [880, 660, 880], message: [392, 392] }[kind];
         notes.forEach((freq, i) => {
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
+            osc.type = kind === "message" ? "triangle" : "sine";
             osc.frequency.value = freq;
+            if (kind === "message") osc.frequency.exponentialRampToValueAtTime(freq * 1.5, ctx.currentTime + i * 0.18 + 0.1);
             osc.connect(gain);
             gain.connect(ctx.destination);
             const start = ctx.currentTime + i * 0.18;
@@ -38,10 +43,12 @@ function chime(urgent: boolean) {
 }
 
 /**
- * Header bell: the user's notifications (new orders; owner alerts for owners), live through
- * the NestJS stream with a sound and a pop-up, plus the switch for mobile/desktop push notifications.
+ * Header icons: the bell (orders, and owner alerts for owners) and, apart from it, the messages icon
+ * (conversations and comments). Each has its count, list and sound, live through the NestJS stream;
+ * the bell also holds the switch for mobile/desktop push notifications.
  */
-export default function NotificationBell() {
+export default function NotificationBell({ scope }: { scope: "messages" | "other" }) {
+    const messages = scope === "messages";
     const { t, locale, dir } = useAdminT();
     // Phones get a bottom sheet instead of the popover, which can't fit next to the header icons.
     const mobile = Grid.useBreakpoint().md === false;
@@ -62,7 +69,7 @@ export default function NotificationBell() {
 
     const load = useCallback(async () => {
         try {
-            const response = await fetch("/api/admin/notifications?limit=15");
+            const response = await fetch(`/api/admin/notifications?limit=15&scope=${scope}`);
             const result = await response.json();
             if (result.success) {
                 setItems(result.data.rows);
@@ -73,31 +80,25 @@ export default function NotificationBell() {
         } finally {
             setLoading(false);
         }
-    }, []);
+    }, [scope]);
 
     // Safety net: reload every minute while the live stream is down, every 5 minutes while it's up
     // (each reload is a request on Vercel's free plan, per open admin tab).
-    const live = useRef(false);
     useEffect(() => {
         load();
         let ticks = 0;
         const timer = setInterval(() => {
             ticks += 1;
-            if (!live.current || ticks % 5 === 0) load();
+            if (!streamIsLive() || ticks % 5 === 0) load();
         }, 60_000);
         return () => clearInterval(timer);
     }, [load]);
 
     // Live: new rows pop up with a sound; updated rows (grouped delete alerts) are replaced.
-    // The stream (NestJS, SSE) closes every 15 minutes and EventSource reconnects, which
-    // re-checks the session.
     useEffect(() => {
         if (!userId) return;
-        const stream = new EventSource("/api/admin/notifications/stream");
-        stream.onopen = () => { live.current = true; };
-        stream.onerror = () => { live.current = false; };
-        stream.onmessage = (event) => {
-            const { op, row } = JSON.parse(event.data) as { op: "insert" | "update"; row: AdminNotification };
+        return listenNotifications(({ op, row }) => {
+            if (MESSAGE_NOTIFICATIONS.includes(row.type) !== messages) return;
             if (op === "update") {
                 setItems((current) => current.map((n) => (n.id === row.id ? row : n)));
                 if (!row.read_at) load();
@@ -106,7 +107,7 @@ export default function NotificationBell() {
             setItems((current) => [row, ...current.filter((n) => n.id !== row.id)].slice(0, 15));
             setUnread((count) => count + 1);
             const urgent = row.severity !== "info";
-            chime(urgent);
+            chime(messages ? "message" : urgent ? "urgent" : "order");
             const text = notificationText(row, localeRef.current);
             notification.open({
                 title: text.title,
@@ -119,20 +120,19 @@ export default function NotificationBell() {
                 },
                 style: { cursor: row.url ? "pointer" : undefined },
             });
-        };
-        return () => stream.close();
-    }, [userId, notification, router, load]);
+        });
+    }, [userId, notification, router, load, messages]);
 
     // Desktop notification state; the server keeps the admin language for push texts.
     useEffect(() => {
-        getDesktopState().then(setDesktop).catch(() => setDesktop("unsupported"));
-    }, []);
+        if (!messages) getDesktopState().then(setDesktop).catch(() => setDesktop("unsupported"));
+    }, [messages]);
     useEffect(() => {
         if (desktop === "on") refreshDesktop(locale).catch(() => undefined);
     }, [desktop, locale]);
 
     const markRead = async (body: { ids?: number[]; all?: boolean }) => {
-        await fetch("/api/admin/notifications", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+        await fetch("/api/admin/notifications", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...body, scope }) });
         const now = new Date().toISOString();
         setItems((current) => current.map((n) => (body.all || body.ids?.includes(n.id) ? { ...n, read_at: n.read_at ?? now } : n)));
         setUnread((count) => (body.all ? 0 : Math.max(0, count - (body.ids?.length ?? 0))));
@@ -164,10 +164,12 @@ export default function NotificationBell() {
         if (!result.success) message.error(result.error);
     };
 
+    const title = messages ? t("Messages and comments") : t("Notifications");
+    const Icon = messages ? MessageOutlined : BellOutlined;
     const content = (
         <div style={{ width: mobile ? "100%" : 380, maxWidth: "100%" }}>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 8 }}>
-                <Text strong>{t("Notifications")}</Text>
+                <Text strong>{title}</Text>
                 <Button type="link" size="small" disabled={unread === 0} onClick={() => markRead({ all: true })}>
                     {t("Mark all as read")}
                 </Button>
@@ -182,7 +184,7 @@ export default function NotificationBell() {
                 )}
             </div>
             <Divider style={{ margin: "8px 0" }} />
-            <Space orientation="vertical" style={{ width: "100%" }} size={4}>
+            {messages ? <Link href="/admin/customers/inbox" onClick={() => setOpen(false)}>{t("Messenger")}</Link> : <Space orientation="vertical" style={{ width: "100%" }} size={4}>
                 <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", alignItems: "center", gap: 8 }}>
                     <Space size={6} style={{ minWidth: 0 }}>
                         <NotificationOutlined />
@@ -203,11 +205,11 @@ export default function NotificationBell() {
                     <Button type="link" size="small" style={{ paddingInline: 0 }} onClick={sendTest}>{t("Send a test notification")}</Button>
                     <Link href="/admin/notifications" onClick={() => setOpen(false)}>{t("See all")}</Link>
                 </div>
-            </Space>
+            </Space>}
         </div>
     );
 
-    const bell = <Button type="text" aria-label={t("Notifications")} onClick={mobile ? () => setOpen(true) : undefined} icon={<Badge count={unread} size="small" overflowCount={99}><BellOutlined style={{ fontSize: 18 }} /></Badge>} />;
+    const bell = <Button type="text" aria-label={title} onClick={mobile ? () => setOpen(true) : undefined} icon={<Badge count={unread} size="small" overflowCount={99}><Icon style={{ fontSize: 18 }} /></Badge>} />;
 
     if (mobile) {
         return (

@@ -36,6 +36,16 @@ export function unseal(sealed: string): string | null {
   }
 }
 
+/** The Page's events we need; echoes are the replies sent from Messenger or Business Suite. */
+export const PAGE_FIELDS = ['messages', 'message_echoes', 'feed'];
+
+// When the webhook last got something since the API started, for Connections → Check.
+export const received: Record<string, string | null> = {
+  page: null,
+  instagram: null,
+  refused: null,
+};
+
 /** The connected Page with its token, or null. */
 export async function metaConnection(db: Database) {
   const row = await db

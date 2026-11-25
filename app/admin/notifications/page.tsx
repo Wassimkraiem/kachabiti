@@ -10,7 +10,7 @@ import { NotificationItem, type AdminNotification } from "@/components/admin/not
 
 const { Title, Paragraph } = Typography;
 
-type Filter = "all" | "unread" | "order" | "security";
+type Filter = "all" | "unread" | "order" | "messages" | "security";
 
 export default function NotificationsPage() {
     const { t } = useAdminT();
@@ -28,6 +28,8 @@ export default function NotificationsPage() {
             if (before) params.set("before", String(before));
             if (filter === "unread") params.set("unread", "1");
             if (filter === "order" || filter === "security") params.set("kind", filter);
+            if (filter === "order") params.set("scope", "other");
+            if (filter === "messages") params.set("scope", "messages");
             const response = await fetch(`/api/admin/notifications?${params}`);
             const result = await response.json();
             if (!result.success) throw new Error(result.error);
@@ -60,6 +62,7 @@ export default function NotificationsPage() {
         { value: "all", label: t("All") },
         { value: "unread", label: t("Unread") },
         { value: "order", label: t("Orders") },
+        { value: "messages", label: t("Messages and comments") },
         // Owner alerts go to owners (and to admins while the business has no owner).
         ...(isOwner || isAdmin ? [{ value: "security", label: t("Owner alerts") }] : []),
     ];

@@ -21,7 +21,7 @@ import {
 import { Public } from '../auth/decorators';
 import { ApiError, Raw } from '../common/api';
 import { Database } from '../db/database';
-import { metaConnection } from './meta-connection';
+import { metaConnection, received } from './meta-connection';
 
 /**
  * Port of app/api/webhooks/meta: Messenger, Instagram Direct and WhatsApp messages, and the public
@@ -62,11 +62,18 @@ export class MetaWebhookController {
         (request.headers['x-hub-signature-256'] as string | undefined) ?? null,
       )
     ) {
-      this.log.warn(`refused: invalid signature (${raw.length} bytes)`);
+      // Which product the wrong secret is for: its name only, nothing else is trusted.
+      const object = /"object"\s*:\s*"(\w{1,40})"/.exec(raw)?.[1] ?? 'unknown';
+      received.refused = `${new Date().toISOString()} ${object}`;
+      this.log.warn(
+        `refused: invalid signature (${object}, ${raw.length} bytes)`,
+      );
       throw new ApiError('Invalid signature', 401);
     }
     try {
       const payload = JSON.parse(raw);
+      if (payload.object === 'page' || payload.object === 'instagram')
+        received[payload.object] = new Date().toISOString();
       // Another Page subscribed to the same Meta app: its customers aren't ours.
       // shortcut: Page events only, match instagram_id too once a second Instagram account is subscribed.
       if (payload.object === 'page' && Array.isArray(payload.entry)) {
@@ -122,7 +129,7 @@ export class MetaWebhookController {
             .values({
               customer_id: customerId,
               channel: message.channel,
-              direction: 'in',
+              direction: message.direction,
               body: message.text.slice(0, 5000),
               external_id: message.externalId,
               sender_name: message.senderName,

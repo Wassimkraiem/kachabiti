@@ -19,7 +19,8 @@ import { AdminOnly, CurrentActor } from '../auth/decorators';
 import { ApiError, Zod } from '../common/api';
 import { config } from '../config';
 import { Database } from '../db/database';
-import { metaConnection, seal, unseal } from './meta-connection';
+import { metaConnection, PAGE_FIELDS, seal, unseal } from './meta-connection';
+import { tokenInfo } from './meta-health';
 
 const STATE_COOKIE = 'kb_meta_state';
 const LOGIN_COOKIE = 'kb_meta_login';
@@ -36,14 +37,6 @@ interface Page {
   name: string;
   access_token: string;
   instagram_business_account?: { id: string; username?: string };
-}
-
-interface TokenInfo {
-  is_valid: boolean;
-  app_id: string;
-  expires_at?: number;
-  data_access_expires_at?: number;
-  scopes?: string[];
 }
 
 const connectSchema = z.object({ page_id: z.string().regex(/^\d+$/) });
@@ -173,13 +166,8 @@ export class MetaConnectionController {
       (p) => p.id === body.page_id,
     );
     if (!page) throw new ApiError('This Page was not granted to the app.', 404);
-    const { appId, secret } = this.app();
-    const { data: info } = await this.ask(
-      graph<{ data: TokenInfo }>(
-        `/debug_token?${new URLSearchParams({ input_token: page.access_token })}`,
-        { token: `${appId}|${secret}` },
-      ),
-    );
+    const { appId } = this.app();
+    const info = await this.ask(tokenInfo(page.access_token));
     if (!info.is_valid || info.app_id !== appId || info.expires_at !== 0)
       throw new ApiError(
         'Meta gave a token that expires. Set the login configuration to a token that never expires, then connect again.',
@@ -200,7 +188,7 @@ export class MetaConnectionController {
       graph(`/${page.id}/subscribed_apps`, {
         method: 'POST',
         token: page.access_token,
-        body: { subscribed_fields: 'messages,feed' },
+        body: { subscribed_fields: PAGE_FIELDS.join(',') },
       }),
     );
     const row = {

@@ -40,8 +40,9 @@ export function validSignature(rawBody: string, header: string | null): boolean 
 
 export interface IncomingMessage {
     channel: MetaChannel;
+    direction: 'in' | 'out'; // out: sent by the shop, from Messenger, Instagram or Business Suite too
     externalId: string;      // message id (dedupes Meta's retries)
-    senderId: string;        // PSID / IGSID / WhatsApp number
+    senderId: string;        // the customer: PSID / IGSID / WhatsApp number
     senderName: string | null;
     phone: string | null;    // WhatsApp only
     text: string;
@@ -52,20 +53,23 @@ type Json = Record<string, unknown>;
 const arr = (v: unknown) => (Array.isArray(v) ? (v as Json[]) : []);
 const obj = (v: unknown) => (v && typeof v === 'object' ? (v as Json) : {});
 
-/** Text messages in a webhook payload (attachments are noted as such; echoes of our own messages are skipped). */
+/** Text messages in a webhook payload (attachments are noted as such), the shop's own included. */
 export function parseWebhook(payload: Json): IncomingMessage[] {
     const out: IncomingMessage[] = [];
     const object = payload.object;
     for (const entry of arr(payload.entry)) {
         if (object === 'page' || object === 'instagram') {
-            for (const event of arr(entry.messaging)) {
+            // The test button in Meta's dashboard sends Instagram messages as changes.
+            const tests = arr(entry.changes).filter((c) => c.field === 'messages').map((c) => obj(c.value));
+            for (const event of [...arr(entry.messaging), ...tests]) {
                 const message = obj(event.message);
-                if (!message.mid || message.is_echo) continue;
+                if (!message.mid) continue;
                 const attachments = arr(message.attachments);
                 out.push({
                     channel: object === 'page' ? 'facebook' : 'instagram',
+                    direction: message.is_echo ? 'out' : 'in',
                     externalId: String(message.mid),
-                    senderId: String(obj(event.sender).id ?? ''),
+                    senderId: String(obj(message.is_echo ? event.recipient : event.sender).id ?? ''),
                     senderName: null,
                     phone: null,
                     text: typeof message.text === 'string' && message.text ? message.text : attachments.length ? `[${attachments.map((a) => a.type).join(', ')}]` : '[message]',
@@ -81,6 +85,7 @@ export function parseWebhook(payload: Json): IncomingMessage[] {
                     const text = obj(message.text).body;
                     out.push({
                         channel: 'whatsapp',
+                        direction: 'in',
                         externalId: String(message.id),
                         senderId: from,
                         senderName: names.get(from) || null,
@@ -144,7 +149,7 @@ export function parseComments(payload: Json): IncomingComment[] {
 }
 
 /** Calls the Graph API (JSON). Throws with Meta's message when it refuses. */
-export async function graph<T = Json>(path: string, init: { method?: string; token?: string; body?: Json } = {}): Promise<T> {
+export async function graph<T = Json>(path: string, init: { method?: string; token?: string; body?: Json; timeout?: number } = {}): Promise<T> {
     const response = await fetch(`${GRAPH}${path}`, {
         method: init.method ?? 'GET',
         headers: {
@@ -152,7 +157,7 @@ export async function graph<T = Json>(path: string, init: { method?: string; tok
             ...(init.body ? { 'Content-Type': 'application/json' } : {}),
         },
         body: init.body ? JSON.stringify(init.body) : undefined,
-        signal: AbortSignal.timeout(15_000),
+        signal: AbortSignal.timeout(init.timeout ?? 15_000),
     });
     const json = (await response.json().catch(() => ({}))) as Json;
     if (!response.ok) throw new Error(String(obj(json.error).message ?? `Meta refused the message (${response.status})`));

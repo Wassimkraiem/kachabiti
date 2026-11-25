@@ -86,7 +86,7 @@ info.scopes = ['pages_messaging', 'pages_manage_metadata'];
 
 r = await call('/api/admin/meta', 'POST', { page_id: '111' });
 ok(r.json?.data?.name === 'Shop' && !jar.kb_meta_login, 'Page connected', r);
-ok(calls.some((c) => c.method === 'POST' && c.path === '/111/subscribed_apps' && c.token === 'page-token-111' && c.body.subscribed_fields === 'messages,feed'), 'Page subscribed to the webhook');
+ok(calls.some((c) => c.method === 'POST' && c.path === '/111/subscribed_apps' && c.token === 'page-token-111' && c.body.subscribed_fields === 'messages,message_echoes,feed'), 'Page subscribed to the webhook');
 let [row] = await sql('select * from meta_connection');
 ok(row.page_id === '111' && row.instagram_id === '999' && !row.token_encrypted.includes('page-token'), 'token stored encrypted', row);
 r = await call('/api/admin/meta');

@@ -8,6 +8,7 @@ import { useAdminT } from "@/lib/admin-i18n";
 import { useAdminRole } from "@/lib/admin-role-context";
 import { PageHeader } from "@/components/admin/erp/ui";
 import { useApi } from "@/components/admin/erp/erp-client";
+import MetaCheck from "@/components/admin/erp/MetaCheck";
 import MetaConnection from "@/components/admin/erp/MetaConnection";
 import { CHAT_CHANNELS, CommentChat, MESSENGER_CSS, MessageChat, MessengerRail, ThreadRow, usePolling, type CommentThread, type MessageThread } from "@/components/admin/erp/messenger";
 
@@ -161,6 +162,7 @@ function Messenger() {
                     <p><Text type="secondary">{t("Connecting them needs a Meta business app (Messenger and Instagram) and a WhatsApp Business Cloud API number, with their tokens set on the server. Until then, log calls and messages on each customer's record.")}</Text></p>
                 )}
                 {isAdmin && <MetaConnection onChange={messages.reload} />}
+                {isAdmin && <MetaCheck />}
             </Modal>
         </div>
     );

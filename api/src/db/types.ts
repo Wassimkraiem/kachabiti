@@ -90,6 +90,25 @@ export interface MetaConnection {
   updated_at: Generated<Timestamp>;
 }
 
+export interface ScheduledPosts {
+  caption: Generated<string>;
+  claimed_at: Timestamp | null;
+  created_at: Generated<Timestamp>;
+  created_by: string;
+  created_by_email: string | null;
+  deleted_at: Timestamp | null;
+  error: string | null;
+  id: Generated<string>;
+  media_type: string | null;
+  media_url: string | null;
+  page_id: string;
+  published: Generated<Json>;
+  scheduled_at: Timestamp;
+  status: Generated<string>;
+  targets: string[];
+  updated_at: Generated<Timestamp>;
+}
+
 export interface ActivityLog {
   action: string;
   actor_email: string | null;
@@ -1189,6 +1208,7 @@ export interface DB {
   agent_goals: AgentGoals;
   api_keys: ApiKeys;
   meta_connection: MetaConnection;
+  scheduled_posts: ScheduledPosts;
   auth_tokens: AuthTokens;
   back_office_users: BackOfficeUsers;
   bank_statement_lines: BankStatementLines;

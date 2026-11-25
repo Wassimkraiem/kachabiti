@@ -13,6 +13,7 @@ import {
 import type { Request } from 'express';
 import { sql } from 'kysely';
 import { z } from 'zod';
+import { MESSAGE_NOTIFICATIONS } from '@shared/erp/notification-types';
 import { hasFullAccess } from '@shared/admin-auth';
 import { CHANNELS } from '@shared/erp/constants';
 import {
@@ -666,6 +667,14 @@ export class StaffController {
 
 // ── Notifications ──
 
+/** scope=messages: conversations and comments; other: everything else; none: all. */
+const scopeOperator = (scope: unknown) =>
+  scope === 'messages'
+    ? ('in' as const)
+    : scope === 'other'
+      ? ('not in' as const)
+      : null;
+
 @Controller('admin/notifications')
 @Public()
 export class NotificationsController {
@@ -680,7 +689,7 @@ export class NotificationsController {
     return this.events.stream(actor.userId);
   }
 
-  /** The user's own notifications: ?limit=&before=<id>&kind=&unread=1 → { rows, unread, hasMore }. */
+  /** The user's own notifications: ?limit=&before=<id>&kind=&scope=messages|other&unread=1 → { rows, unread, hasMore }. */
   @Get()
   async list(
     @Query() query: Record<string, string>,
@@ -709,6 +718,8 @@ export class NotificationsController {
     if (before) rows = rows.where('id', '<', before);
     if (query.kind) rows = rows.where('kind', '=', query.kind);
     if (query.unread === '1') rows = rows.where('read_at', 'is', null);
+    const scope = scopeOperator(query.scope);
+    if (scope) rows = rows.where('type', scope, MESSAGE_NOTIFICATIONS);
     const [list, unread] = await Promise.all([
       rows.execute(),
       this.db
@@ -717,6 +728,7 @@ export class NotificationsController {
         .where('recipient_id', '=', actor.userId)
         .where('deleted_at', 'is', null)
         .where('read_at', 'is', null)
+        .$if(!!scope, (qb) => qb.where('type', scope!, MESSAGE_NOTIFICATIONS))
         .executeTakeFirstOrThrow(),
     ]);
     return {
@@ -726,7 +738,7 @@ export class NotificationsController {
     };
   }
 
-  /** { ids: number[] } or { all: true } marks the user's notifications read. */
+  /** { ids: number[] } or { all: true, scope? } marks the user's notifications read. */
   @Put()
   async markRead(
     @Body() body: Record<string, any>,
@@ -743,6 +755,9 @@ export class NotificationsController {
         : [];
       if (ids.length === 0) throw new ApiError('ids or all is required');
       update = update.where('id', 'in', ids);
+    } else {
+      const scope = scopeOperator(body.scope);
+      if (scope) update = update.where('type', scope, MESSAGE_NOTIFICATIONS);
     }
     await update.execute();
   }

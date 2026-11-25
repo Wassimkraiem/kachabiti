@@ -103,6 +103,16 @@ export const erpPaths: Record<string, Record<string, Op>> = {
     '/api/admin/meta/login': { get: op('Customers', 'Redirects to the Facebook sign-in') },
     '/api/admin/meta/callback': { get: op('Customers', 'Where Facebook comes back (code, state); redirects to the Inbox') },
     '/api/admin/meta/pages': { get: op('Customers', 'Pages granted at the Facebook sign-in, without tokens (10 minutes)') },
+    '/api/admin/meta/check': { get: op('Customers', 'What is missing for messages and comments to arrive, asked to Meta (owners and admins)') },
+    '/api/admin/meta/repair': { post: op('Customers', 'Subscribe the Page and the Meta app to the missing events') },
+    '/api/social/posts': {
+        get: op('Marketing', 'Scheduled posts of a period (?from=&to=) and the connected Page (marketing permission)'),
+        post: op('Marketing', 'Schedule a post', { requestBody: body({ caption: { type: 'string' }, media_url: { type: 'string', nullable: true }, media_type: { type: 'string', enum: ['image', 'video'], nullable: true }, targets: { type: 'array', items: { type: 'string', enum: ['facebook', 'instagram'] } }, scheduled_at: { type: 'string', format: 'date-time' } }, ['targets', 'scheduled_at']) }),
+        patch: op('Marketing', 'Change a post that is not out yet (id and the same fields)'),
+        delete: op('Marketing', 'Take a post off the calendar', { parameters: [q('id', 'Post id', 'string', 'uuid')] }),
+    },
+    '/api/social/posts/retry': { post: op('Marketing', 'Send again what failed', { requestBody: body({ id: uuid }, ['id']) }) },
+    '/api/social/media': { post: op('Marketing', 'Upload a JPEG (8 MB) or MP4 (50 MB) for a post (multipart file): { url, type }') },
     '/api/webhooks/meta': {
         get: op('Customers', "Meta webhook subscription check (hub.mode, hub.verify_token, hub.challenge). Public."),
         post: op('Customers', 'Messenger / Instagram / WhatsApp messages (signed with X-Hub-Signature-256). Public.'),
