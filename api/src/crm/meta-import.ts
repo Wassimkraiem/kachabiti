@@ -19,7 +19,9 @@ const MAX_MESSAGES = 100; // per conversation
 const DAY = 24 * 3600_000;
 const FIELDS = 'id,created_time,from,message,attachments';
 
-/** Meta refuses a page it finds too large ("reduce the amount of data"): ask for half as many. */
+const TOO_MUCH = /reduce the amount of data|timeout|timed out/i;
+
+/** Meta refuses or times out on a page it finds too large ("reduce the amount of data"): ask for half as many. */
 export async function shrinking<T>(
   limit: number,
   ask: (limit: number) => Promise<T>,
@@ -28,11 +30,7 @@ export async function shrinking<T>(
     try {
       return { result: await ask(limit), limit };
     } catch (error) {
-      if (
-        limit <= 1 ||
-        !/reduce the amount of data/i.test((error as Error).message)
-      )
-        throw error;
+      if (limit <= 1 || !TOO_MUCH.test((error as Error).message)) throw error;
       limit = Math.ceil(limit / 2);
     }
   }
@@ -133,6 +131,8 @@ export class MetaImport implements OnModuleInit, OnModuleDestroy {
     let latest = since;
     let conversations = 0;
     let added = 0;
+    let skipped = 0;
+    let reason = '';
     try {
       let after: string | undefined;
       do {
@@ -165,17 +165,34 @@ export class MetaImport implements OnModuleInit, OnModuleDestroy {
           }
           latest = Math.max(latest, updated);
           conversations++;
-          added += await this.conversation(channel, token, ours, conversation);
+          // One conversation Meta can't give doesn't stop the others; it is read again next time.
+          try {
+            added += await this.conversation(
+              channel,
+              token,
+              ours,
+              conversation,
+            );
+          } catch (error) {
+            skipped++;
+            reason = (error as Error).message;
+          }
         }
       } while (after && conversations < MAX_CONVERSATIONS && !this.stopped);
-      this.since.set(key, latest);
+      if (!skipped) this.since.set(key, latest);
       imported[channel] = {
-        ok: true,
+        ok: skipped < conversations || !conversations,
         // A first reading says what it found; the later ones only that they work.
-        detail: since
-          ? (imported[channel]?.detail ?? null)
-          : `${conversations} / ${added}`,
+        detail: skipped
+          ? `${conversations} / ${added} · ${skipped} ✕ ${reason}`
+          : since
+            ? (imported[channel]?.detail ?? null)
+            : `${conversations} / ${added}`,
       };
+      if (skipped)
+        this.log.warn(
+          `${channel}: ${skipped} conversation(s) skipped: ${reason}`,
+        );
       if (added)
         this.log.log(`${channel}: ${added} message(s) from ${conversations}`);
     } catch (error) {
@@ -204,7 +221,7 @@ export class MetaImport implements OnModuleInit, OnModuleDestroy {
             await shrinking(20, (size) =>
               graph<Page<Message>>(
                 `/${encodeURIComponent(id)}/messages?fields=id,created_time&limit=${size}`,
-                { token },
+                { token, timeout: 60_000 },
               ),
             )
           ).result;
@@ -223,7 +240,7 @@ export class MetaImport implements OnModuleInit, OnModuleDestroy {
             ? listed
             : await graph<Message>(
                 `/${encodeURIComponent(listed.id)}?fields=${FIELDS}`,
-                { token },
+                { token, timeout: 60_000 },
               );
         const kept = await this.keep(channel, customer, m);
         if (kept) added++;

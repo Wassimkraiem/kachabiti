@@ -19,6 +19,7 @@ const fb = [{
         paging: { next: 'x', cursors: { after: 'c2' } },
     },
 }];
+const stuck = { id: 'conv3', updated_time: ago(1), participants: { data: [{ id: `stuck${stamp}`, username: 'stuck' }, insta] } };
 const ig = [{ id: 'conv2', updated_time: ago(1), participants: { data: [sami, insta] }, messages: { data: [msg('igout', insta, 'marhba', 2000), msg('igin', sami, 'salam', 2001)] } }];
 let igFails = false;
 let deeper = false;
@@ -31,6 +32,8 @@ const server = createServer((req, res) => {
         if (url.pathname === '/cdn/photo') return res.writeHead(200, { 'Content-Type': 'image/jpeg' }).end('x');
         if (url.pathname === '/me') return json({ id: 'page', instagram_business_account: { id: '999', username: 'shop' } });
         // Like Meta: Instagram refuses messages inside the conversation list, and lists ids only.
+        // One conversation Instagram never answers, even one message at a time.
+        if (url.pathname === '/conv3/messages') return json({ error: { message: 'Timeout' } }, 500);
         if (url.pathname === '/conv2/messages' && Number(url.searchParams.get('limit')) > 5) return json({ error: { message: 'Please reduce the amount of data' } }, 500);
         if (url.pathname === '/conv2/messages') return json({ data: ig[0].messages.data.map(({ id, created_time }) => ({ id, created_time })) });
         const one = ig[0].messages.data.find((m) => url.pathname === `/${m.id}`);
@@ -41,7 +44,8 @@ const server = createServer((req, res) => {
             if (url.searchParams.get('platform') === 'messenger') return json({ data: fb });
             if (/messages/.test(url.searchParams.get('fields'))) return json({ error: { message: 'Please reduce the amount of data' } }, 500);
             if (Number(url.searchParams.get('limit')) > 2) return json({ error: { message: "Please reduce the amount of data you're asking for, then retry your request" } }, 500);
-            return igFails ? json({ error: { message: 'Needs instagram_manage_messages' } }, 400) : json({ data: ig.map(({ messages, ...c }) => c) });
+            if (Number(url.searchParams.get('limit')) > 1) return json({ error: { message: 'Timeout' } }, 500);
+            return igFails ? json({ error: { message: 'Needs instagram_manage_messages' } }, 400) : json({ data: [stuck, ...ig].map(({ messages, ...c }) => c) });
         }
         json({});
     });
@@ -80,7 +84,9 @@ await pause(800);
 list = await rows('messenger', amel.id);
 ok(list.filter((m) => m.body === 'sent here').length === 1 && list.filter((m) => m.body === 'still there?').length === 1 && list.length === 6, 'no duplicates; a missed message is added', list.map((m) => m.body));
 
-// Check
+// Check: the stuck conversation is skipped and named, the others are read
+const igCheck = (await owner.call('/api/admin/meta/check')).json.data.checks.find((c) => c.id === 'import_instagram');
+ok(igCheck?.ok && /1 ✕ Timeout/.test(igCheck.detail), 'a conversation that times out is skipped, the others read', igCheck);
 igFails = true;
 const checks = async () => (await owner.call('/api/admin/meta/check')).json.data.checks;
 ok(await until(async () => (await checks()).some((c) => c.id === 'import_instagram' && !c.ok && /instagram_manage_messages/.test(c.detail))), "Check shows Meta's refusal");
