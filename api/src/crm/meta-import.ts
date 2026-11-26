@@ -19,6 +19,25 @@ const MAX_MESSAGES = 100; // per conversation
 const DAY = 24 * 3600_000;
 const FIELDS = 'id,created_time,from,message,attachments';
 
+/** Meta refuses a page it finds too large ("reduce the amount of data"): ask for half as many. */
+export async function shrinking<T>(
+  limit: number,
+  ask: (limit: number) => Promise<T>,
+): Promise<{ result: T; limit: number }> {
+  for (;;) {
+    try {
+      return { result: await ask(limit), limit };
+    } catch (error) {
+      if (
+        limit <= 1 ||
+        !/reduce the amount of data/i.test((error as Error).message)
+      )
+        throw error;
+      limit = Math.ceil(limit / 2);
+    }
+  }
+}
+
 interface Person {
   id: string;
   name?: string;
@@ -53,6 +72,8 @@ export class MetaImport implements OnModuleInit, OnModuleDestroy {
   private stopped = false;
   /** Latest change already read, per Page and platform. In memory: a restart reads again. */
   private readonly since = new Map<string, number>();
+  /** The page sizes Meta accepted, per platform: started smaller after a refusal. */
+  private readonly sizes = new Map<string, number>();
 
   constructor(
     private readonly db: Database,
@@ -115,20 +136,25 @@ export class MetaImport implements OnModuleInit, OnModuleDestroy {
     try {
       let after: string | undefined;
       do {
-        const query = new URLSearchParams({
-          platform: channel === 'facebook' ? 'messenger' : 'instagram',
-          // Instagram refuses messages inside this list ("reduce the amount of data"): they're read apart.
-          fields:
-            channel === 'facebook'
-              ? `id,updated_time,participants,messages.limit(20){${FIELDS}}`
-              : 'id,updated_time,participants',
-          limit: channel === 'facebook' ? '10' : '25',
-          ...(after ? { after } : {}),
-        });
-        const list = await graph<Page<Conversation>>(
-          `/me/conversations?${query}`,
-          { token, timeout: 60_000 },
+        const cursor = after;
+        const { result: list, limit } = await shrinking(
+          this.sizes.get(channel) ?? 10,
+          (size) =>
+            graph<Page<Conversation>>(
+              `/me/conversations?${new URLSearchParams({
+                platform: channel === 'facebook' ? 'messenger' : 'instagram',
+                // Instagram refuses messages inside this list: they're read apart.
+                fields:
+                  channel === 'facebook'
+                    ? `id,updated_time,participants,messages.limit(20){${FIELDS}}`
+                    : 'id,updated_time,participants',
+                limit: String(size),
+                ...(cursor ? { after: cursor } : {}),
+              })}`,
+              { token, timeout: 60_000 },
+            ),
         );
+        this.sizes.set(channel, limit);
         after = list.paging?.next ? list.paging.cursors?.after : undefined;
         for (const conversation of list.data ?? []) {
           const updated = Date.parse(conversation.updated_time);
@@ -174,10 +200,14 @@ export class MetaImport implements OnModuleInit, OnModuleDestroy {
     let page =
       channel === 'facebook'
         ? messages
-        : await graph<Page<Message>>(
-            `/${encodeURIComponent(id)}/messages?fields=id,created_time&limit=20`,
-            { token },
-          );
+        : (
+            await shrinking(20, (size) =>
+              graph<Page<Message>>(
+                `/${encodeURIComponent(id)}/messages?fields=id,created_time&limit=${size}`,
+                { token },
+              ),
+            )
+          ).result;
     let gone = 0;
     for (;;) {
       const list = page?.data ?? [];

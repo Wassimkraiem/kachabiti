@@ -232,7 +232,7 @@ export function MessageChat({ thread, connected, onBack, onChange }: { thread: M
                 onBack={onBack}
                 actions={
                     <>
-                        {mine && <Button size="small" loading={busy} onClick={() => assign("release")}>{t("Release")}</Button>}
+                        {(mine || (owner && me.isAdmin)) && <Button size="small" loading={busy} onClick={() => assign("release")}>{t("Release")}</Button>}
                         {owner && !mine && me.isAdmin && <Button size="small" loading={busy} onClick={() => assign("take")}>{t("Take over")}</Button>}
                         <Tag className="msgr-wide" color={STAGE_COLORS[customer.stage]}>{t(STAGE_LABELS[customer.stage])}</Tag>
                         {customer.phone && <Button type="text" aria-label={t("Call")} title={customer.phone} icon={<PhoneOutlined />} href={`tel:+216${customer.phone}`} />}

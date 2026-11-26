@@ -31,6 +31,7 @@ const server = createServer((req, res) => {
         if (url.pathname === '/cdn/photo') return res.writeHead(200, { 'Content-Type': 'image/jpeg' }).end('x');
         if (url.pathname === '/me') return json({ id: 'page', instagram_business_account: { id: '999', username: 'shop' } });
         // Like Meta: Instagram refuses messages inside the conversation list, and lists ids only.
+        if (url.pathname === '/conv2/messages' && Number(url.searchParams.get('limit')) > 5) return json({ error: { message: 'Please reduce the amount of data' } }, 500);
         if (url.pathname === '/conv2/messages') return json({ data: ig[0].messages.data.map(({ id, created_time }) => ({ id, created_time })) });
         const one = ig[0].messages.data.find((m) => url.pathname === `/${m.id}`);
         if (one) return json(one);
@@ -39,6 +40,7 @@ const server = createServer((req, res) => {
         if (url.pathname === '/me/conversations') {
             if (url.searchParams.get('platform') === 'messenger') return json({ data: fb });
             if (/messages/.test(url.searchParams.get('fields'))) return json({ error: { message: 'Please reduce the amount of data' } }, 500);
+            if (Number(url.searchParams.get('limit')) > 2) return json({ error: { message: "Please reduce the amount of data you're asking for, then retry your request" } }, 500);
             return igFails ? json({ error: { message: 'Needs instagram_manage_messages' } }, 400) : json({ data: ig.map(({ messages, ...c }) => c) });
         }
         json({});
