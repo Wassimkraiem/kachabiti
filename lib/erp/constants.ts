@@ -207,7 +207,10 @@ export const DOCUMENT_KIND_LABELS: Record<DocumentKind, string> = {
 };
 
 /** Orders still moving through the pipeline (a second one from the same phone is a possible duplicate). */
-export const OPEN_ORDER_STATUSES = ['pending', 'confirmed', 'processing', 'shipped'] as const;
+export const OPEN_ORDER_STATUSES = ['pending', 'unreachable', 'confirmed', 'processing', 'shipped'] as const;
+
+/** Waiting for the customer's confirmation: they can be confirmed, edited, and not yet sent. */
+export const TO_CONFIRM_STATUSES = ['pending', 'unreachable'] as const;
 
 export const TICKET_STATUSES = ['todo', 'in_progress', 'done'] as const;
 export type TicketStatus = (typeof TICKET_STATUSES)[number];

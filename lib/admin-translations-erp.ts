@@ -351,6 +351,11 @@ export const erpEntries: [en: string, fr: string, ar: string][] = [
     ["Parcel created, stock out", "Colis créé, stock sorti", "تم إنشاء الطرد وإخراج المخزون"],
     ["Money received", "Argent reçu", "تم قبض المبلغ"],
     ["Customer confirmed", "Client a confirmé", "أكد العميل"],
+    ["Unreachable", "Injoignable", "لا يرد"],
+    ["Customer unreachable", "Client injoignable", "العميل لا يرد"],
+    ["Marked unreachable", "Marquée injoignable", "تم وضعها: لا يرد"],
+    ["Marked {count} order(s) unreachable", "{count} commande(s) marquée(s) injoignable(s)", "{count} طلب: لا يرد"],
+    ["The customer doesn't answer", "Le client ne répond pas", "العميل لا يرد"],
     ["Call or message the customer first, then validate to send the parcel.", "Appelez ou écrivez au client d'abord, puis validez pour envoyer le colis.", "اتصل بالعميل أو راسله أولا، ثم تحقق لإرسال الطرد."],
     ["Customer record and history", "Fiche client et historique", "ملف العميل وسجله"],
 

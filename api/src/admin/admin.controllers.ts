@@ -523,7 +523,7 @@ export class MyWorkController {
     ] = await Promise.all([
       can('orders')
         ? orders()
-            .where('status', 'in', ['pending', 'confirmed'])
+            .where('status', 'in', ['pending', 'unreachable', 'confirmed'])
             .where((eb) =>
               eb.or([
                 eb('assigned_to', '=', me),
@@ -550,7 +550,7 @@ export class MyWorkController {
             .selectFrom('orders')
             .select((eb) => eb.fn.countAll<number>().as('n'))
             .where('deleted_at', 'is', null)
-            .where('status', 'in', ['pending', 'confirmed'])
+            .where('status', 'in', ['pending', 'unreachable', 'confirmed'])
             .where('assigned_to', 'is', null)
             .where('created_by', 'is', null)
             .executeTakeFirstOrThrow()

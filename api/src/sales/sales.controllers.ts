@@ -14,6 +14,7 @@ import {
   CHANNELS,
   MONEY_ACCOUNTS,
   PAYMENT_METHODS,
+  TO_CONFIRM_STATUSES,
 } from '@shared/erp/constants';
 import { generateOrderNumber } from '@shared/order-number';
 import { CurrentActor, Public } from '../auth/decorators';
@@ -101,6 +102,11 @@ const patchSchema = z.discriminatedUnion('action', [
   }),
   // The customer agreed: pending → confirmed.
   z.object({ action: z.literal('confirm'), ids: z.array(zId).min(1).max(500) }),
+  // The customer doesn't answer: to confirm → unreachable (still to confirm).
+  z.object({
+    action: z.literal('unreachable'),
+    ids: z.array(zId).min(1).max(500),
+  }),
   // Where the order came from.
   z.object({
     action: z.literal('source'),
@@ -398,7 +404,10 @@ export class SalesOrdersController {
       );
       return { changed };
     }
-    if (body.action === 'confirm') {
+    if (body.action === 'confirm' || body.action === 'unreachable') {
+      const to = body.action === 'confirm' ? 'confirmed' : 'unreachable';
+      const from: readonly string[] =
+        body.action === 'confirm' ? TO_CONFIRM_STATUSES : ['pending'];
       const orders = await this.db
         .selectFrom('orders')
         .select(['id', 'status'])
@@ -406,13 +415,13 @@ export class SalesOrdersController {
         .where('deleted_at', 'is', null)
         .execute();
       let confirmed = 0;
-      for (const order of orders.filter((o) => o.status === 'pending')) {
+      for (const order of orders.filter((o) => from.includes(o.status))) {
         await this.db.withActor(actor, (trx) =>
           this.db.call(
             'set_order_status',
             {
               p_order_id: order.id,
-              p_changes: { status: 'confirmed' },
+              p_changes: { status: to },
               p_actor: actor.userId,
               p_actor_email: actor.email,
             },
@@ -422,7 +431,7 @@ export class SalesOrdersController {
         confirmed += 1;
       }
       await invalidateCatalog();
-      return { confirmed };
+      return { confirmed, changed: confirmed };
     }
     const row = await this.db.withActor(actor, (trx) =>
       trx

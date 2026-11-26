@@ -39,8 +39,7 @@ import {
     CheckOutlined,
     WarningOutlined,
     UserAddOutlined,
-    PrinterOutlined,
-} from "@ant-design/icons";
+    PrinterOutlined, PhoneOutlined } from "@ant-design/icons";
 import { DATE_LOCALES, useAdminT } from "@/lib/admin-i18n";
 import DeliveryStatusTag from "@/components/admin/delivery/DeliveryStatusTag";
 import { reportParcelCancellation } from "@/components/admin/delivery/delivery-api";
@@ -455,6 +454,13 @@ export default function AdminOrdersPage() {
             render: (_: any, record: OrderRow) => (
                 <Space wrap>
                     {record.status === "pending" && (
+                        <Tooltip title={t("The customer doesn't answer")}>
+                            <Button size="small" icon={<PhoneOutlined />} onClick={() => runAction({ action: "unreachable", ids: [record.id] }, "Marked {count} order(s) unreachable")}>
+                                {t("Unreachable")}
+                            </Button>
+                        </Tooltip>
+                    )}
+                    {(record.status === "pending" || record.status === "unreachable") && (
                         <Tooltip title={t("The customer agreed (by phone or message)")}>
                             <Button size="small" icon={<CheckOutlined />} onClick={() => runAction({ action: "confirm", ids: [record.id] }, "Confirmed {count} order(s)")}>
                                 {t("Confirm")}

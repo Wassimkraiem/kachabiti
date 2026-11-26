@@ -4,12 +4,13 @@ import { deliveryApi, type Delivery } from "@/components/admin/delivery/delivery
 
 /**
  * Admin wording for order statuses, in pipeline order. "pending" is an order still to confirm
- * with the customer; "confirmed" means they agreed. "processing" is shown as "Validated":
+ * with the customer, "unreachable" one whose customer doesn't answer (still to confirm); "confirmed" means they agreed. "processing" is shown as "Validated":
  * validating an order creates its Colissimo parcel and takes its items out of stock (tracked
  * products). Being delivered is not being paid: payments are tracked separately.
  */
 export const ORDER_STATUS_LABELS: Record<string, string> = {
     pending: "To confirm",
+    unreachable: "Unreachable",
     confirmed: "Confirmed",
     processing: "Validated",
     shipped: "Shipped",
@@ -20,6 +21,7 @@ export const ORDER_STATUS_LABELS: Record<string, string> = {
 
 export const ORDER_STATUS_COLORS: Record<string, string> = {
     pending: "orange",
+    unreachable: "magenta",
     confirmed: "gold",
     processing: "blue",
     shipped: "cyan",

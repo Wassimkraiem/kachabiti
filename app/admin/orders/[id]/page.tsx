@@ -270,7 +270,7 @@ export default function OrderDetailPage() {
                     </Text>
                 </div>
                 <Space wrap>
-                    {(order.status === "pending" || order.status === "confirmed") && (
+                    {(order.status === "pending" || order.status === "unreachable" || order.status === "confirmed") && (
                         <Button icon={<EditOutlined />} onClick={() => setEditing(true)}>{t("Edit order")}</Button>
                     )}
                     <Button

@@ -173,7 +173,7 @@ export default function MyWorkPage() {
                                                 key={o.id}
                                                 actions={[
                                                     <a key="call" href={`tel:${o.customer_phone}`} aria-label={t("Call")}><PhoneOutlined /></a>,
-                                                    o.status === "pending" ? <Button key="ok" size="small" icon={<CheckOutlined />} onClick={() => confirm(o.id)}>{t("Confirm")}</Button> : <Tag key="ok" color="gold">{t("Confirmed")}</Tag>,
+                                                    (o.status === "pending" || o.status === "unreachable") ? <Button key="ok" size="small" icon={<CheckOutlined />} onClick={() => confirm(o.id)}>{t("Confirm")}</Button> : <Tag key="ok" color="gold">{t("Confirmed")}</Tag>,
                                                 ]}
                                                 title={<Link href={`/admin/orders/${o.id}`}>{o.customer_first_name} {o.customer_last_name}</Link>}
                                                 description={

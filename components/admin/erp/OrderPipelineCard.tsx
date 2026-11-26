@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Button, Card, Col, Row, Select, Space, Steps, Typography } from "antd";
-import { CheckOutlined } from "@ant-design/icons";
+import { CheckOutlined, PhoneOutlined } from "@ant-design/icons";
 import { message } from "@/components/admin/antd-app";
 import { useAdminT } from "@/lib/admin-i18n";
 import { useAdminRole } from "@/lib/admin-role-context";
@@ -76,11 +76,16 @@ export default function OrderPipelineCard({ order, onChanged }: { order: Pipelin
                     { title: t("Paid"), description: paid ? t("Money received") : order.payment_status === "partial" ? t("Partly paid") : undefined },
                 ]}
             />
-            {order.status === "pending" && (
+            {(order.status === "pending" || order.status === "unreachable") && (
                 <Space style={{ marginTop: 16 }} wrap>
                     <Button type="primary" icon={<CheckOutlined />} loading={saving} onClick={() => patch({ action: "confirm", ids: [order.id] }, "Order confirmed")}>
                         {t("Customer confirmed")}
                     </Button>
+                    {order.status === "pending" && (
+                        <Button icon={<PhoneOutlined />} loading={saving} onClick={() => patch({ action: "unreachable", ids: [order.id] }, "Marked unreachable")}>
+                            {t("Customer unreachable")}
+                        </Button>
+                    )}
                     <Text type="secondary">{t("Call or message the customer first, then validate to send the parcel.")}</Text>
                 </Space>
             )}
