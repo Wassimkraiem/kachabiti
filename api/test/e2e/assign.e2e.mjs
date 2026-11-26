@@ -41,6 +41,12 @@ ok((await claim(youssef, 'release')).status === 409 && (await assigned()) === 'a
 
 let t = await thread(youssef);
 ok(t[0]?.customer.assigned_to_email === 'amina@test.local' && t[0].customer.assigned_to === amina.id, 'others see who has it', t[0]?.customer);
+const notes = async (who) => (await sql("select type from notifications where recipient_id = $1 and data->>'customer_id' = $2 and created_at > $3 and deleted_at is null", [who.id, id, since])).map((n) => n.type);
+const [{ since }] = await sql('select now() as since');
+await sql("insert into customer_interactions (customer_id, channel, direction, body) values ($1, 'facebook', 'in', 'any news?')", [id]);
+ok((await notes(amina)).join() === 'assigned_message', 'the assigned agent gets their own kind of notification', await notes(amina));
+ok((await notes(youssef)).length === 0, 'other agents are not notified');
+ok((await amina.call(`/api/crm/interactions?inbox=1`)).json.data.mine === 2 && (await youssef.call(`/api/crm/interactions?inbox=1`)).json.data.mine === 0, 'the Assigned to me tab counts unread messages', (await amina.call(`/api/crm/interactions?inbox=1`)).json.data.mine);
 ok((await thread(amina, '&assigned=me')).length === 1 && (await thread(youssef, '&assigned=me')).length === 0, '"Mine" lists only your own');
 
 ok((await reply(owner)).status === 201 && (await assigned()) === 'amina@test.local', 'an owner replies without taking it');

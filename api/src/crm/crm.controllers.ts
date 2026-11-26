@@ -504,7 +504,7 @@ export class InteractionsController {
     }
     const channels = channel ? [channel] : CHAT_CHANNELS;
     const like = likeTerm(q.get('q'));
-    const [threads, counts] = await Promise.all([
+    const [threads, counts, mine] = await Promise.all([
       sql<Record<string, unknown>>`
         select l.*, coalesce(u.n, 0)::int as unread,
                json_build_object('full_name', c.full_name, 'phone', c.phone, 'stage', c.stage,
@@ -537,6 +537,15 @@ export class InteractionsController {
         where x.direction = 'in' and x.read_at is null and x.deleted_at is null
           and x.channel = any(${CHAT_CHANNELS}::text[])
         group by 1`.execute(this.db),
+      // Unread messages of the customers assigned to whoever asks: the "Assigned to me" tab.
+      sql<{ n: number }>`
+        select count(*)::int as n
+        from customer_interactions x
+        join customers c on c.id = x.customer_id and c.deleted_at is null
+        where x.direction = 'in' and x.read_at is null and x.deleted_at is null
+          and x.channel = any(${CHAT_CHANNELS}::text[]) and c.assigned_to = ${actor.userId}::uuid`.execute(
+        this.db,
+      ),
     ]);
     this.media.background(
       this.media.profiles(
@@ -546,6 +555,7 @@ export class InteractionsController {
     return {
       threads: threads.rows,
       unread: Object.fromEntries(counts.rows.map((r) => [r.channel, r.n])),
+      mine: mine.rows[0]?.n ?? 0,
       connected: metaConfigured(await metaPageToken(this.db)),
     };
   }

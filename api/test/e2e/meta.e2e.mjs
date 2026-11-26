@@ -101,7 +101,8 @@ await webhook(messageFrom('222', `s2-${stamp}`, `m2-${stamp}`));
 const kept = await sql('select customer_id, external_id from customer_interactions where external_id = any($1)', [[`m1-${stamp}`, `m2-${stamp}`]]);
 ok(kept.length === 1 && kept[0].external_id === `m1-${stamp}`, "another Page's message is ignored", kept);
 r = await agent.call('/api/crm/interactions', 'POST', { customer_id: kept[0].customer_id, channel: 'facebook', direction: 'out', body: 'Hi', send: true });
-ok(r.status === 201 && calls.at(-1).path === '/me/messages' && calls.at(-1).token === 'page-token-111' && calls.at(-1).body.recipient.id === `s1-${stamp}`, 'reply sent with the Page token', r);
+const sentReply = calls.findLast((c) => c.path === '/me/messages');
+ok(r.status === 201 && sentReply?.token === 'page-token-111' && sentReply.body.recipient.id === `s1-${stamp}`, 'reply sent with the Page token', r);
 r = await agent.call('/api/crm/interactions?inbox=1');
 ok(r.json?.data?.connected?.facebook === true, 'inbox shows connected', r.json?.data?.connected);
 

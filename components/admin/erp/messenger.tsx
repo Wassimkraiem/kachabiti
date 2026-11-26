@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { Avatar, Badge, Button, Empty, Input, Space, Spin, Tag, Typography } from "antd";
-import { ArrowLeftOutlined, ArrowRightOutlined, CheckOutlined, CommentOutlined, FacebookFilled, InstagramFilled, MessageOutlined, PhoneOutlined, SendOutlined, TikTokFilled, UndoOutlined, UserOutlined, WhatsAppOutlined } from "@ant-design/icons";
+import { ArrowLeftOutlined, InboxOutlined, ArrowRightOutlined, CheckOutlined, CommentOutlined, FacebookFilled, InstagramFilled, MessageOutlined, PhoneOutlined, SendOutlined, TikTokFilled, UndoOutlined, UserOutlined, WhatsAppOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import { message } from "@/components/admin/antd-app";
 import { useAdminT } from "@/lib/admin-i18n";
@@ -353,12 +353,14 @@ export function CommentChat({ thread, onBack, onChange }: { thread: CommentThrea
 }
 
 /** The side tabs: Messages or Comments, then the channels. */
+export type MessengerTab = "messages" | "mine" | "comments";
+
 export function MessengerRail({ tab, onTab, channel, onChannel, counts, totals }: {
-    tab: "messages" | "comments"; onTab: (tab: "messages" | "comments") => void;
+    tab: MessengerTab; onTab: (tab: MessengerTab) => void;
     channel: string; onChannel: (channel: string) => void;
     /** What's waiting in the open tab, per channel. */
     counts: Record<string, number>;
-    totals: { messages: number; comments: number };
+    totals: { messages: number; mine: number; comments: number };
 }) {
     const { t } = useAdminT();
     const item = (key: string, label: string, icon: ReactNode, count: number, active: boolean, onClick: () => void) => (
@@ -368,17 +370,18 @@ export function MessengerRail({ tab, onTab, channel, onChannel, counts, totals }
             {count > 0 && <Badge count={count} size="small" color="#7a3b2e" />}
         </button>
     );
-    const channels = Object.entries(CHAT_CHANNELS).filter(([key]) => tab === "messages" || key !== "whatsapp");
+    const channels = Object.entries(CHAT_CHANNELS).filter(([key]) => tab !== "comments" || key !== "whatsapp");
     return (
         <nav className="msgr-rail" aria-label={t("Messenger")}>
             <div className="msgr-rail-group">
                 {item("messages", t("Messages"), <MessageOutlined />, totals.messages, tab === "messages", () => onTab("messages"))}
+                {item("mine", t("Assigned to me"), <InboxOutlined />, totals.mine, tab === "mine", () => onTab("mine"))}
                 {item("comments", t("Comments"), <CommentOutlined />, totals.comments, tab === "comments", () => onTab("comments"))}
             </div>
             <div className="msgr-rail-title">{t("Channel")}</div>
             <div className="msgr-rail-group">
                 {item("", t("All channels"), null, 0, channel === "", () => onChannel(""))}
-                {channels.map(([key, c]) => item(key, key === "facebook" && tab === "messages" ? "Messenger" : c.label, <span style={{ color: c.color }}>{c.icon}</span>, counts[key] ?? 0, channel === key, () => onChannel(key)))}
+                {channels.map(([key, c]) => item(key, key === "facebook" && tab !== "comments" ? "Messenger" : c.label, <span style={{ color: c.color }}>{c.icon}</span>, counts[key] ?? 0, channel === key, () => onChannel(key)))}
             </div>
         </nav>
     );
@@ -390,7 +393,7 @@ export const MESSENGER_CSS = `
 .msgr-rail-group { display: flex; flex-direction: column; gap: 2px; }
 .msgr-rail-title { margin: 18px 12px 6px; font-size: 12px; color: #6b6b6b; }
 .msgr button.msgr-tab, .msgr button.msgr-row { border: 0; background: none; font: inherit; color: inherit; cursor: pointer; text-align: start; }
-.msgr button.msgr-tab { display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 12px; border-radius: 8px; white-space: nowrap; }
+.msgr button.msgr-tab { display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 6px 12px; border-radius: 8px; line-height: 1.25; }
 .msgr button.msgr-tab > span:nth-last-child(1) { margin-inline-end: 0; }
 .msgr button.msgr-tab .ant-badge { margin-inline-start: auto; }
 .msgr button.msgr-tab:hover, .msgr button.msgr-row:hover { background: #f3eee9; }
@@ -426,6 +429,7 @@ export const MESSENGER_CSS = `
   .msgr-rail { width: auto; padding: 8px; border-inline-end: 0; border-bottom: 1px solid #ececec; overflow: visible; }
   .msgr-rail-title { display: none; }
   .msgr-rail-group { flex-direction: row; overflow-x: auto; }
+  .msgr button.msgr-tab { white-space: nowrap; }
   .msgr-rail-group + .msgr-rail-title + .msgr-rail-group { margin-top: 6px; }
   .msgr-rail-group:first-child button.msgr-tab { flex: 1; justify-content: center; }
   .msgr-rail-group:first-child button.msgr-tab .ant-badge { margin-inline-start: 0; }

@@ -11,7 +11,7 @@ import { useApi } from "@/components/admin/erp/erp-client";
 import MetaCheck from "@/components/admin/erp/MetaCheck";
 import MetaConnection from "@/components/admin/erp/MetaConnection";
 import { messageText } from "@/components/admin/erp/messenger-media";
-import { agentName, CHAT_CHANNELS, CommentChat, photoOf, MESSENGER_CSS, MessageChat, MessengerRail, ThreadRow, usePolling, type CommentThread, type MessageThread } from "@/components/admin/erp/messenger";
+import { agentName, CHAT_CHANNELS, CommentChat, photoOf, MESSENGER_CSS, MessageChat, MessengerRail, type MessengerTab, ThreadRow, usePolling, type CommentThread, type MessageThread } from "@/components/admin/erp/messenger";
 
 const { Text } = Typography;
 
@@ -29,7 +29,9 @@ function Messenger() {
     const me = useAdminRole();
     const { isAdmin } = me;
     const params = useSearchParams();
-    const [tab, setTab] = useState<"messages" | "comments">(params.get("tab") === "comments" ? "comments" : "messages");
+    const asked = params.get("tab");
+    const [tab, setTab] = useState<MessengerTab>(asked === "comments" || asked === "mine" ? asked : "messages");
+    const chats = tab !== "comments"; // Messages, or those of the customers assigned to me
     const [channel, setChannel] = useState("");
     const [show, setShow] = useState("all");
     const [search, setSearch] = useState("");
@@ -44,26 +46,26 @@ function Messenger() {
     if (query) filters.set("q", query);
     const messageFilters = new URLSearchParams(filters);
     const commentFilters = new URLSearchParams(filters);
-    if (tab === "messages") {
+    if (chats) {
         if (channel) messageFilters.set("channel", channel);
         if (show === "unread") messageFilters.set("unread", "1");
-        if (show === "mine") messageFilters.set("assigned", "me");
+        if (tab === "mine") messageFilters.set("assigned", "me");
     } else {
         if (channel) commentFilters.set("platform", channel);
         commentFilters.set("show", show);
     }
     // Both load, for the counts on the two tabs.
-    const messages = useApi<{ threads: MessageThread[]; unread: Record<string, number>; connected: Connected }>(`/api/crm/interactions?inbox=1&${messageFilters}`);
+    const messages = useApi<{ threads: MessageThread[]; unread: Record<string, number>; mine: number; connected: Connected }>(`/api/crm/interactions?inbox=1&${messageFilters}`);
     const comments = useApi<{ threads: CommentThread[]; open: Record<string, number> }>(`/api/crm/comments?threads=1&${commentFilters}`);
     usePolling(messages.reload);
     usePolling(comments.reload);
 
     const connected = messages.data?.connected;
-    const list = tab === "messages" ? messages : comments;
+    const list = chats ? messages : comments;
     const count = list.data?.threads.length;
     const message = openMessage && (messages.data?.threads.find((th) => messageKey(th) === messageKey(openMessage)) ?? openMessage);
     const comment = openComment && (comments.data?.threads.find((th) => commentKey(th) === commentKey(openComment)) ?? openComment);
-    const hasOpen = tab === "messages" ? !!message : !!comment;
+    const hasOpen = chats ? !!message : !!comment;
 
     return (
         <div>
@@ -82,15 +84,15 @@ function Messenger() {
                     onTab={(next) => { setTab(next); setChannel(""); setShow("all"); setSearch(""); setQuery(""); }}
                     channel={channel}
                     onChannel={setChannel}
-                    counts={(tab === "messages" ? messages.data?.unread : comments.data?.open) ?? {}}
-                    totals={{ messages: sum(messages.data?.unread), comments: sum(comments.data?.open) }}
+                    counts={(chats ? messages.data?.unread : comments.data?.open) ?? {}}
+                    totals={{ messages: sum(messages.data?.unread), mine: messages.data?.mine ?? 0, comments: sum(comments.data?.open) }}
                 />
                 <div className="msgr-list">
                     <div className="msgr-list-head">
                         <Input
                             allowClear
                             prefix={<SearchOutlined style={{ color: "#8c8c8c" }} />}
-                            placeholder={t(tab === "messages" ? "Name, phone or message" : "Comment, name or phone")}
+                            placeholder={t(chats ? "Name, phone or message" : "Comment, name or phone")}
                             aria-label={t("Search")}
                             value={search}
                             onChange={(e) => { setSearch(e.target.value); if (!e.target.value) setQuery(""); }}
@@ -101,16 +103,16 @@ function Messenger() {
                             size="small"
                             value={show}
                             onChange={setShow}
-                            options={tab === "messages"
-                                ? [{ value: "all", label: t("All") }, { value: "unread", label: t("Unread") }, { value: "mine", label: t("Mine") }]
+                            options={chats
+                                ? [{ value: "all", label: t("All") }, { value: "unread", label: t("Unread") }]
                                 : [{ value: "all", label: t("All") }, { value: "open", label: t("To handle") }, { value: "leads", label: t("Phone") }]}
                         />
                     </div>
                     <div className="msgr-list-rows">
                         {list.error && <Text type="danger">{t(list.error)}</Text>}
                         {!list.data && list.loading && <div style={{ textAlign: "center", padding: 24 }}><Spin /></div>}
-                        {count === 0 && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={t(tab === "messages" ? "No messages yet." : "No comments yet.")} />}
-                        {tab === "messages"
+                        {count === 0 && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description={t(tab === "mine" ? "No conversation is assigned to you." : chats ? "No messages yet." : "No comments yet.")} />}
+                        {chats
                             ? messages.data?.threads.map((th) => (
                                 <ThreadRow
                                     key={messageKey(th)}
@@ -140,7 +142,7 @@ function Messenger() {
                     </div>
                 </div>
                 <div className="msgr-chat">
-                    {tab === "messages" && message ? (
+                    {chats && message ? (
                         <MessageChat
                             key={messageKey(message)}
                             thread={message}

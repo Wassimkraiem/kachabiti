@@ -15,12 +15,13 @@ import { MESSAGE_NOTIFICATIONS } from "@/lib/erp/notification-types";
 
 const { Text } = Typography;
 
-// Short tones (no audio file): a chime for orders and alerts, a soft double "pop" for messages.
+// Short tones (no audio file): a chime for orders and alerts, a soft double "pop" for messages, three
+// rising notes for a customer assigned to you.
 // Browsers allow it once the page has had a click.
-function chime(kind: "order" | "urgent" | "message") {
+function chime(kind: "order" | "urgent" | "message" | "assigned") {
     try {
         const ctx = new AudioContext();
-        const notes = { order: [660, 880], urgent: [880, 660, 880], message: [392, 392] }[kind];
+        const notes = { order: [660, 880], urgent: [880, 660, 880], message: [392, 392], assigned: [523, 659, 784] }[kind];
         notes.forEach((freq, i) => {
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
@@ -107,7 +108,8 @@ export default function NotificationBell({ scope }: { scope: "messages" | "other
             setItems((current) => [row, ...current.filter((n) => n.id !== row.id)].slice(0, 15));
             setUnread((count) => count + 1);
             const urgent = row.severity !== "info";
-            chime(messages ? "message" : urgent ? "urgent" : "order");
+            const assigned = row.type === "assigned_message";
+            chime(assigned ? "assigned" : messages ? "message" : urgent ? "urgent" : "order");
             const text = notificationText(row, localeRef.current);
             notification.open({
                 title: text.title,
@@ -118,7 +120,7 @@ export default function NotificationBell({ scope }: { scope: "messages" | "other
                 onClick: () => {
                     if (row.url) router.push(row.url);
                 },
-                style: { cursor: row.url ? "pointer" : undefined },
+                style: { cursor: row.url ? "pointer" : undefined, ...(assigned ? { borderInlineStart: "4px solid #7a3b2e", background: "#fbf3ee" } : {}) },
             });
         });
     }, [userId, notification, router, load, messages]);
