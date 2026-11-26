@@ -10,7 +10,7 @@ const calls = [];
 const info = { is_valid: true, app_id: 'app', expires_at: 0, scopes: ['pages_messaging', 'pages_manage_metadata'] };
 let instagramFails = false;
 let subscribed = ['messages'];
-let appSubscriptions = [{ object: 'page', callback_url: 'https://api.test/api/webhooks/meta', active: true, fields: [{ name: 'messages' }, { name: 'leadgen' }] }];
+let appSubscriptions = [{ object: 'page', callback_url: 'https://hooks.test/api/webhooks/meta', active: true, fields: [{ name: 'messages' }, { name: 'leadgen' }] }];
 const meta = createServer((req, res) => {
     const path = req.url.split('?')[0];
     let text = '';
@@ -170,6 +170,7 @@ r = await owner.call('/api/admin/meta/repair', 'POST');
 ok(r.json?.success, 'repaired', r.json);
 const page = appSubscriptions.find((s) => s.object === 'page').fields.map((f) => f.name);
 ok(['messages', 'message_echoes', 'feed', 'leadgen'].every((f) => page.includes(f)), 'adds fields and keeps the others', page);
+ok(appSubscriptions.every((s) => s.callback_url === 'https://hooks.test/api/webhooks/meta'), "Instagram gets the address Facebook's events already use", appSubscriptions.map((s) => s.callback_url));
 r = await owner.call('/api/admin/meta/check');
 ok(check('webhook_instagram').ok && check('webhook_page').ok && check('page_subscription').ok, 'subscriptions are green', r.json.data.checks);
 

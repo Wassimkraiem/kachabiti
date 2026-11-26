@@ -143,8 +143,18 @@ export class MetaHealthController {
         const have = s?.fields.map((f) => f.name) ?? [];
         if (s?.active && !without(fields, have).length) continue;
         // Another address stays as it is: moving it would cut off whatever listens there.
+        // The address the app's other events already use (one webhook for all), else this server's.
+        // SITE_DOMAIN is Caddy's site address: it may hold several names or a scheme.
+        const host = domain
+          ?.split(/[\s,]+/)
+          .find(Boolean)
+          ?.replace(/^https?:\/\//, '')
+          .replace(/\/.*$/, '');
         const callback_url =
-          s?.callback_url ?? (domain && `https://${domain}/api/webhooks/meta`);
+          s?.callback_url ??
+          list.find((x) => x.callback_url?.endsWith('/api/webhooks/meta'))
+            ?.callback_url ??
+          (host && `https://${host}/api/webhooks/meta`);
         if (!verify_token || !callback_url)
           throw new Error(
             'META_VERIFY_TOKEN or SITE_DOMAIN is not set on the server.',
