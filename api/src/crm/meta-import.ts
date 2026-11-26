@@ -117,8 +117,12 @@ export class MetaImport implements OnModuleInit, OnModuleDestroy {
       do {
         const query = new URLSearchParams({
           platform: channel === 'facebook' ? 'messenger' : 'instagram',
-          fields: `id,updated_time,participants,messages.limit(20){${FIELDS}}`,
-          limit: '10',
+          // Instagram refuses messages inside this list ("reduce the amount of data"): they're read apart.
+          fields:
+            channel === 'facebook'
+              ? `id,updated_time,participants,messages.limit(20){${FIELDS}}`
+              : 'id,updated_time,participants',
+          limit: channel === 'facebook' ? '10' : '25',
           ...(after ? { after } : {}),
         });
         const list = await graph<Page<Conversation>>(
@@ -167,7 +171,13 @@ export class MetaImport implements OnModuleInit, OnModuleDestroy {
     const [customer] = others;
     let added = 0;
     let read = 0;
-    let page = messages;
+    let page =
+      channel === 'facebook'
+        ? messages
+        : await graph<Page<Message>>(
+            `/${encodeURIComponent(id)}/messages?fields=id,created_time&limit=20`,
+            { token },
+          );
     let gone = 0;
     for (;;) {
       const list = page?.data ?? [];
@@ -176,7 +186,15 @@ export class MetaImport implements OnModuleInit, OnModuleDestroy {
       const news = list.filter(
         (m) => !known.ids.has(m.id) && Date.parse(m.created_time) > gone,
       );
-      for (const m of news.reverse()) {
+      for (const listed of news.reverse()) {
+        // Instagram lists ids only; each message is read on its own (20 at most per conversation).
+        const m =
+          channel === 'facebook'
+            ? listed
+            : await graph<Message>(
+                `/${encodeURIComponent(listed.id)}?fields=${FIELDS}`,
+                { token },
+              );
         const kept = await this.keep(channel, customer, m);
         if (kept) added++;
       }

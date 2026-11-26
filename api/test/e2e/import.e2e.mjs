@@ -30,11 +30,16 @@ const server = createServer((req, res) => {
         if (url.pathname.startsWith('/s3/')) { if (req.method === 'PUT') stored.set(url.pathname, 1); return res.end(); }
         if (url.pathname === '/cdn/photo') return res.writeHead(200, { 'Content-Type': 'image/jpeg' }).end('x');
         if (url.pathname === '/me') return json({ id: 'page', instagram_business_account: { id: '999', username: 'shop' } });
+        // Like Meta: Instagram refuses messages inside the conversation list, and lists ids only.
+        if (url.pathname === '/conv2/messages') return json({ data: ig[0].messages.data.map(({ id, created_time }) => ({ id, created_time })) });
+        const one = ig[0].messages.data.find((m) => url.pathname === `/${m.id}`);
+        if (one) return json(one);
         if (url.pathname === '/conv1/messages') return json({ data: [msg('old', amel, 'first hello', 5000), ...(deeper ? [msg('deep', amel, 'deeper, never stored', 6000)] : [])] });
         if (url.pathname === '/me/conversations' && url.searchParams.has('user_id')) return json({ data: [] });
         if (url.pathname === '/me/conversations') {
             if (url.searchParams.get('platform') === 'messenger') return json({ data: fb });
-            return igFails ? json({ error: { message: 'Needs instagram_manage_messages' } }, 400) : json({ data: ig });
+            if (/messages/.test(url.searchParams.get('fields'))) return json({ error: { message: 'Please reduce the amount of data' } }, 500);
+            return igFails ? json({ error: { message: 'Needs instagram_manage_messages' } }, 400) : json({ data: ig.map(({ messages, ...c }) => c) });
         }
         json({});
     });
