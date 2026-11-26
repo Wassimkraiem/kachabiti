@@ -11,13 +11,18 @@ import {
 } from '@nestjs/common';
 import * as Sentry from '@sentry/nestjs';
 import type { Request } from 'express';
-import { parseComments, parseWebhook, validSignature } from '@shared/erp/meta';
+import {
+  parseComments,
+  parseReferrals,
+  parseWebhook,
+  validSignature,
+} from '@shared/erp/meta';
 import { Public } from '../auth/decorators';
 import { ApiError, Raw } from '../common/api';
 import { Database } from '../db/database';
 import { metaConnection, received } from './meta-connection';
 import { MetaMedia } from './meta-media';
-import { keepMessage } from './meta-messages';
+import { customerFor, keepMessage } from './meta-messages';
 
 /**
  * Port of app/api/webhooks/meta: Messenger, Instagram Direct and WhatsApp messages, and the public
@@ -84,6 +89,7 @@ export class MetaWebhookController {
       }
       const comments = parseComments(payload);
       const messages = parseWebhook(payload);
+      const referrals = parseReferrals(payload);
       const fields = [
         ...new Set(
           (Array.isArray(payload.entry) ? payload.entry : []).flatMap(
@@ -131,6 +137,38 @@ export class MetaWebhookController {
             { customer_id: kept.customer_id, channel: message.channel },
           ]),
         );
+      }
+      // Which ad started the conversation, after its message so the customer is there.
+      for (const r of referrals) {
+        await this.db.withActor(null, async (trx) => {
+          const customerId = await customerFor(trx as unknown as Database, {
+            channel: r.channel,
+            direction: 'in',
+            externalId: r.externalId,
+            senderId: r.senderId,
+            senderName: null,
+            phone: null,
+            text: '',
+            attachments: [],
+            sentAt: r.at,
+          });
+          await trx
+            .insertInto('ad_referrals')
+            .values({
+              customer_id: customerId,
+              channel: r.channel,
+              ad_id: r.adId.slice(0, 64),
+              source: r.source?.slice(0, 40) ?? null,
+              ref: r.ref?.slice(0, 200) ?? null,
+              ad_title: r.title?.slice(0, 300) ?? null,
+              external_id: r.externalId.slice(0, 200),
+              referred_at: r.at,
+            })
+            .onConflict((oc) =>
+              oc.columns(['channel', 'external_id']).doNothing(),
+            )
+            .execute();
+        });
       }
     } catch (error) {
       // Answer 200 anyway: Meta retries failed deliveries for hours and then disables the webhook.

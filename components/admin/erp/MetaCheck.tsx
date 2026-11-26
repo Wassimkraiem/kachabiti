@@ -21,6 +21,8 @@ const LABELS: Record<string, string> = {
     scope_instagram_messages: msg("Permission: Instagram messages"),
     scope_instagram_comments: msg("Permission: Instagram comments"),
     scope_publish: msg("Permission: publish posts"),
+    scope_ads: msg("Permission: read ads"),
+    ad_account: msg("Ad account chosen"),
     instagram: msg("Instagram account linked to the Page"),
     page_subscription: msg("Page events"),
     webhook_page: msg("Facebook webhook"),

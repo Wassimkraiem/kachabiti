@@ -116,6 +116,51 @@ export function parseWebhook(payload: Json): IncomingMessage[] {
     return out.filter((m) => m.senderId);
 }
 
+export interface AdReferral {
+    channel: 'facebook' | 'instagram';
+    senderId: string;        // the customer
+    adId: string;
+    source: string | null;   // ADS
+    ref: string | null;
+    title: string | null;    // the ad's title, when Meta gives it
+    externalId: string;      // the message id, or sender:time
+    at: Date;
+}
+
+/**
+ * Which ad started a conversation (Click to Messenger / Instagram Direct ads): Meta puts a referral on
+ * the first message, or sends it alone (Page field messaging_referrals) when the thread already existed.
+ */
+export function parseReferrals(payload: Json): AdReferral[] {
+    const out: AdReferral[] = [];
+    const object = payload.object;
+    if (object !== 'page' && object !== 'instagram') return out;
+    for (const entry of arr(payload.entry)) {
+        const tests = arr(entry.changes).filter((c) => c.field === 'messages').map((c) => obj(c.value));
+        for (const event of [...arr(entry.messaging), ...tests]) {
+            const message = obj(event.message);
+            if (message.is_echo) continue;
+            const referral = obj(event.referral ?? message.referral ?? obj(event.postback).referral);
+            const adId = referral.ad_id ? String(referral.ad_id) : '';
+            const senderId = String(obj(event.sender).id ?? '');
+            if (!adId || !senderId) continue;
+            const context = obj(referral.ads_context_data);
+            const at = new Date(Number(event.timestamp) || Date.now());
+            out.push({
+                channel: object === 'page' ? 'facebook' : 'instagram',
+                senderId,
+                adId,
+                source: referral.source ? String(referral.source) : null,
+                ref: referral.ref ? String(referral.ref) : null,
+                title: typeof context.ad_title === 'string' ? context.ad_title : null,
+                externalId: message.mid ? String(message.mid) : `${senderId}:${at.getTime()}`,
+                at,
+            });
+        }
+    }
+    return out;
+}
+
 export interface IncomingComment {
     platform: 'facebook' | 'instagram';
     externalId: string;      // comment id (dedupes Meta's retries)

@@ -42,7 +42,7 @@ export async function keepMessage(
   return { id: row?.id, customer_id: customerId };
 }
 
-async function customerFor(
+export async function customerFor(
   trx: Database,
   message: IncomingMessage,
 ): Promise<string> {

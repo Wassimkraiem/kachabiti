@@ -5,6 +5,7 @@ import { ApiError } from '../common/api';
 import { Database } from '../db/database';
 import {
   imported,
+  metaAds,
   metaPageToken,
   PAGE_FIELDS,
   received,
@@ -45,6 +46,7 @@ const SCOPES: Record<string, string[]> = {
   instagram_messages: ['instagram_basic', 'instagram_manage_messages'],
   instagram_comments: ['instagram_basic', 'instagram_manage_comments'],
   publish: ['pages_manage_posts', 'instagram_content_publish'],
+  ads: ['ads_read'],
 };
 const without = (needed: string[], have: string[] = []) =>
   needed.filter((x) => !have.includes(x));
@@ -121,6 +123,12 @@ export class MetaHealthController {
         const have = s?.fields.map((f) => f.name);
         return without(fields, have).join(', ') || null;
       });
+    const ads = await metaAds(this.db);
+    checks.push({
+      id: 'ad_account',
+      ok: Boolean(ads?.ad_account_id),
+      detail: ads?.ad_account_name ?? null,
+    });
     for (const channel of ['facebook', 'instagram'] as const) {
       const result = imported[channel];
       if (result) checks.push({ id: `import_${channel}`, ...result });

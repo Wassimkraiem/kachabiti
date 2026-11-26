@@ -510,7 +510,10 @@ export class InteractionsController {
                json_build_object('full_name', c.full_name, 'phone', c.phone, 'stage', c.stage,
                                  'assigned_to', c.assigned_to,
                                  'assigned_to_email', c.assigned_to_email) as customer,
-               c.external_ids ? ((case l.channel when 'facebook' then 'messenger' else l.channel end) || '_photo') as photo
+               c.external_ids ? ((case l.channel when 'facebook' then 'messenger' else l.channel end) || '_photo') as photo,
+               (select coalesce(r.ad_title, r.ad_id) from ad_referrals r
+                 where r.customer_id = l.customer_id and r.channel = l.channel and r.deleted_at is null
+                 order by r.referred_at desc limit 1) as ad
         from (
           select distinct on (x.customer_id, x.channel)
                  x.customer_id, x.channel, x.direction, x.body, x.created_at, x.sender_name
@@ -525,7 +528,12 @@ export class InteractionsController {
           group by 1, 2
         ) u on u.customer_id = l.customer_id and u.channel = l.channel
         where (not ${q.bool('unread')}::boolean or u.n > 0)
-          and (not ${q.get('assigned') === 'me'}::boolean or c.assigned_to = ${actor.userId}::uuid)
+          -- assigned: me (the Assigned to me tab), none (waiting for someone), others (taken).
+          and case ${q.get('assigned') ?? ''}::text
+                when 'me' then c.assigned_to = ${actor.userId}::uuid
+                when 'none' then c.assigned_to is null
+                when 'others' then c.assigned_to is not null and c.assigned_to <> ${actor.userId}::uuid
+                else true end
           and (${like}::text is null or c.full_name ilike ${like}
                or c.phone ilike ${like} or l.body ilike ${like})
         order by l.created_at desc
@@ -536,6 +544,7 @@ export class InteractionsController {
         join customers c on c.id = x.customer_id and c.deleted_at is null
         where x.direction = 'in' and x.read_at is null and x.deleted_at is null
           and x.channel = any(${CHAT_CHANNELS}::text[])
+          and c.assigned_to is null -- the Messages tab counts what waits for someone
         group by 1`.execute(this.db),
       // Unread messages of the customers assigned to whoever asks: the "Assigned to me" tab.
       sql<{ n: number }>`

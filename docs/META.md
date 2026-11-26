@@ -120,6 +120,15 @@ Conversations from before, and messages the webhook missed, are read from Meta 1
 and every 2 minutes (the 200 latest conversations per platform; 100 messages each on Messenger, 20 on
 Instagram). Check shows the result or Meta's refusal. Messages over an hour old don't notify.
 
+## Meta ads
+
+Admin → Marketing → Meta ads shows the ad account's campaigns (spend, reach, impressions, clicks, CTR,
+CPC, CPM, Meta's "conversations started") next to what the CRM saw: people who wrote after clicking an
+ad (Meta's referral on the message, Page field `messaging_referrals`; Instagram sends it with the
+message) and their orders within 30 days. Needs `ads_read` in the login configuration; the connecting
+person's token is kept (encrypted) for it, then the ad account is chosen in Messenger → Connections.
+Meta's spend is shown in the account's currency and is not booked in the accounts.
+
 ## Photos, audio, names
 
 Photos, audio and videos of Messenger and Instagram are copied to the private bucket (Meta's links

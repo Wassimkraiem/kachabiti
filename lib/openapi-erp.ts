@@ -87,6 +87,11 @@ export const erpPaths: Record<string, Record<string, Op>> = {
         get: op('Customers', 'Public comments (?show=all|leads|open&platform=&author=&q=&page=), or one thread per person (?threads=1)'),
         patch: op('Customers', 'Mark comments handled or not', { requestBody: body({ ids: { type: 'array', items: uuid }, handled: { type: 'boolean' } }, ['ids', 'handled']) }),
     },
+    '/api/marketing/meta-ads': {
+        get: op('Marketing', "The ad account's campaigns with Meta's figures, and the conversations, orders and delivered sales the CRM saw from their ads (?from=&to= YYYY-MM-DD)"),
+    },
+    '/api/admin/meta/ad-accounts': { get: op('Owner', 'The ad accounts the connecting person can read (ads_read)') },
+    '/api/admin/meta/ad-account': { post: op('Owner', 'Choose the ad account Meta ads reads', { requestBody: body({ id: { type: 'string' } }, ['id']) }) },
     '/api/crm/replies': {
         get: op('Customers', "The team's saved replies, in order"),
         post: op('Customers', 'Add a saved reply', { requestBody: body({ title: { type: 'string' }, body: { type: 'string' }, position: { type: 'integer' } }, ['title', 'body']) }),

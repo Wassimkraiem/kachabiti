@@ -34,6 +34,8 @@ export interface MessageThread {
     sender_name: string | null;
     unread: number;
     photo?: boolean;
+    /** The ad they wrote from, if they did. */
+    ad?: string | null;
     customer: { full_name: string; phone: string | null; stage: CustomerStage; assigned_to: string | null; assigned_to_email: string | null };
 }
 

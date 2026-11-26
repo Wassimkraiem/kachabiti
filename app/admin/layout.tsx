@@ -166,6 +166,7 @@ const menuItems: MenuItem[] = [
         label: msg("Marketing"),
         children: [
             { key: "/admin/marketing/calendar", icon: <CalendarOutlined />, label: msg("Post calendar") },
+            { key: "/admin/marketing/meta-ads", icon: <FundOutlined />, label: msg("Meta ads") },
             { key: "/admin/marketing/campaigns", icon: <NotificationOutlined />, label: msg("Campaigns & ad spend") },
             { key: "/admin/landing", icon: <HomeOutlined />, label: msg("Landing page") },
             { key: "/admin/sale-banners", icon: <PercentageOutlined />, label: msg("Sale Banners") },
@@ -237,6 +238,7 @@ const MENU_PERMISSIONS: Record<string, Permission | "admin" | "owner"> = {
     "/admin/finance/documents": "finance",
     "/admin/promotions": "discounts",
     "/admin/marketing/calendar": "marketing",
+    "/admin/marketing/meta-ads": "marketing",
     "/admin/marketing/campaigns": "marketing",
     "/admin/sale-banners": "marketing",
     "/admin/reels": "marketing",

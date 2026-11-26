@@ -12,9 +12,16 @@ const LOGIN = "/api/admin/meta/login";
 
 interface Status {
     available: boolean;
-    page: { name: string; instagram: string | null; data_access_expires_at: string | null } | null;
+    page: {
+        name: string;
+        instagram: string | null;
+        data_access_expires_at: string | null;
+        ad_account: { id: string; name: string | null; currency: string | null } | null;
+        ads_ready: boolean;
+    } | null;
 }
 interface GrantedPage { id: string; name: string; instagram: string | null }
+interface AdAccount { id: string; name: string; currency: string; active: boolean }
 
 const RESULTS: Record<string, string> = {
     expired: msg("The Facebook sign-in has expired. Connect again."),
@@ -96,6 +103,7 @@ export default function MetaConnection({ onChange }: { onChange: () => void }) {
                             {page ? t("Change Page") : t("Connect with Facebook")}
                         </Button>
                     )}
+                    {page && <AdAccountPicker current={page.ad_account} canRead={page.ads_ready} onChange={reload} />}
                     {page && (
                         <Popconfirm title={t("Disconnect this Page?")} description={t("New messages and comments will stop arriving.")} okText={t("Disconnect")} cancelText={t("Cancel")} onConfirm={() => run(() => api("/api/admin/meta", { method: "DELETE" }))}>
                             <Button danger loading={busy}>{t("Disconnect")}</Button>
@@ -104,5 +112,50 @@ export default function MetaConnection({ onChange }: { onChange: () => void }) {
                 </Space>
             )}
         </Card>
+    );
+}
+
+/** The ad account Admin → Marketing → Meta ads reads (the connecting person's, with ads_read). */
+function AdAccountPicker({ current, canRead, onChange }: { current: { id: string; name: string | null; currency: string | null } | null; canRead: boolean; onChange: () => void }) {
+    const { t } = useAdminT();
+    const [choosing, setChoosing] = useState(false);
+    const { data, error } = useApi<AdAccount[]>(choosing ? "/api/admin/meta/ad-accounts" : null);
+    const [busy, setBusy] = useState(false);
+    if (!canRead) return <Text type="secondary">{t("Ads: connect the Page again (with ads_read) to read your campaigns.")}</Text>;
+    if (!choosing)
+        return (
+            <Space size={4} wrap>
+                <Text type="secondary">{t("Ad account")}:</Text>
+                <Text>{current ? `${current.name ?? current.id} · ${current.currency ?? ""}` : t("none")}</Text>
+                <Button size="small" onClick={() => setChoosing(true)}>{current ? t("Change") : t("Choose")}</Button>
+            </Space>
+        );
+    return (
+        <Space wrap>
+            {error && <Alert type="error" showIcon title={t(error)} />}
+            {data?.length === 0 && <Alert type="warning" showIcon title={t("No ad account was granted. Add ads_read to the login configuration and connect again.")} />}
+            {data && data.length > 0 && (
+                <Select
+                    aria-label={t("Ad account")}
+                    placeholder={t("Ad account")}
+                    style={{ minWidth: 260 }}
+                    disabled={busy}
+                    onChange={async (id: string) => {
+                        setBusy(true);
+                        try {
+                            await api("/api/admin/meta/ad-account", { method: "POST", body: { id } });
+                            setChoosing(false);
+                            onChange();
+                        } catch (e) {
+                            message.error(t((e as Error).message));
+                        } finally {
+                            setBusy(false);
+                        }
+                    }}
+                    options={data.map((a) => ({ value: a.id, label: `${a.name} · ${a.currency}${a.active ? "" : ` (${t("inactive")})`}` }))}
+                />
+            )}
+            <Button size="small" onClick={() => setChoosing(false)}>{t("Cancel")}</Button>
+        </Space>
     );
 }

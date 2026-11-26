@@ -33,7 +33,8 @@ function Messenger() {
     const [tab, setTab] = useState<MessengerTab>(asked === "comments" || asked === "mine" ? asked : "messages");
     const chats = tab !== "comments"; // Messages, or those of the customers assigned to me
     const [channel, setChannel] = useState("");
-    const [show, setShow] = useState("all");
+    // Messages first show the conversations nobody has taken yet.
+    const [show, setShow] = useState(tab === "messages" ? "none" : "all");
     const [search, setSearch] = useState("");
     const [query, setQuery] = useState("");
     // The open thread is kept whole: it stays open when a filter drops it from the list.
@@ -50,6 +51,9 @@ function Messenger() {
         if (channel) messageFilters.set("channel", channel);
         if (show === "unread") messageFilters.set("unread", "1");
         if (tab === "mine") messageFilters.set("assigned", "me");
+        // Unread, in Messages, is what waits for someone too.
+        else if (show === "none" || show === "unread") messageFilters.set("assigned", "none");
+        else if (show === "others") messageFilters.set("assigned", "others");
     } else {
         if (channel) commentFilters.set("platform", channel);
         commentFilters.set("show", show);
@@ -81,7 +85,7 @@ function Messenger() {
             <div className={`msgr${hasOpen ? " has-open" : ""}`}>
                 <MessengerRail
                     tab={tab}
-                    onTab={(next) => { setTab(next); setChannel(""); setShow("all"); setSearch(""); setQuery(""); }}
+                    onTab={(next) => { setTab(next); setChannel(""); setShow(next === "messages" ? "none" : "all"); setSearch(""); setQuery(""); }}
                     channel={channel}
                     onChannel={setChannel}
                     counts={(chats ? messages.data?.unread : comments.data?.open) ?? {}}
@@ -103,7 +107,9 @@ function Messenger() {
                             size="small"
                             value={show}
                             onChange={setShow}
-                            options={chats
+                            options={tab === "messages"
+                                ? [{ value: "none", label: t("To take") }, { value: "unread", label: t("Unread") }, { value: "others", label: t("Assigned") }, { value: "all", label: t("All") }]
+                                : chats
                                 ? [{ value: "all", label: t("All") }, { value: "unread", label: t("Unread") }]
                                 : [{ value: "all", label: t("All") }, { value: "open", label: t("To handle") }, { value: "leads", label: t("Phone") }]}
                         />
@@ -122,7 +128,7 @@ function Messenger() {
                                     text={`${th.direction === "out" ? `${t("You")}: ` : ""}${messageText(th.body, t)}`}
                                     date={th.created_at}
                                     count={th.unread}
-                                    extra={th.customer.assigned_to_email && <span className="msgr-ellipsis" style={{ fontSize: 12, color: "#7a3b2e" }}>{th.customer.assigned_to === me.id ? t("Assigned to you") : t("Assigned to {name}", { name: agentName(th.customer.assigned_to_email) })}</span>}
+                                    extra={(th.customer.assigned_to_email || th.ad) && <span className="msgr-ellipsis" style={{ display: "flex", gap: 6, alignItems: "center" }}>{th.ad && <Tag color="blue" style={{ margin: 0, fontSize: 11 }} title={th.ad}>{t("Ad")}</Tag>}{th.customer.assigned_to_email && <span className="msgr-ellipsis" style={{ fontSize: 12, color: "#7a3b2e" }}>{th.customer.assigned_to === me.id ? t("Assigned to you") : t("Assigned to {name}", { name: agentName(th.customer.assigned_to_email) })}</span>}</span>}
                                     active={!!message && messageKey(message) === messageKey(th)}
                                     onClick={() => setOpenMessage(th)}
                                 />

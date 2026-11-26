@@ -76,6 +76,10 @@ export interface ApiKeys {
 }
 
 export interface MetaConnection {
+  ad_account_id: string | null;
+  ad_account_name: string | null;
+  ad_currency: string | null;
+  user_token_encrypted: string | null;
   connected_by: string;
   connected_by_email: string | null;
   created_at: Generated<Timestamp>;
@@ -87,6 +91,21 @@ export interface MetaConnection {
   page_id: string;
   page_name: string;
   token_encrypted: string;
+  updated_at: Generated<Timestamp>;
+}
+
+export interface AdReferrals {
+  ad_id: string;
+  ad_title: string | null;
+  channel: string;
+  created_at: Generated<Timestamp>;
+  customer_id: string;
+  deleted_at: Timestamp | null;
+  external_id: string;
+  id: Generated<string>;
+  ref: string | null;
+  referred_at: Timestamp;
+  source: string | null;
   updated_at: Generated<Timestamp>;
 }
 
@@ -1221,6 +1240,7 @@ export interface DB {
   agent_goals: AgentGoals;
   api_keys: ApiKeys;
   meta_connection: MetaConnection;
+  ad_referrals: AdReferrals;
   saved_replies: SavedReplies;
   scheduled_posts: ScheduledPosts;
   auth_tokens: AuthTokens;

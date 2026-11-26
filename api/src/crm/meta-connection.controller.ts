@@ -19,7 +19,13 @@ import { AdminOnly, CurrentActor } from '../auth/decorators';
 import { ApiError, Zod } from '../common/api';
 import { config } from '../config';
 import { Database } from '../db/database';
-import { metaConnection, PAGE_FIELDS, seal, unseal } from './meta-connection';
+import {
+  metaAds,
+  metaConnection,
+  PAGE_FIELDS,
+  seal,
+  unseal,
+} from './meta-connection';
 import { tokenInfo } from './meta-health';
 
 const STATE_COOKIE = 'kb_meta_state';
@@ -40,6 +46,14 @@ interface Page {
 }
 
 const connectSchema = z.object({ page_id: z.string().regex(/^\d+$/) });
+const adAccountSchema = z.object({ id: z.string().regex(/^act_\d+$/) });
+
+interface AdAccount {
+  id: string;
+  name: string;
+  currency: string;
+  account_status: number;
+}
 
 /**
  * Admin → Customers → Inbox, "Connect with Facebook" (Facebook Login for Business): login sends the
@@ -66,8 +80,62 @@ export class MetaConnectionController {
         name: page.page_name,
         instagram: page.instagram_username,
         data_access_expires_at: page.data_access_expires_at,
+        ad_account: page.ad_account_id && {
+          id: page.ad_account_id,
+          name: page.ad_account_name,
+          currency: page.ad_currency,
+        },
+        // Connected before ads were read: connect again to read them.
+        ads_ready: Boolean(page.user_token_encrypted),
       },
     };
+  }
+
+  /** The ad accounts the connecting person can read (ads_read). */
+  @Get('ad-accounts')
+  async adAccounts() {
+    const ads = await metaAds(this.db);
+    if (!ads)
+      throw new ApiError(
+        'Connect the Page again to read your ad accounts.',
+        409,
+      );
+    const { data } = await this.ask(
+      graph<{ data: AdAccount[] }>(
+        '/me/adaccounts?fields=id,name,currency,account_status&limit=100',
+        { token: ads.token },
+      ),
+    );
+    return data.map((a) => ({
+      id: a.id,
+      name: a.name,
+      currency: a.currency,
+      active: a.account_status === 1,
+    }));
+  }
+
+  /** { id } — the ad account Admin → Marketing → Meta ads reads. */
+  @Post('ad-account')
+  async chooseAdAccount(
+    @Body(new Zod(adAccountSchema)) body: z.infer<typeof adAccountSchema>,
+    @CurrentActor() actor: RequestActor,
+  ) {
+    const account = (await this.adAccounts()).find((a) => a.id === body.id);
+    if (!account)
+      throw new ApiError('This ad account was not granted to the app.', 404);
+    await this.db.withActor(actor, async (trx) => {
+      await trx
+        .updateTable('meta_connection')
+        .set({
+          ad_account_id: account.id,
+          ad_account_name: account.name,
+          ad_currency: account.currency,
+        })
+        .where('deleted_at', 'is', null)
+        .execute();
+      await this.record(trx, actor, 'update', account.id, account.name);
+    });
+    return account;
   }
 
   @Get('login')
@@ -147,7 +215,7 @@ export class MetaConnectionController {
   /** The Pages granted at login, without their tokens. */
   @Get('pages')
   async pages(@Req() request: Request, @CurrentActor() actor: RequestActor) {
-    return (await this.granted(request, actor)).map((p) => ({
+    return (await this.granted(request, actor)).pages.map((p) => ({
       id: p.id,
       name: p.name,
       instagram: p.instagram_business_account?.username ?? null,
@@ -162,9 +230,8 @@ export class MetaConnectionController {
     @Res({ passthrough: true }) response: Response,
     @CurrentActor() actor: RequestActor,
   ) {
-    const page = (await this.granted(request, actor)).find(
-      (p) => p.id === body.page_id,
-    );
+    const login = await this.granted(request, actor);
+    const page = login.pages.find((p) => p.id === body.page_id);
     if (!page) throw new ApiError('This Page was not granted to the app.', 404);
     const { appId } = this.app();
     const info = await this.ask(tokenInfo(page.access_token));
@@ -197,6 +264,8 @@ export class MetaConnectionController {
       instagram_id: page.instagram_business_account?.id ?? null,
       instagram_username: page.instagram_business_account?.username ?? null,
       token_encrypted: seal(page.access_token),
+      // The person's own token reads the ad accounts (ads_read); the Page's token can't.
+      user_token_encrypted: seal(login.token),
       data_access_expires_at: info.data_access_expires_at
         ? new Date(info.data_access_expires_at * 1000)
         : null,
@@ -225,7 +294,14 @@ export class MetaConnectionController {
     await this.db.withActor(actor, async (trx) => {
       const row = await trx
         .updateTable('meta_connection')
-        .set({ deleted_at: new Date(), token_encrypted: '' })
+        .set({
+          deleted_at: new Date(),
+          token_encrypted: '',
+          user_token_encrypted: null,
+          ad_account_id: null,
+          ad_account_name: null,
+          ad_currency: null,
+        })
         .where('deleted_at', 'is', null)
         .returning(['page_id', 'page_name'])
         .executeTakeFirst();
@@ -258,7 +334,7 @@ export class MetaConnectionController {
   private async granted(
     request: Request,
     actor: RequestActor,
-  ): Promise<Page[]> {
+  ): Promise<{ pages: Page[]; token: string }> {
     const sealed = readCookie(request.headers.cookie, LOGIN_COOKIE);
     const text = sealed && unseal(sealed);
     const login = text
@@ -276,7 +352,7 @@ export class MetaConnectionController {
         { token: login.token },
       ),
     );
-    return data;
+    return { pages: data, token: login.token };
   }
 
   /** Meta's refusal, shown to the admin. */

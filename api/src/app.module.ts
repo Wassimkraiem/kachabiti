@@ -75,6 +75,7 @@ import {
   TreasuryController,
 } from './finance/finance.controllers';
 import { PostPublisher } from './social/post-publisher';
+import { MetaAdsController } from './social/meta-ads.controller';
 import { SocialController } from './social/social.controller';
 import { PosController } from './pos/pos.controller';
 import {
@@ -146,6 +147,7 @@ import {
     MetaMediaController,
     MetaWebhookController,
     SocialController,
+    MetaAdsController,
     CampaignsController,
     PosController,
     PurchaseOrdersController,

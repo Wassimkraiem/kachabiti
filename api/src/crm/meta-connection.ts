@@ -37,7 +37,12 @@ export function unseal(sealed: string): string | null {
 }
 
 /** The Page's events we need; echoes are the replies sent from Messenger or Business Suite. */
-export const PAGE_FIELDS = ['messages', 'message_echoes', 'feed'];
+export const PAGE_FIELDS = [
+  'messages',
+  'message_echoes',
+  'messaging_referrals',
+  'feed',
+];
 
 // When the webhook last got something since the API started, for Connections → Check.
 export const received: Record<string, string | null> = {
@@ -59,6 +64,22 @@ export async function metaConnection(db: Database) {
     .where('deleted_at', 'is', null)
     .executeTakeFirst();
   const token = row && unseal(row.token_encrypted);
+  return row && token ? { ...row, token } : null;
+}
+
+/** The ad account and the token that reads it (the connecting person's, with ads_read), or null. */
+export async function metaAds(db: Database) {
+  const row = await db
+    .selectFrom('meta_connection')
+    .select([
+      'user_token_encrypted',
+      'ad_account_id',
+      'ad_account_name',
+      'ad_currency',
+    ])
+    .where('deleted_at', 'is', null)
+    .executeTakeFirst();
+  const token = row?.user_token_encrypted && unseal(row.user_token_encrypted);
   return row && token ? { ...row, token } : null;
 }
 
