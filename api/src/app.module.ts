@@ -63,6 +63,7 @@ import { MetaConnectionController } from './crm/meta-connection.controller';
 import { MetaHealthController } from './crm/meta-health';
 import { MetaImport } from './crm/meta-import';
 import { MetaMedia, MetaMediaController } from './crm/meta-media';
+import { SavedRepliesController } from './crm/saved-replies.controller';
 import { MetaWebhookController } from './crm/meta-webhook.controller';
 import {
   AccountingController,
@@ -138,6 +139,7 @@ import {
     CustomersController,
     InteractionsController,
     TasksController,
+    SavedRepliesController,
     CommentsController,
     MetaConnectionController,
     MetaHealthController,

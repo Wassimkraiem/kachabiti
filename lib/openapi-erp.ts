@@ -87,6 +87,12 @@ export const erpPaths: Record<string, Record<string, Op>> = {
         get: op('Customers', 'Public comments (?show=all|leads|open&platform=&author=&q=&page=), or one thread per person (?threads=1)'),
         patch: op('Customers', 'Mark comments handled or not', { requestBody: body({ ids: { type: 'array', items: uuid }, handled: { type: 'boolean' } }, ['ids', 'handled']) }),
     },
+    '/api/crm/replies': {
+        get: op('Customers', "The team's saved replies, in order"),
+        post: op('Customers', 'Add a saved reply', { requestBody: body({ title: { type: 'string' }, body: { type: 'string' }, position: { type: 'integer' } }, ['title', 'body']) }),
+        put: op('Customers', 'Change a saved reply (id and the fields to change)'),
+        delete: op('Customers', 'Remove a saved reply (delete permission)', { parameters: [q('id', 'Saved reply id', 'string', 'uuid')] }),
+    },
     '/api/crm/tasks': {
         get: op('Customers', 'Follow-ups (?customer_id= | ?mine=1 | ?status=open|done|overdue)'),
         post: op('Customers', 'Create a follow-up', { requestBody: body({ title: { type: 'string' }, due_at: { type: 'string', format: 'date-time' }, customer_id: uuid, order_id: uuid, assigned_to: uuid, notes: { type: 'string' } }, ['title', 'due_at']) }),

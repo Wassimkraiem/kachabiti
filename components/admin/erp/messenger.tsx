@@ -11,6 +11,7 @@ import { useAdminRole } from "@/lib/admin-role-context";
 import { STAGE_COLORS, STAGE_LABELS, type CustomerStage } from "@/lib/erp/constants";
 import { api, formatDate, useApi } from "./erp-client";
 import { Attachments, MediaButtons, messageText } from "./messenger-media";
+import { SavedReplies } from "./saved-replies";
 
 const { Text } = Typography;
 
@@ -260,6 +261,7 @@ export function MessageChat({ thread, connected, onBack, onChange }: { thread: M
                 ) : connected ? (
                     <>
                         {(channel === "facebook" || channel === "instagram") && <MediaButtons customerId={customer_id} channel={channel} onSent={async () => { await reload(); onChange(); }} />}
+                        <SavedReplies onPick={(reply) => setText((current) => (current.trim() ? `${current.trimEnd()}\n${reply}` : reply))} />
                         <Input.TextArea
                             value={text}
                             onChange={(e) => setText(e.target.value)}
@@ -418,6 +420,8 @@ export const MESSENGER_CSS = `
 .msgr-bubble.is-note { align-self: center; background: #fff7e0; border-radius: 10px; font-size: 13px; }
 .msgr-meta { margin-top: 2px; font-size: 11px; color: #6b6b6b; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .msgr-bubble.is-out .msgr-meta { color: rgba(255,255,255,.8); justify-content: flex-end; }
+button.msgr-reply { display: flex; flex-direction: column; align-items: stretch; gap: 2px; width: 100%; min-width: 0; overflow: hidden; padding: 8px; border: 0; border-radius: 8px; background: none; font: inherit; color: inherit; text-align: start; cursor: pointer; }
+button.msgr-reply:hover, button.msgr-reply:focus-visible { background: #f3eee9; outline: none; }
 .msgr-compose { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: flex-end; padding: 12px 16px; border-top: 1px solid #ececec; }
 @media (max-width: 1199px) {
   .msgr-rail { width: 150px; }

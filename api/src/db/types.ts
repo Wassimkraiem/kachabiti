@@ -90,6 +90,18 @@ export interface MetaConnection {
   updated_at: Generated<Timestamp>;
 }
 
+export interface SavedReplies {
+  body: string;
+  created_at: Generated<Timestamp>;
+  created_by: string | null;
+  created_by_email: string | null;
+  deleted_at: Timestamp | null;
+  id: Generated<string>;
+  position: Generated<number>;
+  title: string;
+  updated_at: Generated<Timestamp>;
+}
+
 export interface ScheduledPosts {
   caption: Generated<string>;
   claimed_at: Timestamp | null;
@@ -1209,6 +1221,7 @@ export interface DB {
   agent_goals: AgentGoals;
   api_keys: ApiKeys;
   meta_connection: MetaConnection;
+  saved_replies: SavedReplies;
   scheduled_posts: ScheduledPosts;
   auth_tokens: AuthTokens;
   back_office_users: BackOfficeUsers;
