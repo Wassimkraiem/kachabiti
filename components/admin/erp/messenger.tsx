@@ -7,6 +7,7 @@ import { ArrowLeftOutlined, ArrowRightOutlined, CheckOutlined, CommentOutlined, 
 import dayjs from "dayjs";
 import { message } from "@/components/admin/antd-app";
 import { useAdminT } from "@/lib/admin-i18n";
+import { useAdminRole } from "@/lib/admin-role-context";
 import { STAGE_COLORS, STAGE_LABELS, type CustomerStage } from "@/lib/erp/constants";
 import { api, formatDate, useApi } from "./erp-client";
 import { Attachments, MediaButtons, messageText } from "./messenger-media";
@@ -32,7 +33,7 @@ export interface MessageThread {
     sender_name: string | null;
     unread: number;
     photo?: boolean;
-    customer: { full_name: string; phone: string | null; stage: CustomerStage; assigned_to_email: string | null };
+    customer: { full_name: string; phone: string | null; stage: CustomerStage; assigned_to: string | null; assigned_to_email: string | null };
 }
 
 export interface CommentThread {
@@ -75,6 +76,9 @@ export function usePolling(reload: () => void) {
         return () => clearInterval(timer);
     }, [reload]);
 }
+
+/** The name an agent goes by: their e-mail before the @. */
+export const agentName = (email: string | null | undefined) => email?.split("@")[0] ?? "";
 
 const timeOf = (value: string) => dayjs(value).format("HH:mm");
 
@@ -170,7 +174,29 @@ export function MessageChat({ thread, connected, onBack, onChange }: { thread: M
     const { data, loading, error, reload } = useApi<ChatMessage[]>(`/api/crm/interactions?customer_id=${customer_id}&channel=${channel}`);
     const [text, setText] = useState("");
     const [sending, setSending] = useState(false);
+    const [busy, setBusy] = useState(false);
+    const me = useAdminRole();
     usePolling(reload);
+
+    // Who answers: the staff member who opens it first (owners and admins when they reply or take it).
+    const owner = customer.assigned_to;
+    const mine = !!me.id && owner === me.id;
+    const canReply = !owner || mine || me.isAdmin;
+    const assign = async (action: "claim" | "take" | "release") => {
+        setBusy(true);
+        try {
+            await api("/api/crm/interactions/claim", { method: "POST", body: { customer_id, action } });
+        } catch (e) {
+            message.error(t((e as Error).message));
+        } finally {
+            setBusy(false);
+            onChange();
+        }
+    };
+    useEffect(() => {
+        if (!owner && me.id && !me.isAdmin) void assign("claim");
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- once per conversation, when nobody has it
+    }, [owner, me.id, me.isAdmin]);
 
     // Opening a conversation, or receiving in the open one, marks it read.
     const unread = thread.unread;
@@ -188,10 +214,10 @@ export function MessageChat({ thread, connected, onBack, onChange }: { thread: M
             await api("/api/crm/interactions", { method: "POST", body: { customer_id, channel, direction: "out", body, send: true } });
             setText("");
             await reload();
-            onChange();
         } catch (e) {
             message.error(t((e as Error).message));
         } finally {
+            onChange(); // a reply also claims the conversation
             setSending(false);
         }
     };
@@ -202,10 +228,12 @@ export function MessageChat({ thread, connected, onBack, onChange }: { thread: M
                 name={customer.full_name || thread.sender_name || customer.phone || ""}
                 channel={channel}
                 photo={photoOf(thread)}
-                sub={customer.assigned_to_email ? ` · ${customer.assigned_to_email}` : ""}
+                sub={owner ? ` · ${mine ? t("Assigned to you") : t("Assigned to {name}", { name: agentName(customer.assigned_to_email) })}` : ""}
                 onBack={onBack}
                 actions={
                     <>
+                        {mine && <Button size="small" loading={busy} onClick={() => assign("release")}>{t("Release")}</Button>}
+                        {owner && !mine && me.isAdmin && <Button size="small" loading={busy} onClick={() => assign("take")}>{t("Take over")}</Button>}
                         <Tag className="msgr-wide" color={STAGE_COLORS[customer.stage]}>{t(STAGE_LABELS[customer.stage])}</Tag>
                         {customer.phone && <Button type="text" aria-label={t("Call")} title={customer.phone} icon={<PhoneOutlined />} href={`tel:+216${customer.phone}`} />}
                         <Link href={`/admin/customers/${customer_id}`}><Button icon={<UserOutlined />} aria-label={t("Customer record")}><span className="msgr-wide">{t("Customer record")}</span></Button></Link>
@@ -227,7 +255,9 @@ export function MessageChat({ thread, connected, onBack, onChange }: { thread: M
                 )}
             />
             <div className="msgr-compose">
-                {connected ? (
+                {!canReply ? (
+                    <Text type="secondary">{t("Assigned to {name}: only they can reply.", { name: agentName(customer.assigned_to_email) })}</Text>
+                ) : connected ? (
                     <>
                         {(channel === "facebook" || channel === "instagram") && <MediaButtons customerId={customer_id} channel={channel} onSent={async () => { await reload(); onChange(); }} />}
                         <Input.TextArea

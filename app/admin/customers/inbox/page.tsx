@@ -11,7 +11,7 @@ import { useApi } from "@/components/admin/erp/erp-client";
 import MetaCheck from "@/components/admin/erp/MetaCheck";
 import MetaConnection from "@/components/admin/erp/MetaConnection";
 import { messageText } from "@/components/admin/erp/messenger-media";
-import { CHAT_CHANNELS, CommentChat, photoOf, MESSENGER_CSS, MessageChat, MessengerRail, ThreadRow, usePolling, type CommentThread, type MessageThread } from "@/components/admin/erp/messenger";
+import { agentName, CHAT_CHANNELS, CommentChat, photoOf, MESSENGER_CSS, MessageChat, MessengerRail, ThreadRow, usePolling, type CommentThread, type MessageThread } from "@/components/admin/erp/messenger";
 
 const { Text } = Typography;
 
@@ -26,7 +26,8 @@ const commentKey = (th: CommentThread) => `${th.platform}:${th.author}`;
  */
 function Messenger() {
     const { t } = useAdminT();
-    const { isAdmin } = useAdminRole();
+    const me = useAdminRole();
+    const { isAdmin } = me;
     const params = useSearchParams();
     const [tab, setTab] = useState<"messages" | "comments">(params.get("tab") === "comments" ? "comments" : "messages");
     const [channel, setChannel] = useState("");
@@ -46,6 +47,7 @@ function Messenger() {
     if (tab === "messages") {
         if (channel) messageFilters.set("channel", channel);
         if (show === "unread") messageFilters.set("unread", "1");
+        if (show === "mine") messageFilters.set("assigned", "me");
     } else {
         if (channel) commentFilters.set("platform", channel);
         commentFilters.set("show", show);
@@ -100,7 +102,7 @@ function Messenger() {
                             value={show}
                             onChange={setShow}
                             options={tab === "messages"
-                                ? [{ value: "all", label: t("All") }, { value: "unread", label: t("Unread") }]
+                                ? [{ value: "all", label: t("All") }, { value: "unread", label: t("Unread") }, { value: "mine", label: t("Mine") }]
                                 : [{ value: "all", label: t("All") }, { value: "open", label: t("To handle") }, { value: "leads", label: t("Phone") }]}
                         />
                     </div>
@@ -118,6 +120,7 @@ function Messenger() {
                                     text={`${th.direction === "out" ? `${t("You")}: ` : ""}${messageText(th.body, t)}`}
                                     date={th.created_at}
                                     count={th.unread}
+                                    extra={th.customer.assigned_to_email && <span className="msgr-ellipsis" style={{ fontSize: 12, color: "#7a3b2e" }}>{th.customer.assigned_to === me.id ? t("Assigned to you") : t("Assigned to {name}", { name: agentName(th.customer.assigned_to_email) })}</span>}
                                     active={!!message && messageKey(message) === messageKey(th)}
                                     onClick={() => setOpenMessage(th)}
                                 />

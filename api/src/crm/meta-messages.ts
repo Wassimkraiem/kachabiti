@@ -1,5 +1,7 @@
 import { sql } from 'kysely';
 import type { IncomingMessage } from '@shared/erp/meta';
+import type { RequestActor } from '../auth/auth.guard';
+import { ApiError, isManager } from '../common/api';
 import { Database } from '../db/database';
 
 /** Stores a message on its customer, once. `id` is undefined when it was there already. */
@@ -98,4 +100,48 @@ async function customerFor(
     .returning('id')
     .executeTakeFirstOrThrow();
   return created.id;
+}
+
+/**
+ * Gives an unassigned customer to whoever answers them. Someone else's customer is refused, except
+ * to owners and admins (who leave it assigned as it is, or `take` it).
+ */
+export async function claimCustomer(
+  db: Database,
+  actor: RequestActor,
+  customerId: string,
+  take = false,
+) {
+  const claimed = await db.withActor(actor, (trx) => {
+    let query = trx
+      .updateTable('customers')
+      .set({ assigned_to: actor.userId, assigned_to_email: actor.email })
+      .where('id', '=', customerId)
+      .where('deleted_at', 'is', null);
+    query = take
+      ? query.where((eb) =>
+          eb.or([
+            eb('assigned_to', 'is', null),
+            eb('assigned_to', '!=', actor.userId),
+          ]),
+        )
+      : query.where('assigned_to', 'is', null);
+    return query.returning('assigned_to_email').executeTakeFirst();
+  });
+  if (claimed) return claimed;
+  const current = await db
+    .selectFrom('customers')
+    .select(['assigned_to', 'assigned_to_email'])
+    .where('id', '=', customerId)
+    .where('deleted_at', 'is', null)
+    .executeTakeFirst();
+  if (!current) throw new ApiError('This customer no longer exists.', 404);
+  if (current.assigned_to !== actor.userId && !isManager(actor))
+    throw new ApiError(
+      'This conversation is assigned to another agent.',
+      409,
+      'ASSIGNED',
+      { assigned_to_email: current.assigned_to_email },
+    );
+  return { assigned_to_email: current.assigned_to_email };
 }

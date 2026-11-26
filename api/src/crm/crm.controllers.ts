@@ -24,6 +24,7 @@ import { many, one } from '../db/embed';
 import { deleteObject } from '../common/storage';
 import { metaPageToken } from './meta-connection';
 import { MetaMedia, replyTarget, type Attachment } from './meta-media';
+import { claimCustomer } from './meta-messages';
 import { memberEmail } from '../sales/commerce';
 
 // Ports of app/api/customers, crm/interactions and crm/tasks (rules in lib/api-access.ts).
@@ -445,6 +446,11 @@ const interactionSchema = z.object({
   // Actually send it on the channel (Messenger, Instagram, WhatsApp) instead of only logging it.
   send: z.boolean().default(false),
 });
+const claimSchema = z.object({
+  customer_id: zId,
+  // take: an owner or admin takes it from another agent; release: back to nobody.
+  action: z.enum(['claim', 'take', 'release']).default('claim'),
+});
 const readSchema = z.object({
   customer_id: zId,
   channel: z.string().max(20).optional(),
@@ -470,7 +476,10 @@ export class InteractionsController {
    * the unread messages per channel.
    */
   @Get()
-  async list(@Query() query: Record<string, string>) {
+  async list(
+    @Query() query: Record<string, string>,
+    @CurrentActor() actor: RequestActor,
+  ) {
     const q = params(query);
     const customerId = q.get('customer_id');
     const channel = q.get('channel');
@@ -499,6 +508,7 @@ export class InteractionsController {
       sql<Record<string, unknown>>`
         select l.*, coalesce(u.n, 0)::int as unread,
                json_build_object('full_name', c.full_name, 'phone', c.phone, 'stage', c.stage,
+                                 'assigned_to', c.assigned_to,
                                  'assigned_to_email', c.assigned_to_email) as customer,
                c.external_ids ? ((case l.channel when 'facebook' then 'messenger' else l.channel end) || '_photo') as photo
         from (
@@ -515,6 +525,7 @@ export class InteractionsController {
           group by 1, 2
         ) u on u.customer_id = l.customer_id and u.channel = l.channel
         where (not ${q.bool('unread')}::boolean or u.n > 0)
+          and (not ${q.get('assigned') === 'me'}::boolean or c.assigned_to = ${actor.userId}::uuid)
           and (${like}::text is null or c.full_name ilike ${like}
                or c.phone ilike ${like} or l.body ilike ${like})
         order by l.created_at desc
@@ -555,6 +566,7 @@ export class InteractionsController {
         );
       }
       const channel = body.channel as MetaChannel;
+      await claimCustomer(this.db, actor, body.customer_id);
       const { recipient, pageToken } = await replyTarget(
         this.db,
         body.customer_id,
@@ -605,6 +617,43 @@ export class InteractionsController {
         .execute();
       return row;
     });
+  }
+
+  /** { customer_id, action } — who answers this customer (opening an unassigned conversation claims it). */
+  @Post('claim')
+  async claim(
+    @Body(new Zod(claimSchema)) body: z.infer<typeof claimSchema>,
+    @CurrentActor() actor: RequestActor,
+  ) {
+    if (body.action === 'take' && !isManager(actor))
+      throw new ApiError(
+        'Only owners and admins can take a conversation over.',
+        403,
+      );
+    if (body.action !== 'release')
+      return claimCustomer(
+        this.db,
+        actor,
+        body.customer_id,
+        body.action === 'take',
+      );
+    const released = await this.db.withActor(actor, (trx) => {
+      let query = trx
+        .updateTable('customers')
+        .set({ assigned_to: null, assigned_to_email: null })
+        .where('id', '=', body.customer_id)
+        .where('deleted_at', 'is', null);
+      if (!isManager(actor))
+        query = query.where('assigned_to', '=', actor.userId);
+      return query.returning('id').executeTakeFirst();
+    });
+    if (!released)
+      throw new ApiError(
+        'This conversation is assigned to another agent.',
+        409,
+        'ASSIGNED',
+      );
+    return { assigned_to_email: null };
   }
 
   /** { customer_id, channel? } — marks a customer's messages read (on one channel, or all). */

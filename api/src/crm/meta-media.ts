@@ -29,6 +29,7 @@ import { deleteObject, putObject, signedUrl } from '../common/storage';
 import { Database } from '../db/database';
 import type { Upload } from '../files/files.controllers';
 import { metaPageToken } from './meta-connection';
+import { claimCustomer } from './meta-messages';
 
 /** path: our copy in `documents`; url: Meta's, until it is copied. */
 export interface Attachment {
@@ -446,6 +447,7 @@ export class MetaMediaController {
     const kind = file && SENDABLE[file.mimetype];
     if (!file || !kind?.[1](file.buffer))
       throw new ApiError('Choose a photo or an audio recording.');
+    await claimCustomer(this.db, actor, body.customer_id);
     const { recipient, pageToken } = await replyTarget(
       this.db,
       body.customer_id,

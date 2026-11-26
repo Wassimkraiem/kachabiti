@@ -74,6 +74,9 @@ export const erpPaths: Record<string, Record<string, Op>> = {
         put: op('Customers', "Mark a customer's messages read (on one channel, or all)", { requestBody: body({ customer_id: uuid, channel: { type: 'string' } }, ['customer_id']) }),
         delete: op('Customers', 'Remove a note', { parameters: [q('id', 'Note id', 'string', 'uuid')] }),
     },
+    '/api/crm/interactions/claim': {
+        post: op('Customers', 'Who answers a customer: claim (if nobody has them), take (owners and admins), release', { requestBody: body({ customer_id: uuid, action: { type: 'string', enum: ['claim', 'take', 'release'] } }, ['customer_id']) }),
+    },
     '/api/crm/media': {
         get: op('Customers', "A message's photo, audio or video (?id=&i=): redirects to a link that lasts an hour"),
         post: op('Customers', 'Send a photo (JPEG) or audio (WAV) on Messenger or Instagram (multipart: file, customer_id, channel)'),
